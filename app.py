@@ -126,6 +126,39 @@ def schedule_info(sport, league, team_id):
     return {'line1': line1, 'line2': line2}
 
 
+STOCKS_API = 'https://tashefamily-stocks-api-production.up.railway.app'
+SYMBOLS = ['SPY', 'QQQ', 'DIA', 'BAH', 'RKLB', 'OCO.V', 'RGTI', 'AVTI', 'LUNR', 'IONQ', 'NVDA']
+_stock_cache = {}
+
+
+def fetch_quote(symbol, ttl=900):
+    now = time.time()
+    if symbol in _stock_cache and now - _stock_cache[symbol]['ts'] < ttl:
+        return _stock_cache[symbol]['data']
+    try:
+        r = requests.get(f'{STOCKS_API}/quote/{symbol}', timeout=8)
+        r.raise_for_status()
+        data = r.json()
+        _stock_cache[symbol] = {'data': data, 'ts': now}
+        return data
+    except Exception:
+        return _stock_cache.get(symbol, {}).get('data')
+
+
+def fmt_quote(data):
+    if not data:
+        return '—'
+    price = data.get('price', 0)
+    change = data.get('change', 0)
+    arrow = '▲' if change >= 0 else '▼'
+    return f'{price:.2f}  {arrow}{abs(change):.2f}'
+
+
+@app.route('/quotes/all')
+def get_all_quotes():
+    return jsonify({s: fmt_quote(fetch_quote(s)) for s in SYMBOLS})
+
+
 TEAM_LABELS = {
     'phillies':   'Phillies',
     'eagles':     'Eagles',
