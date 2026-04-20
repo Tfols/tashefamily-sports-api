@@ -126,6 +126,33 @@ def schedule_info(sport, league, team_id):
     return {'line1': line1, 'line2': line2}
 
 
+TEAM_LABELS = {
+    'phillies':   'Phillies',
+    'eagles':     'Eagles',
+    'yankees':    'Yankees',
+    'nationals':  'Nats',
+    'commanders': 'Commanders',
+    'pitt':       'Pitt',
+}
+
+
+def combined_line(d):
+    line1, line2 = d.get('line1', ''), d.get('line2', '')
+    if line2 in ('—', 'No upcoming games', 'No recent games', ''):
+        return line1
+    return f'{line1}  ·  {line2}'
+
+
+@app.route('/sports/all')
+def get_all_teams():
+    result = {}
+    for slug, info in TEAMS.items():
+        d = live_game(info['sport'], info['league'], info['id']) or \
+            schedule_info(info['sport'], info['league'], info['id'])
+        result[slug] = combined_line(d)
+    return jsonify(result)
+
+
 @app.route('/sports/<team_slug>')
 def get_team(team_slug):
     team = TEAMS.get(team_slug.lower())
