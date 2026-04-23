@@ -202,6 +202,13 @@ def health():
     return jsonify({'status': 'ok'})
 
 
+@app.route('/debug-env')
+def debug_env():
+    """Shows which expected env vars are present (not their values)."""
+    keys = ['OPENWEATHERMAP_API_KEY', 'GOOGLE_ICAL_URL', 'PORT']
+    return jsonify({k: bool(os.environ.get(k)) for k in keys})
+
+
 # ── Dashboard HTML ────────────────────────────────────────────────
 @app.route('/')
 def dashboard():
@@ -252,7 +259,7 @@ def get_calendar():
         _ical_cache['ts']   = now
         return jsonify(result)
     except Exception as e:
-        return jsonify(_ical_cache.get('data', []))
+        return jsonify(_ical_cache.get('data') or {'error': str(e)})
 
 
 # ── Weather proxy ─────────────────────────────────────────────────
@@ -284,8 +291,8 @@ def get_weather():
         _wx_cache['data'] = result
         _wx_cache['ts']   = now
         return jsonify(result)
-    except Exception:
-        return jsonify(_wx_cache.get('data', {}))
+    except Exception as e:
+        return jsonify(_wx_cache.get('data') or {'error': str(e)})
 
 
 if __name__ == '__main__':
