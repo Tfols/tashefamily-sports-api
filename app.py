@@ -3,6 +3,7 @@ import time
 from datetime import datetime, date, timedelta
 
 import pytz
+import recurring_ical_events
 import requests
 from flask import Flask, jsonify, send_from_directory
 from icalendar import Calendar as iCal
@@ -232,10 +233,13 @@ def get_calendar():
         cal = iCal.from_ical(r.content)
         today = datetime.now(ET).date()
         cutoff = today + timedelta(days=60)
+        # Use recurring_ical_events to expand RRULE recurrences so future
+        # instances of recurring series (swim lessons, etc.) are included.
+        start_dt = datetime(today.year, today.month, today.day, tzinfo=ET)
+        end_dt   = datetime(cutoff.year, cutoff.month, cutoff.day, 23, 59, 59, tzinfo=ET)
+        expanded = recurring_ical_events.of(cal).between(start_dt, end_dt)
         events = []
-        for component in cal.walk():
-            if component.name != 'VEVENT':
-                continue
+        for component in expanded:
             dtstart = component.get('DTSTART')
             if not dtstart:
                 continue
@@ -246,8 +250,6 @@ def get_calendar():
             else:
                 edate = dt
                 etime = 'All day'
-            if edate < today or edate > cutoff:
-                continue
             events.append({
                 'title': str(component.get('SUMMARY', 'Untitled')),
                 'date':  edate.isoformat(),

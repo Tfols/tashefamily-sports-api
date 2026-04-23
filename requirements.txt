@@ -4,3 +4,4 @@ gunicorn
 pytz
 icalendar
 python-dateutil
+recurring-ical-events
