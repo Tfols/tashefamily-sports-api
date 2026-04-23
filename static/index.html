@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Ops Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── Palette ─────────────────────────────────────────────── */
+:root {
+  --bg-1:     #060a14;
+  --bg-2:     #111b32;
+  --panel:    rgba(15,24,42,0.92);
+  --chip:     rgba(18,31,54,0.96);
+  --border:   #2e446f;
+  --border-s: #3b588e;
+  --rule:     #304975;
+  --text:     #d9e7ff;
+  --bright:   #f3f8ff;
+  --muted:    #90a9ca;
+  --head:     #bfdbff;
+  --accent:   #38bdf8;
+  --ok:       #34d399;
+  --bad:      #fb7185;
+  --blue-grd: linear-gradient(90deg, #38bdf8, #5d8bff);
+}
+
+/* ── Reset + base ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2)) fixed;
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(26,42,70,0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,42,70,0.35) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.45;
+}
+
+/* ── Layout shell ───────────────────────────────────────── */
+#app {
+  position: relative; z-index: 1;
+  max-width: 1440px; margin: 0 auto;
+  padding: 12px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+/* ── Panel + chip base ──────────────────────────────────── */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.panel-inner {
+  background: var(--chip);
+  border: 1px solid var(--border-s);
+  border-radius: 5px;
+}
+
+/* ── Section label ──────────────────────────────────────── */
+.section-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--head);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 8px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════════════════════ */
+#header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 18px;
+}
+#brand { flex: 0 0 auto; }
+#brand h1 {
+  font-size: 26px; font-weight: 700;
+  color: var(--bright); letter-spacing: 0.03em;
+  line-height: 1;
+}
+#brand p {
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.06em; margin-top: 2px;
+}
+#status-chips {
+  flex: 1;
+  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+}
+.status-chip {
+  background: var(--chip);
+  border: 1px solid var(--border-s);
+  border-radius: 4px;
+  padding: 6px 14px;
+  min-width: 120px;
+  text-align: center;
+}
+.status-chip .chip-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--head); display: block; margin-bottom: 2px;
+}
+.status-chip .chip-value {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; font-weight: 600;
+  color: var(--bright);
+}
+#clock-block { flex: 0 0 auto; text-align: right; }
+#clock {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 28px; font-weight: 700;
+  color: var(--bright); line-height: 1;
+}
+#date-str {
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   MAIN BODY — left panel + right rail
+══════════════════════════════════════════════════════════ */
+#body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 10px;
+  align-items: start;
+}
+
+/* ── Left panel ─────────────────────────────────────────── */
+#left { display: flex; flex-direction: column; gap: 10px; }
+
+/* Data row: Scores + Quotes side by side */
+#data-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+/* ── Card shared ────────────────────────────────────────── */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: visible;
+}
+.card-header {
+  height: 2px;
+  background: var(--blue-grd);
+  border-radius: 6px 6px 0 0;
+  opacity: 0.8;
+}
+.card-body { padding: 8px 10px; }
+.card-title {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--head);
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 6px;
+}
+
+/* ── Row chip (shared by Scores + Quotes) ───────────────── */
+.row-chip {
+  display: flex; align-items: center;
+  background: var(--chip);
+  border: 1px solid var(--border-s);
+  border-radius: 3px;
+  padding: 3px 8px;
+  min-height: 24px;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.row-chip:last-child { margin-bottom: 0; }
+.row-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--bright);
+  flex: 0 0 48px;
+}
+.row-value {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  text-align: right;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.row-value .live { color: var(--bad); font-weight: 700; }
+
+/* ── Quotes 2-col grid ──────────────────────────────────── */
+#quotes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+#quotes-grid .row-chip {
+  margin-bottom: 0;
+  min-width: 0;
+}
+#quotes-grid .row-label { flex: 0 0 44px; font-size: 10px; }
+#quotes-grid .row-value { font-size: 10px; }
+.up   { color: var(--ok); }
+.down { color: var(--bad); }
+
+/* ── Calendar card ──────────────────────────────────────── */
+#calendar-card .card-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+}
+
+/* Month grid */
+#month-grid { flex: 0 0 auto; min-width: 210px; }
+.month-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.month-nav button {
+  background: var(--chip); border: 1px solid var(--border-s);
+  color: var(--muted); border-radius: 3px;
+  padding: 2px 8px; cursor: pointer; font-size: 12px;
+}
+.month-nav button:hover { color: var(--bright); }
+.month-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--head); text-transform: uppercase;
+}
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+}
+.cal-dow {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--muted); text-align: center;
+  padding: 2px 0;
+}
+.cal-day {
+  position: relative;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; text-align: center;
+  padding: 3px 0 6px;
+  border-radius: 3px;
+  cursor: default;
+  color: var(--text);
+  line-height: 1;
+}
+.cal-day.other-month { color: var(--muted); opacity: 0.4; }
+.cal-day.today {
+  background: rgba(56,189,248,0.18);
+  color: var(--accent); font-weight: 700;
+}
+.cal-day.weekend { color: var(--bad); }
+.cal-day.today.weekend { color: var(--bad); }
+.cal-day .event-dot {
+  position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Upcoming events list */
+#events-list { overflow: auto; }
+.event-row {
+  display: flex; align-items: flex-start; gap: 8px;
+  background: var(--chip); border: 1px solid var(--border-s);
+  border-radius: 3px; padding: 4px 8px;
+  margin-bottom: 3px;
+}
+.event-row:last-child { margin-bottom: 0; }
+.event-date {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; font-weight: 600; color: var(--accent);
+  flex: 0 0 68px; white-space: nowrap;
+  padding-top: 1px;
+}
+.event-title {
+  font-size: 12px; color: var(--bright);
+  line-height: 1.3;
+}
+.event-time {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; color: var(--muted);
+  margin-top: 1px;
+}
+#no-events {
+  color: var(--muted); font-size: 12px; padding: 8px 0;
+  text-align: center; font-style: italic;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RIGHT RAIL
+══════════════════════════════════════════════════════════ */
+#right { display: flex; flex-direction: column; gap: 10px; }
+
+/* News */
+.news-link {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--chip); border: 1px solid var(--border-s);
+  border-radius: 3px; padding: 7px 10px;
+  margin-bottom: 3px;
+  text-decoration: none; color: inherit;
+  transition: border-color 0.15s;
+}
+.news-link:last-child { margin-bottom: 0; }
+.news-link:hover { border-color: var(--accent); }
+.news-source {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--head); flex: 0 0 auto;
+}
+.news-desc { font-size: 11px; color: var(--muted); }
+
+/* Weather */
+.wx-main {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 32px; font-weight: 700; color: var(--bright);
+  line-height: 1;
+}
+.wx-desc { font-size: 12px; color: var(--muted); margin: 3px 0 8px; }
+.wx-stats { display: flex; gap: 6px; flex-wrap: wrap; }
+.wx-stat {
+  background: var(--chip); border: 1px solid var(--border-s);
+  border-radius: 3px; padding: 3px 8px;
+  font-family: "JetBrains Mono", monospace; font-size: 11px;
+}
+.wx-stat-label { color: var(--muted); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; display: block; }
+.wx-stat-val { color: var(--bright); font-weight: 600; }
+
+/* ── Loading/error states ───────────────────────────────── */
+.loading { color: var(--muted); font-size: 11px; padding: 6px 0; font-style: italic; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- HEADER -->
+  <div class="panel" id="header">
+    <div id="brand">
+      <h1>Family Ops Board</h1>
+      <p>dashboard.tashefamily.com</p>
+    </div>
+    <div id="status-chips">
+      <div class="status-chip">
+        <span class="chip-label">Calendar</span>
+        <span class="chip-value" id="chip-cal">—</span>
+      </div>
+      <div class="status-chip">
+        <span class="chip-label">Scores</span>
+        <span class="chip-value" id="chip-scores">—</span>
+      </div>
+      <div class="status-chip">
+        <span class="chip-label">Quotes</span>
+        <span class="chip-value" id="chip-quotes">—</span>
+      </div>
+      <div class="status-chip">
+        <span class="chip-label">Weather</span>
+        <span class="chip-value" id="chip-weather">—</span>
+      </div>
+    </div>
+    <div id="clock-block">
+      <div id="clock">—:——</div>
+      <div id="date-str">——</div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div id="body">
+
+    <!-- LEFT -->
+    <div id="left">
+
+      <!-- Data row: Scores + Quotes -->
+      <div id="data-row">
+
+        <!-- SCORES -->
+        <div class="card">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <div class="card-title">Scores</div>
+            <div id="scores-list"><span class="loading">Loading…</span></div>
+          </div>
+        </div>
+
+        <!-- QUOTES -->
+        <div class="card">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <div class="card-title">Quotes</div>
+            <div id="quotes-grid"><span class="loading">Loading…</span></div>
+          </div>
+        </div>
+
+      </div><!-- /data-row -->
+
+      <!-- CALENDAR -->
+      <div class="card" id="calendar-card">
+        <div class="card-header"></div>
+        <div class="card-body">
+          <div class="card-title">Calendar</div>
+          <div style="display:grid; grid-template-columns: auto 1fr; gap:14px; align-items:start;">
+
+            <!-- Month grid -->
+            <div id="month-grid">
+              <div class="month-nav">
+                <button id="prev-mo">&lsaquo;</button>
+                <span class="month-title" id="month-title">APR 2026</span>
+                <button id="next-mo">&rsaquo;</button>
+              </div>
+              <div class="cal-grid" id="cal-grid"></div>
+            </div>
+
+            <!-- Upcoming events -->
+            <div id="events-list"><span class="loading">Loading…</span></div>
+
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /left -->
+
+    <!-- RIGHT RAIL -->
+    <div id="right">
+
+      <!-- NEWS -->
+      <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+          <div class="card-title">News</div>
+          <a class="news-link" href="https://apnews.com" target="_blank" rel="noopener">
+            <span class="news-source">AP News</span>
+            <span class="news-desc">Top stories</span>
+          </a>
+          <a class="news-link" href="https://reuters.com" target="_blank" rel="noopener">
+            <span class="news-source">Reuters</span>
+            <span class="news-desc">World &amp; markets</span>
+          </a>
+          <a class="news-link" href="https://arstechnica.com" target="_blank" rel="noopener">
+            <span class="news-source">Ars Technica</span>
+            <span class="news-desc">Tech &amp; science</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- WEATHER -->
+      <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+          <div class="card-title">Weather — Alexandria, VA</div>
+          <div id="weather-content"><span class="loading">Loading…</span></div>
+        </div>
+      </div>
+
+    </div><!-- /right -->
+  </div><!-- /body -->
+
+</div><!-- /app -->
+
+<script>
+// ── State ──────────────────────────────────────────────────────
+let scoresData  = {};
+let quotesData  = {};
+let calEvents   = [];
+let weatherData = {};
+let viewYear, viewMonth; // for calendar navigation
+
+// ── Clock ──────────────────────────────────────────────────────
+function updateClock() {
+  const now  = new Date();
+  const h    = String(now.getHours()).padStart(2,'0');
+  const m    = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('clock').textContent = `${h}:${m}`;
+  const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  const mons = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  document.getElementById('date-str').textContent =
+    `${mons[now.getMonth()]} ${now.getDate()} · ${days[now.getDay()]}`;
+}
+
+// ── Fetch helpers ──────────────────────────────────────────────
+async function fetchJSON(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+// ── Scores ─────────────────────────────────────────────────────
+const SCORE_LABELS = {
+  phillies:'PHI', eagles:'EAG', yankees:'NYY',
+  nationals:'WSH', commanders:'CMD', pitt:'PITT'
+};
+const SCORE_ORDER = ['phillies','eagles','yankees','nationals','commanders','pitt'];
+
+async function fetchScores() {
+  try { scoresData = await fetchJSON('/sports/all'); } catch(e) {}
+  renderScores();
+}
+
+function renderScores() {
+  const el = document.getElementById('scores-list');
+  const live = SCORE_ORDER.filter(k => scoresData[k] && scoresData[k].startsWith('🔴'));
+  document.getElementById('chip-scores').textContent =
+    live.length ? `${live.length} LIVE` : 'NO LIVE';
+
+  el.innerHTML = SCORE_ORDER.map(key => {
+    const val = scoresData[key] || '—';
+    const isLive = val.startsWith('🔴');
+    const display = isLive
+      ? `<span class="live">${val}</span>`
+      : escHtml(val);
+    return `<div class="row-chip">
+      <span class="row-label">${SCORE_LABELS[key]}</span>
+      <span class="row-value">${display}</span>
+    </div>`;
+  }).join('');
+}
+
+// ── Quotes ─────────────────────────────────────────────────────
+const QUOTE_ORDER = ['SPY','QQQ','DIA','BAH','RKLB','OCO.V','RGTI','AVTI','LUNR','IONQ','NVDA'];
+
+async function fetchQuotes() {
+  try { quotesData = await fetchJSON('/quotes/all'); } catch(e) {}
+  renderQuotes();
+}
+
+function renderQuotes() {
+  const el = document.getElementById('quotes-grid');
+  let up = 0, down = 0;
+
+  el.innerHTML = QUOTE_ORDER.map(sym => {
+    const raw = quotesData[sym] || '—';
+    // raw format: "708.45  ▼2.76"  or  "708.45  ▲2.76"
+    let display = escHtml(raw);
+    const arrowUp   = raw.includes('▲');
+    const arrowDown = raw.includes('▼');
+    if (arrowUp)   { up++;   display = raw.replace('▲', '<span class="up">▲') + '</span>'; }
+    if (arrowDown) { down++; display = raw.replace('▼', '<span class="down">▼') + '</span>'; }
+    return `<div class="row-chip">
+      <span class="row-label">${sym}</span>
+      <span class="row-value">${display}</span>
+    </div>`;
+  }).join('');
+
+  const chipEl = document.getElementById('chip-quotes');
+  if (up + down > 0) {
+    chipEl.innerHTML = `<span class="up">${up}▲</span> / <span class="down">${down}▼</span>`;
+  } else {
+    chipEl.textContent = '—';
+  }
+}
+
+// ── Calendar ───────────────────────────────────────────────────
+async function fetchCalendar() {
+  try { calEvents = await fetchJSON('/ical'); } catch(e) {}
+  renderEvents();
+  renderMonthGrid();
+  const chipEl = document.getElementById('chip-cal');
+  const today = todayStr();
+  const todayCount = calEvents.filter(e => e.date === today).length;
+  chipEl.textContent = todayCount ? `${todayCount} TODAY` : `${calEvents.length} AHEAD`;
+}
+
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function renderEvents() {
+  const el = document.getElementById('events-list');
+  if (!calEvents.length) {
+    el.innerHTML = '<div id="no-events">No upcoming events</div>';
+    return;
+  }
+  const today = todayStr();
+  el.innerHTML = calEvents.slice(0, 10).map(ev => {
+    const d    = new Date(ev.date + 'T12:00:00');
+    const mon  = d.toLocaleString('en-US', {month:'short'}).toUpperCase();
+    const day  = d.getDate();
+    const dow  = d.toLocaleString('en-US', {weekday:'short'}).toUpperCase();
+    const isToday = ev.date === today;
+    return `<div class="event-row">
+      <div class="event-date">${isToday ? 'TODAY' : `${dow} ${mon} ${day}`}</div>
+      <div>
+        <div class="event-title">${escHtml(ev.title)}</div>
+        <div class="event-time">${escHtml(ev.time)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderMonthGrid() {
+  const now = new Date();
+  if (viewYear === undefined) { viewYear = now.getFullYear(); viewMonth = now.getMonth(); }
+  const firstDay = new Date(viewYear, viewMonth, 1);
+  const lastDay  = new Date(viewYear, viewMonth + 1, 0);
+  const startDow = firstDay.getDay();      // 0=Sun
+  const totalDays = lastDay.getDate();
+  const todayDate = now.getDate();
+  const isCurrentMonth = viewYear === now.getFullYear() && viewMonth === now.getMonth();
+
+  const MONS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  document.getElementById('month-title').textContent = `${MONS[viewMonth]} ${viewYear}`;
+
+  // Build set of days with events for this month
+  const eventDays = new Set();
+  const prefix = `${viewYear}-${String(viewMonth+1).padStart(2,'0')}-`;
+  calEvents.forEach(ev => { if (ev.date.startsWith(prefix)) eventDays.add(parseInt(ev.date.slice(8))); });
+
+  const dows = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+  let html = dows.map(d => `<div class="cal-dow">${d}</div>`).join('');
+
+  // leading blanks
+  for (let i = 0; i < startDow; i++) {
+    const prevMonthDay = new Date(viewYear, viewMonth, 0).getDate() - startDow + i + 1;
+    html += `<div class="cal-day other-month">${prevMonthDay}</div>`;
+  }
+  for (let d = 1; d <= totalDays; d++) {
+    const dow = (startDow + d - 1) % 7;
+    const isToday = isCurrentMonth && d === todayDate;
+    const isWeekend = dow === 0 || dow === 6;
+    const hasEvent = eventDays.has(d);
+    const cls = [
+      'cal-day',
+      isToday   ? 'today'       : '',
+      isWeekend ? 'weekend'     : '',
+    ].filter(Boolean).join(' ');
+    html += `<div class="${cls}">${d}${hasEvent ? '<span class="event-dot"></span>' : ''}</div>`;
+  }
+  // trailing blanks
+  const remaining = (7 - ((startDow + totalDays) % 7)) % 7;
+  for (let i = 1; i <= remaining; i++) html += `<div class="cal-day other-month">${i}</div>`;
+
+  document.getElementById('cal-grid').innerHTML = html;
+}
+
+// Month nav
+document.getElementById('prev-mo').addEventListener('click', () => {
+  if (viewMonth === 0) { viewMonth = 11; viewYear--; } else viewMonth--;
+  renderMonthGrid();
+});
+document.getElementById('next-mo').addEventListener('click', () => {
+  if (viewMonth === 11) { viewMonth = 0; viewYear++; } else viewMonth++;
+  renderMonthGrid();
+});
+
+// ── Weather ────────────────────────────────────────────────────
+async function fetchWeather() {
+  try { weatherData = await fetchJSON('/weather'); } catch(e) {}
+  renderWeather();
+}
+
+function renderWeather() {
+  const el = document.getElementById('weather-content');
+  const d  = weatherData;
+  if (!d || !d.temp) { el.innerHTML = '<span class="loading">Unavailable</span>'; return; }
+
+  document.getElementById('chip-weather').textContent = `${d.temp}°F`;
+
+  el.innerHTML = `
+    <div class="wx-main">${d.temp}°F</div>
+    <div class="wx-desc">${escHtml(d.description)}</div>
+    <div class="wx-stats">
+      <div class="wx-stat">
+        <span class="wx-stat-label">Feels</span>
+        <span class="wx-stat-val">${d.feels_like}°</span>
+      </div>
+      <div class="wx-stat">
+        <span class="wx-stat-label">Humidity</span>
+        <span class="wx-stat-val">${d.humidity}%</span>
+      </div>
+      <div class="wx-stat">
+        <span class="wx-stat-label">Wind</span>
+        <span class="wx-stat-val">${d.wind} mph</span>
+      </div>
+    </div>`;
+}
+
+// ── Utility ────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+// ── Init ───────────────────────────────────────────────────────
+async function init() {
+  updateClock();
+  setInterval(updateClock, 1000);
+  await Promise.all([fetchScores(), fetchQuotes(), fetchCalendar(), fetchWeather()]);
+  setInterval(fetchScores,   60000);
+  setInterval(fetchQuotes,   900000);
+  setInterval(() => { fetchCalendar(); fetchWeather(); }, 3600000);
+}
+init();
+</script>
+</body>
+</html>

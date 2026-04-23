@@ -1,10 +1,11 @@
 import os
 import time
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 import pytz
 import requests
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
+from icalendar import Calendar as iCal
 
 app = Flask(__name__)
 
@@ -199,6 +200,92 @@ def get_team(team_slug):
 @app.route('/health')
 def health():
     return jsonify({'status': 'ok'})
+
+
+# ── Dashboard HTML ────────────────────────────────────────────────
+@app.route('/')
+def dashboard():
+    return send_from_directory('static', 'index.html')
+
+
+# ── Calendar proxy ────────────────────────────────────────────────
+_ical_cache = {}
+
+@app.route('/ical')
+def get_calendar():
+    ical_url = os.environ.get('GOOGLE_ICAL_URL', '')
+    if not ical_url:
+        return jsonify([])
+    now = time.time()
+    if 'data' in _ical_cache and now - _ical_cache.get('ts', 0) < 300:
+        return jsonify(_ical_cache['data'])
+    try:
+        r = requests.get(ical_url, timeout=10)
+        r.raise_for_status()
+        cal = iCal.from_ical(r.content)
+        today = datetime.now(ET).date()
+        cutoff = today + timedelta(days=60)
+        events = []
+        for component in cal.walk():
+            if component.name != 'VEVENT':
+                continue
+            dtstart = component.get('DTSTART')
+            if not dtstart:
+                continue
+            dt = dtstart.dt
+            if isinstance(dt, datetime):
+                edate = dt.astimezone(ET).date()
+                etime = dt.astimezone(ET).strftime('%I:%M %p').lstrip('0')
+            else:
+                edate = dt
+                etime = 'All day'
+            if edate < today or edate > cutoff:
+                continue
+            events.append({
+                'title': str(component.get('SUMMARY', 'Untitled')),
+                'date':  edate.isoformat(),
+                'time':  etime,
+            })
+        events.sort(key=lambda e: e['date'])
+        result = events[:20]
+        _ical_cache['data'] = result
+        _ical_cache['ts']   = now
+        return jsonify(result)
+    except Exception as e:
+        return jsonify(_ical_cache.get('data', []))
+
+
+# ── Weather proxy ─────────────────────────────────────────────────
+_wx_cache = {}
+
+@app.route('/weather')
+def get_weather():
+    api_key = os.environ.get('OPENWEATHERMAP_API_KEY', '')
+    if not api_key:
+        return jsonify({})
+    now = time.time()
+    if 'data' in _wx_cache and now - _wx_cache.get('ts', 0) < 600:
+        return jsonify(_wx_cache['data'])
+    try:
+        r = requests.get(
+            'https://api.openweathermap.org/data/2.5/weather',
+            params={'lat': 38.8048, 'lon': -77.0469, 'appid': api_key, 'units': 'imperial'},
+            timeout=8,
+        )
+        r.raise_for_status()
+        d = r.json()
+        result = {
+            'temp':        round(d['main']['temp']),
+            'feels_like':  round(d['main']['feels_like']),
+            'description': d['weather'][0]['description'].title(),
+            'humidity':    d['main']['humidity'],
+            'wind':        round(d['wind']['speed']),
+        }
+        _wx_cache['data'] = result
+        _wx_cache['ts']   = now
+        return jsonify(result)
+    except Exception:
+        return jsonify(_wx_cache.get('data', {}))
 
 
 if __name__ == '__main__':
