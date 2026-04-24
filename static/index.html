@@ -136,21 +136,18 @@ body::before {
 }
 
 /* ══════════════════════════════════════════════════════════
-   FORECAST BAR  (full-width strip below header)
+   FORECAST — compact inline strip inside header
 ══════════════════════════════════════════════════════════ */
-#forecast-bar {
-  padding: 8px 12px;
-}
-#forecast-strip {
-  display: flex; gap: 6px;
+#forecast-header {
+  display: flex; gap: 3px; flex: 0 0 auto;
 }
 .fc-day {
-  flex: 1 1 0; min-width: 0;
+  width: 58px;
   background: var(--chip);
   border: 1px solid var(--border-s);
   border-radius: 4px;
-  padding: 6px 4px;
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 5px 3px;
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
 }
 .fc-day.fc-today {
   border-color: var(--accent);
@@ -158,21 +155,17 @@ body::before {
 }
 .fc-day-name {
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+  font-size: 8px; font-weight: 700; letter-spacing: 0.1em;
   color: var(--muted); text-transform: uppercase;
 }
 .fc-day.fc-today .fc-day-name { color: var(--accent); }
-.fc-day-icon { font-size: 20px; line-height: 1; }
-.fc-day-hi {
+.fc-day-icon { font-size: 17px; line-height: 1; }
+.fc-day-temps {
   font-family: "JetBrains Mono", monospace;
-  font-size: 13px; font-weight: 700; color: var(--bright);
-  line-height: 1;
+  font-size: 11px; font-weight: 700; color: var(--bright);
+  line-height: 1; white-space: nowrap;
 }
-.fc-day-lo {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px; color: var(--muted);
-  line-height: 1;
-}
+.fc-lo { color: var(--muted); font-weight: 400; font-size: 10px; }
 
 /* ══════════════════════════════════════════════════════════
    MAIN BODY — left panel + right rail
@@ -400,15 +393,11 @@ body::before {
         <span class="chip-value" id="chip-weather">—</span>
       </div>
     </div>
+    <div id="forecast-header"></div>
     <div id="clock-block">
       <div id="clock">—:——</div>
       <div id="date-str">——</div>
     </div>
-  </div>
-
-  <!-- FORECAST BAR -->
-  <div class="panel" id="forecast-bar">
-    <div id="forecast-strip"><span class="loading">Loading forecast…</span></div>
   </div>
 
   <!-- BODY -->
@@ -641,19 +630,15 @@ async function fetchForecast() {
 }
 
 function renderForecast() {
-  const el = document.getElementById('forecast-strip');
-  if (!forecastData.length) {
-    el.innerHTML = '<span class="loading">Forecast unavailable</span>';
-    return;
-  }
+  const el = document.getElementById('forecast-header');
+  if (!forecastData.length) { el.innerHTML = ''; return; }
   el.innerHTML = forecastData.map(day => {
-    const icon  = WX_EMOJI[day.icon] || '🌡️';
+    const icon    = WX_EMOJI[day.icon] || '🌡️';
     const isToday = day.day === 'TODAY';
     return `<div class="fc-day${isToday ? ' fc-today' : ''}">
       <div class="fc-day-name">${day.day}</div>
       <div class="fc-day-icon">${icon}</div>
-      <div class="fc-day-hi">${day.high}°</div>
-      <div class="fc-day-lo">${day.low}°</div>
+      <div class="fc-day-temps">${day.high}°<span class="fc-lo">/${day.low}°</span></div>
     </div>`;
   }).join('');
 }
