@@ -347,19 +347,29 @@ body::before {
 .news-desc { font-size: 11px; color: var(--muted); }
 
 /* Weather */
+.wx-row {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 12px;
+}
+.wx-left { display: flex; align-items: center; gap: 10px; flex: 1; }
+.wx-icon { font-size: 34px; line-height: 1; flex-shrink: 0; }
 .wx-main {
   font-family: "JetBrains Mono", monospace;
-  font-size: 32px; font-weight: 700; color: var(--bright);
+  font-size: 30px; font-weight: 700; color: var(--bright);
   line-height: 1;
 }
-.wx-desc { font-size: 12px; color: var(--muted); margin: 3px 0 8px; }
-.wx-stats { display: flex; gap: 6px; flex-wrap: wrap; }
+.wx-desc { font-size: 11px; color: var(--muted); margin-top: 3px; }
+.wx-stats {
+  display: flex; flex-direction: column; gap: 3px;
+  align-items: stretch; flex-shrink: 0;
+}
 .wx-stat {
   background: var(--chip); border: 1px solid var(--border-s);
-  border-radius: 3px; padding: 3px 8px;
+  border-radius: 3px; padding: 2px 8px;
   font-family: "JetBrains Mono", monospace; font-size: 11px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
 }
-.wx-stat-label { color: var(--muted); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; display: block; }
+.wx-stat-label { color: var(--muted); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; }
 .wx-stat-val { color: var(--bright); font-weight: 600; }
 
 /* ── Loading/error states ───────────────────────────────── */
@@ -741,22 +751,30 @@ function renderWeather() {
   if (!d || !d.temp) { el.innerHTML = '<span class="loading">Unavailable</span>'; return; }
 
   document.getElementById('chip-weather').textContent = `${d.temp}°F`;
+  const wxIcon = WX_EMOJI[d.icon] || '🌡️';
 
   el.innerHTML = `
-    <div class="wx-main">${d.temp}°F</div>
-    <div class="wx-desc">${escHtml(d.description)}</div>
-    <div class="wx-stats">
-      <div class="wx-stat">
-        <span class="wx-stat-label">Feels</span>
-        <span class="wx-stat-val">${d.feels_like}°</span>
+    <div class="wx-row">
+      <div class="wx-left">
+        <div class="wx-icon">${wxIcon}</div>
+        <div>
+          <div class="wx-main">${d.temp}°F</div>
+          <div class="wx-desc">${escHtml(d.description)}</div>
+        </div>
       </div>
-      <div class="wx-stat">
-        <span class="wx-stat-label">Humidity</span>
-        <span class="wx-stat-val">${d.humidity}%</span>
-      </div>
-      <div class="wx-stat">
-        <span class="wx-stat-label">Wind</span>
-        <span class="wx-stat-val">${d.wind} mph</span>
+      <div class="wx-stats">
+        <div class="wx-stat">
+          <span class="wx-stat-label">Feels</span>
+          <span class="wx-stat-val">${d.feels_like}°</span>
+        </div>
+        <div class="wx-stat">
+          <span class="wx-stat-label">Humidity</span>
+          <span class="wx-stat-val">${d.humidity}%</span>
+        </div>
+        <div class="wx-stat">
+          <span class="wx-stat-label">Wind</span>
+          <span class="wx-stat-val">${d.wind} mph</span>
+        </div>
       </div>
     </div>`;
 }

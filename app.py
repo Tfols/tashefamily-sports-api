@@ -375,6 +375,7 @@ def get_weather():
             'description': d['weather'][0]['description'].title(),
             'humidity':    d['main']['humidity'],
             'wind':        round(d['wind']['speed']),
+            'icon':        d['weather'][0]['icon'],
         }
         _wx_cache['data'] = result
         _wx_cache['ts']   = now
