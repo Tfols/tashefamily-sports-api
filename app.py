@@ -94,7 +94,9 @@ def live_game(sport, league, team_id):
 def schedule_info(sport, league, team_id):
     data = espn_get(sport, league, f'teams/{team_id}/schedule', ttl=300)
     if not data:
-        return {'line1': 'No data', 'line2': '—'}
+        # College sports: silently hide the row — ESPN API may not cover this sport
+        # Pro sports: surface 'No data' so we know there's an issue
+        return None if 'college' in league else {'line1': 'No data', 'line2': '—'}
 
     completed, upcoming = [], []
     for event in data.get('events', []):
@@ -112,13 +114,16 @@ def schedule_info(sport, league, team_id):
 
     # Off-season detection applies only to college sports.
     # Professional leagues (NFL, MLB) always show their last result even in offseason.
+    # college-football uses a 180-day window (season ends Nov-Jan, want to show through May).
+    # All other college sports use 45 days.
     if 'college' in league and not upcoming:
         if not completed:
             return None
         try:
             last_dt = datetime.fromisoformat(completed[0][0].replace('Z', '+00:00'))
             days_ago = (datetime.now(pytz.utc) - last_dt.astimezone(pytz.utc)).days
-            if days_ago > 45:
+            threshold = 180 if league == 'college-football' else 45
+            if days_ago > threshold:
                 return None
         except Exception:
             pass  # date parse failure → fall through and show what we have
