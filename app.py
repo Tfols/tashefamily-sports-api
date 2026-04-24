@@ -11,12 +11,18 @@ from icalendar import Calendar as iCal
 app = Flask(__name__)
 
 TEAMS = {
-    'phillies':   {'sport': 'baseball', 'league': 'mlb',              'id': '22'},
-    'eagles':     {'sport': 'football', 'league': 'nfl',              'id': '21'},
-    'yankees':    {'sport': 'baseball', 'league': 'mlb',              'id': '10'},
-    'nationals':  {'sport': 'baseball', 'league': 'mlb',              'id': '20'},
-    'commanders': {'sport': 'football', 'league': 'nfl',              'id': '28'},
-    'pitt':       {'sport': 'football', 'league': 'college-football', 'id': '221'},
+    'phillies':      {'sport': 'baseball',    'league': 'mlb',                       'id': '22'},
+    'eagles':        {'sport': 'football',    'league': 'nfl',                       'id': '21'},
+    'yankees':       {'sport': 'baseball',    'league': 'mlb',                       'id': '10'},
+    'nationals':     {'sport': 'baseball',    'league': 'mlb',                       'id': '20'},
+    'commanders':    {'sport': 'football',    'league': 'nfl',                       'id': '28'},
+    'pitt':          {'sport': 'football',    'league': 'college-football',          'id': '221'},
+    'pitt-mbb':      {'sport': 'basketball',  'league': 'mens-college-basketball',   'id': '221'},
+    'pitt-wbb':      {'sport': 'basketball',  'league': 'womens-college-basketball', 'id': '221'},
+    'pitt-baseball': {'sport': 'baseball',    'league': 'college-baseball',          'id': '221'},
+    'pitt-msoc':     {'sport': 'soccer',      'league': 'mens-college-soccer',       'id': '221'},
+    'pitt-wsoc':     {'sport': 'soccer',      'league': 'womens-college-soccer',     'id': '221'},
+    'pitt-wvb':      {'sport': 'volleyball',  'league': 'womens-college-volleyball', 'id': '221'},
 }
 
 _cache = {}
@@ -103,6 +109,18 @@ def schedule_info(sport, league, team_id):
 
     completed.sort(key=lambda x: x[0], reverse=True)
     upcoming.sort(key=lambda x: x[0])
+
+    # Off-season detection: no upcoming games AND last game > 45 days ago → hide row
+    if not upcoming:
+        if not completed:
+            return None
+        try:
+            last_dt = datetime.fromisoformat(completed[0][0].replace('Z', '+00:00'))
+            days_ago = (datetime.now(pytz.utc) - last_dt.astimezone(pytz.utc)).days
+            if days_ago > 45:
+                return None
+        except Exception:
+            pass  # date parse failure → fall through and show what we have
 
     line1 = 'No recent games'
     if completed:

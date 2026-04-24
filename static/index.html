@@ -533,14 +533,32 @@ async function fetchJSON(url) {
 
 // ── Scores ─────────────────────────────────────────────────────
 const SCORE_LABELS = {
-  phillies:'PHI', eagles:'EAG', yankees:'NYY',
-  nationals:'WSH', commanders:'CMD', pitt:'PITT'
+  phillies:'PHI',  eagles:'EAG',  yankees:'NYY',
+  nationals:'WSH', commanders:'CMD',
+  // Pitt sports — short labels so icon does the heavy lifting
+  'pitt':          'PITT',
+  'pitt-mbb':      'PMB',
+  'pitt-wbb':      'PWB',
+  'pitt-baseball': 'PBB',
+  'pitt-msoc':     'PMS',
+  'pitt-wsoc':     'PWS',
+  'pitt-wvb':      'PVB',
 };
 const SCORE_ICONS = {
-  phillies:'⚾', eagles:'🏈', yankees:'⚾',
-  nationals:'⚾', commanders:'🏈', pitt:'🏈'
+  phillies:'⚾', eagles:'🏈', yankees:'⚾', nationals:'⚾', commanders:'🏈',
+  'pitt':          '🏈',
+  'pitt-mbb':      '🏀',
+  'pitt-wbb':      '🏀',
+  'pitt-baseball': '⚾',
+  'pitt-msoc':     '⚽',
+  'pitt-wsoc':     '⚽',
+  'pitt-wvb':      '🏐',
 };
-const SCORE_ORDER = ['phillies','eagles','yankees','nationals','commanders','pitt'];
+// API controls which Pitt sports are visible (off-season = omitted from response)
+const SCORE_ORDER = [
+  'phillies','eagles','yankees','nationals','commanders',
+  'pitt','pitt-mbb','pitt-wbb','pitt-baseball','pitt-msoc','pitt-wsoc','pitt-wvb',
+];
 
 async function fetchScores() {
   try { scoresData = await fetchJSON('/sports/all'); } catch(e) {}
@@ -553,18 +571,21 @@ function renderScores() {
   document.getElementById('chip-scores').textContent =
     live.length ? `${live.length} LIVE` : 'NO LIVE';
 
-  el.innerHTML = SCORE_ORDER.map(key => {
-    const val = scoresData[key] || '—';
-    const isLive = val.startsWith('🔴');
-    const display = isLive
-      ? `<span class="live">${val}</span>`
-      : escHtml(val);
-    return `<div class="row-chip">
-      <span class="sport-icon">${SCORE_ICONS[key]}</span>
-      <span class="row-label">${SCORE_LABELS[key]}</span>
-      <span class="row-value">${display}</span>
-    </div>`;
-  }).join('');
+  // Only render rows the API returned — absent keys are off-season, hide them
+  el.innerHTML = SCORE_ORDER
+    .filter(key => scoresData[key] != null)
+    .map(key => {
+      const val = scoresData[key] || '—';
+      const isLive = val.startsWith('🔴');
+      const display = isLive
+        ? `<span class="live">${val}</span>`
+        : escHtml(val);
+      return `<div class="row-chip">
+        <span class="sport-icon">${SCORE_ICONS[key]}</span>
+        <span class="row-label">${SCORE_LABELS[key]}</span>
+        <span class="row-value">${display}</span>
+      </div>`;
+    }).join('');
 }
 
 // ── Quotes ─────────────────────────────────────────────────────
