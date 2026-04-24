@@ -110,8 +110,9 @@ def schedule_info(sport, league, team_id):
     completed.sort(key=lambda x: x[0], reverse=True)
     upcoming.sort(key=lambda x: x[0])
 
-    # Off-season detection: no upcoming games AND last game > 45 days ago → hide row
-    if not upcoming:
+    # Off-season detection applies only to college sports.
+    # Professional leagues (NFL, MLB) always show their last result even in offseason.
+    if 'college' in league and not upcoming:
         if not completed:
             return None
         try:
@@ -200,9 +201,13 @@ def combined_line(d):
 def get_all_teams():
     result = {}
     for slug, info in TEAMS.items():
-        d = live_game(info['sport'], info['league'], info['id']) or \
-            schedule_info(info['sport'], info['league'], info['id'])
-        result[slug] = combined_line(d)
+        try:
+            d = live_game(info['sport'], info['league'], info['id']) or \
+                schedule_info(info['sport'], info['league'], info['id'])
+            if d is not None:
+                result[slug] = combined_line(d)
+        except Exception:
+            pass  # one team failing should never blank the whole response
     return jsonify(result)
 
 
