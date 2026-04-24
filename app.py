@@ -264,6 +264,64 @@ def get_calendar():
         return jsonify(_ical_cache.get('data') or {'error': str(e)})
 
 
+# ── Forecast proxy ────────────────────────────────────────────────
+_forecast_cache = {}
+
+@app.route('/forecast')
+def get_forecast():
+    api_key = os.environ.get('OPENWEATHERMAP_API_KEY', '')
+    if not api_key:
+        return jsonify([])
+    now = time.time()
+    if 'data' in _forecast_cache and now - _forecast_cache.get('ts', 0) < 900:
+        return jsonify(_forecast_cache['data'])
+    try:
+        r = requests.get(
+            'https://api.openweathermap.org/data/2.5/forecast',
+            params={'lat': 38.8048, 'lon': -77.0469, 'appid': api_key,
+                    'units': 'imperial', 'cnt': 40},
+            timeout=8,
+        )
+        r.raise_for_status()
+        d = r.json()
+
+        # Group 3-hour slots by local date, compute daily high/low
+        from collections import defaultdict
+        days = defaultdict(list)
+        for item in d.get('list', []):
+            dt_local = datetime.utcfromtimestamp(item['dt']).replace(
+                tzinfo=pytz.utc).astimezone(ET)
+            days[dt_local.strftime('%Y-%m-%d')].append(item)
+
+        result = []
+        today_str = datetime.now(ET).strftime('%Y-%m-%d')
+        for date_key in sorted(days.keys())[:7]:
+            items = days[date_key]
+            highs = [i['main']['temp_max'] for i in items]
+            lows  = [i['main']['temp_min'] for i in items]
+            # prefer a midday slot for representative icon
+            midday = min(items, key=lambda i: abs(
+                datetime.utcfromtimestamp(i['dt']).replace(
+                    tzinfo=pytz.utc).astimezone(ET).hour - 12))
+            icon = midday['weather'][0]['icon']
+            desc = midday['weather'][0]['description'].title()
+            day_dt = datetime.strptime(date_key, '%Y-%m-%d')
+            result.append({
+                'day':   'TODAY' if date_key == today_str else day_dt.strftime('%a').upper(),
+                'date':  date_key,
+                'high':  round(max(highs)),
+                'low':   round(min(lows)),
+                'desc':  desc,
+                'icon':  icon,
+            })
+
+        _forecast_cache['data'] = result
+        _forecast_cache['ts']   = now
+        return jsonify(result)
+    except Exception as e:
+        return jsonify(_forecast_cache.get('data') or {'error': str(e)})
+
+
 # ── Weather proxy ─────────────────────────────────────────────────
 _wx_cache = {}
 

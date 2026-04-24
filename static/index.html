@@ -60,20 +60,28 @@ body::before {
   border: 1px solid var(--border);
   border-radius: 8px;
 }
-.panel-inner {
-  background: var(--chip);
-  border: 1px solid var(--border-s);
-  border-radius: 5px;
-}
 
-/* ── Section label ──────────────────────────────────────── */
-.section-label {
+/* ── Card shared ────────────────────────────────────────── */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: visible;
+}
+.card-header {
+  height: 2px;
+  background: var(--blue-grd);
+  border-radius: 6px 6px 0 0;
+  opacity: 0.8;
+}
+.card-body { padding: 8px 10px; }
+.card-title {
   font-size: 10px; font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--head);
-  padding-bottom: 6px;
+  padding-bottom: 5px;
   border-bottom: 1px solid var(--rule);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -128,6 +136,45 @@ body::before {
 }
 
 /* ══════════════════════════════════════════════════════════
+   FORECAST BAR  (full-width strip below header)
+══════════════════════════════════════════════════════════ */
+#forecast-bar {
+  padding: 8px 12px;
+}
+#forecast-strip {
+  display: flex; gap: 6px;
+}
+.fc-day {
+  flex: 1 1 0; min-width: 0;
+  background: var(--chip);
+  border: 1px solid var(--border-s);
+  border-radius: 4px;
+  padding: 6px 4px;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.fc-day.fc-today {
+  border-color: var(--accent);
+  background: rgba(56,189,248,0.1);
+}
+.fc-day-name {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--muted); text-transform: uppercase;
+}
+.fc-day.fc-today .fc-day-name { color: var(--accent); }
+.fc-day-icon { font-size: 20px; line-height: 1; }
+.fc-day-hi {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; font-weight: 700; color: var(--bright);
+  line-height: 1;
+}
+.fc-day-lo {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; color: var(--muted);
+  line-height: 1;
+}
+
+/* ══════════════════════════════════════════════════════════
    MAIN BODY — left panel + right rail
 ══════════════════════════════════════════════════════════ */
 #body {
@@ -148,29 +195,6 @@ body::before {
   align-items: start;
 }
 
-/* ── Card shared ────────────────────────────────────────── */
-.card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: visible;
-}
-.card-header {
-  height: 2px;
-  background: var(--blue-grd);
-  border-radius: 6px 6px 0 0;
-  opacity: 0.8;
-}
-.card-body { padding: 8px 10px; }
-.card-title {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--head);
-  padding-bottom: 5px;
-  border-bottom: 1px solid var(--rule);
-  margin-bottom: 6px;
-}
-
 /* ── Row chip (shared by Scores + Quotes) ───────────────── */
 .row-chip {
   display: flex; align-items: center;
@@ -179,16 +203,22 @@ body::before {
   border-radius: 3px;
   padding: 3px 8px;
   min-height: 24px;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 2px;
 }
 .row-chip:last-child { margin-bottom: 0; }
+.sport-icon {
+  flex: 0 0 auto;
+  font-size: 13px;
+  line-height: 1;
+  opacity: 0.85;
+}
 .row-label {
   font-family: "JetBrains Mono", monospace;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--bright);
-  flex: 0 0 48px;
+  flex: 0 0 42px;
 }
 .row-value {
   font-family: "JetBrains Mono", monospace;
@@ -376,6 +406,11 @@ body::before {
     </div>
   </div>
 
+  <!-- FORECAST BAR -->
+  <div class="panel" id="forecast-bar">
+    <div id="forecast-strip"><span class="loading">Loading forecast…</span></div>
+  </div>
+
   <!-- BODY -->
   <div id="body">
 
@@ -470,11 +505,12 @@ body::before {
 
 <script>
 // ── State ──────────────────────────────────────────────────────
-let scoresData  = {};
-let quotesData  = {};
-let calEvents   = [];
-let weatherData = {};
-let viewYear, viewMonth; // for calendar navigation
+let scoresData   = {};
+let quotesData   = {};
+let calEvents    = [];
+let weatherData  = {};
+let forecastData = [];
+let viewYear, viewMonth;
 
 // ── Clock ──────────────────────────────────────────────────────
 function updateClock() {
@@ -500,6 +536,10 @@ const SCORE_LABELS = {
   phillies:'PHI', eagles:'EAG', yankees:'NYY',
   nationals:'WSH', commanders:'CMD', pitt:'PITT'
 };
+const SCORE_ICONS = {
+  phillies:'⚾', eagles:'🏈', yankees:'⚾',
+  nationals:'⚾', commanders:'🏈', pitt:'🏈'
+};
 const SCORE_ORDER = ['phillies','eagles','yankees','nationals','commanders','pitt'];
 
 async function fetchScores() {
@@ -520,6 +560,7 @@ function renderScores() {
       ? `<span class="live">${val}</span>`
       : escHtml(val);
     return `<div class="row-chip">
+      <span class="sport-icon">${SCORE_ICONS[key]}</span>
       <span class="row-label">${SCORE_LABELS[key]}</span>
       <span class="row-value">${display}</span>
     </div>`;
@@ -540,7 +581,6 @@ function renderQuotes() {
 
   el.innerHTML = QUOTE_ORDER.map(sym => {
     const raw = quotesData[sym] || '—';
-    // raw format: "708.45  ▼2.76"  or  "708.45  ▲2.76"
     let display = escHtml(raw);
     const arrowUp   = raw.includes('▲');
     const arrowDown = raw.includes('▼');
@@ -558,6 +598,43 @@ function renderQuotes() {
   } else {
     chipEl.textContent = '—';
   }
+}
+
+// ── Forecast ────────────────────────────────────────────────────
+// Map OWM icon codes → emoji
+const WX_EMOJI = {
+  '01d':'☀️','01n':'🌙',
+  '02d':'🌤️','02n':'🌤️',
+  '03d':'⛅','03n':'⛅',
+  '04d':'☁️','04n':'☁️',
+  '09d':'🌦️','09n':'🌦️',
+  '10d':'🌧️','10n':'🌧️',
+  '11d':'⛈️','11n':'⛈️',
+  '13d':'🌨️','13n':'🌨️',
+  '50d':'🌫️','50n':'🌫️',
+};
+
+async function fetchForecast() {
+  try { forecastData = await fetchJSON('/forecast'); } catch(e) {}
+  renderForecast();
+}
+
+function renderForecast() {
+  const el = document.getElementById('forecast-strip');
+  if (!forecastData.length) {
+    el.innerHTML = '<span class="loading">Forecast unavailable</span>';
+    return;
+  }
+  el.innerHTML = forecastData.map(day => {
+    const icon  = WX_EMOJI[day.icon] || '🌡️';
+    const isToday = day.day === 'TODAY';
+    return `<div class="fc-day${isToday ? ' fc-today' : ''}">
+      <div class="fc-day-name">${day.day}</div>
+      <div class="fc-day-icon">${icon}</div>
+      <div class="fc-day-hi">${day.high}°</div>
+      <div class="fc-day-lo">${day.low}°</div>
+    </div>`;
+  }).join('');
 }
 
 // ── Calendar ───────────────────────────────────────────────────
@@ -604,7 +681,7 @@ function renderMonthGrid() {
   if (viewYear === undefined) { viewYear = now.getFullYear(); viewMonth = now.getMonth(); }
   const firstDay = new Date(viewYear, viewMonth, 1);
   const lastDay  = new Date(viewYear, viewMonth + 1, 0);
-  const startDow = firstDay.getDay();      // 0=Sun
+  const startDow = firstDay.getDay();
   const totalDays = lastDay.getDate();
   const todayDate = now.getDate();
   const isCurrentMonth = viewYear === now.getFullYear() && viewMonth === now.getMonth();
@@ -612,7 +689,6 @@ function renderMonthGrid() {
   const MONS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   document.getElementById('month-title').textContent = `${MONS[viewMonth]} ${viewYear}`;
 
-  // Build set of days with events for this month
   const eventDays = new Set();
   const prefix = `${viewYear}-${String(viewMonth+1).padStart(2,'0')}-`;
   calEvents.forEach(ev => { if (ev.date.startsWith(prefix)) eventDays.add(parseInt(ev.date.slice(8))); });
@@ -620,7 +696,6 @@ function renderMonthGrid() {
   const dows = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
   let html = dows.map(d => `<div class="cal-dow">${d}</div>`).join('');
 
-  // leading blanks
   for (let i = 0; i < startDow; i++) {
     const prevMonthDay = new Date(viewYear, viewMonth, 0).getDate() - startDow + i + 1;
     html += `<div class="cal-day other-month">${prevMonthDay}</div>`;
@@ -630,21 +705,15 @@ function renderMonthGrid() {
     const isToday = isCurrentMonth && d === todayDate;
     const isWeekend = dow === 0 || dow === 6;
     const hasEvent = eventDays.has(d);
-    const cls = [
-      'cal-day',
-      isToday   ? 'today'       : '',
-      isWeekend ? 'weekend'     : '',
-    ].filter(Boolean).join(' ');
+    const cls = ['cal-day', isToday ? 'today' : '', isWeekend ? 'weekend' : ''].filter(Boolean).join(' ');
     html += `<div class="${cls}">${d}${hasEvent ? '<span class="event-dot"></span>' : ''}</div>`;
   }
-  // trailing blanks
   const remaining = (7 - ((startDow + totalDays) % 7)) % 7;
   for (let i = 1; i <= remaining; i++) html += `<div class="cal-day other-month">${i}</div>`;
 
   document.getElementById('cal-grid').innerHTML = html;
 }
 
-// Month nav
 document.getElementById('prev-mo').addEventListener('click', () => {
   if (viewMonth === 0) { viewMonth = 11; viewYear--; } else viewMonth--;
   renderMonthGrid();
@@ -699,9 +768,10 @@ function escHtml(s) {
 async function init() {
   updateClock();
   setInterval(updateClock, 1000);
-  await Promise.all([fetchScores(), fetchQuotes(), fetchCalendar(), fetchWeather()]);
+  await Promise.all([fetchScores(), fetchQuotes(), fetchCalendar(), fetchWeather(), fetchForecast()]);
   setInterval(fetchScores,   60000);
   setInterval(fetchQuotes,   900000);
+  setInterval(fetchForecast, 900000);
   setInterval(() => { fetchCalendar(); fetchWeather(); }, 3600000);
 }
 init();
