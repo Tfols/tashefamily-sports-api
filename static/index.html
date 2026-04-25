@@ -351,22 +351,33 @@ body::before {
 #right { display: flex; flex-direction: column; gap: 10px; }
 
 /* News */
-.news-link {
-  display: flex; align-items: center; gap: 10px;
+.news-headline {
+  display: block;
   background: var(--chip); border: 1px solid var(--border-s);
-  border-radius: 3px; padding: 7px 10px;
+  border-radius: 3px; padding: 6px 8px;
   margin-bottom: 3px;
   text-decoration: none; color: inherit;
   transition: border-color 0.15s;
 }
-.news-link:last-child { margin-bottom: 0; }
-.news-link:hover { border-color: var(--accent); }
-.news-source {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--head); flex: 0 0 auto;
+.news-headline:last-child { margin-bottom: 0; }
+.news-headline:hover { border-color: var(--accent); }
+.news-headline-title {
+  font-size: 12px; color: var(--bright); line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
 }
-.news-desc { font-size: 11px; color: var(--muted); }
+.news-headline-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 3px;
+}
+.news-headline-src {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted);
+}
+.news-headline-age {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px; color: var(--muted);
+}
 
 /* Weather */
 .wx-row {
@@ -494,19 +505,8 @@ body::before {
       <div class="card">
         <div class="card-header"></div>
         <div class="card-body">
-          <div class="card-title">News</div>
-          <a class="news-link" href="https://apnews.com" target="_blank" rel="noopener">
-            <span class="news-source">AP News</span>
-            <span class="news-desc">Top stories</span>
-          </a>
-          <a class="news-link" href="https://reuters.com" target="_blank" rel="noopener">
-            <span class="news-source">Reuters</span>
-            <span class="news-desc">World &amp; markets</span>
-          </a>
-          <a class="news-link" href="https://arstechnica.com" target="_blank" rel="noopener">
-            <span class="news-source">Ars Technica</span>
-            <span class="news-desc">Tech &amp; science</span>
-          </a>
+          <div class="card-title">AP News</div>
+          <div id="news-ap"><span class="loading">Loading…</span></div>
         </div>
       </div>
 
@@ -829,6 +829,31 @@ document.getElementById('next-mo').addEventListener('click', () => {
   renderMonthGrid();
 });
 
+// ── News ───────────────────────────────────────────────────────
+let newsAP = [];
+
+async function fetchNews() {
+  try { newsAP = await fetchJSON('/news/ap'); } catch(e) {}
+  renderNews();
+}
+
+function renderNews() {
+  const el = document.getElementById('news-ap');
+  if (!newsAP.length) {
+    el.innerHTML = '<span class="loading">No stories available</span>';
+    return;
+  }
+  el.innerHTML = newsAP.map(item =>
+    `<a class="news-headline" href="${escAttr(item.link)}" target="_blank" rel="noopener">
+      <div class="news-headline-title">${escHtml(item.title)}</div>
+      <div class="news-headline-meta">
+        <span class="news-headline-src">AP News</span>
+        <span class="news-headline-age">${escHtml(item.age)}</span>
+      </div>
+    </a>`
+  ).join('');
+}
+
 // ── Weather ────────────────────────────────────────────────────
 async function fetchWeather() {
   try { weatherData = await fetchJSON('/weather'); } catch(e) {}
@@ -877,15 +902,22 @@ function escHtml(s) {
     .replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;');
 }
+function escAttr(s) {
+  // Safe for use in href= attributes — strips javascript: and encodes
+  const str = String(s).trim();
+  if (/^javascript:/i.test(str)) return '#';
+  return str.replace(/"/g,'%22').replace(/'/g,'%27');
+}
 
 // ── Init ───────────────────────────────────────────────────────
 async function init() {
   updateClock();
   setInterval(updateClock, 1000);
-  await Promise.all([fetchScores(), fetchQuotes(), fetchCalendar(), fetchWeather(), fetchForecast()]);
+  await Promise.all([fetchScores(), fetchQuotes(), fetchCalendar(), fetchWeather(), fetchForecast(), fetchNews()]);
   setInterval(fetchScores,   60000);
   setInterval(fetchQuotes,   900000);
   setInterval(fetchForecast, 900000);
+  setInterval(fetchNews,     900000);
   setInterval(() => { fetchCalendar(); fetchWeather(); }, 3600000);
 }
 init();

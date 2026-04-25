@@ -5,3 +5,4 @@ pytz
 icalendar
 python-dateutil
 recurring-ical-events
+feedparser

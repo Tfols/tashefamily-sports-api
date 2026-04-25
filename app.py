@@ -1,7 +1,9 @@
+import calendar as cal_module
 import os
 import time
 from datetime import datetime, date, timedelta
 
+import feedparser
 import pytz
 import recurring_ical_events
 import requests
@@ -382,6 +384,61 @@ def get_weather():
         return jsonify(result)
     except Exception as e:
         return jsonify(_wx_cache.get('data') or {'error': str(e)})
+
+
+# ── News / RSS proxy ──────────────────────────────────────────────
+# URLs can be swapped here without touching any other code.
+# AP News no longer publishes public RSS; using RSSHub as a proxy.
+NEWS_FEEDS = {
+    'ap':      'https://rsshub.app/apnews/topics/apf-topnews',
+    'reuters': 'https://rsshub.app/reuters/world',
+    'ars':     'https://feeds.arstechnica.com/arstechnica/index',
+}
+NEWS_TTL   = 900   # 15 min
+NEWS_LIMIT = 6     # headlines per source
+
+_news_cache = {}
+
+
+@app.route('/news/<source>')
+def get_news(source):
+    feed_url = NEWS_FEEDS.get(source)
+    if not feed_url:
+        return jsonify({'error': 'Unknown source'}), 404
+
+    now = time.time()
+    if source in _news_cache and now - _news_cache[source].get('ts', 0) < NEWS_TTL:
+        return jsonify(_news_cache[source]['data'])
+
+    try:
+        # feedparser respects ETags / Last-Modified automatically
+        feed = feedparser.parse(
+            feed_url,
+            request_headers={'User-Agent': 'Mozilla/5.0 (tashefamily-dashboard/1.0)'},
+        )
+        items = []
+        for entry in feed.entries[:NEWS_LIMIT]:
+            pub = entry.get('published_parsed') or entry.get('updated_parsed')
+            age_str = ''
+            if pub:
+                pub_epoch = cal_module.timegm(pub)   # UTC struct → epoch
+                age_secs  = now - pub_epoch
+                if age_secs < 3600:
+                    age_str = f'{max(1, int(age_secs / 60))}m ago'
+                elif age_secs < 86400:
+                    age_str = f'{int(age_secs / 3600)}h ago'
+                else:
+                    age_str = f'{int(age_secs / 86400)}d ago'
+            items.append({
+                'title': entry.get('title', '(no title)'),
+                'link':  entry.get('link', ''),
+                'age':   age_str,
+            })
+        if items:
+            _news_cache[source] = {'data': items, 'ts': now}
+        return jsonify(items or _news_cache.get(source, {}).get('data', []))
+    except Exception:
+        return jsonify(_news_cache.get(source, {}).get('data') or [])
 
 
 if __name__ == '__main__':
