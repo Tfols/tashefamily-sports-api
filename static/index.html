@@ -239,14 +239,8 @@ body::before {
 .down { color: var(--bad); }
 
 /* ── Calendar card ──────────────────────────────────────── */
-#calendar-card .card-body {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 12px;
-}
-
 /* Month grid */
-#month-grid { flex: 0 0 auto; min-width: 210px; }
+#month-grid { }
 .month-nav {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 6px;
@@ -293,35 +287,63 @@ body::before {
   width: 4px; height: 4px; border-radius: 50%;
   background: var(--accent);
 }
+.cal-day.has-event { cursor: pointer; }
+.cal-day.has-event:hover { background: rgba(56,189,248,0.1); }
+.cal-day.active-day {
+  outline: 1px solid var(--accent);
+  background: rgba(56,189,248,0.15) !important;
+}
 
-/* Upcoming events list */
-#events-list { overflow: auto; }
+/* Day-detail popup (below calendar grid) */
+#day-detail {
+  display: none;
+  margin-top: 8px;
+  padding: 7px 9px;
+  background: rgba(10,20,40,0.98);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+}
+#day-detail-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 5px;
+}
+#day-detail-date {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--accent); text-transform: uppercase;
+}
+#day-detail-close {
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; font-size: 15px; line-height: 1; padding: 0 2px;
+}
+#day-detail-close:hover { color: var(--bright); }
+
+/* Shared event row (day-detail + upcoming-7) */
 .event-row {
   display: flex; align-items: flex-start; gap: 8px;
   background: var(--chip); border: 1px solid var(--border-s);
   border-radius: 3px; padding: 4px 8px;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 .event-row:last-child { margin-bottom: 0; }
-.event-date {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px; font-weight: 600; color: var(--accent);
-  flex: 0 0 68px; white-space: nowrap;
-  padding-top: 1px;
-}
-.event-title {
-  font-size: 12px; color: var(--bright);
-  line-height: 1.3;
-}
 .event-time {
   font-family: "JetBrains Mono", monospace;
-  font-size: 10px; color: var(--muted);
-  margin-top: 1px;
+  font-size: 10px; color: var(--accent);
+  flex: 0 0 62px; white-space: nowrap; padding-top: 1px;
 }
-#no-events {
-  color: var(--muted); font-size: 12px; padding: 8px 0;
-  text-align: center; font-style: italic;
+.event-title { font-size: 12px; color: var(--bright); line-height: 1.3; }
+
+/* Upcoming 7 days card */
+.upcoming-day { margin-bottom: 7px; }
+.upcoming-day:last-child { margin-bottom: 0; }
+.upcoming-day-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px; padding-bottom: 2px;
+  border-bottom: 1px solid var(--rule);
 }
+.upcoming-day-label.is-today { color: var(--accent); }
 
 /* ══════════════════════════════════════════════════════════
    RIGHT RAIL
@@ -444,21 +466,21 @@ body::before {
         <div class="card-header"></div>
         <div class="card-body">
           <div class="card-title">Calendar</div>
-          <div style="display:grid; grid-template-columns: auto 1fr; gap:14px; align-items:start;">
-
-            <!-- Month grid -->
-            <div id="month-grid">
-              <div class="month-nav">
-                <button id="prev-mo">&lsaquo;</button>
-                <span class="month-title" id="month-title">APR 2026</span>
-                <button id="next-mo">&rsaquo;</button>
-              </div>
-              <div class="cal-grid" id="cal-grid"></div>
+          <div id="month-grid">
+            <div class="month-nav">
+              <button id="prev-mo">&lsaquo;</button>
+              <span class="month-title" id="month-title">APR 2026</span>
+              <button id="next-mo">&rsaquo;</button>
             </div>
-
-            <!-- Upcoming events -->
-            <div id="events-list"><span class="loading">Loading…</span></div>
-
+            <div class="cal-grid" id="cal-grid"></div>
+          </div>
+          <!-- Day detail: appears below grid when an event day is clicked -->
+          <div id="day-detail">
+            <div id="day-detail-header">
+              <span id="day-detail-date"></span>
+              <button id="day-detail-close">×</button>
+            </div>
+            <div id="day-detail-events"></div>
           </div>
         </div>
       </div>
@@ -494,6 +516,15 @@ body::before {
         <div class="card-body">
           <div class="card-title">Weather — Alexandria, VA</div>
           <div id="weather-content"><span class="loading">Loading…</span></div>
+        </div>
+      </div>
+
+      <!-- UPCOMING 7 DAYS -->
+      <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+          <div class="card-title">Next 7 Days</div>
+          <div id="upcoming-list"><span class="loading">Loading…</span></div>
         </div>
       </div>
 
@@ -654,12 +685,16 @@ function renderForecast() {
 }
 
 // ── Calendar ───────────────────────────────────────────────────
+let activeDayStr = null;
+
 async function fetchCalendar() {
   try { calEvents = await fetchJSON('/ical'); } catch(e) {}
-  renderEvents();
+  render7DayEvents();
   renderMonthGrid();
+  // Refresh day-detail if a day is currently open
+  if (activeDayStr) showDayDetail(activeDayStr, true);
   const chipEl = document.getElementById('chip-cal');
-  const today = todayStr();
+  const today  = todayStr();
   const todayCount = calEvents.filter(e => e.date === today).length;
   chipEl.textContent = todayCount ? `${todayCount} TODAY` : `${calEvents.length} AHEAD`;
 }
@@ -669,28 +704,75 @@ function todayStr() {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
-function renderEvents() {
-  const el = document.getElementById('events-list');
-  if (!calEvents.length) {
-    el.innerHTML = '<div id="no-events">No upcoming events</div>';
+// 7-day upcoming events in the right rail
+function render7DayEvents() {
+  const el = document.getElementById('upcoming-list');
+  if (!el) return;
+  const ts  = todayStr();
+  const end = new Date(); end.setDate(end.getDate() + 6);
+  const es  = `${end.getFullYear()}-${String(end.getMonth()+1).padStart(2,'0')}-${String(end.getDate()).padStart(2,'0')}`;
+  const upcoming = calEvents.filter(e => e.date >= ts && e.date <= es);
+  if (!upcoming.length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:12px;text-align:center;padding:8px 0;font-style:italic;">No events in next 7 days</div>';
     return;
   }
-  const today = todayStr();
-  el.innerHTML = calEvents.slice(0, 10).map(ev => {
-    const d    = new Date(ev.date + 'T12:00:00');
-    const mon  = d.toLocaleString('en-US', {month:'short'}).toUpperCase();
-    const day  = d.getDate();
-    const dow  = d.toLocaleString('en-US', {weekday:'short'}).toUpperCase();
-    const isToday = ev.date === today;
-    return `<div class="event-row">
-      <div class="event-date">${isToday ? 'TODAY' : `${dow} ${mon} ${day}`}</div>
-      <div>
-        <div class="event-title">${escHtml(ev.title)}</div>
-        <div class="event-time">${escHtml(ev.time)}</div>
-      </div>
+  const byDate = {};
+  upcoming.forEach(ev => { (byDate[ev.date] = byDate[ev.date] || []).push(ev); });
+  el.innerHTML = Object.keys(byDate).sort().map(date => {
+    const d      = new Date(date + 'T12:00:00');
+    const isToday = date === ts;
+    const label  = isToday ? 'TODAY' : d.toLocaleString('en-US',{weekday:'short'}).toUpperCase();
+    const mon    = d.toLocaleString('en-US',{month:'short'}).toUpperCase();
+    return `<div class="upcoming-day">
+      <div class="upcoming-day-label${isToday ? ' is-today' : ''}">${label} · ${mon} ${d.getDate()}</div>
+      ${byDate[date].map(ev => `
+        <div class="event-row">
+          <div class="event-time">${escHtml(ev.time)}</div>
+          <div class="event-title">${escHtml(ev.title)}</div>
+        </div>`).join('')}
     </div>`;
   }).join('');
 }
+
+// Click-to-see day detail panel below the calendar
+function showDayDetail(dateStr, forceOpen) {
+  const panel   = document.getElementById('day-detail');
+  const dateEl  = document.getElementById('day-detail-date');
+  const eventsEl = document.getElementById('day-detail-events');
+
+  // Toggle off if clicking the same open day
+  if (!forceOpen && activeDayStr === dateStr && panel.style.display !== 'none') {
+    panel.style.display = 'none';
+    activeDayStr = null;
+    document.querySelectorAll('.cal-day.active-day').forEach(el => el.classList.remove('active-day'));
+    return;
+  }
+
+  activeDayStr = dateStr;
+  document.querySelectorAll('.cal-day.active-day').forEach(el => el.classList.remove('active-day'));
+  const target = document.querySelector(`.cal-day[data-date="${dateStr}"]`);
+  if (target) target.classList.add('active-day');
+
+  const events = calEvents.filter(e => e.date === dateStr);
+  if (!events.length) { panel.style.display = 'none'; activeDayStr = null; return; }
+
+  const d   = new Date(dateStr + 'T12:00:00');
+  const dow = d.toLocaleString('en-US',{weekday:'long'}).toUpperCase();
+  const mon = d.toLocaleString('en-US',{month:'short'}).toUpperCase();
+  dateEl.textContent = `${dow} · ${mon} ${d.getDate()}`;
+  eventsEl.innerHTML = events.map(ev => `
+    <div class="event-row">
+      <div class="event-time">${escHtml(ev.time)}</div>
+      <div class="event-title">${escHtml(ev.title)}</div>
+    </div>`).join('');
+  panel.style.display = 'block';
+}
+
+document.getElementById('day-detail-close').addEventListener('click', () => {
+  document.getElementById('day-detail').style.display = 'none';
+  document.querySelectorAll('.cal-day.active-day').forEach(el => el.classList.remove('active-day'));
+  activeDayStr = null;
+});
 
 function renderMonthGrid() {
   const now = new Date();
@@ -718,11 +800,19 @@ function renderMonthGrid() {
   }
   for (let d = 1; d <= totalDays; d++) {
     const dow = (startDow + d - 1) % 7;
-    const isToday = isCurrentMonth && d === todayDate;
+    const isToday   = isCurrentMonth && d === todayDate;
     const isWeekend = dow === 0 || dow === 6;
-    const hasEvent = eventDays.has(d);
-    const cls = ['cal-day', isToday ? 'today' : '', isWeekend ? 'weekend' : ''].filter(Boolean).join(' ');
-    html += `<div class="${cls}">${d}${hasEvent ? '<span class="event-dot"></span>' : ''}</div>`;
+    const hasEvent  = eventDays.has(d);
+    const dateStr   = `${viewYear}-${String(viewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isActive  = dateStr === activeDayStr;
+    const cls = ['cal-day',
+      isToday   ? 'today'      : '',
+      isWeekend ? 'weekend'    : '',
+      hasEvent  ? 'has-event'  : '',
+      isActive  ? 'active-day' : '',
+    ].filter(Boolean).join(' ');
+    const click = hasEvent ? `onclick="showDayDetail('${dateStr}')"` : '';
+    html += `<div class="${cls}" data-date="${dateStr}" ${click}>${d}${hasEvent ? '<span class="event-dot"></span>' : ''}</div>`;
   }
   const remaining = (7 - ((startDow + totalDays) % 7)) % 7;
   for (let i = 1; i <= remaining; i++) html += `<div class="cal-day other-month">${i}</div>`;
