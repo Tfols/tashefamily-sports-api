@@ -390,8 +390,10 @@ def get_weather():
 # URLs can be swapped here without touching any other code.
 # AP News no longer publishes public RSS; using RSSHub as a proxy.
 NEWS_FEEDS = {
-    'ap':      'https://rsshub.app/apnews/topics/apf-topnews',
-    'reuters': 'https://rsshub.app/reuters/world',
+    # Google News RSS filtered to apnews.com — reliable proxy since AP
+    # removed their public RSS feeds.
+    'ap':      'https://news.google.com/rss/search?q=site:apnews.com&hl=en-US&gl=US&ceid=US:en',
+    'reuters': 'https://news.google.com/rss/search?q=site:reuters.com&hl=en-US&gl=US&ceid=US:en',
     'ars':     'https://feeds.arstechnica.com/arstechnica/index',
 }
 NEWS_TTL   = 900   # 15 min
@@ -416,6 +418,12 @@ def get_news(source):
             feed_url,
             request_headers={'User-Agent': 'Mozilla/5.0 (tashefamily-dashboard/1.0)'},
         )
+        # Suffixes Google News appends to titles, e.g. "Headline - AP News"
+        STRIP_SUFFIXES = [
+            ' - AP News', ' - The Associated Press', ' - Associated Press',
+            ' - Reuters', ' - Ars Technica',
+        ]
+
         items = []
         for entry in feed.entries[:NEWS_LIMIT]:
             pub = entry.get('published_parsed') or entry.get('updated_parsed')
@@ -429,8 +437,13 @@ def get_news(source):
                     age_str = f'{int(age_secs / 3600)}h ago'
                 else:
                     age_str = f'{int(age_secs / 86400)}d ago'
+            title = entry.get('title', '(no title)')
+            for sfx in STRIP_SUFFIXES:
+                if title.endswith(sfx):
+                    title = title[:-len(sfx)].strip()
+                    break
             items.append({
-                'title': entry.get('title', '(no title)'),
+                'title': title,
                 'link':  entry.get('link', ''),
                 'age':   age_str,
             })
