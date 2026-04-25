@@ -573,9 +573,11 @@ let viewYear, viewMonth;
 // ── Clock ──────────────────────────────────────────────────────
 function updateClock() {
   const now  = new Date();
-  const h    = String(now.getHours()).padStart(2,'0');
+  const raw  = now.getHours();
+  const h    = raw % 12 || 12;
   const m    = String(now.getMinutes()).padStart(2,'0');
-  document.getElementById('clock').textContent = `${h}:${m}`;
+  const ampm = raw < 12 ? 'am' : 'pm';
+  document.getElementById('clock').textContent = `${h}:${m}${ampm}`;
   const days = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
   const mons = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   document.getElementById('date-str').textContent =
@@ -652,6 +654,14 @@ const QUOTE_ORDER = ['SPY','QQQ','DIA','BAH','RKLB','OCO.V','RGTI','AVTI','LUNR'
 async function fetchQuotes() {
   try { quotesData = await fetchJSON('/quotes/all'); } catch(e) {}
   renderQuotes();
+  // Stamp the card title with the time quotes were last refreshed
+  const now  = new Date();
+  const raw  = now.getHours();
+  const h    = raw % 12 || 12;
+  const m    = String(now.getMinutes()).padStart(2,'0');
+  const ampm = raw < 12 ? 'am' : 'pm';
+  const titleEl = document.querySelector('#quotes-grid')?.closest('.card-body')?.querySelector('.card-title');
+  if (titleEl) titleEl.textContent = `Quotes — ${h}:${m}${ampm}`;
 }
 
 function renderQuotes() {
