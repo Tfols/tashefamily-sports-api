@@ -390,13 +390,13 @@ def get_weather():
 # URLs can be swapped here without touching any other code.
 # AP News no longer publishes public RSS; using RSSHub as a proxy.
 NEWS_FEEDS = {
-    # Google News RSS filtered to apnews.com — reliable proxy since AP
-    # removed their public RSS feeds.
-    'ap':      'https://news.google.com/rss/search?q=site:apnews.com&hl=en-US&gl=US&ceid=US:en',
-    'reuters': 'https://news.google.com/rss/search?q=site:reuters.com&hl=en-US&gl=US&ceid=US:en',
+    # when:1d restricts Google News search to the last 24 hours so we
+    # always get today's articles rather than cached older results.
+    'ap':      'https://news.google.com/rss/search?q=site:apnews.com+when:1d&hl=en-US&gl=US&ceid=US:en',
+    'reuters': 'https://news.google.com/rss/search?q=site:reuters.com+when:1d&hl=en-US&gl=US&ceid=US:en',
     'ars':     'https://feeds.arstechnica.com/arstechnica/index',
 }
-NEWS_TTL   = 900   # 15 min
+NEWS_TTL   = 600   # 10 min
 NEWS_LIMIT = 6     # headlines per source
 
 _news_cache = {}
@@ -424,8 +424,15 @@ def get_news(source):
             ' - Reuters', ' - Ars Technica',
         ]
 
+        # Sort newest-first regardless of feed order, then take top N
+        sorted_entries = sorted(
+            feed.entries,
+            key=lambda e: e.get('published_parsed') or (0,) * 9,
+            reverse=True,
+        )
+
         items = []
-        for entry in feed.entries[:NEWS_LIMIT]:
+        for entry in sorted_entries[:NEWS_LIMIT]:
             pub = entry.get('published_parsed') or entry.get('updated_parsed')
             age_str = ''
             if pub:
