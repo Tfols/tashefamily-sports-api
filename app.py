@@ -7,7 +7,8 @@ import feedparser
 import pytz
 import recurring_ical_events
 import requests
-from flask import Flask, jsonify, send_from_directory
+from html.parser import HTMLParser
+from flask import Flask, jsonify, send_from_directory, request, Response
 from icalendar import Calendar as iCal
 
 app = Flask(__name__)
@@ -253,6 +254,68 @@ def dashboard():
 @app.route('/links')
 def links():
     return send_from_directory('static', 'links.html')
+
+
+# ── Favicon proxy ─────────────────────────────────────────────────
+_favicon_cache = {}
+FAVICON_TTL = 3600  # 1 hour
+
+
+class _FaviconParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.url = None
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'link' and not self.url:
+            d = dict(attrs)
+            if 'icon' in d.get('rel', '').lower():
+                self.url = d.get('href', '')
+
+
+@app.route('/favicon')
+def proxy_favicon():
+    domain = request.args.get('domain', '').strip()
+    if not domain.endswith('.tashefamily.com') and not domain.endswith('.up.railway.app'):
+        return '', 403
+
+    now = time.time()
+    if domain in _favicon_cache and now - _favicon_cache[domain]['ts'] < FAVICON_TTL:
+        c = _favicon_cache[domain]
+        return Response(c['data'], content_type=c['ct'])
+
+    base = f'https://{domain}'
+    favicon_url = None
+
+    try:
+        r = requests.get(base, timeout=6, headers={'User-Agent': 'Mozilla/5.0'}, allow_redirects=True)
+        if r.ok:
+            parser = _FaviconParser()
+            parser.feed(r.text[:8192])
+            href = parser.url
+            if href:
+                if href.startswith('http'):
+                    favicon_url = href
+                elif href.startswith('//'):
+                    favicon_url = 'https:' + href
+                else:
+                    favicon_url = base + (href if href.startswith('/') else '/' + href)
+    except Exception:
+        pass
+
+    if not favicon_url:
+        favicon_url = base + '/favicon.ico'
+
+    try:
+        r = requests.get(favicon_url, timeout=6, headers={'User-Agent': 'Mozilla/5.0'})
+        if r.ok and r.content:
+            ct = r.headers.get('content-type', 'image/x-icon')
+            _favicon_cache[domain] = {'data': r.content, 'ct': ct, 'ts': now}
+            return Response(r.content, content_type=ct)
+    except Exception:
+        pass
+
+    return '', 404
 
 
 # ── Calendar proxy ────────────────────────────────────────────────
