@@ -258,7 +258,8 @@ def links():
 
 # ── Favicon proxy ─────────────────────────────────────────────────
 _favicon_cache = {}
-FAVICON_TTL = 3600  # 1 hour
+FAVICON_TTL = 3600   # 1 hour
+FAVICON_VER = 2      # bump to invalidate all cached entries on redeploy
 _HDR = {'User-Agent': 'Mozilla/5.0'}
 
 
@@ -290,11 +291,30 @@ def _resolve_href(base, href):
     return base + (href if href.startswith('/') else '/' + href)
 
 
+_IMAGE_MAGIC = (
+    b'\x00\x00\x01\x00',  # ICO
+    b'\x89PNG',            # PNG
+    b'GIF87a', b'GIF89a', # GIF
+    b'\xff\xd8\xff',       # JPEG
+    b'RIFF',               # WEBP (check bytes 8-12 separately)
+    b'<svg', b'<?xml',    # SVG
+)
+
+
+def _is_image(data, ct):
+    ct = ct.lower().split(';')[0].strip()
+    if any(k in ct for k in ('html', 'javascript', 'json', 'text/plain')):
+        return False
+    if 'image' in ct:
+        return True
+    return any(data.startswith(m) for m in _IMAGE_MAGIC)
+
+
 def _fetch_image(url):
     r = requests.get(url, timeout=6, headers=_HDR, allow_redirects=True)
     ct = r.headers.get('content-type', '')
-    if r.ok and r.content and len(r.content) > 64 and ('image' in ct or url.endswith('.ico')):
-        return r.content, ct or 'image/x-icon'
+    if r.ok and r.content and len(r.content) > 64 and _is_image(r.content, ct):
+        return r.content, ct if 'image' in ct.lower() else 'image/x-icon'
     return None, None
 
 
@@ -306,7 +326,7 @@ def proxy_favicon():
 
     now = time.time()
     cached = _favicon_cache.get(domain)
-    if cached and now - cached['ts'] < FAVICON_TTL:
+    if cached and cached.get('ver') == FAVICON_VER and now - cached['ts'] < FAVICON_TTL:
         if cached.get('empty'):
             return '', 404
         return Response(cached['data'], content_type=cached['ct'])
@@ -318,7 +338,7 @@ def proxy_favicon():
         try:
             data, ct = _fetch_image(base + path)
             if data:
-                _favicon_cache[domain] = {'data': data, 'ct': ct, 'ts': now}
+                _favicon_cache[domain] = {'data': data, 'ct': ct, 'ts': now, 'ver': FAVICON_VER}
                 return Response(data, content_type=ct)
         except Exception:
             pass
@@ -333,14 +353,14 @@ def proxy_favicon():
                 try:
                     data, ct = _fetch_image(_resolve_href(base, href))
                     if data:
-                        _favicon_cache[domain] = {'data': data, 'ct': ct, 'ts': now}
+                        _favicon_cache[domain] = {'data': data, 'ct': ct, 'ts': now, 'ver': FAVICON_VER}
                         return Response(data, content_type=ct)
                 except Exception:
                     pass
     except Exception:
         pass
 
-    _favicon_cache[domain] = {'empty': True, 'ts': now}
+    _favicon_cache[domain] = {'empty': True, 'ts': now, 'ver': FAVICON_VER}
     return '', 404
 
 
