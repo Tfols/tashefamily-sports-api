@@ -250,6 +250,11 @@ def dashboard():
     return send_from_directory('static', 'index.html')
 
 
+@app.route('/links')
+def links():
+    return send_from_directory('static', 'links.html')
+
+
 # ── Calendar proxy ────────────────────────────────────────────────
 _ical_cache = {}
 
