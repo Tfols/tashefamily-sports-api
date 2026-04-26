@@ -259,18 +259,43 @@ def links():
 # ── Favicon proxy ─────────────────────────────────────────────────
 _favicon_cache = {}
 FAVICON_TTL = 3600  # 1 hour
+_HDR = {'User-Agent': 'Mozilla/5.0'}
 
 
 class _FaviconParser(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.url = None
+        self.candidates = []
 
     def handle_starttag(self, tag, attrs):
-        if tag == 'link' and not self.url:
-            d = dict(attrs)
-            if 'icon' in d.get('rel', '').lower():
-                self.url = d.get('href', '')
+        if tag != 'link':
+            return
+        d = dict(attrs)
+        rel = d.get('rel', '').lower()
+        href = d.get('href', '')
+        if not href or 'icon' not in rel:
+            return
+        # prefer explicit "icon" over "apple-touch-icon" etc.
+        if rel in ('icon', 'shortcut icon'):
+            self.candidates.insert(0, href)
+        else:
+            self.candidates.append(href)
+
+
+def _resolve_href(base, href):
+    if href.startswith('http'):
+        return href
+    if href.startswith('//'):
+        return 'https:' + href
+    return base + (href if href.startswith('/') else '/' + href)
+
+
+def _fetch_image(url):
+    r = requests.get(url, timeout=6, headers=_HDR, allow_redirects=True)
+    ct = r.headers.get('content-type', '')
+    if r.ok and r.content and len(r.content) > 64 and ('image' in ct or url.endswith('.ico')):
+        return r.content, ct or 'image/x-icon'
+    return None, None
 
 
 @app.route('/favicon')
@@ -280,41 +305,42 @@ def proxy_favicon():
         return '', 403
 
     now = time.time()
-    if domain in _favicon_cache and now - _favicon_cache[domain]['ts'] < FAVICON_TTL:
-        c = _favicon_cache[domain]
-        return Response(c['data'], content_type=c['ct'])
+    cached = _favicon_cache.get(domain)
+    if cached and now - cached['ts'] < FAVICON_TTL:
+        if cached.get('empty'):
+            return '', 404
+        return Response(cached['data'], content_type=cached['ct'])
 
     base = f'https://{domain}'
-    favicon_url = None
 
+    # Pass 1: try common paths directly (fast, no HTML fetch needed)
+    for path in ('/favicon.ico', '/favicon.png', '/favicon.svg'):
+        try:
+            data, ct = _fetch_image(base + path)
+            if data:
+                _favicon_cache[domain] = {'data': data, 'ct': ct, 'ts': now}
+                return Response(data, content_type=ct)
+        except Exception:
+            pass
+
+    # Pass 2: parse the page HTML for <link rel="icon">
     try:
-        r = requests.get(base, timeout=6, headers={'User-Agent': 'Mozilla/5.0'}, allow_redirects=True)
+        r = requests.get(base, timeout=8, headers=_HDR, allow_redirects=True)
         if r.ok:
             parser = _FaviconParser()
-            parser.feed(r.text[:8192])
-            href = parser.url
-            if href:
-                if href.startswith('http'):
-                    favicon_url = href
-                elif href.startswith('//'):
-                    favicon_url = 'https:' + href
-                else:
-                    favicon_url = base + (href if href.startswith('/') else '/' + href)
+            parser.feed(r.text)
+            for href in parser.candidates:
+                try:
+                    data, ct = _fetch_image(_resolve_href(base, href))
+                    if data:
+                        _favicon_cache[domain] = {'data': data, 'ct': ct, 'ts': now}
+                        return Response(data, content_type=ct)
+                except Exception:
+                    pass
     except Exception:
         pass
 
-    if not favicon_url:
-        favicon_url = base + '/favicon.ico'
-
-    try:
-        r = requests.get(favicon_url, timeout=6, headers={'User-Agent': 'Mozilla/5.0'})
-        if r.ok and r.content:
-            ct = r.headers.get('content-type', 'image/x-icon')
-            _favicon_cache[domain] = {'data': r.content, 'ct': ct, 'ts': now}
-            return Response(r.content, content_type=ct)
-    except Exception:
-        pass
-
+    _favicon_cache[domain] = {'empty': True, 'ts': now}
     return '', 404
 
 
