@@ -118,6 +118,17 @@ body::before {
   letter-spacing: 0.03em;
 }
 </style>
+<script>
+function faviconFallback(img) {
+  const name = img.closest('.app-card-body').querySelector('.app-name').textContent.trim();
+  const letter = name[0].toUpperCase();
+  const palette = ['#2563eb','#059669','#d97706','#dc2626','#7c3aed','#0891b2','#be185d','#65a30d'];
+  const fill = palette[letter.charCodeAt(0) % palette.length];
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36"><rect width="36" height="36" rx="6" fill="${fill}"/><text x="18" y="25" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" font-weight="700" fill="white">${letter}</text></svg>`;
+  img.onerror = null;
+  img.src = 'data:image/svg+xml,' + encodeURIComponent(svg);
+}
+</script>
 </head>
 <body>
 <div id="app">
@@ -135,7 +146,7 @@ body::before {
     <a href="https://cocktails.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=cocktails.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=cocktails.tashefamily.com" alt="">
         <div class="app-name">Cocktails</div>
         <div class="app-url">cocktails.tashefamily.com</div>
       </div>
@@ -144,7 +155,7 @@ body::before {
     <a href="https://bookshelf.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=bookshelf.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=bookshelf.tashefamily.com" alt="">
         <div class="app-name">Bookshelf</div>
         <div class="app-url">bookshelf.tashefamily.com</div>
       </div>
@@ -153,7 +164,7 @@ body::before {
     <a href="https://math.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=math.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=math.tashefamily.com" alt="">
         <div class="app-name">Math</div>
         <div class="app-url">math.tashefamily.com</div>
       </div>
@@ -162,7 +173,7 @@ body::before {
     <a href="https://marc.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=marc.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=marc.tashefamily.com" alt="">
         <div class="app-name">Marc</div>
         <div class="app-url">marc.tashefamily.com</div>
       </div>
@@ -171,7 +182,7 @@ body::before {
     <a href="https://lego.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=lego.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=lego.tashefamily.com" alt="">
         <div class="app-name">Lego</div>
         <div class="app-url">lego.tashefamily.com</div>
       </div>
@@ -180,7 +191,7 @@ body::before {
     <a href="https://bbros.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=bbros.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=bbros.tashefamily.com" alt="">
         <div class="app-name">BBros</div>
         <div class="app-url">bbros.tashefamily.com</div>
       </div>
@@ -189,7 +200,7 @@ body::before {
     <a href="https://minis.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=minis.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=minis.tashefamily.com" alt="">
         <div class="app-name">Minis</div>
         <div class="app-url">minis.tashefamily.com</div>
       </div>
@@ -198,7 +209,7 @@ body::before {
     <a href="https://tashemap.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=tashemap.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=tashemap.tashefamily.com" alt="">
         <div class="app-name">TasheMap</div>
         <div class="app-url">tashemap.tashefamily.com</div>
       </div>
@@ -207,7 +218,7 @@ body::before {
     <a href="https://phillies.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=phillies.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=phillies.tashefamily.com" alt="">
         <div class="app-name">Phillies</div>
         <div class="app-url">phillies.tashefamily.com</div>
       </div>
@@ -216,7 +227,7 @@ body::before {
     <a href="https://boardgames.tashefamily.com" target="_blank" class="app-card">
       <div class="app-card-bar"></div>
       <div class="app-card-body">
-        <img class="app-favicon" src="/favicon?domain=boardgames.tashefamily.com" alt="">
+        <img class="app-favicon" onerror="faviconFallback(this)" src="/favicon?domain=boardgames.tashefamily.com" alt="">
         <div class="app-name">Board Games</div>
         <div class="app-url">boardgames.tashefamily.com</div>
       </div>

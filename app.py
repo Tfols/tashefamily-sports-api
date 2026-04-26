@@ -259,7 +259,13 @@ def links():
 # ── Favicon proxy ─────────────────────────────────────────────────
 _favicon_cache = {}
 FAVICON_TTL = 3600   # 1 hour
-FAVICON_VER = 2      # bump to invalidate all cached entries on redeploy
+FAVICON_VER = 3      # bump to invalidate all cached entries on redeploy
+
+# Apps whose favicon isn't discoverable via standard paths or HTML parsing
+# (e.g. login-gated apps where the <link rel="icon"> is only in the auth'd shell)
+FAVICON_OVERRIDES = {
+    'lego.tashefamily.com': '/static/icons/favicon-32.png',
+}
 _HDR = {'User-Agent': 'Mozilla/5.0'}
 
 
@@ -332,6 +338,16 @@ def proxy_favicon():
         return Response(cached['data'], content_type=cached['ct'])
 
     base = f'https://{domain}'
+
+    # Override: known non-standard favicon paths (e.g. login-gated apps)
+    if domain in FAVICON_OVERRIDES:
+        try:
+            data, ct = _fetch_image(base + FAVICON_OVERRIDES[domain])
+            if data:
+                _favicon_cache[domain] = {'data': data, 'ct': ct, 'ts': now, 'ver': FAVICON_VER}
+                return Response(data, content_type=ct)
+        except Exception:
+            pass
 
     # Pass 1: try common paths directly (fast, no HTML fetch needed)
     for path in ('/favicon.ico', '/favicon.png', '/favicon.svg'):
