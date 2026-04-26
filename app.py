@@ -184,7 +184,11 @@ def fmt_quote(data):
 
 @app.route('/quotes/all')
 def get_all_quotes():
-    return jsonify({s: fmt_quote(fetch_quote(s)) for s in SYMBOLS})
+    result = {s: fmt_quote(fetch_quote(s)) for s in SYMBOLS}
+    ts_values = [_stock_cache[s]['ts'] for s in SYMBOLS if s in _stock_cache]
+    if ts_values:
+        result['fetched_at'] = int(min(ts_values))
+    return jsonify(result)
 
 
 TEAM_LABELS = {

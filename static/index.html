@@ -654,14 +654,20 @@ const QUOTE_ORDER = ['SPY','QQQ','DIA','BAH','RKLB','OCO.V','RGTI','AVTI','LUNR'
 async function fetchQuotes() {
   try { quotesData = await fetchJSON('/quotes/all'); } catch(e) {}
   renderQuotes();
-  // Stamp the card title with the time quotes were last refreshed
-  const now  = new Date();
-  const raw  = now.getHours();
-  const h    = raw % 12 || 12;
-  const m    = String(now.getMinutes()).padStart(2,'0');
-  const ampm = raw < 12 ? 'am' : 'pm';
   const titleEl = document.querySelector('#quotes-grid')?.closest('.card-body')?.querySelector('.card-title');
-  if (titleEl) titleEl.textContent = `Quotes — ${h}:${m}${ampm}`;
+  if (titleEl) {
+    const fetchedAt = quotesData.fetched_at;
+    if (fetchedAt) {
+      const d    = new Date(fetchedAt * 1000);
+      const raw  = d.getHours();
+      const h    = raw % 12 || 12;
+      const m    = String(d.getMinutes()).padStart(2, '0');
+      const ampm = raw < 12 ? 'am' : 'pm';
+      titleEl.textContent = `Quotes — ${h}:${m}${ampm}`;
+    } else {
+      titleEl.textContent = 'Quotes';
+    }
+  }
 }
 
 function renderQuotes() {
