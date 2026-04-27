@@ -256,6 +256,12 @@ def links():
     return send_from_directory('static', 'links.html')
 
 
+@app.route('/favicon.ico')
+@app.route('/favicon.png')
+def favicon():
+    return send_from_directory('static', 'favicon.png', mimetype='image/png')
+
+
 # ── Favicon proxy ─────────────────────────────────────────────────
 _favicon_cache = {}
 FAVICON_TTL = 3600   # 1 hour
