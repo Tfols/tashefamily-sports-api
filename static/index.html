@@ -223,6 +223,41 @@ body::before {
 }
 .row-value .live { color: var(--bad); font-weight: 700; }
 
+/* ── Score split-column layout ──────────────────────────── */
+.score-cols {
+  display: flex; align-items: center;
+  flex: 1; min-width: 0;
+  gap: 5px;
+}
+.score-divider {
+  width: 1px; height: 14px;
+  background: var(--rule);
+  flex: 0 0 1px;
+  align-self: center;
+}
+.score-last {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 500;
+  color: var(--text);
+  flex: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.score-next {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; font-weight: 400;
+  color: var(--muted);
+  flex: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-align: right;
+}
+.score-live {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 700;
+  color: var(--bad);
+  flex: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
 /* ── Quotes 2-col grid ──────────────────────────────────── */
 #quotes-grid {
   display: grid;
@@ -673,7 +708,12 @@ async function fetchScores() {
 
 function renderScores() {
   const el = document.getElementById('scores-list');
-  const live = SCORE_ORDER.filter(k => scoresData[k] && scoresData[k].startsWith('🔴'));
+
+  // Live detection — API now returns {last, next} objects
+  const live = SCORE_ORDER.filter(k => {
+    const d = scoresData[k];
+    return d && typeof d === 'object' && d.last?.startsWith('🔴');
+  });
   document.getElementById('chip-scores').textContent =
     live.length ? `${live.length} LIVE` : 'NO LIVE';
 
@@ -681,15 +721,23 @@ function renderScores() {
   el.innerHTML = SCORE_ORDER
     .filter(key => scoresData[key] != null)
     .map(key => {
-      const val = scoresData[key] || '—';
-      const isLive = val.startsWith('🔴');
-      const display = isLive
-        ? `<span class="live">${val}</span>`
-        : escHtml(val);
+      const d      = scoresData[key];
+      const last   = (typeof d === 'object' ? d.last : d) || '—';
+      const next   = (typeof d === 'object' ? d.next : null) || '—';
+      const isLive = last.startsWith('🔴');
+
+      // Live: spans full width in red; normal: last | divider | next
+      const cols = isLive
+        ? `<span class="score-live">${escHtml(last)}</span>`
+        : `<span class="score-last">${escHtml(last)}</span>
+           <span class="score-divider"></span>
+           <span class="score-next">${escHtml(next)}</span>`;
+
       return `<div class="row-chip">
         <span class="sport-icon">${SCORE_ICONS[key]}</span>
         <span class="row-label">${SCORE_LABELS[key]}</span>
-        <span class="row-value">${display}</span>
+        <span class="score-divider"></span>
+        <div class="score-cols">${cols}</div>
       </div>`;
     }).join('');
 }

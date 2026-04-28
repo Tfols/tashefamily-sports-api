@@ -202,11 +202,12 @@ TEAM_LABELS = {
 }
 
 
-def combined_line(d):
+def split_line(d):
+    """Return {last, next} dict — last result and next game as separate strings."""
     line1, line2 = d.get('line1', ''), d.get('line2', '')
-    if line2 in ('—', 'No upcoming games', 'No recent games', ''):
-        return line1
-    return f'{line1}  ·  {line2}'
+    last_val = line1 if line1 not in ('No recent games', '') else '—'
+    next_val = line2 if line2 not in ('—', 'No upcoming games', '') else '—'
+    return {'last': last_val, 'next': next_val}
 
 
 @app.route('/sports/all')
@@ -217,7 +218,7 @@ def get_all_teams():
             d = live_game(info['sport'], info['league'], info['id']) or \
                 schedule_info(info['sport'], info['league'], info['id'])
             if d is not None:
-                result[slug] = combined_line(d)
+                result[slug] = split_line(d)
         except Exception:
             pass  # one team failing should never blank the whole response
     return jsonify(result)
