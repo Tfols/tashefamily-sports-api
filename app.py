@@ -180,7 +180,9 @@ def fmt_quote(data):
     price = data.get('price', 0)
     change = data.get('change', 0)
     arrow = '▲' if change >= 0 else '▼'
-    return f'{price:.2f}  {arrow}{abs(change):.2f}'
+    prev = price - change
+    pct = (change / prev * 100) if prev else 0
+    return f'{price:.2f}  {arrow}{abs(change):.2f} ({abs(pct):.1f}%)'
 
 
 @app.route('/quotes/all')
