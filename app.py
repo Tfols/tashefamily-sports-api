@@ -156,7 +156,7 @@ def schedule_info(sport, league, team_id):
 
 
 STOCKS_API = 'https://tashefamily-stocks-api-production.up.railway.app'
-SYMBOLS = ['SPY', 'QQQ', 'DIA', 'BAH', 'RKLB', 'OCO.V', 'RGTI', 'AVTI', 'LUNR', 'IONQ', 'NVDA']
+SYMBOLS = ['SPY', 'QQQ', 'DIA', 'BAH', 'RKLB', 'OCO.V', 'RGTI', 'LUNR', 'IONQ', 'NVDA']
 _stock_cache = {}
 
 
