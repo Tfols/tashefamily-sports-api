@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports & Fact Sheets — Tashe</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-1:     #060a14;
+  --bg-2:     #111b32;
+  --panel:    rgba(15,24,42,0.92);
+  --chip:     rgba(18,31,54,0.96);
+  --border:   #2e446f;
+  --border-s: #3b588e;
+  --rule:     #304975;
+  --text:     #d9e7ff;
+  --bright:   #f3f8ff;
+  --muted:    #90a9ca;
+  --head:     #bfdbff;
+  --accent:   #38bdf8;
+  --ok:       #34d399;
+  --bad:      #fb7185;
+  --blue-grd: linear-gradient(90deg, #38bdf8, #5d8bff);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; }
+body {
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2)) fixed;
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(26,42,70,0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,42,70,0.35) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.45;
+}
+
+#app {
+  position: relative; z-index: 1;
+  max-width: 960px; margin: 0 auto;
+  padding: 28px 20px;
+}
+
+/* ── Page header ─────────────────────────────────────────── */
+#page-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+#back-link {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; font-weight: 600;
+  color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  flex: 0 0 auto;
+  transition: color 0.15s, border-color 0.15s;
+}
+#back-link:hover { color: var(--accent); border-color: var(--accent); }
+#page-title {
+  font-size: 22px; font-weight: 700;
+  color: var(--bright); letter-spacing: 0.02em;
+}
+#page-sub {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 0.08em; margin-top: 4px;
+}
+
+/* ── Upload zone ─────────────────────────────────────────── */
+#upload-zone {
+  background: var(--panel);
+  border: 2px dashed var(--border-s);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+#upload-zone:hover,
+#upload-zone.dragover {
+  border-color: var(--accent);
+  background: rgba(56,189,248,0.06);
+}
+#upload-zone .upload-icon {
+  font-size: 28px; margin-bottom: 8px;
+}
+#upload-zone .upload-text {
+  font-size: 13px; color: var(--muted);
+}
+#upload-zone .upload-text strong {
+  color: var(--accent);
+}
+#upload-zone .upload-hint {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px; color: var(--muted);
+  letter-spacing: 0.06em; margin-top: 6px;
+  opacity: 0.7;
+}
+#file-input { display: none; }
+
+#upload-progress {
+  display: none;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: var(--chip);
+  border: 1px solid var(--border-s);
+  border-radius: 6px;
+}
+#upload-progress .prog-text {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; color: var(--accent);
+}
+
+/* ── File count ──────────────────────────────────────────── */
+#file-count {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* ── File list ───────────────────────────────────────────── */
+#file-list {
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.file-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex; align-items: center;
+  transition: border-color 0.15s;
+}
+.file-card:hover {
+  border-color: var(--accent);
+}
+.file-card-bar {
+  width: 3px; align-self: stretch;
+  background: var(--blue-grd);
+  flex: 0 0 3px;
+}
+.file-card-body {
+  padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px;
+  flex: 1; min-width: 0;
+}
+.file-icon {
+  font-size: 24px; flex: 0 0 auto; line-height: 1;
+}
+.file-info {
+  flex: 1; min-width: 0;
+}
+.file-name {
+  font-size: 14px; font-weight: 700;
+  color: var(--bright); letter-spacing: 0.01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.file-meta {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 0.03em; margin-top: 2px;
+  display: flex; gap: 12px;
+}
+.file-actions {
+  display: flex; gap: 6px; flex: 0 0 auto;
+}
+.file-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: none;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.file-btn.view {
+  color: var(--accent);
+}
+.file-btn.view:hover {
+  border-color: var(--accent);
+}
+.file-btn.delete {
+  color: var(--bad);
+}
+.file-btn.delete:hover {
+  border-color: var(--bad);
+}
+
+.empty-state {
+  text-align: center; padding: 40px 20px;
+  color: var(--muted); font-size: 13px;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="page-header">
+    <a href="/" id="back-link">&larr; Dashboard</a>
+    <div>
+      <div id="page-title">Reports & Fact Sheets</div>
+      <div id="page-sub">tashefamily.com</div>
+    </div>
+  </div>
+
+  <div id="upload-zone" onclick="document.getElementById('file-input').click()">
+    <div class="upload-icon">&#8679;</div>
+    <div class="upload-text">Drop files here or <strong>click to upload</strong></div>
+    <div class="upload-hint">PDF, DOCX, XLSX, images, or any file type</div>
+    <input type="file" id="file-input" multiple>
+  </div>
+
+  <div id="upload-progress">
+    <span class="prog-text" id="prog-text">Uploading...</span>
+  </div>
+
+  <div id="file-count"></div>
+  <div id="file-list">
+    <div class="empty-state">Loading...</div>
+  </div>
+
+</div>
+
+<script>
+const EXT_ICONS = {
+  pdf: '&#128196;', doc: '&#128196;', docx: '&#128196;',
+  xls: '&#128202;', xlsx: '&#128202;', csv: '&#128202;',
+  png: '&#128444;', jpg: '&#128444;', jpeg: '&#128444;', gif: '&#128444;', svg: '&#128444;', webp: '&#128444;',
+  ppt: '&#128202;', pptx: '&#128202;',
+  zip: '&#128230;', gz: '&#128230;', tar: '&#128230;',
+  txt: '&#128196;', md: '&#128196;', json: '&#128196;',
+};
+
+function fileIcon(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  return EXT_ICONS[ext] || '&#128196;';
+}
+
+function fmtSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1048576).toFixed(1) + ' MB';
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function loadFiles() {
+  const el = document.getElementById('file-list');
+  const countEl = document.getElementById('file-count');
+  try {
+    const r = await fetch('/api/reports/list');
+    const files = await r.json();
+    if (!files.length) {
+      el.innerHTML = '<div class="empty-state">No reports uploaded yet</div>';
+      countEl.textContent = '';
+      return;
+    }
+    countEl.textContent = files.length + ' file' + (files.length === 1 ? '' : 's');
+    el.innerHTML = files.map(f => `
+      <div class="file-card">
+        <div class="file-card-bar"></div>
+        <div class="file-card-body">
+          <div class="file-icon">${fileIcon(f.name)}</div>
+          <div class="file-info">
+            <div class="file-name">${escHtml(f.name)}</div>
+            <div class="file-meta">
+              <span>${fmtSize(f.size)}</span>
+              <span>${escHtml(f.uploaded)}</span>
+            </div>
+          </div>
+          <div class="file-actions">
+            <a href="/api/reports/file/${encodeURIComponent(f.name)}" target="_blank" class="file-btn view">Open</a>
+            <button class="file-btn delete" onclick="deleteFile('${escHtml(f.name)}')">Delete</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    el.innerHTML = '<div class="empty-state">Failed to load files</div>';
+  }
+}
+
+async function uploadFiles(fileList) {
+  const prog = document.getElementById('upload-progress');
+  const progText = document.getElementById('prog-text');
+  prog.style.display = 'block';
+
+  for (let i = 0; i < fileList.length; i++) {
+    progText.textContent = `Uploading ${i+1}/${fileList.length}: ${fileList[i].name}`;
+    const fd = new FormData();
+    fd.append('file', fileList[i]);
+    try {
+      await fetch('/api/reports/upload', { method: 'POST', body: fd });
+    } catch(e) {}
+  }
+  prog.style.display = 'none';
+  loadFiles();
+}
+
+async function deleteFile(name) {
+  if (!confirm('Delete ' + name + '?')) return;
+  try {
+    await fetch('/api/reports/file/' + encodeURIComponent(name), { method: 'DELETE' });
+  } catch(e) {}
+  loadFiles();
+}
+
+// Drag & drop
+const zone = document.getElementById('upload-zone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('dragover');
+  if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files);
+});
+document.getElementById('file-input').addEventListener('change', e => {
+  if (e.target.files.length) uploadFiles(e.target.files);
+  e.target.value = '';
+});
+
+loadFiles();
+</script>
+</body>
+</html>

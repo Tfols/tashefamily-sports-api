@@ -259,6 +259,72 @@ def links():
     return send_from_directory('static', 'links.html')
 
 
+@app.route('/reports')
+def reports_page():
+    return send_from_directory('static', 'reports.html')
+
+
+# ── Reports file storage ─────────────────────────────────────────
+REPORTS_DIR = os.path.join(app.root_path, 'data', 'reports')
+os.makedirs(REPORTS_DIR, exist_ok=True)
+
+ALLOWED_EXTENSIONS = {
+    'pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'ppt', 'pptx',
+    'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp',
+    'txt', 'md', 'json', 'zip', 'gz', 'tar',
+}
+
+
+def _safe_filename(name):
+    import re
+    name = os.path.basename(name)
+    name = re.sub(r'[^\w\s\-.]', '', name).strip()
+    return name or 'unnamed'
+
+
+@app.route('/api/reports/upload', methods=['POST'])
+def upload_report():
+    f = request.files.get('file')
+    if not f or not f.filename:
+        return jsonify({'error': 'No file'}), 400
+    name = _safe_filename(f.filename)
+    ext = name.rsplit('.', 1)[-1].lower() if '.' in name else ''
+    if ext not in ALLOWED_EXTENSIONS:
+        return jsonify({'error': f'File type .{ext} not allowed'}), 400
+    path = os.path.join(REPORTS_DIR, name)
+    f.save(path)
+    return jsonify({'name': name, 'size': os.path.getsize(path)})
+
+
+@app.route('/api/reports/list')
+def list_reports():
+    files = []
+    for name in sorted(os.listdir(REPORTS_DIR)):
+        path = os.path.join(REPORTS_DIR, name)
+        if not os.path.isfile(path):
+            continue
+        stat = os.stat(path)
+        from datetime import datetime as dt
+        uploaded = dt.fromtimestamp(stat.st_mtime, tz=ET).strftime('%b %d, %Y %I:%M %p')
+        files.append({'name': name, 'size': stat.st_size, 'uploaded': uploaded})
+    files.sort(key=lambda f: f['uploaded'], reverse=True)
+    return jsonify(files)
+
+
+@app.route('/api/reports/file/<path:filename>')
+def serve_report(filename):
+    return send_from_directory(REPORTS_DIR, filename)
+
+
+@app.route('/api/reports/file/<path:filename>', methods=['DELETE'])
+def delete_report(filename):
+    path = os.path.join(REPORTS_DIR, os.path.basename(filename))
+    if os.path.isfile(path):
+        os.remove(path)
+        return jsonify({'deleted': True})
+    return jsonify({'error': 'Not found'}), 404
+
+
 @app.route('/favicon.ico')
 @app.route('/favicon.png')
 def favicon():
