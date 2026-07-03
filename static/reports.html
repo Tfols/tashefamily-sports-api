@@ -100,6 +100,7 @@ body::before {
   gap: 10px;
 }
 
+/* Single-file card (link wrapper) */
 .report-card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -112,6 +113,15 @@ body::before {
 .report-card:hover {
   border-color: var(--accent);
   transform: translateY(-2px);
+}
+
+/* Multi-file card (div wrapper) */
+.report-card-multi {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
 }
 .report-card-bar { height: 3px; background: var(--blue-grd); }
 .report-card-body {
@@ -141,6 +151,45 @@ body::before {
   opacity: 0.7;
 }
 
+/* Sub-links inside a multi-file card */
+.report-files {
+  display: flex; flex-direction: column;
+  gap: 0;
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.report-file-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  text-decoration: none;
+  transition: background 0.12s;
+  border-bottom: 1px solid var(--border);
+}
+.report-file-link:last-child { border-bottom: none; }
+.report-file-link:hover { background: rgba(255,255,255,0.04); }
+.report-file-icon { font-size: 18px; flex: 0 0 auto; }
+.report-file-info { flex: 1; min-width: 0; }
+.report-file-name {
+  font-size: 13px; font-weight: 600;
+  color: var(--bright);
+  line-height: 1.3;
+}
+.report-file-desc {
+  font-size: 11px; color: var(--muted);
+  line-height: 1.3; margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.report-file-arrow {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; color: var(--muted);
+  flex: 0 0 auto;
+  transition: color 0.12s, transform 0.12s;
+}
+.report-file-link:hover .report-file-arrow {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
 .empty-topic {
   grid-column: 1 / -1;
   text-align: center; padding: 20px;
@@ -153,7 +202,8 @@ body::before {
   color: #c4822a;
   border-bottom-color: #5a4030;
 }
-.theme-garden .report-card {
+.theme-garden .report-card,
+.theme-garden .report-card-multi {
   background: rgba(35,26,18,0.92);
   border-color: #5a4030;
 }
@@ -166,6 +216,13 @@ body::before {
 .theme-garden .report-name { color: #f5f0e6; }
 .theme-garden .report-desc { color: #b8a88a; }
 .theme-garden .report-meta { color: #b8a88a; }
+.theme-garden .report-files { border-top-color: #5a4030; }
+.theme-garden .report-file-link { border-bottom-color: #5a4030; }
+.theme-garden .report-file-link:hover { background: rgba(196,130,42,0.08); }
+.theme-garden .report-file-name { color: #f5f0e6; }
+.theme-garden .report-file-desc { color: #b8a88a; }
+.theme-garden .report-file-arrow { color: #b8a88a; }
+.theme-garden .report-file-link:hover .report-file-arrow { color: #c4822a; }
 </style>
 </head>
 <body>
@@ -185,12 +242,23 @@ body::before {
 
 <script>
 /*
-  To add a report: push an entry into the appropriate topic array below.
-  Files live in /static/reports/ — reference them as /static/reports/filename.pdf
+  REPORTS array — each entry is one card.
+  Single-file:  { topic, name, desc, file, type, date, icon?, theme? }
+  Multi-file:   { topic, name, desc, date, icon?, theme?, files: [{label, desc, file, icon?}, ...] }
 */
 const REPORTS = [
-  { topic: 'Potager — Kitchen Garden Design', name: 'Design Fact Sheet', desc: 'At-a-glance layout, key numbers, principles, and NoVA growing notes', file: '/static/reports/nova-potager-factsheet.html', type: 'HTML', date: 'Jul 2026', icon: '🌱', theme: 'garden' },
-  { topic: 'Potager — Kitchen Garden Design', name: 'Full Reference Guide', desc: 'Comprehensive 11-section guide — history, hardscaping, planting calendar, IPM, irrigation, and local resources', file: '/static/reports/nova-potager-report.html', type: 'HTML', date: 'Jul 2026', icon: '🪴', theme: 'garden' },
+  {
+    topic: 'Garden',
+    name: 'Potager — Kitchen Garden Design',
+    desc: 'NoVA potager garden — layout, planting, hardscaping, and growing guides',
+    date: 'Jul 2026',
+    icon: '🌱',
+    theme: 'garden',
+    files: [
+      { label: 'Design Fact Sheet', desc: 'At-a-glance layout, key numbers, principles', file: '/static/reports/nova-potager-factsheet.html', icon: '🌱' },
+      { label: 'Full Reference Guide', desc: 'History, planting calendar, IPM, irrigation, resources', file: '/static/reports/nova-potager-report.html', icon: '🪴' },
+    ]
+  },
 ];
 
 const TYPE_ICONS = {
@@ -201,6 +269,41 @@ const TYPE_ICONS = {
 
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderCard(r) {
+  if (r.files) {
+    return `<div class="report-card-multi">
+      <div class="report-card-bar"></div>
+      <div class="report-card-body">
+        <div class="report-icon">${r.icon || '📄'}</div>
+        <div class="report-name">${escHtml(r.name)}</div>
+        ${r.desc ? `<div class="report-desc">${escHtml(r.desc)}</div>` : ''}
+        ${r.date ? `<div class="report-meta">${escHtml(r.date)}</div>` : ''}
+      </div>
+      <div class="report-files">
+        ${r.files.map(f => `
+          <a href="${escHtml(f.file)}" target="_blank" class="report-file-link">
+            <div class="report-file-icon">${f.icon || '📄'}</div>
+            <div class="report-file-info">
+              <div class="report-file-name">${escHtml(f.label)}</div>
+              ${f.desc ? `<div class="report-file-desc">${escHtml(f.desc)}</div>` : ''}
+            </div>
+            <div class="report-file-arrow">→</div>
+          </a>
+        `).join('')}
+      </div>
+    </div>`;
+  }
+  return `<a href="${escHtml(r.file)}" target="_blank" class="report-card">
+    <div class="report-card-bar"></div>
+    <div class="report-card-body">
+      <div class="report-icon">${r.icon || TYPE_ICONS[r.type] || '📄'}</div>
+      <div class="report-name">${escHtml(r.name)}</div>
+      ${r.desc ? `<div class="report-desc">${escHtml(r.desc)}</div>` : ''}
+      <div class="report-meta">${escHtml(r.type)}${r.date ? ' · ' + escHtml(r.date) : ''}</div>
+    </div>
+  </a>`;
 }
 
 function render() {
@@ -222,17 +325,7 @@ function render() {
     return `<div class="topic-section${theme}">
       <div class="topic-header">${escHtml(topic)}</div>
       <div class="report-grid">
-        ${items.map(r => `
-          <a href="${escHtml(r.file)}" target="_blank" class="report-card">
-            <div class="report-card-bar"></div>
-            <div class="report-card-body">
-              <div class="report-icon">${r.icon || TYPE_ICONS[r.type] || '📄'}</div>
-              <div class="report-name">${escHtml(r.name)}</div>
-              ${r.desc ? `<div class="report-desc">${escHtml(r.desc)}</div>` : ''}
-              <div class="report-meta">${escHtml(r.type)}${r.date ? ' · ' + escHtml(r.date) : ''}</div>
-            </div>
-          </a>
-        `).join('')}
+        ${items.map(renderCard).join('')}
       </div>
     </div>`;
   }).join('');
