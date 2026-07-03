@@ -249,6 +249,7 @@ body::before {
 const REPORTS = [
   {
     topic: 'Garden',
+    hideTopicHeader: true,
     name: 'Potager — Kitchen Garden Design',
     desc: 'NoVA potager garden — layout, planting, hardscaping, and growing guides',
     date: 'Jul 2026',
@@ -322,8 +323,9 @@ function render() {
   el.innerHTML = Object.keys(byTopic).map(topic => {
     const items = byTopic[topic];
     const theme = items[0].theme ? ` theme-${items[0].theme}` : '';
+    const showHeader = items[0].hideTopicHeader ? false : true;
     return `<div class="topic-section${theme}">
-      <div class="topic-header">${escHtml(topic)}</div>
+      ${showHeader ? `<div class="topic-header">${escHtml(topic)}</div>` : ''}
       <div class="report-grid">
         ${items.map(renderCard).join('')}
       </div>
