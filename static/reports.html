@@ -79,134 +79,72 @@ body::before {
   letter-spacing: 0.08em; margin-top: 4px;
 }
 
-/* ── Upload zone ─────────────────────────────────────────── */
-#upload-zone {
-  background: var(--panel);
-  border: 2px dashed var(--border-s);
-  border-radius: 8px;
-  padding: 24px;
-  text-align: center;
-  margin-bottom: 20px;
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+/* ── Topic section ───────────────────────────────────────── */
+.topic-section {
+  margin-bottom: 24px;
 }
-#upload-zone:hover,
-#upload-zone.dragover {
-  border-color: var(--accent);
-  background: rgba(56,189,248,0.06);
-}
-#upload-zone .upload-icon {
-  font-size: 28px; margin-bottom: 8px;
-}
-#upload-zone .upload-text {
-  font-size: 13px; color: var(--muted);
-}
-#upload-zone .upload-text strong {
-  color: var(--accent);
-}
-#upload-zone .upload-hint {
+.topic-header {
   font-family: "JetBrains Mono", monospace;
-  font-size: 9px; color: var(--muted);
-  letter-spacing: 0.06em; margin-top: 6px;
-  opacity: 0.7;
-}
-#file-input { display: none; }
-
-#upload-progress {
-  display: none;
-  margin-bottom: 16px;
-  padding: 10px 14px;
-  background: var(--chip);
-  border: 1px solid var(--border-s);
-  border-radius: 6px;
-}
-#upload-progress .prog-text {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px; color: var(--accent);
-}
-
-/* ── File count ──────────────────────────────────────────── */
-#file-count {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px; color: var(--muted);
-  letter-spacing: 0.08em; text-transform: uppercase;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--head);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
   margin-bottom: 10px;
 }
 
-/* ── File list ───────────────────────────────────────────── */
-#file-list {
-  display: flex; flex-direction: column; gap: 6px;
+/* ── Report cards grid ───────────────────────────────────── */
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-.file-card {
+.report-card {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
-  display: flex; align-items: center;
-  transition: border-color 0.15s;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.15s, transform 0.12s;
 }
-.file-card:hover {
+.report-card:hover {
   border-color: var(--accent);
+  transform: translateY(-2px);
 }
-.file-card-bar {
-  width: 3px; align-self: stretch;
-  background: var(--blue-grd);
-  flex: 0 0 3px;
+.report-card-bar { height: 3px; background: var(--blue-grd); }
+.report-card-body {
+  padding: 14px 14px 12px;
+  display: flex; flex-direction: column; gap: 4px;
 }
-.file-card-body {
-  padding: 12px 14px;
-  display: flex; align-items: center; gap: 12px;
-  flex: 1; min-width: 0;
+.report-icon {
+  font-size: 26px; line-height: 1;
+  margin-bottom: 4px;
 }
-.file-icon {
-  font-size: 24px; flex: 0 0 auto; line-height: 1;
-}
-.file-info {
-  flex: 1; min-width: 0;
-}
-.file-name {
+.report-name {
   font-size: 14px; font-weight: 700;
   color: var(--bright); letter-spacing: 0.01em;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  line-height: 1.3;
 }
-.file-meta {
+.report-desc {
+  font-size: 12px; color: var(--muted);
+  line-height: 1.35;
+  display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.report-meta {
   font-family: "JetBrains Mono", monospace;
-  font-size: 10px; color: var(--muted);
-  letter-spacing: 0.03em; margin-top: 2px;
-  display: flex; gap: 12px;
-}
-.file-actions {
-  display: flex; gap: 6px; flex: 0 0 auto;
-}
-.file-btn {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  background: none;
-  cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
-}
-.file-btn.view {
-  color: var(--accent);
-}
-.file-btn.view:hover {
-  border-color: var(--accent);
-}
-.file-btn.delete {
-  color: var(--bad);
-}
-.file-btn.delete:hover {
-  border-color: var(--bad);
+  font-size: 9px; color: var(--muted);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+  opacity: 0.7;
 }
 
-.empty-state {
-  text-align: center; padding: 40px 20px;
-  color: var(--muted); font-size: 13px;
+.empty-topic {
+  grid-column: 1 / -1;
+  text-align: center; padding: 20px;
+  color: var(--muted); font-size: 12px;
   font-style: italic;
 }
 </style>
@@ -222,125 +160,64 @@ body::before {
     </div>
   </div>
 
-  <div id="upload-zone" onclick="document.getElementById('file-input').click()">
-    <div class="upload-icon">&#8679;</div>
-    <div class="upload-text">Drop files here or <strong>click to upload</strong></div>
-    <div class="upload-hint">PDF, DOCX, XLSX, images, or any file type</div>
-    <input type="file" id="file-input" multiple>
-  </div>
-
-  <div id="upload-progress">
-    <span class="prog-text" id="prog-text">Uploading...</span>
-  </div>
-
-  <div id="file-count"></div>
-  <div id="file-list">
-    <div class="empty-state">Loading...</div>
-  </div>
+  <div id="report-sections"></div>
 
 </div>
 
 <script>
-const EXT_ICONS = {
-  pdf: '&#128196;', doc: '&#128196;', docx: '&#128196;',
-  xls: '&#128202;', xlsx: '&#128202;', csv: '&#128202;',
-  png: '&#128444;', jpg: '&#128444;', jpeg: '&#128444;', gif: '&#128444;', svg: '&#128444;', webp: '&#128444;',
-  ppt: '&#128202;', pptx: '&#128202;',
-  zip: '&#128230;', gz: '&#128230;', tar: '&#128230;',
-  txt: '&#128196;', md: '&#128196;', json: '&#128196;',
+/*
+  To add a report: push an entry into the appropriate topic array below.
+  Files live in /static/reports/ — reference them as /static/reports/filename.pdf
+*/
+const REPORTS = [
+  // { topic: 'Investments', name: 'Q2 Portfolio Review', desc: 'Holdings and performance summary', file: '/static/reports/q2-portfolio.pdf', type: 'PDF', date: 'Jun 2026' },
+];
+
+const TYPE_ICONS = {
+  PDF:   '📄', DOCX:  '📝', XLSX:  '📊', CSV:   '📊',
+  PPTX:  '📊', PNG:   '🖼️', JPG:   '🖼️', SVG:   '🖼️',
+  TXT:   '📃', HTML:  '🌐',
 };
-
-function fileIcon(name) {
-  const ext = name.split('.').pop().toLowerCase();
-  return EXT_ICONS[ext] || '&#128196;';
-}
-
-function fmtSize(bytes) {
-  if (bytes < 1024) return bytes + ' B';
-  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-  return (bytes / 1048576).toFixed(1) + ' MB';
-}
 
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-async function loadFiles() {
-  const el = document.getElementById('file-list');
-  const countEl = document.getElementById('file-count');
-  try {
-    const r = await fetch('/api/reports/list');
-    const files = await r.json();
-    if (!files.length) {
-      el.innerHTML = '<div class="empty-state">No reports uploaded yet</div>';
-      countEl.textContent = '';
-      return;
-    }
-    countEl.textContent = files.length + ' file' + (files.length === 1 ? '' : 's');
-    el.innerHTML = files.map(f => `
-      <div class="file-card">
-        <div class="file-card-bar"></div>
-        <div class="file-card-body">
-          <div class="file-icon">${fileIcon(f.name)}</div>
-          <div class="file-info">
-            <div class="file-name">${escHtml(f.name)}</div>
-            <div class="file-meta">
-              <span>${fmtSize(f.size)}</span>
-              <span>${escHtml(f.uploaded)}</span>
+function render() {
+  const el = document.getElementById('report-sections');
+
+  if (!REPORTS.length) {
+    el.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--muted);font-size:13px;font-style:italic;">No reports yet</div>';
+    return;
+  }
+
+  const byTopic = {};
+  REPORTS.forEach(r => {
+    (byTopic[r.topic] = byTopic[r.topic] || []).push(r);
+  });
+
+  el.innerHTML = Object.keys(byTopic).map(topic => {
+    const items = byTopic[topic];
+    return `<div class="topic-section">
+      <div class="topic-header">${escHtml(topic)}</div>
+      <div class="report-grid">
+        ${items.map(r => `
+          <a href="${escHtml(r.file)}" target="_blank" class="report-card">
+            <div class="report-card-bar"></div>
+            <div class="report-card-body">
+              <div class="report-icon">${TYPE_ICONS[r.type] || '📄'}</div>
+              <div class="report-name">${escHtml(r.name)}</div>
+              ${r.desc ? `<div class="report-desc">${escHtml(r.desc)}</div>` : ''}
+              <div class="report-meta">${escHtml(r.type)}${r.date ? ' · ' + escHtml(r.date) : ''}</div>
             </div>
-          </div>
-          <div class="file-actions">
-            <a href="/api/reports/file/${encodeURIComponent(f.name)}" target="_blank" class="file-btn view">Open</a>
-            <button class="file-btn delete" onclick="deleteFile('${escHtml(f.name)}')">Delete</button>
-          </div>
-        </div>
+          </a>
+        `).join('')}
       </div>
-    `).join('');
-  } catch(e) {
-    el.innerHTML = '<div class="empty-state">Failed to load files</div>';
-  }
+    </div>`;
+  }).join('');
 }
 
-async function uploadFiles(fileList) {
-  const prog = document.getElementById('upload-progress');
-  const progText = document.getElementById('prog-text');
-  prog.style.display = 'block';
-
-  for (let i = 0; i < fileList.length; i++) {
-    progText.textContent = `Uploading ${i+1}/${fileList.length}: ${fileList[i].name}`;
-    const fd = new FormData();
-    fd.append('file', fileList[i]);
-    try {
-      await fetch('/api/reports/upload', { method: 'POST', body: fd });
-    } catch(e) {}
-  }
-  prog.style.display = 'none';
-  loadFiles();
-}
-
-async function deleteFile(name) {
-  if (!confirm('Delete ' + name + '?')) return;
-  try {
-    await fetch('/api/reports/file/' + encodeURIComponent(name), { method: 'DELETE' });
-  } catch(e) {}
-  loadFiles();
-}
-
-// Drag & drop
-const zone = document.getElementById('upload-zone');
-zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
-zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-zone.addEventListener('drop', e => {
-  e.preventDefault();
-  zone.classList.remove('dragover');
-  if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files);
-});
-document.getElementById('file-input').addEventListener('change', e => {
-  if (e.target.files.length) uploadFiles(e.target.files);
-  e.target.value = '';
-});
-
-loadFiles();
+render();
 </script>
 </body>
 </html>
