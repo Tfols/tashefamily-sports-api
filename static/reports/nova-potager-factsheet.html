@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f5f0e6;color:#1e1710;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoVA Potager Design — At a Glance</title>
+<style>
+html,body{color-scheme:light;background:#f5f0e6!important;color:#1e1710!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;font-size:15px;line-height:1.6;background:#f5f0e6;color:#1e1710;max-width:1100px;margin:0 auto;padding:36px 28px 72px}
+
+/* ── TOKENS ── */
+/* soil: #3d2b1f  sage: #4a6741  amber: #c4822a  parchment: #f5f0e6  cream: #fffdf8  mist: #e8e0d0 */
+
+/* ── MASTHEAD ── */
+.masthead{background:#3d2b1f;color:#f5f0e6;padding:28px 32px 24px;margin-bottom:24px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+.masthead-left{}
+.masthead-tag{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:#c4822a;margin-bottom:8px}
+.masthead h1{font-size:2rem;font-weight:700;line-height:1.1;color:#f5f0e6}
+.masthead h1 em{font-style:italic;color:#a8c89e;font-weight:400}
+.masthead-sub{font-size:.82rem;color:#c8bfb0;margin-top:8px;font-style:italic}
+.zone-badge{background:#4a6741;color:#f5f0e6;padding:16px 22px;text-align:center;min-width:100px}
+.zone-badge .zone-num{font-size:2.4rem;font-weight:700;font-family:"Courier New",monospace;color:#a8c89e;line-height:1}
+.zone-badge .zone-label{font-family:"Courier New",monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#c8bfb0;margin-top:4px}
+
+/* ── GRID LAYOUT ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.grid-32{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px}
+.grid-23{display:grid;grid-template-columns:1fr 2fr;gap:16px;margin-bottom:16px}
+
+/* ── CARDS ── */
+.card{background:#fffdf8;padding:20px 22px;border-top:3px solid #c4822a}
+.card.green-top{border-top-color:#4a6741}
+.card.soil-top{border-top-color:#3d2b1f}
+.card-label{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#c4822a;margin-bottom:8px}
+.card-label.green{color:#4a6741}
+.card-label.soil{color:#3d2b1f}
+.card h2{font-size:1rem;font-weight:700;color:#1e1710;margin-bottom:10px;line-height:1.2}
+.card p{font-size:.82rem;color:#2e2820;line-height:1.6;margin-bottom:8px}
+.card p:last-child{margin-bottom:0}
+
+/* ── GARDEN DIAGRAM CARD ── */
+.diagram-card{background:#3d2b1f;padding:24px 28px}
+.diagram-card .diagram-label{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#c4822a;margin-bottom:14px}
+.diagram-card pre{font-family:"Courier New",monospace;font-size:11.5px;line-height:1.6;color:#d4c8b8;white-space:pre}
+.diagram-card .diagram-note{font-family:"Courier New",monospace;font-size:9px;color:#8a7a6a;margin-top:12px;letter-spacing:.05em}
+
+/* ── PRINCIPLES LIST ── */
+.principle-row{display:flex;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid #e8e0d0}
+.principle-row:last-child{border-bottom:none}
+.principle-num{font-family:"Courier New",monospace;font-size:1.2rem;font-weight:700;color:#c4822a;flex-shrink:0;width:28px;line-height:1.2}
+.principle-text{}
+.principle-name{font-weight:700;font-size:.9rem;color:#1e1710;line-height:1.3}
+.principle-desc{font-size:.8rem;color:#3a3028;line-height:1.5;margin-top:2px}
+
+/* ── SEASON STRIP ── */
+.season-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:16px}
+.season-block{padding:14px 16px;text-align:center}
+.season-block.spring{background:#6b8f5e;color:#fff}
+.season-block.summer{background:#c4822a;color:#fff}
+.season-block.fall{background:#8b5e3c;color:#fff}
+.season-block.winter{background:#3d2b1f;color:#c8bfb0}
+.season-name{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px;opacity:.85}
+.season-crops{font-size:.75rem;line-height:1.5}
+
+/* ── NUMBERS ROW ── */
+.numbers-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.number-cell{background:#4a6741;color:#f5f0e6;padding:16px 12px;text-align:center}
+.number-big{font-family:"Courier New",monospace;font-size:1.8rem;font-weight:700;color:#a8c89e;line-height:1}
+.number-label{font-size:.72rem;color:#c8bfb0;margin-top:5px;line-height:1.4}
+
+/* ── CHALLENGE ROWS ── */
+.challenge-item{display:grid;grid-template-columns:130px 1fr;gap:0;border-bottom:1px solid #e8e0d0}
+.challenge-item:last-child{border-bottom:none}
+.challenge-name{background:#3d2b1f;color:#c8bfb0;padding:10px 12px;font-size:.78rem;font-weight:700;font-family:Georgia,serif;line-height:1.4}
+.challenge-fix{background:#fffdf8;color:#2e2820;padding:10px 14px;font-size:.78rem;line-height:1.5}
+
+/* ── FLOWER SWATCHES ── */
+.flower-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.flower-swatch{text-align:center}
+.swatch-circle{width:48px;height:48px;border-radius:50%;margin:0 auto 7px;border:2px solid rgba(0,0,0,.08)}
+.swatch-name{font-size:.78rem;font-weight:700;color:#1e1710;line-height:1.3}
+.swatch-note{font-size:.7rem;color:#5a4e44;margin-top:2px;font-style:italic}
+
+/* ── MATERIAL TABLE ── */
+.mat-row{display:grid;grid-template-columns:100px 1fr 60px;gap:0;border-bottom:1px solid #e8e0d0;align-items:center}
+.mat-row:last-child{border-bottom:none}
+.mat-row:first-child{border-bottom:2px solid #3d2b1f}
+.mat-name{padding:8px 10px;font-size:.78rem;font-weight:700;color:#1e1710}
+.mat-desc{padding:8px 10px;font-size:.75rem;color:#2e2820;line-height:1.4}
+.mat-life{padding:8px 10px;font-size:.75rem;color:#4a6741;font-family:"Courier New",monospace;text-align:right;font-weight:700}
+.mat-header{background:#3d2b1f;color:#c8bfb0}
+.mat-header .mat-name,.mat-header .mat-desc,.mat-header .mat-life{font-family:"Courier New",monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:#c8bfb0;font-weight:400}
+
+/* ── IRRIGATION STRIP ── */
+.irr-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.irr-block{background:#fffdf8;border-left:4px solid #4a6741;padding:14px 16px}
+.irr-block.amber{border-left-color:#c4822a}
+.irr-block.soil{border-left-color:#3d2b1f}
+.irr-head{font-weight:700;font-size:.82rem;color:#1e1710;margin-bottom:4px}
+.irr-body{font-size:.76rem;color:#2e2820;line-height:1.5}
+
+/* ── FOOTER ── */
+.footer{margin-top:28px;padding-top:16px;border-top:1px solid #ccc0a8;font-family:"Courier New",monospace;font-size:9px;letter-spacing:.08em;color:#8a7a6a;text-align:center;line-height:2}
+
+@media(max-width:700px){
+  .grid-2,.grid-3,.grid-32,.grid-23,.numbers-row,.season-strip,.irr-row{grid-template-columns:1fr}
+  .masthead{grid-template-columns:1fr}.zone-badge{display:none}
+  .flower-grid{grid-template-columns:repeat(2,1fr)}
+  .mat-row{grid-template-columns:1fr 1fr}
+  .mat-life{display:none}
+  .challenge-item{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-left">
+    <div class="masthead-tag">Northern Virginia &middot; Alexandria &middot; Compiled 2026</div>
+    <h1>The <em>Potager</em> Kitchen Garden<br>Design at a Glance</h1>
+    <div class="masthead-sub">A quick-reference fact sheet for ornamental kitchen garden design in the Mid-Atlantic region</div>
+  </div>
+  <div class="zone-badge">
+    <div class="zone-num">7a</div>
+    <div class="zone-label">USDA Zone</div>
+  </div>
+</div>
+
+<!-- SEASON STRIP -->
+<div class="season-strip">
+  <div class="season-block spring">
+    <div class="season-name">Spring</div>
+    <div class="season-crops">Mar &ndash; May<br>Peas &middot; Greens<br>Brassicas &middot; Carrots<br>Transplant after Apr 15</div>
+  </div>
+  <div class="season-block summer">
+    <div class="season-name">Summer</div>
+    <div class="season-crops">May &ndash; Aug<br>Tomatoes &middot; Peppers<br>Beans &middot; Squash<br>Okra &middot; Sweet Potato</div>
+  </div>
+  <div class="season-block fall">
+    <div class="season-name">Fall</div>
+    <div class="season-crops">Aug &ndash; Nov<br>Kale &middot; Lettuce<br>Arugula &middot; Beets<br>Garlic (Oct&ndash;Nov)</div>
+  </div>
+  <div class="season-block winter">
+    <div class="season-name">Winter</div>
+    <div class="season-crops">Dec &ndash; Feb<br>Plan &middot; Order seeds<br>Start indoors Feb 1<br>Cold frames extend fall</div>
+  </div>
+</div>
+
+<!-- KEY NUMBERS -->
+<div class="numbers-row">
+  <div class="number-cell">
+    <div class="number-big">4 ft</div>
+    <div class="number-label">Max bed width — reach center from either side</div>
+  </div>
+  <div class="number-cell">
+    <div class="number-big">24&Prime;</div>
+    <div class="number-label">Min path width for comfortable working access</div>
+  </div>
+  <div class="number-cell">
+    <div class="number-big">6 hrs</div>
+    <div class="number-label">Minimum daily direct sun — 8&ndash;10 hrs ideal</div>
+  </div>
+  <div class="number-cell">
+    <div class="number-big">55&deg;F</div>
+    <div class="number-label">Soil temp threshold before warm-season transplants</div>
+  </div>
+  <div class="number-cell">
+    <div class="number-big">1&Prime;&Prime;</div>
+    <div class="number-label">Water per week needed; raised beds need more in July&ndash;Aug</div>
+  </div>
+</div>
+
+<!-- ROW 1: DIAGRAM + PRINCIPLES -->
+<div class="grid-23" style="margin-bottom:16px">
+  <div class="diagram-card">
+    <div class="diagram-label">The Four-Square Layout &mdash; Classic Potager</div>
+    <pre>
++------------------------------------------+
+|  [ BOUNDARY: fence, hedge, or low wall ] |
+|                                          |
+|  +----------+   PATH   +----------+     |
+|  |          |          |          |     |
+|  |  BED A   |          |  BED B   |     |
+|  | Greens / |          | Tomatoes/|     |
+|  |  Herbs   |          | Peppers  |     |
+|  +----------+          +----------+     |
+|     PATH      [FOCAL]      PATH         |
+|  +----------+  POINT  +----------+     |
+|  |  BED C   |          |  BED D   |     |
+|  | Squash / |          | Flowers/ |     |
+|  |  Beans   |          |  Fruit   |     |
+|  +----------+          +----------+     |
++------------------------------------------+</pre>
+    <div class="diagram-note">Beds: 4 ft wide max &nbsp;&middot;&nbsp; Paths: 24&ndash;30 in. gravel or brick &nbsp;&middot;&nbsp; Focal point: arbor, urn, fig, or sundial</div>
+  </div>
+
+  <div class="card green-top">
+    <div class="card-label green">The Five Principles</div>
+    <div class="principle-row">
+      <div class="principle-num">1</div>
+      <div class="principle-text"><div class="principle-name">Geometric Order</div><div class="principle-desc">Defined beds and formal patterns make a productive garden read as intentional, not chaotic.</div></div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-num">2</div>
+      <div class="principle-text"><div class="principle-name">Paths as Infrastructure</div><div class="principle-desc">Gravel or brick paths keep you out of wet soil, define zones, and give the garden bones in winter.</div></div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-num">3</div>
+      <div class="principle-text"><div class="principle-name">A Focal Point</div><div class="principle-desc">Every composed garden has a visual anchor the eye finds first. Deliberate, not necessarily expensive.</div></div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-num">4</div>
+      <div class="principle-text"><div class="principle-name">Vertical Structure</div><div class="principle-desc">Arches, trellises, and teepees add the third dimension and improve air circulation in humid summers.</div></div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-num">5</div>
+      <div class="principle-text"><div class="principle-name">Integrated Flowers</div><div class="principle-desc">Edible and ornamental flowers attract pollinators, deter pests, and fill visual gaps year-round.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 2: CHALLENGES + IRRIGATION -->
+<div class="grid-2" style="margin-bottom:16px">
+  <div class="card soil-top">
+    <div class="card-label soil">NoVA Challenges &amp; Responses</div>
+    <div class="challenge-item">
+      <div class="challenge-name">Heavy Clay Soil</div>
+      <div class="challenge-fix">Raised beds (10&ndash;12 in. amended mix) solve drainage entirely. In-ground needs 2&ndash;3 yrs of compost amendment.</div>
+    </div>
+    <div class="challenge-item">
+      <div class="challenge-name">Summer Heat &amp; Humidity</div>
+      <div class="challenge-fix">Disease-resistant cultivars + good air circulation. Succession plant cool crops; don&rsquo;t fight July&ndash;Aug with greens.</div>
+    </div>
+    <div class="challenge-item">
+      <div class="challenge-name">Deer &amp; Rabbits</div>
+      <div class="challenge-fix">6-ft fence minimum for deer; 24-in. hardware cloth at base for rabbits. Design it in from the start.</div>
+    </div>
+    <div class="challenge-item">
+      <div class="challenge-name">False Spring Trap</div>
+      <div class="challenge-fix">Last frost avg. Apr 7&ndash;15. Wait for soil &ge;55&deg;F before warm-season transplants &mdash; early plants stall.</div>
+    </div>
+    <div class="challenge-item">
+      <div class="challenge-name">Spotted Lanternfly</div>
+      <div class="challenge-fix">Now established in NoVA. Remove Tree of Heaven (primary host). Kill on contact; scrape egg masses.</div>
+    </div>
+  </div>
+
+  <div class="card green-top">
+    <div class="card-label green">Irrigation Principles</div>
+    <div style="margin-bottom:12px">
+      <div class="irr-head" style="font-size:.85rem;color:#1e1710;font-weight:700;margin-bottom:6px">Drip irrigation is the strong consensus recommendation</div>
+      <p style="font-size:.8rem;color:#2e2820;line-height:1.6">Delivers water to the root zone, not foliage &mdash; the primary defense against fungal disease in Virginia&rsquo;s humid summers. Use 30&ndash;50% less water than overhead sprinklers for equivalent results (UGA Extension).</p>
+    </div>
+    <div class="irr-block" style="margin-bottom:8px">
+      <div class="irr-head">Drip + Timer</div>
+      <div class="irr-body">Best system for raised beds. Set-and-manage; consistent watering prevents stress cycles that invite disease.</div>
+    </div>
+    <div class="irr-block amber" style="margin-bottom:8px">
+      <div class="irr-head">Soaker Hose</div>
+      <div class="irr-body">Budget alternative; works well in raised beds. Less precise than emitters; replace every 2&ndash;5 yrs.</div>
+    </div>
+    <div class="irr-block soil">
+      <div class="irr-head">Rain Barrel</div>
+      <div class="irr-body">Legal in Virginia. 50-gal barrel supplements irrigation in shoulder seasons; doesn&rsquo;t cover July drought.</div>
+    </div>
+    <p style="font-size:.75rem;color:#5a4e44;margin-top:10px;font-style:italic">Never overhead water in the evening. Morning only &mdash; foliage must dry before nighttime humidity sets in.</p>
+  </div>
+</div>
+
+<!-- ROW 3: BED MATERIALS + FLOWERS -->
+<div class="grid-2" style="margin-bottom:16px">
+  <div class="card">
+    <div class="card-label">Raised Bed &amp; Path Materials</div>
+    <div class="mat-row mat-header">
+      <div class="mat-name">Material</div>
+      <div class="mat-desc">Notes</div>
+      <div class="mat-life">Lifespan</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-name">Cedar (untreated)</div>
+      <div class="mat-desc">Best traditional choice. Rot-resistant, safe, silvers gracefully. 2-in. thickness minimum.</div>
+      <div class="mat-life">15&ndash;20 yr</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-name">Galvanized Steel</div>
+      <div class="mat-desc">Best low-maintenance choice. Zn-Al-Mg coating. Holds heat in spring/fall for season extension.</div>
+      <div class="mat-life">30+ yr</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-name">Untreated Pine</div>
+      <div class="mat-desc">Good budget/experimental option before committing to a permanent layout.</div>
+      <div class="mat-life">5&ndash;7 yr</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-name">Brick / Stone</div>
+      <div class="mat-desc">Highest aesthetic ceiling. Virginia colonial tradition favors brick paths. Reclaimed brick preferred.</div>
+      <div class="mat-life">Generational</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-name">Gravel Paths</div>
+      <div class="mat-desc">Classic potager material. Lay over landscape fabric (permanent) or cardboard (temporary). 4&ndash;6 in. deep.</div>
+      <div class="mat-life">Ongoing</div>
+    </div>
+    <div class="mat-row">
+      <div class="mat-name" style="color:#8b2020">Pressure-Treated</div>
+      <div class="mat-desc" style="color:#8b2020">Avoid in food gardens. Copper-based preservatives; not certified organic; leaching risk in acidic soil.</div>
+      <div class="mat-life" style="color:#8b2020">&mdash;</div>
+    </div>
+  </div>
+
+  <div class="card green-top">
+    <div class="card-label green">Potager Flowers for Zone 7a</div>
+    <div class="flower-grid">
+      <div class="flower-swatch">
+        <div class="swatch-circle" style="background:#e8a030"></div>
+        <div class="swatch-name">Calendula</div>
+        <div class="swatch-note">Edible petals; hardy; golden-orange</div>
+      </div>
+      <div class="flower-swatch">
+        <div class="swatch-circle" style="background:#e05020"></div>
+        <div class="swatch-name">Nasturtium</div>
+        <div class="swatch-note">Edible; heat-tolerant; self-seeds</div>
+      </div>
+      <div class="flower-swatch">
+        <div class="swatch-circle" style="background:#5578c8"></div>
+        <div class="swatch-name">Borage</div>
+        <div class="swatch-note">Blue; edible; attracts pollinators</div>
+      </div>
+      <div class="flower-swatch">
+        <div class="swatch-circle" style="background:#8060a8"></div>
+        <div class="swatch-name">Lavender</div>
+        <div class="swatch-note">Perennial in 7a; fragrant; bees</div>
+      </div>
+      <div class="flower-swatch">
+        <div class="swatch-circle" style="background:#d04878"></div>
+        <div class="swatch-name">Roses</div>
+        <div class="swatch-note">Classic potager; pair with herbs</div>
+      </div>
+      <div class="flower-swatch">
+        <div class="swatch-circle" style="background:#e83838"></div>
+        <div class="swatch-name">Zinnias</div>
+        <div class="swatch-note">Heat-loving; fill gaps into fall</div>
+      </div>
+      <div class="flower-swatch">
+        <div class="swatch-circle" style="background:#4060c0"></div>
+        <div class="swatch-name">Bachelor&rsquo;s Button</div>
+        <div class="swatch-note">Blue; edible petals; self-seeds</div>
+      </div>
+      <div class="flower-swatch">
+        <div class="swatch-circle" style="background:#f0f0a0;border-color:#ccc"></div>
+        <div class="swatch-name">Sweet Alyssum</div>
+        <div class="swatch-note">White; insectary; 50&ndash;70% aphid reduction</div>
+      </div>
+    </div>
+    <p style="font-size:.75rem;color:#5a4e44;margin-top:14px;font-style:italic">French marigold <em>T. patula</em> (not shown) is the most evidence-backed companion plant: dense planting reduces root-knot nematodes 40&ndash;70% around tomatoes.</p>
+  </div>
+</div>
+
+<!-- ROW 4: COMPANION PLANTING + STRUCTURES -->
+<div class="grid-2">
+  <div class="card">
+    <div class="card-label">Companion Planting: Evidence Summary</div>
+    <div class="challenge-item">
+      <div class="challenge-name" style="background:#4a6741;color:#f5f0e6">French Marigold</div>
+      <div class="challenge-fix"><strong>Strong evidence.</strong> <em>T. patula</em> reduces root-knot nematodes 40&ndash;70%. Plant densely; maintain 8&ndash;12 weeks minimum.</div>
+    </div>
+    <div class="challenge-item">
+      <div class="challenge-name" style="background:#4a6741;color:#f5f0e6">Three Sisters</div>
+      <div class="challenge-fix"><strong>Strong evidence.</strong> Corn + beans + squash polyculture: 20&ndash;40% yield advantage over monoculture (LER studies).</div>
+    </div>
+    <div class="challenge-item">
+      <div class="challenge-name" style="background:#4a6741;color:#f5f0e6">Sweet Alyssum</div>
+      <div class="challenge-fix"><strong>Good evidence.</strong> Attracts hoverflies and parasitoid wasps; 50&ndash;70% aphid reduction adjacent to beds.</div>
+    </div>
+    <div class="challenge-item">
+      <div class="challenge-name" style="background:#6b8f5e;color:#fff">Basil + Tomato</div>
+      <div class="challenge-fix"><strong>Modest evidence.</strong> Basil volatile oils reduce thrips on adjacent plants. Does <em>not</em> improve flavor (no biological basis).</div>
+    </div>
+    <div class="challenge-item">
+      <div class="challenge-name" style="background:#8b2020;color:#fff">Fennel</div>
+      <div class="challenge-fix"><strong>Documented harmful.</strong> Allelopathic root exudates inhibit neighboring plants. Isolate in its own bed or container.</div>
+    </div>
+  </div>
+
+  <div class="card green-top">
+    <div class="card-label green">Structures in the Potager</div>
+    <div class="principle-row">
+      <div class="principle-num" style="color:#4a6741">&rarr;</div>
+      <div class="principle-text"><div class="principle-name">Garden Shed</div><div class="principle-desc">Historically present in functional potagers. Modern approach: design it as a visual feature rather than hiding it. Position at edge with herb beds in front.</div></div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-num" style="color:#4a6741">&rarr;</div>
+      <div class="principle-text"><div class="principle-name">Cold Frames</div><div class="principle-desc">Glass-topped boxes extend the fall season by 4&ndash;6 weeks. Same footprint as a garden bed. Historically appropriate and practically valuable.</div></div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-num" style="color:#4a6741">&rarr;</div>
+      <div class="principle-text"><div class="principle-name">Arbors &amp; Arches</div><div class="principle-desc">Both focal point and growing structure. Grow beans, cucumbers, or small gourds &mdash; crops productive enough to justify the structure.</div></div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-num" style="color:#4a6741">&rarr;</div>
+      <div class="principle-text"><div class="principle-name">Greenhouse / Pavilion</div><div class="principle-desc">Victorian addition to the tradition, but historically a garden pavilion or viewing house has always been part of formal potager design (Jefferson&rsquo;s Monticello brick pavilion).</div></div>
+    </div>
+    <div class="principle-row">
+      <div class="principle-num" style="color:#c4822a">&rarr;</div>
+      <div class="principle-text"><div class="principle-name">Materials Rule</div><div class="principle-desc">Weather-natural materials (wood, bamboo, wrought iron) age into the garden. Powder-coated metal ages poorly. A cedar arch silvers to match cedar beds over time.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Sources: Virginia Cooperative Extension (VCE) &middot; Master Gardeners of Northern Virginia (MGNV) &middot; Joy Larkcom, <em>Creative Vegetable Gardening</em><br>
+  Jennifer Bartley, <em>Designing the New Kitchen Garden</em> &middot; Southern Exposure Seed Exchange &middot; Château de Villandry &middot; RHS<br>
+  VCE Publications 426-331, 426-312, 426-335 &middot; MGNV "Beating the Bugs" &middot; USDA APHIS
+</div>
+
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#faf8f4;color:#1c1916;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northern Virginia Potager Garden: A Comprehensive Reference</title>
+<style>
+html,body{color-scheme:light;background:#faf8f4!important;color:#1c1916!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.78;background:#faf8f4;color:#1c1916;max-width:820px;margin:0 auto;padding:56px 40px 96px}
+
+/* COVER */
+.cover{border-top:4px solid #3d2b1f;border-bottom:1px solid #c0ae96;padding:32px 0 28px;margin-bottom:48px}
+.cover-tag{font-family:"Courier New",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8a6523;margin-bottom:12px}
+.cover h1{font-size:2.2rem;font-weight:700;line-height:1.15;color:#1c1916;margin-bottom:10px}
+.cover h1 em{font-style:italic;font-weight:400;color:#4a6741}
+.cover-subtitle{font-size:1rem;color:#3d3028;font-style:italic;margin-bottom:20px;max-width:60ch}
+.cover-meta{font-family:"Courier New",monospace;font-size:10px;letter-spacing:.1em;color:#7a6f62;line-height:2.2;border-top:1px solid #d8cdb8;padding-top:14px;margin-top:14px}
+
+/* TOC */
+.toc{background:#fff;border:1px solid #d8cdb8;padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:"Courier New",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8a6523;margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted #d8cdb8;font-size:.88rem}
+.toc-item:last-child{border-bottom:none}
+.toc-section{color:#1c1916}
+.toc-num{font-family:"Courier New",monospace;font-size:.8rem;color:#8a6523}
+
+/* SECTION STRUCTURE */
+.section{margin-bottom:56px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"Courier New",monospace;font-size:10px;letter-spacing:.12em;color:#8a6523;flex-shrink:0}
+.section-rule{height:1px;background:#d8cdb8;flex:1}
+h2{font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:#1c1916;margin-bottom:14px;line-height:1.2}
+h3{font-family:Georgia,serif;font-size:1.05rem;font-style:italic;font-weight:400;color:#4a6741;margin:26px 0 9px}
+p{color:#1c1916;margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+p strong{color:#1c1916}
+em{font-style:italic}
+
+/* CALLOUT */
+.callout{border-left:4px solid #4a6741;background:#edf3eb;padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:#1c1916;margin:0;font-size:.96rem;line-height:1.68;max-width:66ch}
+
+/* DETAIL TABLE (challenges) */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:190px 1fr;gap:0;border-bottom:1px solid #e0d5c5;padding:12px 0;font-size:.9rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:Georgia,serif;font-weight:700;color:#4a6741;line-height:1.45;padding-right:16px}
+.detail-body{color:#1c1916;line-height:1.68}
+.detail-body strong{color:#1c1916}
+
+/* EVIDENCE TABLE */
+.evidence-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.88rem;background:#fff;border:1px solid #d8cdb8}
+.evidence-table th{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#1c1916;background:#f0e8da;border-bottom:2px solid #c0ae96;padding:9px 13px;text-align:left}
+.evidence-table td{padding:9px 13px;border-bottom:1px solid #e8ddd0;color:#1c1916;vertical-align:top;line-height:1.5}
+.evidence-table tr:last-child td{border-bottom:none}
+.ev-strong{color:#335c28;font-weight:700;font-size:.8rem}
+.ev-modest{color:#8a6523;font-weight:700;font-size:.8rem}
+.ev-warn{color:#8b2020;font-weight:700;font-size:.8rem}
+
+/* CALENDAR TABLE */
+.cal-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.88rem;background:#fff;border:1px solid #d8cdb8}
+.cal-table th{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#1c1916;background:#f0e8da;border-bottom:2px solid #c0ae96;padding:9px 13px;text-align:left}
+.cal-table td{padding:9px 13px;border-bottom:1px solid #e8ddd0;color:#1c1916;vertical-align:top;line-height:1.5}
+.cal-table tr:last-child td{border-bottom:none}
+.season-tag{font-family:"Courier New",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#8a6523}
+
+/* MATERIALS TABLE */
+.mat-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.88rem;background:#fff;border:1px solid #d8cdb8}
+.mat-table th{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#1c1916;background:#f0e8da;border-bottom:2px solid #c0ae96;padding:9px 13px;text-align:left}
+.mat-table td{padding:9px 13px;border-bottom:1px solid #e8ddd0;color:#1c1916;vertical-align:top;line-height:1.5}
+.mat-table tr:last-child td{border-bottom:none}
+.avoid{color:#8b2020}
+
+/* RESOURCE GRID */
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.res-card{background:#fff;border:1px solid #d8cdb8;border-top:3px solid #4a6741;padding:16px 18px}
+.res-card.amber-top{border-top-color:#8a6523}
+.res-type{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8a6523;display:block;margin-bottom:5px}
+.res-card strong{font-family:Georgia,serif;font-size:.95rem;font-weight:700;display:block;color:#1c1916;margin-bottom:6px;line-height:1.3}
+.res-card p{font-size:.84rem;color:#1c1916;margin:0;line-height:1.6;max-width:none}
+.res-card a{font-family:"Courier New",monospace;font-size:.76rem;color:#4a6741;text-decoration:none;display:block;margin-top:8px;word-break:break-all}
+
+/* SOURCES SECTION */
+.sources-section{margin-top:56px;padding-top:28px;border-top:2px solid #3d2b1f}
+.source-group{margin-bottom:28px}
+.source-group-title{font-family:"Courier New",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8a6523;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #d8cdb8}
+.source-item{font-size:.87rem;color:#1c1916;line-height:1.65;padding:6px 0;border-bottom:1px dotted #e0d5c5}
+.source-item:last-child{border-bottom:none}
+.source-item em{font-style:italic}
+.source-url{font-family:"Courier New",monospace;font-size:.76rem;color:#4a6741;display:block;margin-top:2px}
+
+/* FOOTER */
+.footer{margin-top:56px;padding-top:20px;border-top:1px solid #d8cdb8;font-family:"Courier New",monospace;font-size:10px;letter-spacing:.08em;color:#7a6f62;text-align:center;line-height:2.2}
+
+@media(max-width:640px){
+  body{padding:28px 18px 64px;font-size:16px}
+  .cover h1{font-size:1.7rem}
+  .res-grid{grid-template-columns:1fr}
+  .detail-row{grid-template-columns:1fr;gap:4px}
+  .detail-label{padding-right:0}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Comprehensive Reference &middot; Alexandria, Virginia &middot; USDA Zone 7a</div>
+  <h1>The <em>Potager</em> Kitchen Garden<br>of Northern Virginia</h1>
+  <div class="cover-subtitle">Design, planting, pest management, hardscaping, irrigation, companion planting, and local resources &mdash; a consolidated reference for ornamental kitchen garden practice in the Mid-Atlantic region.</div>
+  <div class="cover-meta">
+    Compiled: 2026 &nbsp;&middot;&nbsp; Scope: Residential potager gardens, Alexandria and Northern Virginia suburbs<br>
+    Primary authority: Virginia Cooperative Extension (VCE) &middot; Master Gardeners of Northern Virginia (MGNV)<br>
+    Supplementary sources: Joy Larkcom &middot; Jennifer Bartley &middot; RHS &middot; Southern Exposure Seed Exchange &middot; USDA APHIS
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><span class="toc-section">1. The Potager Tradition: Origins and Design Philosophy</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item"><span class="toc-section">2. Northern Virginia Conditions and Challenges</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item"><span class="toc-section">3. Design Principles and Layout</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item"><span class="toc-section">4. Hardscaping: Beds, Paths, and Structure</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item"><span class="toc-section">5. Planting Calendar for Zone 7a</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">6. Flowers in the Potager</span><span class="toc-num">&sect; 06</span></div>
+  <div class="toc-item"><span class="toc-section">7. Companion Planting: Evidence and Practice</span><span class="toc-num">&sect; 07</span></div>
+  <div class="toc-item"><span class="toc-section">8. Integrated Pest Management</span><span class="toc-num">&sect; 08</span></div>
+  <div class="toc-item"><span class="toc-section">9. Irrigation</span><span class="toc-num">&sect; 09</span></div>
+  <div class="toc-item"><span class="toc-section">10. Structures in the Potager</span><span class="toc-num">&sect; 10</span></div>
+  <div class="toc-item"><span class="toc-section">11. Local Organizations and Key Resources</span><span class="toc-num">&sect; 11</span></div>
+  <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
+</div>
+
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
+  <h2>The Potager Tradition: Origins and Design Philosophy</h2>
+
+  <p>The <em>potager</em> is a French kitchen garden tradition in which beauty and productivity are treated not as competing values but as expressions of the same underlying discipline. The word derives simply from <em>potage</em> &mdash; the vegetable soup the garden supplied. What began as monastic herb and vegetable beds in medieval Europe evolved, through the French Renaissance and into the 17th century, into a highly structured design tradition. The canonical example is the Château de Villandry in the Loire Valley, whose nine-square potager was restored by Joachim Carvallo beginning in 1906 based on research into 16th-century French garden engravings, particularly the work of du Cerceau.</p>
+
+  <p>The tradition was revived for home gardeners in the late 20th century primarily through the work of Rosemary Verey, whose garden at Barnsley House in the Cotswolds drew 30,000 visitors annually and directly inspired a generation of designers. Joy Larkcom subsequently codified the tradition's design principles in <em>Creative Vegetable Gardening</em> (1997), widely regarded as the most important single book on ornamental kitchen gardening in the English language. In the American context, Jennifer Bartley's <em>Designing the New Kitchen Garden</em> (Timber Press, 2006) explicitly translated these principles for contemporary American conditions.</p>
+
+  <p>The core insight of the potager is that structural clarity and visual beauty are the same thing. Geometric beds defined by clean paths, tall trellises providing vertical structure, a deliberate focal point at the center of the design, and edible flowers woven through vegetable plantings &mdash; these are not decorative add-ons to a functional garden. They <em>are</em> the functional garden: they determine access, drainage management, crop rotation logic, and how the gardener moves through the space at harvest time. A well-designed potager performs better as a production system than a sprawling, unstructured vegetable patch precisely because its design disciplines are also its agronomic disciplines.</p>
+
+  <div class="callout"><p>"Regardless of style, all well-designed gardens make use of three essential principles &mdash; balance, proportion, and repetition &mdash; to blend the various parts of the garden into a harmonious whole."</p></div>
+</div>
+
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
+  <h2>Northern Virginia Conditions and Challenges</h2>
+
+  <p>Alexandria and the surrounding Northern Virginia suburbs sit firmly in USDA Hardiness Zone 7a, with average annual minimum temperatures of 0 to 5&deg;F. The urban heat island effect of the Washington metro area means that gardens within the Beltway and close-in suburbs often behave more like Zone 7b in practice, offering modest advantages for marginally tender perennials. The frost-free growing season runs approximately from mid-April to late October &mdash; roughly 185 to 200 days &mdash; which is a genuine long-season advantage when managed with succession planting.</p>
+
+  <p>The dominant soil type throughout most of Northern Virginia is heavy clay, a remnant of Piedmont and Coastal Plain geology. Clay soil drains poorly, compacts severely when worked wet, and bakes to near-concrete hardness during summer drought. This single characteristic shapes more decisions about NoVA kitchen garden design than any other factor. Raised beds filled with amended growing mix eliminate the drainage problem entirely and represent the strong consensus recommendation from VCE, MGNV, and experienced local gardeners. In-ground beds require two to three years of consistent annual compost amendment before drainage improves meaningfully.</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Clay Soil</span><span class="detail-body">Raised beds (10&ndash;12 inches of amended mix) solve drainage entirely. In-ground beds: plan 2&ndash;3 years of consistent amendment. Get a soil test first &mdash; VCE's Virginia Tech lab, approximately $20, tells you exactly what to add.</span></div>
+    <div class="detail-row"><span class="detail-label">Summer Heat &amp; Humidity</span><span class="detail-body">July and August are genuinely hostile to cool-season crops and create serious fungal disease pressure on tomatoes and squash. Prioritize disease-resistant cultivars (look for V, F, N, T designations on plant labels). Good air circulation through proper bed spacing and vertical structure is the primary preventive measure. Succession-plant cool crops for spring and fall; don't fight the midsummer heat.</span></div>
+    <div class="detail-row"><span class="detail-label">Deer &amp; Rabbits</span><span class="detail-body">Deer pressure in Alexandria and inner Fairfax is significant and consistent. A boundary fence is not optional. Minimum 6 feet for deer deterrence; 24 inches of hardware cloth buried at the base for rabbits. Design fencing as part of the garden's aesthetic from the start rather than retrofitting it after losses.</span></div>
+    <div class="detail-row"><span class="detail-label">False Spring Trap</span><span class="detail-body">Average last frost in Alexandria falls April 7&ndash;15, but late-April cold snaps occur frequently enough that experienced local gardeners consistently delay warm-season transplants until soil temperature reaches and holds above 55&deg;F. Tomatoes planted in cold soil stall and do not catch up to properly-timed ones planted two weeks later.</span></div>
+    <div class="detail-row"><span class="detail-label">Spotted Lanternfly</span><span class="detail-body">Now established throughout Northern Virginia. Preferred hosts include Tree of Heaven, grapes, and hops. Direct vegetable damage is less severe than damage to woody plants, but heavy infestations produce honeydew that promotes sooty mold. Remove Tree of Heaven from your property &mdash; it is the primary host. Report confirmed sightings to VDACS.</span></div>
+  </div>
+
+  <h3>What Thrives in Zone 7a</h3>
+  <p>The region's long frost-free season and genuine summer heat make it excellent territory for tomatoes, peppers, sweet potatoes, okra, pole beans, summer squash, and melons. The shoulder seasons &mdash; March through May and September through November &mdash; support two complete cool-season crop cycles: salad greens, brassicas, root vegetables, and peas. Perennial herbs (rosemary, thyme, sage, chives, oregano) overwinter reliably without protection. Figs thrive here with minimal attention. Blueberries perform well if soil pH is maintained in the acidic range (4.5&ndash;5.5).</p>
+</div>
+
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
+  <h2>Design Principles and Layout</h2>
+
+  <p>Five structural principles, derived from the historical potager tradition and validated by contemporary designers including Verey, Larkcom, and Bartley, apply directly to a Northern Virginia context:</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">1. Geometric Order</span><span class="detail-body">Formal patterns and defined beds &mdash; rectangular, four-square, or quartered &mdash; give the eye something to rest on even when plantings are at different stages of growth. Symmetry makes a productive vegetable garden read as intentional rather than chaotic.</span></div>
+    <div class="detail-row"><span class="detail-label">2. Paths as Infrastructure</span><span class="detail-body">Gravel, brick, or flagstone paths between beds serve both aesthetics and practicality. They keep the gardener out of wet soil, define maintenance zones, and give the garden its bones in winter when plantings are gone. Minimum 24 inches wide for comfortable working access; 30 inches preferred for wheelbarrow use.</span></div>
+    <div class="detail-row"><span class="detail-label">3. A Focal Point</span><span class="detail-body">Every well-composed garden has a visual anchor &mdash; a sundial, a dwarf fruit tree, a birdbath, an arbor, an urn, or a garden pavilion. This is the element the eye finds first and from which the design radiates outward. It does not need to be expensive; it needs to be deliberate and appropriately scaled.</span></div>
+    <div class="detail-row"><span class="detail-label">4. Vertical Structure</span><span class="detail-body">Trellises, teepee supports, and arches add the third dimension that separates a composed garden from a flat vegetable patch. Vertical elements also solve practical problems: climbing crops on trellises free bed space, improve air circulation (critical in Virginia's humid summers), and multiply effective growing area without expanding the footprint.</span></div>
+    <div class="detail-row"><span class="detail-label">5. Integrated Flowers</span><span class="detail-body">Edible and ornamental flowers woven through vegetable beds attract pollinators, confuse pests, fill visual gaps, and provide color across seasons. The rose-and-herb pairing is the classic potager combination; Rosemary Verey's Barnsley House potager featured roses throughout the vegetable beds.</span></div>
+  </div>
+
+  <h3>The Four-Square Layout</h3>
+  <p>The canonical potager layout divides the kitchen garden into four equal quadrants separated by crossing paths, with a focal point at the intersection. Each quadrant functions as an independent growing bed, facilitating four-year crop rotation (moving tomato-family, brassica-family, root, and legume crops through beds in sequence to prevent soil disease buildup). Beds should be no wider than four feet, allowing the gardener to reach the center from either side without stepping into the growing soil, which compacts it. The entire space should be enclosed by a boundary element &mdash; fence, hedge, or low wall &mdash; that defines the garden as a room and addresses deer pressure.</p>
+
+  <h3>Starting the Design Process</h3>
+  <p>VCE's planning guidance and experienced practitioners converge on designing on paper before breaking ground. The recommended sequence: (1) assess sun exposure at multiple times of day over several days, noting that shade patterns move seasonally; (2) obtain a soil test before purchasing amendments; (3) sketch layout to rough scale, placing beds and paths before thinking about plants; (4) plan for all three seasons simultaneously to avoid the common error of filling every bed with warm-season crops; (5) start smaller than instinct suggests &mdash; VCE's direct guidance is that a small, weed-free garden will produce more than a large, weedy one.</p>
+</div>
+
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
+  <h2>Hardscaping: Beds, Paths, and Structure</h2>
+
+  <p>The hardscape is what gives a kitchen garden its year-round bones &mdash; the elements that hold visual structure in winter when plants are gone, and that determine maintenance burden for years. Material choices involve genuine tradeoffs between upfront cost, longevity, aesthetics, and safety for edible gardens.</p>
+
+  <h3>Raised Bed Materials</h3>
+  <table class="mat-table">
+    <thead><tr><th>Material</th><th>Notes</th><th>Lifespan (NoVA)</th><th>Food Safe</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Cedar (untreated)</strong></td><td>Best traditional choice. Naturally rot-resistant. Silvers gracefully over time. Buy 2-in. nominal thickness minimum &mdash; 1-in. boards warp quickly in humidity.</td><td>15&ndash;20 years</td><td>Yes</td></tr>
+      <tr><td><strong>Galvanized Steel</strong></td><td>Best low-maintenance choice. Zn-Al-Mg coating lasts longest. Zinc is a natural micronutrient; safe at normal levels. Extends season by holding heat in spring and fall.</td><td>30+ years</td><td>Yes</td></tr>
+      <tr><td><strong>Untreated Pine</strong></td><td>Good budget or experimental option. Use before committing to a permanent layout. Treat with food-safe linseed oil to extend life modestly.</td><td>5&ndash;7 years</td><td>Yes</td></tr>
+      <tr><td><strong>Stone / Brick</strong></td><td>Generational lifespan and highest aesthetic ceiling for formal potager. Best suited to a layout you are confident in; moving stone beds is a major project.</td><td>Generational</td><td>Yes</td></tr>
+      <tr><td><strong>Composite Lumber</strong></td><td>Recycled plastic (Trex, similar). Virtually maintenance-free. Contemporary aesthetic. Quality varies; look for documented UV stability ratings.</td><td>50+ years</td><td>Yes</td></tr>
+      <tr><td class="avoid"><strong>Pressure-Treated Lumber</strong></td><td class="avoid">Post-2003 formulations use copper-based preservatives approved by the EPA for food gardens, but not certified for organic production. Long-term leaching in acidic soil is still studied. Unnecessary given available alternatives.</td><td class="avoid">&mdash;</td><td class="avoid">Uncertain</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Path Materials</h3>
+  <p>The Virginia colonial tradition, particularly in Alexandria and the broader Tidewater region, favored brick as the primary formal garden path material. Jefferson used compacted gravel for the serpentine walkway at Monticello (1806), representing a more naturalistic approach. Both remain historically appropriate and practically sound for a modern NoVA potager.</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Gravel</span><span class="detail-body">The classic potager path material. Warm, textural, drains perfectly. Lay over landscape fabric (for permanent paths) or cardboard (temporary, 1&ndash;3 years) to suppress weeds. Minimum 4&ndash;6 inches deep to block sunlight to soil. Requires periodic topping up and raking.</span></div>
+    <div class="detail-row"><span class="detail-label">Brick or Pavers</span><span class="detail-body">Highest aesthetic option and most permanent. Reclaimed brick is preferred for appearance and is often less expensive than new. Requires compacted gravel sub-base to prevent heaving through NoVA's freeze-thaw cycles. Once installed correctly, essentially zero ongoing maintenance. Salvage yards in the region stock reclaimed brick.</span></div>
+    <div class="detail-row"><span class="detail-label">Arborist Wood Chips</span><span class="detail-body">Free or very low cost through ChipDrop.com or direct contact with local tree services. Excellent weed suppression; improves soil biology at bed edges as it decomposes. Requires annual topping up. Not ideal for the most formal potager designs; better for cottage or informal styles. Apply 4&ndash;6 inches deep.</span></div>
+    <div class="detail-row"><span class="detail-label">Creeping Thyme + Stepping Stones</span><span class="detail-body">Flagstone set in low-growing creeping thyme is the most visually integrated path option for a garden blending edibles and ornamentals. Thyme is edible, fragrant underfoot, drought-tolerant once established, and attracts pollinators when it blooms in early summer. Labor-intensive to install; low-maintenance once established.</span></div>
+  </div>
+
+  <h3>Weed Suppression Under Gravel</h3>
+  <p>The two primary approaches are landscape fabric and cardboard. Non-woven landscape fabric, laid before spreading gravel, blocks weeds from below while remaining water-permeable; expect 5&ndash;10 years of effective suppression in Virginia's humid conditions before degradation. Cardboard (2&ndash;3 layers, no tape, minimal seams) is the biodegradable alternative &mdash; effective for 1&ndash;3 years in damp climates. For permanent potager paths, landscape fabric is the practical choice; for seasonal or trial paths, cardboard is adequate and more sustainable. Neither barrier is 100% effective against persistent perennial weeds at seams and edges; minimum gravel depth (4&ndash;6 inches) reduces light penetration and limits weed establishment.</p>
+
+  <h3>Vertical Structure</h3>
+  <p>A central arch or tunnel, teepee supports for pole beans and tomatoes, and flat trellises against walls or fences are what make a kitchen garden read as a designed space. Materials that weather naturally &mdash; wood, bamboo, wrought iron &mdash; age into the garden aesthetically; powder-coated metal tends to age poorly and unevenly. A cedar arch silvers over time to match cedar beds. Climbing crops on vertical structure (pole beans, cucumbers, small gourds) should be productive enough to justify the structure's visual prominence &mdash; this is both a design and an agricultural principle.</p>
+
+  <h3>Boundary Fencing</h3>
+  <p>In Northern Virginia, deer fencing is a design requirement, not an optional upgrade. Minimum 6 feet for effective deer deterrence; 8 feet in areas with persistent or bold deer populations. A cedar picket or split-rail fence with interior wire mesh is the most traditional approach and fits the potager aesthetic well. An alternative for urban settings is a shorter decorative fence (3&ndash;4 feet) combined with fishing line strung at intervals above &mdash; deer are reluctant to jump when they cannot see where they will land. Hardware cloth 24 inches deep at the base (or buried slightly) is required to stop rabbits.</p>
+</div>
+
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
+  <h2>Planting Calendar for Zone 7a</h2>
+  <p>Dates reflect Alexandria/Arlington conditions. VCE Publication 426-331 is the authoritative regional source with specific spacing and quantity guidance.</p>
+
+  <table class="cal-table">
+    <thead><tr><th>Window</th><th>Dates (approx.)</th><th>What to Plant</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><span class="season-tag">Indoors / Start</span></td><td>Feb 1&ndash;Mar 1</td><td>Tomatoes, peppers, eggplant, onions</td><td>6&ndash;8 weeks before last frost. Grow under lights.</td></tr>
+      <tr><td><span class="season-tag">Early Spring Direct</span></td><td>Mar 1&ndash;Apr 1</td><td>Peas, spinach, lettuce, kale, radishes, beets, carrots</td><td>Soil workable; tolerate light frost. Row covers extend window.</td></tr>
+      <tr><td><span class="season-tag">Spring Transplant</span></td><td>Apr 15&ndash;May 10</td><td>Tomatoes, peppers, eggplant, basil, cucumbers, squash</td><td>Wait for soil &ge;55&deg;F. After May 1 is safer than before Apr 15.</td></tr>
+      <tr><td><span class="season-tag">Early Summer</span></td><td>May 15&ndash;Jun 15</td><td>Beans (direct sow), sweet potatoes, okra, melons</td><td>Warm-season peak. Succession-sow beans every 2&ndash;3 weeks.</td></tr>
+      <tr><td><span class="season-tag">Midsummer Gap</span></td><td>Jul&ndash;Aug 1</td><td>Cover crops, heat-set tomatoes, okra, herbs</td><td>Too hot for cool crops. Rest beds or plant cover crop.</td></tr>
+      <tr><td><span class="season-tag">Fall Direct Sow</span></td><td>Aug 1&ndash;Sep 15</td><td>Kale, collards, lettuce, spinach, arugula, beets, turnips, bok choy</td><td>Count back 6&ndash;8 weeks from first frost (~Oct 20).</td></tr>
+      <tr><td><span class="season-tag">Garlic &amp; Alliums</span></td><td>Oct 15&ndash;Nov 1</td><td>Garlic (hardneck), shallots, overwintering onion sets</td><td>Needs 8 weeks cold for bulbing. Harvest following July.</td></tr>
+      <tr><td><span class="season-tag">Perennial Herbs</span></td><td>Spring or Fall</td><td>Rosemary, thyme, sage, oregano, chives, mint (contained)</td><td>Plant at bed edges; avoid disturbing with annual tillage.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- SECTION 6 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 06</span><div class="section-rule"></div></div>
+  <h2>Flowers in the Potager</h2>
+
+  <p>Flowers in the potager tradition are never merely decorative. They serve as pollinator habitat, pest deterrents, visual structure, seasonal color, and in many cases as edible or medicinal crops in their own right. The selection below reflects both the historical tradition and what performs well in Zone 7a conditions.</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Nasturtiums</span><span class="detail-body">Orange, red, and yellow; both flowers and seed pods are edible with a peppery flavor. Heat-tolerant, easy self-seeders, and among the most commonly recommended potager flowers. Thrive in NoVA's summer heat with minimal attention.</span></div>
+    <div class="detail-row"><span class="detail-label">Calendula (Pot Marigold)</span><span class="detail-body">Golden-orange petals, edible, and historically used medicinally. Hardy, prolific, and productive across the long NoVA growing season. One of the most traditional potager flowers in both French and English kitchen garden traditions.</span></div>
+    <div class="detail-row"><span class="detail-label">Borage</span><span class="detail-body">Blue star-shaped flowers, edible with a cucumber flavor, historically used in drinks and salads. An aggressive self-seeder. Strongly attractive to bees. Used in the Three Sisters companion planting tradition as an insectary plant.</span></div>
+    <div class="detail-row"><span class="detail-label">Lavender</span><span class="detail-body">Perennial in Zone 7a with minimal winter protection. Fragrant, edible, culinary, and strongly attractive to bees and butterflies. A classic potager pairing with roses and herbs, and a key component of the Barnsley House tradition.</span></div>
+    <div class="detail-row"><span class="detail-label">Roses</span><span class="detail-body">Traditionally interplanted with herbs throughout the potager. Rosemary Verey's Barnsley House potager featured roses as a structural and aesthetic element throughout the vegetable beds. Heirloom and species roses are preferred for their scent and disease resistance.</span></div>
+    <div class="detail-row"><span class="detail-label">Zinnias</span><span class="detail-body">Heat-loving annuals that come in a wide color range and bloom prolifically into fall. They fill the visual gap in late summer when many spring plantings have finished and fall crops are not yet established. Strong cut flower.</span></div>
+    <div class="detail-row"><span class="detail-label">Bachelor's Buttons</span><span class="detail-body">Blue cornflowers that self-seed readily and naturalize in a potager. Edible petals. Classic cottage garden and kitchen garden companion. Attractive to beneficial insects.</span></div>
+    <div class="detail-row"><span class="detail-label">Sweet Alyssum</span><span class="detail-body">Small white flowers, low-growing, and among the most effective insectary plants available. Documented 50&ndash;70% aphid reduction in adjacent beds through attraction of hoverflies and parasitoid wasps. Excellent as path edging.</span></div>
+    <div class="detail-row"><span class="detail-label">French Marigold (T. patula)</span><span class="detail-body">The most evidence-backed companion plant in food gardening &mdash; see Section 7. Also visually excellent as a dense bed border. The specific cultivar matters: <em>T. patula</em>, not the large African marigold <em>T. erecta</em>.</span></div>
+  </div>
+</div>
+
+
+<!-- SECTION 7 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 07</span><div class="section-rule"></div></div>
+  <h2>Companion Planting: Evidence and Practice</h2>
+
+  <p>Companion planting is one of the most enthusiastically promoted and least rigorously sourced areas of garden advice. The credible baseline finding is that <em>polyculture</em> &mdash; growing diverse species together rather than in monocultures &mdash; generally outperforms monoculture for resilience and pest resistance. Specific mechanisms for specific pairings vary considerably in how well they are documented.</p>
+
+  <table class="evidence-table">
+    <thead><tr><th>Pairing</th><th>Evidence Level</th><th>Mechanism</th><th>Practical Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>French Marigold (<em>T. patula</em>) + Tomatoes</strong></td>
+        <td><span class="ev-strong">Strong</span></td>
+        <td>Root exudate alpha-terthienyl toxic to root-knot nematode larvae. Multiple peer-reviewed studies: 40&ndash;70% juvenile nematode reduction.</td>
+        <td>Cultivar critical: <em>T. patula</em> only. Must be planted densely and grown 8&ndash;12 weeks of active root exudation. A few scattered marigolds are insufficient.</td>
+      </tr>
+      <tr>
+        <td><strong>Three Sisters (corn + beans + squash)</strong></td>
+        <td><span class="ev-strong">Strong</span></td>
+        <td>Polyculture Land Equivalent Ratio studies document 20&ndash;40% yield advantage over monoculture. Corn provides vertical support; beans fix nitrogen; squash leaves function as living mulch.</td>
+        <td>Nitrogen fixation benefits the <em>following season's</em> soil, not the concurrent corn and squash. Excellent summer configuration for a full NoVA bed.</td>
+      </tr>
+      <tr>
+        <td><strong>Sweet Alyssum (insectary strip)</strong></td>
+        <td><span class="ev-strong">Strong</span></td>
+        <td>Attracts hoverflies and parasitoid wasps. 2024 NIH study: 50&ndash;70% aphid reduction adjacent to insectary strips.</td>
+        <td>Low-risk, visually excellent as bed edging or path border. Combine with dill, yarrow, or buckwheat for broadest beneficial insect spectrum.</td>
+      </tr>
+      <tr>
+        <td><strong>Basil near Tomatoes</strong></td>
+        <td><span class="ev-modest">Modest</span></td>
+        <td>Basil volatile oils (linalool, eugenol) reduced thrips on adjacent plants (JASHS, 2009). No evidence for the widely claimed flavor improvement.</td>
+        <td>Plant at the base of tomato plants. The benefit is real but modest; primarily thrips reduction and general pollinator attraction.</td>
+      </tr>
+      <tr>
+        <td><strong>Garlic as general repellent</strong></td>
+        <td><span class="ev-modest">Modest / Unclear</span></td>
+        <td>Sulfur compounds in garlic deter some pests in laboratory settings. Effect in field conditions appears highly localized to the garlic plant itself.</td>
+        <td>Plant garlic where you want it as a crop; don't rely on it for broad pest deterrence. Traditional lore significantly overstates the field effect.</td>
+      </tr>
+      <tr>
+        <td><strong>Fennel near vegetables</strong></td>
+        <td><span class="ev-warn">Documented Harmful</span></td>
+        <td>Fennel produces allelopathic root exudates that actively inhibit growth of neighboring plants. Effect well-documented in multiple studies.</td>
+        <td>Grow fennel only in its own isolated bed or container. Do not interplant with vegetables or herbs under any circumstances.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>For a NoVA potager, the high-confidence companion planting approach is: dense French marigold (<em>T. patula</em>) borders maintained all season; sweet alyssum as path edging; basil tucked at tomato bases; Three Sisters configuration for the squash/bean/corn summer bed. These deliver documented benefits while also being visually excellent choices for the potager aesthetic.</p>
+</div>
+
+
+<!-- SECTION 8 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 08</span><div class="section-rule"></div></div>
+  <h2>Integrated Pest Management</h2>
+
+  <p>VCE's Integrated Pest Management (IPM) framework moves through interventions in order of invasiveness: cultural controls (timing, spacing, variety selection, sanitation) first, then mechanical controls (hand-picking, row covers, traps), then biological controls (beneficial insects, Bt, neem), then chemical controls only as a last resort. Correct identification before any treatment is the single most important step in avoiding collateral damage to beneficial insects. The Virginia Tech Insect ID Lab (insectid.vt.edu) provides free identification. The MGNV "Beating the Bugs" guide maintains a current photo reference for Virginia vegetable garden pests.</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Squash Vine Borer</span><span class="detail-body">Larva of a day-flying moth (<em>Melittia cucurbitae</em>). Adults lay single orange-red eggs at the base of squash stems in late June through July. Larvae bore internally; by the time wilting is visible, they're already inside. Management: daily stem inspection for eggs during the laying window; row cover before egg-laying begins (remove for pollination); succession planting in late July to escape peak infestation; butternut squash more tolerant than zucchini. VCE Publication 3104-1566.</span></div>
+    <div class="detail-row"><span class="detail-label">Squash Bug</span><span class="detail-body">Flat, gray-brown true bug (<em>Anasa tristis</em>). Overwinters as an adult; emerges in spring. Pierces leaves and sucks sap; vectors cucurbit yellow vine disease. Management: crush bronze egg masses on leaf undersides on sight &mdash; the most effective intervention. Remove all crop debris in fall to eliminate overwintering habitat. VCE Publication ENTO-578.</span></div>
+    <div class="detail-row"><span class="detail-label">Tomato Hornworm</span><span class="detail-body">Large (3&ndash;4 inch) green caterpillar, larva of the five-spotted hawk moth. Defoliates rapidly; camouflaged against foliage. First sign: dark pellet frass on leaves. Management: hand-pick. If caterpillars are covered in white rice-grain cocoons (braconid wasp eggs), leave them &mdash; the wasps are working. Broad-spectrum insecticides kill parasitoid wasps and worsen hornworm pressure over time.</span></div>
+    <div class="detail-row"><span class="detail-label">Japanese Beetle</span><span class="detail-body">Shiny bronze-and-green beetles, feeding in groups, skeletonizing leaves. Grubs overwinter in lawn soil. Management: hand-pick in early morning into soapy water. Japanese beetle traps are widely documented to attract more beetles than they catch, worsening infestations &mdash; do not install them. Milky spore applied to lawn soil reduces grub populations over multiple seasons.</span></div>
+    <div class="detail-row"><span class="detail-label">Spotted Lanternfly</span><span class="detail-body">Invasive planthopper (<em>Lycorma delicatula</em>) now established throughout NoVA. Preferred hosts: Tree of Heaven, grapes, hops. Vegetable damage less severe than to woody plants, but heavy infestations produce honeydew that promotes sooty mold. Management: kill on contact; scrape egg masses (gray putty-like smears on hard surfaces in fall) and bag them. Remove Tree of Heaven from property &mdash; the primary host. Report sightings to VDACS or USDA APHIS.</span></div>
+    <div class="detail-row"><span class="detail-label">Late Blight / Early Blight</span><span class="detail-body">Two distinct fungal diseases of tomatoes and potatoes, both promoted by NoVA's summer humidity. Early blight: concentric ring lesions on lower leaves first. Late blight: aggressive, can kill an entire plant within days in wet conditions. Management: disease-resistant cultivars (V, F, N, T designations); proper bed spacing for air circulation; removing lower leaves; not composting infected material; annual bed rotation for tomato family crops.</span></div>
+  </div>
+</div>
+
+
+<!-- SECTION 9 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 09</span><div class="section-rule"></div></div>
+  <h2>Irrigation</h2>
+
+  <p>Irrigation in a NoVA kitchen garden must be designed for two very different conditions: spring and fall, when rainfall is generally adequate and cool temperatures reduce plant stress; and July through August, when heat, sporadic rainfall, and raised beds that drain quickly by design create serious drought stress. Raised beds are more irrigation-sensitive than in-ground beds precisely because they drain faster &mdash; the same characteristic that makes them superior for clay soil management also makes them more dependent on supplemental watering during summer.</p>
+
+  <p><strong>Drip irrigation</strong> is the consensus recommendation for a kitchen garden at potager scale. It delivers water to the root zone rather than wetting foliage, which is the primary mechanism for reducing fungal disease pressure in Virginia's humid summers. The University of Georgia Cooperative Extension estimates that drip systems use 30&ndash;50% less water than overhead sprinklers for equivalent results; VCE recommends drip or soaker hose systems for vegetable gardens specifically on disease-pressure grounds. A basic four-bed drip system connected to a spigot with a timer is not a complex installation and converts irrigation from a periodic task into a managed, consistent system. Without a timer, drip irrigation tends to be used inconsistently, which is agronomically worse than consistent underwatering.</p>
+
+  <p><strong>Soaker hoses</strong> are the budget alternative and perform adequately in raised beds. Water distribution along the hose length is less precise than emitters, but acceptable for most kitchen garden applications. Expect 2&ndash;5 years before UV degradation requires replacement in Virginia conditions.</p>
+
+  <p><strong>Overhead watering</strong> should be avoided for vegetable beds beyond seedling establishment. If overhead watering is used, morning is the only appropriate time &mdash; foliage must dry fully before nighttime humidity sets in. Evening overhead watering in a Virginia summer is a significant driver of fungal disease.</p>
+
+  <p><strong>Rainwater harvesting</strong> via rain barrels is legal in Virginia (restrictions were repealed), is encouraged by VCE and the Fairfax County Soil and Water Conservation District, and fits naturally into the potager's design ethic. A 50-gallon barrel connected to a downspout provides meaningful supplemental irrigation during moderate dry spells in shoulder seasons. A single barrel will not carry a garden through a serious July drought, but reducing municipal water dependence during spring and fall is straightforward and inexpensive.</p>
+
+  <p>For the potager aesthetic, infrastructure visibility matters. Drip lines laid along bed edges under mulch are essentially invisible. A timer unit on the spigot is unobtrusive. This is preferable to overhead risers or pop-up sprinkler heads, which interrupt the visual composition of a formal garden. The design preference and the agronomic preference are, in this case, the same choice.</p>
+
+  <p>VCE's general guidance is 1&ndash;1.5 inches of water per week during the growing season; raised beds in full sun during heat events can need significantly more. A soil moisture meter provides more reliable guidance than any rule of thumb for knowing when specific beds actually need water.</p>
+</div>
+
+
+<!-- SECTION 10 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 10</span><div class="section-rule"></div></div>
+  <h2>Structures in the Potager</h2>
+
+  <p>Structures are historically legitimate and well-documented elements of the kitchen garden tradition. The functional potager has always included buildings and constructed elements beyond the plant beds themselves; the question is how to design them as visual features rather than afterthoughts.</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Garden Pavilion or Viewing House</span><span class="detail-body">Jefferson's Monticello featured a brick pavilion at the center of the kitchen garden terrace as both a focal point and a sheltered observation point &mdash; a direct continuation of the classical French tradition. At Villandry, the garden pavilion is integral to the potager's design. For a smaller residential potager, a timber or metal pergola with seating serves the same function at appropriate scale.</span></div>
+    <div class="detail-row"><span class="detail-label">Garden Shed</span><span class="detail-body">Present in virtually all functional potagers. Contemporary designers including Linda Vater specifically discuss incorporating the shed as a designed element within the potager layout rather than hiding it. Position at the garden's edge as a visual terminus, with herb or cutting flower beds in front of it to integrate it into the planting design. Materials and finish should match or complement the bed and fence materials.</span></div>
+    <div class="detail-row"><span class="detail-label">Cold Frames</span><span class="detail-body">Low glass or polycarbonate-topped boxes that extend the growing season by 4&ndash;6 weeks in fall and provide protected starting conditions in late winter. Historically appropriate and practically valuable in Zone 7a. Take approximately the same footprint as a garden bed and can be positioned to integrate visually with the bed layout.</span></div>
+    <div class="detail-row"><span class="detail-label">Greenhouse</span><span class="detail-body">A Victorian addition to the tradition (not historically part of the French potager design) but increasingly incorporated in contemporary kitchen garden design as a year-round productive element. For a small residential potager, a lean-to greenhouse against a south-facing wall is the most space-efficient and visually integrated option. Material choice matters for aesthetics: timber framing ages into a garden far better than aluminum.</span></div>
+    <div class="detail-row"><span class="detail-label">Arbors and Arches</span><span class="detail-body">Among the most historically consistent structural elements of the potager. Function both as focal points and as productive growing structures for climbing crops. Central arch or tunnel with beans, cucumbers, or small gourds is the most traditional configuration. Cedar or locust wood structures weather naturally and age into the garden; both are historically appropriate materials for the Virginia climate.</span></div>
+  </div>
+</div>
+
+
+<!-- SECTION 11 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 11</span><div class="section-rule"></div></div>
+  <h2>Local Organizations and Key Resources</h2>
+
+  <div class="res-grid">
+    <div class="res-card">
+      <span class="res-type">Primary Local Authority</span>
+      <strong>Master Gardeners of Northern Virginia (MGNV)</strong>
+      <p>Covers Arlington County and the City of Alexandria jointly. Eight demonstration gardens; plant clinics at farmers markets; YouTube channel with 190+ recorded educational classes; Help Desk for questions. The closest thing to a vetted local expert network available to home gardeners.</p>
+      <a href="https://mgnv.org">mgnv.org</a>
+    </div>
+    <div class="res-card">
+      <span class="res-type">Regional Extension</span>
+      <strong>Virginia Cooperative Extension (VCE)</strong>
+      <p>Partnership of Virginia Tech and Virginia State University. Peer-reviewed publications on all aspects of Virginia gardening; free planting calendars, pest management guides, and soil testing services. The technical authority for Zone 7a conditions.</p>
+      <a href="https://pubs.ext.vt.edu">pubs.ext.vt.edu</a>
+    </div>
+    <div class="res-card">
+      <span class="res-type">Demonstration Garden</span>
+      <strong>Green Spring Gardens (Fairfax County)</strong>
+      <p>27-acre public garden with working vegetable, herb, and historic house gardens. The best local place to observe what thrives in Zone 7a conditions before committing to a planting or design.</p>
+      <a href="https://www.fairfaxcounty.gov/parks/green-spring">fairfaxcounty.gov/parks/green-spring</a>
+    </div>
+    <div class="res-card">
+      <span class="res-type">Regional Seed Source</span>
+      <strong>Southern Exposure Seed Exchange</strong>
+      <p>Worker-owned cooperative in Mineral, VA. 850+ varieties trialed in Virginia climate. Open-pollinated and heirloom focus; no GMOs. Their variety notes are a practical field guide to what performs in Mid-Atlantic heat and humidity. The most regionally-grounded seed catalog available.</p>
+      <a href="https://www.southernexposure.com">southernexposure.com</a>
+    </div>
+    <div class="res-card amber-top">
+      <span class="res-type" style="color:#8a6523">Key Book</span>
+      <strong>Creative Vegetable Gardening &mdash; Joy Larkcom</strong>
+      <p>Mitchell Beazley, 1997/2017. The foundational English-language text on ornamental kitchen gardening. Includes five complete potager plans. Praised by Monty Don, Rosemary Verey, and Alys Fowler. Larkcom received the RHS Veitch Memorial Medal. Start here.</p>
+    </div>
+    <div class="res-card amber-top">
+      <span class="res-type" style="color:#8a6523">Key Book</span>
+      <strong>Designing the New Kitchen Garden &mdash; Jennifer Bartley</strong>
+      <p>Timber Press, 2006. The American translation of the potager tradition, explicitly adapted for contemporary US conditions. Illustrated with photographs and the author's watercolors. American Library Association: "the perfect blend of inspiration and practical guidance."</p>
+    </div>
+    <div class="res-card amber-top">
+      <span class="res-type" style="color:#8a6523">Regional Book</span>
+      <strong>Timber Press Guide to Vegetable Gardening in the Southeast &mdash; Ira Wallace</strong>
+      <p>Timber Press, 2013. Written by a longtime SESE worker-owner; specifically addresses the Southeast's heat, humidity, and clay soil challenges. The regional growing reference; treat the above design books as your design authority and this as your agronomic authority.</p>
+    </div>
+    <div class="res-card amber-top">
+      <span class="res-type" style="color:#8a6523">Design Software</span>
+      <strong>Recommended Tools</strong>
+      <p><strong>iScape</strong> &mdash; AR visualization on your actual site. <strong>GrowVeg</strong> &mdash; planting schedules and companion planting logic. <strong>VegPlotter</strong> &mdash; free layout planning. Use in combination: none covers design aesthetics, production planning, and regional facts simultaneously.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- SOURCES AND REFERENCES -->
+<div class="sources-section">
+  <div class="section-eyebrow"><span class="section-tag">&sect;</span><div class="section-rule"></div></div>
+  <h2>Sources and References</h2>
+
+  <div class="source-group">
+    <div class="source-group-title">Books and Primary Texts</div>
+    <div class="source-item">Larkcom, Joy. <em>Creative Vegetable Gardening.</em> Mitchell Beazley, 1997; revised 2008, 2017. The foundational text on potager design in the English language.</div>
+    <div class="source-item">Verey, Rosemary. <em>Rosemary Verey's Making of a Garden.</em> Frances Lincoln, 1995. Barnsley House and the revival of the ornamental potager tradition.</div>
+    <div class="source-item">Bartley, Jennifer R. <em>Designing the New Kitchen Garden: An American Potager Handbook.</em> Timber Press, 2006. ISBN 978-0-88192-772-6.</div>
+    <div class="source-item">Ogden, Ellen Ecker. <em>The Complete Kitchen Garden.</em> Stewart, Tabori &amp; Chang, 2011. Fifteen themed kitchen garden designs with scaled plans and recipes.</div>
+    <div class="source-item">Vater, Linda. <em>The Elegant and Edible Garden.</em> Cool Springs Press, 2022. GardenComm 2023 Laurel Media Award Silver. Practical potager design for American conditions, Oklahoma City clay soil.</div>
+    <div class="source-item">Musgrave, Toby. <em>The Kitchen Garden.</em> Phaidon Press, 2025. ISBN 978-1-8372-9094-9. Survey of fifty notable kitchen gardens globally.</div>
+    <div class="source-item">Burke, Nicole Johnsey. <em>Kitchen Garden Revival.</em> Cool Springs Press, 2020. Practical design and construction guidance for raised-bed kitchen gardens.</div>
+    <div class="source-item">Brennan, Georgeanne. <em>Potager: Fresh Garden Cooking in the French Style.</em> Chronicle Books. Foreword by Alice Waters. The French kitchen garden tradition and its relationship to cooking.</div>
+    <div class="source-item">Wallace, Ira. <em>The Timber Press Guide to Vegetable Gardening in the Southeast.</em> Timber Press, 2013. James Beard Foundation Leadership Award recipient. Regional growing reference for Mid-Atlantic and Southeast conditions.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Virginia Cooperative Extension Publications (Virginia Tech / Virginia State University)</div>
+    <div class="source-item">VCE Publication 426-331. <em>Virginia's Home Garden Vegetable Planting Guide.</em> Planting dates by USDA zone with spacing and quantity guidance.
+      <span class="source-url">pubs.ext.vt.edu/426/426-331/426-331.html</span></div>
+    <div class="source-item">VCE Publication 426-312. <em>Planning the Vegetable Garden.</em> Layout fundamentals including crop placement and succession planting.</div>
+    <div class="source-item">VCE Publication 426-335. <em>Intensive Gardening Methods.</em> Raised-bed spacing for maximum yield per square foot.</div>
+    <div class="source-item">VCE Publication 426-336. <em>Vegetable Gardening in Containers.</em> Container culture guidance for deck and patio growing.</div>
+    <div class="source-item">VCE Publication 3104-1566. <em>Squash Vine Borer.</em> Pest identification and management.</div>
+    <div class="source-item">VCE Publication ENTO-578. <em>Squash Bug.</em> Pest identification and management.</div>
+    <div class="source-item">VCE EMG Handbook. <em>Extension Master Gardener Training Manual.</em> Complete Virginia gardening reference.
+      <span class="source-url">pressbooks.lib.vt.edu/emgtraining</span></div>
+    <div class="source-item">Virginia Tech Soil Testing Laboratory. Soil test services for Virginia gardeners.
+      <span class="source-url">soiltest.cals.vt.edu</span></div>
+    <div class="source-item">Virginia Tech Insect ID Lab. Free insect identification service.
+      <span class="source-url">insectid.vt.edu</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Local Organizations and Demonstration Gardens</div>
+    <div class="source-item">Master Gardeners of Northern Virginia (MGNV). Arlington County and City of Alexandria. Eight demonstration gardens; 190+ educational videos; Help Desk; "Beating the Bugs" pest reference guide.
+      <span class="source-url">mgnv.org</span></div>
+    <div class="source-item">Fairfax County Master Gardeners Association. Research-based horticultural advice for Fairfax County.
+      <span class="source-url">fairfaxgardening.org</span></div>
+    <div class="source-item">Green Spring Gardens. Fairfax County Park Authority, 4603 Green Spring Rd, Alexandria, VA 22312. 27-acre public garden with demonstration vegetable and herb gardens.
+      <span class="source-url">fairfaxcounty.gov/parks/green-spring</span></div>
+    <div class="source-item">Fairfax County Soil and Water Conservation District. Community garden guide aggregating VCE and local resources.
+      <span class="source-url">fairfaxcounty.gov/soil-water-conservation/community-garden-guide</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Seed Sources</div>
+    <div class="source-item">Southern Exposure Seed Exchange. Worker-owned cooperative, Mineral, Virginia. 850+ varieties trialed in-region; open-pollinated and heirloom focus; no GMOs. Catalog free by mail or online.
+      <span class="source-url">southernexposure.com</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Online Resources and Periodicals</div>
+    <div class="source-item">Château de Villandry. Official site and virtual tour of the canonical potager design.
+      <span class="source-url">chateauvillandry.fr/en</span></div>
+    <div class="source-item">The Potager Blog &mdash; Linda Vater. Ongoing documentation of a residential potager in Oklahoma City clay soil conditions (comparable to NoVA).
+      <span class="source-url">potagerblog.com</span></div>
+    <div class="source-item">Home for the Harvest &mdash; Mary Jane Duford (certified permaculture garden designer). Sourced potager design and companion planting coverage.
+      <span class="source-url">homefortheharvest.com/potager-garden-design</span></div>
+    <div class="source-item">Royal Horticultural Society (RHS). Institutional horticultural authority; plant encyclopaedia, cultivar performance trials, and vegetable growing guidance.
+      <span class="source-url">rhs.org.uk/vegetables</span></div>
+    <div class="source-item">BBC Gardeners' World. Potager design guidance with contributions from Larkcom, Swithinbank, and Bourne.
+      <span class="source-url">gardenersworld.com</span></div>
+    <div class="source-item"><em>Gardens Illustrated.</em> Monthly. The most design-serious gardening periodical in the English-speaking world.
+      <span class="source-url">gardensillustrated.com</span></div>
+    <div class="source-item"><em>Fine Gardening.</em> Bi-monthly, Active Interest Media, Newtown CT. Primary US gardening periodical for design content; articles written by practitioners.
+      <span class="source-url">finegardening.com</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Pest Management Authorities</div>
+    <div class="source-item">USDA APHIS. Spotted lanternfly monitoring, reporting, and management guidance.
+      <span class="source-url">aphis.usda.gov/spotted-lanternfly</span></div>
+    <div class="source-item">Virginia Department of Agriculture and Consumer Services (VDACS). Spotted lanternfly reporting; pest and disease alerts for Virginia.
+      <span class="source-url">vdacs.virginia.gov</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Scientific Literature Referenced</div>
+    <div class="source-item">Companoni planting &mdash; nematode suppression: Multiple peer-reviewed studies on <em>Tagetes patula</em> alpha-terthienyl and root-knot nematode larvae. 40&ndash;70% juvenile nematode reduction in dense plantings maintained 8&ndash;12 weeks.</div>
+    <div class="source-item">Three Sisters polyculture: Land Equivalent Ratio studies documenting 20&ndash;40% yield advantage over monoculture in corn-bean-squash polycultures.</div>
+    <div class="source-item">Insectary strips &mdash; aphid suppression: NIH-indexed study, 2024. 50&ndash;70% aphid reduction in vegetable beds adjacent to sweet alyssum insectary strips.</div>
+    <div class="source-item">Basil volatile oils: Journal of the American Society for Horticultural Science, 2009. Linalool and eugenol volatile oils from basil reduced thrips populations on adjacent plants.</div>
+    <div class="source-item">Drip irrigation efficiency: University of Georgia Cooperative Extension. Drip systems estimated to use 30&ndash;50% less water than overhead irrigation for equivalent plant water availability.</div>
+  </div>
+</div>
+
+<div class="footer">
+  Northern Virginia Potager Kitchen Garden: A Comprehensive Reference &nbsp;&middot;&nbsp; Compiled 2026<br>
+  Primary authority: Virginia Cooperative Extension &middot; Master Gardeners of Northern Virginia<br>
+  A working document. Update as the garden and the literature evolve.
+</div>
+
+</body>
+</html>
