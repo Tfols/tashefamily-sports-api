@@ -223,6 +223,30 @@ body::before {
 .theme-garden .report-file-desc { color: #b8a88a; }
 .theme-garden .report-file-arrow { color: #b8a88a; }
 .theme-garden .report-file-link:hover .report-file-arrow { color: #c4822a; }
+
+/* ── Futuristic / AI theme ──────────────────────────────── */
+.theme-ai .report-card,
+.theme-ai .report-card-multi {
+  background: rgba(8,12,22,0.94);
+  border-color: #1a3a5c;
+  box-shadow: 0 0 12px rgba(0,210,255,0.06);
+}
+.theme-ai .report-card:hover {
+  border-color: #00d2ff;
+}
+.theme-ai .report-card-bar {
+  background: linear-gradient(90deg, #00d2ff, #7a2cff);
+}
+.theme-ai .report-name { color: #e0f4ff; }
+.theme-ai .report-desc { color: #7eacc4; }
+.theme-ai .report-meta { color: #7eacc4; }
+.theme-ai .report-files { border-top-color: #1a3a5c; }
+.theme-ai .report-file-link { border-bottom-color: #1a3a5c; }
+.theme-ai .report-file-link:hover { background: rgba(0,210,255,0.06); }
+.theme-ai .report-file-name { color: #e0f4ff; }
+.theme-ai .report-file-desc { color: #7eacc4; }
+.theme-ai .report-file-arrow { color: #7eacc4; }
+.theme-ai .report-file-link:hover .report-file-arrow { color: #00d2ff; }
 </style>
 </head>
 <body>
@@ -258,6 +282,19 @@ const REPORTS = [
     files: [
       { label: 'Design Fact Sheet', desc: 'At-a-glance layout, key numbers, principles', file: '/static/reports/nova-potager-factsheet.html', icon: '🌱' },
       { label: 'Full Reference Guide', desc: 'History, planting calendar, IPM, irrigation, resources', file: '/static/reports/nova-potager-report.html', icon: '🪴' },
+    ]
+  },
+  {
+    topic: 'AI',
+    hideTopicHeader: true,
+    name: 'Agentic AI Building',
+    desc: 'Prompt layer and skill layer design for reliable AI agent systems',
+    date: 'Jul 2026',
+    icon: '🤖',
+    theme: 'ai',
+    files: [
+      { label: 'Field Reference', desc: 'Prompt layer / skill layer architecture at a glance', file: '/static/reports/prompt-skill-field-reference.html', icon: '⚡' },
+      { label: 'Full Research Report', desc: 'Prompt and skill design — findings, patterns, and risks', file: '/static/reports/agentic-systems-prompt-skill-report.docx', icon: '📋' },
     ]
   },
 ];
