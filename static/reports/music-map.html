@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Musical Map</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1814;
+    --paper: #f7f4ee;
+    --warm-mid: #e8e2d6;
+    --rule: #c9c0b0;
+    --accent: #5c4a2a;
+    --accent-light: #8a6e42;
+    --muted: #7a7060;
+    --highlight: #d4a853;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 3rem 1.5rem 5rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  header {
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    padding: 1.8rem 0 1.4rem;
+    margin-bottom: 2.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-style: italic;
+    color: var(--accent-light);
+    font-size: 1.05rem;
+    margin-top: 0.2rem;
+  }
+
+  /* Thesis block */
+  .thesis {
+    background: var(--warm-mid);
+    border-left: 4px solid var(--highlight);
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 2.8rem;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--accent);
+    line-height: 1.75;
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 2.6rem;
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  /* Quadrant grid */
+  .quadrant-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 2.6rem;
+  }
+
+  .quadrant {
+    background: var(--warm-mid);
+    padding: 1.1rem 1.3rem;
+    border-top: 2px solid var(--accent);
+  }
+
+  .quadrant h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.7rem;
+  }
+
+  .quadrant ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .quadrant ul li {
+    font-size: 0.9rem;
+    padding: 0.18rem 0;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .quadrant ul li:last-child { border-bottom: none; }
+
+  .artist-name { font-weight: 700; }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  /* Recommendations */
+  .rec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .rec-card {
+    border: 1px solid var(--rule);
+    padding: 1rem 1.1rem;
+    position: relative;
+  }
+
+  .rec-card::before {
+    content: '→';
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    color: var(--highlight);
+    font-size: 1rem;
+  }
+
+  .rec-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    padding-right: 1.2rem;
+  }
+
+  .rec-card p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .rec-card.top-pick {
+    border-color: var(--highlight);
+    background: #fdf9f0;
+  }
+
+  .top-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--highlight);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  /* Signature threads */
+  .threads {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+  }
+
+  .thread-pill {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 3.5rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 600px) {
+    .quadrant-grid { grid-template-columns: 1fr; }
+    .rec-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="eyebrow">Personal Music Map — July 2026</span>
+  <h1>Craft, Harmony,<br>Patience & Catharsis</h1>
+  <p class="subtitle">A listener's atlas, assembled from conversation</p>
+</header>
+
+<div class="thesis">
+  You're not a genre person. You're a <em>values</em> person. Across bluegrass, chamber folk, Americana rock, and orchestral indie, what holds your catalog together is a consistent demand for musical craft, harmonic architecture, patient songwriting, and the capacity for emotional scale — quiet when quiet is right, devastating when it needs to be.
+</div>
+
+<section>
+  <div class="section-label">The Four Quadrants of Your Taste</div>
+  <div class="quadrant-grid">
+
+    <div class="quadrant">
+      <h3>Virtuosity &amp; Craft</h3>
+      <ul>
+        <li><span class="artist-name">Chris Thile / Nickel Creek</span><span class="tag">anchor</span></li>
+        <li><span class="artist-name">Punch Brothers</span><span class="tag">anchor</span></li>
+        <li><span class="artist-name">Andrew Bird</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Aoife O'Donovan</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Sarah Jarosz</span><span class="tag">confirmed</span></li>
+      </ul>
+    </div>
+
+    <div class="quadrant">
+      <h3>Harmony as Architecture</h3>
+      <ul>
+        <li><span class="artist-name">Fleet Foxes</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">The Staves</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Darlingside</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">The Last Bison</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Milk Carton Kids</span><span class="tag">confirmed</span></li>
+      </ul>
+    </div>
+
+    <div class="quadrant">
+      <h3>Literate Americana</h3>
+      <ul>
+        <li><span class="artist-name">Jason Isbell</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Dawes</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Old 97s</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">The Head and the Heart</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Watchhouse</span><span class="tag">strong rec</span></li>
+      </ul>
+    </div>
+
+    <div class="quadrant">
+      <h3>Emotional Scale &amp; Catharsis</h3>
+      <ul>
+        <li><span class="artist-name">Brandi Carlile</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">The National</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Airborne Toxic Event</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Lake Street Dive</span><span class="tag">confirmed</span></li>
+        <li><span class="artist-name">Iron &amp; Wine</span><span class="tag">confirmed</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Top Recommendations — Prioritized</div>
+  <div class="rec-grid">
+
+    <div class="rec-card top-pick">
+      <span class="top-badge">★ Highest confidence</span>
+      <h4>Watchhouse</h4>
+      <p>Formerly Mandolin Orange. The single most direct fit for your full catalog. Start with <em>Watchhouse</em> (2021).</p>
+    </div>
+
+    <div class="rec-card top-pick">
+      <span class="top-badge">★ Highest confidence</span>
+      <h4>Anaïs Mitchell</h4>
+      <p>Literary, dark, harmonically rich folk. <em>Young Man in America</em> is the entry; <em>Hadestown</em> shows her scope.</p>
+    </div>
+
+    <div class="rec-card top-pick">
+      <span class="top-badge">★ Highest confidence</span>
+      <h4>Gillian Welch</h4>
+      <p>With David Rawlings: Appalachian minimalism at its most austere and beautiful. <em>Time (The Revelator)</em> first.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>The Lone Bellow</h4>
+      <p>Three-part harmonies, emotional intensity, roots rock. Already confirmed you know and like them.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Patty Griffin</h4>
+      <p>Should have been mentioned sooner. Brandi Carlile's emotional scale, more folk-rooted. <em>Children Running Through.</em></p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Typhoon</h4>
+      <p>Large ensemble, orchestral, devastating. National fans tend to find this landing hard. <em>White Lighter.</em></p>
+    </div>
+
+    <div class="rec-card">
+      <h4>I'm With Her</h4>
+      <p>Sara Watkins, Sarah Jarosz, Aoife O'Donovan as a trio. You love all three separately — hear them together.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Elbow</h4>
+      <p>British, orchestral, Guy Garvey's voice does what Carlile's does. <em>The Seldom Seen Kid</em> is essential.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Bill Callahan</h4>
+      <p>Baritone, literary, deadpan patience. Lower-percentage but fits the craft-and-restraint end of your range.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-label">Also Recommended — Additional Discoveries</div>
+  <div class="rec-grid">
+
+    <div class="rec-card">
+      <h4>Béla Fleck</h4>
+      <p>Banjo as serious instrument — jazz, classical, and world music crossover. The Thile thread taken in a different direction.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Edgar Meyer</h4>
+      <p>Double bassist, frequent Thile collaborator. Sits precisely at the bluegrass/classical intersection.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Yo-Yo Ma — Appalachian Journey</h4>
+      <p>Classical players taking roots music seriously. Thile appears on some of this work; essential listening for that crossover.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Frazey Ford</h4>
+      <p>Soulful and understated. Follows naturally from the Lake Street Dive and Aoife O'Donovan threads.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Alison Krauss &amp; Union Station</h4>
+      <p>Polished, beautiful acoustic music with exceptional musicianship. One of the earliest and most natural Nickel Creek neighbors.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>The Infamous Stringdusters</h4>
+      <p>More jamgrass energy than your usual fare but similarly virtuosic. Worth a trial run.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Big Thief / Adrianne Lenker</h4>
+      <p>Adrianne Lenker's solo work especially sits at the intersection of nearly your entire catalog. High-percentage recommendation.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Chris Eldridge</h4>
+      <p>Punch Brothers guitarist. Solo work is understated and excellent — a quieter extension of what you already love.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Bill Frisell</h4>
+      <p>Jazz-adjacent instrumental guitar. Follow Andrew Bird's curiosity in this direction for a more purely instrumental experience.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Alela Diane</h4>
+      <p>Sparse, patient, beautiful. Sits squarely in the Milk Carton Kids thread of restraint and quiet craft.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Hand Habits</h4>
+      <p>Intimate and quiet. Rewards close listening; closer to the patient end of your spectrum than the cathartic end.</p>
+    </div>
+
+    <div class="rec-card">
+      <h4>Caitlin Canty</h4>
+      <p>Serious about language; sits in the Dawes and Isbell thread of literate Americana songwriting.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-label">The Unifying Threads</div>
+  <div class="threads">
+    <span class="thread-pill">Instrumental virtuosity</span>
+    <span class="thread-pill">Harmony as structure</span>
+    <span class="thread-pill">Literary songwriting</span>
+    <span class="thread-pill">Patience &amp; restraint</span>
+    <span class="thread-pill">Emotional catharsis at scale</span>
+    <span class="thread-pill">Genre-crossing without genre-losing</span>
+    <span class="thread-pill">Chamber folk sensibility</span>
+    <span class="thread-pill">Acoustic foundation</span>
+  </div>
+</section>
+
+<footer>
+  <span>Built from conversation · July 2026</span>
+  <span>Not exhaustive — a map, not a census</span>
+</footer>
+
+</body>
+</html>

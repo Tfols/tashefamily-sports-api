@@ -247,6 +247,52 @@ body::before {
 .theme-ai .report-file-desc { color: #7eacc4; }
 .theme-ai .report-file-arrow { color: #7eacc4; }
 .theme-ai .report-file-link:hover .report-file-arrow { color: #00d2ff; }
+
+/* ── Musical notation theme ─────────────────────────────── */
+.theme-music .report-card,
+.theme-music .report-card-multi {
+  background: rgba(28,24,18,0.94);
+  border-color: #5c4a2a;
+}
+.theme-music .report-card:hover {
+  border-color: #d4a853;
+}
+.theme-music .report-card-bar {
+  background: linear-gradient(90deg, #d4a853, #8a6e42);
+}
+.theme-music .report-name { color: #f7f4ee; }
+.theme-music .report-desc { color: #b8a88a; }
+.theme-music .report-meta { color: #b8a88a; }
+.theme-music .report-files { border-top-color: #5c4a2a; }
+.theme-music .report-file-link { border-bottom-color: #5c4a2a; }
+.theme-music .report-file-link:hover { background: rgba(212,168,83,0.08); }
+.theme-music .report-file-name { color: #f7f4ee; }
+.theme-music .report-file-desc { color: #b8a88a; }
+.theme-music .report-file-arrow { color: #b8a88a; }
+.theme-music .report-file-link:hover .report-file-arrow { color: #d4a853; }
+
+/* ── Book / reading theme ───────────────────────────────── */
+.theme-book .report-card,
+.theme-book .report-card-multi {
+  background: rgba(30,18,12,0.94);
+  border-color: #6b3a28;
+}
+.theme-book .report-card:hover {
+  border-color: #c06a3e;
+}
+.theme-book .report-card-bar {
+  background: linear-gradient(90deg, #c06a3e, #7a3422);
+}
+.theme-book .report-name { color: #f5ece4; }
+.theme-book .report-desc { color: #b89a82; }
+.theme-book .report-meta { color: #b89a82; }
+.theme-book .report-files { border-top-color: #6b3a28; }
+.theme-book .report-file-link { border-bottom-color: #6b3a28; }
+.theme-book .report-file-link:hover { background: rgba(192,106,62,0.08); }
+.theme-book .report-file-name { color: #f5ece4; }
+.theme-book .report-file-desc { color: #b89a82; }
+.theme-book .report-file-arrow { color: #b89a82; }
+.theme-book .report-file-link:hover .report-file-arrow { color: #c06a3e; }
 </style>
 </head>
 <body>
@@ -296,6 +342,28 @@ const REPORTS = [
       { label: 'Field Reference', desc: 'Prompt layer / skill layer architecture at a glance', file: '/static/reports/prompt-skill-field-reference.html', icon: '⚡' },
       { label: 'Full Research Report', desc: 'Prompt and skill design — findings, patterns, and risks', file: '/static/reports/agentic-systems-prompt-skill-report.docx', icon: '📋' },
     ]
+  },
+  {
+    topic: 'Music',
+    hideTopicHeader: true,
+    name: 'Music To Try Out',
+    desc: 'A curated map of albums, artists, and genres to explore',
+    date: 'Jul 2026',
+    icon: '🎵',
+    theme: 'music',
+    file: '/static/reports/music-map.html',
+    type: 'HTML',
+  },
+  {
+    topic: 'Books',
+    hideTopicHeader: true,
+    name: 'Books to Read',
+    desc: 'Reading list — titles, authors, and categories to work through',
+    date: 'Jul 2026',
+    icon: '📚',
+    theme: 'book',
+    file: '/static/reports/reading-list-print.html',
+    type: 'HTML',
   },
 ];
 

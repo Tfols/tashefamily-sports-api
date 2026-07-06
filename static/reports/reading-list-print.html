@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading List</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light only; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @media (prefers-color-scheme: dark) {
+    html, body, td, th, div, span { background-color: #fff !important; color: #111 !important; }
+    .cat { color: #a05000 !important; }
+    .auth { color: #222 !important; }
+    .note { color: #333 !important; }
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-family: 'Source Sans 3', Arial, sans-serif;
+    font-size: 10.5px;
+    line-height: 1.35;
+  }
+
+  body { padding: 18px 22px; }
+
+  h1 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #111 !important;
+    border-bottom: 1.5px solid #111;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+  }
+
+  .legend {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 8px;
+    color: #222 !important;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+  }
+
+  .cat {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 7.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a05000 !important;
+    margin-top: 9px;
+    margin-bottom: 2px;
+    padding: 1px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  tr { border-bottom: 0.5px solid #e0e0e0; }
+
+  td { padding: 2.5px 4px; vertical-align: top; }
+
+  .d  { width: 10px; padding-top: 4px; }
+  .d span { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
+  .p1 { background: #c17d2a; }
+  .p2 { background: #555555; }
+  .p3 { background: #aaaaaa; }
+
+  .ttl {
+    font-weight: 600;
+    font-size: 10.5px;
+    color: #111 !important;
+    white-space: nowrap;
+    width: 195px;
+  }
+
+  .auth {
+    font-size: 9.5px;
+    color: #222 !important;
+    white-space: nowrap;
+    width: 130px;
+  }
+
+  .note {
+    font-size: 9px;
+    color: #333 !important;
+    line-height: 1.3;
+  }
+
+  .s {
+    width: 48px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .b {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 7px;
+    letter-spacing: 0.5px;
+    padding: 1px 4px;
+    border-radius: 1px;
+    text-transform: uppercase;
+  }
+  .bp { background: #5a2800; color: #ffd4a0 !important; }
+  .bu { background: #e8e8e8; color: #333 !important; }
+  .bo { background: #1e3a6e; color: #d6e4ff !important; }
+  .br { background: #1a4a30; color: #b8f0d0 !important; }
+
+  @media print {
+    html, body { background: #fff !important; color: #111 !important; }
+    body { padding: 12px 16px; font-size: 9.5px; }
+    .print-btn { display: none; }
+    tr { page-break-inside: avoid; }
+  }
+
+  .print-btn {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid #111;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">⎙ Print / Save PDF</button>
+<h1>Reading List</h1>
+<div class="legend">
+  <span>● Top priority</span>
+  <span>● Strong rec</span>
+  <span>○ Worth getting to</span>
+  <span style="background:#5a2800;color:#ffd4a0;padding:1px 5px;font-size:7px;">PRIORITY</span> Pushed hardest &nbsp;
+  <span style="background:#1e3a6e;color:#d6e4ff;padding:1px 5px;font-size:7px;">OWNED</span> On your shelf
+</div>
+
+<div class="cat">Military Science Fiction</div>
+<table>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">The Forever War</td><td class="auth">Joe Haldeman</td><td class="note">Vietnam-era authenticity. Short — read in a weekend. Foundational genre text.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Ranks of Bronze</td><td class="auth">David Drake</td><td class="note">Roman legion in interstellar mercenary economy. Drake is a Vietnam vet. His best standalone.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Ark Royal</td><td class="auth">Christopher Nuttall</td><td class="note">Obsolete carrier, disgraced captain, alien threat. Weber naval architecture energy.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Ninefox Gambit</td><td class="auth">Yoon Ha Lee</td><td class="note">Military hierarchy + political intrigue. Also fits Literary SF. Disorienting first 50 pages, then clicks.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+</table>
+
+<div class="cat">Space Opera &amp; Political SF</div>
+<table>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">The Culture Series</td><td class="auth">Iain M. Banks</td><td class="note">Most important gap on this list. 9 novels. Start: The Player of Games → Use of Weapons.</td><td class="s"><span class="b bp">Priority</span></td></tr>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">Commonwealth Saga / Void Trilogy</td><td class="auth">Peter F. Hamilton</td><td class="note">Big-canvas cumulative build. Reynolds but more plot momentum. Start: Pandora's Star.</td><td class="s"><span class="b bp">Priority</span></td></tr>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">A Deepness in the Sky / Fire Upon the Deep</td><td class="auth">Vernor Vinge</td><td class="note">Trade empire politics across civilizations. Read Deepness first despite written second.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Galactic North (short fiction)</td><td class="auth">Alastair Reynolds</td><td class="note">Revelation Space universe across full timeline. Read after finishing the trilogy.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Book of the New Sun</td><td class="auth">Gene Wolfe</td><td class="note">Far-future Earth as fantasy. Unreliable narrator. Vertical build — each reread adds layers.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">The Night's Dawn Trilogy</td><td class="auth">Peter F. Hamilton</td><td class="note">Earlier Hamilton. Far-future civilization + supernatural. Start: The Reality Dysfunction.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+</table>
+
+<div class="cat">Literary &amp; Political SF</div>
+<table>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">Terra Ignota Series</td><td class="auth">Ada Palmer</td><td class="note">Most important Martine gap. Post-geographic 2454, sophisticated political philosophy. Start: Too Like the Lightning.</td><td class="s"><span class="b bp">Priority</span></td></tr>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">The Traitor Baru Cormorant</td><td class="auth">Seth Dickinson</td><td class="note">Imperial accountant uses finance as a weapon. Assimilation, complicity. First book works standalone.</td><td class="s"><span class="b bp">Priority</span></td></tr>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">Left Hand of Darkness / The Dispossessed</td><td class="auth">Ursula K. Le Guin</td><td class="note">Effectively unread — 25 years ago. Will land completely differently now.</td><td class="s"><span class="b br">Reread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">A Psalm for the Wild-Built</td><td class="auth">Becky Chambers</td><td class="note">Monk &amp; Robot book 1. You own it. Short — read between heavier books.</td><td class="s"><span class="b bo">Owned</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Word for World is Forest</td><td class="auth">Ursula K. Le Guin</td><td class="note">Short, political. Good Le Guin reentry before Left Hand / Dispossessed.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">The Curse of Chalion</td><td class="auth">Lois McMaster Bujold</td><td class="note">Bujold's fantasy. Original theology that matters mechanically. Probably her best single novel.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+</table>
+
+<div class="cat">Military Fantasy</div>
+<table>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">Shadows of the Apt</td><td class="auth">Adrian Tchaikovsky</td><td class="note">Tchaikovsky fantasy — start here. Insect-kinden, real strategic logic, cumulative build. 10 books. Start: Empire in Black and Gold.</td><td class="s"><span class="b bp">Priority</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">The Dread Empire</td><td class="auth">Glen Cook</td><td class="note">Cook's earlier series. Multi-faction politics, strategic campaigns. Precursor to Black Company.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">The Shadow Campaigns</td><td class="auth">Django Wexler</td><td class="note">Napoleonic-analog military fantasy. Magic integrates into tactics. 5 books, complete.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Temeraire</td><td class="auth">Naomi Novik</td><td class="note">Napoleonic Wars with dragons as aerial corps. Real military structure and logistics. 9 books.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p3"></span></td><td class="ttl">Dorsai! / The Childe Cycle</td><td class="auth">Gordon Dickson</td><td class="note">Root text for Weber and Campbell. Planet of professional soldiers. Weber cited as direct influence.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+</table>
+
+<div class="cat">Epic Fantasy</div>
+<table>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">Second Apocalypse Series</td><td class="auth">R. Scott Bakker</td><td class="note">Philosophically rigorous magic. Holy War campaigns with Weber-level logistics. Dark but literary. Start: The Darkness That Comes Before.</td><td class="s"><span class="b bp">Priority</span></td></tr>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">Powder Mage Trilogy</td><td class="auth">Brian McClellan</td><td class="note">Gunpowder manipulation magic in Napoleonic revolution. Hard rules, military texture. Complete.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">Kingkiller Chronicle</td><td class="auth">Patrick Rothfuss</td><td class="note">Sympathy magic with genuine physics. Best prose in contemporary fantasy. ⚠ 2 of 3 books out, no release date for book 3.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">The Licanius Trilogy</td><td class="auth">James Islington</td><td class="note">Multi-timeline fantasy, hard-rules magic, plot compounds across all 3 books. Complete. Underrated.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Jonathan Strange &amp; Mr Norrell</td><td class="auth">Susanna Clarke</td><td class="note">Napoleonic England, magic returns. Period literary style, exceptional prose. Leisurely but rewarding.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Piranesi</td><td class="auth">Susanna Clarke</td><td class="note">Mystery in an impossible architectural space. Short standalone. Exceptional prose.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">The Goblin Emperor</td><td class="auth">Katherine Addison</td><td class="note">Unwanted heir navigates court. Gentle but takes governance mechanics seriously.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p2"></span></td><td class="ttl">Deryni Series</td><td class="auth">Katherine Kurtz</td><td class="note">Church politics, succession crises, medieval power. 12 books. Slower / more courtly.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p3"></span></td><td class="ttl">Gentleman Bastard Sequence</td><td class="auth">Scott Lynch</td><td class="note">Con mechanics and city-state politics. 3 of 7 out. ⚠ Slow publication.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+<tr><td class="d"><span class="p3"></span></td><td class="ttl">Riyria Chronicles</td><td class="auth">Michael J. Sullivan</td><td class="note">All 6 books written before publishing — unusually tight payoff. Lighter tone, satisfying build.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+</table>
+
+<div class="cat">Progression Fantasy &amp; LitRPG</div>
+<table>
+<tr><td class="d"><span class="p1"></span></td><td class="ttl">Cradle Series</td><td class="auth">Will Wight</td><td class="note">Cultivation fantasy, rigorously defined advancement system. Hard rules, discovery process. 11 books, complete.</td><td class="s"><span class="b bu">Unread</span></td></tr>
+</table>
+
+</body>
+</html>
