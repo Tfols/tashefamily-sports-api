@@ -190,6 +190,8 @@ body::before {
   transform: translateX(2px);
 }
 
+.report-cell { display: contents; }
+
 .empty-topic {
   grid-column: 1 / -1;
   text-align: center; padding: 20px;
@@ -420,22 +422,12 @@ function render() {
     return;
   }
 
-  const byTopic = {};
-  REPORTS.forEach(r => {
-    (byTopic[r.topic] = byTopic[r.topic] || []).push(r);
-  });
-
-  el.innerHTML = Object.keys(byTopic).map(topic => {
-    const items = byTopic[topic];
-    const theme = items[0].theme ? ` theme-${items[0].theme}` : '';
-    const showHeader = items[0].hideTopicHeader ? false : true;
-    return `<div class="topic-section${theme}">
-      ${showHeader ? `<div class="topic-header">${escHtml(topic)}</div>` : ''}
-      <div class="report-grid">
-        ${items.map(renderCard).join('')}
-      </div>
-    </div>`;
-  }).join('');
+  el.innerHTML = `<div class="report-grid">
+    ${REPORTS.map(r => {
+      const theme = r.theme ? ` theme-${r.theme}` : '';
+      return `<div class="report-cell${theme}">${renderCard(r)}</div>`;
+    }).join('')}
+  </div>`;
 }
 
 render();
