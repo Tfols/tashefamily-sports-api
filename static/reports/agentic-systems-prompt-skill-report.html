@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI Systems: Prompt Layer and Skill Layer Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-1: #060a14;
+  --bg-2: #0c1424;
+  --panel: rgba(13,20,34,0.92);
+  --panel-2: rgba(18,27,44,0.9);
+  --border: #1a3a5c;
+  --border-soft: rgba(26,58,92,0.6);
+  --text: #cfe3f5;
+  --bright: #eef6ff;
+  --muted: #7eacc4;
+  --dim: #547690;
+  --cyan: #00d2ff;
+  --violet: #7a2cff;
+  --amber: #e0a638;
+  --amber-deep: #c98a24;
+  --grad: linear-gradient(90deg, var(--cyan), var(--violet));
+}
+*,*::before,*::after{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(ellipse 900px 500px at 15% -5%, rgba(122,44,255,0.15), transparent 60%),
+    radial-gradient(ellipse 700px 500px at 100% 10%, rgba(0,210,255,0.08), transparent 55%),
+    linear-gradient(160deg, var(--bg-1), var(--bg-2)) fixed;
+  color: var(--text);
+  font-family: "IBM Plex Sans", sans-serif;
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.65;
+}
+body::before{
+  content:"";
+  position: fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:
+    linear-gradient(rgba(26,58,92,0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,58,92,0.28) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black, transparent 80%);
+}
+
+#shell{ position:relative; z-index:1; max-width: 1180px; margin:0 auto; padding: 28px 20px 90px; }
+
+/* ── header ─────────────────────────────────────────────── */
+#page-header{
+  display:flex; align-items:center; gap:16px;
+  margin-bottom: 26px; padding-bottom:16px;
+  border-bottom: 1px solid var(--border-soft);
+}
+#back-link{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+  color: var(--muted); letter-spacing:.1em; text-transform:uppercase;
+  text-decoration:none; padding:6px 12px; border:1px solid var(--border); border-radius:4px;
+  flex:0 0 auto; transition: color .15s, border-color .15s;
+}
+#back-link:hover{ color: var(--cyan); border-color: var(--cyan); }
+#page-sub{ font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--dim); letter-spacing:.1em; text-transform:uppercase; }
+
+/* ── hero ───────────────────────────────────────────────── */
+.hero{ margin-bottom: 34px; }
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  color: var(--cyan); margin-bottom:14px; display:flex; align-items:center; gap:10px;
+}
+.eyebrow::before{ content:""; width:22px; height:1px; background: var(--grad); }
+h1.title{
+  font-family:"Space Grotesk",sans-serif; font-weight:700;
+  font-size: clamp(30px, 5vw, 52px); line-height:1.04; letter-spacing:-0.01em;
+  color: var(--bright); margin-bottom:6px;
+}
+h1.title .sub{
+  display:block; font-weight:500; font-size:0.52em; color: var(--muted); margin-top:8px;
+}
+.dek{
+  max-width: 760px; color: var(--muted); font-size: 14px; line-height:1.7; margin-top:18px;
+}
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:20px;
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; color: var(--dim); letter-spacing:.04em;
+}
+.meta-row b{ color: var(--muted); }
+
+/* ── layout: sidebar + content ─────────────────────────── */
+.layout{ display:grid; grid-template-columns: 220px 1fr; gap: 36px; align-items:start; }
+@media (max-width: 880px){ .layout{ grid-template-columns: 1fr; } #toc{ position:static; } }
+
+#toc{
+  position: sticky; top: 20px;
+  border:1px solid var(--border); background: var(--panel);
+  border-radius:8px; padding: 16px 16px 18px;
+}
+#toc .toc-label{
+  font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--dim); margin-bottom:10px;
+}
+#toc ol{ list-style:none; display:flex; flex-direction:column; gap:2px; counter-reset:none; }
+#toc li a{
+  display:block; padding:5px 6px; border-radius:4px;
+  font-size:12px; color: var(--muted); text-decoration:none; line-height:1.4;
+  transition: color .12s, background .12s;
+}
+#toc li a:hover{ color: var(--bright); background: rgba(0,210,255,0.07); }
+#toc li.sub a{ padding-left:16px; font-size:11.5px; color: var(--dim); }
+#toc li.top a{ font-weight:600; color: var(--text); }
+
+/* ── content ───────────────────────────────────────────── */
+main{ min-width:0; }
+section.block{ margin-bottom: 40px; scroll-margin-top: 20px; }
+
+h2.h1{
+  font-family:"Space Grotesk",sans-serif; font-weight:700; font-size: 25px; color: var(--bright);
+  display:flex; align-items:baseline; gap:12px; margin-bottom:16px;
+  padding-bottom:10px; border-bottom: 1px solid var(--border-soft);
+}
+h2.h1 .num{
+  font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600; color: var(--cyan);
+  flex:0 0 auto;
+}
+h3.h2{
+  font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:18px; color: var(--bright);
+  margin: 26px 0 10px; display:flex; align-items:baseline; gap:10px;
+}
+h3.h2 .num{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; color: var(--muted); }
+h4.h3{
+  font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  color: var(--violet); margin: 18px 0 8px;
+}
+
+p{ margin-bottom: 13px; color: var(--text); }
+p:last-child{ margin-bottom:0; }
+
+ul.pts{ list-style:none; display:flex; flex-direction:column; gap:9px; margin: 10px 0 16px; }
+ul.pts li{
+  position:relative; padding-left:18px; font-size:14px; line-height:1.6; color: var(--text);
+}
+ul.pts li::before{ content:"›"; position:absolute; left:0; top:0; color: var(--cyan); font-weight:700; }
+
+/* finding callout */
+.finding{
+  margin: 16px 0; border:1px solid var(--border); border-left:3px solid var(--cyan);
+  background: var(--panel-2); border-radius: 0 8px 8px 0; padding: 14px 18px;
+}
+.finding .flabel{
+  font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:10.5px; letter-spacing:.12em;
+  color: var(--cyan); display:block; margin-bottom:6px;
+}
+.finding p{ font-size:13.5px; color: var(--text); }
+
+/* risk callout */
+.risk{
+  margin:16px 0; border:1px solid var(--amber-deep); border-left:3px solid var(--amber);
+  background: rgba(224,166,56,0.06); border-radius:0 8px 8px 0; padding:14px 18px;
+}
+.risk .flabel{
+  font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:10.5px; letter-spacing:.12em;
+  color: var(--amber); display:block; margin-bottom:6px;
+}
+.risk p{ font-size:13.5px; color:#e6d3ac; }
+
+.cite{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; color: var(--dim); margin-top:4px; display:block; }
+
+/* synthesis principles */
+.principles{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+.principle{
+  border:1px solid var(--border); background: var(--panel); border-radius:8px; padding:14px 16px;
+  display:grid; grid-template-columns: auto 1fr; gap:14px; align-items:start;
+}
+.principle .pnum{
+  font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:18px;
+  background: var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.principle h4{ font-family:"Space Grotesk",sans-serif; font-size:14.5px; color: var(--bright); margin-bottom:5px; font-weight:600; }
+.principle p{ font-size:13px; color: var(--muted); margin:0; }
+
+/* epistemic tiers */
+.tier{ margin-bottom:14px; padding-left:14px; border-left:2px solid var(--border); }
+.tier b{ color: var(--bright); }
+
+/* references */
+.ref-group{ margin-bottom:22px; }
+.ref-group-title{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color: var(--violet); margin-bottom:10px; padding-bottom:6px; border-bottom:1px dashed var(--border-soft);
+}
+.ref-list{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+.ref-list li{
+  font-size:12.5px; line-height:1.55; color: var(--muted); padding-left:14px; position:relative;
+}
+.ref-list li::before{ content:"·"; position:absolute; left:0; color: var(--cyan); }
+.ref-list li b, .ref-list li strong{ color: var(--text); }
+.ref-note{ font-size:11.5px; color: var(--dim); font-style:italic; margin-top:4px; }
+
+/* footer titleblock */
+.titleblock{
+  margin-top: 40px; padding-top:18px; border-top:1px solid var(--border-soft);
+  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+}
+.tb-notes{ font-size:11px; color: var(--dim); max-width:640px; line-height:1.6; }
+.tb-grid{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; border:1px solid var(--border);
+  display:grid; grid-template-columns:repeat(2,auto); border-radius:6px; overflow:hidden;
+}
+.tb-grid div{ padding:6px 12px; border-right:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft); }
+.tb-grid div:nth-child(2n){ border-right:none; }
+.tb-grid .k{ color: var(--dim); }
+.tb-grid .v{ color: var(--cyan); font-weight:600; }
+
+@media (prefers-reduced-motion:no-preference){
+  .fade{ animation: fadeUp .55s ease both; }
+  section.block:nth-of-type(1){ animation-delay:.02s; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+}
+</style>
+</head>
+<body>
+<div id="shell">
+
+  <div id="page-header">
+    <a href="/reports" id="back-link">&larr; Reports</a>
+    <div id="page-sub">tashefamily.com · agentic ai research</div>
+  </div>
+
+  <div class="hero fade">
+    <div class="eyebrow">Research Synthesis · Agentic AI Building</div>
+    <h1 class="title">Agentic AI Systems
+      <span class="sub">Prompt Layer and Skill Layer Design</span>
+    </h1>
+    <p class="dek">A vendor-neutral synthesis of primary research, engineering guidance, and current preprints on how large-language-model agents are instructed, extended, and secured — covering both the moment-to-moment prompt layer and the packaged, reusable skill layer built on top of it.</p>
+    <div class="meta-row">
+      <span><b>Prepared</b> July 2026</span>
+      <span><b>Companion</b> Field Reference (AGT-01)</span>
+      <span><b>Scope</b> Prompt layer · Skill layer · Cross-cutting synthesis</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <nav id="toc">
+      <div class="toc-label">Contents</div>
+      <ol>
+        <li class="top"><a href="#intro">Introduction</a></li>
+        <li class="top"><a href="#part1">Part I — Skill Layer</a></li>
+        <li class="sub"><a href="#s1-1">1.1 What a Skill Is</a></li>
+        <li class="sub"><a href="#s1-2">1.2 Writing the Skill Prompt</a></li>
+        <li class="sub"><a href="#s1-3">1.3 Tool &amp; Prompt Design</a></li>
+        <li class="sub"><a href="#s1-4">1.4 Evaluation &amp; Iteration</a></li>
+        <li class="sub"><a href="#s1-5">1.5 Does It Actually Help?</a></li>
+        <li class="sub"><a href="#s1-6">1.6 Adversarial Robustness</a></li>
+        <li class="sub"><a href="#s1-7">1.7 Registries &amp; Directories</a></li>
+        <li class="sub"><a href="#s1-8">1.8 Examples of "Good"</a></li>
+        <li class="top"><a href="#part2">Part II — Prompt Layer</a></li>
+        <li class="sub"><a href="#s2-1">2.1 What It Covers</a></li>
+        <li class="sub"><a href="#s2-2">2.2 Foundational Techniques</a></li>
+        <li class="sub"><a href="#s2-3">2.3 Prompt Brittleness</a></li>
+        <li class="sub"><a href="#s2-4">2.4 Tool Spec Design</a></li>
+        <li class="sub"><a href="#s2-5">2.5 Adversarial Robustness</a></li>
+        <li class="sub"><a href="#s2-6">2.6 Examples of "Good"</a></li>
+        <li class="top"><a href="#synthesis">Cross-Cutting Synthesis</a></li>
+        <li class="top"><a href="#epistemic">Source Quality Notes</a></li>
+        <li class="top"><a href="#sources">Sources &amp; References</a></li>
+      </ol>
+    </nav>
+
+    <main>
+
+      <section class="block fade" id="intro">
+        <h2 class="h1"><span class="num">§0</span>Introduction: Two Layers, One Stack</h2>
+        <p>"Agentic skills" and "agent prompting" are often discussed as one topic, but they are really two distinct design problems stacked on top of each other. This report treats them separately, in the order an agent actually depends on them, before drawing out the discipline that turns out to govern both.</p>
+        <p>The <b>prompt layer</b> is the moment-to-moment substrate: the system instructions, tool/function specifications, in-context examples, and output-format rules an agent reasons from on every single turn, with or without any packaged capability loaded. It exists for every agent, always.</p>
+        <p>The <b>skill layer</b> sits on top of it: a portable, filesystem-based package — conventionally a folder containing a SKILL.md file plus optional scripts, references, and assets — that bundles reusable procedural knowledge so an agent does not need the same workflow re-explained every session. Skills are only as reliable as the prompt-layer design underneath them; a well-packaged skill built on ambiguous tool descriptions will still fail.</p>
+        <p>A methodological note before the substance: the material below is drawn from a mix of vendor engineering documentation, official guides, peer-reviewed and pre-print academic literature, and community-maintained resources. Where a claim rests on a single 2026 preprint rather than a replicated or peer-reviewed finding, this report says so explicitly, consistent with treating exact effect sizes as illustrative of scale rather than settled constants. The closing section collects these caveats in one place alongside the full source list.</p>
+      </section>
+
+      <section class="block fade" id="part1">
+        <h2 class="h1"><span class="num">Part I</span>The Skill Layer</h2>
+
+        <h3 class="h2" id="s1-1"><span class="num">1.1</span>What a Skill Is</h3>
+        <p>The packaging format — a folder with a required SKILL.md file (YAML frontmatter plus markdown instructions) and optional scripts/, references/, and assets/ subfolders — originated at a single vendor but has since been published as an open, independently governed specification (agentskills.io), adopted across a wide range of agent products including coding assistants, IDE integrations, and enterprise platforms. Because it is now a shared, cross-platform specification rather than a proprietary format, the design principles in this section are genuinely portable rather than tied to one company's implementation.</p>
+        <p>The architecture every implementation of the standard shares is <b>progressive disclosure</b>, structured in three tiers:</p>
+        <ul class="pts">
+          <li><b>Tier 1 — Discovery.</b> At startup, an agent loads only each skill's name and description: just enough to judge relevance without paying a context cost for content it may never use.</li>
+          <li><b>Tier 2 — Activation.</b> When a task appears to match, the agent reads the full SKILL.md body into context.</li>
+          <li><b>Tier 3 — Reference.</b> Only if the task genuinely requires it does the agent open bundled reference files or execute bundled scripts.</li>
+        </ul>
+        <p>This is the load-bearing design decision in the entire system: it is what lets an agent have access to dozens of skills without every one of them consuming context space it is not currently using.</p>
+
+        <h3 class="h2" id="s1-2"><span class="num">1.2</span>Writing the Skill Prompt: What the Evidence Says Matters Most</h3>
+        <p>The description field carries almost the entire burden of whether a skill is used at all. Because it is the only text loaded before a triggering decision is made, an under-specified description means the skill silently never fires when it should, while an over-broad one fires when it shouldn't and wastes context. The open standard's own authoring guidance frames this explicitly as a precision/recall problem: the recommended practice is to build a small validation set of prompts that should and should not trigger the skill, then iteratively revise the description against that set and track a pass rate — treating description-writing as something tested, not written once and trusted.</p>
+        <p>A 2026 academic treatment of this same problem (a paper on trigger precision for LLM-authored skills, published as a preprint) formalizes it further, extracting explicit positive and negative trigger phrases from a skill's description and representing them with context-aware embeddings, because the same phrase can legitimately belong in both an activation and an exclusion context depending on framing. The practical takeaway, independent of the formal machinery: ambiguous wording in a description is not just imprecise, it is actively confusable with its opposite — so being explicit about exclusions ("use this for X, not for Y") is doing real work, not just being thorough.</p>
+        <p>Inside the body of the instructions, the recurring advice across the open specification's documentation and vendor guides built on it converges on a small set of points:</p>
+        <ul class="pts">
+          <li>Numbered, procedural steps rather than explanatory prose — agents follow sequences more reliably than they extract procedures from paragraphs.</li>
+          <li>Concrete templates and worked examples rather than descriptions of desired output — pattern-matching against an exact example is more reliable than inferring a format from a description of it.</li>
+          <li>Explicit edge cases and explicit statements of what to skip and why, rather than leaving boundary conditions to inference.</li>
+          <li>Keeping the main file lean and pushing infrequently needed material into separate reference files — a widely circulated community heuristic (not part of the formal specification itself) suggests that if a piece of information is needed in under roughly a fifth of invocations, it belongs in a reference file.</li>
+          <li>Being unambiguous about whether bundled code is meant to be executed (a script the agent runs, with only the output entering context) or read as reference documentation — leaving this implicit is a common source of an agent wasting context reading source code it should have simply run.</li>
+        </ul>
+
+        <h3 class="h2" id="s1-3"><span class="num">1.3</span>The Layer Underneath: Tool and Prompt Design</h3>
+        <p>Skills typically wrap or coordinate tools, so tool-design quality directly limits skill reliability. The most comprehensive vendor-neutral treatment here is OpenAI's "A Practical Guide to Building Agents," which distills patterns across many production deployments rather than a single house style. Its central claim, echoed widely elsewhere: high-quality instructions are the single biggest success factor for an agent — it is only as reliable as the instructions and tool descriptions it is given.</p>
+        <p>Concrete, recurring recommendations from that guide and adjacent production experience:</p>
+        <ul class="pts">
+          <li>Convert existing standard operating procedures directly into prompt steps rather than writing instructions from scratch — translating an already-working human process faithfully outperforms improvising a new one.</li>
+          <li>Use prompt templates with variables rather than duplicating near-identical full prompts across scenarios, for both maintainability and consistency.</li>
+          <li>Watch for tool overload as a signal to split responsibilities across multiple agents. The issue is not strictly the number of tools but their similarity or overlap — some deployments manage more than 15 well-defined, distinct tools successfully, while others struggle with fewer than 10 that overlap in function. The fix-order matters: try improving tool clarity (better names, parameters, descriptions) first; only split into multiple agents if that fails to resolve the confusion.</li>
+          <li>When splitting is warranted, two orchestration patterns are broadly validated: a <b>manager pattern</b> (a central agent calls specialized agents as tools and synthesizes results) suited to tasks needing unified synthesis, and a <b>decentralized / handoff pattern</b> (agents transfer control to one another directly) suited to triage-style workflows where no single agent needs to retain oversight.</li>
+          <li>Build evaluations early against the most capable available model to establish a real accuracy ceiling before economizing with a smaller one — otherwise it is impossible to tell whether a smaller model is failing the task or the task was never verified as achievable in the first place.</li>
+        </ul>
+
+        <h3 class="h2" id="s1-4"><span class="num">1.4</span>The Evaluation and Iteration Loop</h3>
+        <p>Skill quality is treated, across the available guidance, as something produced by observation rather than upfront perfection. The recurring loop: start with evaluation — run the agent on representative tasks and see where it struggles before writing anything; build skills incrementally to close specific, observed gaps; watch how the agent actually navigates the skill in practice, including unexpected trajectories or overreliance on particular bundled files; and iterate directly with the agent, asking it to reflect on what went wrong when a task fails and to help capture what worked when it succeeds.</p>
+        <p>This mirrors broader agent-evaluation guidance: teams often delay building evaluations because they assume hundreds of test cases are needed, when in practice 20–50 tasks drawn from real observed failures is a solid starting point, since early-stage effect sizes are usually large enough that small samples reveal problems clearly.</p>
+
+        <h3 class="h2" id="s1-5"><span class="num">1.5</span>Empirical Evidence: Does It Actually Help?</h3>
+        <div class="finding">
+          <span class="flabel">⬡ KEY FINDING</span>
+          <p>A controlled academic evaluation (OpenSkillEval, testing over 600 dynamically generated tasks against 30 community-sourced skills across five real-world application categories) found that skill availability does not guarantee effective skill usage, that the benefit of skill augmentation depends strongly on both the underlying model and the agent framework, and that many publicly popular skills do not reliably outperform the base agent without the skill at all. It further found that for tasks whose core difficulty is reasoning and analytical judgment — as opposed to procedural formatting or workflow sequencing — existing skills provided only limited benefit.</p>
+          <span class="cite">OpenSkillEval, 2026 · 600+ tasks, 30 skills</span>
+        </div>
+        <p>The practical implication: a skill's value should be measured, not assumed. If a skill targets a fundamentally reasoning-heavy problem rather than a workflow-execution problem, the procedural-skill format is unlikely to move the needle much — that is a case for better prompting or a stronger model, not more procedural scaffolding.</p>
+
+        <h3 class="h2" id="s1-6"><span class="num">1.6</span>Robustness as an Adversarial Property</h3>
+        <p>"Robust" in this space increasingly means "resistant to manipulation," not just "reliably triggers and executes correctly." A 2026 security paper studying real skills pulled from a public registry demonstrated that natural-language skill metadata is itself an attack surface at three distinct points in a skill's lifecycle:</p>
+        <ul class="pts">
+          <li><b>Discovery.</b> Short textual triggers appended to a SKILL.md file can manipulate embedding-based retrieval and improve an adversarial skill's visibility in a registry.</li>
+          <li><b>Selection.</b> Description-only framing can bias an agent toward selecting a functionally deceptive variant over a legitimate one.</li>
+          <li><b>Governance.</b> Semantic evasion strategies can let malicious instructions avoid triggering a safety-blocking verdict from automated scanners.</li>
+        </ul>
+        <p>In the paper's own framing, a SKILL.md file is not passive documentation but operational text that shapes which third-party capabilities an agent finds, trusts, and uses. A related systematization-of-knowledge paper on the same threat surface categorizes this as "poisoned skill retrieval," explicitly analogizing it to SEO poisoning in web search — the retrieval mechanism can be gamed with the same techniques that game any embedding-based ranking system. A separate benchmarking paper proposes scoring skills on an "Instruction Fidelity Risk" scale, where the highest-severity case is a skill that incorporates unsanitized user- or web-supplied free text directly into agent instructions without any scoping or sanitization.</p>
+        <div class="risk">
+          <span class="flabel">⚠ RISK — SKILL METADATA AS ATTACK SURFACE</span>
+          <p>Practical implications for anyone authoring or installing skills: treat any skill not personally authored, and not fully read, as untrusted — this applies to the SKILL.md text itself, not just bundled scripts. Be skeptical of skills whose description makes capability claims that are hard to verify against what the bundled code and instructions actually do — documented "false-advertisement" attacks are exactly this mismatch. Any skill accepting free-text input and feeding it into agent instructions or tool parameters without sanitization is the highest-risk configuration by design.</p>
+        </div>
+
+        <h3 class="h2" id="s1-7"><span class="num">1.7</span>Skill Registries and Directories</h3>
+        <p>The ecosystem for discovering and installing skills has grown quickly enough to include several distinct categories, each with a different risk profile:</p>
+        <ul class="pts">
+          <li>The specification itself — hosted openly on GitHub (agentskills/agentskills) — is the canonical reference for what a valid SKILL.md package looks like, not a database of skills.</li>
+          <li>Vendor-bundled collections — official first-party skill repositories maintained directly by specific platforms — carry essentially zero supply-chain risk since they are published directly by the platform, at the cost of narrow selection.</li>
+          <li>Curated cross-platform directories (e.g., skills.sh, maintained by Vercel) market themselves specifically as a higher-quality-bar alternative to the fully open community pool.</li>
+          <li>Fully open community registries (e.g., ClawHub) are currently the largest pools — reported at over 13,000 published skills as of early 2026 — and also the source of a documented, serious security incident (see below).</li>
+          <li>Large aggregator directories (e.g., SkillsMP) index skills across multiple source registries for discoverability, meaning their quality signal is only as good as the registries they pull from.</li>
+          <li>Self-hosted enterprise registries (e.g., the open-source SkillHub project) offer private, access-controlled, audited internal distribution — arguably the more defensible model for organizational use beyond personal experimentation.</li>
+        </ul>
+        <div class="risk">
+          <span class="flabel">⚠ INCIDENT — "CLAWHAVOC"</span>
+          <p>A coordinated campaign planted several hundred malicious skills in a fully open community registry using typosquatted names — subtle misspellings of trusted skill names — that distributed credential-stealing malware and exfiltrated SSH keys, API tokens, and browser session cookies from installs. A separate third-party audit reportedly flagged roughly 13% of scanned skills for critical security issues, including prompt injection risks and exposed API keys. The registry has since added automated malware scanning and removed thousands of suspicious listings, but this should be read as a live, reactive fix rather than a solved problem.</p>
+        </div>
+        <p>Overall assessment: this ecosystem currently resembles an early, imperfectly policed app store more than a mature package registry — comparable to where early extension or package ecosystems stood before mature vetting emerged, security incidents included. Preferring official or heavily curated sources over the raw open pool, and actually reading a skill's SKILL.md and any bundled scripts before installing, is not optional caution given the above — it is the baseline given what has already happened in this specific ecosystem.</p>
+
+        <h3 class="h2" id="s1-8"><span class="num">1.8</span>Examples of "Good" in the Skill Layer</h3>
+        <p>The clearest examples of good skill-authoring guidance are not finished skills to imitate wholesale, but documented methodologies for building and testing them:</p>
+        <ul class="pts">
+          <li><b>Description-optimization workflow</b> (agentskills.io). The open specification's own authoring guide documents a concrete testing loop: generate a set of prompts that should and should not trigger a given skill, run them against the current description, measure a pass rate, revise the description to close gaps in precision or recall, and repeat — a directly reusable process independent of any specific skill's content.</li>
+          <li><b>Skill-creation tooling patterns.</b> Several skill-authoring tools in the ecosystem implement a structured build loop — interview the intended use case, draft the skill, run it against baseline (no-skill) and prior-iteration comparisons, grade outputs (sometimes via an independent "grader" agent to reduce author bias), and iterate — which is a good template for anyone building a custom skill rather than installing one.</li>
+        </ul>
+        <p>What counts as "good" here is best understood as a property of the process that produced a skill (was it tested against real triggering ambiguity, was it evaluated against a no-skill baseline, was its description precision-tuned) rather than a property that can be judged by reading a finished SKILL.md file in isolation.</p>
+      </section>
+
+      <section class="block fade" id="part2">
+        <h2 class="h1"><span class="num">Part II</span>The Prompt Layer</h2>
+
+        <h3 class="h2" id="s2-1"><span class="num">2.1</span>What the Prompt Layer Covers</h3>
+        <p>Four distinct things get bundled under this term, and they have different failure modes:</p>
+        <ul class="pts">
+          <li><b>System-level instructions</b> — the standing behavioral guidance an agent operates under.</li>
+          <li><b>In-context examples</b> (few-shot demonstrations) — showing rather than telling.</li>
+          <li><b>Tool / function specifications</b> — the schemas and descriptions defining what actions an agent can take and how.</li>
+          <li><b>Output structuring</b> — how the shape of a response is constrained (JSON, specific formats, etc.).</li>
+        </ul>
+
+        <h3 class="h2" id="s2-2"><span class="num">2.2</span>Foundational Techniques</h3>
+        <p>A small number of techniques are close to consensus because they have been replicated extensively. <b>Few-shot prompting</b> — showing input/output examples rather than only describing a task — was formally characterized in the original GPT-3 paper (Brown et al., 2020) and remains one of the most reliable levers for steering output toward a specific format or style. <b>Chain-of-thought prompting</b> — inducing step-by-step reasoning before a final answer — was shown (Wei et al., 2022) to substantially improve multi-step reasoning performance and remains one of the most consistently replicated findings in the literature.</p>
+        <p>Beyond these two, the field has produced a large taxonomy of techniques with varying evidentiary support. The most comprehensive attempt to organize this is a 2024 systematic survey (Schulhoff et al., "The Prompt Report"), which catalogued 58 distinct LLM prompting techniques and 33 vocabulary terms through a formal PRISMA-style review of more than 1,500 papers — arguably the closest thing this field has to a settled taxonomy rather than competing vendor terminology. One finding from that project worth flagging on its own: automated prompt-optimization methods were able to outperform the paper's own human prompt engineer on the tasks tested — evidence that systematic search over prompt variants can beat expert intuition, even expert intuition.</p>
+
+        <h3 class="h2" id="s2-3"><span class="num">2.3</span>Prompt Brittleness: The Central Empirical Finding</h3>
+        <div class="finding">
+          <span class="flabel">⬡ KEY FINDING</span>
+          <p>A substantial and consistent body of research documents prompt brittleness (also called format sensitivity): models can produce meaningfully different outputs from prompts that are semantically identical but differ in superficial, non-meaningful ways — spacing, delimiter choice, or example ordering.</p>
+        </div>
+        <ul class="pts">
+          <li><b>Sclar et al. (2024)</b> showed that changing only the formatting of a prompt — delimiter choice, minor spacing differences, content held constant — produced performance swings of up to <b>76 points</b> on a benchmark suite of instruction-following tasks. That is not a marginal effect; it exceeds the performance gap between many models.</li>
+          <li><b>Zhao et al. (2021)</b> found that the specific choice and ordering of few-shot examples could shift GPT-3's classification accuracy by up to 30%, and proposed a calibration method to partially correct for it — one of the earliest and most cited papers establishing that few-shot examples are a source of instability if not controlled for, not simply a free improvement.</li>
+          <li><b>Lu et al. (2022)</b> systematically studied the effect of example order specifically, finding that permutations of the same example set could swing accuracy substantially, and — importantly — that the best-performing order did not reliably transfer from one model to another. There is no universal "correct order" to memorize; it is model- and task-specific.</li>
+          <li><b>Bertsch et al. (2024)</b> found that order-sensitivity meaningfully decreases when models are given very long context with hundreds of demonstrations rather than a handful, suggesting the issue is partly about limited context inducing overweighting of position cues — and that longer-context models may be somewhat more forgiving, though this does not eliminate the problem.</li>
+        </ul>
+        <p>The practical implication is a genuine reframe: there is no such thing as verifying a prompt is good by reading it and judging that it sounds clear. A prompt that reads as unambiguous can still be unstable under formatting variation that happens naturally across sessions, API versions, or minor edits. The only defense the literature converges on is empirical testing across variants — generating multiple phrasings or formats of the same instruction and measuring output consistency, rather than trusting a single hand-tuned version. This is the same "test, don't assume" discipline that governs skill-description triggering (§1.2), and it is, if anything, more load-bearing at the raw prompt layer, since no packaging structure catches ambiguity the way progressive disclosure does for skills.</p>
+
+        <h3 class="h2" id="s2-4"><span class="num">2.4</span>Tool and Function Specification Design</h3>
+        <p>Tool and function specifications are prompts too — natural-language (or natural-language-adjacent, via JSON schema descriptions) text loaded into context and interpreted, subject to the same instability concerns above. The pattern that converges across most production guidance, independent of vendor, is to treat a tool definition the way one would write onboarding documentation for a new employee: make implicit context explicit (specialized formats, internal terminology, relationships between resources), avoid ambiguous parameter names, and provide concrete examples of correctly formatted calls rather than relying on a schema alone to convey usage. Production guidance converges on a related, distinct point: when an agent starts making tool-selection errors, the first fix is improving tool clarity — better names, tighter parameter definitions, more explicit descriptions — and only if that fails should responsibilities be split across multiple agents; treating tool confusion as an orchestration problem before ruling out a specification problem is a common, avoidable source of premature complexity.</p>
+
+        <h3 class="h2" id="s2-5"><span class="num">2.5</span>Adversarial Robustness</h3>
+        <p>If "robust" is meant in the security sense rather than the reliability sense, this is the least mature and most consequential area. Indirect prompt injection — malicious instructions embedded in content an agent retrieves or processes (a webpage, a document, a tool's output) rather than typed directly by a user — is a well-established, actively studied attack class against tool-using agents specifically, because an agent that reads external content and then acts on tools is structurally exposed to that content in a way a plain chatbot is not.</p>
+        <p>The most credible empirical grounding is AgentDojo (Debenedetti et al., NeurIPS 2024), a benchmark built specifically to evaluate prompt injection attacks and defenses against realistic tool-using agents (email management, banking-style tasks). Its findings are directly relevant to prompt design:</p>
+        <ul class="pts">
+          <li>Simple, prompt-level defenses measurably help: wrapping tool outputs in explicit delimiters with instructions to treat enclosed content as data rather than instructions; "prompt sandwiching," repeating the original user instructions again after a tool call returns (to counteract the tendency for the most recently seen instructions — possibly injected — to dominate); and restricting the agent to only the tools plausibly needed for a task before it observes any untrusted data, so a compromised tool result cannot unlock unnecessary tool access.</li>
+        </ul>
+        <div class="risk">
+          <span class="flabel">⚠ KEY FINDING — NO COMPLETE DEFENSE</span>
+          <p>None of the tested defenses are close to a complete solution. Across the defenses evaluated in the AgentDojo benchmark, essentially all of them cost roughly <b>15–20% of task utility</b> specifically when under active attack — there is a real trade-off between injection robustness and full capability, not a free win. A 2025 follow-up (PromptArmor), using a separate guardrail LLM specifically prompted to screen for injected content, reports substantially better figures — sub-1% false-positive and false-negative rates on the same benchmark — suggesting the frontier has moved, though this is a single paper's result on one benchmark, not yet a settled finding.</p>
+        </div>
+        <p>A broader 2025 survey of agentic security makes a structural point worth internalizing: the safety training a base model receives does not reliably transfer into the agentic context, and the static, predictable structure of a typical system prompt is itself identified as a vulnerability that injection attacks exploit — a system prompt that is boilerplate and guessable is easier to attack around than one with less predictable structure.</p>
+
+        <h3 class="h2" id="s2-6"><span class="num">2.6</span>Examples of "Good" in the Prompt Layer</h3>
+        <p>Two genuinely different categories of example are worth distinguishing here.</p>
+        <h4 class="h3">A. Intentionally published, pedagogical examples</h4>
+        <p>OpenAI's own prompting guides, published in its Cookbook as worked, annotated examples rather than abstract advice — particularly the GPT-4.1 and GPT-5 / GPT-5.1 guides — are the strongest examples available of the craft, not just advice about it:</p>
+        <ul class="pts">
+          <li>They present a concrete recommended prompt skeleton — role/objective, instructions with sub-categories, explicit reasoning steps, output format, worked examples, then a final instruction — while explicitly inviting deviation rather than treating it as rigid.</li>
+          <li>They document why a specific change worked, with a number attached: adding three explicit sentences instructing a model to persist until a task is genuinely resolved, to gather information itself rather than guess, and to plan explicitly before tool calls produced close to a <b>20% improvement</b> on a coding benchmark — a concrete demonstration that small, well-placed prompt text can matter enormously, directly consistent with the brittleness research in §2.3.</li>
+          <li>They incorporate externally validated findings, not just vendor claims: Cursor's engineering team found that wrapping instruction categories in structured XML-style tags (e.g., <code>&lt;persistence&gt;</code>, <code>&lt;context_understanding&gt;</code>) improved instruction adherence and allowed cross-referencing sections elsewhere in the prompt.</li>
+        </ul>
+        <p>A separate cookbook entry, "Building Resilient Prompts Using an Evaluation Flywheel," is a good example of a different kind of write-up — not a template, but a documented methodology for diagnosing and iteratively fixing a brittle prompt: reading a sample of failing outputs, applying descriptive labels to what is going wrong (open coding), grouping those into higher-level failure categories (axial coding), and only then building automated graders around the categories that actually matter. This is essentially the "test, don't assume" discipline from §2.3 turned into a repeatable process.</p>
+        <h4 class="h3">B. Real production system prompts (third-party extracted)</h4>
+        <p>A small ecosystem of actively maintained repositories collects system prompts extracted from major commercial AI products, organized by vendor and version, with the largest reportedly exceeding 130,000 GitHub stars and covering 30-plus tools including versioned tool-calling schemas, not just prose instructions. These are genuinely valuable for studying real, battle-tested structural choices at scale — for instance, a documented second-generation rewrite of one product's agent prompt, or the specific XML-tag conventions different products converge on independently.</p>
+        <p>Important caveats: these are unofficial extractions (typically via adversarial prompting or other extraction techniques), not vendor-endorsed exemplars — inclusion in a collection does not mean the content represents recommended best practice, and some of it likely reflects messy, accumulated, real-world compromises rather than clean design. These prompts also go stale quickly as vendors iterate, and there are legitimate legal and ethical questions around scraping and republishing another company's proprietary configuration. They are best treated as material for pattern study — the way one would study a competitor's public-facing product — rather than as source text to copy from directly.</p>
+      </section>
+
+      <section class="block fade" id="synthesis">
+        <h2 class="h1"><span class="num">§3</span>Cross-Cutting Synthesis</h2>
+        <p>Pulling both layers together, a small number of principles recur regardless of which layer is being designed:</p>
+        <div class="principles">
+          <div class="principle">
+            <span class="pnum">01</span>
+            <div><h4>Measurement beats intuition, at every level.</h4><p>Whether the object being judged is a raw system prompt, a tool description, or a skill's triggering description, the same finding holds: a human reading it and judging it clear is not evidence that it behaves reliably. Small, seemingly cosmetic changes — formatting, ordering, phrasing — can produce large behavioral swings. The only practices with real evidentiary support are empirical: build a small test set (20–50 real cases is enough to start), test variants against it, and revise based on observed failures.</p></div>
+          </div>
+          <div class="principle">
+            <span class="pnum">02</span>
+            <div><h4>Clarity for a human reader is necessary but not sufficient.</h4><p>Writing for "a new hire" — explicit context, unambiguous naming, concrete examples — is good practice at every layer, but it does not by itself guarantee robustness to formatting variation or adversarial manipulation. Both require separate, additional defenses.</p></div>
+          </div>
+          <div class="principle">
+            <span class="pnum">03</span>
+            <div><h4>Neither layer is a solved problem, especially on security.</h4><p>Indirect prompt injection at the tool-use layer and metadata manipulation at the skill-registry layer are both active, unresolved research areas as of mid-2026, with defenses that measurably trade away capability rather than eliminating the risk. Any deployment that processes untrusted external content through a tool-using agent should be built with this trade-off in mind, not treated as a hypothetical.</p></div>
+          </div>
+          <div class="principle">
+            <span class="pnum">04</span>
+            <div><h4>Complexity should be earned, not defaulted to.</h4><p>Both layers show the same anti-pattern: reaching for more architecture (more agents, more tools, more elaborate skill scaffolding) before exhausting simpler fixes (clearer tool descriptions, a better-tuned skill description, a more explicit prompt). The evidence consistently favors fixing specification clarity first.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="block fade" id="epistemic">
+        <h2 class="h1"><span class="num">§4</span>Source Quality and Epistemic Notes</h2>
+        <p>In keeping with treating sourcing rigor as part of the deliverable, not an afterthought, this section states plainly what kind of evidence underlies each part of this report.</p>
+        <div class="tier"><p><b>Vendor engineering documentation and official guides</b> (the open Agent Skills specification, OpenAI's agent-building and prompting guides) reflect production experience at scale and are treated as reliable practitioner guidance, though they are not independently peer-reviewed and naturally emphasize each publisher's own tooling.</p></div>
+        <div class="tier"><p><b>Peer-reviewed or well-established academic work</b> (the original few-shot and chain-of-thought papers, the Prompt Report survey, AgentDojo) is treated as the strongest tier of evidence in this report, subject to the normal caveat that any single benchmark or study captures a specific experimental setting.</p></div>
+        <div class="tier"><p><b>2026 preprints</b> (OpenSkillEval, the SKILL.md supply-chain security paper, the agentic-skills systematization-of-knowledge paper, the skill trigger-precision paper, PromptArmor, the agentic security survey) have not necessarily completed formal peer review, and in a fast-moving area like this, findings can be superseded quickly. This report treats their qualitative conclusions — skills do not automatically help; skill and prompt metadata are exploitable attack surfaces; injection defenses trade away utility — as well-supported, since they are consistent across multiple independent sources. Specific quantitative figures from single preprints (e.g., an 86% win rate, a 77.6% selection rate, a 76-point swing) are held more loosely, as snapshots under specific experimental conditions rather than durable constants.</p></div>
+        <div class="tier"><p><b>Community and journalistic sources</b> (registry statistics, security-incident reporting, curated "best-of" lists) are used only for factual, verifiable claims (star counts, incident descriptions, registry size) and are flagged as such; they are not used as evidence for design-best-practice claims.</p></div>
+        <div class="tier"><p>A small number of <b>well-known foundational results</b> (Brown et al. 2020 on few-shot learning; Wei et al. 2022 on chain-of-thought) are cited as established background rather than freshly retrieved and verified in this research session; they are included because they are extremely well replicated and widely known, not because they were directly re-examined here.</p></div>
+      </section>
+
+      <section class="block fade" id="sources">
+        <h2 class="h1"><span class="num">§5</span>Sources and References</h2>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Specifications and Open Standards</div>
+          <ul class="ref-list">
+            <li>Agent Skills open specification. agentskills.io and github.com/agentskills/agentskills.</li>
+            <li>"Optimizing skill descriptions." Agent Skills documentation. agentskills.io/skill-creation/optimizing-descriptions.</li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Vendor Engineering Guidance</div>
+          <ul class="ref-list">
+            <li>OpenAI. "A Practical Guide to Building Agents." openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/ (also distributed as PDF via cdn.openai.com).</li>
+            <li>OpenAI. "GPT-4.1 Prompting Guide." OpenAI Cookbook, cookbook.openai.com/examples/gpt4-1_prompting_guide.</li>
+            <li>OpenAI. "GPT-5 Prompting Guide" and "GPT-5.1 Prompting Guide." OpenAI Cookbook, cookbook.openai.com/examples/gpt-5/.</li>
+            <li>OpenAI. "Building Resilient Prompts Using an Evaluation Flywheel." OpenAI Cookbook, developers.openai.com/cookbook/examples/evaluation/building_resilient_prompts_using_an_evaluation_flywheel.</li>
+            <li>OpenAI. "Prompt Engineering." OpenAI API documentation, developers.openai.com/api/docs/guides/prompt-engineering.</li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Peer-Reviewed / Established Academic Literature</div>
+          <ul class="ref-list">
+            <li>Brown, T. et al. (2020). "Language Models are Few-Shot Learners." NeurIPS 2020. <span class="ref-note">(Foundational GPT-3 few-shot prompting paper; cited as established background.)</span></li>
+            <li>Wei, J. et al. (2022). "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models." NeurIPS 2022. <span class="ref-note">(Cited as established background.)</span></li>
+            <li>Schulhoff, S. et al. (2024). "The Prompt Report: A Systematic Survey of Prompt Engineering Techniques." arXiv:2406.06608.</li>
+            <li>Debenedetti, E., Zhang, J., Balunović, M., Beurer-Kellner, L., Fischer, M., &amp; Tramèr, F. (2024). "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents." NeurIPS 2024 (Datasets and Benchmarks track). arXiv:2406.13352.</li>
+            <li>Zhao, T. et al. (2021). "Calibrate Before Use: Improving Few-Shot Performance of Language Models." <span class="ref-note">Referenced via citing literature (arXiv:2511.21752; arXiv:2510.05152), not directly retrieved in this session.</span></li>
+            <li>Lu, Y. et al. (2022). "Fantastically Ordered Prompts and Where to Find Them: Overcoming Few-Shot Prompt Order Sensitivity." <span class="ref-note">Referenced via citing literature (arXiv:2511.21752; arXiv:2510.05152), not directly retrieved in this session.</span></li>
+            <li>Sclar, M. et al. (2024). "Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design." <span class="ref-note">Referenced via citing literature (arXiv:2510.05152; arXiv:2504.06969), not directly retrieved in this session.</span></li>
+            <li>Bertsch, A. et al. (2024). Findings on long-context reduction of few-shot order sensitivity. <span class="ref-note">Referenced via citing literature (arXiv:2510.05152), not directly retrieved in this session.</span></li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">2026 Preprints (Not Yet Peer-Reviewed)</div>
+          <ul class="ref-list">
+            <li>"OpenSkillEval: Automatically Auditing the Open Skill Ecosystem for LLM Agents." arXiv:2605.23657.</li>
+            <li>"SkillAxe: Sharpening LLM-Authored Agent Skills Through Evaluation-Guided Self-Refinement." arXiv:2606.10546.</li>
+            <li>"Under the Hood of SKILL.md: Semantic Supply-chain Attacks on AI Agent Skill Registry." arXiv:2605.11418.</li>
+            <li>"SoK: Agentic Skills — Beyond Tool Use in LLM Agents." arXiv:2602.20867.</li>
+            <li>"Benchmarking Security Risk Detection and Verification in Open Agentic Skill Ecosystems." arXiv:2606.00925.</li>
+            <li>"A Survey on Agentic Security: Applications, Threats and Defenses." arXiv:2510.06445.</li>
+            <li>"PromptArmor: Simple yet Effective Prompt Injection Defenses." arXiv:2507.15219.</li>
+            <li>"A Single Character can Make or Break Your LLM Evals." arXiv:2510.05152. <span class="ref-note">(Secondary source summarizing Sclar et al. 2024 and related prompt-sensitivity literature.)</span></li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Registries, Directories, and Ecosystem Reporting</div>
+          <ul class="ref-list">
+            <li>skills.sh — curated cross-platform skill directory (skills.sh).</li>
+            <li>ClawHub — open community skill registry (clawhub.ai / clawhub.com); see also OpenClaw documentation, docs.openclaw.ai/tools/skills.</li>
+            <li>SkillsMP — skill aggregator/directory (skillsmp.com).</li>
+            <li>iflytek/skillhub — self-hosted enterprise skill registry (github.com/iflytek/skillhub).</li>
+            <li>Composio. "Top 15 OpenClaw Skills You Can't Afford to Miss in 2026." composio.dev/content/top-openclaw-skills. <span class="ref-note">(Source for the "ClawHavoc" typosquatting incident and related registry security reporting.)</span></li>
+            <li>Firecrawl. "19 Best OpenClaw Skills for Your AI Agents." firecrawl.dev/blog/openclaw-skills. <span class="ref-note">(Additional registry statistics and security-audit reporting.)</span></li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Extracted / Third-Party Prompt Collections (Pattern Study Only)</div>
+          <ul class="ref-list">
+            <li>x1xhlol/system-prompts-and-models-of-ai-tools. github.com/x1xhlol/system-prompts-and-models-of-ai-tools.</li>
+            <li>asgeirtj/system_prompts_leaks. <span class="ref-note">Referenced via secondary reporting (everydev.ai profile of the repository).</span></li>
+            <li>jujumilk3/leaked-system-prompts. github.com/jujumilk3/leaked-system-prompts.</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="titleblock">
+        <div class="tb-notes">
+          <b>Notes.</b> Items marked with a finding citation are drawn from named studies; several are 2026 preprints that have not completed formal peer review — treat exact effect sizes (e.g., "76 points," "15–20%") as illustrative of scale, not settled constants.
+        </div>
+        <div class="tb-grid">
+          <div class="k">DOCUMENT</div><div class="v">Full Research Report</div>
+          <div class="k">COMPANION</div><div class="v">Field Reference (AGT-01)</div>
+          <div class="k">STATUS</div><div class="v">For internal use</div>
+          <div class="k">REV</div><div class="v">2026-07</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>
