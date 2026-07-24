@@ -49,6 +49,10 @@ em{font-style:italic}
 .detail-body{color:#1c1916;line-height:1.68}
 .detail-body strong{color:#1c1916}
 
+/* TABLE SCROLL WRAPPER (prevents mobile column-squeeze) */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+.table-scroll table{margin:0}
+
 /* EVIDENCE TABLE */
 .evidence-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.88rem;background:#fff;border:1px solid #d8cdb8}
 .evidence-table th{font-family:"Courier New",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#1c1916;background:#f0e8da;border-bottom:2px solid #c0ae96;padding:9px 13px;text-align:left}
@@ -99,6 +103,7 @@ em{font-style:italic}
   .res-grid{grid-template-columns:1fr}
   .detail-row{grid-template-columns:1fr;gap:4px}
   .detail-label{padding-right:0}
+  .mat-table,.cal-table,.evidence-table{width:auto;min-width:560px}
 }
 </style>
 </head>
@@ -202,6 +207,7 @@ em{font-style:italic}
   <p>The hardscape is what gives a kitchen garden its year-round bones &mdash; the elements that hold visual structure in winter when plants are gone, and that determine maintenance burden for years. Material choices involve genuine tradeoffs between upfront cost, longevity, aesthetics, and safety for edible gardens.</p>
 
   <h3>Raised Bed Materials</h3>
+  <div class="table-scroll">
   <table class="mat-table">
     <thead><tr><th>Material</th><th>Notes</th><th>Lifespan (NoVA)</th><th>Food Safe</th></tr></thead>
     <tbody>
@@ -213,6 +219,7 @@ em{font-style:italic}
       <tr><td class="avoid"><strong>Pressure-Treated Lumber</strong></td><td class="avoid">Post-2003 formulations use copper-based preservatives approved by the EPA for food gardens, but not certified for organic production. Long-term leaching in acidic soil is still studied. Unnecessary given available alternatives.</td><td class="avoid">&mdash;</td><td class="avoid">Uncertain</td></tr>
     </tbody>
   </table>
+  </div>
 
   <h3>Path Materials</h3>
   <p>The Virginia colonial tradition, particularly in Alexandria and the broader Tidewater region, favored brick as the primary formal garden path material. Jefferson used compacted gravel for the serpentine walkway at Monticello (1806), representing a more naturalistic approach. Both remain historically appropriate and practically sound for a modern NoVA potager.</p>
@@ -241,6 +248,7 @@ em{font-style:italic}
   <h2>Planting Calendar for Zone 7a</h2>
   <p>Dates reflect Alexandria/Arlington conditions. VCE Publication 426-331 is the authoritative regional source with specific spacing and quantity guidance.</p>
 
+  <div class="table-scroll">
   <table class="cal-table">
     <thead><tr><th>Window</th><th>Dates (approx.)</th><th>What to Plant</th><th>Notes</th></tr></thead>
     <tbody>
@@ -254,6 +262,7 @@ em{font-style:italic}
       <tr><td><span class="season-tag">Perennial Herbs</span></td><td>Spring or Fall</td><td>Rosemary, thyme, sage, oregano, chives, mint (contained)</td><td>Plant at bed edges; avoid disturbing with annual tillage.</td></tr>
     </tbody>
   </table>
+  </div>
 </div>
 
 
@@ -285,6 +294,7 @@ em{font-style:italic}
 
   <p>Companion planting is one of the most enthusiastically promoted and least rigorously sourced areas of garden advice. The credible baseline finding is that <em>polyculture</em> &mdash; growing diverse species together rather than in monocultures &mdash; generally outperforms monoculture for resilience and pest resistance. Specific mechanisms for specific pairings vary considerably in how well they are documented.</p>
 
+  <div class="table-scroll">
   <table class="evidence-table">
     <thead><tr><th>Pairing</th><th>Evidence Level</th><th>Mechanism</th><th>Practical Notes</th></tr></thead>
     <tbody>
@@ -326,6 +336,7 @@ em{font-style:italic}
       </tr>
     </tbody>
   </table>
+  </div>
 
   <p>For a NoVA potager, the high-confidence companion planting approach is: dense French marigold (<em>T. patula</em>) borders maintained all season; sweet alyssum as path edging; basil tucked at tomato bases; Three Sisters configuration for the squash/bean/corn summer bed. These deliver documented benefits while also being visually excellent choices for the potager aesthetic.</p>
 </div>
