@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#faf7f0;color:#1c1c1c;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGO Part Storage: A Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{color-scheme:light;background:#faf7f0!important;color:#1c1c1c!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.75;background:#faf7f0;color:#1c1c1c;max-width:820px;margin:0 auto;padding:56px 40px 96px}
+
+/* tokens: brick-red #a3121c · brick-red-deep #6e0c13 · brick-blue #1c4a73 · brick-green #2f5c3f · ink #1c1c1c · paper #faf7f0 */
+
+/* COVER */
+.cover{border-top:4px solid #1c1c1c;border-bottom:1px solid #d8d2c2;padding:32px 0 28px;margin-bottom:48px}
+.cover-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#a3121c;margin-bottom:12px}
+.cover h1{font-size:2.05rem;font-weight:700;line-height:1.18;color:#1c1c1c;margin-bottom:10px}
+.cover h1 em{font-style:italic;font-weight:400;color:#2f5c3f}
+.cover-subtitle{font-size:1rem;color:#4a4a4a;font-style:italic;margin-bottom:20px;max-width:60ch}
+.cover-meta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;color:#7a7a7a;line-height:2.2;border-top:1px solid #e0dac9;padding-top:14px;margin-top:14px}
+
+/* TOC */
+.toc{background:#fff;border:1px solid #e0dac9;padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#a3121c;margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted #e0dac9;font-size:.88rem}
+.toc-item:last-child{border-bottom:none}
+.toc-section{color:#1c1c1c}
+.toc-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:#a3121c}
+
+/* SECTION STRUCTURE */
+.section{margin-bottom:56px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:#a3121c;flex-shrink:0}
+.section-rule{height:1px;background:#e0dac9;flex:1}
+h2{font-family:'Spectral',serif;font-size:1.44rem;font-weight:700;color:#1c1c1c;margin-bottom:14px;line-height:1.24}
+h3{font-family:'Spectral',serif;font-size:1.05rem;font-style:italic;font-weight:400;color:#2f5c3f;margin:26px 0 9px}
+p{color:#1c1c1c;margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+p strong{color:#1c1c1c}
+em{font-style:italic}
+sup.cite{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:#8a6a1a;font-style:normal;margin-left:1px}
+
+/* CALLOUT */
+.callout{border-left:4px solid #2f5c3f;background:#eef2ec;padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:#1c1c1c;margin:0;font-size:.96rem;line-height:1.68;max-width:66ch}
+.callout cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.72rem;color:#5a6e53;margin-top:8px}
+
+/* DETAIL TABLE */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:190px 1fr;gap:0;border-bottom:1px solid #ece5d4;padding:12px 0;font-size:.9rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:'Spectral',serif;font-weight:700;color:#2f5c3f;line-height:1.45;padding-right:16px}
+.detail-body{color:#1c1c1c;line-height:1.68}
+.detail-body strong{color:#1c1c1c}
+
+/* TABLE WRAPPER */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+.table-scroll table{margin:0}
+
+/* BRAND TABLE */
+.brand-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.86rem;background:#fff;border:1px solid #e0dac9}
+.brand-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#1c1c1c;background:#f1ead6;border-bottom:2px solid #d8cdb0;padding:9px 12px;text-align:left}
+.brand-table td{padding:9px 12px;border-bottom:1px solid #eee5d0;color:#1c1c1c;vertical-align:top;line-height:1.5}
+.brand-table tr:last-child td{border-bottom:none}
+.gap-row{background:#faf3e2;font-style:italic;color:#7a5a1a}
+
+/* SORTING TABLE */
+.stat-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.87rem;background:#fff;border:1px solid #e0dac9}
+.stat-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#1c1c1c;background:#f1ead6;border-bottom:2px solid #d8cdb0;padding:9px 12px;text-align:left}
+.stat-table td{padding:9px 12px;border-bottom:1px solid #eee5d0;color:#1c1c1c;vertical-align:top;line-height:1.5}
+.stat-table tr:last-child td{border-bottom:none}
+
+/* CONFIDENCE BOX */
+.confidence{border:1.5px solid #1c1c1c;background:#fff;margin:22px 0}
+.confidence-head{background:#1c1c1c;color:#faf7f0;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.confidence-body{padding:16px 20px}
+.conf-item{border-left:4px solid #8a6a1a;padding:8px 14px;margin-bottom:12px;background:#faf7f0}
+.conf-item:last-child{margin-bottom:0}
+.conf-item.bad{border-left-color:#a3121c}
+.conf-item.good{border-left-color:#2f5c3f}
+.conf-item .lbl{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#8a6a1a;display:block;margin-bottom:4px}
+.conf-item.bad .lbl{color:#a3121c}
+.conf-item.good .lbl{color:#2f5c3f}
+.conf-item p{font-size:.86rem;margin:0;max-width:none}
+
+/* SOURCES SECTION */
+.sources-section{margin-top:56px;padding-top:28px;border-top:2px solid #1c1c1c}
+.source-group{margin-bottom:28px}
+.source-group-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#a3121c;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #e0dac9}
+.source-group-note{font-size:.78rem;color:#7a7a7a;font-style:italic;margin-bottom:12px}
+.source-item{font-size:.87rem;color:#1c1c1c;line-height:1.65;padding:6px 0;border-bottom:1px dotted #ece5d4}
+.source-item:last-child{border-bottom:none}
+.source-item em{font-style:italic}
+.source-num{font-family:"IBM Plex Mono",monospace;color:#8a6a1a;margin-right:4px}
+.source-url{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:#2f5c3f;display:block;margin-top:2px}
+
+/* FOOTER */
+.footer{margin-top:56px;padding-top:20px;border-top:1px solid #e0dac9;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:#7a7a7a;text-align:center;line-height:2.2}
+
+@media(max-width:640px){
+  body{padding:28px 18px 64px;font-size:16px}
+  .cover h1{font-size:1.5rem}
+  .detail-row{grid-template-columns:1fr;gap:4px}
+  .detail-label{padding-right:0}
+  .brand-table,.stat-table{width:auto;min-width:560px}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Reference Guide &middot; Individual-Part Sorting &amp; Storage &middot; Compiled 2026</div>
+  <h1>LEGO Part Storage<br><em>What AFOLs Actually Recommend, and Where They Disagree</em></h1>
+  <div class="cover-subtitle">A full accounting of the purpose-built products the adult LEGO fan community actually buys, the format landscape those products fall into, the criteria experienced builders weigh when choosing among them, and the real, unresolved disagreement over how granular sorting should get &mdash; with sourcing confidence noted explicitly throughout, including where it falls short.</div>
+  <div class="cover-meta">
+    Compiled: 2026 &nbsp;&middot;&nbsp; Scope: storage and sorting for individual, sorted LEGO pieces (not bulk/thematic bin storage)<br>
+    Core sourcing: BrickArchitect &middot; BrickNerd &middot; Rebrickable &middot; TheBrickBlogger<br>
+    Companion document: Field Reference (lego-storage-factsheet.html)
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><span class="toc-section">1. Purpose-Built Sorting Products, By Brand</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item"><span class="toc-section">2. Format Types and Categories</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item"><span class="toc-section">3. Selection Criteria &mdash; Size, Stackability, Labeling, Cost, Durability, Clear vs. Opaque</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item"><span class="toc-section">4. Sorting Philosophy: Category, Part, and Element</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item"><span class="toc-section">5. Sourcing Confidence Assessment</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
+</div>
+
+
+<!-- BOTTOM LINE -->
+<div class="callout" style="margin-bottom:48px">
+  <p>This guide covers storage for individual, sorted LEGO pieces &mdash; not general bulk bin storage. Across every source consulted, three things hold up consistently: small parts-cabinet drawer systems dominate the space; Akro-Mils and IRIS USA are the most commonly cited US brands, with Really Useful Boxes the dominant UK/EU equivalent; and sorting granularity should scale with collection size rather than jumping straight to full element-level (part-plus-color) sorting. Where experienced AFOLs genuinely disagree is over how far up that granularity ladder is actually worth the labor &mdash; a real difference of opinion, not just a matter of scale.</p>
+  <cite>BrickArchitect &middot; BrickNerd &middot; Rebrickable<sup class="cite">[1][5][6]</sup></cite>
+</div>
+
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
+  <h2>Purpose-Built Sorting Products, By Brand</h2>
+
+  <p><strong>Akro-Mils drawer cabinets</strong> are the most-cited US brand for this purpose. Small parts cabinets with plastic dividers, they're described as "reasonably well made" and more ergonomic for micro-categories than tackle boxes.<sup class="cite">[6]</sup> The <strong>44-drawer cabinet (model 10144)</strong>, roughly 20"W&times;6"D&times;15.8"H, is the most frequently mentioned unit &mdash; stackable, wall-mountable, and priced roughly $60&ndash;95 depending on retailer. One UK-focused forum thread noted Akro-Mils is "harder to find in the UK," with <strong>Raaco</strong> suggested as a comparable alternative.<sup class="cite">[7]</sup></p>
+
+  <p><strong>IRIS USA</strong> is the other major US brand, and is explicitly preferred over Akro-Mils by at least one detailed AFOL guide. BrickNerd's guide calls the IRIS Rolling Cart with Organizer Top "the indisputable king" of one AFOL's LEGO room, citing modularity, clear drawers, and smooth sliding (&asymp;$40 for a 6-drawer unit as of May 2023).<sup class="cite">[5]</sup> The same guide notes IRIS mini-drawer units generally out-stability Akro-Mils equivalents (&asymp;$40&ndash;50/unit), though it separately argues against relying heavily on mini-drawers at all (see &sect; 04). Amazon customer review data for the IRIS 44-drawer parts cabinet shows a <strong>4.7/5 rating across 135+ reviews</strong>, with buyers specifically citing LEGO sorting as a use case.<sup class="cite">[8]</sup></p>
+
+  <p><strong>Really Useful Boxes</strong> &mdash; specifically the "Scrapbook Drawers" tower line &mdash; is described as near-ubiquitous among UK AFOLs, because the drawers are sized for 12&times;12" scrapbook paper and an optional 15-compartment "Hobby Tray" divider insert breaks each drawer into compartments of roughly 10.5&times;7.0&times;7.5 cm (about 0.55 L each). Pricing for the tower units runs from about $23 (single 9.5L drawer) up to about $120 for an 8-drawer tower, with individual replacement drawers around $20 each. BrickArchitect's large-collection guide independently notes these drawers are "about 70% larger" than the purpose-built Papimax LEGO drawers.<sup class="cite">[1][10]</sup></p>
+
+  <div class="callout">
+    <p>Pricing/dimension specifics for Really Useful Boxes rely partly on a Brickset review that was rate-limited (HTTP 429/403) on a second direct-fetch attempt &mdash; treat those particular figures as one level removed from the primary source until independently re-verified. See &sect; 05.</p>
+    <cite>Sourcing note &mdash; see full detail in &sect; 05</cite>
+  </div>
+
+  <p><strong>Craft and hobby organizers</strong> also show up as legitimate, community-used alternatives, not fringe options. <strong>ArtBin Super Satchel</strong> organizers (clear polypropylene, &asymp;15.2&times;8&times;6.2 in, removable dividers, stackable, slim/double-deep variants) are explicitly called out as popular with the AFOL community, including a documented case of a builder &mdash; Adam Savage, profiled by name &mdash; constructing a custom cabinet just to house stacks of them.<sup class="cite">[4]</sup> <strong>Stanley Removable Compartment Pro Organizer</strong> (&asymp;$15, 25 removable compartments) and <strong>Plano 3700-series tackle boxes</strong> (up to 24 compartments, 14&times;9.25&times;2 in) are both cited as workable lower-cost options, with the caveat that tackle-box-style compartment layouts make "accessing a specific part a bit slower."<sup class="cite">[1]</sup></p>
+
+  <p><strong>Official LEGO-branded storage</strong> (Room Copenhagen-manufactured stackable brick-shaped drawers, e.g. 2&times;2 with one drawer &asymp;$25, 2&times;4 with two drawers &asymp;$35) gets a mixed review. Pros: stacking like real bricks, enclosed drawers that don't spill in transit, and drawer fronts that accept LEGO plates for labeling. Cons: reduced structural sturdiness versus a solid brick, limited size options (no 1&times;2), higher cost per unit than generic cabinets, and some reported discoloration on white units. The reviewer's bottom line: better for bulk/thematic storage than for granular single-part sorting, where standard drawer cabinets are preferred.<sup class="cite">[9]</sup></p>
+
+  <div class="table-scroll">
+  <table class="brand-table">
+    <thead><tr><th>Brand</th><th>Region</th><th>Flagship Product</th><th>Typical Price</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Akro-Mils</strong></td><td>US</td><td>44-Drawer Cabinet (#10144)</td><td>$60&ndash;95</td></tr>
+      <tr><td><strong>IRIS USA</strong></td><td>US</td><td>Rolling Cart w/ Organizer Top</td><td>&asymp;$40 (6-drawer)</td></tr>
+      <tr><td><strong>Really Useful Boxes</strong></td><td>UK/EU</td><td>Scrapbook Drawers Tower</td><td>$23&ndash;120</td></tr>
+      <tr><td><strong>ArtBin</strong></td><td>US/int'l</td><td>Super Satchel</td><td>Not specified in source research</td></tr>
+      <tr><td><strong>Stanley</strong></td><td>US/int'l</td><td>Removable Compartment Pro</td><td>&asymp;$15</td></tr>
+      <tr><td><strong>Official LEGO (Room Copenhagen)</strong></td><td>Global</td><td>Storage Brick Drawers</td><td>$25&ndash;35/unit</td></tr>
+      <tr class="gap-row"><td>Sistema &middot; Bisupply &middot; SOKA</td><td>&mdash;</td><td colspan="2">No dedicated AFOL review or community discussion found &mdash; flagged as a gap in &sect; 05, not a confirmed negative.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>No substantive AFOL reviews or community discussion of <strong>Sistema</strong>, <strong>Bisupply</strong>, or <strong>SOKA</strong> specifically for LEGO sorting were found. Sistema comes up mostly as generic stackable food-storage-style containers people repurpose &mdash; cheap and widely available, but noted to require "a lot of effort" un-stacking to part out a build. Bisupply and SOKA returned essentially no dedicated reviews or community commentary at all; these read as generic Amazon-brand parts cabinets rather than products with an established AFOL reputation. This is a real gap in available information, not a confirmed negative &mdash; see &sect; 05.<sup class="cite">[14]</sup></p>
+</div>
+
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
+  <h2>Format Types and Categories</h2>
+
+  <p>BrickArchitect &mdash; a well-established AFOL reference site run by Tom Alphin, author of unofficial LEGO building guides &mdash; categorizes the field into six formats: <strong>drawer cabinets, drawers-with-dividers, removable-compartment organizers, tackle boxes, plastic bags, and open-front bins</strong> &mdash; with an explicit note that "there is no perfect storage solution," and that compartmentalized products are roughly <strong>10% less space-efficient</strong> than fewer, larger compartments.<sup class="cite">[1]</sup></p>
+
+  <p>Named builder case studies on the same site show real-world diversity in how these formats actually get combined in practice, rather than any single format winning outright:</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Huw Millington</span><span class="detail-body">Brickset founder. Uses hundreds of Really Useful Scrapbook Drawers plus bulk ziploc bags, stored in IKEA MALM dressers.</span></div>
+    <div class="detail-row"><span class="detail-label">"Bevins Bricks"</span><span class="detail-body">Uses Sterilite mini 3-drawer cabinets.</span></div>
+    <div class="detail-row"><span class="detail-label">Adam Savage</span><span class="detail-body">Uses a custom-built cabinet constructed specifically around ArtBin Super Satchels.</span></div>
+    <div class="detail-row"><span class="detail-label">"fakespacesquid"</span><span class="detail-body">Deliberately mixes twelve different storage types depending on access frequency, using sorting sieves and explicit "overflow storage" for less-used parts.</span></div>
+  </div>
+
+  <p>Source for this section: BrickArchitect, <em>Storage Ideas from other LEGO Artists</em> &mdash; a directly-fetched primary source profiling named builders, rather than an aggregator paraphrase.<sup class="cite">[4]</sup></p>
+</div>
+
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
+  <h2>Selection Criteria: Size, Stackability, Labeling, Cost, Durability, Clear vs. Opaque</h2>
+
+  <h3>Drawer Size and Depth</h3>
+  <p>Drawer size is a core design constraint, not an afterthought. BrickArchitect gives concrete interior dimensions: Akro-Mils drawers &asymp;5.0&times;13.3&times;3.7 cm, Papimax (LEGO-specific) drawers &asymp;7&times;7.5&times;6 cm, and Really Useful hobby-tray compartments &asymp;10.5&times;7.0&times;7.5 cm. The tradeoff is explicit: smaller drawers fit small pieces (1&times;1 plates, etc.) more densely, but larger pieces (16-stud bricks, baseplates) need bigger drawers or won't fit at all.<sup class="cite">[1]</sup> BrickArchitect's medium-collection guide separately recommends favoring <strong>shallow drawers over deep ones</strong> across the board, to avoid pieces getting buried and hard to spot.<sup class="cite">[2]</sup></p>
+
+  <h3>Stackability</h3>
+  <p>Repeatedly cited as a near-mandatory feature. Both IRIS and Akro-Mils cabinets are designed with lid grooves and interlocking tabs specifically to stack units, and BrickNerd frames "uniform, stackable containers" as one of its core selection principles.<sup class="cite">[5]</sup></p>
+
+  <h3>Labeling</h3>
+  <p>BrickArchitect's site provides printable label sheets specifically for this purpose, and the official LEGO storage bricks accept an actual LEGO plate on the drawer front as a built-in labeling surface.<sup class="cite">[3][9]</sup></p>
+
+  <h3>Cost per Drawer</h3>
+  <p>Cost varies enormously &mdash; from roughly $0.50&ndash;$1 per compartment-equivalent for bulk Sterilite/Akro-Mils cabinets, up to &asymp;$20 per drawer for Really Useful scrapbook drawers, and &asymp;$25&ndash;35 per unit for official LEGO storage bricks.</p>
+
+  <h3>Durability and Material Quality</h3>
+  <p>One direct brand comparison found in search results states IRIS's plastic frames are "stronger and more rigid" than Sterilite's, and IRIS cabinets are described as "a little more stable" &mdash; though this is a secondhand comparison surfaced via search snippet rather than independently verified by fetching the original page. Treat this as a lead, not a settled fact; see &sect; 05.<sup class="cite">[12]</sup></p>
+
+  <h3>Clear vs. Opaque</h3>
+  <p>Transparency is treated as close to a non-negotiable preference across nearly every source. Clear/translucent drawers (IRIS, Sterilite ClearView, ArtBin) are consistently favored because a builder can identify a drawer's contents without opening it; no source consulted for this report argued for opaque as advantageous.</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Akro-Mils interior</span><span class="detail-body">&asymp;5.0 &times; 13.3 &times; 3.7 cm</span></div>
+    <div class="detail-row"><span class="detail-label">Papimax interior</span><span class="detail-body">&asymp;7 &times; 7.5 &times; 6 cm (LEGO-specific)</span></div>
+    <div class="detail-row"><span class="detail-label">Really Useful hobby tray</span><span class="detail-body">&asymp;10.5 &times; 7.0 &times; 7.5 cm (&asymp;0.55 L); &asymp;70% larger than Papimax</span></div>
+  </div>
+</div>
+
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
+  <h2>Sorting Philosophy: Category, Part, and Element</h2>
+
+  <p>There is strong, consistent agreement across BrickArchitect, BrickNerd, and the Rebrickable review that sorting should scale with collection size rather than jumping straight to full element-level sorting. BrickArchitect gives the most concrete, oft-cited thresholds:<sup class="cite">[3]</sup></p>
+
+  <div class="table-scroll">
+  <table class="stat-table">
+    <thead><tr><th>Collection Size</th><th>Recommended Approach</th></tr></thead>
+    <tbody>
+      <tr><td>Under &asymp;3,000 pieces</td><td>No real sorting needed</td></tr>
+      <tr><td>3,000&ndash;10,000</td><td>Sort into a dozen or fewer broad categories</td></tr>
+      <tr><td>10,000&ndash;50,000</td><td>Common pieces by individual part; less-common pieces by broader category</td></tr>
+      <tr><td>50,000&ndash;250,000</td><td>Sort essentially everything by part</td></tr>
+      <tr><td>250,000+</td><td>Common pieces by element (part + color); less-common pieces stay part-only</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The reasoning given for <em>not</em> jumping to full element-sorting even at fairly large scale: sorting by part alone (without also splitting every color into its own bin) is "sufficient for most large collections, because it is easy for most people to distinguish between colors." Full element sorting is described as LEGO's own internal warehouse practice, recommended by BrickArchitect only for extremely large (250,000+ piece) personal collections, since the up-front labor and drawer count required scale enormously.<sup class="cite">[3]</sup></p>
+
+  <h3>Where Opinions Genuinely Diverge</h3>
+  <p>This is where the disagreement is not just a matter of scale. BrickNerd's guide takes an explicitly contrarian position relative to the fine-grained-sorting ideal, arguing that heavy reliance on small or mini drawers "wastes space and money" and creates unnecessarily lengthy sorting sessions "without proportional benefit." It instead advocates broad categories, dense storage, and larger uniform containers even for big collections.<sup class="cite">[5]</sup></p>
+
+  <p>BrickArchitect's own guide flags the opposite failure mode from the other direction &mdash; that pure color-sorting (the instinctive first step most people take) becomes a dead end once a builder needs to find a <em>specific part</em> rather than just admire a pile of one color, which is why it recommends the by-category-then-by-part progression rather than staying with color as an organizing axis.<sup class="cite">[3]</sup></p>
+
+  <div class="callout">
+    <p>So the disagreement isn't "sort by element" vs. "sort by category" as a clean binary &mdash; it's about how far up the granularity ladder is actually worth the labor cost, and reasonable, experienced AFOL voices land in different places on that question.</p>
+    <cite>Synthesized from BrickArchitect and BrickNerd &mdash; see &sect; 05 for how these two sources were weighed</cite>
+  </div>
+
+  <p><strong>Practical takeaway:</strong> for storing individual piece types specifically, the community consensus (as represented in the sources this report could access) supports sorting by part once a collection is large enough to matter (roughly 10,000+ pieces), using clear, stackable, shallow drawers &mdash; IRIS or Akro-Mils cabinets in the US, or Really Useful drawers in the UK. Going all the way to full color-plus-part (element) sorting is worth it only at very large scale, and some experienced builders would argue not to bother with that level of granularity at all.</p>
+</div>
+
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
+  <h2>Sourcing Confidence Assessment</h2>
+
+  <p>This research draws on AFOL blogs, reference guides, forums, and named-builder profiles &mdash; not on a single authoritative standard, since none exists for this topic. Confidence varies meaningfully by claim, and is broken out explicitly below rather than presented as uniform.</p>
+
+  <div class="confidence">
+    <div class="confidence-head">Well-Supported</div>
+    <div class="confidence-body">
+      <div class="conf-item good">
+        <span class="lbl">Corroborated across independent sources</span>
+        <p>The size-based sorting-philosophy framework (category &rarr; part &rarr; element as collections grow) is corroborated across two independent, well-established AFOL reference sources (BrickArchitect and BrickNerd) using consistent language and thresholds &mdash; about as close to community consensus as this research found.</p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Corroborated across independent sources</span>
+        <p>The prominence of Akro-Mils (US) and Really Useful Boxes (UK) as the most commonly named brands is corroborated across three independent sources (Rebrickable, a UK forum discussion, and BrickArchitect's builder profiles).</p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Directly-fetched primary source</span>
+        <p>The named-builder case studies (Huw Millington, Adam Savage, etc.) on BrickArchitect's "Storage Ideas from other LEGO Artists" page were fetched directly, showing real AFOL practice rather than aggregator paraphrase.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Thinly Sourced or Unverified</div>
+    <div class="confidence-body">
+      <div class="conf-item bad">
+        <span class="lbl">Reddit could not be accessed &mdash; flagged explicitly</span>
+        <p>Reddit (r/lego, or any r/legostorage-type subreddit) could not be directly accessed &mdash; WebFetch is blocked from reddit.com and its mirrors, and web search did not surface specific, quotable Reddit threads with enough detail to cite responsibly. Everything characterized in this report as "community" opinion comes from LEGO-fan blogs, forums (Rebrickable forum, a UK LEGO forum), and named-builder profiles rather than Reddit itself. No Reddit sentiment was fabricated or inferred; any impression of "what Reddit says" should be read as simply absent from this research, not confirmed one way or the other.</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">Search-summary only, not independently verified</span>
+        <p>The IRIS-vs-Sterilite "stronger/more rigid plastic" comparison is sourced only from a search-engine synthesis, not independently fetched and verified &mdash; a lead, not a confirmed fact.</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">Rate-limited on re-fetch</span>
+        <p>Several figures (Really Useful Boxes pricing/dimension specifics, some Brickset review details) rely on a second attempt at direct fetch that was rate-limited (HTTP 429/403), so those figures are one level removed from the primary source. Pricing throughout this report also fluctuates by retailer and date generally.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Could Not Confirm At All</div>
+    <div class="confidence-body">
+      <div class="conf-item bad">
+        <span class="lbl">Confirmed gap, not a confirmed negative</span>
+        <p>No credible, dedicated AFOL review or community discussion of <strong>Sistema, Bisupply, or SOKA</strong> specifically for LEGO sorting was found. These products may simply be under-discussed in the sources this research could reach, rather than poorly regarded by the community &mdash; there is no basis in this research to characterize community opinion on them one way or the other.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SOURCES AND REFERENCES -->
+<div class="sources-section">
+  <div class="section-eyebrow"><span class="section-tag">&sect;</span><div class="section-rule"></div></div>
+  <h2>Sources and References</h2>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 1 &mdash; Primary AFOL Reference Guides</div>
+    <div class="source-group-note">Directly-fetched, well-established, cross-corroborating AFOL reference sources; the strongest sourcing tier used in this report.</div>
+    <div class="source-item"><span class="source-num">[1]</span>BrickArchitect. <em>LEGO Storage for Large Collections.</em>
+      <span class="source-url">brickarchitect.com/guide/bricks/large/</span></div>
+    <div class="source-item"><span class="source-num">[2]</span>BrickArchitect. <em>LEGO Storage for Medium Collections.</em>
+      <span class="source-url">brickarchitect.com/guide/bricks/medium/</span></div>
+    <div class="source-item"><span class="source-num">[3]</span>BrickArchitect. <em>Organizing your LEGO Bricks.</em>
+      <span class="source-url">brickarchitect.com/guide/bricks/organization/</span></div>
+    <div class="source-item"><span class="source-num">[4]</span>BrickArchitect. <em>Storage Ideas from other LEGO Artists.</em>
+      <span class="source-url">brickarchitect.com/guide/bricks/ideas/</span></div>
+    <div class="source-item"><span class="source-num">[5]</span>BrickNerd. <em>An Opinionated Guide to LEGO Storage Containers and Cost.</em> May 25, 2023.
+      <span class="source-url">bricknerd.com/home/an-opinionated-guide-to-lego-storage-containers-and-cost-5-25-23</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 2 &mdash; Community Forums and Marketplace-Adjacent Sources</div>
+    <div class="source-group-note">Community-authored reviews and threads, plus marketplace review aggregation.</div>
+    <div class="source-item"><span class="source-num">[6]</span>Rebrickable. <em>Review: LEGO Storage Organisers.</em>
+      <span class="source-url">rebrickable.com/blog/389/review-lego-storage-organisers/</span></div>
+    <div class="source-item"><span class="source-num">[7]</span>Rebrickable Forum. <em>LEGO Storage</em> (thread).
+      <span class="source-url">forum.rebrickable.com/t/lego-storage/3778</span></div>
+    <div class="source-item"><span class="source-num">[8]</span>Amazon. IRIS USA 44-Drawer Organizer &mdash; product listing and customer reviews (4.7/5, 135+ reviews).
+      <span class="source-url">amazon.com/IRIS-Organizer-44-Drawer-Electronics-Organization/dp/B07DFDS56H</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 3 &mdash; Brand and Product Review / Official Product Data</div>
+    <div class="source-group-note">Single-source dedicated reviews and manufacturer/retailer specification pages.</div>
+    <div class="source-item"><span class="source-num">[9]</span>TheBrickBlogger. <em>LEGO storage brick drawers review.</em> May 2018.
+      <span class="source-url">thebrickblogger.com/2018/05/lego-storage-brick-drawers-review/</span></div>
+    <div class="source-item"><span class="source-num">[10]</span>Really Useful Products (UK/AU). Storage product specifications and pricing.
+      <span class="source-url">reallyusefulproducts.co.uk/usa/html/onlineshop/rub_storage.php</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 4 &mdash; Secondhand / Search-Summary Sourcing</div>
+    <div class="source-group-note">Leads surfaced via search-engine summary rather than independently fetched and verified pages. Treated with lower confidence throughout this report; see &sect; 05.</div>
+    <div class="source-item"><span class="source-num">[11]</span>Brickset. Review of Really Useful Scrapbook Drawers. Referenced via search-engine summary; direct fetch attempted a second time but rate-limited (HTTP 429/403) &mdash; pricing/dimension specifics attributed to this review are one level removed from the primary source.</div>
+    <div class="source-item"><span class="source-num">[12]</span>Unspecified search-engine synthesis comparing IRIS vs. Sterilite plastic rigidity and stability. Surfaced via search snippet only, not independently fetched or verified &mdash; a lead, not a confirmed fact.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 5 &mdash; Explicitly Absent or Inaccessible</div>
+    <div class="source-group-note">Documented here for transparency as gaps in this research, not as sources actually consulted. See &sect; 05.</div>
+    <div class="source-item"><span class="source-num">[13]</span>Reddit (r/lego, and any r/legostorage-type community). <strong>Not accessed.</strong> WebFetch is blocked on reddit.com and its mirrors; web search did not surface specific, quotable threads sufficient to cite responsibly. No Reddit content was used, quoted, or inferred anywhere in this report.</div>
+    <div class="source-item"><span class="source-num">[14]</span>Sistema, Bisupply, SOKA &mdash; brand-specific AFOL sourcing. <strong>Not found.</strong> No dedicated review or community discussion of these three brands specifically for LEGO part sorting was located in this research.</div>
+  </div>
+</div>
+
+<div class="footer">
+  LEGO Part Storage: What AFOLs Actually Recommend, and Where They Disagree &nbsp;&middot;&nbsp; Compiled 2026<br>
+  Core sourcing: BrickArchitect &middot; BrickNerd &middot; Rebrickable &middot; TheBrickBlogger<br>
+  Sourcing gaps &mdash; including the Reddit access block and the Sistema/Bisupply/SOKA review gap &mdash; are flagged explicitly in &sect; 05 rather than smoothed over.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f2ead6;color:#241c12;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold &amp; Silver Mining Claims in Virginia — Field Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2ead6;
+  --paper-2:#e8dcbe;
+  --paper-3:#faf4e6;
+  --ink:#241c12;
+  --ink-soft:#4d3f28;
+  --line:#c9b78c;
+  --line-dark:#a3894f;
+  --rust:#b8611f;
+  --rust-deep:#7a3d10;
+  --ochre:#c9932e;
+  --ochre-bright:#e0ac3f;
+  --forest:#2f4a33;
+  --forest-deep:#1c2f20;
+  --pewter:#5c6672;
+  --pewter-deep:#3a4149;
+  --stamp-red:#a4291f;
+  --stamp-green:#2f6b3a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:light;background:var(--paper)!important;color:var(--ink)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:'Spectral',Georgia,serif;font-size:15px;line-height:1.55;max-width:1180px;margin:0 auto;padding:32px 28px 70px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+/* ── MASTHEAD ── */
+.masthead{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:4px solid var(--ink);padding-bottom:16px;margin-bottom:18px}
+.masthead-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--rust-deep);margin-bottom:8px}
+h1{font-family:'Spectral',serif;font-weight:700;font-size:2.3rem;line-height:1.08;color:var(--ink)}
+h1 em{font-style:italic;color:var(--forest);font-weight:500}
+.masthead-sub{font-size:.92rem;font-style:italic;color:var(--ink-soft);margin-top:9px;max-width:64ch}
+.stamp-badge{border:3px solid var(--stamp-red);color:var(--stamp-red);padding:12px 20px;text-align:center;transform:rotate(-3deg);flex-shrink:0;background:rgba(164,41,31,0.03)}
+.sb-big{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.35rem;line-height:1.05;letter-spacing:.03em;text-transform:uppercase}
+.sb-sub{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.05em;margin-top:5px;color:var(--stamp-red)}
+.sb-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;margin-top:5px;opacity:.85}
+
+/* ── STAT ROW ── */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-bottom:20px}
+.stat-cell{background:var(--paper-3);border:1px solid var(--line-dark);border-top:4px solid var(--ochre-bright);padding:12px 8px;text-align:center}
+.stat-cell.alt{border-top-color:var(--forest)}
+.stat-num{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.35rem;color:var(--rust-deep);line-height:1.1}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--ink-soft);margin-top:6px;line-height:1.35}
+
+/* ── DOCUMENT CONTRAST (signature element) ── */
+.contrast-wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;margin-bottom:20px;border:2px solid var(--ink);background:var(--paper-3)}
+.contrast-divider{display:flex;align-items:center;justify-content:center;width:34px;background:var(--ink);color:var(--paper-3);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;writing-mode:vertical-rl;text-transform:uppercase;padding:10px 0}
+.doc-card{padding:18px 20px;position:relative;overflow:hidden}
+.doc-card.void{border-right:1px solid var(--line)}
+.doc-head{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px}
+.doc-title{font-family:'Spectral',serif;font-weight:700;font-size:1.02rem;color:var(--ink);margin-bottom:12px}
+.doc-field{display:grid;grid-template-columns:110px 1fr;gap:8px;padding:6px 0;border-bottom:1px dotted var(--line);font-size:.78rem}
+.doc-field:last-child{border-bottom:none}
+.doc-flabel{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.03em;color:var(--ink-soft);text-transform:uppercase}
+.doc-fval{color:var(--ink)}
+.doc-fval.blank{color:var(--line-dark);font-style:italic}
+.doc-stamp{position:absolute;font-family:'IBM Plex Mono',monospace;font-weight:700;text-transform:uppercase;letter-spacing:.04em;text-align:center;line-height:1.3;padding:8px 14px;border:3px solid;opacity:.88;pointer-events:none}
+.doc-stamp.red{color:var(--stamp-red);border-color:var(--stamp-red);top:52%;right:14px;transform:rotate(-9deg);font-size:.78rem;width:190px}
+.doc-stamp.green{color:var(--stamp-green);border-color:var(--stamp-green);top:14px;right:16px;transform:rotate(6deg);font-size:.72rem;width:126px}
+.doc-note{font-size:.72rem;color:var(--ink-soft);font-style:italic;margin-top:12px;line-height:1.5;border-top:1px solid var(--line);padding-top:10px}
+
+/* ── BELT MAP ── */
+.belt-wrap{background:var(--paper-3);border:2px solid var(--ink);padding:20px 24px 18px;margin-bottom:20px}
+.belt-headrow{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:16px;border-bottom:1px dashed var(--line-dark);padding-bottom:10px}
+.belt-title{font-family:'Spectral',serif;font-weight:700;font-size:1.05rem;color:var(--ink)}
+.belt-meta{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-soft);letter-spacing:.05em}
+.belt-scroll{overflow-x:auto;padding-bottom:6px}
+.belt-strip{position:relative;min-width:760px;padding:44px 6px 0}
+.belt-ribbon{position:relative;height:14px;border-radius:2px;background:linear-gradient(90deg,var(--rust),var(--ochre-bright));box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15)}
+.belt-ticks{display:flex;justify-content:space-between;margin-top:6px}
+.belt-tick{display:flex;flex-direction:column;align-items:center;width:60px;text-align:center}
+.bt-dot{width:6px;height:6px;border-radius:50%;background:var(--ink);margin-bottom:5px}
+.bt-label{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--ink-soft);letter-spacing:.02em;line-height:1.2}
+.belt-pins{position:absolute;top:0;left:6px;right:6px;height:44px}
+.belt-pin{position:absolute;transform:translateX(-50%);text-align:center;width:150px}
+.pin-flag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:9.5px;color:var(--paper-3);background:var(--forest);padding:2px 7px;border-radius:2px;margin-bottom:3px}
+.belt-pin.alt .pin-flag{background:var(--stamp-red)}
+.pin-line{width:1px;height:8px;background:var(--line-dark);margin:0 auto}
+.pin-label{font-size:.68rem;color:var(--ink-soft);line-height:1.3}
+.belt-foot{font-size:.76rem;color:var(--ink-soft);line-height:1.6;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.belt-legend{display:flex;gap:18px;margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--ink-soft)}
+.belt-legend span{display:inline-flex;align-items:center;gap:5px}
+.leg-dot{width:8px;height:8px;border-radius:2px;display:inline-block}
+
+/* ── SHARED PANEL GRID ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.panel{background:var(--paper-3);border:1px solid var(--line-dark);padding:17px 19px}
+.panel-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--rust-deep);margin-bottom:4px}
+.panel h2{font-family:'Spectral',serif;font-size:1.02rem;color:var(--ink);margin-bottom:10px}
+.panel p{font-size:.82rem;color:var(--ink-soft);line-height:1.6;margin-bottom:8px}
+.panel p:last-child{margin-bottom:0}
+
+/* Ledger rows (fees / process steps) */
+.ledger-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;padding:7px 0;border-bottom:1px dotted var(--line);align-items:baseline}
+.ledger-row:last-child{border-bottom:none}
+.lg-num{font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--forest);font-size:.85rem;min-width:20px}
+.lg-note{font-size:.78rem;color:var(--ink);line-height:1.45}
+.lg-note b{color:var(--ink)}
+.lg-fig{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--ink-soft);white-space:nowrap;text-align:right}
+
+/* Permit stamp pairs (recreational panel) */
+.permit-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.permit-tag{border:2px solid;padding:9px 11px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;line-height:1.5}
+.permit-tag.ok{border-color:var(--stamp-green);color:var(--stamp-green)}
+.permit-tag.bad{border-color:var(--stamp-red);color:var(--stamp-red)}
+.permit-tag b{display:block;font-size:.72rem;margin-bottom:3px;letter-spacing:.03em}
+
+/* ── COMPARISON TABLE ── */
+.compare-wrap{background:var(--paper-3);border:2px solid var(--ink);padding:18px 20px;margin-bottom:20px}
+.compare-title{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+.compare-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.compare-table th{font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--paper-2);border-bottom:2px solid var(--line-dark);padding:8px 10px;text-align:left}
+.compare-table td{padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top;line-height:1.45}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table td:first-child{font-weight:600;color:var(--ink-soft);white-space:nowrap}
+
+/* ── OPEN QUESTIONS (kept visible, not buried) ── */
+.oq-wrap{border:3px solid var(--stamp-red);background:var(--paper-3);padding:18px 22px;margin-bottom:18px}
+.oq-title{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--stamp-red);margin-bottom:12px}
+.oq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.oq-item{display:flex;gap:12px}
+.oq-num{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1rem;color:var(--stamp-red);flex-shrink:0}
+.oq-body{font-size:.78rem;line-height:1.55;color:var(--ink)}
+.oq-body b{color:var(--ink)}
+
+/* ── CONFIDENCE LEDGER ── */
+.conf-wrap{background:var(--paper-3);border:1px solid var(--ink);padding:17px 21px;margin-bottom:18px}
+.conf-title{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+.conf-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.conf-col-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.conf-col-label.good{color:var(--stamp-green)}
+.conf-col-label.thin{color:var(--stamp-red)}
+.conf-list{list-style:none;font-size:.75rem;line-height:1.55;color:var(--ink-soft)}
+.conf-list li{padding:4px 0 4px 14px;position:relative;border-bottom:1px dotted var(--line)}
+.conf-list li:last-child{border-bottom:none}
+.conf-list li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%}
+.conf-list.good li::before{background:var(--stamp-green)}
+.conf-list.thin li::before{background:var(--stamp-red)}
+
+/* ── FOOTER ── */
+.footer{margin-top:8px;padding-top:14px;border-top:1px solid var(--line-dark);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.04em;color:var(--ink-soft);text-align:center;line-height:1.9}
+
+@media(max-width:900px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .masthead{grid-template-columns:1fr}
+  .contrast-wrap{grid-template-columns:1fr}
+  .contrast-divider{writing-mode:horizontal-tb;width:100%;padding:6px 0}
+  .compare-table{font-size:.7rem}
+  .oq-grid{grid-template-columns:1fr}
+  .conf-cols{grid-template-columns:1fr}
+  .permit-pair{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div>
+    <div class="masthead-eyebrow">Legal &amp; Historical Field Reference &middot; Mines, Minerals &amp; Energy &middot; Compiled 2026</div>
+    <h1>Gold &amp; Silver Mining Claims<br><em>in Virginia</em></h1>
+    <div class="masthead-sub">Virginia has no claim-staking system. Gold and silver here are privately owned mineral rights, not federal claims &mdash; and exploratory drilling is, right now, exempt from state permitting entirely. Two open questions are flagged below, not smoothed over.</div>
+  </div>
+  <div class="stamp-badge">
+    <div class="sb-big">No Claims<br>Registry</div>
+    <div class="sb-sub">Title 45.2, Code of Virginia</div>
+    <div class="sb-label">Private Mineral Estate State</div>
+  </div>
+</div>
+
+<!-- KEY NUMBERS -->
+<div class="stat-row">
+  <div class="stat-cell">
+    <div class="stat-num">98,600&nbsp;t.oz</div>
+    <div class="stat-label">Historical gold production, Virginia (peak 1849)</div>
+  </div>
+  <div class="stat-cell alt">
+    <div class="stat-num">90,000&nbsp;t.oz</div>
+    <div class="stat-label">Historical silver production (byproduct, ended 1945)</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">140&nbsp;mi</div>
+    <div class="stat-label">Length of the Virginia Gold-Pyrite Belt (9&ndash;16 mi wide)</div>
+  </div>
+  <div class="stat-cell alt">
+    <div class="stat-num">$50&nbsp;/&nbsp;acre</div>
+    <div class="stat-label">New mine permit fee, plus $3,000/acre reclamation bond</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">0</div>
+    <div class="stat-label">State permits required to drill/explore for gold today</div>
+  </div>
+  <div class="stat-cell alt">
+    <div class="stat-num">35&nbsp;yrs</div>
+    <div class="stat-label">Unused mineral rights can revert to the surface owner</div>
+  </div>
+</div>
+
+<!-- SIGNATURE: CLAIM STAKE VS DEED STAMP -->
+<div class="contrast-wrap">
+  <div class="doc-card void">
+    <div class="doc-head">Western Public-Land Model</div>
+    <div class="doc-title">Unpatented Mining Claim &mdash; BLM Form 3830</div>
+    <div class="doc-field"><span class="doc-flabel">Claimant</span><span class="doc-fval blank">&mdash;</span></div>
+    <div class="doc-field"><span class="doc-flabel">Claim name</span><span class="doc-fval blank">&mdash;</span></div>
+    <div class="doc-field"><span class="doc-flabel">Land status</span><span class="doc-fval">Federal public domain, open to mineral entry</span></div>
+    <div class="doc-field"><span class="doc-flabel">Filed with</span><span class="doc-fval">BLM state/county land office</span></div>
+    <div class="doc-field"><span class="doc-flabel">State</span><span class="doc-fval blank">Virginia not listed</span></div>
+    <div class="doc-stamp red">Not Applicable<br>No Open Federal<br>Locatable Land in VA</div>
+    <div class="doc-note">BLM's own brochure lists the specific states where a claim can currently be located &mdash; Virginia is not among them. This is a direct, primary-source confirmation, not an inference.</div>
+  </div>
+  <div class="contrast-divider">Virginia Is Different</div>
+  <div class="doc-card recorded">
+    <div class="doc-head">Virginia Model</div>
+    <div class="doc-title">Mineral Right &mdash; Deed / Lease Record</div>
+    <div class="doc-field"><span class="doc-flabel">Mineral owner</span><span class="doc-fval">Private party &mdash; may differ from surface owner</span></div>
+    <div class="doc-field"><span class="doc-flabel">Instrument</span><span class="doc-fval">Lease, purchase, or inherited severed estate</span></div>
+    <div class="doc-field"><span class="doc-flabel">Land status</span><span class="doc-fval">Overwhelmingly private land</span></div>
+    <div class="doc-field"><span class="doc-flabel">Recorded with</span><span class="doc-fval">County land/deed records</span></div>
+    <div class="doc-field"><span class="doc-flabel">Governing law</span><span class="doc-fval">Code of Virginia Title 45.2, Ch. 4 &amp; 13</span></div>
+    <div class="doc-stamp green">Recorded</div>
+    <div class="doc-note">No standardized state lease form or public gold/silver leasing registry exists &mdash; this is a private contract, negotiated directly with whoever holds the mineral rights.</div>
+  </div>
+</div>
+
+<!-- BELT MAP -->
+<div class="belt-wrap">
+  <div class="belt-headrow">
+    <div class="belt-title">The Virginia Gold-Pyrite Belt &mdash; Piedmont Strike Line</div>
+    <div class="belt-meta">Schematic transect, not to scale &middot; Fairfax Co. &rarr; Buckingham Co.</div>
+  </div>
+  <div class="belt-scroll">
+    <div class="belt-strip">
+      <div class="belt-pins">
+        <div class="belt-pin" style="left:18.18%">
+          <span class="pin-flag">1782</span>
+          <div class="pin-line"></div>
+          <div class="pin-label">Jefferson notes a 4-lb gold ore chunk, Stafford Co.</div>
+        </div>
+        <div class="belt-pin" style="left:45.45%">
+          <span class="pin-flag">1804</span>
+          <div class="pin-line"></div>
+          <div class="pin-label">First recorded production &mdash; Whitehall Mine, Spotsylvania Co.</div>
+        </div>
+        <div class="belt-pin alt" style="left:95%">
+          <span class="pin-flag">2020&ndash;</span>
+          <div class="pin-line"></div>
+          <div class="pin-label">Renewed exploratory core drilling, Buckingham Co.</div>
+        </div>
+      </div>
+      <div class="belt-ribbon"></div>
+      <div class="belt-ticks">
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Fairfax</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Prince<br>William</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Stafford</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Fauquier</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Culpeper</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Spotsylvania</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Orange</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Louisa</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Fluvanna</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Goochland</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Cumberland</span></div>
+        <div class="belt-tick"><span class="bt-dot"></span><span class="bt-label">Buckingham</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="belt-legend">
+    <span><span class="leg-dot" style="background:var(--forest)"></span>Historic production milestone</span>
+    <span><span class="leg-dot" style="background:var(--stamp-red)"></span>Modern exploratory activity</span>
+  </div>
+  <div class="belt-foot">Roughly 140 miles long and 9&ndash;16 miles wide through the Piedmont province. Production peaked in 1849 (the same year the California Gold Rush began drawing labor and capital away); small-scale commercial gold mining continued until <b>1947</b>, the last year Virginia recorded gold production. Virginia produces no gold commercially today. Silver districts (Halifax Co. &ldquo;Virginia District&rdquo;; Louisa Co. &ldquo;Mineral District&rdquo;) sit partly within/adjacent to this belt but are a separate byproduct story &mdash; see the Silver panel below.</div>
+</div>
+
+<!-- AGENCY / PROCESS -->
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-label">Governing Agency &mdash; Virginia Energy Mineral Mining Program</div>
+    <h2>Permit, License &amp; Bond, At a Glance</h2>
+    <div class="ledger-row"><div class="lg-num">1</div><div class="lg-note">Mine permit + safety license required before <b>any commercial extraction and sale</b> of minerals.</div><div class="lg-fig">required</div></div>
+    <div class="ledger-row"><div class="lg-num">2</div><div class="lg-note">New permit fee.</div><div class="lg-fig">$50 / permitted acre</div></div>
+    <div class="ledger-row"><div class="lg-num">3</div><div class="lg-note">License fee (annual renewal).</div><div class="lg-fig">$400 paper / $330 e-form</div></div>
+    <div class="ledger-row"><div class="lg-num">4</div><div class="lg-note">Reclamation bond.</div><div class="lg-fig">$3,000 / disturbed acre</div></div>
+    <div class="ledger-row"><div class="lg-num">5</div><div class="lg-note">&lt;1 acre disturbed &amp; &lt;500 tons removed &mdash; "restricted" permit, fee/bond exempt but still licensed.</div><div class="lg-fig">lighter paperwork</div></div>
+    <div class="ledger-row"><div class="lg-num">6</div><div class="lg-note"><b>Exploration/prospecting by drilling is explicitly excluded</b> from the "mining" definition in &sect; 45.2-1200.</div><div class="lg-fig">no permit at all</div></div>
+    <p style="font-size:.72rem;color:var(--ink-soft);font-style:italic;margin-top:4px">Same structure applies equally to gold and silver &mdash; Virginia law does not distinguish between the two minerals.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-label">The Practical Process Today</div>
+    <h2>Leasing, Not Staking</h2>
+    <div class="ledger-row"><div class="lg-num">1</div><div class="lg-note">Identify who owns the <b>mineral rights</b> &mdash; check county deed records; surface and mineral ownership often differ.</div><div class="lg-fig"></div></div>
+    <div class="ledger-row"><div class="lg-num">2</div><div class="lg-note">Negotiate a <b>lease or purchase</b> with the mineral-rights holder &mdash; a private contract, not a government claim.</div><div class="lg-fig"></div></div>
+    <div class="ledger-row"><div class="lg-num">3</div><div class="lg-note">Conduct exploration (drilling, sampling) &mdash; currently unregulated under &sect; 45.2-1200's exemption. This is exactly what happened in Buckingham Co. starting in 2020.</div><div class="lg-fig"></div></div>
+    <div class="ledger-row"><div class="lg-num">4</div><div class="lg-note">Moving to commercial extraction triggers the Virginia Energy permit + license + bond regime described at left.</div><div class="lg-fig"></div></div>
+  </div>
+</div>
+
+<!-- SILVER + RECREATIONAL -->
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-label">Silver Specifics</div>
+    <h2>Always a Byproduct</h2>
+    <p>Virginia Energy's own geology page: silver "has been produced in Virginia primarily as a by-product of lead, zinc, copper and gold mining." No independent silver industry ever existed here.</p>
+    <p><b>First production:</b> 1885; High Hill Mine, Halifax Co. credited as first identifiable source (1903). <b>Last production:</b> 1945. <b>Total output:</b> ~90,000 troy oz.</p>
+    <p><b>Districts:</b> Virginia District (Halifax Co.), Mineral District (Louisa Co.), plus Prince William, Goochland, Spotsylvania, Orange &amp; Buckingham counties. Related lead-zinc mining at Austinville-Ivanhoe (Wythe Co.) ran 1750&ndash;1981, moderately confirmed. No separate "silver mining law" &mdash; same Title 45.2 rules as gold.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-label">Recreational &amp; Small-Scale Prospecting</div>
+    <h2>Landowner Permission Is the Real Gate</h2>
+    <p>Almost all land &mdash; and the streams running through it &mdash; is privately owned in Virginia, so <b>landowner permission</b>, not a government permit, is the actual gating factor for hand-panning.</p>
+    <div class="permit-pair">
+      <div class="permit-tag ok"><b>Hand-Tool Panning</b>No state permit. Allowed on GW &amp; Jefferson National Forest for personal, non-commercial use.</div>
+      <div class="permit-tag bad"><b>Suction Dredge / Highbanker</b>Streambed disturbance can trigger a DEQ Virginia Water Protection Permit + possible federal Section 404 permit, regardless of scale.</div>
+    </div>
+    <p style="margin-top:10px;font-size:.72rem;font-style:italic">Sourcing caveat: specific "best rivers to pan" claims (Rappahannock, Rapidan, North Anna, Rivanna, James) trace to hobbyist/SEO prospecting sites, not an agency or scholarly source &mdash; treat as color, not verified fact.</p>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="compare-wrap">
+  <div class="compare-title">Key Differences From the Western Claim-Staking Model</div>
+  <table class="compare-table">
+    <thead><tr><th>Feature</th><th>Western Public-Land States</th><th>Virginia</th></tr></thead>
+    <tbody>
+      <tr><td>Governing law</td><td>Federal General Mining Law of 1872</td><td>State law &mdash; Code of Virginia Title 45.2 (private mineral-rights doctrine + Mineral Mining Program permits)</td></tr>
+      <tr><td>Land base</td><td>Federal public land (BLM / Forest Service)</td><td>Overwhelmingly private land; mineral rights often severed from surface</td></tr>
+      <tr><td>How you get rights</td><td>File an unpatented mining claim with BLM; maintain via annual fees/assessment work</td><td>Lease or purchase mineral rights from the private owner; no claims registry exists</td></tr>
+      <tr><td>Exploration/prospecting</td><td>Generally allowed under the 1872 Act's claim system</td><td>Explicitly exempted from state mining-permit law if done by drilling (&sect; 45.2-1200)</td></tr>
+      <tr><td>Commercial extraction permit</td><td>Federal/BLM requirements plus state environmental permits</td><td>Virginia Energy Mineral Mining Program permit + license + bond ($50/acre fee, $3,000/acre bond)</td></tr>
+      <tr><td>Recreational panning</td><td>Generally allowed on many public lands without a permit</td><td>Allowed with hand tools, contingent on landowner permission (or a permissive public area)</td></tr>
+      <tr><td>Regulatory readiness for modern gold mining</td><td>Long-established (if contested) frameworks in mining states</td><td>National Academies (2022) found Virginia's framework "not appropriate for gold mining" at modern scale</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- OPEN QUESTIONS -->
+<div class="oq-wrap">
+  <div class="oq-title">Two Open Questions &mdash; Flagged, Not Resolved</div>
+  <div class="oq-grid">
+    <div class="oq-item">
+      <div class="oq-num">Q1</div>
+      <div class="oq-body"><b>Are any federal 1872-law claims actually active today in Virginia's National Forests?</b> BLM administers the subsurface on unwithdrawn National Forest land nationally, so claims are theoretically possible in the GW &amp; Jefferson NF. But BLM's own state list of where claims can currently be located excludes Virginia, and the Forest Service's page for these forests describes only permit-free recreational collecting &mdash; not a claims program. No primary source confirms an active filed claim in VA. Plausible in principle, unconfirmed in practice.</div>
+    </div>
+    <div class="oq-item">
+      <div class="oq-num">Q2</div>
+      <div class="oq-body"><b>Has the General Assembly closed the gaps the 2022 National Academies study identified?</b> As of that report, no fix had been enacted. Whether the 2023&ndash;2026 sessions changed that was not confirmed &mdash; no evidence of a fix was found, but the search was not exhaustive of those sessions. Treat "still unaddressed" as likely, not confirmed current law.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIDENCE LEDGER -->
+<div class="conf-wrap">
+  <div class="conf-title">Sourcing Confidence Ledger</div>
+  <div class="conf-cols">
+    <div>
+      <div class="conf-col-label good">Well-Supported</div>
+      <ul class="conf-list good">
+        <li>Virginia's absence from BLM's list of claim-locatable states (primary source)</li>
+        <li>Mineral rights as severed private property (Code of Virginia)</li>
+        <li>Mineral Mining Program permit/license/bond fee schedule (agency PDF brochure)</li>
+        <li>&sect; 45.2-1200 exploration-drilling exemption (direct fetch, cross-checked)</li>
+        <li>Gold-Pyrite Belt geography, timeline, production figures (Virginia Energy geology pages)</li>
+        <li>Silver-as-byproduct framing (Virginia Energy silver page)</li>
+        <li>2022 National Academies conclusion on regulatory inadequacy (NAP + Bay Journal)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="conf-col-label thin">Thinner or Unconfirmed</div>
+      <ul class="conf-list thin">
+        <li>Active federal 1872 claims in VA National Forests today &mdash; see Q1 above</li>
+        <li>Post-2022 legislative fix status &mdash; see Q2 above</li>
+        <li>"Best gold panning rivers" &mdash; hobbyist/SEO sourcing, not agency-confirmed</li>
+        <li>Austinville-Ivanhoe 1750&ndash;1981 dates &mdash; search-engine synthesis, moderately confirmed</li>
+        <li>No documented standard mineral-lease template/registry was found &mdash; leasing process is inferred from the general private-mineral-rights framework</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Sources: Bureau of Land Management &middot; Virginia Energy (Mineral Mining Program &amp; Division of Geology and Mineral Resources) &middot; Code of Virginia Title 45.2<br>
+  National Academies of Sciences, Engineering, and Medicine (2022) &middot; Bay Journal &middot; The Roanoke Star &middot; Suffolk News-Herald &middot; U.S. Forest Service (GW &amp; Jefferson NF)<br>
+  Full citations, per-section sourcing, and tiered references in the companion Full Reference Guide &middot; Compiled 2026
+</div>
+
+</body>
+</html>

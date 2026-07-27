@@ -318,6 +318,52 @@ body::before {
 .theme-phillies .report-file-desc { color: #c2a68f; }
 .theme-phillies .report-file-arrow { color: #c2a68f; }
 .theme-phillies .report-file-link:hover .report-file-arrow { color: #d4a028; }
+
+/* ── Assay office / Virginia mining theme ───────────────── */
+.theme-vamining .report-card,
+.theme-vamining .report-card-multi {
+  background: rgba(20,16,10,0.94);
+  border-color: #5c4423;
+}
+.theme-vamining .report-card:hover {
+  border-color: #c9932e;
+}
+.theme-vamining .report-card-bar {
+  background: linear-gradient(90deg, #2f4a33, #c9932e);
+}
+.theme-vamining .report-name { color: #f2ead6; }
+.theme-vamining .report-desc { color: #bfae8a; }
+.theme-vamining .report-meta { color: #bfae8a; }
+.theme-vamining .report-files { border-top-color: #5c4423; }
+.theme-vamining .report-file-link { border-bottom-color: #5c4423; }
+.theme-vamining .report-file-link:hover { background: rgba(201,147,46,0.08); }
+.theme-vamining .report-file-name { color: #f2ead6; }
+.theme-vamining .report-file-desc { color: #bfae8a; }
+.theme-vamining .report-file-arrow { color: #bfae8a; }
+.theme-vamining .report-file-link:hover .report-file-arrow { color: #c9932e; }
+
+/* ── Brick / LEGO storage theme ─────────────────────────── */
+.theme-lego .report-card,
+.theme-lego .report-card-multi {
+  background: rgba(26,10,10,0.94);
+  border-color: #7a1f24;
+}
+.theme-lego .report-card:hover {
+  border-color: #ffcf00;
+}
+.theme-lego .report-card-bar {
+  background: linear-gradient(90deg, #d0111c, #ffcf00);
+}
+.theme-lego .report-name { color: #fbeee0; }
+.theme-lego .report-desc { color: #d9ac9c; }
+.theme-lego .report-meta { color: #d9ac9c; }
+.theme-lego .report-files { border-top-color: #7a1f24; }
+.theme-lego .report-file-link { border-bottom-color: #7a1f24; }
+.theme-lego .report-file-link:hover { background: rgba(255,207,0,0.08); }
+.theme-lego .report-file-name { color: #fbeee0; }
+.theme-lego .report-file-desc { color: #d9ac9c; }
+.theme-lego .report-file-arrow { color: #d9ac9c; }
+.theme-lego .report-file-link:hover .report-file-arrow { color: #ffcf00; }
 </style>
 </head>
 <body>
@@ -401,6 +447,32 @@ const REPORTS = [
     files: [
       { label: 'Fact Sheet', desc: 'Scoreboard-style at-a-glance: roster, postseason, Game 6', file: '/static/reports/1993-phillies-factsheet.html', icon: '⚾' },
       { label: 'Full Season Reference', desc: 'Numbered sections, full sourcing, and tiered references', file: '/static/reports/1993-phillies-report.html', icon: '📖' },
+    ]
+  },
+  {
+    topic: 'Law & History',
+    hideTopicHeader: true,
+    name: 'Gold & Silver Mining Claims in Virginia',
+    desc: 'Why Virginia has no claim-staking system, the state permit regime, the historic Gold-Pyrite Belt, and two open sourcing questions flagged rather than smoothed over',
+    date: 'Jul 2026',
+    icon: '⛏️',
+    theme: 'vamining',
+    files: [
+      { label: 'Field Reference', desc: 'Claim-vs-deed contrast, belt map, key figures at a glance', file: '/static/reports/virginia-mining-claims-factsheet.html', icon: '⛏️' },
+      { label: 'Full Legal & Historical Reference', desc: 'Numbered sections, tiered sources, sourcing confidence', file: '/static/reports/virginia-mining-claims-report.html', icon: '📜' },
+    ]
+  },
+  {
+    topic: 'Hobby',
+    hideTopicHeader: true,
+    name: 'LEGO Part Storage',
+    desc: 'What AFOLs actually buy by brand, the format landscape, what to weigh when choosing, and the real disagreement over how granular sorting should get',
+    date: 'Jul 2026',
+    icon: '🧱',
+    theme: 'lego',
+    files: [
+      { label: 'Field Reference', desc: 'To-scale drawer diagram, brand plates, sorting ladder', file: '/static/reports/lego-storage-factsheet.html', icon: '🧱' },
+      { label: 'Full Reference Guide', desc: 'Numbered sections, tiered sources, sourcing confidence', file: '/static/reports/lego-storage-report.html', icon: '📖' },
     ]
   },
 ];

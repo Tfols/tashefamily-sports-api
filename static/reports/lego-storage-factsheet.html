@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#fdfbf4;color:#171717;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGO Part Storage — Field Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fdfbf4;
+  --paper-2:#f6f0de;
+  --ink:#171717;
+  --ink-soft:#4b4b4b;
+  --line:#d8d2c2;
+  --line-dark:#b7ae94;
+  --red:#d0111c;
+  --red-deep:#8f0b13;
+  --red-tint:#fdeaea;
+  --blue:#0057a6;
+  --blue-deep:#013a72;
+  --blue-tint:#e8f0fa;
+  --yellow:#ffcf00;
+  --yellow-deep:#a97e00;
+  --yellow-tint:#fff6d9;
+  --green:#237841;
+  --green-deep:#164f2b;
+  --green-tint:#e9f3ec;
+  --stud:#a3a2a4;
+  --stud-deep:#6f6e70;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:light;background:var(--paper)!important;color:var(--ink)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:"IBM Plex Sans",sans-serif;font-size:14.5px;line-height:1.5;max-width:1160px;margin:0 auto;padding:0 0 60px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+/* ── STUD STRIPS (baseplate texture) ── */
+.stud-strip{
+  height:16px;
+  background-color:var(--stud);
+  background-image:radial-gradient(circle at 8px 8px, var(--stud-deep) 3.2px, transparent 3.6px);
+  background-size:16px 16px;
+}
+
+#sheet{padding:26px 30px 0}
+
+/* ── MASTHEAD ── */
+.masthead{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:stretch;border:3px solid var(--ink);margin-bottom:18px}
+.masthead-main{padding:18px 24px;background:var(--paper)}
+.masthead-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:6px;font-weight:600}
+h1{font-family:"Fredoka",sans-serif;font-weight:700;font-size:2.35rem;line-height:1.02;color:var(--ink)}
+h1 span.hl{color:var(--red)}
+.masthead-sub{font-size:.88rem;color:var(--ink-soft);margin-top:8px;max-width:64ch}
+.set-badge{background:var(--yellow);border-left:3px solid var(--ink);padding:14px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:150px}
+.set-badge .sb-num{font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.9rem;color:var(--ink);line-height:1}
+.set-badge .sb-label{font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px;text-align:center}
+
+/* ── KEY NUMBERS (parts-inventory tiles) ── */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px}
+.stat-cell{background:var(--paper);border:2px solid var(--ink);padding:11px 8px;text-align:center;position:relative}
+.stat-cell::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:var(--yellow);border:2px solid var(--ink)}
+.stat-cell.c-red::before{background:var(--red)}
+.stat-cell.c-blue::before{background:var(--blue)}
+.stat-cell.c-green::before{background:var(--green)}
+.stat-num{font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.5rem;color:var(--ink);line-height:1;margin-top:4px}
+.stat-label{font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--ink-soft);margin-top:6px;line-height:1.35}
+
+/* ── SECTION LABEL ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sec-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);background:var(--yellow);padding:3px 9px;border:2px solid var(--ink);flex-shrink:0}
+.sec-rule{height:2px;background:var(--ink);flex:1}
+
+/* ── DIAGRAM PANEL (blueprint / spec drawing) ── */
+.diagram-panel{border:3px solid var(--ink);background:#fdfcf7;margin-bottom:18px;overflow:hidden}
+.diagram-head{background:var(--ink);color:var(--paper);padding:9px 18px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between}
+.diagram-body{padding:14px 20px 8px}
+.diagram-body svg{width:100%;height:auto;display:block}
+.diagram-caption{font-size:.78rem;color:var(--ink-soft);padding:6px 20px 14px;line-height:1.55;border-top:1px dashed var(--line-dark);margin-top:6px}
+.diagram-caption b{color:var(--ink)}
+
+/* ── BRAND PLATE GRID ── */
+.plate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.plate{border:2.5px solid var(--ink);background:var(--paper);display:flex;flex-direction:column;page-break-inside:avoid}
+.plate-bar{padding:6px 12px;font-family:"IBM Plex Mono",monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;display:flex;justify-content:space-between}
+.plate.p-red .plate-bar{background:var(--red)}
+.plate.p-blue .plate-bar{background:var(--blue)}
+.plate.p-green .plate-bar{background:var(--green)}
+.plate.p-yellow .plate-bar{background:var(--yellow-deep)}
+.plate.p-grey .plate-bar{background:var(--stud-deep)}
+.plate.p-gap .plate-bar{background:var(--ink)}
+.plate-body{padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:6px}
+.plate-name{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1.05rem;color:var(--ink);line-height:1.15}
+.plate-tag{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--ink-soft);letter-spacing:.03em}
+.plate-spec{font-size:.75rem;color:var(--ink-soft);line-height:1.5}
+.plate-spec b{color:var(--ink)}
+.plate-quote{font-size:.74rem;font-style:italic;color:var(--ink);border-left:3px solid var(--yellow-deep);padding-left:8px;margin-top:2px}
+.plate-source{font-family:"IBM Plex Mono",monospace;font-size:.63rem;color:var(--ink-soft);margin-top:auto;padding-top:8px;border-top:1px dotted var(--line-dark)}
+.plate.p-gap .plate-body{background:var(--paper-2)}
+.plate-flag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ink);padding:2px 6px;margin-bottom:2px}
+
+/* ── FORMAT STRIP ── */
+.format-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px}
+.fmt-cell{border:2px solid var(--ink);background:var(--paper);padding:10px 8px;text-align:center}
+.fmt-icon{font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.3rem;color:var(--red);line-height:1}
+.fmt-name{font-family:"IBM Plex Mono",monospace;font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:6px;line-height:1.3;color:var(--ink)}
+
+/* ── CONSIDERATIONS CHIPS ── */
+.chip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.chip{background:var(--paper);border:2px solid var(--ink);border-top:5px solid var(--blue);padding:12px 14px;page-break-inside:avoid}
+.chip:nth-child(2){border-top-color:var(--red)}
+.chip:nth-child(3){border-top-color:var(--green)}
+.chip:nth-child(4){border-top-color:var(--yellow-deep)}
+.chip:nth-child(5){border-top-color:var(--blue)}
+.chip:nth-child(6){border-top-color:var(--red)}
+.chip-label{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.chip-title{font-family:"Fredoka",sans-serif;font-weight:600;font-size:.92rem;color:var(--ink);margin-bottom:6px}
+.chip p{font-size:.76rem;color:var(--ink-soft);line-height:1.5}
+
+/* ── GRANULARITY STAIRCASE ── */
+.philo-wrap{display:grid;grid-template-columns:1.15fr 1fr;gap:14px;margin-bottom:18px}
+.stair-panel{border:3px solid var(--ink);background:var(--paper);padding:16px 18px}
+.stair-title{font-family:"Fredoka",sans-serif;font-weight:600;font-size:1rem;margin-bottom:12px}
+.stairs{display:flex;align-items:flex-end;gap:6px;height:158px;margin-bottom:8px}
+.stair{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;position:relative}
+.stair-lbl-top{font-family:"IBM Plex Mono",monospace;font-size:.52rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.stair-block{width:100%;border:2px solid var(--ink);position:relative}
+.stair-block::before{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;border:2px solid var(--ink)}
+.stair-block.h1{height:20px;background:var(--paper-2)}
+.stair-block.h1::before{background:var(--paper-2)}
+.stair-block.h2{height:50px;background:var(--yellow)}
+.stair-block.h2::before{background:var(--yellow)}
+.stair-block.h3{height:85px;background:var(--blue)}
+.stair-block.h3::before{background:var(--blue)}
+.stair-block.h4{height:118px;background:var(--red)}
+.stair-block.h4::before{background:var(--red)}
+.stair-block.h5{height:145px;background:var(--green)}
+.stair-block.h5::before{background:var(--green)}
+.stair-num{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--ink-soft);margin-top:8px;text-align:center;line-height:1.35}
+.stair-lbl{position:absolute;bottom:4px;left:0;right:0;text-align:center;font-family:"IBM Plex Mono",monospace;font-size:.58rem;font-weight:700;color:var(--ink)}
+.stair-block.h4 .stair-lbl,.stair-block.h5 .stair-lbl{color:#fff}
+.stair-foot{font-size:.73rem;color:var(--ink-soft);line-height:1.5;border-top:1px dashed var(--line-dark);padding-top:10px}
+
+.vs-panel{border:3px solid var(--ink);background:var(--paper);display:flex;flex-direction:column}
+.vs-title{background:var(--ink);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px}
+.vs-side{padding:12px 16px;flex:1}
+.vs-side.a{border-bottom:2px dashed var(--ink)}
+.vs-who{font-family:"Fredoka",sans-serif;font-weight:600;font-size:.86rem;margin-bottom:4px}
+.vs-who.a{color:var(--blue)}
+.vs-who.b{color:var(--red)}
+.vs-side p{font-size:.75rem;color:var(--ink-soft);line-height:1.5}
+.vs-caption{font-size:.71rem;font-style:italic;color:var(--ink-soft);padding:10px 16px 14px;border-top:1px solid var(--line);line-height:1.5}
+
+/* ── QC / SOURCING NOTES ── */
+.qc-strip{border:3px solid var(--ink);background:var(--paper);margin-bottom:18px}
+.qc-head{background:var(--yellow);padding:9px 18px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border-bottom:3px solid var(--ink)}
+.qc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.qc-item{padding:13px 18px;border-right:1px dashed var(--line-dark);border-bottom:1px dashed var(--line-dark)}
+.qc-item:nth-child(2n){border-right:none}
+.qc-flag{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:9px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;display:inline-block;padding:2px 7px;color:#fff}
+.qc-flag.ok{background:var(--green)}
+.qc-flag.thin{background:var(--yellow-deep)}
+.qc-flag.gap{background:var(--red)}
+.qc-body{font-size:.76rem;line-height:1.5;color:var(--ink)}
+
+/* ── FOOTER ── */
+.footer{padding:16px 30px 20px;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.04em;color:var(--ink-soft);text-align:center;line-height:1.9}
+
+@media(max-width:900px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .plate-grid{grid-template-columns:repeat(2,1fr)}
+  .format-strip{grid-template-columns:repeat(3,1fr)}
+  .chip-grid{grid-template-columns:1fr 1fr}
+  .philo-wrap{grid-template-columns:1fr}
+  .masthead{grid-template-columns:1fr}
+  .qc-grid{grid-template-columns:1fr}
+  .qc-item{border-right:none}
+}
+</style>
+</head>
+<body>
+
+<div class="stud-strip"></div>
+
+<div id="sheet">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-main">
+    <div class="masthead-eyebrow">Field Reference &middot; Sorting &amp; Storage for Individual Pieces &middot; Compiled 2026</div>
+    <h1>LEGO Part <span class="hl">Storage</span></h1>
+    <div class="masthead-sub">What AFOLs (adult LEGO fans) actually buy and how they actually sort &mdash; drawer systems by brand, the format landscape, what to weigh when choosing, and the real disagreement over how granular to go. Sourcing confidence notes included below, not smoothed over.</div>
+  </div>
+  <div class="set-badge">
+    <div class="sb-num">6 &middot; 5</div>
+    <div class="sb-label">Storage Formats &middot; Sorting Tiers</div>
+  </div>
+</div>
+
+<!-- KEY NUMBERS -->
+<div class="stat-row">
+  <div class="stat-cell c-blue">
+    <div class="stat-num">44</div>
+    <div class="stat-label">Drawers in the flagship Akro-Mils &amp; IRIS cabinets &mdash; both brands' most-cited model</div>
+  </div>
+  <div class="stat-cell c-red">
+    <div class="stat-num">$15&ndash;120</div>
+    <div class="stat-label">Price span across recommended systems, Stanley organizer to 8-drawer Really Useful tower</div>
+  </div>
+  <div class="stat-cell c-green">
+    <div class="stat-num">4.7/5</div>
+    <div class="stat-label">IRIS 44-drawer Amazon rating, 135+ reviews citing LEGO sorting as the use case</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Storage formats BrickArchitect sorts the whole field into</div>
+  </div>
+  <div class="stat-cell c-blue">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Collection-size tiers in the category&rarr;part&rarr;element sorting ladder</div>
+  </div>
+  <div class="stat-cell c-red">
+    <div class="stat-num">~10%</div>
+    <div class="stat-label">Space efficiency lost by compartmentalized storage vs. fewer, larger compartments</div>
+  </div>
+</div>
+
+<!-- SIGNATURE DIAGRAM: TO-SCALE DRAWER COMPARISON -->
+<div class="diagram-panel">
+  <div class="diagram-head"><span>Spec Drawing &mdash; To Scale</span><span>Interior drawer dimensions, as cited</span></div>
+  <div class="diagram-body">
+    <svg viewBox="0 0 570 250" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="graph" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e7e1cf" stroke-width="0.6"/>
+        </pattern>
+      </defs>
+      <rect x="0" y="0" width="570" height="250" fill="url(#graph)"/>
+
+      <!-- scale ruler -->
+      <line x1="20" y1="16" x2="120" y2="16" stroke="#171717" stroke-width="2"/>
+      <line x1="20" y1="9" x2="20" y2="23" stroke="#171717" stroke-width="2"/>
+      <line x1="120" y1="9" x2="120" y2="23" stroke="#171717" stroke-width="2"/>
+      <text x="70" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#4b4b4b">100 mm scale reference</text>
+
+      <!-- Drawer 1: Akro-Mils -->
+      <rect x="20" y="120" width="133" height="50" fill="#e8f0fa" stroke="#0057a6" stroke-width="2.5"/>
+      <text x="86.5" y="186" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="11" fill="#171717">AKRO-MILS</text>
+      <text x="86.5" y="199" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4b4b4b">&asymp;133&times;50 mm interior</text>
+
+      <!-- 2x4 brick to scale inside Akro-Mils drawer -->
+      <rect x="70" y="137" width="32" height="16" fill="#ffcf00" stroke="#171717" stroke-width="1.3"/>
+
+      <!-- Drawer 2: Papimax -->
+      <rect x="185" y="100" width="75" height="70" fill="#e9f3ec" stroke="#237841" stroke-width="2.5"/>
+      <text x="222.5" y="186" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="11" fill="#171717">PAPIMAX</text>
+      <text x="222.5" y="199" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4b4b4b">&asymp;75&times;70 mm interior</text>
+      <text x="222.5" y="210" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4b4b4b">(LEGO-specific)</text>
+
+      <!-- Drawer 3: Really Useful hobby tray -->
+      <rect x="292" y="100" width="105" height="70" fill="#fdeaea" stroke="#d0111c" stroke-width="2.5"/>
+      <text x="344.5" y="186" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="600" font-size="11" fill="#171717">REALLY USEFUL</text>
+      <text x="344.5" y="199" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#4b4b4b">&asymp;105&times;70 mm (~0.55L)</text>
+      <text x="344.5" y="210" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4b4b4b">(hobby-tray compartment)</text>
+
+      <!-- Baseplate outline, dwarfing the drawers -->
+      <rect x="292" y="100" width="256" height="128" fill="none" stroke="#6f6e70" stroke-width="2" stroke-dasharray="7,5"/>
+      <text x="420" y="243" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="700" fill="#4b4b4b">16&times;32-stud baseplate &asymp;256&times;128 mm &mdash; fits none of these drawers</text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <b>Reading this diagram:</b> a 2&times;4 brick (32&times;16 mm, drawn to scale in yellow) fits comfortably in even the tightest widely-recommended cabinet drawer &mdash; the Akro-Mils cell. A 1&times;1 plate (&asymp;8&times;8 mm, too small to render clearly at this scale) fits dozens of times over in any of the three. A half baseplate does not fit in any of them &mdash; the tradeoff cited across sources: smaller drawers pack small pieces densely, but any drawer-cabinet system needs a separate home for large-format pieces. Dimensions are the approximate (&ldquo;&asymp;&rdquo;) figures given in source material, not independently re-measured.
+  </div>
+</div>
+
+<!-- BRAND PLATES -->
+<div class="sec-label"><span class="sec-tag">Bag 1&ndash;6</span><div class="sec-rule"></div></div>
+<div class="plate-grid">
+
+  <div class="plate p-blue">
+    <div class="plate-bar"><span>Akro-Mils</span><span>US</span></div>
+    <div class="plate-body">
+      <div class="plate-name">Drawer Cabinets</div>
+      <div class="plate-tag">Most-cited US brand &middot; "the workhorse"</div>
+      <div class="plate-spec">Flagship: <b>44-Drawer Cabinet (#10144)</b>, &asymp;20"W&times;6"D&times;15.8"H, stackable, wall-mountable. <b>$60&ndash;95</b> depending on retailer.</div>
+      <div class="plate-quote">"Reasonably well made" &mdash; more ergonomic for micro-categories than tackle boxes.</div>
+      <div class="plate-spec">Harder to find outside the US; UK fans point to <b>Raaco</b> as the closest equivalent.</div>
+      <div class="plate-source">Source: Rebrickable review + forum thread</div>
+    </div>
+  </div>
+
+  <div class="plate p-green">
+    <div class="plate-bar"><span>IRIS USA</span><span>US</span></div>
+    <div class="plate-body">
+      <div class="plate-name">Rolling Cart &amp; Mini-Drawers</div>
+      <div class="plate-tag">Preferred over Akro-Mils by at least one detailed guide</div>
+      <div class="plate-spec">Flagship: <b>Rolling Cart w/ Organizer Top</b>, &asymp;$40 for a 6-drawer unit (May 2023 pricing).</div>
+      <div class="plate-quote">"The indisputable king of my LEGO room."</div>
+      <div class="plate-spec"><b>44-Drawer cabinet: 4.7/5</b> across 135+ Amazon reviews, LEGO sorting specifically cited. Mini-drawer units reported more stable than Akro-Mils equivalents ($40&ndash;50/unit).</div>
+      <div class="plate-source">Source: BrickNerd guide; Amazon listing</div>
+    </div>
+  </div>
+
+  <div class="plate p-red">
+    <div class="plate-bar"><span>Really Useful Boxes</span><span>UK/EU</span></div>
+    <div class="plate-body">
+      <div class="plate-name">Scrapbook Drawers Tower</div>
+      <div class="plate-tag">Near-ubiquitous among UK AFOLs</div>
+      <div class="plate-spec">Drawers sized for 12&times;12" scrapbook paper; optional 15-compartment <b>Hobby Tray</b> insert, &asymp;10.5&times;7.0&times;7.5 cm/compartment (&asymp;0.55L) &mdash; about 70% larger than purpose-built Papimax LEGO drawers.</div>
+      <div class="plate-spec">Towers: &asymp;<b>$23</b> (single 9.5L drawer) to &asymp;<b>$120</b> (8-drawer tower); replacement drawers &asymp;$20 each.</div>
+      <div class="plate-source">Source: BrickArchitect large-collection guide; Really Useful Products site; Brickset review (secondhand &mdash; see sourcing notes)</div>
+    </div>
+  </div>
+
+  <div class="plate p-yellow">
+    <div class="plate-bar"><span>Craft &amp; Hobby Organizers</span><span>Crossover</span></div>
+    <div class="plate-body">
+      <div class="plate-name">ArtBin &middot; Stanley &middot; Plano</div>
+      <div class="plate-tag">Legitimate, community-used alternatives, not fringe</div>
+      <div class="plate-spec"><b>ArtBin Super Satchel</b> &mdash; clear polypropylene, &asymp;15.2&times;8&times;6.2", removable dividers, stackable. Popular enough that one builder (Adam Savage, documented) built a custom cabinet just to house stacks of them.</div>
+      <div class="plate-spec"><b>Stanley Removable Compartment Pro</b> (&asymp;$15, 25 compartments) and <b>Plano 3700-series</b> tackle boxes (up to 24 compartments) work, but tackle-box layouts make finding a specific part slower.</div>
+      <div class="plate-source">Source: BrickArchitect storage-ideas page; large-collection guide</div>
+    </div>
+  </div>
+
+  <div class="plate p-grey">
+    <div class="plate-bar"><span>Official LEGO Bricks</span><span>Room Copenhagen</span></div>
+    <div class="plate-body">
+      <div class="plate-name">Storage Brick Drawers</div>
+      <div class="plate-tag">Mixed verdict</div>
+      <div class="plate-spec">2&times;2 (1 drawer) &asymp;$25; 2&times;4 (2 drawers) &asymp;$35.</div>
+      <div class="plate-spec"><b>Pro:</b> stacks like a real brick; enclosed drawers don't spill in transit; drawer front accepts an actual LEGO plate for labeling.<br><b>Con:</b> less sturdy than a solid brick; no 1&times;2 size; costs more per unit than generic cabinets; some reported discoloration on white units.</div>
+      <div class="plate-spec">Verdict: better for bulk/thematic storage than granular single-part sorting.</div>
+      <div class="plate-source">Source: TheBrickBlogger review</div>
+    </div>
+  </div>
+
+  <div class="plate p-gap">
+    <div class="plate-bar"><span>Sistema &middot; Bisupply &middot; SOKA</span><span>Unconfirmed</span></div>
+    <div class="plate-body">
+      <span class="plate-flag">Missing Part &mdash; Gap, Not a Verdict</span>
+      <div class="plate-name">No Dedicated AFOL Reviews Found</div>
+      <div class="plate-spec">Sistema appears mostly as generic repurposed food-storage containers &mdash; cheap and widely available, but reportedly "a lot of effort" to un-stack when parting out a build.</div>
+      <div class="plate-spec">Bisupply and SOKA returned essentially no dedicated reviews or community commentary &mdash; they read as generic Amazon-brand parts cabinets without an established AFOL reputation.</div>
+      <div class="plate-spec"><b>This is an absence of evidence, not evidence of a poor product.</b></div>
+      <div class="plate-source">Source: search-derived, no dedicated review found</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FORMAT TYPES -->
+<div class="sec-label"><span class="sec-tag">Formats</span><div class="sec-rule"></div></div>
+<div class="format-strip">
+  <div class="fmt-cell"><div class="fmt-icon">&#9639;</div><div class="fmt-name">Drawer Cabinets</div></div>
+  <div class="fmt-cell"><div class="fmt-icon">&#9638;</div><div class="fmt-name">Drawers w/ Dividers</div></div>
+  <div class="fmt-cell"><div class="fmt-icon">&#9636;</div><div class="fmt-name">Removable-Compartment</div></div>
+  <div class="fmt-cell"><div class="fmt-icon">&#9633;</div><div class="fmt-name">Tackle Boxes</div></div>
+  <div class="fmt-cell"><div class="fmt-icon">&#9679;</div><div class="fmt-name">Plastic Bags</div></div>
+  <div class="fmt-cell"><div class="fmt-icon">&#9635;</div><div class="fmt-name">Open-Front Bins</div></div>
+</div>
+<div class="diagram-caption" style="border:2px solid var(--ink);background:var(--paper);margin-bottom:18px;padding:10px 16px">
+  BrickArchitect's own framing: <b>"there is no perfect storage solution."</b> Real builder setups mix formats deliberately &mdash; Brickset founder Huw Millington uses hundreds of Really Useful Scrapbook Drawers plus bulk ziploc bags in IKEA MALM dressers; another builder uses Sterilite mini 3-drawer cabinets; Adam Savage uses a custom cabinet built around ArtBin Super Satchels; one builder ("fakespacesquid") deliberately runs twelve different storage types by access frequency, with explicit "overflow storage" for rarely-used parts. <i>Source: BrickArchitect, Storage Ideas from other LEGO Artists.</i>
+</div>
+
+<!-- CONSIDERATIONS -->
+<div class="sec-label"><span class="sec-tag">What To Weigh</span><div class="sec-rule"></div></div>
+<div class="chip-grid">
+  <div class="chip">
+    <div class="chip-label">Constraint</div>
+    <div class="chip-title">Drawer Size &amp; Depth</div>
+    <p>See the spec drawing above for the concrete numbers. Favor <b>shallow over deep</b> across the board &mdash; buried pieces are hard to spot.</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Near-Mandatory</div>
+    <div class="chip-title">Stackability</div>
+    <p>IRIS and Akro-Mils cabinets both use interlocking lid grooves/tabs specifically so units stack &mdash; called a core selection principle across multiple guides.</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Built-In or DIY</div>
+    <div class="chip-title">Labeling</div>
+    <p>BrickArchitect provides printable label sheets for exactly this purpose. Official LEGO storage bricks build labeling in &mdash; the drawer front accepts an actual LEGO plate.</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Wide Range</div>
+    <div class="chip-title">Cost per Drawer</div>
+    <p>&asymp;$0.50&ndash;$1/compartment-equivalent for bulk Sterilite/Akro-Mils, up to &asymp;$20/drawer for Really Useful, &asymp;$25&ndash;35/unit for official LEGO bricks.</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Lead, Not Confirmed</div>
+    <div class="chip-title">Durability</div>
+    <p>One search-summary source describes IRIS plastic as more rigid/stable than Sterilite's &mdash; not independently verified. Treat as a lead.</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Near-Universal</div>
+    <div class="chip-title">Clear vs. Opaque</div>
+    <p>Clear/translucent (IRIS, Sterilite ClearView, ArtBin) is favored across nearly every source &mdash; see contents without opening. No source argued for opaque.</p>
+  </div>
+</div>
+
+<!-- SORTING PHILOSOPHY -->
+<div class="sec-label"><span class="sec-tag">The Real Debate</span><div class="sec-rule"></div></div>
+<div class="philo-wrap">
+  <div class="stair-panel">
+    <div class="stair-title">Sorting Granularity Scales With Collection Size</div>
+    <div class="stairs">
+      <div class="stair">
+        <div class="stair-lbl-top">NONE</div>
+        <div class="stair-block h1"></div>
+        <div class="stair-num">&lt;3,000<br>pcs</div>
+      </div>
+      <div class="stair">
+        <div class="stair-block h2"><span class="stair-lbl">CATEGORY</span></div>
+        <div class="stair-num">3,000&ndash;<br>10,000</div>
+      </div>
+      <div class="stair">
+        <div class="stair-block h3"><span class="stair-lbl">PART (common)</span></div>
+        <div class="stair-num">10,000&ndash;<br>50,000</div>
+      </div>
+      <div class="stair">
+        <div class="stair-block h4"><span class="stair-lbl">PART (all)</span></div>
+        <div class="stair-num">50,000&ndash;<br>250,000</div>
+      </div>
+      <div class="stair">
+        <div class="stair-block h5"><span class="stair-lbl">ELEMENT</span></div>
+        <div class="stair-num">250,000+</div>
+      </div>
+    </div>
+    <div class="stair-foot">Thresholds per BrickArchitect. "Element" = part + color, LEGO's own warehouse practice &mdash; recommended for personal collections only at the top tier, since labor and drawer count scale enormously. Sorting by part alone is called "sufficient for most large collections, because it is easy for most people to distinguish between colors."</div>
+  </div>
+
+  <div class="vs-panel">
+    <div class="vs-title">Where AFOLs Genuinely Disagree</div>
+    <div class="vs-side a">
+      <div class="vs-who a">BrickArchitect</div>
+      <p>Flags pure color-sorting &mdash; most people's instinctive first step &mdash; as a dead end once you need to find a <i>specific part</i>, not just admire a pile of one color. Recommends progressing up the category&rarr;part&rarr;element ladder as collections grow.</p>
+    </div>
+    <div class="vs-side b">
+      <div class="vs-who b">BrickNerd</div>
+      <p>Pushes back on fine-grained sorting as an ideal: heavy reliance on small/mini drawers "wastes space and money" and creates unnecessarily long sorting sessions "without proportional benefit." Favors broad categories and larger uniform containers even at big collection sizes.</p>
+    </div>
+    <div class="vs-caption">Not a clean binary of "by element" vs. "by category" &mdash; a genuine disagreement among experienced AFOLs about how far up the granularity ladder is actually worth the labor.</div>
+  </div>
+</div>
+
+<!-- QC / SOURCING CONFIDENCE -->
+<div class="qc-strip">
+  <div class="qc-head">Bricks &amp; Pieces &mdash; Sourcing Confidence (kept visible, not smoothed over)</div>
+  <div class="qc-grid">
+    <div class="qc-item">
+      <span class="qc-flag ok">In Stock &mdash; Well-Supported</span>
+      <div class="qc-body">The size-based sorting-philosophy framework (category&rarr;part&rarr;element) is corroborated across two independent, established AFOL sources with consistent thresholds. Akro-Mils (US) and Really Useful Boxes (UK) as the dominant brands is corroborated across three independent sources, including directly-fetched builder case studies.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag thin">Back-Ordered &mdash; Thinly Sourced</span>
+      <div class="qc-body"><b>Reddit could not be accessed directly</b> &mdash; WebFetch is blocked on reddit.com and mirrors. Every "community" claim in this report traces to AFOL blogs and forums (BrickArchitect, BrickNerd, Rebrickable), <i>not</i> verified Reddit sentiment. Treat any impression of "what Reddit says" as absent from this research, not confirmed.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag gap">Missing Part &mdash; Confirmed Gap</span>
+      <div class="qc-body">No dedicated AFOL review or community discussion of <b>Sistema, Bisupply, or SOKA</b> for LEGO sorting specifically was found. This is a gap in available information &mdash; not a confirmed negative.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag thin">Lead Only &mdash; One Step Removed</span>
+      <div class="qc-body">The IRIS-vs-Sterilite durability comparison came from a search-engine synthesis, not an independently fetched page. Some Really Useful Boxes pricing/dimension specifics rely on a Brickset review re-fetch that was rate-limited (HTTP 429/403) &mdash; treat as secondhand pending re-verification.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="stud-strip"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Sources: BrickArchitect &middot; BrickNerd &middot; Rebrickable (review + forum) &middot; TheBrickBlogger &middot; Amazon (product listing) &middot; Really Useful Products<br>
+  Full citations, tiers, and the Reddit-access / Sistema-Bisupply-SOKA gaps are documented in full in the companion Full Report &middot; Compiled 2026
+</div>
+
+</body>
+</html>
