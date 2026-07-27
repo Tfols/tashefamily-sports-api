@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f4ecda;color:#211a12;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1993 Phillies — Season at a Glance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4ecda;
+  --paper-2:#e9dcc0;
+  --paper-3:#fbf6ea;
+  --ink:#211a12;
+  --ink-soft:#4a3d2c;
+  --line:#c8b78e;
+  --line-dark:#a68f5c;
+  --maroon:#7c1f3d;
+  --maroon-deep:#4c1027;
+  --gold:#a9781f;
+  --gold-bright:#c8922c;
+  --turf:#355e3b;
+  --turf-deep:#1f3a24;
+  --board-bg:#081a10;
+  --board-bg2:#122c1c;
+  --led:#ffb703;
+  --led-white:#f4ecd8;
+  --flag-warn:#a9781f;
+  --flag-bad:#a4291f;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:light;background:var(--paper)!important;color:var(--ink)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:'Libre Baskerville',Georgia,serif;font-size:15px;line-height:1.55;max-width:1140px;margin:0 auto;padding:34px 30px 70px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+/* ── MASTHEAD ── */
+.masthead{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:4px solid var(--ink);padding-bottom:18px;margin-bottom:18px}
+.masthead-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--maroon);margin-bottom:8px}
+h1{font-family:'Libre Baskerville',serif;font-weight:700;font-size:2.5rem;line-height:1.05;color:var(--ink)}
+h1 em{font-style:italic;color:var(--maroon);font-weight:400}
+.masthead-sub{font-size:.92rem;font-style:italic;color:var(--ink-soft);margin-top:9px;max-width:62ch}
+.record-badge{background:var(--maroon);color:var(--paper-3);padding:12px 26px;text-align:center;border:2px solid var(--maroon-deep);flex-shrink:0}
+.rb-num{font-family:'Bebas Neue',sans-serif;font-size:2.7rem;line-height:.95;letter-spacing:.02em}
+.rb-pct{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--gold-bright);margin-top:2px}
+.rb-label{font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#e8d9c4;margin-top:6px}
+
+/* ── ROAD TO OCTOBER TIMELINE ── */
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:18px;border:2px solid var(--ink)}
+.tl-step{padding:11px 13px;background:var(--paper-3)}
+.tl-step.hl-turf{background:var(--turf);color:#eef4ea}
+.tl-step.hl-maroon{background:var(--maroon);color:var(--paper-3)}
+.tl-step.hl-deep{background:var(--maroon-deep);color:var(--paper-3)}
+.tl-tag{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;opacity:.85;margin-bottom:5px}
+.tl-body{font-size:.74rem;line-height:1.4}
+
+/* ── KEY NUMBERS ── */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-bottom:20px}
+.stat-cell{background:var(--paper-3);border:1px solid var(--line-dark);border-top:4px solid var(--gold-bright);padding:12px 8px;text-align:center}
+.stat-cell.alt{border-top-color:var(--maroon)}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;color:var(--maroon-deep);line-height:1}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:var(--ink-soft);margin-top:6px;line-height:1.35}
+
+/* ── SCOREBOARD CENTERPIECE ── */
+.board-wrap{background:var(--board-bg);border:3px solid #000;padding:22px 26px 20px;margin-bottom:20px;position:relative}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:14px;border-bottom:1px dashed #2a4a34;padding-bottom:12px}
+.board-title{font-family:'Bebas Neue',sans-serif;font-size:1.65rem;letter-spacing:.03em;color:var(--led)}
+.board-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8fae95;letter-spacing:.07em;text-align:right;line-height:1.6}
+.board-grid{display:grid;grid-template-columns:120px repeat(3,1fr);border:1px solid var(--board-bg2);margin-bottom:16px}
+.board-cell{padding:9px 8px;text-align:center;font-family:'IBM Plex Mono',monospace;border-left:1px solid var(--board-bg2);border-bottom:1px solid var(--board-bg2)}
+.board-cell:first-child{border-left:none;text-align:left;padding-left:12px}
+.board-head-row .board-cell{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#8fae95;font-weight:600}
+.team-row .board-cell.team-name{font-family:'Libre Baskerville',serif;font-weight:700;color:var(--led-white);font-size:.92rem}
+.team-abbr{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:#8fae95;display:block;margin-top:2px}
+.board-num{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;color:var(--led)}
+.board-num.final{color:var(--led-white);background:var(--maroon-deep)}
+.board-num.dim{color:#4c6a53;font-size:.95rem;font-family:'IBM Plex Mono',monospace}
+
+.inning-strip{padding-top:2px}
+.inning-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:var(--led);text-transform:uppercase;margin-bottom:9px}
+.play-seq{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.play{background:var(--board-bg2);border:1px solid #2a4a34;padding:6px 10px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#d9e8de}
+.play.hr{background:var(--maroon-deep);border-color:var(--maroon);color:#ffe0e8;font-weight:700}
+.count-flag{display:inline-block;background:var(--led);color:#241800;font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:9.5px;padding:2px 6px;margin-left:6px;border-radius:2px}
+.board-footnote{font-family:'IBM Plex Mono',monospace;font-size:9.3px;color:#8fae95;line-height:1.65;margin-top:10px;border-top:1px dashed #2a4a34;padding-top:10px}
+.board-footnote b{color:var(--led)}
+.board-quote{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--led-white);font-size:.85rem;margin-top:12px;line-height:1.55;border-left:2px solid var(--led);padding-left:12px}
+.board-quote cite{display:block;font-family:'IBM Plex Mono',monospace;font-style:normal;font-size:9.5px;color:#8fae95;margin-top:4px}
+
+/* ── SHARED PANEL GRID ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.panel{background:var(--paper-3);border:1px solid var(--line-dark);padding:17px 19px}
+.panel-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--maroon);margin-bottom:4px}
+.panel h2{font-family:'Libre Baskerville',serif;font-size:1.02rem;color:var(--ink);margin-bottom:10px}
+.panel p{font-size:.82rem;color:var(--ink-soft);line-height:1.6;margin-bottom:8px}
+.panel p:last-child{margin-bottom:0}
+
+/* Lineup / staff rows */
+.lineup-row{display:grid;grid-template-columns:30px 1fr auto;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.lineup-row:last-child{border-bottom:none}
+.pos{font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--maroon-deep);font-size:.76rem}
+.player-name{font-weight:700;font-size:.84rem}
+.player-note{font-size:.73rem;color:var(--ink-soft);margin-top:2px;line-height:1.4}
+.line{font-family:'IBM Plex Mono',monospace;font-size:.73rem;color:var(--ink-soft);text-align:right;white-space:nowrap}
+
+/* Ledger rows */
+.ledger-row{display:grid;grid-template-columns:26px 1fr auto;gap:10px;padding:6px 0;border-bottom:1px dotted var(--line);align-items:baseline}
+.ledger-row:last-child{border-bottom:none}
+.g-num{font-family:'Bebas Neue',sans-serif;color:var(--gold-bright);font-size:1.05rem}
+.g-note{font-size:.76rem;color:var(--ink-soft);line-height:1.4}
+.g-score{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:.78rem;white-space:nowrap}
+.g-score.win{color:var(--turf-deep)}
+.g-score.loss{color:var(--flag-bad)}
+.ledger-gap{font-size:.74rem;font-style:italic;color:var(--gold);padding:6px 0}
+
+/* ── PRESS BOX NOTES ── */
+.notes-strip{background:var(--paper-3);border:2px solid var(--ink);padding:17px 21px;margin-bottom:18px}
+.notes-title{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.note-card{border-left:4px solid var(--gold-bright);padding:9px 13px;background:var(--paper)}
+.note-card.bad{border-left-color:var(--flag-bad)}
+.note-flag{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:9px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;color:var(--flag-warn)}
+.note-flag.bad{color:var(--flag-bad)}
+.note-body{font-size:.75rem;line-height:1.5;color:var(--ink)}
+
+/* ── FOOTER ── */
+.footer{margin-top:8px;padding-top:14px;border-top:1px solid var(--line-dark);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.05em;color:var(--ink-soft);text-align:center;line-height:1.9}
+
+@media(max-width:820px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .timeline{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .masthead{grid-template-columns:1fr}
+  .board-grid{grid-template-columns:90px repeat(3,1fr)}
+  .notes-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div>
+    <div class="masthead-eyebrow">Philadelphia Phillies &middot; National League Champions &middot; Compiled 2026</div>
+    <h1>1993 Phillies<br><em>Worst to First</em> &mdash; Season at a Glance</h1>
+    <div class="masthead-sub">A last-place club in 1992 rebuilt itself into "Macho Row," upset the 104-win Braves, and lost the World Series on Joe Carter's Game 6 walk-off. Sourcing confidence notes included below &mdash; not smoothed over.</div>
+  </div>
+  <div class="record-badge">
+    <div class="rb-num">97&ndash;65</div>
+    <div class="rb-pct">.599 W&ndash;L%</div>
+    <div class="rb-label">NL East &middot; NL Pennant</div>
+  </div>
+</div>
+
+<!-- ROAD TO OCTOBER -->
+<div class="timeline">
+  <div class="tl-step hl-turf">
+    <div class="tl-tag">Opening Day</div>
+    <div class="tl-body">Takes NL East lead on Day 1 of the season.</div>
+  </div>
+  <div class="tl-step">
+    <div class="tl-tag">April 9</div>
+    <div class="tl-body">The only day all season the Phillies aren't in first place.</div>
+  </div>
+  <div class="tl-step hl-turf">
+    <div class="tl-tag">September 28</div>
+    <div class="tl-body">Clinch NL East, 10&ndash;7 over Pittsburgh &mdash; first division title since 1983.</div>
+  </div>
+  <div class="tl-step hl-maroon">
+    <div class="tl-tag">NLCS</div>
+    <div class="tl-body">Upset the 104-win Atlanta Braves, 4 games to 2.</div>
+  </div>
+  <div class="tl-step hl-deep">
+    <div class="tl-tag">World Series</div>
+    <div class="tl-body">Lose to defending-champion Toronto, 4 games to 2.</div>
+  </div>
+</div>
+
+<!-- KEY NUMBERS -->
+<div class="stat-row">
+  <div class="stat-cell">
+    <div class="stat-num">877</div>
+    <div class="stat-label">Runs scored &mdash; led the NL</div>
+  </div>
+  <div class="stat-cell alt">
+    <div class="stat-num">24</div>
+    <div class="stat-label">Complete games &mdash; led the NL</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">3.14M</div>
+    <div class="stat-label">Home attendance &mdash; 4th-highest in MLB</div>
+  </div>
+  <div class="stat-cell alt">
+    <div class="stat-num">43</div>
+    <div class="stat-label">Mitch Williams saves (3.34 ERA, 44 BB/62 IP)</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">10&nbsp;yrs</div>
+    <div class="stat-label">Since the Phillies' last NL East title (1983)</div>
+  </div>
+  <div class="stat-cell alt">
+    <div class="stat-num">1&nbsp;of&nbsp;10</div>
+    <div class="stat-label">Only winning season the Phillies had in the entire 1990s</div>
+  </div>
+</div>
+
+<!-- SCOREBOARD CENTERPIECE -->
+<div class="board-wrap">
+  <div class="board-head">
+    <div class="board-title">The Final At-Bat &mdash; World Series Game 6</div>
+    <div class="board-meta">SkyDome &middot; Toronto, Ontario<br>October 23, 1993</div>
+  </div>
+
+  <div class="board-grid">
+    <div class="board-head-row" style="display:contents">
+      <div class="board-cell"></div>
+      <div class="board-cell">Thru&nbsp;8</div>
+      <div class="board-cell">9th</div>
+      <div class="board-cell">Final</div>
+    </div>
+    <div class="team-row" style="display:contents">
+      <div class="board-cell team-name">Toronto <span class="team-abbr">TOR</span></div>
+      <div class="board-cell"><span class="board-num">5</span></div>
+      <div class="board-cell"><span class="board-num">3</span></div>
+      <div class="board-cell"><span class="board-num final">8</span></div>
+    </div>
+    <div class="team-row" style="display:contents">
+      <div class="board-cell team-name">Philadelphia <span class="team-abbr">PHI</span></div>
+      <div class="board-cell"><span class="board-num">6</span></div>
+      <div class="board-cell"><span class="board-num">0</span></div>
+      <div class="board-cell"><span class="board-num final">6</span></div>
+    </div>
+  </div>
+
+  <div class="inning-strip">
+    <div class="inning-label">Bottom 9th &middot; Phillies lead 6&ndash;5 &middot; Mitch Williams pitching</div>
+    <div class="play-seq">
+      <div class="play">Rickey Henderson &mdash; walk</div>
+      <div class="play">Devon White &mdash; flyout (F7)</div>
+      <div class="play">Paul Molitor &mdash; single</div>
+      <div class="play hr">Joe Carter &mdash; 3-run HR<span class="count-flag">COUNT 2&ndash;2*</span></div>
+    </div>
+    <div class="board-quote">
+      &ldquo;Touch &rsquo;em all, Joe! You&rsquo;ll never hit a bigger home run in your life!&rdquo;
+      <cite>&mdash; Tom Cheek, Blue Jays radio broadcast</cite>
+    </div>
+    <div class="board-footnote">
+      <b>*Sourcing note, kept visible on purpose:</b> the count on Carter's pitch is reported two ways. SABR's detailed game account and Mitch Williams's own recollection say 2&ndash;2 (used here); one Fox News summary says 2&ndash;1. Full detail in the companion Full Report.
+    </div>
+  </div>
+</div>
+
+<!-- BATTING / PITCHING -->
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-label">Lineup Card</div>
+    <h2>Position Players &mdash; Mgr. Jim Fregosi</h2>
+    <div class="lineup-row">
+      <div class="pos">CF</div>
+      <div><div class="player-name">Lenny Dykstra</div><div class="player-note">Career year; NL leader in hits and runs.</div></div>
+      <div class="line">.305 &middot; 19 HR<br>66 RBI &middot; 194 H &middot; 143 R</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">C</div>
+      <div><div class="player-name">Darren Daulton</div><div class="player-note">2nd straight 100-RBI season.</div></div>
+      <div class="line">24 HR &middot; 105 RBI</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">1B</div>
+      <div><div class="player-name">John Kruk</div><div class="player-note">Team's chief personality &mdash; "24 morons and one Mormon."</div></div>
+      <div class="line">.316 &middot; 14 HR<br>85 RBI</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">3B</div>
+      <div><div class="player-name">Dave Hollins</div><div class="player-note">2nd straight year at this RBI mark.</div></div>
+      <div class="line">93 RBI</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">RF</div>
+      <div><div class="player-name">Jim Eisenreich</div><div class="player-note">Elite contact hitter &mdash; 36 K in 362 AB.</div></div>
+      <div class="line">.318 AVG</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">LF</div>
+      <div><div class="player-name">Pete Incaviglia</div><div class="player-note">Power in limited at-bats.</div></div>
+      <div class="line">24 HR &middot; 89 RBI</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-label">Pitching Staff</div>
+    <h2>Rotation &amp; Bullpen</h2>
+    <div class="lineup-row">
+      <div class="pos">SP</div>
+      <div><div class="player-name">Curt Schilling</div><div class="player-note">Tied for team lead in wins &mdash; became the postseason story.</div></div>
+      <div class="line">16&ndash;7 &middot; 4.02 ERA<br>186 K</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">SP</div>
+      <div><div class="player-name">Tommy Greene</div><div class="player-note">Tied Schilling for team lead in wins.</div></div>
+      <div class="line">16 W</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">SP</div>
+      <div><div class="player-name">Ben Rivera</div></div>
+      <div class="line">13 W</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">SP</div>
+      <div><div class="player-name">Danny Jackson</div></div>
+      <div class="line">12 W</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">SP</div>
+      <div><div class="player-name">Terry Mulholland</div></div>
+      <div class="line">12 W</div>
+    </div>
+    <div class="lineup-row">
+      <div class="pos">CL</div>
+      <div><div class="player-name">Mitch Williams &mdash; "Wild Thing"</div><div class="player-note">Regular-season wildness foreshadowed October.</div></div>
+      <div class="line">43 SV &middot; 3.34 ERA<br>44 BB / 62 IP</div>
+    </div>
+    <p style="font-size:.73rem;color:var(--ink-soft);margin-top:10px;font-style:italic">Staff led the NL in complete games (24), innings pitched, and strikeouts.</p>
+  </div>
+</div>
+
+<!-- NLCS / WS LEDGERS -->
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-label">NLCS vs. Atlanta &mdash; Won 4&ndash;2</div>
+    <h2>Upsetting a 104-Win Team</h2>
+    <div class="ledger-row"><div class="g-num">1</div><div class="g-note">10 innings. Kim Batiste walk-off double. Schilling: 10 K in 8 IP, no decision &mdash; struck out Atlanta's first five batters, an NLCS record.</div><div class="g-score win">PHI 4&ndash;3</div></div>
+    <div class="ledger-row"><div class="g-num">2</div><div class="g-note">Atlanta blowout.</div><div class="g-score loss">ATL 14&ndash;3</div></div>
+    <div class="ledger-row"><div class="g-num">3</div><div class="g-note">Tom Glavine start.</div><div class="g-score loss">ATL 9&ndash;4</div></div>
+    <div class="ledger-row"><div class="g-num">4</div><div class="g-note">&nbsp;</div><div class="g-score win">PHI 2&ndash;1</div></div>
+    <div class="ledger-row"><div class="g-num">5</div><div class="g-note">10 innings. Dykstra HR off Mark Wohlers.</div><div class="g-score win">PHI 4&ndash;3</div></div>
+    <div class="ledger-row"><div class="g-num">6</div><div class="g-note">Tommy Greene clinches the pennant.</div><div class="g-score win">PHI 6&ndash;3</div></div>
+    <p style="font-size:.76rem;color:var(--ink-soft);margin-top:10px">NLCS MVP: <b>Curt Schilling</b> &mdash; 1.69 ERA, 19 K across two starts, with no decisions or saves.</p>
+  </div>
+
+  <div class="panel">
+    <div class="panel-label">World Series vs. Toronto &mdash; Lost 4&ndash;2</div>
+    <h2>The Defending Champions Prevail</h2>
+    <div class="ledger-gap">Games 1&ndash;3: results not itemized in source research (series entered Game 4 with Toronto ahead).</div>
+    <div class="ledger-row"><div class="g-num">4</div><div class="g-note">Highest-scoring game in WS history. Phillies led 14&ndash;9 in the 8th; Devon White's 2-run triple flipped it. 29 combined runs; 14 by the losing team &mdash; both records. 4:14 runtime. Williams took the loss.</div><div class="g-score loss">TOR 15&ndash;14</div></div>
+    <div class="ledger-row"><div class="g-num">5</div><div class="g-note">Facing elimination: Schilling's 5-hit complete-game shutout at the Vet, 62,706 fans &mdash; first postseason shutout by a Phillies pitcher.</div><div class="g-score win">PHI 2&ndash;0</div></div>
+    <div class="ledger-row"><div class="g-num">6</div><div class="g-note">Carter's 3-run walk-off off Williams. First Series ever won by a trailing team on a walk-off HR.</div><div class="g-score loss">TOR 8&ndash;6</div></div>
+    <p style="font-size:.76rem;color:var(--ink-soft);margin-top:10px">Series MVP: <b>Paul Molitor</b> (TOR) &mdash; .500 (12-for-24), 2 HR, 8 RBI, 10 R (record-tying).</p>
+  </div>
+</div>
+
+<!-- MACHO ROW / LEGACY -->
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-label">Team Identity</div>
+    <h2>"Macho Row"</h2>
+    <p>Mullets, scraggly facial hair, a deliberately unkempt "shaggy" look &mdash; the clubhouse nickname was a wink at the 1927 Yankees' "Murderers' Row." A full book, William C. Kashatus's <em>Macho Row: The 1993 Phillies and Baseball's Unwritten Code</em>, later documented the culture.</p>
+    <p>Kruk on his teammates: <em>"24 morons and one Mormon"</em> &mdash; a jab at the clean-cut Dale Murphy. At the All-Star Game, Kruk comically bailed out of the box against a 98-mph Randy Johnson fastball, a piece of enduring baseball lore. "Whoomp! (There It Is)" served as the team's unofficial anthem.</p>
+  </div>
+  <div class="panel">
+    <div class="panel-label">Final Outcome &amp; Legacy</div>
+    <h2>A Singular Season</h2>
+    <p>Final record 97&ndash;65, NL East and pennant winners, lost the World Series 4&ndash;2. Home attendance 3,137,674, 4th-highest in the majors.</p>
+    <p>1993 stands as the <b>only winning season the Phillies had in the entire 1990s</b> &mdash; the club didn't post another winning record until 2001. "Macho Row" and the Carter/Williams Game 6 ending remain touchstone reference points in both Phillies and Blue Jays franchise lore.</p>
+  </div>
+</div>
+
+<!-- PRESS BOX NOTES -->
+<div class="notes-strip">
+  <div class="notes-title">Press Box Notes &mdash; Sourcing Confidence (kept visible, not smoothed over)</div>
+  <div class="notes-grid">
+    <div class="note-card">
+      <div class="note-flag">Moderate &mdash; one layer removed</div>
+      <div class="note-body">Baseball-Reference itself returned a blocked (403) response to direct fetch. Player stat lines here come via Wikipedia's derived figures, not confirmed directly against the primary database.</div>
+    </div>
+    <div class="note-card">
+      <div class="note-flag">Moderate &mdash; minor discrepancy</div>
+      <div class="note-body">Count on Carter's Game 6 homer: SABR's account and Williams's own recollection say 2&ndash;2 (used on this sheet); one Fox News summary says 2&ndash;1.</div>
+    </div>
+    <div class="note-card bad">
+      <div class="note-flag">Weak &mdash; unverified lead</div>
+      <div class="note-body">The claim that Williams received death threats after Game 4 traces to a single search-result summary referencing NPR reporting, not an independently fetched source. Treat as a lead, not a confirmed fact.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Sources: Baseball-Reference.com &middot; Baseball Almanac &middot; Wikipedia (season, NLCS, Carter HR, Schilling pages) &middot; SABR Games Project<br>
+  Washington Post (Oct. 1993 archives) &middot; NBC Sports Philadelphia &middot; National Baseball Hall of Fame &middot; NPR (weak sourcing, see notes above)<br>
+  Full citations, per-section sourcing, and tiered references in the companion Full Report &middot; Compiled 2026
+</div>
+
+</body>
+</html>

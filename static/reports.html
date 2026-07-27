@@ -295,6 +295,29 @@ body::before {
 .theme-book .report-file-desc { color: #b89a82; }
 .theme-book .report-file-arrow { color: #b89a82; }
 .theme-book .report-file-link:hover .report-file-arrow { color: #c06a3e; }
+
+/* ── Ballpark / 1993 Phillies theme ─────────────────────── */
+.theme-phillies .report-card,
+.theme-phillies .report-card-multi {
+  background: rgba(24,14,18,0.94);
+  border-color: #6e2b45;
+}
+.theme-phillies .report-card:hover {
+  border-color: #d4a028;
+}
+.theme-phillies .report-card-bar {
+  background: linear-gradient(90deg, #7c1f3d, #d4a028);
+}
+.theme-phillies .report-name { color: #f7ece1; }
+.theme-phillies .report-desc { color: #c2a68f; }
+.theme-phillies .report-meta { color: #c2a68f; }
+.theme-phillies .report-files { border-top-color: #6e2b45; }
+.theme-phillies .report-file-link { border-bottom-color: #6e2b45; }
+.theme-phillies .report-file-link:hover { background: rgba(212,160,40,0.08); }
+.theme-phillies .report-file-name { color: #f7ece1; }
+.theme-phillies .report-file-desc { color: #c2a68f; }
+.theme-phillies .report-file-arrow { color: #c2a68f; }
+.theme-phillies .report-file-link:hover .report-file-arrow { color: #d4a028; }
 </style>
 </head>
 <body>
@@ -366,6 +389,19 @@ const REPORTS = [
     theme: 'book',
     file: '/static/reports/reading-list-print.html',
     type: 'HTML',
+  },
+  {
+    topic: 'Sports History',
+    hideTopicHeader: true,
+    name: '1993 Philadelphia Phillies Season',
+    desc: 'Worst-to-first NL pennant run, the NLCS upset of Atlanta, and the World Series loss to Toronto on Joe Carter\'s walk-off',
+    date: 'Jul 2026',
+    icon: '⚾',
+    theme: 'phillies',
+    files: [
+      { label: 'Fact Sheet', desc: 'Scoreboard-style at-a-glance: roster, postseason, Game 6', file: '/static/reports/1993-phillies-factsheet.html', icon: '⚾' },
+      { label: 'Full Season Reference', desc: 'Numbered sections, full sourcing, and tiered references', file: '/static/reports/1993-phillies-report.html', icon: '📖' },
+    ]
   },
 ];
 
