@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f6f1e3;color:#1c2430;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery Hallway: A Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,400;1,9..144,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{color-scheme:light;background:#f6f1e3!important;color:#1c2430!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:'Libre Baskerville',Georgia,serif;font-size:16.5px;line-height:1.75;background:#f6f1e3;color:#1c2430;max-width:820px;margin:0 auto;padding:56px 40px 96px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+/* tokens: brass #8f701a · brass-bright #b8912b · blueprint #1b3a5c · redpen #a83a30 · ink #1c2430 · paper #f6f1e3 */
+
+h1,h2,h3{font-family:'Fraunces',serif}
+
+/* COVER */
+.cover{border-top:4px solid #1c2430;border-bottom:1px solid #ddd3ba;padding:32px 0 28px;margin-bottom:48px}
+.cover-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#8f701a;margin-bottom:12px}
+.cover h1{font-size:2.15rem;font-weight:700;line-height:1.15;color:#1c2430;margin-bottom:10px}
+.cover h1 em{font-style:italic;font-weight:500;color:#1b3a5c}
+.cover-subtitle{font-size:1rem;color:#4a5568;font-style:italic;margin-bottom:20px;max-width:62ch;font-family:'Fraunces',serif}
+.cover-meta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;color:#7a7568;line-height:2.2;border-top:1px solid #e4dcc4;padding-top:14px;margin-top:14px}
+
+/* TOC */
+.toc{background:#fff;border:1px solid #e4dcc4;padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8f701a;margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted #e4dcc4;font-size:.88rem}
+.toc-item:last-child{border-bottom:none}
+.toc-section{color:#1c2430}
+.toc-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:#8f701a}
+
+/* SECTION STRUCTURE */
+.section{margin-bottom:56px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:#8f701a;flex-shrink:0}
+.section-rule{height:1px;background:#e4dcc4;flex:1}
+h2{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;color:#1c2430;margin-bottom:14px;line-height:1.28}
+h3{font-family:'Fraunces',serif;font-size:1.08rem;font-style:italic;font-weight:500;color:#1b3a5c;margin:26px 0 9px}
+p{color:#1c2430;margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+p strong{color:#1c2430}
+em{font-style:italic}
+sup.cite{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:#8f701a;font-style:normal;margin-left:1px}
+a.inline-link{color:#1b3a5c}
+
+/* CALLOUT */
+.callout{border-left:4px solid #1b3a5c;background:#eaf0f5;padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:#1c2430;margin:0;font-size:.96rem;line-height:1.68;max-width:66ch;font-family:'Fraunces',serif}
+.callout cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.72rem;color:#4a6178;margin-top:8px}
+
+/* DETAIL TABLE */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:200px 1fr;gap:0;border-bottom:1px solid #ece3cd;padding:12px 0;font-size:.9rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:'Fraunces',serif;font-weight:700;color:#1b3a5c;line-height:1.45;padding-right:16px}
+.detail-body{color:#1c2430;line-height:1.68}
+.detail-body strong{color:#1c2430}
+
+/* TABLE */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+.table-scroll table{margin:0}
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.86rem;background:#fff;border:1px solid #e4dcc4}
+.data-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#1c2430;background:#f0e7d0;border-bottom:2px solid #ddcfa8;padding:9px 12px;text-align:left}
+.data-table td{padding:9px 12px;border-bottom:1px solid #eee5cc;color:#1c2430;vertical-align:top;line-height:1.5}
+.data-table tr:last-child td{border-bottom:none}
+.gap-row{background:#faf3e2;font-style:italic;color:#8f701a}
+.flag-row{background:#fbeceb}
+
+/* RULE-OUT PANEL */
+.ruleout-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.ruleout-card{border:1px solid #e4dcc4;background:#fff;padding:14px 16px}
+.ruleout-card h4{font-family:'Fraunces',serif;font-weight:700;font-style:italic;color:#a83a30;font-size:.98rem;margin-bottom:6px}
+.ruleout-card p{font-size:.84rem;margin-bottom:0}
+
+/* VISUAL REFERENCES SECTION (prominent, distinct from bibliography) */
+.visual-refs{border:2px solid #8f701a;background:#fffdf7;margin:18px 0}
+.visual-refs-head{background:#8f701a;color:#fffdf7;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:10px 20px}
+.vref-item{padding:16px 22px;border-bottom:1px solid #ece1c4}
+.vref-item:last-child{border-bottom:none}
+.vref-item.blocked{background:#fbeceb}
+.vref-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.02rem;color:#1c2430;margin-bottom:3px}
+.vref-title a{color:#1b3a5c;text-decoration:none;border-bottom:1px solid #b8c8d6}
+.vref-title a:hover{color:#8f701a;border-bottom-color:#8f701a}
+.vref-url{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:#7a7568;display:block;margin-bottom:6px}
+.vref-desc{font-size:.88rem;color:#1c2430;line-height:1.6}
+.vref-tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#1b3a5c;padding:2px 8px;margin-bottom:6px}
+.vref-tag.warn{background:#a83a30}
+
+/* CONFIDENCE BOX */
+.confidence{border:1.5px solid #1c2430;background:#fff;margin:22px 0}
+.confidence-head{background:#1c2430;color:#f6f1e3;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.confidence-body{padding:16px 20px}
+.conf-item{border-left:4px solid #8f701a;padding:8px 14px;margin-bottom:12px;background:#f6f1e3}
+.conf-item:last-child{margin-bottom:0}
+.conf-item.bad{border-left-color:#a83a30}
+.conf-item.good{border-left-color:#1b3a5c}
+.conf-item .lbl{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#8f701a;display:block;margin-bottom:4px}
+.conf-item.bad .lbl{color:#a83a30}
+.conf-item.good .lbl{color:#1b3a5c}
+.conf-item p{font-size:.86rem;margin:0;max-width:none}
+
+/* WORTH BOOKMARKING */
+.bookmark{border:2px dashed #8f701a;background:#fff8e6;padding:18px 24px;margin:40px 0}
+.bookmark-head{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8f701a;margin-bottom:10px}
+.bookmark p{font-size:.92rem;margin-bottom:8px}
+.bookmark p:last-child{margin-bottom:0}
+.bookmark strong{color:#8f701a}
+
+/* SOURCES SECTION */
+.sources-section{margin-top:56px;padding-top:28px;border-top:2px solid #1c2430}
+.source-group{margin-bottom:28px}
+.source-group-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#8f701a;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #e4dcc4}
+.source-group-note{font-size:.78rem;color:#7a7568;font-style:italic;margin-bottom:12px}
+.source-item{font-size:.87rem;color:#1c2430;line-height:1.65;padding:6px 0;border-bottom:1px dotted #ece3cd}
+.source-item:last-child{border-bottom:none}
+.source-item em{font-style:italic}
+.source-num{font-family:"IBM Plex Mono",monospace;color:#8f701a;margin-right:4px}
+.source-url{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:#1b3a5c;display:block;margin-top:2px}
+
+/* FOOTER */
+.footer{margin-top:56px;padding-top:20px;border-top:1px solid #e4dcc4;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:#7a7568;text-align:center;line-height:2.2}
+
+@media(max-width:640px){
+  body{padding:28px 18px 64px;font-size:16px}
+  .cover h1{font-size:1.5rem}
+  .detail-row{grid-template-columns:1fr;gap:4px}
+  .detail-label{padding-right:0}
+  .data-table{width:auto;min-width:560px}
+  .ruleout-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Reference Guide &middot; Residential Corridor Typology &middot; Compiled Jul 2026</div>
+  <h1>Gallery Hallway<br><em>Terminology, Precedent, and Design Reference</em></h1>
+  <div class="cover-subtitle">What to call the wide, art-carrying central corridor Tom was trying to describe, where the term actually comes from, the taxonomy of related-but-different room types, the real houses built around this idea, and the practical planning considerations for a future renovation or build &mdash; with sourcing confidence noted explicitly, including where it falls short.</div>
+  <div class="cover-meta">
+    Compiled: Jul 2026 &nbsp;&middot;&nbsp; Scope: residential architecture, design inspiration for renovation/build planning<br>
+    Core sourcing: etymonline &middot; Wikipedia &middot; ArchDaily &middot; National Trust &middot; Historic UK &middot; Houzz<br>
+    Companion document: Field Reference (gallery-hallway-factsheet.html)
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><span class="toc-section">1. Terminology Clarification</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item"><span class="toc-section">2. Taxonomy of Hallway/Corridor Types</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item"><span class="toc-section">3. Design Features and Real Built Examples</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item"><span class="toc-section">4. Practical and Architectural Planning Considerations</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item"><span class="toc-section">5. Visual Reference Sources</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">6. Sourcing Confidence Assessment</span><span class="toc-num">&sect; 06</span></div>
+  <div class="toc-item"><span class="toc-section">Worth Bookmarking</span><span class="toc-num">&mdash;</span></div>
+  <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
+</div>
+
+
+<!-- BOTTOM LINE -->
+<div class="callout" style="margin-bottom:48px">
+  <p>"Gallery hallway" is not a rigorously standardized architectural term, but it is a widely understood and frequently used one &mdash; and the instinct that there's a real historical antecedent is correct. The formal term with the deepest lineage is <strong>"long gallery,"</strong> a specific Elizabethan/Jacobean English country-house room type from the 16th&ndash;17th centuries. In contemporary design writing, the feature being described gets called, more or less interchangeably, a "gallery," "gallery hall," "gallery corridor," "art corridor," or simply "the gallery" when it's a named room in a plan. No single body defines "gallery hallway" as a codified building type the way "loggia" or "breezeway" are defined &mdash; it functions as a design/marketing term used consistently but loosely.</p>
+  <cite>etymonline &middot; Wikipedia, Long gallery &middot; Design Encyclopedia<sup class="cite">[1][3][6]</sup></cite>
+</div>
+
+
+<!-- SECTION 1: TERMINOLOGY -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
+  <h2>Terminology Clarification</h2>
+
+  <p><strong>"Gallery" is the historically correct word, and it originally meant exactly this.</strong> The word entered English in the mid-15th century meaning "a covered walk or passageway, narrow and partly open passageway along a wall," from Old French <em>galerie</em> ("a long portico"), from Medieval Latin <em>galeria</em>.<sup class="cite">[1]</sup> The specific meaning "a building or room for the exhibition of art" wasn't recorded until the 1590s<sup class="cite">[1]</sup> &mdash; which means the <em>architectural</em> meaning (long connecting passage) came first, and the <em>art-display</em> meaning was grafted on afterward, precisely because these long connecting passages were where art collections got hung. This etymology is itself strong evidence that "gallery" in this sense isn't a loose metaphor &mdash; it's the word returning to something close to its original sense.</p>
+
+  <h3>The Long Gallery: A Specific Historical Room Type</h3>
+  <p>"Long gallery" refers to a distinct room type that became "an almost universal feature of Elizabethan manors"<sup class="cite">[3]</sup>: a long, narrow, high-ceilinged room, typically on the uppermost reception floor, running the length of one side of the house, with windows on one side (and often the ends) and doors to bedrooms and other rooms on the other.<sup class="cite">[3]</sup> Its documented uses were multiple and overlapping &mdash; formal entertaining, indoor exercise on bad-weather days, and display of portraits and art.<sup class="cite">[3][4]</sup> A peer-reviewed academic treatment exists in <em>Architectural History</em> (Cambridge Core, "The 'Long Gallery': Its Origins, Development, Use and Decoration"),<sup class="cite">[4]</sup> though only the abstract was accessible, not the full text &mdash; flagged in &sect; 06.</p>
+
+  <h3>Modern Usage: A Spectrum, Not a Settled Term</h3>
+  <p>Today's usage spans a set of near-synonyms rather than one dominant word:</p>
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">"Gallery" / "the gallery"</span><span class="detail-body">Used as a proper room name in some contemporary architect-designed houses, functioning as a passage that also links wings of a house and doubles as exhibition space. Britannica's architectural definition of gallery explicitly includes "a passageway between two wings of a building," set at ground level or elevated on columns<sup class="cite">[5]</sup> &mdash; a direct structural echo of the long gallery's original function.</span></div>
+    <div class="detail-row"><span class="detail-label">"Gallery corridor" / "corridor gallery"</span><span class="detail-body">Used more in lighting-design and interior-design contexts to describe treating an existing hallway as an art-display zone.<sup class="cite">[6][22]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">"Art corridor" / "gallery wall hallway"</span><span class="detail-body">More casual, consumer-facing terms (Pinterest, Houzz, decor blogs) that usually describe <em>decorating</em> a standard hallway with art rather than a purpose-built, wider architectural feature.<sup class="cite">[20]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">"Picture gallery"</span><span class="detail-body">An older, more formal variant, still used for grand historical examples &mdash; e.g. the Picture Gallery at Buckingham Palace, a long, top-lit space built specifically to house the royal art collection.<sup class="cite">[3]</sup></span></div>
+  </div>
+
+  <h3>Consensus vs. Variation</h3>
+  <p>There is clear consensus that "gallery" &mdash; not "hallway" or "corridor" alone &mdash; is the right word once a passage is wide enough and treated as a display/gathering space rather than pure circulation. The Design Encyclopedia's working distinction is useful here: a corridor is a linear passage built for circulation efficiency, while a gallery is a more expansive path historically conceived to showcase art or architectural features while also facilitating movement.<sup class="cite">[6]</sup> Where usage genuinely varies is in the modifiers: "long gallery," "gallery hall," "gallery corridor," and unmodified "gallery" are all in active use, and no single one dominates.</p>
+
+  <div class="callout">
+    <p>"Gallery hallway" specifically does appear in consumer/decor contexts but isn't a term used by architecture-trade publications (ArchDaily, Architectural Record) as a formal category name &mdash; they tend to just call these spaces "the gallery" within a specific house's plan.</p>
+    <cite>Synthesized across sources cited above</cite>
+  </div>
+</div>
+
+
+<!-- SECTION 2: TAXONOMY -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
+  <h2>Taxonomy of Hallway/Corridor Types</h2>
+
+  <p><strong>Standard hallway.</strong> In the US, the International Residential Code (IRC Section R311.6) sets a minimum residential hallway width of 3 feet (36 inches).<sup class="cite">[8]</sup> In practice, most residential hallways run 36&ndash;48 inches, with 42&ndash;48 inches considered comfortable for two people to pass.<sup class="cite">[8][9]</sup></p>
+
+  <p><strong>Gallery-style corridor.</strong> Not code-defined, but design guidance converges on <strong>54&ndash;72 inches (4.5&ndash;6 feet)</strong> as the point where a hallway stops feeling like a passage and starts feeling like a room you can furnish or linger in &mdash; wide enough for a console table, bench, or chaise along one wall while still allowing circulation.<sup class="cite">[9]</sup> Historical long galleries were far wider still and closer to full rooms: Hardwick Hall's Long Gallery is variously reported as 162 feet or 166 feet long (sources disagree &mdash; see &sect; 06), 26 feet high, and 22&ndash;40 feet wide.<sup class="cite">[27][28]</sup> Montacute House's Long Gallery is reported at 172 feet (roughly 52 metres)<sup class="cite">[26]</sup> &mdash; described elsewhere as "over 52 metres" and the longest of its type in England; this figure is consistent with the Hardwick Hall range, which gives some confidence in the &asymp;172 ft figure for Montacute specifically.</p>
+
+  <h3>Single-Loaded vs. Double-Loaded Corridor</h3>
+  <p>This is the most useful taxonomic distinction for the feature Tom is describing. A <strong>double-loaded corridor</strong> has rooms on both sides, is efficient in floor area, but tends to be dark in the middle since there's no direct route for daylight. A <strong>single-loaded corridor</strong> has rooms on only one side, with the other side open to windows, a courtyard, or a view &mdash; this is architecturally more dramatic and is the layout that naturally supports gallery treatment, because the blank or glazed wall opposite the rooms is exactly where art, niches, or a run of natural light can go. The historical long gallery is essentially a single-loaded corridor at grand scale: windows on one side, doors to rooms on the other.<sup class="cite">[3]</sup></p>
+
+  <h3>Related but Distinct Terms: Ruling Out Loggia and Breezeway</h3>
+  <p>Two terms come up adjacent to this topic and are worth ruling in or out explicitly, since both are fundamentally exterior or semi-exterior connectors rather than enclosed interior display corridors:</p>
+  <div class="ruleout-grid">
+    <div class="ruleout-card">
+      <h4>Loggia &mdash; different thing</h4>
+      <p>A covered exterior gallery, open on at least one side, usually supported by columns or arches, attached to and sharing the roofline/style of the main building, accessed only from inside. Originates in Mediterranean/Italian Renaissance architecture as a transitional indoor/outdoor space.<sup class="cite">[10]</sup></p>
+    </div>
+    <div class="ruleout-card">
+      <h4>Breezeway &mdash; different thing</h4>
+      <p>A roofed, open-sided passage connecting two separate buildings or two halves of a house, without walls, windows, or conditioning &mdash; more casual and structurally simpler than a loggia, and primarily a connector rather than a display space.<sup class="cite">[11][12]</sup></p>
+    </div>
+  </div>
+
+  <h3>Lighting and Material Distinctions for Gallery-Style Corridors</h3>
+  <p><strong>Lighting:</strong> track lighting (flexible, repositionable heads) and dedicated picture lights (mounted 7&ndash;10 cm above a frame, angled 30&ndash;35 degrees down) are the two standard approaches for art-specific illumination in a hallway.<sup class="cite">[25]</sup> Recommended ambient light levels for hallway/gallery display are around 100&ndash;150 lumens per square metre as a baseline, adjusted per artwork sensitivity.<sup class="cite">[25]</sup> Wall-washing or grazing light (fixtures set to skim the wall surface) is specifically recommended for turning a corridor into a display space rather than just lighting it for passage.<sup class="cite">[22]</sup> Historically, the long gallery relied on side windows and, in later top-lit examples like Buckingham Palace's Picture Gallery, overhead skylighting.<sup class="cite">[3]</sup></p>
+
+  <p><strong>Wall treatment:</strong> practical guidance converges on ensuring gallery-intended walls have blocking (plywood or equivalent solid backing within the stud cavity) rather than relying on drywall anchors alone, particularly for heavier or larger-format art &mdash; fixings should land in a hardwood/plywood structure or studs directly, with weight distributed across two suspension points per piece.<sup class="cite">[23][24]</sup></p>
+
+  <p><strong>Flooring:</strong> none of the sources consulted gave gallery-corridor-specific flooring guidance beyond general hallway durability concerns (hard-wearing, easy-clean surfaces given traffic) &mdash; this is a genuine gap in the available research, not an oversight.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead><tr><th>Type</th><th>Width / Character</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Standard hallway</strong></td><td>36&ndash;48 in (IRC min. 36 in)</td><td>Pure circulation; not designed to be furnished</td></tr>
+      <tr><td><strong>Gallery-capable corridor</strong></td><td>54&ndash;72 in</td><td>Design-guidance threshold, not code-defined</td></tr>
+      <tr><td><strong>Long gallery (historical)</strong></td><td>22&ndash;40 ft wide, up to 172 ft long, &asymp;26 ft high</td><td>Hardwick Hall &amp; Montacute House; essentially a room, not a hallway</td></tr>
+      <tr class="flag-row"><td colspan="3">Hardwick Hall length: 162 ft (photo caption) vs. 166 ft (aggregated National Trust sources) &mdash; disputed, see &sect; 06</td></tr>
+      <tr class="gap-row"><td>Loggia</td><td>&mdash;</td><td>Exterior, open &ge;1 side, columned. Ruled out &mdash; different room type</td></tr>
+      <tr class="gap-row"><td>Breezeway</td><td>&mdash;</td><td>Exterior, open-sided connector. Ruled out &mdash; different room type</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+
+<!-- SECTION 3: DESIGN FEATURES & BUILT EXAMPLES -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
+  <h2>Design Features and Real Built Examples</h2>
+
+  <p>Several ArchDaily-documented projects are directly on-point as reference material for how architects actually build this feature in as a spine, not an afterthought:</p>
+
+  <p><strong>Gallery House, San Francisco (2009), by Ogrydziak Prillinger Architects.</strong><sup class="cite">[13]</sup> Explicitly described by the architects as a new domestic typology combining "a semi-public art gallery and a residence for two," with all spaces aligned along a galleria-like spine. Probably the single closest built precedent: a named "gallery" organizing the whole house.</p>
+
+  <p><strong>Emily's Home (Artist Residence and Studio), Catskill, NY (2025), by Horizontal Design.</strong><sup class="cite">[14]</sup> A central gallery functions as the primary circulation spine while doubling as exhibition space for the owners' art. Only basic project facts &mdash; architect, location, size, 2025 completion &mdash; were confirmed; the fuller design narrative wasn't accessible, so treat the "central gallery as spine" description as a search-snippet-level claim, not fully independently verified.</p>
+
+  <p><strong>Spine Wall House, by Drew Architects.</strong><sup class="cite">[15]</sup> Uses a literal structural/circulation "spine" concept organizing the plan, worth reviewing for the spine-as-organizing-device idea even though it's not framed as an art gallery specifically.</p>
+
+  <p><strong>Light Corridor House, by FIGR Architecture &amp; Design</strong><sup class="cite">[16]</sup> and <strong>Corridor House 2.0, Thrissur, India, by i2a Architects Studio</strong><sup class="cite">[17]</sup> &mdash; both use corridor-as-design-feature (framing light, privacy, and views) as the central architectural move of the house.</p>
+
+  <p><strong>Gallery House, Buffalo, NY, renovation by John Wingfelder Architect.</strong><sup class="cite">[18]</sup> A strong, directly relevant built example: a 1930 center-hall home was reworked so the original central hall became "a center atrium space with a skylit staircase that connects the scheme three-dimensionally, and scoops copious amounts of daylight into the heart of the house," explicitly to showcase the owners' art collection, with glass additions extending toward private sculpture gardens.</p>
+
+  <p><strong>Midcentury revival home featured on Houzz.</strong><sup class="cite">[19]</sup> A real, moderate-budget precedent (not high architecture): a simple gallery-style track light runs the full length of the entry hallway as the primary light source, with the corridor doubling as a display run for curated objects rather than framed art specifically. Useful as a "you don't need Buckingham Palace" reference point.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead><tr><th>Project</th><th>Architect</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Gallery House</strong> (San Francisco)</td><td>Ogrydziak Prillinger Architects, 2009</td><td>Strongest modern precedent &mdash; whole house organized as a gallery</td></tr>
+      <tr><td><strong>Gallery House</strong> (Buffalo, NY)</td><td>John Wingfelder Architect (renovation)</td><td>Strongest renovation precedent</td></tr>
+      <tr><td>Emily's Home</td><td>Horizontal Design, 2025</td><td>Central gallery as circulation spine &mdash; snippet-level claim only</td></tr>
+      <tr><td>Spine Wall House</td><td>Drew Architects</td><td>Structural/circulation spine, not art-framed</td></tr>
+      <tr><td>Light Corridor House</td><td>FIGR Architecture &amp; Design</td><td>Corridor-as-feature, framing light/privacy/views</td></tr>
+      <tr><td>Corridor House 2.0</td><td>i2a Architects Studio, Thrissur, India</td><td>Same move, different climate/context</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Recurring Design Moves Across These Examples</h3>
+  <p>Using the gallery/corridor as the literal organizing spine that connects wings or floors, rather than a leftover space between rooms;<sup class="cite">[5][13][14]</sup> pairing it with a skylight or clerestory to solve the classic "dark hallway" problem inherent to double-loaded plans;<sup class="cite">[18]</sup> treating the art-hanging wall as continuous rather than broken up by doors, which argues for single-loaded massing; and using "moments" along the length &mdash; a significant piece near the entry with its own picture light, then rhythm-setting vignettes &mdash; rather than uniform wall-to-wall hanging.</p>
+</div>
+
+
+<!-- SECTION 4: PRACTICAL/ARCHITECTURAL PLANNING CONSIDERATIONS -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
+  <h2>Practical and Architectural Planning Considerations</h2>
+
+  <p><strong>Square footage tradeoff.</strong> No single industry rule of thumb could be verified for how much extra width "costs" versus a standard hallway &mdash; going from 36&ndash;48 inches (code/standard) to 54&ndash;72+ inches (gallery-capable) roughly doubles the footprint the corridor occupies for a given length.<sup class="cite">[8][9]</sup> Architects justify this by making the corridor do double duty &mdash; primary daylighting device, connective spine between wings, and display space simultaneously &mdash; rather than treating it as pure circulation loss.<sup class="cite">[13][18]</sup></p>
+
+  <p><strong>Daylighting is the single biggest planning lever.</strong> Because double-loaded corridors (rooms on both sides) are structurally prone to being dark in the middle, the gallery-hallway concept works best either as a single-loaded corridor (rooms on one side, windows/glazing on the other) &mdash; the historical long-gallery pattern<sup class="cite">[3]</sup> &mdash; or with a skylight/clerestory strategy layered on top, as in the Buffalo Gallery House renovation.<sup class="cite">[18]</sup></p>
+
+  <p><strong>Lighting design should be planned as track or dedicated picture-light circuits from the start</strong>, not retrofitted, since wall-washing/grazing fixtures and picture lights typically need their own switching and dimming separate from general hallway lighting.<sup class="cite">[22][25]</sup></p>
+
+  <p><strong>Wall structure</strong> needs to be designed into the framing if heavier or larger-format art is planned &mdash; continuous blocking or plywood backing behind drywall at the anticipated hanging zone, or studs positioned with hanging in mind &mdash; rather than left to post-construction anchors. This is a "decide during framing" item, not a decorating-phase fix.<sup class="cite">[23][24]</sup></p>
+
+  <p><strong>Code minimum is a floor, not a target:</strong> the 36-inch IRC minimum<sup class="cite">[8]</sup> is the baseline for any hallway; a genuine gallery-style corridor should be planned well above that from the earliest schematic stage, since retrofitting width later means moving structural walls.</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Biggest lever</span><span class="detail-body">Daylighting &mdash; go single-loaded, or add a skylight/clerestory</span></div>
+    <div class="detail-row"><span class="detail-label">Decide at framing</span><span class="detail-body">Blocking/plywood backing for heavier art, before drywall goes up</span></div>
+    <div class="detail-row"><span class="detail-label">Decide at schematic</span><span class="detail-body">Track/picture-light circuits with dedicated switching &amp; dimming</span></div>
+    <div class="detail-row"><span class="detail-label">Genuine gap</span><span class="detail-body">No gallery-specific flooring guidance found in this research</span></div>
+    <div class="detail-row"><span class="detail-label">Not verified</span><span class="detail-body">No costed industry rule of thumb for the footprint tradeoff</span></div>
+  </div>
+</div>
+
+
+<!-- SECTION 5: VISUAL REFERENCE SOURCES — PROMINENT, DISTINCT SECTION -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
+  <h2>Visual Reference Sources</h2>
+  <p>This section is kept separate from the general bibliography in &sect; Sources and References, because the explicit goal here is design inspiration &mdash; strong photo sets and gallery links, not just citation. Each entry below notes what's actually visually available at the link, not just what topic it covers.</p>
+
+  <div class="visual-refs">
+    <div class="visual-refs-head">Strongest Visual References, In Priority Order</div>
+
+    <div class="vref-item">
+      <span class="vref-tag">Best single reference</span>
+      <div class="vref-title"><a href="https://www.archdaily.com/56058/gallery-house-ogrydziak-prillinger-architects" target="_blank">ArchDaily &mdash; Gallery House, Ogrydziak Prillinger Architects, San Francisco</a></div>
+      <span class="vref-url">archdaily.com/56058/gallery-house-ogrydziak-prillinger-architects</span>
+      <div class="vref-desc">Full photo set (photographer Tim Griffith) plus floor plans, elevations, sections, and axonometric diagrams. The purpose-built gallery-as-spine house, most directly on-brief.<sup class="cite">[13]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <div class="vref-title"><a href="https://www.archdaily.com/1039865/emilys-home-horizontal-design" target="_blank">ArchDaily &mdash; Emily's Home, Horizontal Design, Catskill NY</a></div>
+      <span class="vref-url">archdaily.com/1039865/emilys-home-horizontal-design</span>
+      <div class="vref-desc">25-image gallery, recent (2025) project.<sup class="cite">[14]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <div class="vref-title"><a href="https://www.archdaily.com/888013/light-corridor-house-figr-architecture-and-design" target="_blank">ArchDaily &mdash; Light Corridor House, FIGR Architecture &amp; Design</a></div>
+      <span class="vref-url">archdaily.com/888013/light-corridor-house-figr-architecture-and-design</span>
+      <div class="vref-desc">Includes floor plans showing how the corridor is massed against the rest of the house.<sup class="cite">[16]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <div class="vref-title"><a href="https://www.archdaily.com/799901/spine-wall-house-drew-architects" target="_blank">ArchDaily &mdash; Spine Wall House, Drew Architects</a> &amp; <a href="https://www.archdaily.com/1037106/corridor-house-i2a-architects-studio" target="_blank">Corridor House 2.0, i2a Architects Studio</a></div>
+      <div class="vref-desc">Both have full plan/photo sets useful for the "corridor as organizing device" angle even though art display isn't their primary framing.<sup class="cite">[15][17]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <span class="vref-tag">Best renovation precedent</span>
+      <div class="vref-title"><a href="https://www.wingfelder.com/gallery-house" target="_blank">John Wingfelder Architect &mdash; Gallery House (Buffalo renovation)</a></div>
+      <span class="vref-url">wingfelder.com/gallery-house</span>
+      <div class="vref-desc">A real renovation-of-an-existing-house case study (1930s center-hall home reworked) &mdash; probably the most directly applicable precedent for a renovation context specifically, as opposed to new construction.<sup class="cite">[18]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <div class="vref-title"><a href="https://www.houzz.com/photos/huge-hallway-ideas-phbr1-bp~t_743~a_30-216" target="_blank">Houzz &mdash; 75 Huge Hallway Ideas</a></div>
+      <span class="vref-url">houzz.com/photos/huge-hallway-ideas-phbr1-bp~t_743~a_30-216</span>
+      <div class="vref-desc">Large photo library (2,000+ images per the site), searchable/filterable &mdash; good for browsing volume of examples even though individual project documentation is thin.<sup class="cite">[20]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <div class="vref-title"><a href="https://www.houzz.com/magazine/my-houzz-a-midcentury-revival-that-goes-the-distance-stsetivw-vs~80233187" target="_blank">Houzz Magazine &mdash; My Houzz: A Midcentury Revival That Goes the Distance</a></div>
+      <span class="vref-url">houzz.com/magazine/my-houzz-a-midcentury-revival-that-goes-the-distance-stsetivw-vs~80233187</span>
+      <div class="vref-desc">Real, attainable-scale example of gallery track lighting in an entry hallway.<sup class="cite">[19]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <div class="vref-title"><a href="https://news.artnet.com/art-world/architectural-digest-home-tours-ranked-by-art-2543556" target="_blank">Artnet News &mdash; Home Tours Ranked by Their Art</a></div>
+      <span class="vref-url">news.artnet.com/art-world/architectural-digest-home-tours-ranked-by-art-2543556</span>
+      <div class="vref-desc">Editorial roundup ranking Architectural Digest home tours by their art collections &mdash; useful browsing for how art and circulation space interact in real (if celebrity) homes. Not independently verified beyond the title/topic; treat as a browsing lead, not a cited claim.<sup class="cite">[29]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <div class="vref-title"><a href="https://www.aol.com/articles/hallway-art-collection-most-surprising-210000755.html" target="_blank">Architectural Digest (via AOL) &mdash; The Hallway (and Its Art Collection) Is the Most Surprising Room in This Portland Apartment</a></div>
+      <span class="vref-url">aol.com/articles/hallway-art-collection-most-surprising-210000755.html</span>
+      <div class="vref-desc">A directly on-topic piece &mdash; a hallway built around an art collection, in an apartment rather than a grand house. Good for a more attainable-scale visual reference. Title/topic confirmed; not independently re-verified for photo count or detail.<sup class="cite">[30]</sup></div>
+    </div>
+
+    <div class="vref-item blocked">
+      <span class="vref-tag warn">Blocked &mdash; 403, unread</span>
+      <div class="vref-title"><a href="https://www.dezeen.com/2022/06/18/corridors-lookbooks/" target="_blank">Dezeen &mdash; "Ten home interiors that make a feature of their corridors"</a></div>
+      <span class="vref-url">dezeen.com/2022/06/18/corridors-lookbooks/</span>
+      <div class="vref-desc">Could not be fetched directly (403 error), so its specific contents cannot be described firsthand. Included only as a lead worth opening manually &mdash; the title is a direct match for the brief and Dezeen's lookbook format is reliably strong on photography, but nothing about its actual images or projects should be treated as confirmed.<sup class="cite">[21]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <span class="vref-tag">Historical grounding</span>
+      <div class="vref-title"><a href="https://www.nationaltrust.org.uk/visit/peak-district-derbyshire/hardwick/discover-hardwick-hall" target="_blank">Hardwick Hall, Derbyshire (National Trust)</a></div>
+      <span class="vref-url">nationaltrust.org.uk/visit/peak-district-derbyshire/hardwick/discover-hardwick-hall</span>
+      <div class="vref-desc">The best-preserved Elizabethan long gallery, retaining original tapestries. National Trust's own site is the primary/official source for visiting and photography.<sup class="cite">[28]</sup></div>
+    </div>
+
+    <div class="vref-item">
+      <div class="vref-title"><a href="https://www.historic-uk.com/HistoryMagazine/DestinationsUK/Montacute-House/" target="_blank">Montacute House, Somerset (Historic UK)</a></div>
+      <span class="vref-url">historic-uk.com/HistoryMagazine/DestinationsUK/Montacute-House/</span>
+      <div class="vref-desc">The longest surviving example (&asymp;172 ft), currently used to display National Portrait Gallery loans &mdash; directly illustrating the "gallery as art display corridor" concept in its original historical form. Note: per search results, the upper floors including the Long Gallery may be closed for a restoration project ("Saving the Staircases") &mdash; worth checking the National Trust's site directly for current visiting status if this becomes relevant for an actual site visit.<sup class="cite">[26]</sup></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 6: SOURCING CONFIDENCE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 06</span><div class="section-rule"></div></div>
+  <h2>Sourcing Confidence Assessment</h2>
+
+  <p>This research draws on etymological references, Wikipedia, architecture-trade publications, National Trust/heritage sites, and design-editorial sources &mdash; not a single authoritative standard, since none exists for "gallery hallway" as a category. Confidence varies meaningfully by claim, and is broken out explicitly below rather than presented as uniform.</p>
+
+  <div class="confidence">
+    <div class="confidence-head">Well-Supported</div>
+    <div class="confidence-body">
+      <div class="conf-item good">
+        <span class="lbl">Corroborated, primary etymological source</span>
+        <p>The etymology and definition of "gallery" as originally meaning a long connecting passage, later extended to mean an art-display space.<sup class="cite">[1][2]</sup></p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Corroborated across independent sources</span>
+        <p>The existence, historical period, and general function of the English "long gallery" as an entertaining/exercise/display space.<sup class="cite">[3][4]</sup></p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Clear, well-established distinction</span>
+        <p>The single-loaded vs. double-loaded corridor distinction and its daylighting implications; the distinction between loggia and breezeway as related-but-different terms.<sup class="cite">[10][11][12]</sup></p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Code source, directly cited</span>
+        <p>The IRC 36-inch minimum hallway width.<sup class="cite">[8]</sup></p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Directly-documented built projects</span>
+        <p>The existence and basic facts of the ArchDaily-documented built projects and the Wingfelder Buffalo project.<sup class="cite">[13][14][15][16][17][18]</sup></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Thinly Sourced or With Noted Disagreement</div>
+    <div class="confidence-body">
+      <div class="conf-item bad">
+        <span class="lbl">Genuine, unresolved discrepancy &mdash; not smoothed over</span>
+        <p>The exact length of Hardwick Hall's Long Gallery is disputed across sources: <strong>162 ft per one detailed photo caption</strong> (Alamy)<sup class="cite">[27]</sup> <strong>vs. 166 ft per other aggregated sources</strong> (National Trust-derived).<sup class="cite">[28]</sup> Both figures are presented in this report as a range rather than resolved to one number.</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">Abstract only, not full text</span>
+        <p>The academic Cambridge Core article on the long gallery's origins<sup class="cite">[4]</sup> could only be accessed as an abstract, not the full peer-reviewed text, so its detailed claims beyond the title/topic aren't vouched for.</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Blocked on fetch &mdash; flagged, not described as read</span>
+        <p>The Dezeen corridors lookbook<sup class="cite">[21]</sup> is a title/lead only &mdash; blocked from reading its actual content (403 error). Flagged as unverified rather than describing imagery not actually seen.</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">Search-snippet level, not fully independently verified</span>
+        <p>Verified detail on the full design narrative (materials, lighting specifics) for the Emily's Home project beyond basic project facts.<sup class="cite">[14]</sup></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Not Found / Could Not Confirm</div>
+    <div class="confidence-body">
+      <div class="conf-item bad">
+        <span class="lbl">No single defined standard exists</span>
+        <p>A single authoritative, industry-wide definition or dimensional standard specifically for "gallery hallway" as a distinct code or design category &mdash; it functions as a descriptive term, not a defined one.</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Confirmed gap</span>
+        <p>Flooring guidance specific to gallery-style corridors, as opposed to general hallway durability advice, was not found in this research.</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Not confirmed as an industry term</span>
+        <p>The "gallery hallway" as a term used specifically by luxury custom-home builders did not turn up clear evidence &mdash; could not confirm it's an established marketing term in that industry specifically, as distinct from general design-publication usage.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- WORTH BOOKMARKING -->
+<div class="bookmark">
+  <div class="bookmark-head">Worth Bookmarking &mdash; Vault Candidates Flagged by the Research</div>
+  <p><strong>Hardwick Hall and Montacute House</strong> (both National Trust, England) &mdash; the two best-preserved primary/original "long gallery" examples for historical grounding of this design concept.</p>
+  <p><strong>Gallery House</strong> (San Francisco, Ogrydziak Prillinger Architects) and the <strong>Wingfelder Gallery House</strong> (Buffalo renovation) &mdash; the two strongest modern built precedents found, the closest matches to the actual brief (a house organized around a gallery-as-spine) rather than just decorated hallways.</p>
+</div>
+
+
+<!-- SOURCES AND REFERENCES -->
+<div class="sources-section">
+  <div class="section-eyebrow"><span class="section-tag">&sect;</span><div class="section-rule"></div></div>
+  <h2>Sources and References</h2>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 1 &mdash; Etymological and Historical Primary Sources</div>
+    <div class="source-group-note">The strongest sourcing tier for the terminology and historical-lineage claims in this report.</div>
+    <div class="source-item"><span class="source-num">[1]</span>etymonline. <em>Gallery &mdash; Etymology, Origin &amp; Meaning.</em>
+      <span class="source-url">etymonline.com/word/gallery</span></div>
+    <div class="source-item"><span class="source-num">[2]</span>Wikipedia. <em>Art gallery.</em>
+      <span class="source-url">en.wikipedia.org/wiki/Art_gallery</span></div>
+    <div class="source-item"><span class="source-num">[3]</span>Wikipedia. <em>Long gallery.</em>
+      <span class="source-url">en.wikipedia.org/wiki/Long_gallery</span></div>
+    <div class="source-item"><span class="source-num">[4]</span>Cambridge Core / <em>Architectural History.</em> <em>The 'Long Gallery': Its origins, development, use and decoration.</em> Abstract accessed only &mdash; see &sect; 06.
+      <span class="source-url">cambridge.org/core/journals/architectural-history/article/abs/long-gallery-its-origins-development-use-and-decoration/C31CE46433B5A552653DECF354B0F0BA</span></div>
+    <div class="source-item"><span class="source-num">[5]</span>Britannica Kids. <em>Gallery.</em>
+      <span class="source-url">kids.britannica.com/students/article/gallery/324193</span></div>
+    <div class="source-item"><span class="source-num">[26]</span>Historic UK. <em>The History of Montacute House, Somerset.</em>
+      <span class="source-url">historic-uk.com/HistoryMagazine/DestinationsUK/Montacute-House/</span></div>
+    <div class="source-item"><span class="source-num">[27]</span>Alamy. Photo caption, <em>The Long Gallery at Hardwick Hall, Derbyshire</em> (states 162 feet). One side of a disputed figure &mdash; see &sect; 06.
+      <span class="source-url">alamy.com/stock-photo-the-long-gallery-at-hardwick-hall-derbyshire-the-room-is-162-feet-94452423.html</span></div>
+    <div class="source-item"><span class="source-num">[28]</span>National Trust. <em>Discover Hardwick Hall.</em> Aggregated sources cite 166 feet. Other side of a disputed figure &mdash; see &sect; 06.
+      <span class="source-url">nationaltrust.org.uk/visit/peak-district-derbyshire/hardwick/discover-hardwick-hall</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 2 &mdash; Architecture Trade Publications (Built Examples)</div>
+    <div class="source-group-note">Directly-documented contemporary and renovation precedents; full photo/plan sets available at each link (see &sect; 05).</div>
+    <div class="source-item"><span class="source-num">[13]</span>ArchDaily. <em>Gallery House / Ogrydziak Prillinger Architects.</em>
+      <span class="source-url">archdaily.com/56058/gallery-house-ogrydziak-prillinger-architects</span></div>
+    <div class="source-item"><span class="source-num">[14]</span>ArchDaily. <em>Emily's Home (Artist Residence and Studio in NY) / Horizontal Design.</em> Basic facts confirmed; fuller narrative snippet-level only &mdash; see &sect; 06.
+      <span class="source-url">archdaily.com/1039865/emilys-home-horizontal-design</span></div>
+    <div class="source-item"><span class="source-num">[15]</span>ArchDaily. <em>Spine Wall House / Drew Architects.</em>
+      <span class="source-url">archdaily.com/799901/spine-wall-house-drew-architects</span></div>
+    <div class="source-item"><span class="source-num">[16]</span>ArchDaily. <em>Light Corridor House / FIGR Architecture &amp; Design.</em>
+      <span class="source-url">archdaily.com/888013/light-corridor-house-figr-architecture-and-design</span></div>
+    <div class="source-item"><span class="source-num">[17]</span>ArchDaily. <em>Corridor House 2.0 / i2a Architects Studio.</em>
+      <span class="source-url">archdaily.com/1037106/corridor-house-i2a-architects-studio</span></div>
+    <div class="source-item"><span class="source-num">[18]</span>John Wingfelder Architect. <em>Gallery House</em> (Buffalo renovation case study).
+      <span class="source-url">wingfelder.com/gallery-house</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 3 &mdash; Code, Reference, and Design-Guidance Sources</div>
+    <div class="source-group-note">Definitional and dimensional guidance for the taxonomy in &sect; 02.</div>
+    <div class="source-item"><span class="source-num">[6]</span>Design Encyclopedia. <em>Corridor Vs Gallery.</em>
+      <span class="source-url">design-encyclopedia.com/?T=Corridor+Vs+Gallery</span></div>
+    <div class="source-item"><span class="source-num">[7]</span>Wikipedia. <em>Hallway.</em>
+      <span class="source-url">en.wikipedia.org/wiki/Hallway</span></div>
+    <div class="source-item"><span class="source-num">[8]</span>Angi. <em>Standard Hallway Width: Sizes and Dimensions Guide.</em>
+      <span class="source-url">angi.com/articles/hallway-width.htm</span></div>
+    <div class="source-item"><span class="source-num">[9]</span>Houzz. <em>Key Measurements: Hallway Design Fundamentals.</em>
+      <span class="source-url">houzz.com/magazine/key-measurements-hallway-design-fundamentals-stsetivw-vs~25890141</span></div>
+    <div class="source-item"><span class="source-num">[10]</span>Wikipedia. <em>Loggia.</em>
+      <span class="source-url">en.wikipedia.org/wiki/Loggia</span></div>
+    <div class="source-item"><span class="source-num">[11]</span>Wikipedia. <em>Breezeway.</em>
+      <span class="source-url">en.wikipedia.org/wiki/Breezeway</span></div>
+    <div class="source-item"><span class="source-num">[12]</span>Houzz. <em>Breezeways: Architecture's Cool Connections.</em>
+      <span class="source-url">houzz.com/magazine/breezeways-architecture-s-cool-connections-stsetivw-vs~482224</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 4 &mdash; Practical How-To (Lighting and Wall-Hanging)</div>
+    <div class="source-group-note">Trade/practical guidance underlying &sect; 04's planning recommendations.</div>
+    <div class="source-item"><span class="source-num">[22]</span>Smile Lighting. <em>Corridor Art Gallery: How Wall-Washers and Grazing Light Transform a Hallway into a Display Space.</em>
+      <span class="source-url">smilelighting.com/2026/06/09/corridor-art-gallery-how-wall-washers-and-grazing-light-transform-a-hallway-into-a-display-space-for-art-and-photography/</span></div>
+    <div class="source-item"><span class="source-num">[23]</span>Picture Hang Solutions. <em>10 Proven Ways to Prevent Wall Damage When Hanging Art.</em>
+      <span class="source-url">picturehangsolutions.com/blogs/info/10-proven-ways-to-prevent-wall-damage-when-hanging-art</span></div>
+    <div class="source-item"><span class="source-num">[24]</span>Absolute Museum &amp; Gallery Products. <em>How to Hang Heavy, Large Artworks in Your Gallery.</em>
+      <span class="source-url">absoluteproduct.com/article/how-to-hang-large-heavy-artworks-in-your-gallery</span></div>
+    <div class="source-item"><span class="source-num">[25]</span>Banno Lighting. <em>Gallery Track Lighting: The Professional Guide to Museum-Grade Art Gallery Track Lighting Systems.</em>
+      <span class="source-url">bannolighting.com/blog/gallery-track-lighting/</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 5 &mdash; Consumer, Editorial, and Lookbook Sources (Visual Inspiration)</div>
+    <div class="source-group-note">Design-editorial and consumer sources, useful primarily for browsing volume of examples rather than as authoritative claims. See &sect; 05 for the dedicated visual-references treatment.</div>
+    <div class="source-item"><span class="source-num">[19]</span>Houzz Magazine. <em>My Houzz: A Midcentury Revival That Goes the Distance.</em>
+      <span class="source-url">houzz.com/magazine/my-houzz-a-midcentury-revival-that-goes-the-distance-stsetivw-vs~80233187</span></div>
+    <div class="source-item"><span class="source-num">[20]</span>Houzz. <em>75 Huge Hallway Ideas.</em>
+      <span class="source-url">houzz.com/photos/huge-hallway-ideas-phbr1-bp~t_743~a_30-216</span></div>
+    <div class="source-item"><span class="source-num">[21]</span>Dezeen. <em>Ten home interiors that make a feature of their corridors.</em> <strong>Not accessed &mdash; 403 error.</strong> Title/lead only; see &sect; 05 and &sect; 06.
+      <span class="source-url">dezeen.com/2022/06/18/corridors-lookbooks/</span></div>
+    <div class="source-item"><span class="source-num">[29]</span>Artnet News. <em>From Gwyneth to Diplo: 'Architectural Digest' Home Tours Ranked by Their Art.</em>
+      <span class="source-url">news.artnet.com/art-world/architectural-digest-home-tours-ranked-by-art-2543556</span></div>
+    <div class="source-item"><span class="source-num">[30]</span>Architectural Digest, via AOL. <em>The Hallway (and Its Art Collection) Is the Most Surprising Room in This Portland Apartment.</em>
+      <span class="source-url">aol.com/articles/hallway-art-collection-most-surprising-210000755.html</span></div>
+  </div>
+</div>
+
+<div class="footer">
+  Gallery Hallway: Terminology, Precedent, and Design Reference &nbsp;&middot;&nbsp; Compiled Jul 2026<br>
+  Core sourcing: etymonline &middot; Wikipedia &middot; ArchDaily &middot; National Trust &middot; Historic UK &middot; Houzz<br>
+  The Hardwick Hall length discrepancy and the blocked Dezeen lookbook are flagged explicitly in &sect; 06 rather than smoothed over.
+</div>
+
+</body>
+</html>

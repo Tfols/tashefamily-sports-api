@@ -364,6 +364,52 @@ body::before {
 .theme-lego .report-file-desc { color: #d9ac9c; }
 .theme-lego .report-file-arrow { color: #d9ac9c; }
 .theme-lego .report-file-link:hover .report-file-arrow { color: #ffcf00; }
+
+/* ── Spice apothecary / Spice Storage theme ─────────────── */
+.theme-spice .report-card,
+.theme-spice .report-card-multi {
+  background: rgba(28,16,8,0.94);
+  border-color: #7a3a12;
+}
+.theme-spice .report-card:hover {
+  border-color: #e0a52c;
+}
+.theme-spice .report-card-bar {
+  background: linear-gradient(90deg, #a13d0d, #e0a52c);
+}
+.theme-spice .report-name { color: #f7e8d4; }
+.theme-spice .report-desc { color: #c9a878; }
+.theme-spice .report-meta { color: #c9a878; }
+.theme-spice .report-files { border-top-color: #7a3a12; }
+.theme-spice .report-file-link { border-bottom-color: #7a3a12; }
+.theme-spice .report-file-link:hover { background: rgba(224,165,44,0.08); }
+.theme-spice .report-file-name { color: #f7e8d4; }
+.theme-spice .report-file-desc { color: #c9a878; }
+.theme-spice .report-file-arrow { color: #c9a878; }
+.theme-spice .report-file-link:hover .report-file-arrow { color: #e0a52c; }
+
+/* ── Blueprint / Gallery Hallway theme ──────────────────── */
+.theme-gallery .report-card,
+.theme-gallery .report-card-multi {
+  background: rgba(10,20,32,0.94);
+  border-color: #1f3f5c;
+}
+.theme-gallery .report-card:hover {
+  border-color: #c9a227;
+}
+.theme-gallery .report-card-bar {
+  background: linear-gradient(90deg, #1b3a5c, #c9a227);
+}
+.theme-gallery .report-name { color: #eef4f8; }
+.theme-gallery .report-desc { color: #8fa8bd; }
+.theme-gallery .report-meta { color: #8fa8bd; }
+.theme-gallery .report-files { border-top-color: #1f3f5c; }
+.theme-gallery .report-file-link { border-bottom-color: #1f3f5c; }
+.theme-gallery .report-file-link:hover { background: rgba(201,162,39,0.08); }
+.theme-gallery .report-file-name { color: #eef4f8; }
+.theme-gallery .report-file-desc { color: #8fa8bd; }
+.theme-gallery .report-file-arrow { color: #8fa8bd; }
+.theme-gallery .report-file-link:hover .report-file-arrow { color: #c9a227; }
 </style>
 </head>
 <body>
@@ -473,6 +519,32 @@ const REPORTS = [
     files: [
       { label: 'Field Reference', desc: 'To-scale drawer diagram, brand plates, sorting ladder', file: '/static/reports/lego-storage-factsheet.html', icon: '🧱' },
       { label: 'Full Reference Guide', desc: 'Numbered sections, tiered sources, sourcing confidence', file: '/static/reports/lego-storage-report.html', icon: '📖' },
+    ]
+  },
+  {
+    topic: 'Home Design',
+    hideTopicHeader: true,
+    name: 'Spice & Seasoning Storage',
+    desc: 'Built-in and retrofit ideas for storing a large spice collection with easy access — architectural pull-outs, deep-drawer systems, and curated visual references for kitchen design inspiration',
+    date: 'Jul 2026',
+    icon: '🌶️',
+    theme: 'spice',
+    files: [
+      { label: 'Field Reference', desc: 'Range-wall elevation diagram, capacity comparisons, at-a-glance ideas', file: '/static/reports/spice-storage-factsheet.html', icon: '🧂' },
+      { label: 'Full Reference Guide', desc: 'Built-in & retrofit solutions, placement philosophy, tiered sources', file: '/static/reports/spice-storage-report.html', icon: '📖' },
+    ]
+  },
+  {
+    topic: 'Architecture',
+    hideTopicHeader: true,
+    name: 'Gallery Hallway — Design Reference',
+    desc: 'What to call the wide, art-carrying corridor Tom was picturing — the "long gallery" lineage, taxonomy vs. loggia/breezeway, built precedents, and visual references for a future renovation',
+    date: 'Jul 2026',
+    icon: '🖼️',
+    theme: 'gallery',
+    files: [
+      { label: 'Field Reference', desc: 'Blueprint-style width & daylighting diagram, taxonomy, sourcing flags', file: '/static/reports/gallery-hallway-factsheet.html', icon: '📐' },
+      { label: 'Full Reference Guide', desc: 'Terminology, built examples, planning notes, tiered sources', file: '/static/reports/gallery-hallway-report.html', icon: '🏛️' },
     ]
   },
 ];

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f7ecd8;color:#241608;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spice &amp; Seasoning Storage — Design Field Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7ecd8;
+  --paper-2:#efe0c0;
+  --paper-3:#fbf5e8;
+  --ink:#241608;
+  --ink-soft:#5a4630;
+  --line:#ddc9a0;
+  --line-dark:#b89b68;
+  --paprika:#c1440e;
+  --paprika-deep:#8f2f08;
+  --paprika-tint:#f7e2d4;
+  --turmeric:#c98a12;
+  --turmeric-deep:#8f5f0a;
+  --turmeric-tint:#f7ead0;
+  --sumac:#7a2331;
+  --sumac-deep:#551824;
+  --sumac-tint:#f2dde1;
+  --cardamom:#4b6a45;
+  --cardamom-deep:#33492f;
+  --cardamom-tint:#e3ecdf;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:light;background:var(--paper)!important;color:var(--ink)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:"IBM Plex Mono",monospace;font-size:14px;line-height:1.5;max-width:1180px;margin:0 auto;padding:0 0 60px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+/* ── JAR-CAP STRIPS (signature texture, top/bottom) ── */
+.cap-strip{
+  height:15px;
+  background-image:
+    radial-gradient(circle at 8px 8px, var(--paprika) 4px, transparent 4.4px),
+    radial-gradient(circle at 24px 8px, var(--turmeric) 4px, transparent 4.4px),
+    radial-gradient(circle at 40px 8px, var(--sumac) 4px, transparent 4.4px),
+    radial-gradient(circle at 56px 8px, var(--cardamom) 4px, transparent 4.4px);
+  background-size:64px 16px;
+  background-color:var(--ink);
+}
+
+#sheet{padding:26px 30px 0}
+
+/* ── MASTHEAD ── */
+.masthead{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:stretch;border:3px solid var(--ink);margin-bottom:18px}
+.masthead-main{padding:18px 26px;background:var(--paper-3)}
+.masthead-eyebrow{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--paprika-deep);margin-bottom:8px;font-weight:600}
+h1{font-family:"Fraunces",serif;font-weight:700;font-size:2.5rem;line-height:1.0;color:var(--ink)}
+h1 span.hl{font-style:italic;font-weight:500;color:var(--turmeric-deep)}
+.masthead-sub{font-family:"Fraunces",serif;font-size:1rem;font-weight:400;font-style:italic;color:var(--ink-soft);margin-top:10px;max-width:60ch;line-height:1.45}
+.brief-badge{background:var(--turmeric);border-left:3px solid var(--ink);padding:14px 20px;display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:168px}
+.brief-badge .bb-top{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);opacity:.75;margin-bottom:6px;text-align:center}
+.brief-badge .bb-main{font-family:"Fraunces",serif;font-weight:700;font-size:1.15rem;color:var(--ink);line-height:1.15;text-align:center}
+
+/* ── KEY NUMBERS ── */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px}
+.stat-cell{background:var(--paper-3);border:2px solid var(--ink);padding:11px 8px;text-align:center;position:relative}
+.stat-cell::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:var(--turmeric);border:2px solid var(--ink)}
+.stat-cell.c-paprika::before{background:var(--paprika)}
+.stat-cell.c-sumac::before{background:var(--sumac)}
+.stat-cell.c-cardamom::before{background:var(--cardamom)}
+.stat-num{font-family:"Fraunces",serif;font-weight:700;font-size:1.55rem;color:var(--ink);line-height:1;margin-top:5px}
+.stat-label{font-size:.62rem;color:var(--ink-soft);margin-top:6px;line-height:1.35}
+
+/* ── SECTION LABEL ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sec-tag{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--paper-3);background:var(--ink);padding:4px 10px;flex-shrink:0}
+.sec-tag.alt{background:var(--paprika-deep)}
+.sec-rule{height:2px;background:var(--ink);flex:1}
+
+/* ── DIAGRAM PANEL (elevation drawing) ── */
+.diagram-panel{border:3px solid var(--ink);background:var(--paper-3);margin-bottom:18px;overflow:hidden}
+.diagram-head{background:var(--ink);color:var(--paper);padding:9px 18px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between}
+.diagram-body{padding:14px 20px 8px}
+.diagram-body svg{width:100%;height:auto;display:block}
+.diagram-caption{font-family:"Fraunces",serif;font-size:.86rem;color:var(--ink-soft);padding:8px 20px 16px;line-height:1.55;border-top:1px dashed var(--line-dark);margin-top:6px}
+.diagram-caption b{color:var(--ink);font-weight:600}
+
+/* ── BUILT-IN CARD GRID ── */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.bcard{border:2.5px solid var(--ink);background:var(--paper-3);display:flex;flex-direction:column;page-break-inside:avoid}
+.bcard-bar{padding:6px 12px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;display:flex;justify-content:space-between}
+.bcard.b-paprika .bcard-bar{background:var(--paprika)}
+.bcard.b-turmeric .bcard-bar{background:var(--turmeric-deep)}
+.bcard.b-sumac .bcard-bar{background:var(--sumac)}
+.bcard.b-cardamom .bcard-bar{background:var(--cardamom)}
+.bcard.b-ink .bcard-bar{background:var(--ink)}
+.bcard.b-gap .bcard-bar{background:#7a7264}
+.bcard-body{padding:12px 14px;flex:1;display:flex;flex-direction:column;gap:6px}
+.bcard-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.05rem;color:var(--ink);line-height:1.15}
+.bcard-tag{font-size:.65rem;color:var(--ink-soft);letter-spacing:.03em}
+.bcard-spec{font-family:"Fraunces",serif;font-size:.83rem;color:var(--ink-soft);line-height:1.5}
+.bcard-spec b{color:var(--ink);font-weight:600}
+.bcard-source{font-size:.62rem;color:var(--ink-soft);margin-top:auto;padding-top:8px;border-top:1px dotted var(--line-dark)}
+.bcard.b-gap .bcard-body{background:var(--paper-2)}
+.bcard-flag{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ink);padding:2px 6px;margin-bottom:2px}
+
+/* ── RETROFIT STRIP ── */
+.retro-table{width:100%;border-collapse:collapse;margin-bottom:14px;background:var(--paper-3);border:2px solid var(--ink)}
+.retro-table th{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--ink);padding:8px 12px;text-align:left}
+.retro-table td{font-family:"Fraunces",serif;padding:8px 12px;border-bottom:1px dotted var(--line-dark);font-size:.82rem;color:var(--ink)}
+.retro-table tr:last-child td{border-bottom:none}
+.retro-table td.num{font-family:"IBM Plex Mono",monospace;font-weight:700;color:var(--paprika-deep);white-space:nowrap}
+.retro-table td.tag{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--ink-soft)}
+
+.brand-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.bstrip-cell{border:2px solid var(--ink);background:var(--paper-3);padding:11px 12px}
+.bstrip-name{font-family:"Fraunces",serif;font-weight:700;font-size:.86rem;color:var(--ink);margin-bottom:4px}
+.bstrip-body{font-family:"Fraunces",serif;font-size:.72rem;color:var(--ink-soft);line-height:1.5}
+
+/* ── UNCONVENTIONAL CHIPS ── */
+.chip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.chip{background:var(--paper-3);border:2px solid var(--ink);border-top:5px solid var(--turmeric);padding:11px 12px;page-break-inside:avoid}
+.chip:nth-child(2){border-top-color:var(--paprika)}
+.chip:nth-child(3){border-top-color:var(--cardamom)}
+.chip:nth-child(4){border-top-color:var(--sumac)}
+.chip:nth-child(5){border-top-color:var(--turmeric)}
+.chip:nth-child(6){border-top-color:var(--paprika)}
+.chip:nth-child(7){border-top-color:var(--cardamom)}
+.chip-title{font-family:"Fraunces",serif;font-weight:600;font-size:.85rem;color:var(--ink);margin-bottom:5px}
+.chip p{font-family:"Fraunces",serif;font-size:.72rem;color:var(--ink-soft);line-height:1.45}
+
+/* ── DEBATE VS PANEL ── */
+.philo-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.vs-panel{border:3px solid var(--ink);background:var(--paper-3);display:flex;flex-direction:column}
+.vs-title{background:var(--ink);color:#fff;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:8px 14px}
+.vs-side{padding:13px 16px;flex:1}
+.vs-side.a{border-bottom:2px dashed var(--ink)}
+.vs-who{font-family:"Fraunces",serif;font-weight:700;font-size:.92rem;margin-bottom:5px}
+.vs-who.a{color:var(--paprika-deep)}
+.vs-who.b{color:var(--cardamom-deep)}
+.vs-side p{font-family:"Fraunces",serif;font-size:.78rem;color:var(--ink-soft);line-height:1.5}
+.vs-caption{font-family:"Fraunces",serif;font-size:.74rem;font-style:italic;color:var(--ink-soft);padding:10px 16px 14px;border-top:1px solid var(--line);line-height:1.5}
+
+.zone-panel{border:3px solid var(--ink);background:var(--paper-3);padding:16px 18px}
+.zone-title{font-family:"Fraunces",serif;font-weight:600;font-size:1rem;margin-bottom:10px}
+.zone-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.zone-row{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;font-family:"Fraunces",serif;font-size:.78rem;color:var(--ink-soft);line-height:1.5}
+.zone-dot{width:12px;height:12px;border-radius:50%;margin-top:3px}
+.zone-foot{font-family:"Fraunces",serif;font-size:.73rem;color:var(--ink-soft);line-height:1.5;border-top:1px dashed var(--line-dark);padding-top:10px}
+
+/* ── VISUAL REFERENCE SOURCES (prominent, distinct) ── */
+.gallery-block{border:3px solid var(--turmeric-deep);background:var(--paper-3);margin-bottom:18px}
+.gallery-head{background:var(--turmeric-deep);color:#fff;padding:10px 18px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.gallery-item{padding:12px 16px;border-right:1px dashed var(--line-dark);border-bottom:1px dashed var(--line-dark)}
+.gallery-item:nth-child(2n){border-right:none}
+.gallery-tier{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;padding:2px 7px;margin-bottom:6px}
+.gallery-tier.strong{background:var(--cardamom)}
+.gallery-tier.vendor{background:var(--turmeric-deep)}
+.gallery-tier.unverified{background:var(--sumac)}
+.gallery-name{font-family:"Fraunces",serif;font-weight:700;font-size:.86rem;color:var(--ink);margin-bottom:3px}
+.gallery-url{font-size:.63rem;color:var(--paprika-deep);word-break:break-all;margin-bottom:5px;display:block}
+.gallery-desc{font-family:"Fraunces",serif;font-size:.75rem;color:var(--ink-soft);line-height:1.45}
+.gallery-flag-box{margin:0 16px 14px;border:2px solid var(--sumac);background:var(--sumac-tint);padding:10px 14px}
+.gallery-flag-box b{color:var(--sumac-deep)}
+.gallery-flag-box p{font-family:"Fraunces",serif;font-size:.75rem;color:var(--ink);line-height:1.5;margin-top:4px}
+
+/* ── QC / SOURCING NOTES ── */
+.qc-strip{border:3px solid var(--ink);background:var(--paper-3);margin-bottom:18px}
+.qc-head{background:var(--turmeric);padding:9px 18px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.qc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.qc-item{padding:13px 18px;border-right:1px dashed var(--line-dark);border-bottom:1px dashed var(--line-dark)}
+.qc-item:nth-child(2n){border-right:none}
+.qc-flag{font-weight:700;font-size:9px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;display:inline-block;padding:2px 7px;color:#fff}
+.qc-flag.ok{background:var(--cardamom)}
+.qc-flag.thin{background:var(--turmeric-deep)}
+.qc-flag.gap{background:var(--paprika)}
+.qc-body{font-family:"Fraunces",serif;font-size:.78rem;line-height:1.5;color:var(--ink)}
+
+/* ── FOOTER ── */
+.footer{padding:16px 30px 20px;font-size:9px;letter-spacing:.04em;color:var(--ink-soft);text-align:center;line-height:1.9}
+
+@media(max-width:960px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .card-grid{grid-template-columns:repeat(2,1fr)}
+  .brand-strip{grid-template-columns:repeat(2,1fr)}
+  .chip-grid{grid-template-columns:1fr 1fr}
+  .philo-wrap{grid-template-columns:1fr}
+  .masthead{grid-template-columns:1fr}
+  .qc-grid{grid-template-columns:1fr}
+  .qc-item{border-right:none}
+  .gallery-grid{grid-template-columns:1fr}
+  .gallery-item{border-right:none}
+}
+</style>
+</head>
+<body>
+
+<div class="cap-strip"></div>
+
+<div id="sheet">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-main">
+    <div class="masthead-eyebrow">Design Field Reference &middot; Built-In &amp; Architectural Spice Storage &middot; Compiled 2026</div>
+    <h1>Spice &amp; Seasoning <span class="hl">Storage</span></h1>
+    <div class="masthead-sub">Design inspiration for planning spice storage into an initial kitchen build &mdash; not retrofit shopping. Built-in and architectural approaches first, large-capacity aftermarket systems second, the unconventional ideas third, and a real, unresolved disagreement over placement near heat. Visual reference galleries and sourcing confidence are both kept visible below, not buried.</div>
+  </div>
+  <div class="brief-badge">
+    <div class="bb-top">Scope</div>
+    <div class="bb-main">Plan It In,<br>Don't Bolt It On</div>
+  </div>
+</div>
+
+<!-- KEY NUMBERS -->
+<div class="stat-row">
+  <div class="stat-cell c-paprika">
+    <div class="stat-num">216</div>
+    <div class="stat-label">Jars &mdash; Home-Complete over-door rack, ATK's highest-capacity tested option</div>
+  </div>
+  <div class="stat-cell c-turmeric">
+    <div class="stat-num">64</div>
+    <div class="stat-label">Jars &mdash; Lynk Professional steel drawer insert, ATK's top drawer-storage pick</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">30in</div>
+    <div class="stat-label">Recommended ceiling for narrow wall-cabinet pull-outs before top shelves get hard to reach</div>
+  </div>
+  <div class="stat-cell c-sumac">
+    <div class="stat-num">3&ndash;12in</div>
+    <div class="stat-label">Typical widths for a pull-out spice cabinet flanking the range</div>
+  </div>
+  <div class="stat-cell c-cardamom">
+    <div class="stat-num">325,000+</div>
+    <div class="stat-label">Vertical Spice units sold, company-reported</div>
+  </div>
+  <div class="stat-cell c-turmeric">
+    <div class="stat-num">~50%</div>
+    <div class="stat-label">Usable cabinet storage increase ShelfGenie claims from custom pull-out inserts</div>
+  </div>
+</div>
+
+<!-- SIGNATURE DIAGRAM -->
+<div class="diagram-panel">
+  <div class="diagram-head"><span>Range Wall &mdash; Schematic Elevation</span><span>Widths to scale as cited &middot; heights schematic only</span></div>
+  <div class="diagram-body">
+    <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="draft-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#e7dcc0" stroke-width="0.6"/>
+        </pattern>
+        <radialGradient id="heatGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#c1440e" stop-opacity="0.32"/>
+          <stop offset="100%" stop-color="#c1440e" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect x="0" y="0" width="900" height="400" fill="url(#draft-grid)"/>
+
+      <!-- ROW 1: WIDTH COMPARISON STRIP -->
+      <text x="40" y="18" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#241608" letter-spacing="0.08em">PULL-OUT WIDTH COMPARISON</text>
+      <line x1="40" y1="34" x2="160" y2="34" stroke="#241608" stroke-width="2"/>
+      <line x1="40" y1="28" x2="40" y2="40" stroke="#241608" stroke-width="2"/>
+      <line x1="160" y1="28" x2="160" y2="40" stroke="#241608" stroke-width="2"/>
+      <text x="100" y="52" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5a4630">12in scale reference</text>
+
+      <rect x="40" y="70" width="30" height="55" fill="#f7ead0" stroke="#c98a12" stroke-width="2.5"/>
+      <text x="55" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#241608">3in</text>
+
+      <rect x="100" y="70" width="60" height="55" fill="#f7ead0" stroke="#c98a12" stroke-width="2.5"/>
+      <text x="130" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#241608">6in</text>
+
+      <rect x="190" y="70" width="90" height="55" fill="#f7ead0" stroke="#c98a12" stroke-width="2.5"/>
+      <text x="235" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#241608">9in</text>
+
+      <rect x="310" y="70" width="120" height="55" fill="#f7ead0" stroke="#c98a12" stroke-width="2.5"/>
+      <text x="370" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#241608">12in</text>
+
+      <rect x="460" y="70" width="240" height="55" fill="#f2dde1" stroke="#7a2331" stroke-width="2.5" stroke-dasharray="6,4"/>
+      <text x="580" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#241608">24in standard base cabinet, for comparison</text>
+
+      <line x1="0" y1="160" x2="900" y2="160" stroke="#b89b68" stroke-width="1" stroke-dasharray="2,3"/>
+
+      <!-- ROW 2: RANGE WALL ELEVATION -->
+      <text x="40" y="180" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#241608" letter-spacing="0.08em">RANGE WALL &mdash; WHERE EACH IDEA GOES</text>
+
+      <!-- wall cabinet cap icon, upper left -->
+      <rect x="40" y="200" width="55" height="80" fill="#fbf5e8" stroke="#241608" stroke-width="2"/>
+      <line x1="40" y1="250" x2="95" y2="250" stroke="#7a2331" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="100" y="216" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5a4630">wall version</text>
+      <text x="100" y="228" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5a4630">cap &asymp;30in tall</text>
+      <text x="100" y="240" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5a4630">top shelf else</text>
+      <text x="100" y="252" font-family="IBM Plex Mono, monospace" font-size="8" fill="#5a4630">hard to reach [1][2]</text>
+
+      <!-- backsplash niche -->
+      <rect x="650" y="185" width="95" height="65" fill="#fbf5e8" stroke="#241608" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="697" y="270" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#241608" font-weight="700">NICHE</text>
+      <text x="697" y="281" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4630">cut into backsplash</text>
+      <text x="697" y="291" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4630">or millwork [5]</text>
+
+      <!-- counter line -->
+      <line x1="40" y1="280" x2="860" y2="280" stroke="#241608" stroke-width="3"/>
+
+      <!-- cooktop -->
+      <ellipse cx="430" cy="280" rx="170" ry="120" fill="url(#heatGrad)"/>
+      <rect x="380" y="252" width="100" height="28" fill="#5a4630" stroke="#241608" stroke-width="2"/>
+      <circle cx="405" cy="266" r="9" fill="none" stroke="#f7ecd8" stroke-width="2"/>
+      <circle cx="455" cy="266" r="9" fill="none" stroke="#f7ecd8" stroke-width="2"/>
+      <text x="430" y="245" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#8f2f08" font-weight="700">DISPUTED HEAT/LIGHT ZONE [1][4][10]</text>
+
+      <!-- left: narrow pull-out -->
+      <rect x="280" y="280" width="55" height="100" fill="#f7ead0" stroke="#c98a12" stroke-width="2.5"/>
+      <circle cx="295" cy="296" r="5" fill="#c1440e" stroke="#241608" stroke-width="1"/>
+      <circle cx="308" cy="296" r="5" fill="#c98a12" stroke="#241608" stroke-width="1"/>
+      <circle cx="321" cy="296" r="5" fill="#4b6a45" stroke="#241608" stroke-width="1"/>
+      <text x="220" y="300" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4630">PULL-OUT,</text>
+      <text x="220" y="311" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4630">FLANKS COOKTOP</text>
+      <text x="220" y="322" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4630">NOT OVEN [1][2]</text>
+
+      <!-- right: deep drawer w/ tiered insert -->
+      <rect x="525" y="280" width="100" height="100" fill="#e3ecdf" stroke="#4b6a45" stroke-width="2.5"/>
+      <line x1="535" y1="365" x2="615" y2="325" stroke="#33492f" stroke-width="1.5"/>
+      <circle cx="545" cy="360" r="4.5" fill="#c1440e"/>
+      <circle cx="565" cy="352" r="4.5" fill="#c98a12"/>
+      <circle cx="585" cy="343" r="4.5" fill="#7a2331"/>
+      <circle cx="605" cy="330" r="4.5" fill="#4b6a45"/>
+      <text x="750" y="335" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4630">DEEP DRAWER,</text>
+      <text x="750" y="346" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4630">TIERED INSERT &mdash;</text>
+      <text x="750" y="357" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4630">LABELS FACE UP [6][7][8]</text>
+
+      <!-- corner lazy susan -->
+      <path d="M 860 380 L 860 320 A 60 60 0 0 0 800 380 Z" fill="#f2dde1" stroke="#7a2331" stroke-width="2.5"/>
+      <text x="812" y="373" font-family="IBM Plex Mono, monospace" font-size="7" fill="#551824" font-weight="700">CORNER</text>
+      <text x="805" y="382" font-family="IBM Plex Mono, monospace" font-size="7" fill="#551824" font-weight="700">LAZY SUSAN [10][11]</text>
+
+      <!-- floor line -->
+      <line x1="40" y1="380" x2="860" y2="380" stroke="#241608" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <b>Reading this diagram:</b> the top strip shows narrow pull-out cabinet widths (3&ndash;12in) drawn to scale against a standard 24in base cabinet &mdash; the recurring point across sources is how slim these actually are. The bottom elevation is a schematic (not to architectural scale) showing where each built-in idea typically sits on a range wall: pull-out beside the cooktop rather than the oven, a deep tiered-insert drawer as the alternative, a niche cut into the backsplash above, and a corner lazy susan for larger collections. The shaded zone around the cooktop marks the genuinely disputed question in the source material: is storage this close to heat and light a convenience win or a slow-degradation mistake? See &ldquo;The Placement Debate&rdquo; below.
+  </div>
+</div>
+
+<!-- BUILT-IN / ARCHITECTURAL -->
+<div class="sec-label"><span class="sec-tag">Plan It In</span><div class="sec-rule"></div></div>
+<div class="card-grid">
+
+  <div class="bcard b-turmeric">
+    <div class="bcard-bar"><span>Pull-Out Cabinet</span><span>Range-Flanking</span></div>
+    <div class="bcard-body">
+      <div class="bcard-name">Narrow Pull-Out Beside the Cooktop</div>
+      <div class="bcard-tag">Most commonly cited "designed-in" solution</div>
+      <div class="bcard-spec">Full-extension pull-out, typically <b>3, 6, 9, or 12in wide</b>, set into base cabinetry beside the cooktop or into a range-hood pillar/leg surround. Flank the cooktop, not the oven &mdash; the oven runs hotter at counter height. Cap wall-cabinet versions at <b>&asymp;30in tall</b>; taller narrow pull-outs get hard to reach.</div>
+      <div class="bcard-spec">Designers ask what jar brands/sizes clients use before sizing shelf spacing. Decorative treatments (turned posts, pilasters, hidden finger-pulls) disguise these as full cabinet fronts. Real complaint from homeowner forum threads: jars toppling every time the pull-out opens.</div>
+      <div class="bcard-source">Source: Houzz forum thread; Houzz "How to Add a Pullout Spice Rack" [1][2]</div>
+    </div>
+  </div>
+
+  <div class="bcard b-cardamom">
+    <div class="bcard-bar"><span>Deep Drawer</span><span>Custom Insert</span></div>
+    <div class="bcard-body">
+      <div class="bcard-name">Tiered-Insert Spice Drawer</div>
+      <div class="bcard-tag">Ordered with the cabinets, not added after</div>
+      <div class="bcard-spec">A dedicated drawer, often near the range, fitted with a graduated/tiered insert so jars sit at an angle with labels visible from above.</div>
+      <div class="bcard-spec">Custom lines: <b>KraftMaid</b> and <b>Masterpiece Cabinets</b> trimmable solid-wood insert kits; <b>Century Components / Century Made Shop</b> kits in maple, walnut, Baltic birch, or white oak, sized for framed or frameless cabinet construction and species-matched to the surrounding cabinetry.</div>
+      <div class="bcard-source">Source: KraftMaid, Masterpiece Cabinets, Century Made Shop product pages [6][7][8]</div>
+    </div>
+  </div>
+
+  <div class="bcard b-sumac">
+    <div class="bcard-bar"><span>Corner Lazy Susan</span><span>Rotating</span></div>
+    <div class="bcard-body">
+      <div class="bcard-name">Full-Circle / Kidney / Half-Moon Rotating Storage</div>
+      <div class="bcard-tag">Standard architectural fix for dead corner space</div>
+      <div class="bcard-spec">A rotating unit in a corner base cabinet for spices, oils, and sauces. <b>Full-circle 360&deg;</b> units are recommended specifically for larger collections needing maximum capacity.</div>
+      <div class="bcard-spec">NKBA planning guidance treats at least one functional storage device in a corner cabinet as close to a baseline expectation in a well-designed kitchen &mdash; not spice-specific, but this is the most common way that requirement gets met for bottled/jarred goods.</div>
+      <div class="bcard-source">Source: CRD Design Build; George Cabinetry; Kitchen Wise; Wholesale Cabinet Supply (NKBA) [10][11][31]</div>
+    </div>
+  </div>
+
+  <div class="bcard b-paprika">
+    <div class="bcard-bar"><span>Hidden Compartments</span><span>Concealment</span></div>
+    <div class="bcard-body">
+      <div class="bcard-name">Cabinet-Leg &amp; Appliance-Garage-Adjacent Storage</div>
+      <div class="bcard-tag">Designed to disappear entirely</div>
+      <div class="bcard-spec">Interior designer <b>Jeanne Campana</b> is cited describing a cabinet leg that glides out to reveal a hidden spice shelf. Other pieces describe false-backsplash panels concealing a spice cabinet recessed into the wall cavity near the stovetop.</div>
+      <div class="bcard-spec">Houzz's 25-photo appliance-garage roundup documents the broader "designed-in concealment" category &mdash; tambour, swing, bifold, and pocket doors &mdash; the same logic applied to spice storage specifically.</div>
+      <div class="bcard-source">Source: Harvey Jones; Houzz "25 Ideas for Kitchen Appliance Garages" [17][18]</div>
+    </div>
+  </div>
+
+  <div class="bcard b-ink">
+    <div class="bcard-bar"><span>Backsplash Niche</span><span>Millwork</span></div>
+    <div class="bcard-body">
+      <div class="bcard-name">Shelf Niches Cut Into Backsplash or Millwork</div>
+      <div class="bcard-tag">Strongest single gallery for this idea</div>
+      <div class="bcard-spec">Built shelf niches carved directly into a stone or tiled backsplash behind the range; plain or tiled drywall niches sized to hold jars at arm's reach; library-ladder rail systems doing double duty as a spice shelf; hinged-door compartments built into decorative gaps between island columns/legs.</div>
+      <div class="bcard-source">Source: Houzz "24 Hot Ideas for Stashing Spices" [5]</div>
+    </div>
+  </div>
+
+  <div class="bcard b-turmeric">
+    <div class="bcard-bar"><span>Spice Kitchen</span><span>Secondary Prep Space</span></div>
+    <div class="bcard-body">
+      <div class="bcard-name">A Whole Second Kitchen, Not a Storage Feature</div>
+      <div class="bcard-tag">Requires floor-plan &amp; plumbing/venting at initial design</div>
+      <div class="bcard-spec">A distinct, fully-equipped secondary prep kitchen (sink, stovetop, sometimes oven/dishwasher/hood) tucked behind or beside the main showpiece kitchen, used for high-mess, high-spice cooking. Explicitly recommended for "gourmet home cooks, frequent entertainers, and large families."</div>
+      <div class="bcard-spec">South/East Asian design roots. Term is used partly as content marketing by cabinetry-company blogs &mdash; treat the "trend" framing as several firms' independent characterization, not one authoritative industry term.</div>
+      <div class="bcard-source">Source: Deslaurier, Yorkville, ENZO, Laurysen Kitchens [21][22][23][24]</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="bcard b-gap" style="margin-bottom:18px">
+  <div class="bcard-bar"><span>deVOL &middot; Plain English &middot; Christopher Peacock</span><span>Unconfirmed Lead</span></div>
+  <div class="bcard-body" style="flex-direction:row;align-items:center;gap:20px;flex-wrap:wrap">
+    <div style="flex:1;min-width:260px">
+      <span class="bcard-flag">Lead, Not a Verified Project</span>
+      <div class="bcard-name">Bespoke Larder Cabinetry With Built-In Spice Racks</div>
+      <div class="bcard-spec">These bespoke British-style kitchen makers (deVOL and Plain English both have US/NY presence) are known for larder/pantry cabinetry with adjustable shelving that includes built-in spice racks as part of bespoke larder units &mdash; but this was only confirmed at the level of a general company-offering description, not a specific named project or photo set. No source URL was captured in this research. <b>Browse each maker's own portfolio pages directly rather than treating this as a confirmed source.</b></div>
+    </div>
+  </div>
+</div>
+
+<!-- LARGE-CAPACITY RETROFIT -->
+<div class="sec-label"><span class="sec-tag alt">Large-Capacity</span><div class="sec-rule"></div></div>
+<table class="retro-table">
+  <thead><tr><th>Product</th><th>Capacity</th><th>Format</th><th>ATK Notes</th></tr></thead>
+  <tbody>
+    <tr><td>Spicy Shelf Deluxe</td><td class="num">54 jars</td><td class="tag">Expandable plastic cabinet organizer</td><td class="tag">"Best Overall Cabinet"</td></tr>
+    <tr><td>mDesign 3-Tier Expandable Spice Rack</td><td class="num">54 jars</td><td class="tag">Tiered cabinet shelf</td><td class="tag">"Best Tiered Cabinet"</td></tr>
+    <tr><td>Lynk Professional 4-Tier Steel Organizer</td><td class="num">64 jars</td><td class="tag">Expandable steel drawer insert</td><td class="tag">ATK's pick for drawer storage</td></tr>
+    <tr><td>Home-Complete Over-the-Door Rack</td><td class="num">216 jars</td><td class="tag">Metal over-door hanging rack</td><td class="tag">Highest capacity tested, by far</td></tr>
+    <tr><td>Simple Trending Stackable 2-Tier Organizer</td><td class="num">75 jars</td><td class="tag">Stackable aluminum</td><td class="tag">&mdash;</td></tr>
+    <tr><td>Copco 12in 2-Tier Turntable</td><td class="num">48 jars</td><td class="tag">Lazy-susan style</td><td class="tag">&mdash;</td></tr>
+  </tbody>
+</table>
+<div class="diagram-caption" style="border:2px solid var(--ink);background:var(--paper-3);margin-bottom:18px;padding:10px 16px">
+  Source: <b>America's Test Kitchen</b>, hands-on comparative product testing &mdash; a stronger sourcing tier than the affiliate/aggregator roundups that dominate this space. [15]
+</div>
+
+<div class="brand-strip">
+  <div class="bstrip-cell">
+    <div class="bstrip-name">Vertical Spice</div>
+    <div class="bstrip-body">Patented "Flex-Bands" adjust to standard, half-size, and odd-shaped bottles. Models from a 20-jar (2-drawer) unit up to a 60-half-jar (3-drawer) configuration. Fits cabinet depths &asymp;10.6&ndash;22.1in. Made in USA. Company-reported: <b>325,000+ units sold</b>, 4.9&#9733; average. Site includes a real before/after install gallery. [4]</div>
+  </div>
+  <div class="bstrip-cell">
+    <div class="bstrip-name">Gneiss Spice</div>
+    <div class="bstrip-body">Reusable magnetic jars plus a <b>216-name</b> pre-printed label set, mounted on a fridge, wall, or steel backsplash panel. Built explicitly for people scaling up a large, uniform-looking collection. [13]</div>
+  </div>
+  <div class="bstrip-cell">
+    <div class="bstrip-name">RSVP International</div>
+    <div class="bstrip-body">Spice jars, labels, and racks line aimed at the same uniform-container, visual-organization-at-scale approach as Gneiss Spice. [14]</div>
+  </div>
+  <div class="bstrip-cell">
+    <div class="bstrip-name">ShelfGenie</div>
+    <div class="bstrip-body">Custom pull-out shelf inserts, marketed as increasing usable cabinet storage by up to <b>50%</b>. Also: tiered drawer organizers trimmed to fit existing drawers, and door-mounted racks shallow enough that the door still closes. [5][9]</div>
+  </div>
+</div>
+
+<!-- UNCONVENTIONAL -->
+<div class="sec-label"><span class="sec-tag">Unconventional</span><div class="sec-rule"></div></div>
+<div class="chip-grid">
+  <div class="chip">
+    <div class="chip-title">Hidden Backsplash Compartment</div>
+    <p>Wall-cavity compartment near the stovetop, faced with matching tile/panel so it reads as ordinary backsplash until opened. [18]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-title">Cabinet-Leg Pull-Out</div>
+    <p>A decorative cabinet leg or toe-kick element that glides out to reveal a slim hidden spice shelf. [18]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-title">Magnetic Spice Wall</div>
+    <p>Stainless or magnetic-primed wall panel, often above the stove, with magnet-backed tins. DIY versions glue neodymium magnets to canning-jar lids. [12]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-title">Island-Integrated Storage</div>
+    <p>Pull-out racks or shallow shelves built into an island's side, or hinged compartments fit into the gap between island support columns. [5]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-title">Spice-Kitchen Retrofit</div>
+    <p>Converting an existing walk-in pantry footprint into a whole secondary prep space for bulk spice storage plus heavy prep. [21&ndash;24]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-title">Vintage / Repurposed Display</div>
+    <p>An old picture frame with galvanized steel inside, holding magnetic tins as a wall "portrait"; reclaimed wood turned into a two-shelf rack. [19]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-title">Under-Shelf Pull-Out</div>
+    <p>Mounts to the underside of an existing cabinet shelf and pulls forward &mdash; adds storage without altering the cabinet box. [18]</p>
+  </div>
+</div>
+
+<!-- PLACEMENT DEBATE -->
+<div class="sec-label"><span class="sec-tag alt">The Real Debate</span><div class="sec-rule"></div></div>
+<div class="philo-wrap">
+  <div class="vs-panel">
+    <div class="vs-title">Range-Adjacent vs. Heat Preservation</div>
+    <div class="vs-side a">
+      <div class="vs-who a">Convenience Camp &mdash; Louder in Design Writing</div>
+      <p>Houzz's "3 Zones of Kitchen Storage" (Steven Randel) explicitly groups spice storage, pots/pans, and cooking utensils together immediately around the range: store it where you use it. Echoed independently in NKBA-derived guidance. The classic sink&ndash;stove&ndash;fridge work triangle is increasingly supplemented by a zone model (prep, cooking, cleanup, sometimes drink-prep), with spices folded into the cooking zone. LivingEtc (designer Juanita Sierra): "think of proximity &mdash; where will you naturally move to after each task."</p>
+    </div>
+    <div class="vs-side b">
+      <div class="vs-who b">Preservation Camp &mdash; Quieter, Food-Science-Adjacent</div>
+      <p>A secondary, less-dominant thread argues heat, light, and humidity near the range degrade spice potency faster, so the working set should sit <em>away</em> from the cooktop. This shows up in general kitchen-organization and home-advice writing, not in a study or authoritative culinary-science source &mdash; "commonly repeated," not "established."</p>
+    </div>
+    <div class="vs-caption">Genuinely unresolved in the source material, not a settled point. Real homeowner forum reports of jars toppling from narrow pull-outs add a separate, practical strike against the convenience position. No codified, industry-wide "spice work-triangle" standard exists analogous to the classic work triangle. [1][2][4][10][25][27][31]</div>
+  </div>
+
+  <div class="zone-panel">
+    <div class="zone-title">Reachability &amp; Working-Set Rules of Thumb</div>
+    <div class="zone-list">
+      <div class="zone-row"><div class="zone-dot" style="background:var(--turmeric)"></div><span>Keep the most-used spices at eye-to-waist height, within arm's reach of the primary cook's stance at the stove.</span></div>
+      <div class="zone-row"><div class="zone-dot" style="background:var(--paprika)"></div><span>Avoid stacking narrow pull-outs above &asymp;30in of shelf height &mdash; top shelves become hard to reach.</span></div>
+      <div class="zone-row"><div class="zone-dot" style="background:var(--sumac)"></div><span>Multiple designers warn against 12in-deep upper wall cabinets for spice pull-outs: they don't hold much and force reaching.</span></div>
+      <div class="zone-row"><div class="zone-dot" style="background:var(--cardamom)"></div><span>Less-frequently-used spices and bulk backstock more commonly go to the pantry &mdash; only the "working set" stays range-adjacent.</span></div>
+    </div>
+    <div class="zone-foot">Source: Houzz "Stash It All"; Houzz "House Planning"; LivingEtc "Forget the Working Triangle"; CRD Design Build [1][2][10][25][27]</div>
+  </div>
+</div>
+
+<!-- VISUAL REFERENCE SOURCES (prominent) -->
+<div class="gallery-block">
+  <div class="gallery-head"><span>Visual Reference Sources &mdash; Start Here for Photos</span><span>Tiered by verification, not alphabetical</span></div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <span class="gallery-tier strong">Strong &middot; Confirmed Gallery</span>
+      <div class="gallery-name">Houzz &mdash; "24 Hot Ideas for Stashing Spices"</div>
+      <span class="gallery-url">houzz.com/magazine/24-hot-ideas-for-stashing-spices-stsetivw-vs~315468</span>
+      <div class="gallery-desc">Curated photo essay: built niches, narrow pull-outs, magnetic rails, pantry door racks &mdash; each tied to a real project/designer. Probably the single best starting gallery for designed-in ideas. [5]</div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-tier strong">Strong &middot; Confirmed Gallery</span>
+      <div class="gallery-name">Houzz &mdash; "Pull-out Spice Drawer" Photo Gallery</div>
+      <span class="gallery-url">houzz.com/photos/pull-out-spice-drawer-phbr0lbl-bl~l_77294</span>
+      <div class="gallery-desc">Filterable gallery, dozens of curated pull-out spice drawer installations, traditional to modern farmhouse. [28]</div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-tier strong">Strong &middot; Confirmed Gallery</span>
+      <div class="gallery-name">Houzz &mdash; "Kitchen Pantry Ideas" Gallery</div>
+      <span class="gallery-url">houzz.com/photos/kitchen-pantry-ideas-phbr1-bp~t_709~a_13-517</span>
+      <div class="gallery-desc">Large filterable gallery: pull-out pantry shelving, glass canister walls, door-mounted organizers, walk-in spice-wall pantries, named firms. [29]</div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-tier strong">Strong &middot; Confirmed Gallery</span>
+      <div class="gallery-name">Houzz &mdash; Pullout Rack How-To + Appliance Garages (25 photos)</div>
+      <span class="gallery-url">houzz.com/magazine/how-to-add-a-pullout-spice-rack-stsetivw-vs~30117943<br>houzz.com/magazine/25-ideas-for-kitchen-appliance-garages-stsetivw-vs~166482309</span>
+      <div class="gallery-desc">Two photo-illustrated design-professional pieces; the appliance-garage piece is a 25-photo gallery organized by location, door type, and feature. [2][17]</div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-tier strong">Strong &middot; Confirmed Gallery</span>
+      <div class="gallery-name">Vertical Spice &mdash; Before &amp; After Gallery</div>
+      <span class="gallery-url">verticalspice.com</span>
+      <div class="gallery-desc">Product photography plus a real "Before &amp; After" installation gallery of real cabinet retrofits &mdash; a vendor site, but a literal capacity/dimension reference with genuinely useful photos. [4]</div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-tier strong">Strong &middot; Confirmed Gallery</span>
+      <div class="gallery-name">Laurysen Kitchens &mdash; "The Ultimate Guide to Spice Kitchens"</div>
+      <span class="gallery-url">laurysenkitchens.com/blog/spice-kitchen/</span>
+      <div class="gallery-desc">Confirmed multiple photos: pull-out organizers, galley layout, spice-kitchen pantry shots, from a custom cabinetry maker's own portfolio-adjacent content. [24]</div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-tier vendor">Vendor / Product Photography</span>
+      <div class="gallery-name">Remodelista &mdash; Double-Shelf Spice Rack Product Page</div>
+      <span class="gallery-url">remodelista.com/products/double-shelf-spice-rack/</span>
+      <div class="gallery-desc">Strong editorial/visual brand; styled photography of this one product. A related pantry roundup could not be verified &mdash; see flag below.</div>
+    </div>
+    <div class="gallery-item">
+      <span class="gallery-tier vendor">Vendor / Product Photography</span>
+      <div class="gallery-name">Dwell &mdash; "Achieve Organizational Nirvana&hellip;"</div>
+      <span class="gallery-url">dwell.com/article/kitchen-cabinets-pantry-storage-organization-products-59978324</span>
+      <div class="gallery-desc">Confirmed via direct fetch: styled product photography (Yamazaki tower organizer, Threshold tiered wood rack) &mdash; more product catalog than architectural inspiration. See correction below. [20]</div>
+    </div>
+  </div>
+  <div class="gallery-flag-box">
+    <b>Corrected false lead &mdash; kept visible on purpose:</b>
+    <p>An earlier search snippet suggested the Dwell article above featured a "back-lit spice storage" kitchen renovation by architect <b>Chris Greenawalt</b>. This was checked directly against the actual article and is <b>not present</b> &mdash; it was a search-indexing error, not fact. Do not use this as a design reference; it does not exist in the source.</p>
+  </div>
+  <div class="gallery-flag-box" style="border-color:var(--turmeric-deep);background:var(--turmeric-tint)">
+    <b>Unverified leads &mdash; title/snippet only, fetch blocked:</b>
+    <p><b>HGTV, "30 Spice Organizer Ideas"</b> (hgtv.com/lifestyle/clean-and-organize/creative-spice-storage-ideas-pictures) &mdash; title claims a 30-photo gallery, but the page could not be fetched (HTTP 403) to verify content. <b>Remodelista, "A Peek Inside the Pantry"</b> &mdash; a related roundup, also blocked (HTTP 403), no URL independently confirmed. Both are worth trying to view directly yourself, but were not verified by this research.</p>
+  </div>
+  <div class="gallery-flag-box" style="border-color:var(--ink);background:var(--paper-2)">
+    <b>Real gap, not a substitute source:</b>
+    <p>No dedicated spice-storage gallery or article was found on <b>Architectural Digest</b> despite multiple targeted searches. AD's general "Kitchens" Pinterest board (pinterest.com/archdigest/kitchens/) and broad kitchen-tour coverage exist but nothing spice-storage-specific turned up. Lower-tier aggregator galleries (Craftionary "25 Top Spice Storage Solutions," TheCoolist "28 Kitchen Spice Storage Ideas," Family Handyman "12 Ingenious Spice Storage Ideas," Taste of Home "13 Genius Spice Storage Ideas") exist for volume browsing but are weighted below the sources above for design credibility &mdash; no specific URLs were captured for these in research.</p>
+  </div>
+</div>
+
+<!-- QC / SOURCING CONFIDENCE -->
+<div class="qc-strip">
+  <div class="qc-head">Sourcing Confidence &mdash; Kept Visible, Not Smoothed Over</div>
+  <div class="qc-grid">
+    <div class="qc-item">
+      <span class="qc-flag ok">Well-Supported</span>
+      <div class="qc-body">Pull-out cabinet mechanics, deep-drawer custom inserts, lazy susan corner storage, and the "store spices in the cooking zone" placement principle are corroborated across multiple independent professional sources &mdash; Houzz editorial content, custom cabinetry makers, and ATK product testing. ATK's hands-on comparative reviews are a stronger tier than the affiliate/aggregator roundups that dominate this space. [1][2][5][6][7][8][10][15][25]</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag thin">Thinly Sourced</span>
+      <div class="qc-body">The "spice kitchen" trend claim rests on cabinetry-company blog content (Deslaurier, Yorkville, ENZO, Laurysen) &mdash; credible as description of a real pattern, but also self-interested marketing from firms selling that exact cabinetry. The pattern's existence looks solid; the "trend"/prevalence framing is unverified beyond these firms' own characterization. The heat/light preservation counter-argument appears only in general home-advice content, not a study or authoritative culinary-science source. [10][21&ndash;24]</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag gap">Confirmed Gap</span>
+      <div class="qc-body">The deVOL / Plain English / Christopher Peacock claim is a lead based on general company-offering language, not a verified specific project or photo &mdash; browse their own sites directly. No codified NKBA standard specific to spice-storage placement (distinct from general storage-zone principles) was found.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag gap">Corrected / Blocked</span>
+      <div class="qc-body">The Dwell/Chris Greenawalt "back-lit spice storage" claim was checked directly and does <b>not</b> appear in the actual article &mdash; a search-indexing error, corrected here rather than repeated. HGTV's "30 Spice Organizer Ideas" and Remodelista's "A Peek Inside the Pantry" roundup both returned HTTP 403 on fetch and are unverified beyond their titles.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="cap-strip"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Sources: Houzz &middot; CliqStudios &middot; Vertical Spice &middot; Century Made Shop &middot; Masterpiece Cabinets &middot; KraftMaid &middot; ShelfGenie &middot; CRD Design Build &middot; George Cabinetry &middot; Kitchen Wise &middot; The Kitchn &middot; Gneiss Spice &middot; RSVP International &middot; America's Test Kitchen &middot; Sweeten &middot; Harvey Jones &middot; HGTV (unverified) &middot; Dwell &middot; Deslaurier &middot; Yorkville &middot; ENZO &middot; Laurysen Kitchens &middot; LivingEtc &middot; Wholesale Cabinet Supply<br>
+  Full citations, tiers, and every sourcing gap are documented in full in the companion Full Report &middot; Compiled 2026
+</div>
+
+</body>
+</html>

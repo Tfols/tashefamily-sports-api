@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#faf6ee;color:#241608;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spice &amp; Seasoning Storage: A Design Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{color-scheme:light;background:#faf6ee!important;color:#241608!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Libre Baskerville',Georgia,serif;font-size:16.5px;line-height:1.75;background:#faf6ee;color:#241608;max-width:820px;margin:0 auto;padding:56px 40px 96px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+
+/* tokens: paprika #c1440e · turmeric #8f5f0a · cardamom #4b6a45 · sumac #7a2331 · ink #241608 · paper #faf6ee */
+
+/* COVER */
+.cover{border-top:4px solid #241608;border-bottom:1px solid #ddc9a0;padding:32px 0 28px;margin-bottom:44px}
+.cover-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#c1440e;margin-bottom:12px}
+.cover h1{font-size:2rem;font-weight:700;line-height:1.2;color:#241608;margin-bottom:10px}
+.cover h1 em{font-style:italic;font-weight:400;color:#4b6a45}
+.cover-subtitle{font-size:1rem;color:#4a4030;font-style:italic;margin-bottom:20px;max-width:60ch}
+.cover-meta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;color:#7a7060;line-height:2.2;border-top:1px solid #e5d8b8;padding-top:14px;margin-top:14px}
+
+/* TOC */
+.toc{background:#fff;border:1px solid #e5d8b8;padding:24px 28px;margin-bottom:44px}
+.toc-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#c1440e;margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted #e5d8b8;font-size:.88rem}
+.toc-item:last-child{border-bottom:none}
+.toc-section{color:#241608}
+.toc-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:#c1440e}
+
+/* SECTION STRUCTURE */
+.section{margin-bottom:52px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:#c1440e;flex-shrink:0}
+.section-rule{height:1px;background:#e5d8b8;flex:1}
+h2{font-family:'Libre Baskerville',serif;font-size:1.4rem;font-weight:700;color:#241608;margin-bottom:14px;line-height:1.28}
+h3{font-family:'Libre Baskerville',serif;font-size:1.02rem;font-style:italic;font-weight:400;color:#4b6a45;margin:26px 0 9px}
+p{color:#241608;margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+p strong{color:#241608}
+em{font-style:italic}
+sup.cite{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:#8f5f0a;font-style:normal;margin-left:1px}
+
+/* CALLOUT */
+.callout{border-left:4px solid #4b6a45;background:#eef1ea;padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:#241608;margin:0;font-size:.95rem;line-height:1.68;max-width:66ch}
+.callout cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.71rem;color:#5a6e53;margin-top:8px}
+
+/* DETAIL TABLE */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:190px 1fr;gap:0;border-bottom:1px solid #ece1c8;padding:12px 0;font-size:.89rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:'Libre Baskerville',serif;font-weight:700;color:#4b6a45;line-height:1.45;padding-right:16px}
+.detail-body{color:#241608;line-height:1.68}
+.detail-body strong{color:#241608}
+
+/* TABLE WRAPPER */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+.table-scroll table{margin:0}
+
+/* GENERIC DATA TABLE */
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.85rem;background:#fff;border:1px solid #e5d8b8}
+.data-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#241608;background:#f2e7c9;border-bottom:2px solid #ddc590;padding:9px 12px;text-align:left}
+.data-table td{padding:9px 12px;border-bottom:1px solid #eee2c6;color:#241608;vertical-align:top;line-height:1.5}
+.data-table tr:last-child td{border-bottom:none}
+.gap-row{background:#faf0da;font-style:italic;color:#7a5a1a}
+
+/* VISUAL REFERENCE SOURCES (prominent, its own treatment) */
+.gallery-section{border:2px solid #8f5f0a;background:#fffdf6;margin:20px 0}
+.gallery-section-head{background:#8f5f0a;color:#fff;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;padding:11px 20px}
+.gallery-tier-label{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:12px 20px 4px;color:#4b6a45}
+.gallery-tier-label.unverified{color:#7a2331}
+.gallery-row{padding:10px 20px;border-bottom:1px dotted #e5d8b8}
+.gallery-row:last-child{border-bottom:none}
+.gallery-row .g-name{font-weight:700;color:#241608;font-size:.92rem}
+.gallery-row .g-url{font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:#c1440e;display:block;margin:2px 0 4px;word-break:break-all}
+.gallery-row .g-desc{font-size:.85rem;color:#3a3020;line-height:1.55}
+.gallery-flagbox{margin:16px 20px 18px;border-left:4px solid #7a2331;background:#f6e6ea;padding:12px 16px}
+.gallery-flagbox b{color:#551824}
+.gallery-flagbox p{font-size:.85rem;color:#241608;margin-top:5px}
+
+/* CONFIDENCE BOX */
+.confidence{border:1.5px solid #241608;background:#fff;margin:22px 0}
+.confidence-head{background:#241608;color:#faf6ee;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.confidence-body{padding:16px 20px}
+.conf-item{border-left:4px solid #8f5f0a;padding:8px 14px;margin-bottom:12px;background:#faf6ee}
+.conf-item:last-child{margin-bottom:0}
+.conf-item.bad{border-left-color:#c1440e}
+.conf-item.good{border-left-color:#4b6a45}
+.conf-item .lbl{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#8f5f0a;display:block;margin-bottom:4px}
+.conf-item.bad .lbl{color:#c1440e}
+.conf-item.good .lbl{color:#4b6a45}
+.conf-item p{font-size:.86rem;margin:0;max-width:none}
+
+/* SOURCES SECTION */
+.sources-section{margin-top:52px;padding-top:28px;border-top:2px solid #241608}
+.source-group{margin-bottom:28px}
+.source-group-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#c1440e;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #e5d8b8}
+.source-group-note{font-size:.78rem;color:#7a7060;font-style:italic;margin-bottom:12px}
+.source-item{font-size:.87rem;color:#241608;line-height:1.65;padding:6px 0;border-bottom:1px dotted #ece1c8}
+.source-item:last-child{border-bottom:none}
+.source-item em{font-style:italic}
+.source-num{font-family:"IBM Plex Mono",monospace;color:#8f5f0a;margin-right:4px}
+.source-url{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:#4b6a45;display:block;margin-top:2px}
+
+/* FOOTER */
+.footer{margin-top:52px;padding-top:20px;border-top:1px solid #e5d8b8;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:#7a7060;text-align:center;line-height:2.2}
+
+@media(max-width:640px){
+  body{padding:28px 18px 64px;font-size:16px}
+  .cover h1{font-size:1.5rem}
+  .detail-row{grid-template-columns:1fr;gap:4px}
+  .detail-label{padding-right:0}
+  .data-table{width:auto;min-width:540px}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Design Reference Guide &middot; Kitchen Spice &amp; Seasoning Storage &middot; Compiled 2026</div>
+  <h1>Spice &amp; Seasoning Storage<br><em>Built-In Design Ideas for a Future Kitchen</em></h1>
+  <div class="cover-subtitle">A full accounting of built-in and architectural approaches designers plan into a kitchen from the start, the large-capacity retrofit systems worth knowing about for comparison, the unconventional ideas worth considering, the genuine and unresolved disagreement over placing spice storage near heat, a prominent set of visual reference galleries for literal design inspiration, and a sourcing confidence assessment kept visible rather than smoothed over.</div>
+  <div class="cover-meta">
+    Compiled: 2026 &nbsp;&middot;&nbsp; Scope: design inspiration for a future kitchen renovation or home build with a large spice/seasoning collection &mdash; not a product-shopping guide for an existing kitchen<br>
+    Core sourcing: Houzz &middot; America's Test Kitchen &middot; custom cabinetry makers &middot; NKBA-derived guidance<br>
+    Companion document: Field Reference (spice-storage-factsheet.html)
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><span class="toc-section">1. Built-In and Architectural Solutions</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item"><span class="toc-section">2. Large-Capacity Retrofit Solutions</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item"><span class="toc-section">3. Unique and Unconventional Ideas</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item"><span class="toc-section">4. Design and Placement Philosophy</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item"><span class="toc-section">5. Visual Reference Sources</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">6. Sourcing Confidence Assessment</span><span class="toc-num">&sect; 06</span></div>
+  <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
+</div>
+
+
+<!-- BOTTOM LINE -->
+<div class="callout" style="margin-bottom:44px">
+  <p>There is real, cross-source agreement on a few points: spice storage belongs within a step or two of the range for anything used regularly; drawer and pull-out systems sized generously are now a "plan for it" feature in higher-end design, not an afterthought; and large collections benefit from uniform jars viewed at a glance rather than mismatched packaging. Past that consensus, most of the field is scattered individual designer preference rather than settled doctrine &mdash; and there is a genuine, unresolved disagreement about whether storing spices directly beside the cooktop is smart or a mistake. This guide keeps that disagreement visible rather than picking a winner.</p>
+  <cite>Houzz &middot; America's Test Kitchen &middot; custom cabinetry makers<sup class="cite">[1][2][10][15]</sup></cite>
+</div>
+
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
+  <h2>Built-In and Architectural Solutions</h2>
+  <p>These are the ideas that need to be planned into an initial kitchen design &mdash; sized, plumbed, or framed in from the start &mdash; rather than bought and installed into an existing cabinet later.</p>
+
+  <h3>Pull-out spice cabinets flanking the range</h3>
+  <p>The most commonly cited "designed-in" solution is a narrow, full-extension pull-out installed in the base cabinetry immediately beside the cooktop, or built into the pillars/legs of a range hood surround. Widths typically run <strong>3, 6, 9, or 12in</strong>. Designers interviewed by Houzz explicitly ask clients what jar brands and sizes they use before sizing shelf spacing, since standard versus oversized bottles change the design.<sup class="cite">[2]</sup> A recurring rule of thumb: keep the pull-out flanking the cooktop rather than the oven, since the oven concentrates more heat at counter height, and cap wall-cabinet versions at about <strong>30in tall</strong> since taller narrow pull-outs become hard to reach.<sup class="cite">[1][2]</sup> Decorative treatments &mdash; turned posts, pilasters, integrated finger-pulls with no visible hardware &mdash; are used to disguise these as full cabinet fronts rather than obvious slivers.<sup class="cite">[2]</sup></p>
+
+  <div class="callout">
+    <p>A genuine, unresolved disagreement exists here. Several Houzz forum threads from actual homeowners report jars toppling every time the narrow pull-out is opened, and some designers discourage pull-outs in 12in-deep wall cabinets because they don't hold much and the top shelves are hard to reach. There is also debate about whether placing spices this close to a heat source degrades them faster &mdash; see &sect; 04 for the full treatment of that disagreement.</p>
+    <cite>Houzz forum: "Pullouts next to cook top" &middot; see &sect; 04<sup class="cite">[1]</sup></cite>
+  </div>
+
+  <h3>Deep-drawer spice systems with custom inserts</h3>
+  <p>Rather than a narrow vertical sliver, many designers now spec a dedicated drawer &mdash; often near the range &mdash; fitted with a tiered or graduated insert so jars sit at an angle and labels stay visible from above. Custom cabinet-line examples include <strong>KraftMaid's</strong> and <strong>Masterpiece Cabinets'</strong> trimmable solid-wood spice drawer insert kits, and <strong>Century Components / Century Made Shop's</strong> insert kits offered in species (maple, walnut, Baltic birch, white oak) matched to the surrounding cabinetry, sized custom for framed or frameless cabinet construction.<sup class="cite">[6][7][8]</sup> These are explicitly pitched as "plan it into the cabinet order" items, not aftermarket retrofits.</p>
+
+  <h3>Rotating / lazy-susan corner cabinet storage</h3>
+  <p>A full-circle, kidney, or half-moon lazy susan in a corner base cabinet is a standard architectural solution for spices, oils, and sauces in what would otherwise be dead corner space; full-circle 360&deg; units are recommended specifically for larger collections needing maximum capacity.<sup class="cite">[10][11]</sup> NKBA planning guidance treats at least one functional storage device in a corner cabinet as close to a baseline expectation in a well-designed kitchen &mdash; not spice-specific, but the corner lazy susan is the most common way that requirement gets met for bottled and jarred goods.<sup class="cite">[31]</sup></p>
+
+  <h3>Appliance-garage-adjacent and hidden spice compartments</h3>
+  <p>Multiple designer-sourced pieces describe hidden spice storage built into cabinet legs, false backsplash panels, or appliance-garage-style enclosures near the cooking zone. Interior designer <strong>Jeanne Campana</strong> is cited describing a cabinet leg that glides out to reveal a hidden spice shelf, and other pieces describe false-backsplash panels concealing a spice cabinet recessed into the wall cavity near the stovetop.<sup class="cite">[18]</sup> Houzz's dedicated appliance-garage roundup (25 examples) doesn't focus on spices specifically but documents the broader "designed-in concealment" category &mdash; tambour, swing, bifold, pocket doors &mdash; that the same logic gets applied to for spice storage.<sup class="cite">[17]</sup></p>
+
+  <h3>Spice niches carved into backsplash and millwork</h3>
+  <p>Houzz's "24 Hot Ideas for Stashing Spices" documents built shelf niches carved directly into a stone or tiled backsplash behind the range, drywall niches (tiled or plain) sized to hold jars at arm's reach, library-ladder rail systems doing double duty as a spice shelf, and hinged-door compartments built into decorative gaps between island columns and legs.<sup class="cite">[5]</sup> This is one of the strongest single sources for designed-in, non-retrofit ideas &mdash; see &sect; 05 for the gallery link.</p>
+
+  <h3>"Spice kitchens" &mdash; secondary prep kitchens</h3>
+  <p>A distinct and increasingly discussed trend, with South and East Asian design roots, is the "spice kitchen" &mdash; not a storage feature but an entire secondary, fully-equipped prep kitchen (sink, stovetop, sometimes oven, dishwasher, or hood) tucked behind or beside the main showpiece kitchen, used for high-mess, high-spice cooking so the main kitchen stays presentable.<sup class="cite">[21][22][23][24]</sup> This is squarely a plan-it-into-the-initial-design idea, since it requires floor-plan and plumbing/venting allocation, and is explicitly recommended by these sources for "gourmet home cooks, frequent entertainers, and large families."<sup class="cite">[23]</sup></p>
+
+  <div class="callout">
+    <p>The term "spice kitchen" is sometimes used loosely by cabinetry-company blogs partly as content marketing. Treat the "trend" framing as several firms' independent characterization rather than one authoritative, industry-wide term &mdash; the underlying design pattern (a secondary prep kitchen) is real and well-documented across sources, but its prevalence as a broad trend is not independently confirmed here.</p>
+    <cite>See &sect; 06 for the full sourcing-confidence treatment</cite>
+  </div>
+
+  <h3>Custom cabinetry maker context</h3>
+  <p>Bespoke British-style kitchen makers <strong>deVOL</strong> and <strong>Plain English</strong> (both with US/NY presence), along with <strong>Christopher Peacock</strong>, are known for larder/pantry cabinetry with adjustable shelving that includes built-in spice racks as part of bespoke larder units. This was only confirmed at the level of a general company-offering description, not a specific named project or photo set, and no source URL was captured in this research for any of the three. Treat this as a lead for browsing each maker's own portfolio pages directly, not as a verified claim.<sup class="cite">&mdash;</sup></p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead><tr><th>Approach</th><th>Plan-In Requirement</th><th>Best For</th></tr></thead>
+    <tbody>
+      <tr><td>Pull-out cabinet, range-flanking</td><td>Base cabinet width allocation, 3&ndash;12in</td><td>Small-to-medium working set, fast access</td></tr>
+      <tr><td>Deep drawer, tiered insert</td><td>Drawer box + insert ordered with cabinets</td><td>Medium-to-large collections, label-up visibility</td></tr>
+      <tr><td>Corner lazy susan</td><td>Corner base cabinet allocation</td><td>Large collections, dead-corner space</td></tr>
+      <tr><td>Hidden / appliance-garage-adjacent</td><td>Wall cavity or cabinet-leg mechanism</td><td>Keeping the main kitchen visually clean</td></tr>
+      <tr><td>Backsplash / millwork niche</td><td>Wall framing or masonry cutout at design stage</td><td>Small working set, decorative display</td></tr>
+      <tr><td>Spice kitchen (secondary prep space)</td><td>Floor plan + plumbing/venting allocation</td><td>Large collections, heavy/messy cooking, entertainers</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
+  <h2>Large-Capacity Retrofit Solutions</h2>
+  <p>These aren't architectural, but they're useful as a capacity and format baseline when planning how much built-in space a large collection actually needs.</p>
+
+  <p><strong>America's Test Kitchen's</strong> independent, hands-on product testing (rather than an affiliate roundup) rated large-capacity options as follows:<sup class="cite">[15]</sup></p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead><tr><th>Product</th><th>Capacity</th><th>Format</th><th>ATK Verdict</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Spicy Shelf Deluxe</strong></td><td>54 jars</td><td>Expandable plastic cabinet organizer</td><td>Best Overall Cabinet</td></tr>
+      <tr><td><strong>mDesign 3-Tier Expandable Spice Rack</strong></td><td>54 jars</td><td>Tiered cabinet shelf</td><td>Best Tiered Cabinet</td></tr>
+      <tr><td><strong>Lynk Professional 4-Tier Steel Organizer</strong></td><td>64 jars</td><td>Expandable steel drawer insert</td><td>Pick for drawer storage</td></tr>
+      <tr><td><strong>Home-Complete Over-the-Door Rack</strong></td><td>216 jars</td><td>Metal over-door hanging rack</td><td>Highest capacity tested, by far</td></tr>
+      <tr><td>Simple Trending Stackable 2-Tier Organizer</td><td>75 jars</td><td>Stackable aluminum</td><td>&mdash;</td></tr>
+      <tr><td>Copco 12in 2-Tier Turntable</td><td>48 jars</td><td>Lazy-susan style</td><td>&mdash;</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>Vertical Spice</strong> is the most-cited branded system for cabinet pull-out drawers specifically engineered for large collections: patented "Flex-Bands" adjust to fit standard jars, half-size jars, and odd-shaped premium bottles, with models ranging from a 20-jar (2-drawer) unit up to a 60-half-jar (3-drawer) configuration. Made in the USA; fits cabinet depths from about 10.6in to 22.1in. The company states <strong>325,000+ units sold</strong> with a 4.9-star average rating &mdash; self-reported figures, from their own site. Their site includes a genuinely useful "before and after" gallery of installed units in real cabinets, covered further in &sect; 05.<sup class="cite">[4]</sup></p>
+
+  <p><strong>Modular, uniform, labeled jar systems</strong> aimed at visual organization at scale &mdash; the category most relevant to "large collection, easy to identify at a glance" &mdash; is led by <strong>Gneiss Spice</strong>, which sells reusable magnetic jars plus a 216-name pre-printed label set, designed to be mounted on a fridge, wall, or steel backsplash panel, explicitly built for people scaling up a collection.<sup class="cite">[13]</sup> <strong>RSVP International</strong> also sells a spice jars, labels, and racks line aimed at the same uniform-container approach.<sup class="cite">[14]</sup></p>
+
+  <p>Other standard retrofit categories documented across multiple sources: tiered drawer organizers with removable or adjustable inserts trimmed to fit existing drawers; door-mounted racks (Rev-A-Shelf-style, shallower than the cabinet interior so the door still closes); and <strong>ShelfGenie's</strong> custom pull-out shelf inserts, marketed as increasing usable cabinet storage by up to 50%.<sup class="cite">[5][9]</sup></p>
+</div>
+
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
+  <h2>Unique and Unconventional Ideas</h2>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Hidden backsplash compartment</span><span class="detail-body">A compartment built into the wall cavity near the stovetop, faced with matching tile or panel so it reads as ordinary backsplash until opened.<sup class="cite">[18]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">Cabinet-leg pull-out</span><span class="detail-body">A decorative cabinet leg or toe-kick element that glides out to reveal a slim hidden spice shelf, attributed to interior designer Jeanne Campana.<sup class="cite">[18]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">Magnetic spice wall</span><span class="detail-body">A sheet of stainless steel or magnetic-primed painted wall panel, often above the stove, with magnet-backed tins or jars. DIY versions use canning-jar lids with glued neodymium magnets, or magnetic chalkboard paint sectioned for both spice tins and a grocery list.<sup class="cite">[12]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">Island-integrated storage</span><span class="detail-body">Pull-out racks or shallow shelved compartments built into the side of a kitchen island, sometimes combined with open display shelving; also decorative hinged-door compartments fit into the gap between island support columns.<sup class="cite">[5]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">Spice kitchen as whole-room retrofit</span><span class="detail-body">Converting or adding a secondary prep space &mdash; sometimes from an existing walk-in pantry footprint &mdash; specifically to house the bulk of a spice collection plus heavy prep work.<sup class="cite">[21&ndash;24]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">Vintage / repurposed display</span><span class="detail-body">Using an old picture frame with galvanized steel mounted inside to hold magnetic spice tins as a deliberate wall "portrait," or transforming reclaimed wood into a two-shelf display rack.<sup class="cite">[19]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">Under-shelf mounted pull-out</span><span class="detail-body">A rack that mounts to the underside of an existing cabinet shelf and pulls forward, adding storage without altering the cabinet box.<sup class="cite">[18]</sup></span></div>
+  </div>
+
+  <p>These range from purely decorative to genuinely architectural &mdash; the magnetic wall and vintage-display ideas can be added to an already-built kitchen, while the hidden compartment, cabinet-leg pull-out, and whole-room spice-kitchen retrofit all require real construction and are closer in spirit to &sect; 01 than to a weekend project.</p>
+</div>
+
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
+  <h2>Design and Placement Philosophy</h2>
+
+  <h3>Spices belong in the cooking zone, not the general pantry, for anything used regularly</h3>
+  <p>Houzz's "3 Zones of Kitchen Storage" framework, written by Steven Randel, explicitly places spice storage, pots and pans, and cooking utensils together immediately around the range center, on the logic that storage should sit at the location where the item is first used during the task.<sup class="cite">[25]</sup> This "store it where you use it" principle also appears independently in NKBA-derived guidance.<sup class="cite">[31]</sup> Less-frequently-used spices and bulk backstock are more commonly relegated to the pantry, with only the "working set" kept range-adjacent.<sup class="cite">[10]</sup></p>
+
+  <h3>The classic work triangle is increasingly treated as insufficient on its own</h3>
+  <p>The sink&ndash;stove&ndash;refrigerator "work triangle" is increasingly superseded or supplemented by a zone model that adds a distinct prep zone, cooking zone, cleanup zone, and sometimes a drink-prep zone, with spice storage folded into the cooking zone specifically.<sup class="cite">[25][27]</sup> LivingEtc's zoning piece, quoting designer Juanita Sierra, frames the underlying logic as thinking about proximity: where will you naturally move to after each task.<sup class="cite">[27]</sup></p>
+
+  <h3>Reachability and ergonomics constraints, repeatedly cited</h3>
+  <p>Keep the most-used spices at eye-to-waist height and within arm's reach of the primary cook's stance at the stove. Avoid stacking spice storage above roughly 30in of shelf height in narrow pull-outs, since top shelves become hard to reach. Multiple designers explicitly warn against 12in-deep upper wall cabinets for spice pull-outs, because they don't hold much and force reaching.<sup class="cite">[1][2]</sup></p>
+
+  <h3>The heat and light preservation counter-argument</h3>
+  <p>Set against the "put it by the stove for speed" consensus is a secondary, less-dominant thread of advice &mdash; echoed in general kitchen-organization writing, not authoritatively resolved &mdash; that heat, light, and humidity near the range degrade spice potency faster.<sup class="cite">[10]</sup> This is a genuine disagreement in the source material. The convenience camp is louder in professional kitchen-design writing, but the preservation camp shows up consistently in food-science-adjacent and general home advice.</p>
+
+  <div class="callout" style="border-left-color:#c1440e;background:#f7e7dd">
+    <p><strong>This is not a settled question.</strong> No codified, industry-wide doctrine analogous to the classic work triangle exists specific to spice placement &mdash; what exists is the general zone-based reasoning above, applied by individual designers to spices as one category among several. Anyone planning a kitchen build around this should treat both positions as legitimate and weigh them against their own cooking habits, rather than assuming the louder "convenience" camp has settled the matter.</p>
+    <cite>Synthesized from Houzz, CRD Design Build, and Wholesale Cabinet Supply (NKBA) &mdash; see &sect; 06<sup class="cite">[1][2][10][25][27][31]</sup></cite>
+  </div>
+
+  <p><strong>Practical takeaway for a future build:</strong> plan a small, fast-access "working set" pull-out or drawer directly in the cooking zone for spices used multiple times a week, sized generously (favor the deep-drawer or wider pull-out end of &sect; 01's range rather than the narrowest 3in sliver, given a large collection), and plan a separate, larger, less heat-exposed home &mdash; a corner lazy susan, a dedicated spice-kitchen shelf, or pantry shelving &mdash; for the bulk of a large collection and backstock. That split addresses both camps in the debate rather than forcing a single answer.</p>
+</div>
+
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
+  <h2>Visual Reference Sources</h2>
+  <p>Because the point of this research was to gather literal design inspiration, this section is deliberately separated from the general Sources and References list at the end of this document. These are the galleries and photo-illustrated pages worth opening directly, organized by how well their content could be verified &mdash; not by alphabetical order or topic.</p>
+
+  <div class="gallery-section">
+    <div class="gallery-section-head">Strong &mdash; Confirmed, Photo-Rich Galleries</div>
+
+    <div class="gallery-row">
+      <div class="g-name">Houzz &mdash; "24 Hot Ideas for Stashing Spices"</div>
+      <span class="g-url">https://www.houzz.com/magazine/24-hot-ideas-for-stashing-spices-stsetivw-vs~315468</span>
+      <div class="g-desc">A curated photo essay mixing built-in niches, narrow pull-outs, magnetic rails, and pantry door-mounted racks, each tied to a real project and designer. Probably the single best starting gallery for "designed-in" ideas.<sup class="cite">[5]</sup></div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="g-name">Houzz &mdash; "Pull-out Spice Drawer" Photo Gallery</div>
+      <span class="g-url">https://www.houzz.com/photos/pull-out-spice-drawer-phbr0lbl-bl~l_77294</span>
+      <div class="g-desc">A filterable Houzz photo-gallery category showing dozens of curated pull-out spice drawer installations spanning traditional to modern farmhouse styles.<sup class="cite">[28]</sup></div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="g-name">Houzz &mdash; "Kitchen Pantry Ideas" Gallery</div>
+      <span class="g-url">https://www.houzz.com/photos/kitchen-pantry-ideas-phbr1-bp~t_709~a_13-517</span>
+      <div class="g-desc">A large filterable gallery covering pull-out pantry shelving, glass canister walls, door-mounted spice organizers, and walk-in spice-wall-style pantries, attributed to named design firms.<sup class="cite">[29]</sup></div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="g-name">Houzz &mdash; "How to Add a Pullout Spice Rack" &amp; "25 Ideas for Kitchen Appliance Garages"</div>
+      <span class="g-url">https://www.houzz.com/magazine/how-to-add-a-pullout-spice-rack-stsetivw-vs~30117943<br>https://www.houzz.com/magazine/25-ideas-for-kitchen-appliance-garages-stsetivw-vs~166482309</span>
+      <div class="g-desc">Both are photo-illustrated design-professional pieces; the second is a 25-photo gallery organized by location, door type, and feature &mdash; useful beyond spices for the broader "designed-in concealment" idea.<sup class="cite">[2][17]</sup></div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="g-name">Vertical Spice &mdash; Company Site &amp; Before/After Gallery</div>
+      <span class="g-url">https://verticalspice.com/</span>
+      <div class="g-desc">Product photography plus a "before and after" installation gallery showing real cabinet retrofits. A vendor site, but a literal capacity and dimension reference with genuinely useful installed-condition photos.<sup class="cite">[4]</sup></div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="g-name">Laurysen Kitchens &mdash; "The Ultimate Guide To Spice Kitchens"</div>
+      <span class="g-url">https://www.laurysenkitchens.com/blog/spice-kitchen/</span>
+      <div class="g-desc">Confirmed to include multiple photos &mdash; pull-out organizers, galley layout, spice-kitchen pantry shots &mdash; from a custom cabinetry maker's own portfolio-adjacent content.<sup class="cite">[24]</sup></div>
+    </div>
+  </div>
+
+  <div class="gallery-section" style="margin-top:20px">
+    <div class="gallery-section-head" style="background:#4b6a45">Vendor / Product Photography &mdash; Narrower, Still Useful</div>
+
+    <div class="gallery-row">
+      <div class="g-name">Remodelista &mdash; Double-Shelf Spice Rack Product Page</div>
+      <span class="g-url">https://www.remodelista.com/products/double-shelf-spice-rack/</span>
+      <div class="g-desc">Strong editorial and visual brand; the individual product page shows styled photography. A related roundup ("A Peek Inside the Pantry") could not be verified &mdash; see the unverified tier below.</div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="g-name">Dwell &mdash; "Achieve Organizational Nirvana With These Space-Saving Kitchen Accessories"</div>
+      <span class="g-url">https://www.dwell.com/article/kitchen-cabinets-pantry-storage-organization-products-59978324</span>
+      <div class="g-desc">Confirmed via direct fetch: styled product photography (Yamazaki tower organizer, Threshold tiered wood rack) &mdash; more product-catalog than architectural-inspiration in tone.<sup class="cite">[20]</sup></div>
+    </div>
+  </div>
+
+  <div class="gallery-flagbox">
+    <b>Corrected false lead &mdash; kept visible rather than smoothed over:</b>
+    <p>An earlier search snippet suggested the Dwell article above featured a "back-lit spice storage" kitchen renovation by architect <strong>Chris Greenawalt</strong>. This was checked directly against the actual article text and is <strong>not present</strong> &mdash; a search-indexing error, not fact. It is documented here specifically so it is not mistaken for a real design reference by anyone using this guide.</p>
+  </div>
+
+  <div class="gallery-section" style="margin-top:20px">
+    <div class="gallery-section-head" style="background:#7a2331">Unverified Leads &mdash; Fetch Blocked, Title/Snippet Only</div>
+
+    <div class="gallery-row">
+      <div class="g-name">HGTV &mdash; "30 Spice Organizer Ideas"</div>
+      <span class="g-url">https://www.hgtv.com/lifestyle/clean-and-organize/creative-spice-storage-ideas-pictures</span>
+      <div class="g-desc">Title claims a 30-photo gallery, but the page could not be fetched directly (HTTP 403) to verify content. Worth opening yourself in a browser; not independently verified by this research.</div>
+    </div>
+
+    <div class="gallery-row">
+      <div class="g-name">Remodelista &mdash; "A Peek Inside the Pantry" (roundup)</div>
+      <span class="g-url">No independently confirmed URL &mdash; referenced only via search snippet</span>
+      <div class="g-desc">Blocked (HTTP 403) from direct verification. Flagged here as an unverified lead, not confirmed content &mdash; distinct from the Remodelista product page above, which was verified.</div>
+    </div>
+  </div>
+
+  <div class="gallery-flagbox" style="border-left-color:#241608;background:#f2e7c9">
+    <b>A real gap, not a substitute source:</b>
+    <p>No dedicated spice-storage gallery or article was found on <strong>Architectural Digest</strong> despite multiple targeted searches. AD does have a general "Kitchens" Pinterest board (https://www.pinterest.com/archdigest/kitchens/) and broad kitchen-tour coverage, but nothing spice-storage-specific turned up in this research &mdash; worth checking directly if AD's broader kitchen photography is of interest, but it should not be treated as a spice-storage-specific source.</p>
+  </div>
+
+  <p style="margin-top:20px"><strong>Lower-tier aggregator galleries</strong> also surfaced in this research: Craftionary ("25 Top Spice Storage Solutions"), TheCoolist ("28 Kitchen Spice Storage Ideas"), Family Handyman ("12 Ingenious Spice Storage Ideas"), and Taste of Home ("13 Genius Spice Storage Ideas"). These are lifestyle-blog galleries, not design-firm or architecture-publication sources, and no specific URLs were captured for them in this research. They may be worth a quick browse purely for volume of ideas, but are weighted below every gallery above for design credibility.</p>
+</div>
+
+
+<!-- SECTION 6 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 06</span><div class="section-rule"></div></div>
+  <h2>Sourcing Confidence Assessment</h2>
+  <p>This research draws on kitchen-design editorial content, custom cabinetry makers, one independent product-testing organization, and NKBA-derived planning guidance &mdash; not a single authoritative standard, since none exists specific to spice storage. Confidence varies meaningfully by claim, broken out explicitly below rather than presented as uniform.</p>
+
+  <div class="confidence">
+    <div class="confidence-head">Well-Supported</div>
+    <div class="confidence-body">
+      <div class="conf-item good">
+        <span class="lbl">Corroborated across independent sources</span>
+        <p>The existence and mechanics of narrow pull-out spice cabinets flanking the range, deep-drawer custom inserts, lazy-susan corner storage, and the "store spices in the cooking zone" placement principle are corroborated across multiple independent professional sources &mdash; Houzz editorial content, custom cabinetry makers, and NKBA-derived guidance.</p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Independent hands-on testing</span>
+        <p>The America's Test Kitchen capacity and product data is a genuine hands-on comparative review, a stronger sourcing tier than the many affiliate and aggregator "spice storage idea" listicles that recur in this space.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Thinly Sourced / Worth Caution</div>
+    <div class="confidence-body">
+      <div class="conf-item">
+        <span class="lbl">Self-interested marketing content</span>
+        <p>The "spice kitchen" trend claim rests on cabinetry-company blog content (Deslaurier, Yorkville, ENZO, Laurysen) &mdash; credible as description of a real design pattern, but also self-interested marketing content from firms selling that exact cabinetry. Treat the <em>existence</em> of the pattern as solid but the <em>"trend"/prevalence framing</em> as unverified beyond these companies' own characterization.</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">General-offering description only</span>
+        <p>The deVOL / Plain English / Christopher Peacock claim is a lead based on general company-offering language, not a verified specific project or photo. No source URL was captured for any of the three.</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">Commonly repeated, not established</span>
+        <p>The heat/light preservation counter-argument appears in general home-advice content but not in a study or authoritative culinary-science source &mdash; "commonly repeated" rather than "established." See &sect; 04 for the full treatment.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Could Not Confirm</div>
+    <div class="confidence-body">
+      <div class="conf-item bad">
+        <span class="lbl">Search-indexing error, corrected</span>
+        <p>The specific Dwell/Chris Greenawalt "back-lit spice storage" project mentioned in an early search snippet was checked directly and does <strong>not</strong> appear in the actual article. Treated as a search-indexing error, not fact &mdash; documented explicitly in &sect; 05 rather than silently dropped.</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Fetch blocked (HTTP 403)</span>
+        <p>HGTV's "30 Spice Organizer Ideas" gallery content could not be verified beyond its title due to a fetch block. Remodelista's "A Peek Inside the Pantry" roundup content likewise could not be verified directly for the same reason.</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">No standard found</span>
+        <p>No codified, publicly available NKBA standard specific to spice storage placement, as distinct from general storage-zone principles, was found.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SOURCES AND REFERENCES -->
+<div class="sources-section">
+  <div class="section-eyebrow"><span class="section-tag">&sect;</span><div class="section-rule"></div></div>
+  <h2>Sources and References</h2>
+  <p style="font-size:.85rem;color:#4a4030;font-style:italic;margin-bottom:20px">General sourcing, organized by category. See &sect; 05 above for the visual-reference-specific gallery list, which duplicates some entries here with added context about what each one shows.</p>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 1 &mdash; Design-Editorial Galleries and Guides</div>
+    <div class="source-group-note">Directly-fetched, photo-illustrated, design-professional content; the primary sourcing tier for both ideas and visuals in this report.</div>
+    <div class="source-item"><span class="source-num">[1]</span>Houzz Forum. <em>Pullouts next to cook top.</em>
+      <span class="source-url">houzz.com/discussions/3866883/pullouts-next-to-cook-top</span></div>
+    <div class="source-item"><span class="source-num">[2]</span>Houzz Magazine. <em>How to Add a Pullout Spice Rack.</em>
+      <span class="source-url">houzz.com/magazine/how-to-add-a-pullout-spice-rack-stsetivw-vs~30117943</span></div>
+    <div class="source-item"><span class="source-num">[5]</span>Houzz Magazine. <em>24 Hot Ideas for Stashing Spices.</em>
+      <span class="source-url">houzz.com/magazine/24-hot-ideas-for-stashing-spices-stsetivw-vs~315468</span></div>
+    <div class="source-item"><span class="source-num">[17]</span>Houzz Magazine. <em>25 Ideas for Kitchen Appliance Garages.</em>
+      <span class="source-url">houzz.com/magazine/25-ideas-for-kitchen-appliance-garages-stsetivw-vs~166482309</span></div>
+    <div class="source-item"><span class="source-num">[25]</span>Houzz Magazine. <em>Stash It All &mdash; Know the 3 Zones of Kitchen Storage.</em> By Steven Randel.
+      <span class="source-url">houzz.com/magazine/stash-it-all-know-the-3-zones-of-kitchen-storage-stsetivw-vs~52732506</span></div>
+    <div class="source-item"><span class="source-num">[26]</span>Houzz Magazine. <em>House Planning &mdash; How to Set Up Your Kitchen.</em>
+      <span class="source-url">houzz.com/magazine/house-planning-how-to-set-up-your-kitchen-stsetivw-vs~390964</span></div>
+    <div class="source-item"><span class="source-num">[28]</span>Houzz. <em>Pull-out Spice Drawer</em> photo gallery.
+      <span class="source-url">houzz.com/photos/pull-out-spice-drawer-phbr0lbl-bl~l_77294</span></div>
+    <div class="source-item"><span class="source-num">[29]</span>Houzz. <em>Kitchen Pantry Ideas</em> photo gallery.
+      <span class="source-url">houzz.com/photos/kitchen-pantry-ideas-phbr1-bp~t_709~a_13-517</span></div>
+    <div class="source-item"><span class="source-num">[30]</span>Houzz Forum. <em>Where do you prefer your spices? LAYOUT.</em>
+      <span class="source-url">houzz.com/discussions/2511797/where-do-you-prefer-your-spices-layout</span></div>
+    <div class="source-item"><span class="source-num">[27]</span>LivingEtc. <em>Forget the Working Triangle, This 'Zoned' Approach Might Be the Best Way to Lay Out a Kitchen.</em>
+      <span class="source-url">livingetc.com/advice/kitchen-zones</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 2 &mdash; Independent Product Testing</div>
+    <div class="source-group-note">Hands-on comparative testing rather than affiliate or aggregator content; the strongest tier for capacity and performance claims specifically.</div>
+    <div class="source-item"><span class="source-num">[15]</span>America's Test Kitchen. <em>The Best Spice Storage Solutions.</em>
+      <span class="source-url">americastestkitchen.com/equipment_reviews/2354-spice-storage-solutions</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 3 &mdash; Custom Cabinetry Makers and Vendor Product Data</div>
+    <div class="source-group-note">Manufacturer and vendor sites; useful for concrete specs, pricing, and installed-condition photography, but commercially self-interested.</div>
+    <div class="source-item"><span class="source-num">[3]</span>CliqStudios. <em>Pull-out Kitchen Storage &amp; Slim Spice Rack Cabinets.</em>
+      <span class="source-url">cliqstudios.com/pull-out-storage/</span></div>
+    <div class="source-item"><span class="source-num">[4]</span>Vertical Spice.
+      <span class="source-url">verticalspice.com</span></div>
+    <div class="source-item"><span class="source-num">[6]</span>Century Made Shop. <em>12" Spice Drawer Organizer Insert.</em>
+      <span class="source-url">centurymadeshop.com/products/12-spice-drawer-organizer-insert-sdoi12pf</span></div>
+    <div class="source-item"><span class="source-num">[7]</span>Masterpiece Cabinets. <em>Spice Drawer Organizer Insert Kit.</em>
+      <span class="source-url">masterpiececabinets.com/spice-drawer-insert-kit/</span></div>
+    <div class="source-item"><span class="source-num">[8]</span>KraftMaid. <em>Spice Drawer Organizer Insert Kit.</em>
+      <span class="source-url">kraftmaid.com/spice-drawer-organizer-insert-kit/</span></div>
+    <div class="source-item"><span class="source-num">[9]</span>ShelfGenie. <em>Spice Racks / Custom Pull-Out Drawers.</em>
+      <span class="source-url">shelfgenie.com/solution-items/spice-rack/</span></div>
+    <div class="source-item"><span class="source-num">[13]</span>Gneiss Spice.
+      <span class="source-url">gneissspice.com</span></div>
+    <div class="source-item"><span class="source-num">[14]</span>RSVP International. <em>Spice Jars, Labels &amp; Racks.</em>
+      <span class="source-url">rsvp-intl.com/collections/spicejarslabelsracks</span></div>
+    <div class="source-item"><span class="source-num">[16]</span>Sweeten. <em>Appliance Garage Ideas.</em>
+      <span class="source-url">sweeten.com/ideas-and-inspiration/kitchen-appliance-garage-ideas/</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 4 &mdash; Design Firms and Cabinetry-Adjacent Editorial (Self-Interested)</div>
+    <div class="source-group-note">Credible for describing real design patterns, but written by firms with a commercial stake in the pattern they describe &mdash; the "spice kitchen" trend framing specifically.</div>
+    <div class="source-item"><span class="source-num">[21]</span>Deslaurier Custom Cabinets. <em>What is a Spice Kitchen?</em>
+      <span class="source-url">deslaurier.com/en-us/learning-centre/what-is-a-spice-kitchen</span></div>
+    <div class="source-item"><span class="source-num">[22]</span>Yorkville Design Centre. <em>The Evolution of the Modern Culinary Space: What is a Spice Kitchen?</em>
+      <span class="source-url">yorkvilledesigncentre.ca/blog/the-evolution-of-the-modern-culinary-space-what-is-a-spice-kitchen</span></div>
+    <div class="source-item"><span class="source-num">[23]</span>ENZO Design Build. <em>Spice Kitchen Guide.</em>
+      <span class="source-url">enzodesignbuild.com/what-is-a-spice-kitchen/</span></div>
+    <div class="source-item"><span class="source-num">[24]</span>Laurysen Kitchens. <em>The Ultimate Guide To Spice Kitchens.</em>
+      <span class="source-url">laurysenkitchens.com/blog/spice-kitchen/</span></div>
+    <div class="source-item"><span class="source-num">[18]</span>Harvey Jones. <em>Our Top Hidden Kitchen Storage Ideas.</em>
+      <span class="source-url">harveyjones.com/blog/planning/our-top-hidden-kitchen-storage-ideas</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 5 &mdash; General Organization / Lifestyle Content</div>
+    <div class="source-group-note">Home-advice and DIY content; used for the unconventional-ideas section and the preservation-argument thread, not treated as design-authority sourcing.</div>
+    <div class="source-item"><span class="source-num">[10]</span>CRD Design Build. <em>What Is a Lazy Susan Cabinet?</em> / George Cabinetry. <em>Corner Cabinet Lazy Susan.</em>
+      <span class="source-url">crddesignbuild.com/blog/lazy-susan-cabinet/ &middot; georgecabinetry.com/blog/corner-cabinet-lazy-susan/</span></div>
+    <div class="source-item"><span class="source-num">[11]</span>Kitchen Wise. <em>Lazy Susan Corner Cabinet Guide.</em>
+      <span class="source-url">kitchenwise.com/blog/categories/kitchen-organization/how-to-install-a-lazy-susan-corner-cabinet/</span></div>
+    <div class="source-item"><span class="source-num">[12]</span>The Kitchn. <em>How To Make a Wall-Mounted Magnetic Spice Rack.</em>
+      <span class="source-url">thekitchn.com/how-to-make-a-wallmounted-magn-101525</span></div>
+    <div class="source-item"><span class="source-num">[19]</span>HGTV. <em>30 Spice Organizer Ideas.</em> Title/lead only &mdash; unverified in detail, see &sect; 05.
+      <span class="source-url">hgtv.com/lifestyle/clean-and-organize/creative-spice-storage-ideas-pictures</span></div>
+    <div class="source-item"><span class="source-num">[20]</span>Dwell. <em>Achieve Organizational Nirvana With These Space-Saving Kitchen Accessories.</em>
+      <span class="source-url">dwell.com/article/kitchen-cabinets-pantry-storage-organization-products-59978324</span></div>
+    <div class="source-item">Remodelista. <em>Double-Shelf Spice Rack</em> product page.
+      <span class="source-url">remodelista.com/products/double-shelf-spice-rack/</span></div>
+    <div class="source-item">Craftionary, TheCoolist, Family Handyman, Taste of Home &mdash; lower-tier aggregator/lifestyle-blog galleries ("25 Top Spice Storage Solutions," "28 Kitchen Spice Storage Ideas," "12 Ingenious Spice Storage Ideas," "13 Genius Spice Storage Ideas"). No specific URLs captured; weighted below all other tiers.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 6 &mdash; Planning Standards</div>
+    <div class="source-group-note">General kitchen-clearance guidance, not spice-specific, used only for the corner-cabinet baseline-expectation claim.</div>
+    <div class="source-item"><span class="source-num">[31]</span>Wholesale Cabinet Supply. <em>Kitchen Design Guidelines &amp; Clearances (NKBA Standards Explained).</em>
+      <span class="source-url">thewcsupply.com/pages/kitchen-design-guidelines-standard-clearances</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 7 &mdash; Explicitly Corrected, Blocked, or Absent</div>
+    <div class="source-group-note">Documented here for transparency as corrections and gaps in this research, not as reliable sources actually consulted. See &sect; 05 and &sect; 06.</div>
+    <div class="source-item"><strong>Corrected false lead:</strong> Dwell / Chris Greenawalt "back-lit spice storage" project. An early search snippet suggested this appeared in source [20]; checked directly and does <strong>not</strong> appear in the actual article. Search-indexing error, not fact.</div>
+    <div class="source-item"><strong>Fetch blocked (HTTP 403):</strong> HGTV's "30 Spice Organizer Ideas" gallery [19], and Remodelista's "A Peek Inside the Pantry" roundup &mdash; both unverified beyond title/snippet.</div>
+    <div class="source-item"><strong>Not found:</strong> No dedicated spice-storage gallery or article on Architectural Digest despite multiple targeted searches. No codified NKBA standard specific to spice-storage placement (distinct from general storage-zone principles). No specific verified project or photo set for the deVOL / Plain English / Christopher Peacock bespoke-larder claim.</div>
+  </div>
+</div>
+
+<div class="footer">
+  Spice &amp; Seasoning Storage: Built-In Design Ideas for a Future Kitchen &nbsp;&middot;&nbsp; Compiled 2026<br>
+  Core sourcing: Houzz &middot; America's Test Kitchen &middot; custom cabinetry makers &middot; NKBA-derived guidance<br>
+  Sourcing gaps &mdash; including the corrected Dwell/Greenawalt lead and the HGTV/Remodelista fetch blocks &mdash; are flagged explicitly in &sect; 05 and &sect; 06 rather than smoothed over.
+</div>
+
+</body>
+</html>

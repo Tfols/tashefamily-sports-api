@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#123350;color:#eef4f8;color-scheme:dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery Hallway — Field Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700;9..144,900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bp-bg:#123350;
+  --bp-bg-2:#0c2740;
+  --bp-panel:#0f2d49;
+  --bp-panel-2:#0a2238;
+  --bp-line:#eef4f8;
+  --bp-line-dim:rgba(238,244,248,.42);
+  --bp-grid:#1d4266;
+  --cream:#f3ecd8;
+  --cream-2:#e8ddc0;
+  --ink:#16202b;
+  --brass:#c9a227;
+  --brass-deep:#8f701a;
+  --brass-soft:rgba(201,162,39,.16);
+  --redpen:#e2574c;
+  --redpen-deep:#a83a30;
+  --redpen-soft:rgba(226,87,76,.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:dark;background:var(--bp-bg)!important;color:var(--bp-line)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:14px;line-height:1.55;
+  max-width:1180px;margin:0 auto;padding:0 0 60px;
+  background:
+    linear-gradient(var(--bp-bg),var(--bp-bg)),
+    repeating-linear-gradient(0deg, transparent 0 27px, var(--bp-grid) 27px 27.6px),
+    repeating-linear-gradient(90deg, transparent 0 27px, var(--bp-grid) 27px 27.6px);
+  background-blend-mode:normal;
+  opacity:1;
+}
+body{ position:relative; }
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 20% 0%, rgba(238,244,248,.05), transparent 55%),
+             radial-gradient(ellipse at 90% 90%, rgba(201,162,39,.06), transparent 50%);
+}
+#sheet{position:relative;z-index:1;padding:26px 28px 0}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+h1,h2,h3{font-family:"Fraunces",serif}
+em{font-style:italic}
+
+/* ── TITLE BLOCK (drafting masthead) ── */
+.masthead{display:grid;grid-template-columns:1fr auto;gap:0;border:2px solid var(--bp-line);margin-bottom:18px;background:var(--bp-panel)}
+.masthead-main{padding:20px 26px}
+.masthead-eyebrow{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin-bottom:8px}
+h1{font-weight:700;font-size:2.5rem;line-height:1.0;color:var(--bp-line);letter-spacing:.005em}
+h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
+.masthead-sub{font-family:"Fraunces",serif;font-size:1rem;font-style:italic;font-weight:400;color:var(--bp-line-dim);margin-top:10px;max-width:60ch;line-height:1.5}
+.title-block{border-left:2px solid var(--bp-line);min-width:210px;display:flex;flex-direction:column}
+.tb-row{padding:8px 16px;border-bottom:1px solid var(--bp-grid);flex:1;display:flex;flex-direction:column;justify-content:center}
+.tb-row:last-child{border-bottom:none}
+.tb-label{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--bp-line-dim)}
+.tb-val{font-size:11.5px;font-weight:600;color:var(--brass);margin-top:2px}
+
+/* ── SECTION LABEL ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.sec-tag{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--bp-bg);background:var(--brass);padding:3px 10px;flex-shrink:0}
+.sec-rule{height:1px;background:var(--bp-grid);flex:1;position:relative}
+.sec-rule::after{content:"";position:absolute;right:0;top:-2px;width:5px;height:5px;background:var(--bp-line-dim);transform:rotate(45deg)}
+
+/* ── KEY FIGURES ── */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:20px}
+.stat-cell{background:var(--bp-panel);border:1px solid var(--bp-grid);border-top:2px solid var(--brass);padding:12px 8px;text-align:center;position:relative}
+.stat-cell.flag{border-top-color:var(--redpen)}
+.stat-cell::before,.stat-cell::after{content:"";position:absolute;width:5px;height:5px;border:1px solid var(--bp-line-dim)}
+.stat-cell::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.stat-cell::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.stat-num{font-family:"Fraunces",serif;font-weight:700;font-size:1.5rem;color:var(--bp-line);line-height:1}
+.stat-label{font-size:.6rem;color:var(--bp-line-dim);margin-top:7px;line-height:1.4}
+
+/* ── DIAGRAM PANEL (the blueprint sheet — signature element) ── */
+.diagram-panel{border:2px solid var(--bp-line);background:var(--bp-panel-2);margin-bottom:20px;overflow:hidden}
+.diagram-head{background:var(--brass);color:var(--bp-bg);padding:8px 18px;font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;display:flex;justify-content:space-between}
+.diagram-sub-head{padding:12px 20px 2px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--brass)}
+.diagram-body{padding:6px 18px 4px}
+.diagram-body svg{width:100%;height:auto;display:block}
+.diagram-caption{font-size:.76rem;color:var(--bp-line-dim);padding:8px 20px 16px;line-height:1.6;border-top:1px dashed var(--bp-grid);margin:10px 20px 0}
+.diagram-caption b{color:var(--brass)}
+.diagram-divider{height:1px;background:var(--bp-grid);margin:6px 20px}
+
+/* ── TIMELINE ── */
+.tl-wrap{background:var(--bp-panel-2);border:2px solid var(--bp-line);padding:20px 22px 16px;margin-bottom:20px}
+.tl-body svg{width:100%;height:auto;display:block}
+
+/* ── TAXONOMY / REDLINE CARDS ── */
+.taxo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.taxo-card{border:2px solid var(--bp-line);background:var(--bp-panel);display:flex;flex-direction:column;page-break-inside:avoid}
+.taxo-card.in{border-color:var(--brass)}
+.taxo-card.out{border-color:var(--redpen)}
+.taxo-bar{padding:7px 12px;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between}
+.taxo-card.in .taxo-bar{background:var(--brass);color:var(--bp-bg)}
+.taxo-card.out .taxo-bar{background:var(--redpen-deep);color:var(--cream)}
+.taxo-icon{padding:12px 14px 0;display:flex;justify-content:center}
+.taxo-icon svg{width:100%;max-width:180px;height:auto}
+.taxo-body{padding:10px 16px 14px;flex:1;display:flex;flex-direction:column;gap:6px}
+.taxo-name{font-family:"Fraunces",serif;font-weight:700;font-size:1.15rem;color:var(--bp-line)}
+.taxo-verdict{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.taxo-card.in .taxo-verdict{color:var(--brass)}
+.taxo-card.out .taxo-verdict{color:var(--redpen)}
+.taxo-def{font-size:.76rem;color:var(--bp-line-dim);line-height:1.55}
+.taxo-source{font-size:.62rem;color:var(--bp-line-dim);margin-top:auto;padding-top:8px;border-top:1px dotted var(--bp-grid)}
+
+/* ── BUILT EXAMPLES (pinned project sheets) ── */
+.plate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.plate{border:1.5px solid var(--bp-grid);background:var(--bp-panel);position:relative;page-break-inside:avoid}
+.plate::before{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--brass);box-shadow:0 1px 3px rgba(0,0,0,.5)}
+.plate-bar{padding:7px 12px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bp-bg);background:var(--bp-line-dim);display:flex;justify-content:space-between}
+.plate.strongest .plate-bar{background:var(--brass)}
+.plate-body{padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.plate-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.0rem;color:var(--bp-line);line-height:1.2}
+.plate-tag{font-size:.62rem;color:var(--brass);letter-spacing:.02em}
+.plate-spec{font-size:.74rem;color:var(--bp-line-dim);line-height:1.5}
+.plate-spec b{color:var(--bp-line)}
+.plate-flag{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--cream);background:var(--redpen-deep);padding:2px 6px;margin-top:2px}
+.plate-source{font-size:.6rem;color:var(--bp-line-dim);margin-top:auto;padding-top:8px;border-top:1px dotted var(--bp-grid)}
+
+/* ── PLANNING CHIPS ── */
+.chip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.chip{background:var(--bp-panel);border:1px solid var(--bp-grid);border-top:3px solid var(--brass);padding:12px 14px;page-break-inside:avoid}
+.chip:nth-child(2){border-top-color:var(--redpen)}
+.chip:nth-child(4){border-top-color:var(--redpen)}
+.chip-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--bp-line-dim);margin-bottom:5px}
+.chip-title{font-family:"Fraunces",serif;font-weight:600;font-size:.94rem;color:var(--bp-line);margin-bottom:6px}
+.chip p{font-size:.75rem;color:var(--bp-line-dim);line-height:1.55}
+.chip p b{color:var(--bp-line)}
+
+/* ── VISUAL REFERENCES (prominent, contact-sheet style) ── */
+.ref-panel{border:2px solid var(--brass);background:var(--bp-panel-2);margin-bottom:20px}
+.ref-head{background:var(--brass);color:var(--bp-bg);padding:9px 20px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.ref-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.ref-item{padding:12px 20px;border-right:1px dashed var(--bp-grid);border-bottom:1px dashed var(--bp-grid);display:flex;flex-direction:column;gap:3px}
+.ref-item:nth-child(2n){border-right:none}
+.ref-item a{color:var(--bp-line);text-decoration:none;font-family:"Fraunces",serif;font-weight:600;font-size:.9rem}
+.ref-item a:hover{color:var(--brass)}
+.ref-item .rd{font-size:.7rem;color:var(--bp-line-dim);line-height:1.45}
+.ref-item .rtag{font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brass)}
+.ref-item.blocked .rtag{color:var(--redpen)}
+.ref-item.blocked a{color:var(--bp-line-dim)}
+
+/* ── SOURCING CONFIDENCE ── */
+.qc-strip{border:2px solid var(--bp-line);background:var(--bp-panel);margin-bottom:20px}
+.qc-head{background:var(--bp-line);color:var(--bp-bg);padding:8px 20px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.qc-grid{display:grid;grid-template-columns:repeat(2,1fr)}
+.qc-item{padding:13px 20px;border-right:1px dashed var(--bp-grid);border-bottom:1px dashed var(--bp-grid)}
+.qc-item:nth-child(2n){border-right:none}
+.qc-flag{font-size:8.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:inline-block;padding:2px 7px}
+.qc-flag.ok{background:var(--brass);color:var(--bp-bg)}
+.qc-flag.flag{background:var(--redpen);color:var(--bp-bg)}
+.qc-flag.thin{background:var(--bp-line-dim);color:var(--bp-bg)}
+.qc-body{font-size:.74rem;line-height:1.55;color:var(--bp-line-dim)}
+.qc-body b{color:var(--bp-line)}
+
+/* ── WORTH BOOKMARKING ── */
+.bookmark{border:2px dashed var(--brass);background:var(--brass-soft);padding:16px 20px;margin-bottom:20px}
+.bookmark-head{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin-bottom:10px}
+.bookmark-item{font-size:.8rem;color:var(--bp-line);line-height:1.55;margin-bottom:8px;padding-left:16px;position:relative}
+.bookmark-item:last-child{margin-bottom:0}
+.bookmark-item::before{content:"\2605";position:absolute;left:0;color:var(--brass);font-size:.7rem}
+.bookmark-item b{color:var(--brass)}
+
+/* ── FOOTER ── */
+.footer{padding:16px 26px 20px;font-size:9px;letter-spacing:.04em;color:var(--bp-line-dim);text-align:center;line-height:1.9;border-top:1px solid var(--bp-grid);margin-top:6px}
+
+@media(max-width:900px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .taxo-grid,.plate-grid,.chip-grid{grid-template-columns:1fr 1fr}
+  .ref-grid,.qc-grid{grid-template-columns:1fr}
+  .ref-item,.qc-item{border-right:none}
+  .masthead{grid-template-columns:1fr}
+  .title-block{border-left:none;border-top:1px solid var(--bp-line);flex-direction:row}
+}
+</style>
+</head>
+<body>
+<div id="sheet">
+
+<!-- TITLE BLOCK -->
+<div class="masthead">
+  <div class="masthead-main">
+    <div class="masthead-eyebrow">Field Reference &middot; Residential Corridor Typology &middot; Compiled Jul 2026</div>
+    <h1>Gallery <span class="hl">Hallway</span></h1>
+    <div class="masthead-sub">The wide, art-carrying central corridor Tom was trying to name &mdash; where the term comes from, what to call it, what to rule out, and the real houses that build it in as the spine of the plan rather than an afterthought.</div>
+  </div>
+  <div class="title-block">
+    <div class="tb-row"><div class="tb-label">Correct Term</div><div class="tb-val">Long Gallery (hist.) / Gallery (mod.)</div></div>
+    <div class="tb-row"><div class="tb-label">Sheet</div><div class="tb-val">1 of 1 &mdash; Field Reference</div></div>
+    <div class="tb-row"><div class="tb-label">Companion</div><div class="tb-val">Full Reference Guide</div></div>
+  </div>
+</div>
+
+<!-- KEY FIGURES -->
+<div class="stat-row">
+  <div class="stat-cell">
+    <div class="stat-num">1590s</div>
+    <div class="stat-label">First recorded date "gallery" meant an art-display room &mdash; the passageway sense (1450s) came first [1]</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">36"</div>
+    <div class="stat-label">IRC code-minimum residential hallway width &mdash; a floor, not a design target [8]</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">54&ndash;72"</div>
+    <div class="stat-label">Where design guidance says a hallway starts reading as a gallery you can furnish [9]</div>
+  </div>
+  <div class="stat-cell flag">
+    <div class="stat-num">162&ndash;166 ft</div>
+    <div class="stat-label">Hardwick Hall's Long Gallery length &mdash; sources disagree, flagged below, not resolved [27][28]</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">172 ft</div>
+    <div class="stat-label">Montacute House's Long Gallery &mdash; longest surviving example, &asymp;52 m [26]</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">100&ndash;150</div>
+    <div class="stat-label">Baseline lumens/m&sup2; recommended for hallway/gallery art display [25]</div>
+  </div>
+</div>
+
+<!-- SIGNATURE DIAGRAM: THE BLUEPRINT SHEET -->
+<div class="diagram-panel">
+  <div class="diagram-head"><span>Drawing Sheet &mdash; Corridor Width &amp; Daylighting</span><span>Not to scale beyond break, as noted</span></div>
+
+  <div class="diagram-sub-head">1 &middot; Width, to scale (with a scale break for the historical outlier)</div>
+  <div class="diagram-body">
+    <svg viewBox="0 0 620 236" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="bpgrid" width="18" height="18" patternUnits="userSpaceOnUse">
+          <path d="M18 0H0V18" fill="none" stroke="#1d4266" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect x="0" y="0" width="620" height="236" fill="url(#bpgrid)"/>
+
+      <!-- zero baseline -->
+      <line x1="90" y1="18" x2="90" y2="206" stroke="#eef4f8" stroke-width="1" stroke-dasharray="2,3" opacity="0.5"/>
+      <text x="90" y="12" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8" opacity="0.6">0&Prime;</text>
+
+      <!-- Row 1: Standard Hallway -->
+      <text x="20" y="38" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#eef4f8">STANDARD HALLWAY</text>
+      <text x="20" y="50" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#eef4f8" opacity="0.65">IRC min. 36" &middot; typical 36&ndash;48" [8]</text>
+      <line x1="90" y1="62" x2="234" y2="62" stroke="#eef4f8" stroke-width="2" opacity="0.55"/>
+      <line x1="198" y1="62" x2="234" y2="62" stroke="#c9a227" stroke-width="10"/>
+      <line x1="198" y1="56" x2="198" y2="68" stroke="#eef4f8" stroke-width="1.5"/>
+      <line x1="234" y1="56" x2="234" y2="68" stroke="#eef4f8" stroke-width="1.5"/>
+      <text x="198" y="80" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#eef4f8">36&Prime;</text>
+      <text x="234" y="80" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#eef4f8">48&Prime;</text>
+
+      <!-- Row 2: Gallery-Capable Corridor -->
+      <text x="20" y="104" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#eef4f8">GALLERY-CAPABLE CORRIDOR</text>
+      <text x="20" y="116" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#eef4f8" opacity="0.65">54&ndash;72" &middot; design guidance, not code [9]</text>
+      <line x1="90" y1="128" x2="306" y2="128" stroke="#eef4f8" stroke-width="2" opacity="0.55"/>
+      <line x1="252" y1="128" x2="306" y2="128" stroke="#c9a227" stroke-width="10"/>
+      <line x1="252" y1="122" x2="252" y2="134" stroke="#eef4f8" stroke-width="1.5"/>
+      <line x1="306" y1="122" x2="306" y2="134" stroke="#eef4f8" stroke-width="1.5"/>
+      <text x="252" y="146" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#eef4f8">54&Prime;</text>
+      <text x="306" y="146" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#eef4f8">72&Prime;</text>
+
+      <!-- Row 3: Long Gallery (historical, scale break) -->
+      <text x="20" y="172" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#eef4f8">LONG GALLERY (HISTORICAL)</text>
+      <text x="20" y="184" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#e2574c">22&ndash;40 ft wide &middot; Hardwick Hall &amp; comparable [27][28]</text>
+      <line x1="90" y1="196" x2="358" y2="196" stroke="#eef4f8" stroke-width="2" opacity="0.55"/>
+      <!-- scale break zigzag -->
+      <path d="M358 188 L364 196 L370 188 L376 196" fill="none" stroke="#e2574c" stroke-width="1.6"/>
+      <line x1="382" y1="196" x2="415.5" y2="196" stroke="#eef4f8" stroke-width="2" opacity="0.55" stroke-dasharray="3,3"/>
+      <line x1="415.5" y1="196" x2="469.5" y2="196" stroke="#c9a227" stroke-width="10"/>
+      <line x1="415.5" y1="190" x2="415.5" y2="202" stroke="#eef4f8" stroke-width="1.5"/>
+      <line x1="469.5" y1="190" x2="469.5" y2="202" stroke="#eef4f8" stroke-width="1.5"/>
+      <text x="415.5" y="216" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#eef4f8">22 ft</text>
+      <text x="469.5" y="216" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#eef4f8">40 ft</text>
+      <text x="367" y="216" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.2" fill="#e2574c" letter-spacing="0.04em">SCALE BREAK</text>
+      <text x="530" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#eef4f8" opacity="0.6">Hardwick Hall also reported</text>
+      <text x="530" y="198" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#eef4f8" opacity="0.6">26 ft high &mdash; not drawn to scale</text>
+    </svg>
+  </div>
+
+  <div class="diagram-divider"></div>
+
+  <div class="diagram-sub-head">2 &middot; Single-loaded vs. double-loaded &mdash; the taxonomic distinction that matters most</div>
+  <div class="diagram-body">
+    <svg viewBox="0 0 620 226" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="620" height="226" fill="url(#bpgrid)"/>
+
+      <!-- PLAN A: double-loaded -->
+      <rect x="20" y="24" width="260" height="164" fill="none" stroke="#eef4f8" stroke-width="1.6"/>
+      <rect x="20" y="24" width="86" height="164" fill="none" stroke="#eef4f8" stroke-width="1"/>
+      <line x1="20" y1="79" x2="106" y2="79" stroke="#eef4f8" stroke-width="1"/>
+      <line x1="20" y1="133" x2="106" y2="133" stroke="#eef4f8" stroke-width="1"/>
+      <rect x="194" y="24" width="86" height="164" fill="none" stroke="#eef4f8" stroke-width="1"/>
+      <line x1="194" y1="79" x2="280" y2="79" stroke="#eef4f8" stroke-width="1"/>
+      <line x1="194" y1="133" x2="280" y2="133" stroke="#eef4f8" stroke-width="1"/>
+      <rect x="106" y="24" width="88" height="164" fill="#e2574c" opacity="0.14"/>
+      <path d="M106 24L194 188M106 56L162 188M106 100L194 188M106 144L194 188M138 24L194 188M170 24L194 148" stroke="#e2574c" stroke-width="0.6" opacity="0.35"/>
+      <text x="150" y="110" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#e2574c" font-weight="700">NO DAYLIGHT</text>
+      <text x="150" y="14" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#eef4f8" font-weight="700">DOUBLE-LOADED</text>
+
+      <!-- PLAN B: single-loaded -->
+      <rect x="340" y="24" width="260" height="164" fill="none" stroke="#eef4f8" stroke-width="1.6"/>
+      <rect x="340" y="24" width="260" height="76" fill="none" stroke="#eef4f8" stroke-width="1"/>
+      <line x1="426.7" y1="24" x2="426.7" y2="100" stroke="#eef4f8" stroke-width="1"/>
+      <line x1="513.3" y1="24" x2="513.3" y2="100" stroke="#eef4f8" stroke-width="1"/>
+      <rect x="340" y="100" width="260" height="88" fill="#c9a227" opacity="0.14"/>
+      <!-- picture frames on the shared wall (the gallery wall) -->
+      <rect x="368" y="104" width="26" height="18" fill="none" stroke="#c9a227" stroke-width="1.4"/>
+      <rect x="463" y="104" width="26" height="18" fill="none" stroke="#c9a227" stroke-width="1.4"/>
+      <rect x="530" y="104" width="20" height="18" fill="none" stroke="#c9a227" stroke-width="1.4"/>
+      <!-- window ticks + light rays along glazed outer wall -->
+      <line x1="360" y1="188" x2="360" y2="196" stroke="#eef4f8" stroke-width="1.4"/>
+      <line x1="400" y1="188" x2="400" y2="196" stroke="#eef4f8" stroke-width="1.4"/>
+      <line x1="440" y1="188" x2="440" y2="196" stroke="#eef4f8" stroke-width="1.4"/>
+      <line x1="480" y1="188" x2="480" y2="196" stroke="#eef4f8" stroke-width="1.4"/>
+      <line x1="520" y1="188" x2="520" y2="196" stroke="#eef4f8" stroke-width="1.4"/>
+      <line x1="560" y1="188" x2="560" y2="196" stroke="#eef4f8" stroke-width="1.4"/>
+      <path d="M375 196 L385 170 M415 196 L425 170 M455 196 L465 170 M495 196 L505 170 M535 196 L545 170" stroke="#c9a227" stroke-width="0.8" opacity="0.55" stroke-dasharray="2,2"/>
+      <text x="470" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#c9a227" font-weight="700">GLAZING + ART WALL</text>
+      <text x="470" y="14" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#eef4f8" font-weight="700">SINGLE-LOADED</text>
+      <text x="470" y="210" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#eef4f8" opacity="0.65">rooms one side &middot; the long-gallery pattern</text>
+    </svg>
+  </div>
+
+  <div class="diagram-caption">
+    <b>Reading this sheet:</b> the width comparison (top) shows why "gallery" and "hallway" feel like different words for different things &mdash; a code-minimum hallway and a true long gallery are roughly an order of magnitude apart in width, which is exactly why no single code-defined term covers both. The plan comparison (bottom) is the more useful architectural fact for renovation planning: a <b>double-loaded corridor</b> (rooms both sides) is structurally prone to a dark middle with no daylight source, while a <b>single-loaded corridor</b> (rooms one side, glazing/art wall opposite) is the layout that naturally supports gallery treatment &mdash; it's the historical long-gallery pattern at any scale. Door openings omitted for clarity.
+  </div>
+</div>
+
+<!-- ETYMOLOGY TIMELINE -->
+<div class="sec-label"><span class="sec-tag">Terminology</span><div class="sec-rule"></div></div>
+<div class="tl-wrap">
+  <div class="tl-body">
+    <svg viewBox="0 0 1080 150" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="70" x2="1040" y2="70" stroke="#eef4f8" stroke-width="1.4"/>
+      <!-- node 1 -->
+      <circle cx="120" cy="70" r="6" fill="#123350" stroke="#c9a227" stroke-width="2.5"/>
+      <text x="120" y="46" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#c9a227">c. 1450s</text>
+      <text x="120" y="94" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">&ldquo;gallery&rdquo; enters English:</text>
+      <text x="120" y="107" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">a long, narrow, partly</text>
+      <text x="120" y="120" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">open passageway [1]</text>
+      <!-- node 2 -->
+      <circle cx="380" cy="70" r="6" fill="#123350" stroke="#c9a227" stroke-width="2.5"/>
+      <text x="380" y="46" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#c9a227">16th&ndash;17th c.</text>
+      <text x="380" y="94" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">The Long Gallery becomes</text>
+      <text x="380" y="107" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">near-universal in Elizabethan</text>
+      <text x="380" y="120" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">&amp; Jacobean manors [3][4]</text>
+      <!-- node 3 -->
+      <circle cx="640" cy="70" r="6" fill="#123350" stroke="#c9a227" stroke-width="2.5"/>
+      <text x="640" y="46" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#c9a227">1590s</text>
+      <text x="640" y="94" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">Meaning extends to &ldquo;a room</text>
+      <text x="640" y="107" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">for the exhibition of art&rdquo; &mdash;</text>
+      <text x="640" y="120" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">grafted onto the room [1][2]</text>
+      <!-- node 4 -->
+      <circle cx="920" cy="70" r="6" fill="#123350" stroke="#c9a227" stroke-width="2.5"/>
+      <text x="920" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#c9a227">Today</text>
+      <text x="920" y="94" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">A spectrum, not one term:</text>
+      <text x="920" y="107" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">gallery / gallery hall /</text>
+      <text x="920" y="120" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#eef4f8">gallery corridor / art corridor</text>
+      <text x="920" y="133" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.8" fill="#e2574c">&ldquo;gallery hallway&rdquo; is consumer-facing, not trade-press [6]</text>
+    </svg>
+  </div>
+</div>
+
+<!-- TAXONOMY: RULING IN / OUT -->
+<div class="sec-label"><span class="sec-tag">Taxonomy</span><div class="sec-rule"></div></div>
+<div class="taxo-grid">
+
+  <div class="taxo-card in">
+    <div class="taxo-bar"><span>Gallery Corridor</span><span>&#10003; This one</span></div>
+    <div class="taxo-icon">
+      <svg viewBox="0 0 160 70" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="140" height="50" fill="none" stroke="#c9a227" stroke-width="2"/>
+        <rect x="20" y="18" width="16" height="12" fill="none" stroke="#c9a227" stroke-width="1.2"/>
+        <rect x="20" y="40" width="16" height="12" fill="none" stroke="#c9a227" stroke-width="1.2"/>
+        <line x1="150" y1="20" x2="150" y2="30" stroke="#c9a227" stroke-width="2"/>
+        <line x1="150" y1="40" x2="150" y2="50" stroke="#c9a227" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="taxo-body">
+      <div class="taxo-name">Gallery Corridor</div>
+      <div class="taxo-verdict">Interior &middot; art wall + glazed wall</div>
+      <div class="taxo-def">An enclosed interior passage, wide enough to furnish and linger in, that carries a display wall opposite a window/view wall. The modern descendant of the long gallery.</div>
+      <div class="taxo-source">This is what Tom is describing</div>
+    </div>
+  </div>
+
+  <div class="taxo-card out">
+    <div class="taxo-bar"><span>Loggia</span><span>&#10005; Different thing</span></div>
+    <div class="taxo-icon">
+      <svg viewBox="0 0 160 70" xmlns="http://www.w3.org/2000/svg">
+        <line x1="10" y1="16" x2="150" y2="16" stroke="#e2574c" stroke-width="2"/>
+        <line x1="20" y1="16" x2="20" y2="58" stroke="#e2574c" stroke-width="2.4"/>
+        <line x1="55" y1="16" x2="55" y2="58" stroke="#e2574c" stroke-width="2.4"/>
+        <line x1="90" y1="16" x2="90" y2="58" stroke="#e2574c" stroke-width="2.4"/>
+        <line x1="125" y1="16" x2="125" y2="58" stroke="#e2574c" stroke-width="2.4"/>
+        <line x1="10" y1="58" x2="150" y2="58" stroke="#e2574c" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="0" y1="0" x2="160" y2="70" stroke="#e2574c" stroke-width="1.4" opacity="0.55"/>
+        <line x1="160" y1="0" x2="0" y2="70" stroke="#e2574c" stroke-width="1.4" opacity="0.55"/>
+      </svg>
+    </div>
+    <div class="taxo-body">
+      <div class="taxo-name">Loggia</div>
+      <div class="taxo-verdict">Exterior &middot; open on &ge;1 side, columned</div>
+      <div class="taxo-def">A covered, column-supported gallery open on at least one side, sharing the main building's roofline but accessed only from inside. Mediterranean/Renaissance origin &mdash; a transitional indoor/outdoor space, not an enclosed art corridor. [10]</div>
+      <div class="taxo-source">Redlined out &mdash; wrong room type</div>
+    </div>
+  </div>
+
+  <div class="taxo-card out">
+    <div class="taxo-bar"><span>Breezeway</span><span>&#10005; Different thing</span></div>
+    <div class="taxo-icon">
+      <svg viewBox="0 0 160 70" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="10" width="40" height="50" fill="none" stroke="#e2574c" stroke-width="2"/>
+        <rect x="115" y="10" width="40" height="50" fill="none" stroke="#e2574c" stroke-width="2"/>
+        <line x1="45" y1="16" x2="115" y2="16" stroke="#e2574c" stroke-width="2"/>
+        <line x1="55" y1="16" x2="45" y2="58" stroke="#e2574c" stroke-width="1" stroke-dasharray="2,3"/>
+        <line x1="105" y1="16" x2="115" y2="58" stroke="#e2574c" stroke-width="1" stroke-dasharray="2,3"/>
+        <line x1="0" y1="0" x2="160" y2="70" stroke="#e2574c" stroke-width="1.4" opacity="0.55"/>
+        <line x1="160" y1="0" x2="0" y2="70" stroke="#e2574c" stroke-width="1.4" opacity="0.55"/>
+      </svg>
+    </div>
+    <div class="taxo-body">
+      <div class="taxo-name">Breezeway</div>
+      <div class="taxo-verdict">Exterior &middot; open-sided connector</div>
+      <div class="taxo-def">A roofed, open-sided passage connecting two separate structures (or two halves of a house), with no walls, windows, or conditioning. Simpler and more casual than a loggia &mdash; a connector, not a display space. [11][12]</div>
+      <div class="taxo-source">Redlined out &mdash; wrong room type</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BUILT EXAMPLES -->
+<div class="sec-label"><span class="sec-tag">Built Examples</span><div class="sec-rule"></div></div>
+<div class="plate-grid">
+
+  <div class="plate strongest">
+    <div class="plate-bar"><span>Gallery House</span><span>San Francisco</span></div>
+    <div class="plate-body">
+      <div class="plate-name">Ogrydziak Prillinger Architects, 2009</div>
+      <div class="plate-tag">Strongest modern precedent</div>
+      <div class="plate-spec">Explicitly built as a new domestic typology &mdash; "a semi-public art gallery and a residence for two," with every room aligned along a galleria-like spine. The closest built match to a house <b>organized around</b> a gallery, not decorated with one.</div>
+      <div class="plate-source">ArchDaily &mdash; full photo set (Tim Griffith) + plans/sections [13]</div>
+    </div>
+  </div>
+
+  <div class="plate strongest">
+    <div class="plate-bar"><span>Gallery House</span><span>Buffalo, NY</span></div>
+    <div class="plate-body">
+      <div class="plate-name">John Wingfelder Architect, renovation</div>
+      <div class="plate-tag">Strongest renovation precedent</div>
+      <div class="plate-spec">A 1930 center-hall home reworked so the original central hall became a skylit atrium/staircase that "scoops copious amounts of daylight into the heart of the house," explicitly to showcase the owners' art collection, with glass additions toward sculpture gardens.</div>
+      <div class="plate-source">wingfelder.com &mdash; case-study photos [18]</div>
+    </div>
+  </div>
+
+  <div class="plate">
+    <div class="plate-bar"><span>Emily's Home</span><span>Catskill, NY</span></div>
+    <div class="plate-body">
+      <div class="plate-name">Horizontal Design, 2025</div>
+      <div class="plate-spec">Central gallery functions as the primary circulation spine while doubling as exhibition space for the owners' art.</div>
+      <div class="plate-flag">Snippet-level only, not fully verified</div>
+      <div class="plate-source">ArchDaily &mdash; 25-image gallery [14]</div>
+    </div>
+  </div>
+
+  <div class="plate">
+    <div class="plate-bar"><span>Spine Wall House</span><span>&mdash;</span></div>
+    <div class="plate-body">
+      <div class="plate-name">Drew Architects</div>
+      <div class="plate-spec">A literal structural/circulation "spine" organizing the whole plan &mdash; not framed as an art gallery, but a useful reference for the spine-as-organizing-device idea.</div>
+      <div class="plate-source">ArchDaily &mdash; plans/photos [15]</div>
+    </div>
+  </div>
+
+  <div class="plate">
+    <div class="plate-bar"><span>Light Corridor House</span><span>&mdash;</span></div>
+    <div class="plate-body">
+      <div class="plate-name">FIGR Architecture &amp; Design</div>
+      <div class="plate-spec">Corridor-as-design-feature is the central architectural move &mdash; framing light, privacy, and views.</div>
+      <div class="plate-source">ArchDaily &mdash; floor plans included [16]</div>
+    </div>
+  </div>
+
+  <div class="plate">
+    <div class="plate-bar"><span>Corridor House 2.0</span><span>Thrissur, India</span></div>
+    <div class="plate-body">
+      <div class="plate-name">i2a Architects Studio</div>
+      <div class="plate-spec">Same corridor-as-organizing-device move in a different climate and context &mdash; useful comparison point.</div>
+      <div class="plate-source">ArchDaily &mdash; full plan/photo set [17]</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- WHAT TO WEIGH -->
+<div class="sec-label"><span class="sec-tag">Planning Considerations</span><div class="sec-rule"></div></div>
+<div class="chip-grid">
+  <div class="chip">
+    <div class="chip-label">Biggest Lever</div>
+    <div class="chip-title">Daylighting</div>
+    <p>Go <b>single-loaded</b> (rooms one side, glazing/view opposite) or layer in a <b>skylight/clerestory</b> as in the Buffalo renovation &mdash; double-loaded plans are structurally prone to a dark middle. [3][18]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Not Yet Confirmed</div>
+    <div class="chip-title">Footprint Cost</div>
+    <p>No verified industry rule of thumb for the square-footage tradeoff exists &mdash; going 36&ndash;48" to 54&ndash;72" roughly doubles the corridor's footprint for a given length, per the numbers above, but this wasn't independently costed.</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Decide Early</div>
+    <div class="chip-title">Lighting Circuits</div>
+    <p>Plan <b>track or dedicated picture-light</b> circuits (fixtures 7&ndash;10 cm above frame, angled 30&ndash;35&deg;) from schematic design &mdash; they need their own switching/dimming, not a retrofit. [22][25]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Framing-Stage Decision</div>
+    <div class="chip-title">Wall Blocking</div>
+    <p>For heavier/larger art, put continuous plywood blocking behind drywall at the hanging zone <b>during framing</b> &mdash; not a post-construction anchor fix. [23][24]</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Genuine Gap</div>
+    <div class="chip-title">Flooring</div>
+    <p>No gallery-corridor-specific flooring guidance was found beyond general hallway durability advice &mdash; flagged as a real gap, not an oversight.</p>
+  </div>
+  <div class="chip">
+    <div class="chip-label">Baseline, Not Target</div>
+    <div class="chip-title">Code Minimum</div>
+    <p>36" (IRC) is the floor for <em>any</em> hallway. A true gallery corridor should be planned well above it from the earliest schematic &mdash; retrofitting width later means moving structural walls. [8]</p>
+  </div>
+</div>
+
+<!-- VISUAL REFERENCES — PROMINENT -->
+<div class="ref-panel">
+  <div class="ref-head">Visual References &mdash; Where To Actually Look</div>
+  <div class="ref-grid">
+    <div class="ref-item">
+      <a href="https://www.archdaily.com/56058/gallery-house-ogrydziak-prillinger-architects" target="_blank">ArchDaily &mdash; Gallery House, San Francisco</a>
+      <div class="rd">Full photo set (Tim Griffith) + floor plans, elevations, sections, axonometric diagrams. Best single reference. [13]</div>
+    </div>
+    <div class="ref-item">
+      <a href="https://www.wingfelder.com/gallery-house" target="_blank">Wingfelder Architect &mdash; Gallery House, Buffalo</a>
+      <div class="rd">Real renovation-of-an-existing-house case study &mdash; most applicable to a renovation context specifically. [18]</div>
+    </div>
+    <div class="ref-item">
+      <a href="https://www.archdaily.com/888013/light-corridor-house-figr-architecture-and-design" target="_blank">ArchDaily &mdash; Light Corridor House</a>
+      <div class="rd">Includes floor plans showing how the corridor is massed against the rest of the house. [16]</div>
+    </div>
+    <div class="ref-item">
+      <a href="https://www.houzz.com/photos/huge-hallway-ideas-phbr1-bp~t_743~a_30-216" target="_blank">Houzz &mdash; 75 Huge Hallway Ideas</a>
+      <div class="rd">2,000+ image library, searchable/filterable &mdash; best for browsing volume rather than depth. [20]</div>
+    </div>
+    <div class="ref-item">
+      <a href="https://www.nationaltrust.org.uk/visit/peak-district-derbyshire/hardwick/discover-hardwick-hall" target="_blank">National Trust &mdash; Hardwick Hall</a>
+      <div class="rd">Best-preserved Elizabethan long gallery, original tapestries. Primary/official source for visiting &amp; photography. [28]</div>
+    </div>
+    <div class="ref-item">
+      <a href="https://www.historic-uk.com/HistoryMagazine/DestinationsUK/Montacute-House/" target="_blank">Historic UK &mdash; Montacute House</a>
+      <div class="rd">Longest surviving long gallery (&asymp;172 ft), currently displays National Portrait Gallery loans. [26]</div>
+    </div>
+    <div class="ref-item blocked">
+      <a href="https://www.dezeen.com/2022/06/18/corridors-lookbooks/" target="_blank">Dezeen &mdash; "Corridors" Lookbook</a>
+      <div class="rd rtag">Blocked (403) &mdash; unread lead only</div>
+      <div class="rd">Title is a direct match for the brief and Dezeen's format is reliably strong on photography, but this could not be fetched. Open manually. [21]</div>
+    </div>
+    <div class="ref-item">
+      <a href="https://www.houzz.com/magazine/my-houzz-a-midcentury-revival-that-goes-the-distance-stsetivw-vs~80233187" target="_blank">Houzz &mdash; Midcentury Revival Entry Hallway</a>
+      <div class="rd">Real, moderate-budget precedent &mdash; full-length track light down an entry hallway. "You don't need Buckingham Palace." [19]</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOURCING CONFIDENCE -->
+<div class="qc-strip">
+  <div class="qc-head">Sourcing Confidence &mdash; Kept Visible, Not Smoothed Over</div>
+  <div class="qc-grid">
+    <div class="qc-item">
+      <span class="qc-flag ok">Well-Supported</span>
+      <div class="qc-body">The etymology and long-gallery lineage [1][2][3][4]; the single-loaded/double-loaded distinction and its daylighting implications; loggia and breezeway as related-but-different terms [10][11][12]; the IRC 36" minimum [8]; the ArchDaily and Wingfelder project facts [13&ndash;18].</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag flag">Disputed &mdash; Flagged</span>
+      <div class="qc-body"><b>Hardwick Hall's Long Gallery length is genuinely disputed:</b> 162 ft per one photo caption [27] vs. 166 ft per aggregated National Trust sources [28]. Shown as a range above, not resolved.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag flag">Blocked, Not Read</span>
+      <div class="qc-body">The Dezeen corridors lookbook [21] returned a 403 and could not be fetched &mdash; included only as a title/lead, not described as if its imagery were seen.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag thin">Thin / Not Confirmed</span>
+      <div class="qc-body">"Gallery hallway" as an established term among luxury custom-home builders specifically &mdash; not confirmed. The Cambridge Core academic article on the long gallery [4] was only accessible as an abstract. Flooring guidance specific to gallery corridors &mdash; not found.</div>
+    </div>
+  </div>
+</div>
+
+<!-- WORTH BOOKMARKING -->
+<div class="bookmark">
+  <div class="bookmark-head">Worth Bookmarking &mdash; Vault Candidates Flagged by the Research</div>
+  <div class="bookmark-item"><b>Hardwick Hall &amp; Montacute House</b> (both National Trust, England) &mdash; the two best-preserved primary/original long-gallery examples, for historical grounding of the concept.</div>
+  <div class="bookmark-item"><b>Gallery House (San Francisco)</b> &amp; the <b>Wingfelder Gallery House (Buffalo)</b> &mdash; the two strongest modern built precedents: houses actually organized around a gallery-as-spine, not just hallways decorated with art.</div>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Sources: etymonline &middot; Wikipedia (Long gallery, Loggia, Breezeway) &middot; Cambridge Core (abstract only) &middot; Britannica &middot; ArchDaily &times;6 &middot; Wingfelder Architect &middot; Houzz &middot; Dezeen (lead, unread) &middot; National Trust &middot; Historic UK &middot; Angi &middot; Design Encyclopedia &middot; lighting &amp; wall-hanging trade guides<br>
+  Full citations, tiers, and the sourcing-confidence detail are documented in the companion Full Reference Guide &middot; Compiled Jul 2026
+</div>
+
+</body>
+</html>
