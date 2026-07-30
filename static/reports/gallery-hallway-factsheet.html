@@ -72,7 +72,7 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
 .sec-rule::after{content:"";position:absolute;right:0;top:-2px;width:5px;height:5px;background:var(--bp-line-dim);transform:rotate(45deg)}
 
 /* ── KEY FIGURES ── */
-.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:20px}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
 .stat-cell{background:var(--bp-panel);border:1px solid var(--bp-grid);border-top:2px solid var(--brass);padding:12px 8px;text-align:center;position:relative}
 .stat-cell.flag{border-top-color:var(--redpen)}
 .stat-cell::before,.stat-cell::after{content:"";position:absolute;width:5px;height:5px;border:1px solid var(--bp-line-dim)}
@@ -130,12 +130,36 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
 /* ── PLANNING CHIPS ── */
 .chip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
 .chip{background:var(--bp-panel);border:1px solid var(--bp-grid);border-top:3px solid var(--brass);padding:12px 14px;page-break-inside:avoid}
-.chip:nth-child(2){border-top-color:var(--redpen)}
-.chip:nth-child(4){border-top-color:var(--redpen)}
+.chip.flagged{border-top-color:var(--redpen)}
 .chip-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--bp-line-dim);margin-bottom:5px}
 .chip-title{font-family:"Fraunces",serif;font-weight:600;font-size:.94rem;color:var(--bp-line);margin-bottom:6px}
 .chip p{font-size:.75rem;color:var(--bp-line-dim);line-height:1.55}
 .chip p b{color:var(--bp-line)}
+
+/* ── PHOTO PLATES (embedded reference photography) ── */
+.photo-panel{border:2px solid var(--bp-line);background:var(--bp-panel-2);margin-bottom:20px}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px 20px}
+.photo-plate{border:1px solid var(--bp-grid);background:var(--bp-panel);padding:8px;display:flex;flex-direction:column;gap:7px;position:relative}
+.photo-plate::before,.photo-plate::after{content:"";position:absolute;width:5px;height:5px;border:1px solid var(--bp-line-dim)}
+.photo-plate::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.photo-plate::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+.photo-plate img{width:100%;height:150px;object-fit:cover;display:block;border:1px solid var(--bp-line-dim);filter:saturate(0.92)}
+.photo-plate .p-title{font-family:"Fraunces",serif;font-weight:600;font-size:.8rem;color:var(--bp-line)}
+.photo-plate .p-cap{font-size:.62rem;color:var(--bp-line-dim);line-height:1.5}
+.photo-plate .p-cap b{color:var(--brass)}
+.photo-plate .p-cap a{color:var(--brass);text-decoration:none;border-bottom:1px dotted var(--brass)}
+.photo-pair-two{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:0 20px 16px}
+.taxo-photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.taxo-photo{margin:2px 0 4px}
+.taxo-photo img{width:100%;height:88px;object-fit:cover;border:1px solid var(--bp-grid);filter:saturate(0.9);display:block}
+.taxo-photo .tp-cap{font-size:.56rem;color:var(--bp-line-dim);line-height:1.4;margin-top:3px}
+.taxo-photo .tp-cap a{color:var(--brass)}
+.further-ex{padding:14px 20px 18px;border-top:1px dashed var(--bp-grid);margin:0 20px}
+.further-ex-title{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);margin-bottom:8px}
+.further-ex-item{font-size:.74rem;color:var(--bp-line-dim);line-height:1.6;margin-bottom:6px;padding-left:14px;position:relative}
+.further-ex-item::before{content:"—";position:absolute;left:0;color:var(--bp-line-dim)}
+.further-ex-item b{color:var(--bp-line)}
+.further-ex-item .flag-inline{color:var(--redpen)}
 
 /* ── VISUAL REFERENCES (prominent, contact-sheet style) ── */
 .ref-panel{border:2px solid var(--brass);background:var(--bp-panel-2);margin-bottom:20px}
@@ -175,9 +199,9 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
 .footer{padding:16px 26px 20px;font-size:9px;letter-spacing:.04em;color:var(--bp-line-dim);text-align:center;line-height:1.9;border-top:1px solid var(--bp-grid);margin-top:6px}
 
 @media(max-width:900px){
-  .stat-row{grid-template-columns:repeat(3,1fr)}
-  .taxo-grid,.plate-grid,.chip-grid{grid-template-columns:1fr 1fr}
-  .ref-grid,.qc-grid{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .taxo-grid,.plate-grid,.chip-grid,.photo-grid{grid-template-columns:1fr 1fr}
+  .ref-grid,.qc-grid,.photo-pair-two{grid-template-columns:1fr}
   .ref-item,.qc-item{border-right:none}
   .masthead{grid-template-columns:1fr}
   .title-block{border-left:none;border-top:1px solid var(--bp-line);flex-direction:row}
@@ -190,9 +214,9 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
 <!-- TITLE BLOCK -->
 <div class="masthead">
   <div class="masthead-main">
-    <div class="masthead-eyebrow">Field Reference &middot; Residential Corridor Typology &middot; Compiled Jul 2026</div>
+    <div class="masthead-eyebrow">Field Reference &middot; Residential Corridor Typology &middot; Compiled Jul 2026 &middot; Revised Jul 2026</div>
     <h1>Gallery <span class="hl">Hallway</span></h1>
-    <div class="masthead-sub">The wide, art-carrying central corridor Tom was trying to name &mdash; where the term comes from, what to call it, what to rule out, and the real houses that build it in as the spine of the plan rather than an afterthought.</div>
+    <div class="masthead-sub">The wide, art-carrying central corridor Tom was trying to name &mdash; where the term comes from, what to call it, what to rule out, and the real houses that build it in as the spine of the plan rather than an afterthought. Now with credited reference photography.</div>
   </div>
   <div class="title-block">
     <div class="tb-row"><div class="tb-label">Correct Term</div><div class="tb-val">Long Gallery (hist.) / Gallery (mod.)</div></div>
@@ -208,20 +232,28 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
     <div class="stat-label">First recorded date "gallery" meant an art-display room &mdash; the passageway sense (1450s) came first [1]</div>
   </div>
   <div class="stat-cell">
-    <div class="stat-num">36"</div>
+    <div class="stat-num">36&Prime;</div>
     <div class="stat-label">IRC code-minimum residential hallway width &mdash; a floor, not a design target [8]</div>
   </div>
   <div class="stat-cell">
-    <div class="stat-num">54&ndash;72"</div>
+    <div class="stat-num">54&ndash;72&Prime;</div>
     <div class="stat-label">Where design guidance says a hallway starts reading as a gallery you can furnish [9]</div>
   </div>
   <div class="stat-cell flag">
-    <div class="stat-num">162&ndash;166 ft</div>
-    <div class="stat-label">Hardwick Hall's Long Gallery length &mdash; sources disagree, flagged below, not resolved [27][28]</div>
+    <div class="stat-num">166 ft</div>
+    <div class="stat-label">Hardwick Hall's Long Gallery &mdash; best-supported figure (Historic England, citing Girouard 1983); still a secondary citation, not book-checked [31][32]</div>
   </div>
   <div class="stat-cell">
     <div class="stat-num">172 ft</div>
     <div class="stat-label">Montacute House's Long Gallery &mdash; longest surviving example, &asymp;52 m [26]</div>
+  </div>
+  <div class="stat-cell flag">
+    <div class="stat-num">110 ft</div>
+    <div class="stat-label">Haddon Hall's Long Gallery &mdash; Smythson attribution is inference per Great British Life, not a documented commission [33]</div>
+  </div>
+  <div class="stat-cell flag">
+    <div class="stat-num">&asymp;136 ft</div>
+    <div class="stat-label">Aston Hall's Long Gallery, incl. 1700 addition &mdash; genuine sourcing gap, no traceable URLs [34]</div>
   </div>
   <div class="stat-cell">
     <div class="stat-num">100&ndash;150</div>
@@ -269,7 +301,7 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
 
       <!-- Row 3: Long Gallery (historical, scale break) -->
       <text x="20" y="172" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#eef4f8">LONG GALLERY (HISTORICAL)</text>
-      <text x="20" y="184" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#e2574c">22&ndash;40 ft wide &middot; Hardwick Hall &amp; comparable [27][28]</text>
+      <text x="20" y="184" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#e2574c">22&ndash;40 ft wide &middot; Hardwick Hall &amp; comparable [27][31][32]</text>
       <line x1="90" y1="196" x2="358" y2="196" stroke="#eef4f8" stroke-width="2" opacity="0.55"/>
       <!-- scale break zigzag -->
       <path d="M358 188 L364 196 L370 188 L376 196" fill="none" stroke="#e2574c" stroke-width="1.6"/>
@@ -330,7 +362,23 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
   </div>
 
   <div class="diagram-caption">
-    <b>Reading this sheet:</b> the width comparison (top) shows why "gallery" and "hallway" feel like different words for different things &mdash; a code-minimum hallway and a true long gallery are roughly an order of magnitude apart in width, which is exactly why no single code-defined term covers both. The plan comparison (bottom) is the more useful architectural fact for renovation planning: a <b>double-loaded corridor</b> (rooms both sides) is structurally prone to a dark middle with no daylight source, while a <b>single-loaded corridor</b> (rooms one side, glazing/art wall opposite) is the layout that naturally supports gallery treatment &mdash; it's the historical long-gallery pattern at any scale. Door openings omitted for clarity.
+    <b>Reading this sheet:</b> the width comparison (top) shows why "gallery" and "hallway" feel like different words for different things &mdash; a code-minimum hallway and a true long gallery are roughly an order of magnitude apart in width, which is exactly why no single code-defined term covers both. The plan comparison (bottom) is the more useful architectural fact for renovation planning: a <b>double-loaded corridor</b> (rooms both sides) is structurally prone to a dark middle with no daylight source, while a <b>single-loaded corridor</b> (rooms one side, glazing/art wall opposite) is the layout that naturally supports gallery treatment &mdash; it's the historical long-gallery pattern at any scale, and also the layout that enables cross-ventilation, which double-loaded plans trade away for floor-area efficiency. Door openings omitted for clarity.
+  </div>
+
+  <div class="diagram-divider"></div>
+
+  <div class="diagram-sub-head">3 &middot; Photographic confirmation</div>
+  <div class="photo-pair-two">
+    <div class="photo-plate">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Casa_di_ringhiera_in_corso_Garibaldi_1.jpg" alt="Casa di ringhiera, Milan — open exterior gallery-access balcony">
+      <div class="p-title">Casa di ringhiera, Milan &mdash; Single-Loaded</div>
+      <div class="p-cap">A shared open exterior gallery-access balcony, a real-world single-loaded circulation example. (The long-gallery photos below are already clean single-loaded examples structurally &mdash; this is a different, exterior-access version of the same principle.) Photo: Saggittarius A, CC BY-SA 4.0. <a href="https://commons.wikimedia.org/wiki/File:Casa_di_ringhiera_in_corso_Garibaldi_1.jpg" target="_blank">Source</a></div>
+    </div>
+    <div class="photo-plate">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Corridor_inside_the_Grandmaster%27s_Palace%2C_Valletta%2C_Malta.jpg" alt="Corridor inside the Grandmaster's Palace, Valletta, Malta">
+      <div class="p-title">Grandmaster's Palace, Valletta &mdash; Double-Loaded</div>
+      <div class="p-cap">Palace interior corridor. Double-loaded framing is inferred from context, not visually confirmed rooms on both sides. Photo: Julian Lupyan, CC0/Public Domain. <a href="https://commons.wikimedia.org/wiki/File:Corridor_inside_the_Grandmaster%27s_Palace,_Valletta,_Malta.jpg" target="_blank">Source</a></div>
+    </div>
   </div>
 </div>
 
@@ -369,6 +417,39 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
   </div>
 </div>
 
+<!-- HISTORICAL LONG GALLERY — PHOTOGRAPHIC REFERENCE -->
+<div class="sec-label"><span class="sec-tag">Photographic Reference</span><div class="sec-rule"></div></div>
+<div class="photo-panel">
+  <div class="diagram-head"><span>Historical Long Galleries</span><span>Wikimedia Commons, credited</span></div>
+  <div class="photo-grid">
+    <div class="photo-plate">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/Montacute_House_Long_Gallery.jpg" alt="Montacute House Long Gallery, Somerset">
+      <div class="p-title">Montacute House, Somerset</div>
+      <div class="p-cap">The longest surviving long gallery (&asymp;172 ft). Photo: Richard Walker, CC BY-SA 2.0. <a href="https://commons.wikimedia.org/wiki/File:Montacute_House_Long_Gallery.jpg" target="_blank">Source</a></div>
+    </div>
+    <div class="photo-plate">
+      <div class="taxo-photo-pair">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Bolsover_District_%2C_Hardwick_Hall_-_Long_Gallery_-_geograph.org.uk_-_5976273.jpg" alt="Hardwick Hall Long Gallery, modern photograph" style="height:150px;object-fit:cover">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/David_Cox_-_Interior_of_the_Long_Gallery%2C_Hardwick_Hall%2C_Derbyshire.jpg" alt="Hardwick Hall Long Gallery, 1838 watercolor by David Cox" style="height:150px;object-fit:cover">
+      </div>
+      <div class="p-title">Hardwick Hall &mdash; Then &amp; Now</div>
+      <div class="p-cap">Left: modern, Lewis Clarke (Geograph), CC BY-SA 2.0 &mdash; <a href="https://commons.wikimedia.org/wiki/File:Bolsover_District_,_Hardwick_Hall_-_Long_Gallery_-_geograph.org.uk_-_5976273.jpg" target="_blank">source</a>. Right: 1838 watercolor, David Cox, Birmingham Museum &amp; Art Gallery, Public Domain &mdash; <a href="https://commons.wikimedia.org/wiki/File:David_Cox_-_Interior_of_the_Long_Gallery,_Hardwick_Hall,_Derbyshire.jpg" target="_blank">source</a>. Same room, &asymp;190 years apart.</div>
+    </div>
+    <div class="photo-plate">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Haddon_Hall_Long_Gallery_%287167229240%29.jpg" alt="Haddon Hall Long Gallery, Derbyshire">
+      <div class="p-title">Haddon Hall, Derbyshire</div>
+      <div class="p-cap">110 ft long. Photo: Michael Beckwith, CC BY 2.0. <a href="https://commons.wikimedia.org/wiki/File:Haddon_Hall_Long_Gallery_(7167229240).jpg" target="_blank">Source</a></div>
+    </div>
+  </div>
+  <div class="further-ex">
+    <div class="further-ex-title">Further Examples, Not Individually Detailed</div>
+    <div class="further-ex-item"><b>Haddon Hall</b> is popularly attributed to Robert Smythson (or son John) by the venue itself &mdash; <span class="flag-inline">Great British Life's regional-history coverage frames this as scholarly inference, not a documented commission.</span></div>
+    <div class="further-ex-item"><b>Aston Hall, Birmingham</b> (Jacobean, 1618&ndash;1635, architect John Thorpe) &mdash; Birmingham Museums Trust calls it "one of the finest long galleries in the country." <span class="flag-inline">A &asymp;136 ft length (incl. a 1700 addition) traces only to a synthesis of a history blog and a photography site, no URLs captured &mdash; genuine gap, unconfirmed lead.</span></div>
+    <div class="further-ex-item"><b>Knole, Kent</b> unusually has three long galleries, linking the family's private wing to the state rooms.</div>
+    <div class="further-ex-item">Wikipedia's Long Gallery article, citing Rosalys Coope's 1986 <em>Architectural History</em> paper, lists 30+ further English/Welsh examples (Althorp, Blickling Hall, Burghley House, Ham House, Hatfield House, Hever Castle, Longleat House, Osterley Park, Penshurst Place, Syon House, Powis Castle, among others) &mdash; leads, not individually verified here.</div>
+  </div>
+</div>
+
 <!-- TAXONOMY: RULING IN / OUT -->
 <div class="sec-label"><span class="sec-tag">Taxonomy</span><div class="sec-rule"></div></div>
 <div class="taxo-grid">
@@ -388,7 +469,7 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
       <div class="taxo-name">Gallery Corridor</div>
       <div class="taxo-verdict">Interior &middot; art wall + glazed wall</div>
       <div class="taxo-def">An enclosed interior passage, wide enough to furnish and linger in, that carries a display wall opposite a window/view wall. The modern descendant of the long gallery.</div>
-      <div class="taxo-source">This is what Tom is describing</div>
+      <div class="taxo-source">This is what Tom is describing &mdash; see the photographic reference panel above</div>
     </div>
   </div>
 
@@ -410,6 +491,18 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
       <div class="taxo-name">Loggia</div>
       <div class="taxo-verdict">Exterior &middot; open on &ge;1 side, columned</div>
       <div class="taxo-def">A covered, column-supported gallery open on at least one side, sharing the main building's roofline but accessed only from inside. Mediterranean/Renaissance origin &mdash; a transitional indoor/outdoor space, not an enclosed art corridor. [10]</div>
+      <div class="taxo-photo">
+        <div class="taxo-photo-pair">
+          <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Loggia_dei_Lanzi_81.JPG" alt="Loggia dei Lanzi, Florence">
+            <div class="tp-cap">Loggia dei Lanzi, Florence. Freepenguin, CC BY-SA 3.0. <a href="https://commons.wikimedia.org/wiki/File:Loggia_dei_Lanzi_81.JPG" target="_blank">Source</a></div>
+          </div>
+          <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/68/Loggia_degli_uffizi.JPG" alt="Loggia degli Uffizi, Florence">
+            <div class="tp-cap">Loggia degli Uffizi, Florence. Sailko, CC BY-SA 3.0. <a href="https://commons.wikimedia.org/wiki/File:Loggia_degli_uffizi.JPG" target="_blank">Source</a></div>
+          </div>
+        </div>
+      </div>
       <div class="taxo-source">Redlined out &mdash; wrong room type</div>
     </div>
   </div>
@@ -431,6 +524,10 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
       <div class="taxo-name">Breezeway</div>
       <div class="taxo-verdict">Exterior &middot; open-sided connector</div>
       <div class="taxo-def">A roofed, open-sided passage connecting two separate structures (or two halves of a house), with no walls, windows, or conditioning. Simpler and more casual than a loggia &mdash; a connector, not a display space. [11][12]</div>
+      <div class="taxo-photo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Dogtrot_House%2C_NRHC%2C_Lubbock%2C_TX_IMG_1603.JPG" alt="Dogtrot house, National Ranching Heritage Center, Lubbock, TX">
+        <div class="tp-cap">Dogtrot house, Lubbock, TX. Billy Hathorn, CC BY 3.0. <a href="https://commons.wikimedia.org/wiki/File:Dogtrot_House,_NRHC,_Lubbock,_TX_IMG_1603.JPG" target="_blank">Source</a></div>
+      </div>
       <div class="taxo-source">Redlined out &mdash; wrong room type</div>
     </div>
   </div>
@@ -498,6 +595,15 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
     </div>
   </div>
 
+  <div class="plate">
+    <div class="plate-bar"><span>Gallery House</span><span>La Pobla de C&eacute;rvoles, Catalonia</span></div>
+    <div class="plate-body">
+      <div class="plate-name">Ra&uacute;l S&aacute;nchez Architects</div>
+      <div class="plate-spec">A guesthouse/gallery for a winery: a cross-shaped circulation spine widens into gallery space, clad in Corten steel.</div>
+      <div class="plate-source">Dezeen, 2020, "Ra&uacute;l S&aacute;nchez uses clever cutaways in Gallery House" [36]</div>
+    </div>
+  </div>
+
 </div>
 
 <!-- WHAT TO WEIGH -->
@@ -509,6 +615,11 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
     <p>Go <b>single-loaded</b> (rooms one side, glazing/view opposite) or layer in a <b>skylight/clerestory</b> as in the Buffalo renovation &mdash; double-loaded plans are structurally prone to a dark middle. [3][18]</p>
   </div>
   <div class="chip">
+    <div class="chip-label">Second-Order Benefit</div>
+    <div class="chip-title">Ventilation, Not Just Light</div>
+    <p>Single-loaded corridors also enable <b>cross-ventilation and multi-sided daylight</b>; double-loaded plans sacrifice this for floor efficiency and suit higher-density/higher-rise construction better.</p>
+  </div>
+  <div class="chip">
     <div class="chip-label">Not Yet Confirmed</div>
     <div class="chip-title">Footprint Cost</div>
     <p>No verified industry rule of thumb for the square-footage tradeoff exists &mdash; going 36&ndash;48" to 54&ndash;72" roughly doubles the corridor's footprint for a given length, per the numbers above, but this wasn't independently costed.</p>
@@ -517,6 +628,11 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
     <div class="chip-label">Decide Early</div>
     <div class="chip-title">Lighting Circuits</div>
     <p>Plan <b>track or dedicated picture-light</b> circuits (fixtures 7&ndash;10 cm above frame, angled 30&ndash;35&deg;) from schematic design &mdash; they need their own switching/dimming, not a retrofit. [22][25]</p>
+  </div>
+  <div class="chip flagged">
+    <div class="chip-label">Lower-Authority Source, Flagged</div>
+    <div class="chip-title">Lighting Spec Detail</div>
+    <p>&asymp;200&ndash;300 lux ambient with wall-washing accents; narrow beam (&lt;20&deg;) for small pieces, wider (30&deg;+) for large canvases; concealed cove/valance preferred over visible fixtures. [25]</p>
   </div>
   <div class="chip">
     <div class="chip-label">Framing-Stage Decision</div>
@@ -563,14 +679,22 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
       <a href="https://www.historic-uk.com/HistoryMagazine/DestinationsUK/Montacute-House/" target="_blank">Historic UK &mdash; Montacute House</a>
       <div class="rd">Longest surviving long gallery (&asymp;172 ft), currently displays National Portrait Gallery loans. [26]</div>
     </div>
-    <div class="ref-item blocked">
-      <a href="https://www.dezeen.com/2022/06/18/corridors-lookbooks/" target="_blank">Dezeen &mdash; "Corridors" Lookbook</a>
-      <div class="rd rtag">Blocked (403) &mdash; unread lead only</div>
-      <div class="rd">Title is a direct match for the brief and Dezeen's format is reliably strong on photography, but this could not be fetched. Open manually. [21]</div>
+    <div class="ref-item">
+      <a href="https://www.dezeen.com/2022/06/18/corridors-lookbooks/" target="_blank">Dezeen &mdash; "Ten Home Interiors" Lookbook</a>
+      <div class="rd rtag">Mirror-sourced this pass &mdash; original still 403s</div>
+      <div class="rd">Ten projects recovered via a mirror, myhome-news.space, not Dezeen directly &mdash; see the full report's &sect; 03 and &sect; 06 for the list and the caveat. [21]</div>
     </div>
     <div class="ref-item">
       <a href="https://www.houzz.com/magazine/my-houzz-a-midcentury-revival-that-goes-the-distance-stsetivw-vs~80233187" target="_blank">Houzz &mdash; Midcentury Revival Entry Hallway</a>
       <div class="rd">Real, moderate-budget precedent &mdash; full-length track light down an entry hallway. "You don't need Buckingham Palace." [19]</div>
+    </div>
+    <div class="ref-item">
+      <a href="https://www.dezeen.com/2020/04/26/gallery-house-interiors-raul-sanchez-winery/" target="_blank">Dezeen &mdash; Gallery House, Catalonia</a>
+      <div class="rd">Source for the Ra&uacute;l S&aacute;nchez Architects winery guesthouse/gallery in the Built Examples panel above. [36]</div>
+    </div>
+    <div class="ref-item">
+      <a href="https://www.greatbritishlife.co.uk/magazines/derbyshire/22632447.architect-robert-smythsons-derbyshire-legacy/" target="_blank">Great British Life &mdash; Haddon Hall's Smythson Attribution</a>
+      <div class="rd">The regional-history source behind the Haddon Hall attribution caveat noted above. [33]</div>
     </div>
   </div>
 </div>
@@ -581,15 +705,23 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
   <div class="qc-grid">
     <div class="qc-item">
       <span class="qc-flag ok">Well-Supported</span>
-      <div class="qc-body">The etymology and long-gallery lineage [1][2][3][4]; the single-loaded/double-loaded distinction and its daylighting implications; loggia and breezeway as related-but-different terms [10][11][12]; the IRC 36" minimum [8]; the ArchDaily and Wingfelder project facts [13&ndash;18].</div>
+      <div class="qc-body">The etymology and long-gallery lineage [1][2][3][4]; the single-loaded/double-loaded distinction and its daylighting/ventilation implications; loggia and breezeway as related-but-different terms [10][11][12]; the IRC 36" minimum [8]; the ArchDaily and Wingfelder project facts [13&ndash;18]; all nine embedded photographs, verified against their Commons file pages.</div>
     </div>
     <div class="qc-item">
-      <span class="qc-flag flag">Disputed &mdash; Flagged</span>
-      <div class="qc-body"><b>Hardwick Hall's Long Gallery length is genuinely disputed:</b> 162 ft per one photo caption [27] vs. 166 ft per aggregated National Trust sources [28]. Shown as a range above, not resolved.</div>
+      <span class="qc-flag ok">Better Resolved</span>
+      <div class="qc-body"><b>Hardwick Hall's length is now better resolved:</b> 166 ft, per Historic England's listing citing Girouard's 1983 monograph [31][32], is markedly stronger than the uncredited 162 ft photo-caption figure [27] &mdash; though still a secondary citation, not checked directly against Girouard's book.</div>
     </div>
     <div class="qc-item">
-      <span class="qc-flag flag">Blocked, Not Read</span>
-      <div class="qc-body">The Dezeen corridors lookbook [21] returned a 403 and could not be fetched &mdash; included only as a title/lead, not described as if its imagery were seen.</div>
+      <span class="qc-flag ok">Attribution Caveat, Sourced</span>
+      <div class="qc-body">Haddon Hall's Smythson attribution is scholarly inference, per Great British Life's "Architect Robert Smythson's Derbyshire legacy" [33] &mdash; not a documented commission. This source existed in the original research but was dropped in an earlier summarization pass; fully cited now.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag flag">Genuine Gap, Kept Open</span>
+      <div class="qc-body">Aston Hall's &asymp;136 ft length [34] traces only to "a synthesis across a history-focused blog and a photography site," per the original research, with no specific URLs captured for either. A real gap &mdash; not filled in with an invented citation.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag ok">Mirror-Sourced, Now Cited</span>
+      <div class="qc-body">The Dezeen corridors lookbook [21] still 403s at its original URL; its ten-project list was recovered via a mirror, myhome-news.space, now cited in full in the companion report. Still mirror-sourced, not confirmed against Dezeen's own page.</div>
     </div>
     <div class="qc-item">
       <span class="qc-flag thin">Thin / Not Confirmed</span>
@@ -603,14 +735,15 @@ h1 .hl{font-style:italic;font-weight:500;color:var(--brass)}
   <div class="bookmark-head">Worth Bookmarking &mdash; Vault Candidates Flagged by the Research</div>
   <div class="bookmark-item"><b>Hardwick Hall &amp; Montacute House</b> (both National Trust, England) &mdash; the two best-preserved primary/original long-gallery examples, for historical grounding of the concept.</div>
   <div class="bookmark-item"><b>Gallery House (San Francisco)</b> &amp; the <b>Wingfelder Gallery House (Buffalo)</b> &mdash; the two strongest modern built precedents: houses actually organized around a gallery-as-spine, not just hallways decorated with art.</div>
+  <div class="bookmark-item"><b>Girouard's <em>Robert Smythson &amp; the Elizabethan Country House</em></b> (Yale University Press, 1983) &mdash; the academic monograph behind the best-supported Hardwick Hall figure; worth sourcing directly for primary-source-level confirmation.</div>
 </div>
 
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-  Sources: etymonline &middot; Wikipedia (Long gallery, Loggia, Breezeway) &middot; Cambridge Core (abstract only) &middot; Britannica &middot; ArchDaily &times;6 &middot; Wingfelder Architect &middot; Houzz &middot; Dezeen (lead, unread) &middot; National Trust &middot; Historic UK &middot; Angi &middot; Design Encyclopedia &middot; lighting &amp; wall-hanging trade guides<br>
-  Full citations, tiers, and the sourcing-confidence detail are documented in the companion Full Reference Guide &middot; Compiled Jul 2026
+  Sources: etymonline &middot; Wikipedia (Long gallery, Loggia, Breezeway) &middot; Cambridge Core (abstract only) &middot; Britannica &middot; ArchDaily &times;7 &middot; Wingfelder Architect &middot; Houzz &middot; Dezeen &times;2 (one mirror-sourced) &middot; Great British Life &middot; National Trust &middot; Historic England &middot; Historic UK &middot; Birmingham Museums Trust &middot; Angi &middot; Design Encyclopedia &middot; lighting &amp; wall-hanging trade guides &middot; Wikimedia Commons (9 credited images)<br>
+  Full citations, tiers, image credits, and the sourcing-confidence detail are documented in the companion Full Reference Guide &middot; Compiled Jul 2026, revised Jul 2026
 </div>
 
 </body>
