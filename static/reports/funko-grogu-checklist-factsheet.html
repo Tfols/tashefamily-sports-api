@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f3f0e6;color:#181d24;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funko Pop! Grogu — Collector's Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3f0e6;
+  --paper-2:#e9e3d0;
+  --paper-3:#faf8f0;
+  --ink:#181d24;
+  --ink-soft:#4a5160;
+  --line:#cec7ae;
+  --line-dark:#a89f83;
+  --beskar:#5a6675;
+  --beskar-deep:#333c47;
+  --creed:#c1521c;
+  --creed-deep:#7e360f;
+  --grogu:#5f8f45;
+  --grogu-deep:#3a5c29;
+  --gold:#b9862c;
+  --gold-deep:#805c17;
+  --pink:#c14d78;
+  --pink-deep:#7d3457;
+  --signal:#2f7089;
+  --signal-deep:#1c4757;
+  --warn:#a4291f;
+  --warn-tint:#f6e2df;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:light;background:var(--paper)!important;color:var(--ink)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:"IBM Plex Sans",sans-serif;font-size:13.5px;line-height:1.5;max-width:1180px;margin:0 auto;padding:0 0 60px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+#sheet{padding:24px 28px 0}
+
+h1,.display{font-family:"Chewy",cursive;font-weight:400}
+
+/* ── MASTHEAD (Pop! box front) ── */
+.masthead{display:grid;grid-template-columns:1fr auto;border:3px solid var(--ink);margin-bottom:16px;overflow:hidden}
+.masthead-spine{background:var(--beskar-deep);color:var(--paper-3);writing-mode:vertical-rl;text-orientation:mixed;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;padding:10px 7px;flex:0 0 auto}
+.masthead-main{padding:16px 22px;background:var(--paper);flex:1;display:flex;flex-direction:column;justify-content:center}
+.masthead-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--creed);margin-bottom:6px;font-weight:700}
+h1{font-size:2.2rem;line-height:1.05;color:var(--ink)}
+h1 span.hl{color:var(--creed)}
+.masthead-sub{font-size:.84rem;color:var(--ink-soft);margin-top:8px;max-width:66ch}
+.puck-badge{background:var(--gold);border-left:3px solid var(--ink);padding:12px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:168px;text-align:center}
+.puck-badge .pb-num{font-family:"Chewy",cursive;font-size:1.7rem;color:var(--ink);line-height:1}
+.puck-badge .pb-range{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--beskar-deep);margin-top:3px;font-weight:700}
+.puck-badge .pb-label{font-family:"IBM Plex Mono",monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+
+/* ── KEY STATS ── */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
+.stat-cell{background:var(--paper-3);border:2px solid var(--ink);padding:10px 8px;text-align:center;position:relative;page-break-inside:avoid}
+.stat-cell::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:var(--gold);border:2px solid var(--ink)}
+.stat-cell.c1::before{background:var(--beskar)}
+.stat-cell.c2::before{background:var(--creed)}
+.stat-cell.c3::before{background:var(--grogu)}
+.stat-cell.c4::before{background:var(--pink)}
+.stat-cell.c5::before{background:var(--warn)}
+.stat-cell.c6::before{background:var(--signal)}
+.stat-num{font-family:"Chewy",cursive;font-size:1.35rem;color:var(--ink);line-height:1;margin-top:4px}
+.stat-label{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--ink-soft);margin-top:6px;line-height:1.35}
+
+/* ── SECTION LABEL ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:10px;margin-top:22px}
+.sec-tag{font-family:"Chewy",cursive;font-size:1.05rem;color:var(--ink);background:var(--gold);padding:3px 12px;border:2px solid var(--ink);flex-shrink:0}
+.sec-rule{height:2px;background:var(--ink);flex:1}
+.sec-note{font-size:.72rem;color:var(--ink-soft);margin-bottom:10px;font-style:italic}
+
+/* ── SHELF DIAGRAM ── */
+.diagram-panel{border:3px solid var(--ink);background:var(--paper-3);margin-bottom:16px;overflow:hidden}
+.diagram-head{background:var(--ink);color:var(--paper);padding:8px 18px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between}
+.diagram-body{padding:10px 16px 4px;overflow-x:auto}
+.diagram-body svg{width:100%;height:auto;display:block;min-width:640px}
+.diagram-caption{font-size:.75rem;color:var(--ink-soft);padding:8px 18px 14px;line-height:1.55;border-top:1px dashed var(--line-dark);margin-top:4px}
+.diagram-caption b{color:var(--ink)}
+
+/* ── BOUNTY BOARD ── */
+.bounty-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.bounty-card{border:2.5px solid var(--ink);background:var(--paper-3);padding:13px 15px;position:relative;page-break-inside:avoid}
+.bounty-rank{position:absolute;top:-12px;left:-10px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper-3);display:flex;align-items:center;justify-content:center;font-family:"Chewy",cursive;font-size:1rem;border:2px solid var(--gold)}
+.bounty-name{font-weight:700;font-size:.87rem;color:var(--ink);margin:6px 0 4px;line-height:1.3}
+.bounty-tag{font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--creed-deep);font-weight:700;letter-spacing:.03em;margin-bottom:6px}
+.bounty-note{font-size:.75rem;color:var(--ink-soft);line-height:1.5}
+.bounty-caveat{border:2px dashed var(--warn);background:var(--warn-tint);padding:10px 16px;font-size:.74rem;color:var(--ink);line-height:1.55;margin-bottom:6px}
+.bounty-caveat b{color:var(--warn)}
+
+/* ── CHECKLIST TABLES ── */
+.era-head{display:flex;align-items:baseline;gap:12px;margin:24px 0 8px;padding:6px 0 6px 14px;border-left:8px solid var(--beskar);border-bottom:2px solid var(--ink)}
+.era-beskar{border-left-color:var(--beskar)}
+.era-creed{border-left-color:var(--creed)}
+.era-pink{border-left-color:var(--pink)}
+.era-gold{border-left-color:var(--gold)}
+.era-grogu{border-left-color:var(--grogu)}
+.era-signal{border-left-color:var(--signal)}
+.era-title{font-family:"Chewy",cursive;font-size:1.15rem;color:var(--ink)}
+.era-sub{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--ink-soft)}
+.era-count{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--ink-soft);margin-left:auto;white-space:nowrap}
+.era-intro{font-size:.78rem;color:var(--ink-soft);line-height:1.55;margin-bottom:8px;max-width:90ch}
+
+.table-scroll{overflow-x:auto;margin-bottom:6px}
+table.check-table{width:100%;border-collapse:collapse;background:var(--paper-3);border:2px solid var(--ink);font-size:.78rem;margin-bottom:4px}
+table.check-table th{font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--paper-2);border-bottom:2px solid var(--ink);padding:7px 10px;text-align:left}
+table.check-table td{padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top;line-height:1.45}
+table.check-table tr:last-child td{border-bottom:none}
+table.check-table tr{page-break-inside:avoid}
+tr.flag-row{background:var(--warn-tint)}
+tr.flag-row td:first-child{border-left:4px solid var(--warn)}
+
+.pop-badge{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 4px;border-radius:50%;background:var(--beskar-deep);color:var(--paper-3);font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.68rem;border:2px solid var(--ink);white-space:nowrap}
+.pop-badge.unk{background:var(--paper-2);color:var(--warn);border-style:dashed;border-color:var(--warn)}
+
+.excl{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.63rem;font-weight:700;padding:3px 8px;border-radius:3px;border-left:3px solid;white-space:nowrap;margin-bottom:2px}
+.excl-standard{background:var(--paper-2);border-color:var(--line-dark);color:var(--ink-soft)}
+.excl-gamestop{background:#f7e7dc;border-color:var(--creed);color:var(--creed-deep)}
+.excl-target{background:#f7e1ea;border-color:var(--pink);color:var(--pink-deep)}
+.excl-walmart{background:#e2eff3;border-color:var(--signal);color:var(--signal-deep)}
+.excl-amazon{background:#f6ecd9;border-color:var(--gold);color:var(--gold-deep)}
+.excl-ee{background:#eaf1e4;border-color:var(--grogu);color:var(--grogu-deep)}
+.excl-con{background:#e8e6de;border-color:var(--beskar-deep);color:var(--beskar-deep)}
+.excl-funkoshop{background:#eceef1;border-color:var(--beskar);color:var(--beskar-deep)}
+
+.flag-tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.6rem;text-transform:uppercase;letter-spacing:.04em;color:#fff;background:var(--warn);padding:2px 6px;border-radius:2px;margin-right:5px}
+
+.callout-box{border:2px dashed var(--ink);background:var(--paper-3);padding:12px 16px;font-size:.76rem;color:var(--ink);line-height:1.55;margin:8px 0 14px}
+.callout-box.creed{border-color:var(--creed);background:#fbeee2}
+.callout-box b{color:var(--ink)}
+
+/* ── NOT FOUND / SCAN PANEL ── */
+.scan-panel{background:var(--signal-deep);border:3px solid var(--ink);color:#dff2f7;padding:16px 20px;margin-bottom:10px}
+.scan-head{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#8fd4e6;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.scan-dot{width:8px;height:8px;border-radius:50%;background:#8fd4e6;display:inline-block;animation:none}
+.scan-row{display:grid;grid-template-columns:170px 1fr;gap:14px;padding:9px 0;border-bottom:1px dashed rgba(143,212,230,.3);align-items:start}
+.scan-row:last-child{border-bottom:none}
+.scan-target{font-family:"IBM Plex Mono",monospace;font-size:.74rem;font-weight:700;color:#fff}
+.scan-result{font-size:.78rem;line-height:1.55;color:#dff2f7}
+.scan-result .no{color:#ff9a8f;font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+/* ── SOURCING CONFIDENCE ── */
+.qc-strip{border:3px solid var(--ink);background:var(--paper-3);margin:20px 0 16px}
+.qc-head{background:var(--gold);padding:9px 18px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border-bottom:3px solid var(--ink)}
+.qc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.qc-item{padding:13px 18px;border-right:1px dashed var(--line-dark);border-bottom:1px dashed var(--line-dark)}
+.qc-item:nth-child(2n){border-right:none}
+.qc-flag{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:9px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;display:inline-block;padding:2px 7px;color:#fff}
+.qc-flag.ok{background:var(--grogu)}
+.qc-flag.thin{background:var(--gold-deep)}
+.qc-flag.gap{background:var(--beskar-deep)}
+.qc-flag.time{background:var(--warn)}
+.qc-body{font-size:.76rem;line-height:1.5;color:var(--ink)}
+
+/* ── FOOTER ── */
+.footer{padding:16px 4px 20px;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.04em;color:var(--ink-soft);text-align:center;line-height:1.9;border-top:1px solid var(--line-dark);margin-top:6px}
+
+@media(max-width:900px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .bounty-grid{grid-template-columns:1fr 1fr}
+  .masthead{grid-template-columns:1fr}
+  .masthead-spine{writing-mode:horizontal-tb;padding:6px}
+  .qc-grid{grid-template-columns:1fr}
+  .qc-item{border-right:none}
+  .scan-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="sheet">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-spine">Star Wars &middot; The Mandalorian Universe</div>
+  <div class="masthead-main">
+    <div class="masthead-eyebrow">Field Reference &middot; Funko Pop! Vinyl Checklist &middot; Snapshot: Late July 2026</div>
+    <h1>Grogu <span class="hl">Pop! Checklist</span></h1>
+    <div class="masthead-sub">Every Funko Pop! figure depicting Grogu ("The Child" / "Baby Yoda") across The Mandalorian, The Book of Boba Fett, and The Mandalorian and Grogu &mdash; organized chronologically by show/era. Sourcing-confidence flags kept visible inline, not smoothed over.</div>
+  </div>
+  <div class="puck-badge">
+    <div class="pb-num">38+</div>
+    <div class="pb-range">#368 &ndash; #838</div>
+    <div class="pb-label">Grogu Pops Tracked</div>
+  </div>
+</div>
+
+<!-- KEY STATS -->
+<div class="stat-row">
+  <div class="stat-cell c1">
+    <div class="stat-num">38+</div>
+    <div class="stat-label">Grogu-depicting vinyl Pop! SKUs catalogued (excludes pins &amp; Bitty Pop minis, tracked separately below)</div>
+  </div>
+  <div class="stat-cell c2">
+    <div class="stat-num">#368&ndash;838</div>
+    <div class="stat-label">Pop-number span &mdash; one continuous Star Wars line, not sequential within an era</div>
+  </div>
+  <div class="stat-cell c3">
+    <div class="stat-num">8</div>
+    <div class="stat-label">Exclusive channels: GameStop, Target, Walmart, Amazon, Entertainment Earth, NYCC, SW Celebration, C2E2</div>
+  </div>
+  <div class="stat-cell c4">
+    <div class="stat-num">5,000</div>
+    <div class="stat-label">Hard production cap on the rarest piece &mdash; Diamond Collection #368, SW Celebration 2022</div>
+  </div>
+  <div class="stat-cell c5">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Pop numbers/SKUs flagged unconfirmed or thinly sourced in this snapshot</div>
+  </div>
+  <div class="stat-cell c6">
+    <div class="stat-num">Jul&nbsp;2026</div>
+    <div class="stat-label">Snapshot date &mdash; Funko keeps adding SKUs, especially tied to the 2026 film</div>
+  </div>
+</div>
+
+<!-- SIGNATURE DIAGRAM: COLLECTOR'S SHELF, CHRONOLOGICAL -->
+<div class="diagram-panel">
+  <div class="diagram-head"><span>The Collector's Shelf &mdash; Chronological</span><span>Box height &asymp; figure count per era</span></div>
+  <div class="diagram-body">
+    <svg viewBox="0 0 920 236" xmlns="http://www.w3.org/2000/svg">
+      <line x1="20" y1="196" x2="900" y2="196" stroke="#181d24" stroke-width="3"/>
+
+      <!-- S1 -->
+      <rect x="45" y="46" width="88" height="150" fill="#5a6675" stroke="#181d24" stroke-width="2.5"/>
+      <rect x="62.6" y="38" width="52.8" height="8" fill="#333c47" stroke="#181d24" stroke-width="2"/>
+      <circle cx="89" cy="121" r="15" fill="#faf8f0" stroke="#181d24" stroke-width="1.5"/>
+      <text x="89" y="126" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="13" fill="#181d24">12</text>
+      <text x="89" y="36" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#4a5160"></text>
+      <text x="89" y="210" text-anchor="middle" font-family="Chewy, cursive" font-size="12" fill="#181d24">Season 1</text>
+      <text x="89" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4a5160">'19&ndash;'20 &middot; #368&ndash;461</text>
+
+      <!-- S2 -->
+      <rect x="151" y="66" width="88" height="130" fill="#c1521c" stroke="#181d24" stroke-width="2.5"/>
+      <rect x="168.6" y="58" width="52.8" height="8" fill="#7e360f" stroke="#181d24" stroke-width="2"/>
+      <circle cx="195" cy="131" r="15" fill="#faf8f0" stroke="#181d24" stroke-width="1.5"/>
+      <text x="195" y="136" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="13" fill="#181d24">10</text>
+      <text x="195" y="210" text-anchor="middle" font-family="Chewy, cursive" font-size="12" fill="#181d24">Season 2</text>
+      <text x="195" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4a5160">'20&ndash;'21 &middot; #465&ndash;488*</text>
+
+      <!-- Valentine's -->
+      <rect x="257" y="136" width="88" height="60" fill="#c14d78" stroke="#181d24" stroke-width="2.5"/>
+      <rect x="274.6" y="128" width="52.8" height="8" fill="#7d3457" stroke="#181d24" stroke-width="2"/>
+      <circle cx="301" cy="163" r="12" fill="#faf8f0" stroke="#181d24" stroke-width="1.5"/>
+      <text x="301" y="168" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="12" fill="#181d24">3</text>
+      <text x="301" y="210" text-anchor="middle" font-family="Chewy, cursive" font-size="11.5" fill="#181d24">Valentine's</text>
+      <text x="301" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4a5160">'22 &middot; #493&ndash;498</text>
+
+      <!-- Convention -->
+      <rect x="363" y="156" width="88" height="40" fill="#b9862c" stroke="#181d24" stroke-width="2.5"/>
+      <rect x="380.6" y="148" width="52.8" height="8" fill="#805c17" stroke="#181d24" stroke-width="2"/>
+      <circle cx="407" cy="176" r="10" fill="#faf8f0" stroke="#181d24" stroke-width="1.5"/>
+      <text x="407" y="180" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="11" fill="#181d24">1</text>
+      <text x="407" y="210" text-anchor="middle" font-family="Chewy, cursive" font-size="11" fill="#181d24">Convention</text>
+      <text x="407" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4a5160">'22 &middot; #368 LE</text>
+
+      <!-- BoBF -->
+      <rect x="469" y="146" width="88" height="50" fill="#5f8f45" stroke="#181d24" stroke-width="2.5"/>
+      <rect x="486.6" y="138" width="52.8" height="8" fill="#3a5c29" stroke="#181d24" stroke-width="2"/>
+      <circle cx="513" cy="171" r="11" fill="#faf8f0" stroke="#181d24" stroke-width="1.5"/>
+      <text x="513" y="176" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="11.5" fill="#181d24">2</text>
+      <text x="513" y="210" text-anchor="middle" font-family="Chewy, cursive" font-size="11" fill="#181d24">Boba Fett</text>
+      <text x="513" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4a5160">'22 &middot; #584&ndash;587</text>
+
+      <!-- S3+ -->
+      <rect x="575" y="136" width="88" height="60" fill="#5a6675" stroke="#181d24" stroke-width="2.5"/>
+      <rect x="592.6" y="128" width="52.8" height="8" fill="#333c47" stroke="#181d24" stroke-width="2"/>
+      <circle cx="619" cy="163" r="12" fill="#faf8f0" stroke="#181d24" stroke-width="1.5"/>
+      <text x="619" y="168" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="12" fill="#181d24">3</text>
+      <text x="619" y="210" text-anchor="middle" font-family="Chewy, cursive" font-size="11.5" fill="#181d24">Season 3+</text>
+      <text x="619" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4a5160">'23&ndash;'24 &middot; #664&ndash;720</text>
+
+      <!-- Impressions -->
+      <rect x="681" y="156" width="88" height="40" fill="#c1521c" stroke="#181d24" stroke-width="2.5"/>
+      <rect x="698.6" y="148" width="52.8" height="8" fill="#7e360f" stroke="#181d24" stroke-width="2"/>
+      <circle cx="725" cy="176" r="10" fill="#faf8f0" stroke="#181d24" stroke-width="1.5"/>
+      <text x="725" y="180" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="11" fill="#181d24">1</text>
+      <text x="725" y="210" text-anchor="middle" font-family="Chewy, cursive" font-size="11" fill="#181d24">Impressions</text>
+      <text x="725" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4a5160">'24/'25* &middot; #772</text>
+
+      <!-- 2026 Film -->
+      <rect x="787" y="106" width="88" height="90" fill="#2f7089" stroke="#181d24" stroke-width="2.5"/>
+      <rect x="804.6" y="98" width="52.8" height="8" fill="#1c4757" stroke="#181d24" stroke-width="2"/>
+      <circle cx="831" cy="151" r="14" fill="#faf8f0" stroke="#181d24" stroke-width="1.5"/>
+      <text x="831" y="156" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="700" font-size="13" fill="#181d24">6</text>
+      <text x="831" y="210" text-anchor="middle" font-family="Chewy, cursive" font-size="11.5" fill="#181d24">2026 Film</text>
+      <text x="831" y="222" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" fill="#4a5160">'26 &middot; #818&ndash;838*</text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <b>Reading this shelf:</b> each box stands for one era/wave, sitting on the shelf left-to-right in release order; box height and the number in the window both track how many distinct Grogu-depicting Pop! SKUs that era contributed (counts <b>exclude</b> pins and Bitty Pop minis &mdash; see those tables further down). An asterisk (*) on the date/range marks an era with at least one flagged/unconfirmed entry &mdash; see the inline flags in that section's table and the Sourcing Confidence panel near the bottom.
+  </div>
+</div>
+
+<!-- BOUNTY BOARD -->
+<div class="sec-label"><span class="sec-tag">Bounty Board</span><div class="sec-rule"></div></div>
+<div class="sec-note">Most sought-after / highest-value pieces, ranked by production scarcity and exclusivity signals &mdash; not verified sale prices (see caveat below).</div>
+<div class="bounty-grid">
+  <div class="bounty-card">
+    <div class="bounty-rank">1</div>
+    <div class="bounty-name">Grogu, Diamond Collection <span class="pop-badge" style="vertical-align:middle">368</span></div>
+    <div class="bounty-tag">SW Celebration Anaheim 2022 &middot; LE 5,000</div>
+    <div class="bounty-note">Diamond-glitter finish. Hard production cap plus convention-only distribution &mdash; the tightest cap found in this research.</div>
+  </div>
+  <div class="bounty-card">
+    <div class="bounty-rank">2</div>
+    <div class="bounty-name">The Child with Pendant <span class="pop-badge" style="vertical-align:middle">398</span></div>
+    <div class="bounty-tag">NYCC 2020 official convention exclusive</div>
+    <div class="bounty-note">Carries a NYCC sticker. &asymp;$65 price-guide estimate &mdash; among the higher figures for a standard-scale Grogu Pop.</div>
+  </div>
+  <div class="bounty-card">
+    <div class="bounty-rank">3</div>
+    <div class="bounty-name">Grogu with Rancor <span class="pop-badge" style="vertical-align:middle">587</span></div>
+    <div class="bounty-tag">Entertainment Earth exclusive &middot; 10" Jumbo</div>
+    <div class="bounty-note">Large-scale sculpt (Grogu riding the Rancor) restricted to a single retail channel.</div>
+  </div>
+  <div class="bounty-card">
+    <div class="bounty-rank">4</div>
+    <div class="bounty-name">Dark Trooper w/ Grogu, GITD <span class="pop-badge" style="vertical-align:middle">488</span></div>
+    <div class="bounty-tag">Entertainment Earth exclusive &middot; Glow-in-the-Dark</div>
+    <div class="bounty-note">Scene-specific deco tied to the S2 finale abduction (S2E6, "The Rescue") &mdash; a fan-favorite moment.</div>
+  </div>
+  <div class="bounty-card">
+    <div class="bounty-rank">5</div>
+    <div class="bounty-name">"Grogu Moving" Loungefly Pin <span class="pop-badge unk" style="vertical-align:middle">pin</span></div>
+    <div class="bounty-tag">C2E2 2024 exclusive &middot; LE 700</div>
+    <div class="bounty-note">Very small production run &mdash; though this is an enamel pin, not a vinyl Pop!.</div>
+  </div>
+  <div class="bounty-card">
+    <div class="bounty-rank">6</div>
+    <div class="bounty-name">Bitty Pop! Hyper Rare Grogu pulls</div>
+    <div class="bounty-tag">1-in-6 pull rate, Mandalorian 4-packs</div>
+    <div class="bounty-note">Closest thing to a chase variant anywhere in the Grogu line &mdash; standard-format Grogu Pops don't have one.</div>
+  </div>
+</div>
+<div class="bounty-caveat"><b>Caveat, kept visible:</b> no hard current secondary-market sale-price data (e.g. recent completed eBay/StockX sales) was found for most of these pieces. This ranking is based on production-scarcity and exclusivity signals from retailer/collector sites &mdash; <b>not</b> verified recent transaction prices &mdash; with the exception of the &asymp;$65 (#398) and &asymp;$30 (IG-12 with Grogu Deluxe #720) price-guide estimates cited directly elsewhere in this checklist.</div>
+
+<!-- SECTION: S1 -->
+<div class="era-head era-beskar">
+  <div><div class="era-title">The Mandalorian &mdash; Season 1</div><div class="era-sub">2019&ndash;2020 releases</div></div>
+  <div class="era-count">12 figures</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>The Child</strong></td><td><span class="pop-badge">368</span></td><td>Feb 2020</td><td><span class="excl excl-standard">Standard</span></td><td>&asymp;3.75in, no exclusivity</td></tr>
+<tr><td><strong>The Child, 10" Super-Sized</strong></td><td><span class="pop-badge">369</span></td><td>2020</td><td><span class="excl excl-standard">Standard</span></td><td>10in scale</td></tr>
+<tr><td><strong>The Child with Control Knob</strong></td><td><span class="pop-badge">370</span></td><td>2020</td><td><span class="excl excl-gamestop">GameStop</span></td><td>&mdash;</td></tr>
+<tr><td><strong>The Child with Cup</strong></td><td><span class="pop-badge">378</span></td><td>2020</td><td><span class="excl excl-standard">Standard</span></td><td>&mdash;</td></tr>
+<tr><td><strong>The Child with Frog</strong></td><td><span class="pop-badge">379</span></td><td>2020</td><td><span class="excl excl-standard">Standard</span></td><td>&mdash;</td></tr>
+<tr><td><strong>The Child (Concerned)</strong></td><td><span class="pop-badge">384</span></td><td>2020</td><td><span class="excl excl-target">Target</span></td><td>Expressive "concerned" face sculpt</td></tr>
+<tr><td><strong>The Child, Force Wielding</strong></td><td><span class="pop-badge">385</span></td><td>2020</td><td><span class="excl excl-walmart">Walmart</span></td><td>&mdash;</td></tr>
+<tr><td><strong>The Child with Pendant</strong></td><td><span class="pop-badge">398</span></td><td>2020</td><td><span class="excl excl-con">NYCC 2020</span></td><td>Official convention exclusive, NYCC sticker; &asymp;$65 price-guide estimate &mdash; see Bounty Board</td></tr>
+<tr><td><strong>The Mandalorian (Child) with Bag</strong></td><td><span class="pop-badge">405</span></td><td>2020</td><td><span class="excl excl-standard">Standard</span></td><td>One of the lowest-valued in the line per collector price guides (&asymp;$12 est.)</td></tr>
+<tr><td><strong>The Child with Egg Canister</strong></td><td><span class="pop-badge">407</span></td><td>2020</td><td><span class="excl excl-standard">Standard</span></td><td>&mdash;</td></tr>
+<tr><td><strong>Mandalorian with the Child, 10" Chrome</strong></td><td><span class="pop-badge">380</span></td><td>Nov 2020 (pre-order)</td><td><span class="excl excl-amazon">Amazon</span></td><td>Super-Sized chrome variant; Nov 2020 pre-order date is what surfaced</td></tr>
+<tr><td><strong>Mando Holding Child ("Baby Yoda")</strong></td><td><span class="pop-badge">461</span></td><td>n/s</td><td><span class="excl excl-standard">Standard</span></td><td>Combo figure, Mandalorian carrying Grogu, non-chrome; exact year not stated in source</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SECTION: S2 -->
+<div class="era-head era-creed">
+  <div><div class="era-title">The Mandalorian &mdash; Season 2</div><div class="era-sub">2020&ndash;2021 releases</div></div>
+  <div class="era-count">9 confirmed + 1 flagged</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>Grogu with Cookies</strong></td><td><span class="pop-badge">465</span></td><td>2020&ndash;21</td><td><span class="excl excl-standard">Standard</span></td><td>Also issued as <em>Grogu with Cookies (Flocked)</em> under the same #465 &mdash; soft-touch flocked variant sold as a Pop &amp; Tee apparel bundle</td></tr>
+<tr><td><strong>Grogu with Butterfly</strong></td><td><span class="pop-badge">468</span></td><td>2021</td><td><span class="excl excl-gamestop">GameStop</span></td><td>&mdash;</td></tr>
+<tr><td><strong>Grogu with Chowder Squid</strong></td><td><span class="pop-badge">469</span></td><td>2021</td><td><span class="excl excl-target">Target</span></td><td>&mdash;</td></tr>
+<tr><td><strong>Grogu (Macy's Thanksgiving Day Parade)</strong></td><td><span class="pop-badge">474</span></td><td>2021</td><td><span class="excl excl-funkoshop">FunkoShop/Macy's</span></td><td>Balloon-float figure tie-in</td></tr>
+<tr><td><strong>Grogu (Macy's Thanksgiving Day Parade), Deluxe</strong></td><td><span class="pop-badge">475</span></td><td>2021</td><td><span class="excl excl-funkoshop">FunkoShop/Macy's</span></td><td>Deluxe-format balloon-float figure</td></tr>
+<tr><td><strong>Grogu Using the Force</strong></td><td><span class="pop-badge">477</span></td><td>2020&ndash;21</td><td><span class="excl excl-amazon">Amazon</span></td><td>&mdash;</td></tr>
+<tr><td><strong>Luke Skywalker with Grogu</strong></td><td><span class="pop-badge">482</span></td><td>2020&ndash;21</td><td><span class="excl excl-standard">Standard</span></td><td>Depicts the Season 2 finale rescue scene</td></tr>
+<tr><td><strong>Grogu Using the Force, Lights &amp; Sound Deluxe</strong></td><td><span class="pop-badge">485</span></td><td>2020&ndash;21</td><td><span class="excl excl-standard">Deluxe</span></td><td>Interactive figure with sound/light features</td></tr>
+<tr><td><strong>Dark Trooper with Grogu, Glow-in-the-Dark</strong></td><td><span class="pop-badge">488</span></td><td>2020&ndash;21</td><td><span class="excl excl-ee">Entertainment Earth</span></td><td>Depicts S2 finale abduction (S2E6, "The Rescue"), GITD deco, &asymp;3.75in &mdash; see Bounty Board</td></tr>
+<tr class="flag-row"><td><strong>Grogu at Macy's Thanksgiving Day Parade (2nd listing)</strong></td><td><span class="pop-badge unk">575</span></td><td>n/s</td><td><span class="excl excl-standard">Unclear</span></td><td><span class="flag-tag">Unconfirmed</span>Appears in one checklist source as a later, distinct balloon-float release; could not be reconciled against #474/#475 from the same event &mdash; possibly a duplicate or listing error. See Sourcing Confidence.</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SECTION: Valentine's -->
+<div class="era-head era-pink">
+  <div><div class="era-title">Valentine's Day Tie-Ins</div><div class="era-sub">2022 &middot; Mandalorian-branded, not season-specific</div></div>
+  <div class="era-count">3 figures</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>Grogu with Cookies (Pink)</strong></td><td><span class="pop-badge">493</span></td><td>2022</td><td><span class="excl excl-standard">Standard</span></td><td>Valentine's Day release</td></tr>
+<tr><td><strong>Luke Skywalker with Grogu (Pink)</strong></td><td><span class="pop-badge">494</span></td><td>2022</td><td><span class="excl excl-standard">Standard</span></td><td>Valentine's Day release</td></tr>
+<tr><td><strong>Mandalorian with Grogu (Pink)</strong></td><td><span class="pop-badge">498</span></td><td>2022</td><td><span class="excl excl-target">Target</span></td><td>Valentine's Day release</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SECTION: Convention/Diamond -->
+<div class="era-head era-gold">
+  <div><div class="era-title">Convention &amp; Diamond Collection Exclusive</div><div class="era-sub">2022</div></div>
+  <div class="era-count">1 figure</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>Grogu, Diamond Collection</strong></td><td><span class="pop-badge">368</span></td><td>2022</td><td><span class="excl excl-con">SW Celebration Anaheim</span></td><td>Same number as base "The Child" (#368) but a distinct SKU/variant &mdash; diamond-glitter finish, limited edition of 5,000 pieces. See Bounty Board.</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SECTION: BoBF -->
+<div class="era-head era-grogu">
+  <div><div class="era-title">The Book of Boba Fett</div><div class="era-sub">2022</div></div>
+  <div class="era-count">2 figures</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>Grogu with Armor</strong></td><td><span class="pop-badge">584</span></td><td>2022</td><td><span class="excl excl-standard">Standard</span></td><td>&asymp;3.75in, depicts Grogu receiving the Mandalorian signet/armor gift</td></tr>
+<tr><td><strong>Grogu with Rancor</strong></td><td><span class="pop-badge">587</span></td><td>2022</td><td><span class="excl excl-ee">Entertainment Earth</span></td><td>10" Jumbo/Super-Sized, Grogu riding the Rancor &mdash; see Bounty Board</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SECTION: S3+ -->
+<div class="era-head era-beskar">
+  <div><div class="era-title">The Mandalorian &mdash; Season 3 and After</div><div class="era-sub">2023&ndash;2024</div></div>
+  <div class="era-count">3 figures</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>Grogu in Hover-Pram</strong></td><td><span class="pop-badge">664</span></td><td>2023</td><td><span class="excl excl-standard">Standard</span></td><td>&mdash;</td></tr>
+<tr><td><strong>Grogu with Anzellan Droidsmith</strong></td><td><span class="pop-badge">691</span></td><td>Mar 2024</td><td><span class="excl excl-amazon">Amazon</span></td><td>&asymp;3.5in duo figure, "visit Nevarro" theming</td></tr>
+<tr><td><strong>IG-12 with Grogu</strong></td><td><span class="pop-badge">720</span></td><td>2023&ndash;24</td><td><span class="excl excl-standard">Deluxe</span></td><td>"Lights &amp; Sound" bobblehead, S3 finale scene &mdash; Grogu piloting the reprogrammed IG-series nanny droid; &asymp;6.75in; secondary-market estimate &asymp;$30</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SECTION: Impressions -->
+<div class="era-head era-creed">
+  <div><div class="era-title">Impressions / Special-Edition Crossover</div><div class="era-sub">Not tied to a specific season</div></div>
+  <div class="era-count">1 figure, flagged</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+<tbody>
+<tr class="flag-row"><td><strong>Mandalorian with Grogu, Impressions ("Samurai")</strong></td><td><span class="pop-badge">772</span></td><td>2024 or 2025</td><td><span class="excl excl-target">Target</span></td><td><span class="flag-tag">Year Unconfirmed</span>Stylized samurai-armor reimagining, &asymp;4.25&ndash;4.35in, includes a random Star Wars art card. Release year is inconsistent across retailer listings (2024 vs. 2025).</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SECTION: Not Found -->
+<div class="era-head era-signal">
+  <div><div class="era-title">Ahsoka &amp; Skeleton Crew</div><div class="era-sub">No Grogu vinyl figures found</div></div>
+  <div class="era-count">0 figures</div>
+</div>
+<div class="scan-panel">
+  <div class="scan-head"><span class="scan-dot"></span>Tracking Fob &mdash; Sensor Sweep Results</div>
+  <div class="scan-row">
+    <div class="scan-target">AHSOKA (2023)</div>
+    <div class="scan-result"><span class="no">No Grogu signature detected</span>Grogu does not appear as a character in this show. The only Grogu-adjacent product is a Loungefly-style <strong>"Ahsoka &amp; Grogu" 4-pack enamel pin set</strong> (2 Ahsoka pins + 2 Grogu pins, &asymp;1.5in each) &mdash; a pin product, not a vinyl Pop!, packaged for cross-promotion rather than an in-show appearance. See Pin Products table.</div>
+  </div>
+  <div class="scan-row">
+    <div class="scan-target">SKELETON CREW (2024&ndash;2025)</div>
+    <div class="scan-result"><span class="no">No Grogu signature detected</span>Grogu does not appear in this show. Skeleton Crew has its own separate Funko Pop line (e.g. the "KB" character, #701) with no Grogu tie-in found.</div>
+  </div>
+  <div class="scan-row">
+    <div class="scan-target">2026 FILM EASTER EGG</div>
+    <div class="scan-result"><span class="no">Context only, not a Pop</span>The Mandalorian and Grogu film reportedly contains a "hidden" nod/cameo referencing Skeleton Crew &mdash; a film Easter egg, not evidence Grogu appears in the Skeleton Crew series itself.</div>
+  </div>
+</div>
+<div class="sec-note">This is a negative finding, not exhaustive absence proof &mdash; consistent across every source checked in this research. No Funko Pop! Town set featuring Grogu was found either.</div>
+
+<!-- SECTION: 2026 Film -->
+<div class="era-head era-signal">
+  <div><div class="era-title">The Mandalorian and Grogu</div><div class="era-sub">2026 film &mdash; the newest wave</div></div>
+  <div class="era-count">6 figures, some flagged</div>
+</div>
+<div class="era-intro">Pre-order began Feb 14, 2026; wave arrived at retail by June 2026. Standard Pops retail at $14.99; Rides Deluxe at $29.99.</div>
+<div class="callout-box creed"><b>Currency caveat:</b> this snapshot reflects the state of the line as of <b>late July 2026</b>. Funko continuously adds new SKUs, especially tied to this recently released film &mdash; new GameStop, Hot Topic, Box Lunch, or SDCC-2026-adjacent exclusives may not yet be reflected here. Treat this table as a snapshot, not a permanently complete list.</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>The Mandalorian with Grogu</strong></td><td><span class="pop-badge">818</span></td><td>2026</td><td><span class="excl excl-standard">Standard $14.99</span></td><td>Combo Pop &mdash; Mando with miniature Grogu on his back/shoulder</td></tr>
+<tr class="flag-row"><td><strong>Grogu with Crest</strong></td><td><span class="pop-badge unk">819?</span></td><td>2026</td><td><span class="excl excl-standard">Standard $14.99</span></td><td><span class="flag-tag">Unconfirmed #</span>Standalone Grogu wearing the Mudhorn-emblazoned armor chest plate given by the Armorer. Number sourced from a single retailer listing snippet, not independently verified against Funko's own product page.</td></tr>
+<tr class="flag-row"><td><strong>Grogu with Snack (Flocked)</strong></td><td><span class="pop-badge unk">?</span></td><td>2026</td><td><span class="excl excl-standard">Standard $14.99</span></td><td><span class="flag-tag">Pop # Unconfirmed</span>Standalone flocked Grogu "enjoying" a popcorn-like snack. Confirmed as a real SKU on Funko.com; its numbered-line Pop # could not be confirmed. Also exists as a Mystery Mini (1-in-36 rarity) &mdash; a different product format.</td></tr>
+<tr class="flag-row"><td><strong>Grogu in Pram</strong></td><td><span class="pop-badge unk">?</span></td><td>2026</td><td><span class="excl excl-standard">Standard $14.99</span></td><td><span class="flag-tag">Pop # Unconfirmed</span>Standalone Grogu in a redesigned hover-pram. Confirmed as a real SKU on Funko.com; its Pop # could not be confirmed. Also exists as a Mystery Mini (1-in-12 rarity) &mdash; a different product format.</td></tr>
+<tr><td><strong>Mandalorian with Grogu in Imperial Remnant AT-RT, Rides Deluxe</strong></td><td><span class="pop-badge">837</span></td><td>2026</td><td><span class="excl excl-standard">Rides Deluxe $29.99</span></td><td>&asymp;6.9in, depicts the pair riding an Imperial walker</td></tr>
+<tr><td><strong>Bitty Pop! Rides: Mandalorian in N1 Starfighter (with Grogu)</strong></td><td><span class="pop-badge unk">&mdash;</span></td><td>2026</td><td><span class="excl excl-standard">$5.99</span></td><td>Miniature-format Bitty Pop Rides set; listed as "coming soon" at the time the Funko.com listing was checked</td></tr>
+</tbody>
+</table>
+</div>
+<div class="sec-note">Excluded from this checklist (don't depict Grogu himself, noted for context only): <strong>Clang</strong> #820, <strong>Mercenary Guard Droid</strong> #821, and <strong>Zeb Orrelios in the Razor Crest</strong> (Rides Deluxe #838, Target exclusive) &mdash; all part of the same movie sub-line.</div>
+
+<!-- SECTION: Bitty Pop multipacks -->
+<div class="era-head era-gold">
+  <div><div class="era-title">Bitty Pop! Multipacks</div><div class="era-sub">Grogu as a "chase"-style mystery bonus</div></div>
+  <div class="era-count">4 mystery-pull variants</div>
+</div>
+<div class="era-intro">Bitty Pop! Star Wars: The Mandalorian 4-packs (Series 1&ndash;4) each include three named 0.9in mini-figures plus one mystery bonus figure. Grogu variants fill that mystery-pull slot &mdash; the closest thing to a designated chase variant anywhere in the Grogu lineup, since standard-format Grogu Pops don't appear to have one.</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Mystery Pull</th><th>Rarity</th><th>Format</th></tr></thead>
+<tbody>
+<tr><td><strong>Grogu</strong></td><td>Hyper Rare &mdash; 1-in-6</td><td>Bitty Pop! (0.9in)</td></tr>
+<tr><td><strong>Grogu with Cup</strong></td><td>Hyper Rare &mdash; 1-in-6</td><td>Bitty Pop! (0.9in)</td></tr>
+<tr><td><strong>Grogu with Frog</strong></td><td>Rare &mdash; 1-in-3</td><td>Bitty Pop! (0.9in)</td></tr>
+<tr><td><strong>Grogu with Cookies</strong></td><td>Rare &mdash; 1-in-3</td><td>Bitty Pop! (0.9in)</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SECTION: Pins -->
+<div class="era-head era-beskar">
+  <div><div class="era-title">Pop! Pin Products</div><div class="era-sub">Not vinyl figures &mdash; included for completeness</div></div>
+  <div class="era-count">4 products</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th>Product</th><th>Detail</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><strong>Pop! Pin: Grogu Using the Force</strong></td><td>SKU STPP0100</td><td>Standalone enamel pin</td></tr>
+<tr><td><strong>Loungefly Pop! Pin: Grogu</strong></td><td>&asymp;4in with stand</td><td>Standalone enamel pin</td></tr>
+<tr><td><strong>Ahsoka &amp; Grogu 4-Pack Pin Set</strong></td><td>SKU STPN0262</td><td>2 Ahsoka + 2 Grogu pins, &asymp;1.5in each</td></tr>
+<tr><td><strong>"Grogu Moving" Loungefly Enamel Pin</strong></td><td>C2E2 2024 exclusive</td><td>Limited to 700 pieces &mdash; see Bounty Board</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SOURCING CONFIDENCE -->
+<div class="qc-strip">
+  <div class="qc-head">Sourcing Confidence &mdash; kept visible, not smoothed over</div>
+  <div class="qc-grid">
+    <div class="qc-item">
+      <span class="qc-flag ok">Well-Supported</span>
+      <div class="qc-body">The core Season 1&ndash;2 numbered lineup (#368&ndash;#498) is corroborated across multiple independent checklist sites (pop-figures.com, cardboardconnection.com, funkypriceguide.com) with consistent numbering. The Book of Boba Fett figures (#584, #587) and the Season 3 IG-12 Deluxe (#720) are confirmed via Entertainment Earth's own product pages. The 2026 movie wave's headline figures (#818, AT-RT #837) and pricing are confirmed via Funko's official Toy Fair 2026 reveal, reported by Laughing Place and corroborated by Collider and TechRadar.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag thin">Thinly Sourced / Unconfirmed</span>
+      <div class="qc-body"><strong>Grogu with Crest #819</strong> rests on a single retailer search-result snippet (bigbadtoystore.com) that could not be directly fetched to verify &mdash; a lead, not a confirmed fact. <strong>"Grogu with Snack (Flocked)"</strong> and <strong>"Grogu in Pram"</strong> are confirmed real SKUs but their numbered-line Pop #s could not be matched. The <strong>#575</strong> Macy's Parade entry may be a duplicate/data error vs. #474/#475. The <strong>Impressions #772</strong> release year is inconsistent (2024 vs. 2025) across listings.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag gap">Not Found / Ruled Out</span>
+      <div class="qc-body">No Grogu-specific standard Pop! vinyl figure tied to <strong>Ahsoka</strong> or <strong>Skeleton Crew</strong> exists, because Grogu does not appear as a character in either show &mdash; consistent across every source checked, though this is a negative finding rather than exhaustive absence proof. No Funko Pop! Town set featuring Grogu was found.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag time">Currency of This List</span>
+      <div class="qc-body">This research reflects the state of the Funko Star Wars line as of <strong>late July 2026</strong>. Funko continuously adds new SKUs, particularly around the recently released Mandalorian and Grogu film &mdash; treat this as a snapshot, not a permanently complete list.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Sources: pop-figures.com &middot; CardboardConnection &middot; funkypriceguide.com &middot; Entertainment Earth &middot; Funko.com &middot; Amazon/Target/Walmart listings &middot; Laughing Place &middot; TechRadar &middot; Collider &middot; StockX<br>
+  Full citations, tiers, and per-claim sourcing notes are documented in the companion Full Reference Guide &middot; Research conducted July 30, 2026
+</div>
+
+</div>
+</body>
+</html>

@@ -410,6 +410,29 @@ body::before {
 .theme-gallery .report-file-desc { color: #8fa8bd; }
 .theme-gallery .report-file-arrow { color: #8fa8bd; }
 .theme-gallery .report-file-link:hover .report-file-arrow { color: #c9a227; }
+
+/* ── Beskar forge / Funko Grogu theme ───────────────────── */
+.theme-grogu .report-card,
+.theme-grogu .report-card-multi {
+  background: rgba(20,17,10,0.94);
+  border-color: #6b4a1f;
+}
+.theme-grogu .report-card:hover {
+  border-color: #2f9e6f;
+}
+.theme-grogu .report-card-bar {
+  background: linear-gradient(90deg, #c1521c, #5f8f45);
+}
+.theme-grogu .report-name { color: #f5efdc; }
+.theme-grogu .report-desc { color: #c9b98a; }
+.theme-grogu .report-meta { color: #c9b98a; }
+.theme-grogu .report-files { border-top-color: #6b4a1f; }
+.theme-grogu .report-file-link { border-bottom-color: #6b4a1f; }
+.theme-grogu .report-file-link:hover { background: rgba(95,143,69,0.08); }
+.theme-grogu .report-file-name { color: #f5efdc; }
+.theme-grogu .report-file-desc { color: #c9b98a; }
+.theme-grogu .report-file-arrow { color: #c9b98a; }
+.theme-grogu .report-file-link:hover .report-file-arrow { color: #2f9e6f; }
 </style>
 </head>
 <body>
@@ -545,6 +568,19 @@ const REPORTS = [
     files: [
       { label: 'Field Reference', desc: 'Blueprint-style width & daylighting diagram, taxonomy, sourcing flags', file: '/static/reports/gallery-hallway-factsheet.html', icon: '📐' },
       { label: 'Full Reference Guide', desc: 'Terminology, built examples, planning notes, tiered sources', file: '/static/reports/gallery-hallway-report.html', icon: '🏛️' },
+    ]
+  },
+  {
+    topic: 'Hobby',
+    hideTopicHeader: true,
+    name: 'Funko Pop! Grogu Collector\'s Checklist',
+    desc: 'Every Grogu Pop across the Mandalorian universe, organized by show/era — chronological checklist, a Bounty Board of the rarest pieces, and sourcing-confidence flags kept visible, not smoothed over',
+    date: 'Jul 2026',
+    icon: '🍪',
+    theme: 'grogu',
+    files: [
+      { label: 'Field Reference', desc: 'Collector\'s-shelf diagram, Bounty Board, era-by-era checklist tables', file: '/static/reports/funko-grogu-checklist-factsheet.html', icon: '🐸' },
+      { label: 'Full Reference Guide', desc: 'Numbered sections, tiered sources, sourcing confidence', file: '/static/reports/funko-grogu-checklist-report.html', icon: '📖' },
     ]
   },
 ];

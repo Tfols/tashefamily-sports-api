@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#faf7ee;color:#1c1c1c;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funko Pop! Grogu: A Collector's Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{color-scheme:light;background:#faf7ee!important;color:#1c1c1c!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.75;background:#faf7ee;color:#1c1c1c;max-width:820px;margin:0 auto;padding:56px 40px 96px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+/* tokens: creed(rust) #a3421c · creed-deep #6e2b13 · grogu(olive-green) #4f7a3a · beskar(steel) #4a5566 · ink #1c1c1c · paper #faf7ee */
+
+/* COVER */
+.cover{border-top:4px solid #1c1c1c;border-bottom:1px solid #ddd4bd;padding:32px 0 28px;margin-bottom:48px}
+.cover-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#a3421c;margin-bottom:12px}
+.cover h1{font-size:2.05rem;font-weight:700;line-height:1.18;color:#1c1c1c;margin-bottom:10px}
+.cover h1 em{font-style:italic;font-weight:400;color:#4f7a3a}
+.cover-subtitle{font-size:1rem;color:#4a4a4a;font-style:italic;margin-bottom:20px;max-width:62ch}
+.cover-meta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;color:#7a7a7a;line-height:2.2;border-top:1px solid #e5ddc6;padding-top:14px;margin-top:14px}
+
+/* TOC */
+.toc{background:#fff;border:1px solid #e5ddc6;padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#a3421c;margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted #e5ddc6;font-size:.87rem}
+.toc-item:last-child{border-bottom:none}
+.toc-section{color:#1c1c1c}
+.toc-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:#a3421c;white-space:nowrap;margin-left:12px}
+
+/* SECTION STRUCTURE */
+.section{margin-bottom:52px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:#a3421c;flex-shrink:0}
+.section-rule{height:1px;background:#e5ddc6;flex:1}
+h2{font-family:'Spectral',serif;font-size:1.42rem;font-weight:700;color:#1c1c1c;margin-bottom:14px;line-height:1.24}
+h3{font-family:'Spectral',serif;font-size:1.04rem;font-style:italic;font-weight:400;color:#4f7a3a;margin:26px 0 9px}
+p{color:#1c1c1c;margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+p strong{color:#1c1c1c}
+em{font-style:italic}
+sup.cite{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:#8a6a1a;font-style:normal;margin-left:1px}
+
+/* CALLOUT */
+.callout{border-left:4px solid #4f7a3a;background:#eef2e8;padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:#1c1c1c;margin:0;font-size:.96rem;line-height:1.68;max-width:66ch}
+.callout cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.72rem;color:#5a6e53;margin-top:8px}
+.callout.warn{border-left-color:#a4291f;background:#f7ece9}
+.callout.warn cite{color:#8a3d33}
+
+/* DETAIL TABLE */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:190px 1fr;gap:0;border-bottom:1px solid #efe8d5;padding:12px 0;font-size:.9rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:'Spectral',serif;font-weight:700;color:#4f7a3a;line-height:1.45;padding-right:16px}
+.detail-body{color:#1c1c1c;line-height:1.68}
+.detail-body strong{color:#1c1c1c}
+
+/* TABLE WRAPPER */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+.table-scroll table{margin:0}
+
+/* CHECKLIST TABLE */
+.ref-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.83rem;background:#fff;border:1px solid #e5ddc6}
+.ref-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#1c1c1c;background:#f2ecd8;border-bottom:2px solid #ddd0a8;padding:9px 11px;text-align:left}
+.ref-table td{padding:9px 11px;border-bottom:1px solid #f0e9d4;color:#1c1c1c;vertical-align:top;line-height:1.5}
+.ref-table tr:last-child td{border-bottom:none}
+.flag-cell{background:#f7ece9}
+.flag-tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:#fff;background:#a4291f;padding:2px 6px;border-radius:2px;margin-right:5px}
+
+/* CONFIDENCE BOX */
+.confidence{border:1.5px solid #1c1c1c;background:#fff;margin:22px 0}
+.confidence-head{background:#1c1c1c;color:#faf7ee;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.confidence-body{padding:16px 20px}
+.conf-item{border-left:4px solid #8a6a1a;padding:8px 14px;margin-bottom:12px;background:#faf7ee}
+.conf-item:last-child{margin-bottom:0}
+.conf-item.bad{border-left-color:#a3421c}
+.conf-item.good{border-left-color:#4f7a3a}
+.conf-item .lbl{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#8a6a1a;display:block;margin-bottom:4px}
+.conf-item.bad .lbl{color:#a3421c}
+.conf-item.good .lbl{color:#4f7a3a}
+.conf-item p{font-size:.86rem;margin:0;max-width:none}
+
+/* SOURCES SECTION */
+.sources-section{margin-top:52px;padding-top:28px;border-top:2px solid #1c1c1c}
+.source-group{margin-bottom:28px}
+.source-group-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#a3421c;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #e5ddc6}
+.source-group-note{font-size:.78rem;color:#7a7a7a;font-style:italic;margin-bottom:12px}
+.source-item{font-size:.87rem;color:#1c1c1c;line-height:1.65;padding:6px 0;border-bottom:1px dotted #f0e9d4}
+.source-item:last-child{border-bottom:none}
+.source-item em{font-style:italic}
+.source-num{font-family:"IBM Plex Mono",monospace;color:#8a6a1a;margin-right:4px}
+.source-url{font-family:"IBM Plex Mono",monospace;font-size:.76rem;color:#4f7a3a;display:block;margin-top:2px;word-break:break-all}
+
+/* FOOTER */
+.footer{margin-top:52px;padding-top:20px;border-top:1px solid #e5ddc6;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:#7a7a7a;text-align:center;line-height:2.2}
+
+@media(max-width:640px){
+  body{padding:28px 18px 64px;font-size:16px}
+  .cover h1{font-size:1.5rem}
+  .detail-row{grid-template-columns:1fr;gap:4px}
+  .detail-label{padding-right:0}
+  .ref-table{width:auto;min-width:560px}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Reference Guide &middot; Collector's Checklist &middot; Research conducted July 30, 2026</div>
+  <h1>Funko Pop! Grogu<br><em>A Full Checklist Across the Mandalorian Universe</em></h1>
+  <div class="cover-subtitle">Every Funko Pop! figure, Bitty Pop, Mystery Mini, and pin product depicting Grogu ("The Child" / "Baby Yoda") found across The Mandalorian, The Book of Boba Fett, and The Mandalorian and Grogu &mdash; organized chronologically by show/era, with sourcing confidence noted explicitly throughout, including where it falls short.</div>
+  <div class="cover-meta">
+    Research conducted: July 30, 2026 &nbsp;&middot;&nbsp; Scope: Grogu-depicting Funko products across the Star Wars/Mandalorian line<br>
+    Core sourcing: pop-figures.com &middot; CardboardConnection &middot; Entertainment Earth &middot; Funko.com &middot; Laughing Place / TechRadar / Collider (2026 Toy Fair reveal)<br>
+    Companion document: Field Reference (funko-grogu-checklist-factsheet.html)
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><span class="toc-section">1. How This Checklist Is Organized</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item"><span class="toc-section">2. The Mandalorian, Season 1 (2019&ndash;2020)</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item"><span class="toc-section">3. The Mandalorian, Season 2 (2020&ndash;2021)</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item"><span class="toc-section">4. Valentine's Day Tie-Ins (2022)</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item"><span class="toc-section">5. Convention &amp; Diamond Collection Exclusive</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">6. The Book of Boba Fett (2022)</span><span class="toc-num">&sect; 06</span></div>
+  <div class="toc-item"><span class="toc-section">7. The Mandalorian, Season 3 and After (2023&ndash;2024)</span><span class="toc-num">&sect; 07</span></div>
+  <div class="toc-item"><span class="toc-section">8. Impressions &amp; Special-Edition Crossovers</span><span class="toc-num">&sect; 08</span></div>
+  <div class="toc-item"><span class="toc-section">9. Ahsoka and Skeleton Crew &mdash; No Grogu Figures Found</span><span class="toc-num">&sect; 09</span></div>
+  <div class="toc-item"><span class="toc-section">10. The Mandalorian and Grogu (2026 Film)</span><span class="toc-num">&sect; 10</span></div>
+  <div class="toc-item"><span class="toc-section">11. Bitty Pop! Multipacks &mdash; Grogu as Mystery "Chase" Bonus</span><span class="toc-num">&sect; 11</span></div>
+  <div class="toc-item"><span class="toc-section">12. Pop! Pin Products</span><span class="toc-num">&sect; 12</span></div>
+  <div class="toc-item"><span class="toc-section">13. Most Sought-After / Highest-Value Pieces</span><span class="toc-num">&sect; 13</span></div>
+  <div class="toc-item"><span class="toc-section">14. Sourcing Confidence Assessment</span><span class="toc-num">&sect; 14</span></div>
+  <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
+</div>
+
+
+<!-- BOTTOM LINE -->
+<div class="callout" style="margin-bottom:48px">
+  <p>This guide catalogues roughly 38 distinct Grogu-depicting Funko Pop! vinyl SKUs, plus companion Bitty Pop, Mystery Mini, and pin products, spanning the numbering range #368 through the high #830s across a single continuous Star Wars Pop! line. Grogu does <strong>not</strong> appear in Ahsoka or Skeleton Crew, and no figures tied to either show were found. A handful of numbers and dates in the newest (2026 film) wave could not be independently confirmed and are flagged inline rather than presented as settled fact &mdash; see &sect; 14.</p>
+  <cite>pop-figures.com &middot; CardboardConnection &middot; Entertainment Earth &middot; Funko.com<sup class="cite">[1][2][11][13]</sup></cite>
+</div>
+
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
+  <h2>How This Checklist Is Organized</h2>
+
+  <p>Star Wars Funko Pop!s share <strong>one continuous numbering line</strong> across the entire franchise &mdash; a single sequential counter that spans every Star Wars sub-property Funko has ever produced a Pop! for. That means Pop numbers in this checklist are not sequential within a show or season; a Grogu figure numbered in the 400s might sit right next to an unrelated Obi-Wan or Ahsoka Tano figure in Funko's own internal catalog. This checklist instead organizes entries <strong>chronologically by show/era</strong> &mdash; the order collectors actually encounter them &mdash; while preserving the exact Pop number for each figure as researched.</p>
+
+  <p>Research was conducted July 30, 2026. Every figure where the Pop number, exact release date, or price could not be independently confirmed is flagged inline in its section table, rather than presented as settled fact. A full accounting of sourcing confidence, by category, is in &sect; 14.</p>
+
+  <div class="callout">
+    <p>Scope note: this guide covers figures, minis, and pins that <strong>depict Grogu specifically</strong>. Related sub-line products that don't depict Grogu himself (e.g. Clang, the Mercenary Guard Droid, Zeb Orrelios in the Razor Crest &mdash; all part of the 2026 movie wave) are named for context in &sect; 10 but excluded from the checklist proper.</p>
+    <cite>Scope decision, this report</cite>
+  </div>
+</div>
+
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
+  <h2>The Mandalorian, Season 1 (2019&ndash;2020)</h2>
+
+  <p>The Season 1 wave is the largest single era in the Grogu line &mdash; twelve figures, released mostly across 2020 as "Baby Yoda" mania followed the character's debut. It runs from the plain <strong>The Child</strong> #368 (Feb 2020) through <strong>Mando Holding Child ("Baby Yoda")</strong> #461, and includes the era's most collectible standard-scale piece, <strong>The Child with Pendant</strong> #398 (NYCC 2020 exclusive) &mdash; see &sect; 13.<sup class="cite">[1][2]</sup></p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>The Child</strong></td><td>368</td><td>Feb 2020</td><td>Standard</td><td>&asymp;3.75in, no exclusivity</td></tr>
+      <tr><td><strong>The Child, 10" Super-Sized</strong></td><td>369</td><td>2020</td><td>Standard</td><td>10in scale</td></tr>
+      <tr><td><strong>The Child with Control Knob</strong></td><td>370</td><td>2020</td><td>GameStop exclusive</td><td>&mdash;</td></tr>
+      <tr><td><strong>The Child with Cup</strong></td><td>378</td><td>2020</td><td>Standard</td><td>&mdash;</td></tr>
+      <tr><td><strong>The Child with Frog</strong></td><td>379</td><td>2020</td><td>Standard</td><td>&mdash;</td></tr>
+      <tr><td><strong>The Child (Concerned)</strong></td><td>384</td><td>2020</td><td>Target exclusive</td><td>Expressive/"concerned" face sculpt</td></tr>
+      <tr><td><strong>The Child, Force Wielding</strong></td><td>385</td><td>2020</td><td>Walmart exclusive</td><td>&mdash;</td></tr>
+      <tr><td><strong>The Child with Pendant</strong></td><td>398</td><td>2020</td><td>NYCC 2020 official convention exclusive</td><td>Carries an NYCC sticker; one of the highest-valued standard-scale Grogu Pops (&asymp;$65 price-guide estimate)</td></tr>
+      <tr><td><strong>The Mandalorian (Child) with Bag</strong></td><td>405</td><td>2020</td><td>Standard</td><td>One of the lowest-valued in the line per collector price guides (&asymp;$12 estimate)</td></tr>
+      <tr><td><strong>The Child with Egg Canister</strong></td><td>407</td><td>2020</td><td>Standard</td><td>&mdash;</td></tr>
+      <tr><td><strong>Mandalorian with the Child, 10" Chrome</strong></td><td>380</td><td>Nov 2020 (pre-order)</td><td>Amazon exclusive</td><td>Super-Sized Pop; pre-order surfaced with a November 2020 date</td></tr>
+      <tr><td><strong>Mando Holding Child ("Baby Yoda")</strong></td><td>461</td><td>Not stated</td><td>Standard</td><td>Combo figure (Mandalorian carrying Grogu, non-chrome)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:.82rem;color:#5a5a5a">Sources for this section: pop-figures.com, CardboardConnection, popfigures.com product pages, funkypriceguide.com, Amazon, TheForce.net.<sup class="cite">[1][2][3][4][5][6][7][8]</sup></p>
+</div>
+
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
+  <h2>The Mandalorian, Season 2 (2020&ndash;2021)</h2>
+
+  <p><strong>Grogu with Cookies</strong> #465 was also issued as a flocked, soft-touch variant sold within a Pop &amp; Tee apparel bundle, under the same #465 &mdash; a shared number covering two distinct physical SKUs.<sup class="cite">[9][10]</sup> The standout piece of the era is the Entertainment Earth-exclusive <strong>Dark Trooper with Grogu, Glow-in-the-Dark</strong> #488, which depicts the Season 2 finale abduction scene (S2E6, "The Rescue") in GITD deco &mdash; see &sect; 13.<sup class="cite">[11]</sup></p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grogu with Cookies</strong></td><td>465</td><td>2020&ndash;21</td><td>Standard</td><td>Also issued as <em>Grogu with Cookies (Flocked)</em>, same #465, a Pop &amp; Tee apparel bundle</td></tr>
+      <tr><td><strong>Grogu with Butterfly</strong></td><td>468</td><td>2021</td><td>GameStop exclusive</td><td>&mdash;</td></tr>
+      <tr><td><strong>Grogu with Chowder Squid</strong></td><td>469</td><td>2021</td><td>Target exclusive</td><td>&mdash;</td></tr>
+      <tr><td><strong>Grogu (Macy's Thanksgiving Day Parade)</strong></td><td>474</td><td>2021</td><td>Standard/FunkoShop tie-in</td><td>Balloon-float figure</td></tr>
+      <tr><td><strong>Grogu (Macy's Thanksgiving Day Parade), Deluxe</strong></td><td>475</td><td>2021</td><td>Deluxe FunkoShop/Macy's tie-in</td><td>Deluxe-format balloon-float figure</td></tr>
+      <tr><td><strong>Grogu Using the Force</strong></td><td>477</td><td>2020&ndash;21</td><td>Amazon exclusive</td><td>&mdash;</td></tr>
+      <tr><td><strong>Luke Skywalker with Grogu</strong></td><td>482</td><td>2020&ndash;21</td><td>Standard</td><td>Depicts the Season 2 finale rescue scene</td></tr>
+      <tr><td><strong>Grogu Using the Force, Lights &amp; Sound Deluxe</strong></td><td>485</td><td>2020&ndash;21</td><td>Deluxe</td><td>Interactive figure with sound/light features</td></tr>
+      <tr><td><strong>Dark Trooper with Grogu, Glow-in-the-Dark</strong></td><td>488</td><td>2020&ndash;21</td><td>Entertainment Earth exclusive</td><td>Depicts the S2 finale abduction (S2E6, "The Rescue"), GITD deco, &asymp;3.75in</td></tr>
+      <tr class="flag-cell"><td><strong>Grogu at Macy's Thanksgiving Day Parade (2nd listing)</strong></td><td>575</td><td>Not stated</td><td>Unclear</td><td><span class="flag-tag">Unconfirmed</span>Appears in one checklist source as a distinct, later balloon-float release; could not be fully reconciled against #474/#475 from the same event. May be a distinct later-year release, or a listing duplicate/data error &mdash; see &sect; 14.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:.82rem;color:#5a5a5a">Sources for this section: pop-figures.com, CardboardConnection, popfigures.com, Funko.com, Entertainment Earth.<sup class="cite">[1][2][9][10][11]</sup></p>
+</div>
+
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
+  <h2>Valentine's Day Tie-Ins (2022)</h2>
+
+  <p>A small three-figure wave, Mandalorian-branded but not tied to a specific season &mdash; pink-deco Valentine's Day variants of existing character pairings.<sup class="cite">[2]</sup></p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grogu with Cookies (Pink)</strong></td><td>493</td><td>2022</td><td>Standard</td><td>Valentine's Day release</td></tr>
+      <tr><td><strong>Luke Skywalker with Grogu (Pink)</strong></td><td>494</td><td>2022</td><td>Standard</td><td>Valentine's Day release</td></tr>
+      <tr><td><strong>Mandalorian with Grogu (Pink)</strong></td><td>498</td><td>2022</td><td>Target exclusive</td><td>Valentine's Day release</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
+  <h2>Convention &amp; Diamond Collection Exclusive</h2>
+
+  <p><strong>Grogu, Diamond Collection</strong> shares the number #368 with the base "The Child" figure but is a distinct SKU/variant &mdash; a Star Wars Celebration Anaheim 2022 exclusive with a diamond-glitter finish, limited to <strong>5,000 pieces</strong>. The hard production cap combined with convention-only distribution makes it one of the most collectible Grogu Pops in this entire checklist &mdash; ranked #1 in &sect; 13.<sup class="cite">[12]</sup></p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grogu, Diamond Collection</strong></td><td>368 (variant SKU)</td><td>2022</td><td>SW Celebration Anaheim 2022 exclusive</td><td>Diamond-glitter finish, limited edition of 5,000</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+
+<!-- SECTION 6 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 06</span><div class="section-rule"></div></div>
+  <h2>The Book of Boba Fett (2022)</h2>
+
+  <p>Two figures. <strong>Grogu with Armor</strong> #584 depicts Grogu receiving the Mandalorian signet/armor gift from the Armorer, at standard scale. <strong>Grogu with Rancor</strong> #587 is an Entertainment Earth-exclusive 10" Jumbo/Super-Sized figure depicting Grogu riding the Rancor &mdash; flagged by collector sites as one of the more sought-after large-scale Grogu pieces (ranked #3 in &sect; 13).<sup class="cite">[13][14][15]</sup></p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grogu with Armor</strong></td><td>584</td><td>2022</td><td>Standard</td><td>&asymp;3.75in, depicts Grogu receiving the Mandalorian signet/armor gift</td></tr>
+      <tr><td><strong>Grogu with Rancor</strong></td><td>587</td><td>2022</td><td>Entertainment Earth exclusive</td><td>10" Jumbo/Super-Sized, Grogu riding the Rancor</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+
+<!-- SECTION 7 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 07</span><div class="section-rule"></div></div>
+  <h2>The Mandalorian, Season 3 and After (2023&ndash;2024)</h2>
+
+  <p>Three figures span this era. <strong>IG-12 with Grogu</strong> #720 is the most elaborate &mdash; a Deluxe "Lights &amp; Sound" bobblehead depicting the Season 3 finale scene in which Grogu pilots the reprogrammed IG-series nanny droid, at roughly 6.75in, with a secondary-market estimate around $30.<sup class="cite">[18][19]</sup></p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grogu in Hover-Pram</strong></td><td>664</td><td>2023</td><td>Standard</td><td>&mdash;</td></tr>
+      <tr><td><strong>Grogu with Anzellan Droidsmith</strong></td><td>691</td><td>March 2024</td><td>Amazon exclusive</td><td>&asymp;3.5in duo figure, "visit Nevarro" theming</td></tr>
+      <tr><td><strong>IG-12 with Grogu</strong></td><td>720</td><td>2023&ndash;24</td><td>Deluxe</td><td>"Lights &amp; Sound" bobblehead, S3 finale scene, &asymp;6.75in; secondary-market estimate &asymp;$30</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:.82rem;color:#5a5a5a">Sources: Entertainment Earth product pages (primary retail source) for all three entries; a Facebook Marketplace listing for the Anzellan Droidsmith duo (weakest tier &mdash; see &sect; 14).<sup class="cite">[16][17][18][19]</sup></p>
+</div>
+
+
+<!-- SECTION 8 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 08</span><div class="section-rule"></div></div>
+  <h2>Impressions &amp; Special-Edition Crossovers</h2>
+
+  <p><strong>Mandalorian with Grogu, Impressions ("Samurai")</strong> #772 is a Target-exclusive stylized reimagining with samurai-inspired armor design, at roughly 4.25&ndash;4.35in, including a random Star Wars art card. This figure is not tied to a specific season.<sup class="cite">[20][21]</sup></p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+    <tbody>
+      <tr class="flag-cell"><td><strong>Mandalorian with Grogu, Impressions ("Samurai")</strong></td><td>772</td><td>2024 or 2025</td><td>Target exclusive</td><td><span class="flag-tag">Year Unconfirmed</span>Samurai-inspired armor design, &asymp;4.25&ndash;4.35in, includes a random Star Wars art card. Release year is inconsistent across retailer listings (2024 vs. 2025 appear in different listings).</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+
+<!-- SECTION 9 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 09</span><div class="section-rule"></div></div>
+  <h2>Ahsoka and Skeleton Crew &mdash; No Grogu Figures Found</h2>
+
+  <p>Grogu does not appear as a character in <strong>Ahsoka</strong> (2023). The only Grogu-adjacent product tied to that show's branding is a Loungefly-style <strong>"Ahsoka &amp; Grogu" 4-pack enamel pin set</strong> (2 Ahsoka pins, 2 Grogu pins, &asymp;1.5in each). This is a pin product, not a vinyl Pop! figure &mdash; it packages the two characters together for cross-promotional purposes rather than depicting an in-show appearance. See &sect; 12 for the full pin listing.<sup class="cite">[22][23]</sup></p>
+
+  <p>Grogu also does not appear in <strong>Skeleton Crew</strong> (2024&ndash;2025). Skeleton Crew has its own separate Funko Pop line (e.g. the "KB" character, #701), with no Grogu tie-in found.<sup class="cite">[24][25]</sup></p>
+
+  <p>The Mandalorian and Grogu film reportedly contains a "hidden" nod/cameo referencing Skeleton Crew, but that is a film Easter egg, not evidence Grogu appears in the Skeleton Crew series itself.<sup class="cite">[26]</sup></p>
+
+  <div class="callout warn">
+    <p>This is a negative finding, not exhaustive absence proof &mdash; but it is consistent across every source checked in this research. No Funko Pop! Town set featuring Grogu was found either.</p>
+    <cite>See &sect; 14, "Not Found / Explicitly Ruled Out"</cite>
+  </div>
+</div>
+
+
+<!-- SECTION 10 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 10</span><div class="section-rule"></div></div>
+  <h2>The Mandalorian and Grogu (2026 Film)</h2>
+
+  <p>The film released in theaters in 2026. Funko's tie-in wave began pre-order February 14, 2026, and arrived at retail by June 2026. Standard Pops in this wave retail at $14.99; Rides Deluxe figures at $29.99.<sup class="cite">[27][28][29]</sup></p>
+
+  <div class="callout warn">
+    <p><strong>Currency caveat, stated plainly:</strong> this research reflects the state of the Funko Star Wars line as of <strong>late July 2026</strong>. Funko continuously adds new SKUs, particularly around this recently released film &mdash; new GameStop, Hot Topic, Box Lunch, or SDCC-2026-adjacent exclusives tied to the film may not yet be reflected in this table. Treat this section as a snapshot, not a permanently complete list.</p>
+    <cite>See &sect; 14 for the full currency note</cite>
+  </div>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Figure</th><th>Pop #</th><th>Year</th><th>Exclusivity</th><th>Variant Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>The Mandalorian with Grogu</strong></td><td>818</td><td>2026</td><td>Standard, $14.99</td><td>Combo Pop &mdash; Mando with miniature Grogu on his back/shoulder</td></tr>
+      <tr class="flag-cell"><td><strong>Grogu with Crest</strong></td><td>819 (unverified)</td><td>2026</td><td>Standard, $14.99</td><td><span class="flag-tag">Unconfirmed #</span>Standalone Grogu wearing the Mudhorn-emblazoned armor chest plate the Armorer gave him. Number sourced from a retailer listing snippet, not independently verified against Funko's own product page.</td></tr>
+      <tr class="flag-cell"><td><strong>Grogu with Snack (Flocked)</strong></td><td>Not confirmed</td><td>2026</td><td>Standard, $14.99</td><td><span class="flag-tag">Pop # Unconfirmed</span>Standalone flocked Grogu shown "enjoying" a popcorn-like snack. Confirmed as a real SKU on Funko's site, but its numbered-line Pop # could not be confirmed. Also exists as a Mystery Mini at 1-in-36 rarity &mdash; a different product format.</td></tr>
+      <tr class="flag-cell"><td><strong>Grogu in Pram</strong></td><td>Not confirmed</td><td>2026</td><td>Standard, $14.99</td><td><span class="flag-tag">Pop # Unconfirmed</span>Standalone Grogu in a redesigned hover-pram. Confirmed to exist as a Funko.com SKU, but its Pop # could not be confirmed. Also exists as a Mystery Mini at 1-in-12 rarity &mdash; a different product format.</td></tr>
+      <tr><td><strong>Mandalorian with Grogu in Imperial Remnant AT-RT, Rides Deluxe</strong></td><td>837</td><td>2026</td><td>Rides Deluxe, $29.99</td><td>&asymp;6.9in, depicts the pair riding an Imperial walker</td></tr>
+      <tr><td><strong>Bitty Pop! Rides: Mandalorian in N1 Starfighter (with Grogu)</strong></td><td>Bitty Pop format &mdash; no full Pop #</td><td>2026</td><td>$5.99</td><td>Miniature-format Bitty Pop Rides set; listed as "coming soon" at the time the Funko.com listing was checked</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Two other figures from this same movie wave &mdash; <strong>Clang</strong> (#820) and the <strong>Mercenary Guard Droid</strong> (#821), plus <strong>Zeb Orrelios in the Razor Crest</strong> (Rides Deluxe #838, Target exclusive) &mdash; are part of "The Mandalorian and Grogu" sub-line but do not depict Grogu himself, so they're excluded from the checklist proper and noted here only for context.<sup class="cite">[34][35][36]</sup></p>
+
+  <p style="font-size:.82rem;color:#5a5a5a">Sources for this section: Funko's official Toy Fair 2026 reveal as reported by Laughing Place, corroborated by Collider and TechRadar; Entertainment Earth and Funko.com product pages; BigBadToyStore (flagged, single-source lead for #819).<sup class="cite">[27][28][29][30][31][32][33][34][35][36]</sup></p>
+</div>
+
+
+<!-- SECTION 11 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 11</span><div class="section-rule"></div></div>
+  <h2>Bitty Pop! Multipacks &mdash; Grogu as Mystery "Chase" Bonus</h2>
+
+  <p>Funko's Bitty Pop! Star Wars: The Mandalorian 4-packs (Series 1&ndash;4) each include three named 0.9in mini-figures plus one mystery bonus figure. Grogu variants are used as that mystery pull, which makes them the closest thing to a designated "chase" variant anywhere in the Grogu lineup &mdash; standard-format Grogu Pop!s do not appear to have a designated chase variant as of this research.<sup class="cite">[37][38]</sup></p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Mystery Pull</th><th>Rarity</th><th>Format</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grogu</strong></td><td>Hyper Rare &mdash; 1-in-6</td><td>Bitty Pop! (0.9in)</td></tr>
+      <tr><td><strong>Grogu with Cup</strong></td><td>Hyper Rare &mdash; 1-in-6</td><td>Bitty Pop! (0.9in)</td></tr>
+      <tr><td><strong>Grogu with Frog</strong></td><td>Rare &mdash; 1-in-3</td><td>Bitty Pop! (0.9in)</td></tr>
+      <tr><td><strong>Grogu with Cookies</strong></td><td>Rare &mdash; 1-in-3</td><td>Bitty Pop! (0.9in)</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+
+<!-- SECTION 12 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 12</span><div class="section-rule"></div></div>
+  <h2>Pop! Pin Products</h2>
+
+  <p>Not vinyl figures, included here for completeness since collectors of the Grogu line commonly track them alongside the Pops proper.</p>
+
+  <div class="table-scroll">
+  <table class="ref-table">
+    <thead><tr><th>Product</th><th>Detail</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pop! Pin: Grogu Using the Force</strong></td><td>SKU STPP0100</td><td>Standalone enamel pin</td></tr>
+      <tr><td><strong>Loungefly Pop! Pin: Grogu</strong></td><td>&asymp;4in with stand</td><td>Standalone enamel pin</td></tr>
+      <tr><td><strong>Ahsoka &amp; Grogu 4-Pack Pin Set</strong></td><td>SKU STPN0262</td><td>2 Ahsoka pins + 2 Grogu pins, &asymp;1.5in each</td></tr>
+      <tr><td><strong>"Grogu Moving" Loungefly Enamel Pin</strong></td><td>C2E2 2024 exclusive</td><td>Limited to 700 pieces</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:.82rem;color:#5a5a5a">Sources: Funko.com, Her Universe, Walmart, popfigures.com.<sup class="cite">[22][23][39][40][41]</sup></p>
+</div>
+
+
+<!-- SECTION 13 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 13</span><div class="section-rule"></div></div>
+  <h2>Most Sought-After / Highest-Value Pieces</h2>
+
+  <p>Based on convention/retailer exclusivity, limited production runs, and collector price-guide estimates gathered throughout this research, the standout pieces are:</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">1. Grogu, Diamond Collection #368</span><span class="detail-body">Star Wars Celebration 2022, limited edition of 5,000 &mdash; hard production cap plus convention-only distribution.<sup class="cite">[12]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">2. The Child with Pendant #398</span><span class="detail-body">NYCC 2020 exclusive &mdash; one of the higher price-guide estimates (&asymp;$65) among standard-scale Grogu Pops.<sup class="cite">[4][5]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">3. Grogu with Rancor #587</span><span class="detail-body">Entertainment Earth exclusive, 10" Jumbo &mdash; large-scale sculpt restricted to a single retail channel.<sup class="cite">[14][15]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">4. Dark Trooper w/ Grogu, GITD #488</span><span class="detail-body">Entertainment Earth exclusive &mdash; scene-specific glow-in-the-dark deco tied to a fan-favorite Season 2 moment.<sup class="cite">[11]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">5. "Grogu Moving" Loungefly Pin</span><span class="detail-body">C2E2 2024, limited edition of 700 &mdash; a very small production run, though a pin rather than a vinyl Pop.<sup class="cite">[41]</sup></span></div>
+    <div class="detail-row"><span class="detail-label">6. Bitty Pop! Hyper Rare Grogu pulls</span><span class="detail-body">1-in-6 pull rate &mdash; the closest thing to a chase variant in the line, valuable to collectors completing blind-box sets.<sup class="cite">[37][38]</sup></span></div>
+  </div>
+
+  <div class="callout warn">
+    <p>No hard current secondary-market sale-price data (e.g. recent completed eBay/StockX sales) was found for most of these pieces. This "most valuable" designation is based on production scarcity and exclusivity signals from retailer/collector sites &mdash; <strong>not</strong> verified recent transaction prices &mdash; with the exception of the &asymp;$65 (#398) and &asymp;$30 (IG-12 with Grogu Deluxe #720, &sect; 07) price-guide estimates cited directly.</p>
+    <cite>Kept visible on purpose &mdash; see &sect; 14</cite>
+  </div>
+</div>
+
+
+<!-- SECTION 14 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 14</span><div class="section-rule"></div></div>
+  <h2>Sourcing Confidence Assessment</h2>
+
+  <p>This research draws on collector checklist sites, official manufacturer pages, primary retailer/exclusive-seller listings, and toy-press reporting on official reveals &mdash; not a single authoritative catalog, since Funko does not publish one. Confidence varies meaningfully by claim, and is broken out explicitly below rather than presented as uniform.</p>
+
+  <div class="confidence">
+    <div class="confidence-head">Well-Supported</div>
+    <div class="confidence-body">
+      <div class="conf-item good">
+        <span class="lbl">Corroborated across independent sources</span>
+        <p>The core Mandalorian Season 1&ndash;2 numbered lineup (#368&ndash;#498) is corroborated across multiple independent checklist sites &mdash; pop-figures.com, CardboardConnection, and funkypriceguide.com &mdash; with consistent numbering.<sup class="cite">[1][2][9]</sup></p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Confirmed via primary retail source</span>
+        <p>The Book of Boba Fett figures (#584, #587) and the Season 3 IG-12 Deluxe (#720) are confirmed via Entertainment Earth's own product pages &mdash; a primary retail source, not an aggregator.<sup class="cite">[11][13][14][18]</sup></p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Confirmed via official reveal reporting</span>
+        <p>The 2026 movie wave's headline figures (#818, AT-RT #837) and pricing are confirmed via Funko's official Toy Fair 2026 reveal, as reported by Laughing Place and corroborated by Collider and TechRadar.<sup class="cite">[27][28][32]</sup></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Thinly Sourced or Unconfirmed</div>
+    <div class="confidence-body">
+      <div class="conf-item bad">
+        <span class="lbl">Single-source lead, not independently verified</span>
+        <p>"Grogu with Crest" #819 rests on a single retailer search-result snippet (bigbadtoystore.com) that could not be directly fetched to verify &mdash; treat that number as a lead, not a confirmed fact.<sup class="cite">[31]</sup></p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Confirmed SKU, unconfirmed Pop #</span>
+        <p>"Grogu with Snack (Flocked)" and "Grogu in Pram" could not be matched to a confirmed numbered-line SKU, even though both are confirmed as real Funko.com products.<sup class="cite">[27][29]</sup></p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Possible duplicate / data error</span>
+        <p>The #575 "Grogu at Macy's Thanksgiving Day Parade" entry could not be reconciled against the #474/#475 pair from the same event, and may be a duplicate or data error in one source.<sup class="cite">[1]</sup></p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Inconsistent across listings</span>
+        <p>The release year for the "Impressions"/Samurai #772 figure is inconsistent across retailer listings (2024 vs. 2025 appear in different listings).<sup class="cite">[20][21]</sup></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Not Found / Explicitly Ruled Out</div>
+    <div class="confidence-body">
+      <div class="conf-item bad">
+        <span class="lbl">Negative finding, consistent across sources</span>
+        <p>No Grogu-specific standard Pop! vinyl figure tied to Ahsoka or Skeleton Crew exists, because Grogu does not appear as a character in either show &mdash; consistent across every source checked, though this is a negative finding rather than exhaustive absence proof. No Funko Pop! Town set featuring Grogu was found.<sup class="cite">[22][23][24][25][26]</sup></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="confidence" style="margin-top:16px">
+    <div class="confidence-head">Currency of This List</div>
+    <div class="confidence-body">
+      <div class="conf-item">
+        <span class="lbl">Snapshot, not a permanent record</span>
+        <p>This research reflects the state of the Funko Star Wars line as of <strong>late July 2026</strong>. Funko continuously adds new SKUs, particularly around the recently released Mandalorian and Grogu film, so this checklist should be treated as a snapshot rather than a permanently complete list &mdash; new GameStop, Hot Topic, Box Lunch, or SDCC-2026-adjacent exclusives tied to the film may not yet be reflected here.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SOURCES AND REFERENCES -->
+<div class="sources-section">
+  <div class="section-eyebrow"><span class="section-tag">&sect;</span><div class="section-rule"></div></div>
+  <h2>Sources and References</h2>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 1 &mdash; Official Funko Manufacturer Pages</div>
+    <div class="source-group-note">funko.com product/fandom pages &mdash; the strongest confirmation that a SKU exists, though not always the numbered-line placement.</div>
+    <div class="source-item"><span class="source-num">[10]</span>Funko. <em>Pop! Grogu with Cookies</em> (From the Vault).
+      <span class="source-url">funko.com/pop-grogu-with-cookies/54531.html</span></div>
+    <div class="source-item"><span class="source-num">[15]</span>Funko. <em>Pop! Jumbo Grogu with Rancor</em> (From the Vault).
+      <span class="source-url">funko.com/pop-jumbo-grogu-with-rancor/69056.html</span></div>
+    <div class="source-item"><span class="source-num">[19]</span>Funko. <em>Pop! Deluxe: IG-12 with Grogu</em>.
+      <span class="source-url">funko.com/pop-deluxe-ig-12-with-grogu/80001.html</span></div>
+    <div class="source-item"><span class="source-num">[21]</span>Funko. <em>Pop! Mandalorian with Grogu (Impressions)</em>.
+      <span class="source-url">funko.com/pop-mandalorian-with-grogu-impressions/85188.html</span></div>
+    <div class="source-item"><span class="source-num">[22]</span>Funko. <em>Ahsoka &amp; Grogu 4-Pack Pin Set</em>.
+      <span class="source-url">funko.com/ahsoka-grogu-4-pack-pin-set/STPN0262.html</span></div>
+    <div class="source-item"><span class="source-num">[29]</span>Funko. <em>STAR WARS: The Mandalorian and Grogu Pop! Vinyl Figures</em> (fandom page).
+      <span class="source-url">funko.com/fandoms/scifi/the-mandalorian-and-grogu/</span></div>
+    <div class="source-item"><span class="source-num">[33]</span>Funko. <em>Pop! Rides Deluxe: The Mandalorian with Grogu in Imperial Remnant AT-RT</em>.
+      <span class="source-url">funko.com/pop-rides-deluxe-the-mandalorian-with-grogu-in-imperial-remnant-at-rt/90812.html</span></div>
+    <div class="source-item"><span class="source-num">[38]</span>Funko. <em>Bitty Pop! Star Wars: The Mandalorian 4-Pack, Series 1</em>.
+      <span class="source-url">funko.com/bitty-pop-star-wars-the-mandalorian-4-pack-series-1/75451.html</span></div>
+    <div class="source-item"><span class="source-num">[39]</span>Funko. <em>Pop! Pin: Grogu Using the Force</em>.
+      <span class="source-url">funko.com/pop-pin-grogu-using-the-force/STPP0100.html</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 2 &mdash; Primary / Exclusive-Seller Retail Listings</div>
+    <div class="source-group-note">Entertainment Earth, Amazon, Target, and Walmart product pages &mdash; direct listings from the exclusive sellers themselves.</div>
+    <div class="source-item"><span class="source-num">[6]</span>Amazon. <em>Funko Pop! Star Wars: The Mandalorian 10" Chrome Mandalorian with The Child</em>.
+      <span class="source-url">amazon.com/Funko-Pop-Star-Wars-Mandalorian/dp/B083MCJYTL</span></div>
+    <div class="source-item"><span class="source-num">[8]</span>Amazon. <em>Funko POP! Star Wars: The Mandalorian &ndash; Mando Holding Child, Baby Yoda #461</em>.
+      <span class="source-url">amazon.com/Funko-Pop-Star-Wars-Mandalorian/dp/B08WCWGR8T</span></div>
+    <div class="source-item"><span class="source-num">[11]</span>Entertainment Earth. <em>Star Wars: The Mandalorian Dark Trooper with Grogu Glow-in-the-Dark #488</em> (EE Exclusive).
+      <span class="source-url">entertainmentearth.com/product/star-wars-the-mandalorian-dark-trooper-with-grogu-glowinthedark-pop-vinyl-figure-entertainment-earth-exclusive/fu66tc58286ee</span></div>
+    <div class="source-item"><span class="source-num">[13]</span>Entertainment Earth. <em>Star Wars: Book of Boba Fett Grogu with Armor #584</em>.
+      <span class="source-url">entertainmentearth.com/product/star-wars-book-of-boba-fett-grogu-with-armor-funko-pop-vinyl-figure-584/fu68650</span></div>
+    <div class="source-item"><span class="source-num">[14]</span>Entertainment Earth. <em>Star Wars: The Book of Boba Fett Grogu with Rancor #587</em> (EE Exclusive).
+      <span class="source-url">entertainmentearth.com/product/star-wars-the-book-of-boba-fett-grogu-with-rancor-funko-pop-vinyl-figure-entertainment-earth-exclusive/fu10by69056ee</span></div>
+    <div class="source-item"><span class="source-num">[16]</span>Entertainment Earth. <em>Star Wars: The Mandalorian Grogu in Hover-Pram #664</em>.
+      <span class="source-url">entertainmentearth.com/product/star-wars-the-mandalorian-grogu-in-hoverpram-funko-pop-vinyl-figure-664/fu76551</span></div>
+    <div class="source-item"><span class="source-num">[18]</span>Entertainment Earth. <em>Star Wars: The Mandalorian IG-12 with Grogu Deluxe #720</em>.
+      <span class="source-url">entertainmentearth.com/product/star-wars-the-mandalorian-ig12-with-grogu-deluxe-funko-pop-vinyl-figure-720/fu80001</span></div>
+    <div class="source-item"><span class="source-num">[30]</span>Entertainment Earth. <em>Star Wars: The Mandalorian and Grogu &ndash; Mandalorian with Grogu #818</em>.
+      <span class="source-url">entertainmentearth.com/product/star-wars-the-mandalorian-and-grogu-mandalorian-with-grogu-funko-pop-vinyl-figure-818/fu90443</span></div>
+    <div class="source-item"><span class="source-num">[34]</span>Entertainment Earth. <em>Star Wars: The Mandalorian and Grogu Clang #820</em> (context only, doesn't depict Grogu).
+      <span class="source-url">entertainmentearth.com/product/star-wars-the-mandalorian-and-grogu-clang-funko-pop-vinyl-figure-820/fu90448</span></div>
+    <div class="source-item"><span class="source-num">[35]</span>Target. <em>Funko Pop! Rides Deluxe: Star Wars: The Mandalorian &amp; Grogu &ndash; Zeb Orrelios in the Razor Crest</em> (context only).
+      <span class="source-url">target.com/p/funko-funko-pop-rides-deluxe-star-wars-the-mandalorian-grogu-zeb-orrelios-in-the-razor-crest/-/A-1010687210</span></div>
+    <div class="source-item"><span class="source-num">[37]</span>Amazon. <em>Funko Bitty Pop! Mandalorian 4-Pack</em>.
+      <span class="source-url">amazon.com/Funko-Mandalorian-Collectible-Offworld-Mystery/dp/B0CCBWHZWK</span></div>
+    <div class="source-item"><span class="source-num">[40]</span>Walmart. <em>Funko Pop! Star Wars Mandalorian with Baby Child Grogu / Loungefly Grogu Pin</em>.
+      <span class="source-url">walmart.com/ip/Funko-Pop-Star-Wars-Pin-SE-Special-Edition-Enamel-The-Mandalorian-with-Grogu/992553936</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 3 &mdash; Toy/Entertainment Press Reporting on Official Reveals</div>
+    <div class="source-group-note">Coverage of Funko's own Toy Fair 2026 reveal for the 2026 film wave.</div>
+    <div class="source-item"><span class="source-num">[27]</span>Laughing Place. <em>This is the Way &mdash; Funko Reveals New Pop! Toys for "The Mandalorian and Grogu" at Toy Fair 2026</em>.
+      <span class="source-url">laughingplace.com/disney-merchandise/funko-pop-the-mandalorian-and-grogu-toy-fair-2026/</span></div>
+    <div class="source-item"><span class="source-num">[28]</span>TechRadar. <em>Exclusive: These new The Mandalorian and Grogu Funko POP!s might be the cutest Star Wars collectibles yet</em>.
+      <span class="source-url">techradar.com/streaming/entertainment/exclusive-funkos-latest-star-wars-figures-bring-the-mandalorian-and-grogu-to-your-desk</span></div>
+    <div class="source-item"><span class="source-num">[32]</span>Collider. <em>The Next Must-Have Mandalorian and Grogu Funko Pops Have Arrived</em>.
+      <span class="source-url">collider.com/the-mandalorian-and-grogu-movie-tv-series-funko-pop-collection-images-stormtrooper-guard-droid-garazeb-zeb-orrelios/</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 4 &mdash; Collector Checklist, Price-Guide &amp; Retailer-Aggregator Sites</div>
+    <div class="source-group-note">Independent collector-run checklists and price guides; cross-corroborated with each other for the core numbered lineup, but not primary manufacturer/retailer sources.</div>
+    <div class="source-item"><span class="source-num">[1]</span>pop-figures.com. <em>Grogu (The Child, Baby Yoda) checklist</em>.
+      <span class="source-url">pop-figures.com/character/grogu-the-child-baby-yoda-366</span></div>
+    <div class="source-item"><span class="source-num">[2]</span>CardboardConnection. <em>Ultimate Funko Pop Star Wars The Mandalorian Figures Gallery and Checklist</em>.
+      <span class="source-url">cardboardconnection.com/funko-pop-star-wars-the-mandalorian-figures</span></div>
+    <div class="source-item"><span class="source-num">[3]</span>popfigures.com. <em>The Child #384 (Concerned), Target Exclusive</em>.
+      <span class="source-url">popfigures.com/en-us/products/the-child-384-concerned-funko-pop-star-wars-the-mandalorian-target-exclusive</span></div>
+    <div class="source-item"><span class="source-num">[4]</span>popfigures.com. <em>The Child with Pendant #398, NYCC 2020 Exclusive</em>.
+      <span class="source-url">popfigures.com/en-us/products/the-child-with-pendant-398-funko-pop-star-wars-the-mandalorian-nycc-2020-official-convention-exclusive</span></div>
+    <div class="source-item"><span class="source-num">[5]</span>funkypriceguide.com. <em>Baby Yoda &mdash; Funko Pop Price Guide</em>.
+      <span class="source-url">funkypriceguide.com/checklist/funko-pop-baby-yoda-character/</span></div>
+    <div class="source-item"><span class="source-num">[9]</span>popfigures.com. <em>Grogu with Cookies (Flocked) #465</em>.
+      <span class="source-url">popfigures.com/en-us/products/grogu-with-cookies-flocked-465-funko-pop-star-wars-special-edition</span></div>
+    <div class="source-item"><span class="source-num">[12]</span>StockX. <em>Funko Pop! Star Wars Grogu Diamond Collection 2022 Star Wars Celebration Exclusive (Edition of 5000) #368</em>.
+      <span class="source-url">stockx.com/funko-pop-star-wars-grogu-diamond-collection-2022-star-wars-celebration-exclusive-edition-of-5000-figure-368</span></div>
+    <div class="source-item"><span class="source-num">[20]</span>RealPopMania. <em>Funko Pop! Star Wars: Impressions &ndash; Mandalorian with Grogu #772</em>.
+      <span class="source-url">realpopmania.com/products/funko-pop-star-wars-impressions-mandalorian-with-grogu-772</span></div>
+    <div class="source-item"><span class="source-num">[23]</span>Her Universe. <em>Funko Star Wars The Mandalorian Ahsoka &amp; Grogu Enamel Pin Set</em>.
+      <span class="source-url">heruniverse.com/product/funko-star-wars-the-mandalorian-ahsoka-grogu-enamel-pin-set/31164578.html</span></div>
+    <div class="source-item"><span class="source-num">[24]</span>Memory Lane Comics. <em>Funko POP! Star Wars: Skeleton Crew KB #701</em>.
+      <span class="source-url">stores.comichub.com/memory_lane/products/pop-star-wars-skeleton-crew-kb</span></div>
+    <div class="source-item"><span class="source-num">[36]</span>RealPopMania. <em>Funko Pop! Rides &ndash; Star Wars: The Mandalorian &amp; Grogu (2026) &ndash; Zeb Orrelios in the Razor Crest Deluxe #838</em> (context only).
+      <span class="source-url">realpopmania.com/products/funko-pop-rides-star-wars-the-mandalorian-grogu-2026-zeb-orrelios-in-the-razor-crest-deluxe-838</span></div>
+    <div class="source-item"><span class="source-num">[41]</span>popfigures.com. <em>Grogu Moving Loungefly Enamel Pin &ndash; Star Wars The Mandalorian, C2E2 2024 Exclusive LE700 pcs</em>.
+      <span class="source-url">popfigures.com/en-us/products/grogu-moving-loungefly-enamel-pin-star-wars-the-mandalorian-c2e2-2024-exclusive-le700-pcs</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 5 &mdash; Fan / Entertainment News Sites</div>
+    <div class="source-group-note">Secondary context and franchise-adjacent reporting.</div>
+    <div class="source-item"><span class="source-num">[7]</span>TheForce.net. <em>Funko Star Wars: The Mandalorian Chrome 10-Inch Pop! Vinyl Figure Features The Child</em>.
+      <span class="source-url">theforce.net/story/fandom/Funko_Star_Wars_The_Mandalorian_Chrome_10Inch_Pop_Vinyl_Figure_Features_The_Child_187180.asp</span></div>
+    <div class="source-item"><span class="source-num">[25]</span>The Direct. <em>Disney Announces Ahsoka &amp; Grogu's Next Star Wars Appearance</em>.
+      <span class="source-url">thedirect.com/article/ahsoka-grogu-next-star-wars-appearance-disney</span></div>
+    <div class="source-item"><span class="source-num">[26]</span>The HoloFiles. <em>'The Mandalorian and Grogu' Features Hidden 'Skeleton Crew' Cameo</em>.
+      <span class="source-url">theholofiles.com/2026/05/30/the-mandalorian-and-grogu-confirmed-to-feature-hidden-skeleton-crew-cameo/</span></div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 6 &mdash; Marketplace Listings &amp; Single-Snippet Leads</div>
+    <div class="source-group-note">Lowest-confidence tier: a peer-to-peer marketplace listing and a single unverified retailer search snippet. Flagged explicitly throughout this report rather than folded into the main checklist as confirmed fact.</div>
+    <div class="source-item"><span class="source-num">[17]</span>Facebook Marketplace. <em>Funko Pop Star Wars: Mandalorian &ndash; Grogu with Anzellan Droidsmith, Amazon Exclusive</em> (listing).
+      <span class="source-url">facebook.com/marketplace/item/2108556062891559/</span></div>
+    <div class="source-item"><span class="source-num">[31]</span>BigBadToyStore. <em>Star Wars: Mandalorian &amp; Grogu Pop! #819 Grogu with Crest</em>. <strong>Single-source, unverified</strong> &mdash; could not be directly fetched to confirm; treated as a lead throughout this report, not a confirmed number.
+      <span class="source-url">bigbadtoystore.com/product/star-wars-mandalorian-grogu-pop-819-grogu-crest-180970?variation=355877</span></div>
+  </div>
+</div>
+
+<div class="footer">
+  Funko Pop! Grogu: A Full Checklist Across the Mandalorian Universe &nbsp;&middot;&nbsp; Research conducted July 30, 2026<br>
+  Core sourcing: pop-figures.com &middot; CardboardConnection &middot; Entertainment Earth &middot; Funko.com &middot; Laughing Place / TechRadar / Collider<br>
+  Sourcing gaps &mdash; including the #819, #575, and 2026-wave Pop-number flags &mdash; are documented explicitly in &sect; 14 rather than smoothed over. This is a snapshot as of late July 2026, not a permanently complete list.
+</div>
+
+</body>
+</html>
