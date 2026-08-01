@@ -433,6 +433,30 @@ body::before {
 .theme-grogu .report-file-desc { color: #c9b98a; }
 .theme-grogu .report-file-arrow { color: #c9b98a; }
 .theme-grogu .report-file-link:hover .report-file-arrow { color: #2f9e6f; }
+
+/* ── System window / LitRPG theme ───────────────────────── */
+.theme-litrpg .report-card,
+.theme-litrpg .report-card-multi {
+  background: rgba(7,11,22,0.95);
+  border-color: #20385c;
+  box-shadow: 0 0 12px rgba(34,211,238,0.05);
+}
+.theme-litrpg .report-card:hover {
+  border-color: #eab308;
+}
+.theme-litrpg .report-card-bar {
+  background: linear-gradient(90deg, #22d3ee, #a78bfa, #eab308);
+}
+.theme-litrpg .report-name { color: #f4f8ff; }
+.theme-litrpg .report-desc { color: #8fa3c2; }
+.theme-litrpg .report-meta { color: #8fa3c2; }
+.theme-litrpg .report-files { border-top-color: #20385c; }
+.theme-litrpg .report-file-link { border-bottom-color: #20385c; }
+.theme-litrpg .report-file-link:hover { background: rgba(167,139,250,0.08); }
+.theme-litrpg .report-file-name { color: #f4f8ff; }
+.theme-litrpg .report-file-desc { color: #8fa3c2; }
+.theme-litrpg .report-file-arrow { color: #8fa3c2; }
+.theme-litrpg .report-file-link:hover .report-file-arrow { color: #eab308; }
 </style>
 </head>
 <body>
@@ -503,6 +527,17 @@ const REPORTS = [
     icon: '📚',
     theme: 'book',
     file: '/static/reports/reading-list-print.html',
+    type: 'HTML',
+  },
+  {
+    topic: 'Books',
+    hideTopicHeader: true,
+    name: 'LitRPG Bookshelf — Reading List Field Guide',
+    desc: 'Subgenre skill tree, physical-availability-first picks built on Dungeon Crawler Carl and He Who Fights with Monsters, plus genre landmarks — game-HUD styled, sourcing flags kept visible',
+    date: 'Aug 2026',
+    icon: '🎮',
+    theme: 'litrpg',
+    file: '/static/reports/litrpg-reading-list-factsheet.html',
     type: 'HTML',
   },
   {
