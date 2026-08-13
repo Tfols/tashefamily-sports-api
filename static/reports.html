@@ -457,6 +457,29 @@ body::before {
 .theme-litrpg .report-file-desc { color: #8fa3c2; }
 .theme-litrpg .report-file-arrow { color: #8fa3c2; }
 .theme-litrpg .report-file-link:hover .report-file-arrow { color: #eab308; }
+
+/* ── Highway strip-map / Road Trip theme ────────────────── */
+.theme-roadtrip .report-card,
+.theme-roadtrip .report-card-multi {
+  background: rgba(16,20,16,0.94);
+  border-color: #3d4a35;
+}
+.theme-roadtrip .report-card:hover {
+  border-color: #e8dab3;
+}
+.theme-roadtrip .report-card-bar {
+  background: linear-gradient(90deg, #1f4d3a, #a83c22);
+}
+.theme-roadtrip .report-name { color: #f2e8cf; }
+.theme-roadtrip .report-desc { color: #b3ab86; }
+.theme-roadtrip .report-meta { color: #b3ab86; }
+.theme-roadtrip .report-files { border-top-color: #3d4a35; }
+.theme-roadtrip .report-file-link { border-bottom-color: #3d4a35; }
+.theme-roadtrip .report-file-link:hover { background: rgba(168,60,34,0.08); }
+.theme-roadtrip .report-file-name { color: #f2e8cf; }
+.theme-roadtrip .report-file-desc { color: #b3ab86; }
+.theme-roadtrip .report-file-arrow { color: #b3ab86; }
+.theme-roadtrip .report-file-link:hover .report-file-arrow { color: #e8dab3; }
 </style>
 </head>
 <body>
@@ -617,6 +640,17 @@ const REPORTS = [
       { label: 'Field Reference', desc: 'Collector\'s-shelf diagram, Bounty Board, era-by-era checklist tables', file: '/static/reports/funko-grogu-checklist-factsheet.html', icon: '🐸' },
       { label: 'Full Reference Guide', desc: 'Numbered sections, tiered sources, sourcing confidence', file: '/static/reports/funko-grogu-checklist-report.html', icon: '📖' },
     ]
+  },
+  {
+    topic: 'Travel',
+    hideTopicHeader: true,
+    name: 'Richmond + Williamsburg — Couple\'s Trip',
+    desc: 'A flexible 2-day mid-September itinerary for two — Richmond first, then Williamsburg, a Marriott-lens lodging pick, and an optional Smithfield extension. Brown\'s Island flagged closed for renovation through Oct 2026.',
+    date: 'Aug 2026',
+    icon: '🚗',
+    theme: 'roadtrip',
+    file: '/static/reports/richmond-williamsburg-couples-trip-factsheet.html',
+    type: 'HTML',
   },
 ];
 
