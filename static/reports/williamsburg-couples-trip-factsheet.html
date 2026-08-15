@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#e8e0c9;color:#241d10;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Williamsburg — Couple's Trip Site Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#e8e0c9;
+  --paper-2:#ddd2ae;
+  --paper-3:#f6f0e0;
+  --ink:#241d10;
+  --ink-soft:#5c5033;
+  --line:#c2b384;
+  --line-dark:#a1936a;
+
+  --dig:#4f6b58;
+  --dig-2:#37493d;
+  --dig-bright:#6f9179;
+  --dig-soft:rgba(79,107,88,0.10);
+
+  --terracotta:#a15a34;
+  --terracotta-2:#7c4326;
+  --terracotta-soft:rgba(161,90,52,0.12);
+
+  --brass:#b8903f;
+  --brass-bright:#d6ab5c;
+  --brass-soft:rgba(214,171,92,0.14);
+
+  --noir:#1b1420;
+  --noir-2:#120d16;
+  --candle:#dcae56;
+  --wine:#6e2436;
+  --cream:#f1e7d6;
+
+  --warn:#9c3626;
+  --warn-soft:rgba(156,54,38,0.10);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:light;background:var(--paper)!important;color:var(--ink)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{
+  font-family:'Spectral',Georgia,serif;
+  font-size:14.5px;line-height:1.58;
+  max-width:1180px;margin:0 auto;padding:0 0 60px;
+  position:relative;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(circle at 14% 8%, rgba(79,107,88,0.07), transparent 42%),
+    radial-gradient(circle at 90% 12%, rgba(214,171,92,0.08), transparent 45%),
+    radial-gradient(circle at 80% 92%, rgba(110,36,54,0.05), transparent 40%),
+    repeating-linear-gradient(135deg, rgba(161,90,52,0.025) 0 2px, transparent 2px 26px);
+}
+#sheet{position:relative;z-index:1;padding:26px 28px 0}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+em{font-style:italic}
+b{font-weight:700}
+
+/* ── SECTION LABEL ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin:30px 0 11px}
+.sec-label:first-of-type{margin-top:4px}
+.sec-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--paper-3);background:var(--ink);padding:4px 11px;flex-shrink:0}
+.sec-rule{height:2px;background:var(--ink);flex:1}
+.sec-note{font-size:.8rem;color:var(--ink-soft);margin:-2px 0 12px;font-style:italic;max-width:84ch}
+
+/* ── MASTHEAD ── */
+.masthead{display:grid;grid-template-columns:1fr 250px;gap:16px;margin-bottom:14px;align-items:stretch}
+.masthead-main{background:var(--ink);color:var(--paper-3);border:3px solid var(--ink);border-radius:4px;padding:24px 28px;position:relative;overflow:hidden}
+.masthead-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-bright);margin-bottom:10px}
+h1{font-family:'Special Elite','Courier New',monospace;font-weight:400;font-size:3rem;line-height:.98;color:var(--paper-3);letter-spacing:.01em;text-transform:uppercase}
+h1 .hl{color:var(--brass-bright)}
+h2,h3{font-family:'Special Elite','Courier New',monospace;font-weight:400}
+.masthead-sub{font-family:'Spectral',serif;font-style:italic;font-size:.94rem;font-weight:400;color:#e2d8c2;margin-top:13px;max-width:62ch;line-height:1.65}
+
+.tag-card{border:2.5px solid var(--ink);border-radius:4px;background:var(--paper-3);display:flex;flex-direction:column;position:relative;padding-top:14px}
+.tag-hole{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--ink-soft)}
+.tag-row{padding:8px 16px;border-bottom:1px dashed var(--line-dark);flex:1;display:flex;flex-direction:column;justify-content:center}
+.tag-row:last-child{border-bottom:none}
+.tag-label{font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.tag-val{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;color:var(--terracotta-2);margin-top:2px;line-height:1.4}
+
+.stamp{position:absolute;bottom:16px;right:22px;width:112px;height:112px;border:3px double var(--brass-bright);border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(-11deg);opacity:.9}
+.stamp-text{font-family:'Special Elite','Courier New',monospace;font-size:9.5px;text-align:center;line-height:1.5;color:var(--brass-bright);letter-spacing:.06em;text-transform:uppercase}
+
+/* ── CLOSURE BANNER ── */
+.closure-banner{border:3px solid var(--ink);background:repeating-linear-gradient(45deg, var(--warn) 0 15px, #1c1108 15px 30px);padding:4px;margin-bottom:22px;border-radius:5px}
+.closure-inner{background:var(--paper-3);padding:15px 20px;display:flex;align-items:flex-start;gap:16px;border-radius:2px;position:relative}
+.closure-ribbon{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-3);background:var(--warn);padding:3px 10px;display:inline-block;transform:rotate(-2deg);margin-bottom:6px}
+.closure-icon{font-size:1.9rem;flex-shrink:0;line-height:1;margin-top:1px}
+.closure-text{font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.68;color:var(--ink)}
+.closure-text .ch{display:block;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--warn);margin-bottom:5px;font-size:.85rem;font-family:'Spectral',serif;font-style:italic}
+
+/* ── KEY FIGURES ── */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:6px}
+.stat-cell{background:var(--paper-3);border:2px solid var(--ink);border-top:5px solid var(--dig);padding:13px 11px 11px;text-align:center;position:relative}
+.stat-cell.warn{border-top-color:var(--warn)}
+.stat-cell.gold{border-top-color:var(--brass)}
+.stat-cell.eve{border-top-color:var(--wine)}
+.stat-num{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.42rem;color:var(--ink);line-height:1.05}
+.stat-cell.longtext .stat-num{font-size:1.02rem;letter-spacing:.01em}
+.stat-label{font-family:'Spectral',serif;font-size:.68rem;color:var(--ink-soft);margin-top:8px;line-height:1.45}
+
+/* ── SITE PLAN (signature diagram) ── */
+.plan-panel{border:3px solid var(--ink);background:var(--paper-3);margin-bottom:8px;border-radius:4px;overflow:hidden}
+.plan-head{background:var(--ink);color:var(--paper-3);padding:8px 18px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between}
+.plan-body{padding:10px 8px 4px}
+.plan-body svg{width:100%;height:auto;display:block}
+.plan-caption{font-size:.78rem;color:var(--ink-soft);padding:12px 22px 8px;line-height:1.68;border-top:1px dashed var(--line);margin:6px 20px 0}
+.plan-caption b{color:var(--dig-2)}
+.plan-caption .flagword{color:var(--warn);font-weight:700}
+.plan-legend{display:flex;flex-wrap:wrap;gap:14px;padding:6px 22px 18px;font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--ink-soft)}
+.plan-legend span{display:inline-flex;align-items:center;gap:6px}
+.swatch{width:11px;height:11px;border-radius:2px;border:1px solid var(--ink);flex-shrink:0}
+
+/* ── FIELD-NOTE INDEX CARDS ── */
+.field-log{display:flex;flex-direction:column;gap:12px;margin-bottom:6px}
+.card-index{display:grid;grid-template-columns:78px 1fr;gap:0;border:2px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--paper-3);page-break-inside:avoid}
+.card-cat{background:var(--dig);color:var(--paper-3);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px;text-align:center;gap:5px}
+.card-index.day2 .card-cat{background:var(--dig-2)}
+.card-index.evening .card-cat{background:var(--wine)}
+.card-index.sunday .card-cat{background:var(--terracotta)}
+.card-num{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.04em}
+.card-phase{font-family:'IBM Plex Mono',monospace;font-size:.56rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;line-height:1.3}
+.card-body{padding:12px 16px 14px}
+.card-index.evening{background:var(--noir)}
+.card-index.evening .card-body{color:var(--cream)}
+.stop-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.stop-name{font-family:'Special Elite','Courier New',monospace;font-weight:400;font-size:1.12rem;color:var(--ink);line-height:1.15}
+.card-index.evening .stop-name{color:var(--candle)}
+.stop-or{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--terracotta-2);background:var(--terracotta-soft);padding:2px 8px;border-radius:2px}
+.card-index.evening .stop-or{color:var(--candle);background:rgba(220,174,86,0.14)}
+.stop-meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);margin:5px 0 8px;line-height:1.55}
+.card-index.evening .stop-meta{color:#c9bba3}
+.stop-desc{font-size:.86rem;line-height:1.6;color:var(--ink)}
+.card-index.evening .stop-desc{color:var(--cream)}
+.stop-desc b{color:var(--dig-2)}
+.card-index.evening .stop-desc b{color:var(--candle)}
+.stop-alt{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line-dark)}
+.card-index.evening .stop-alt{border-top-color:#4a3d54}
+.inline-flag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--paper-3);background:var(--warn);padding:3px 8px;margin-top:7px;border-radius:2px}
+
+/* ── AFTERNOON PICK LIST (inside a card) ── */
+.pick-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:4px}
+.pick-item{font-size:.78rem;line-height:1.5;background:var(--paper-2);border:1px solid var(--line-dark);padding:8px 11px;border-radius:2px}
+.pick-item b{color:var(--ink)}
+
+/* ── CURATED CATEGORY CARDS ── */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:6px}
+.cat-card{border:2px solid var(--ink);background:var(--paper-3);display:flex;flex-direction:column;page-break-inside:avoid;border-radius:3px}
+.cat-bar{background:var(--dig);color:var(--paper-3);padding:8px 13px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.cat-body{padding:11px 14px 13px;display:flex;flex-direction:column;gap:8px}
+.cat-item{font-size:.78rem;line-height:1.5}
+.cat-item b{color:var(--ink)}
+.cat-tag{font-family:'IBM Plex Mono',monospace;font-size:.56rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--paper-2);padding:1px 6px;border-radius:2px;margin-left:5px}
+.cat-note{font-size:.7rem;color:var(--ink-soft);font-style:italic;padding-top:7px;border-top:1px dotted var(--line-dark);line-height:1.5}
+.cat-leads{font-size:.68rem;color:var(--ink-soft);line-height:1.55;padding-top:7px;border-top:1px dotted var(--line-dark)}
+.cat-leads b{color:var(--terracotta-2)}
+
+/* ── RULED OUT (negative findings) ── */
+.ruled-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:8px}
+.ruled-card{border:2px solid var(--ink-soft);background:var(--paper-2);border-radius:3px;padding:14px 18px 16px;position:relative;page-break-inside:avoid}
+.ruled-stamp{position:absolute;top:12px;right:14px;border:2px solid var(--warn);color:var(--warn);font-family:'Special Elite','Courier New',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;transform:rotate(6deg);border-radius:3px}
+.ruled-title{font-family:'Special Elite','Courier New',monospace;font-size:1.02rem;color:var(--ink);margin-bottom:8px;padding-right:100px}
+.ruled-body{font-size:.83rem;line-height:1.62;color:var(--ink)}
+.ruled-body b{color:var(--terracotta-2)}
+
+/* ── LODGING ── */
+.lodge-single{border:2.5px solid var(--brass);background:var(--paper-3);border-radius:4px;position:relative;padding:18px 22px 18px 26px;margin-bottom:10px}
+.lodge-single::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:7px;background:var(--brass-bright);border-radius:0 3px 3px 0}
+.lodge-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.lodge-name{font-family:'Special Elite','Courier New',monospace;font-size:1.32rem;color:var(--ink);line-height:1.1}
+.lodge-pick-flag{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:var(--brass-bright);padding:3px 9px;border-radius:2px;flex-shrink:0}
+.lodge-brand{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--terracotta-2);margin-top:4px;font-weight:600}
+.lodge-desc{font-size:.85rem;line-height:1.6;margin-top:10px;color:var(--ink);max-width:80ch}
+.lodge-desc b{color:var(--dig-2)}
+.lodge-honest{font-size:.76rem;color:var(--ink-soft);font-style:italic;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-dark)}
+
+/* ── CORRECTIONS ── */
+.correction-panel{border:2px solid var(--terracotta);background:var(--terracotta-soft);padding:14px 18px 6px;margin-bottom:22px;border-radius:3px}
+.correction-head{font-family:'IBM Plex Mono',monospace;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--terracotta-2);font-size:.75rem;margin-bottom:10px}
+.correction-item{display:flex;gap:10px;align-items:flex-start;font-size:.8rem;line-height:1.58;color:var(--ink);margin-bottom:10px}
+.correction-item .mark{font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--terracotta);flex-shrink:0}
+.correction-item b{color:var(--terracotta-2)}
+
+/* ── SOURCING CONFIDENCE ── */
+.qc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2.5px solid var(--ink);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.qc-col{padding:15px 17px 16px;border-right:1px dashed var(--line-dark)}
+.qc-col:last-child{border-right:none}
+.qc-col.ok{background:var(--dig-soft)}
+.qc-col.thin{background:var(--brass-soft)}
+.qc-col.gap{background:var(--warn-soft)}
+.qc-flag{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:9px;display:inline-block;padding:3px 9px;border-radius:2px}
+.qc-flag.ok{background:var(--dig);color:var(--paper-3)}
+.qc-flag.thin{background:var(--brass);color:var(--paper-3)}
+.qc-flag.gap{background:var(--warn);color:var(--paper-3)}
+.qc-body{font-size:.75rem;line-height:1.64;color:var(--ink)}
+.qc-body b{color:var(--ink)}
+
+/* ── FOOTER ── */
+.footer{padding:18px 26px 22px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.03em;color:var(--ink-soft);text-align:center;line-height:2;border-top:2px solid var(--line);margin-top:16px}
+.footer b{color:var(--ink)}
+
+@media(max-width:900px){
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .cat-grid,.ruled-grid,.pick-list{grid-template-columns:1fr}
+  .qc-grid{grid-template-columns:1fr}
+  .qc-col{border-right:none;border-bottom:1px dashed var(--line-dark)}
+  .masthead{grid-template-columns:1fr}
+  .card-index{grid-template-columns:56px 1fr}
+}
+</style>
+</head>
+<body>
+<div id="sheet">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-main">
+    <div class="masthead-eyebrow">Site Log &middot; Couple's Trip &middot; No Kids &middot; Weekend Shape: Fri PM &rarr; Sun PM &middot; Compiled Aug 2026</div>
+    <h1>Alexandria <span class="hl">&rarr;</span> Williamsburg</h1>
+    <div class="masthead-sub">Dig by day, drink by candlelight at night. A rough, flexible weekend for two, built around the real archaeology at Jamestowne and one deliberate splurge on Saturday night. This is a planning reference from research, not a locked or booked trip &mdash; hours, prices, and reservations should be reconfirmed closer to travel.</div>
+    <div class="stamp"><div class="stamp-text">Advisory<br>Not Booked<br>Aug 2026</div></div>
+  </div>
+  <div class="tag-card">
+    <div class="tag-hole"></div>
+    <div class="tag-row"><div class="tag-label">Destination</div><div class="tag-val">Williamsburg only &mdash; no Richmond leg</div></div>
+    <div class="tag-row"><div class="tag-label">Friday</div><div class="tag-val">Travel + dinner only, no daytime plans</div></div>
+    <div class="tag-row"><div class="tag-label">Saturday</div><div class="tag-val">Full day, dig-site to speakeasy</div></div>
+    <div class="tag-row"><div class="tag-label">Sunday</div><div class="tag-val">Morning anchor, afternoon departure</div></div>
+  </div>
+</div>
+
+<!-- CLOSURE BANNER -->
+<div class="closure-banner">
+  <div class="closure-inner">
+    <div class="closure-icon">&#9888;&#65039;</div>
+    <div class="closure-text">
+      <span class="ch">Read Before Planning Anything Near William &amp; Mary</span>
+      <span class="closure-ribbon">Permanently Closed</span><br>
+      <b>Old Chickahominy House</b> &mdash; the long-running Southern-food diner near William &amp; Mary that would otherwise have been a strong pick for this trip &mdash; <b>permanently closed in late January 2026</b> after 70 years in business. Confirmed via direct reporting from <b>Williamsburg Yorktown Daily</b>, citing the owners' own December 22, 2025 announcement. Several aggregator sites (Tripadvisor, Facebook, Yelp-adjacent listings) still show it as operating and have not been updated &mdash; do not trust those listings, and do not resurface this as a recommendation.
+    </div>
+  </div>
+</div>
+
+<!-- KEY FIGURES -->
+<div class="sec-label"><span class="sec-tag">Trip At A Glance</span><div class="sec-rule"></div></div>
+<div class="stat-row">
+  <div class="stat-cell">
+    <div class="stat-num">2.5&ndash;3H</div>
+    <div class="stat-label">Drive, Alexandria &rarr; Williamsburg, Friday &mdash; traffic-dependent</div>
+  </div>
+  <div class="stat-cell eve">
+    <div class="stat-num">0 MIN</div>
+    <div class="stat-label">Walk between dinner (Amber Ox) and cocktails (The Study) &mdash; same building, the day's best logistics find</div>
+  </div>
+  <div class="stat-cell warn">
+    <div class="stat-num">APR&ndash;OCT</div>
+    <div class="stat-label">Season window for the Historic Jamestowne daily archaeology tour &mdash; re-check schedule if traveling outside it</div>
+  </div>
+  <div class="stat-cell gold">
+    <div class="stat-num">$75</div>
+    <div class="stat-label">Colonial Williamsburg annual pass, adult, per the official site &mdash; not a single-day rate</div>
+  </div>
+  <div class="stat-cell warn">
+    <div class="stat-num">70 YRS</div>
+    <div class="stat-label">Old Chickahominy House's run, before permanently closing Jan 2026 &mdash; see banner above</div>
+  </div>
+  <div class="stat-cell warn longtext">
+    <div class="stat-num">NONE FOUND</div>
+    <div class="stat-label">DDD spots in Williamsburg / Newport News / Hampton / York Co. &mdash; nearest is Doumar's, Norfolk (&asymp;55 min, wrong direction)</div>
+  </div>
+  <div class="stat-cell warn longtext">
+    <div class="stat-num">NONE FOUND</div>
+    <div class="stat-label">German/European heritage tie-in for Tom &mdash; genuinely checked; nothing substantial turned up</div>
+  </div>
+  <div class="stat-cell gold">
+    <div class="stat-num">250TH</div>
+    <div class="stat-label">Anniversary year for U.S. independence &mdash; expect bigger crowds &amp; extra CW programming in 2026</div>
+  </div>
+</div>
+
+<!-- SITE PLAN (signature diagram) -->
+<div class="sec-label"><span class="sec-tag">The Weekend, Plotted As A Site Log</span><div class="sec-rule"></div></div>
+<div class="plan-panel">
+  <div class="plan-head"><span>Weekend Site Log &mdash; Alexandria To Williamsburg</span><span>Schematic, Not To Scale</span></div>
+  <div class="plan-body">
+    <svg viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a1936a" stroke-width="0.6" opacity="0.35"/>
+        </pattern>
+      </defs>
+
+      <text x="60" y="34" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="700" letter-spacing="1" fill="#241d10">WEEKEND SITE LOG &mdash; ALEXANDRIA TO WILLIAMSBURG</text>
+      <text x="60" y="51" font-family="Spectral, serif" font-style="italic" font-size="11" fill="#5c5033">The weekend's real stops, laid out like excavation units on a site plan &mdash; not a routing map.</text>
+      <line x1="60" y1="60" x2="1150" y2="60" stroke="#241d10" stroke-width="1.5"/>
+
+      <rect x="0" y="70" width="1200" height="612" fill="#f6f0e0"/>
+      <rect x="0" y="70" width="1200" height="612" fill="url(#gridPattern)"/>
+
+      <!-- compass rose -->
+      <circle cx="1140" cy="115" r="28" fill="#f6f0e0" stroke="#241d10" stroke-width="2"/>
+      <path d="M1140 92 L1146 112 L1140 108 L1134 112 Z" fill="#a15a34"/>
+      <text x="1140" y="132" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#241d10">N</text>
+
+      <!-- UNIT 1: LODGING -->
+      <rect x="60" y="110" width="90" height="24" rx="3" fill="#5c5033"/>
+      <text x="105" y="126" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#f6f0e0">FRI PM</text>
+      <rect x="60" y="140" width="200" height="170" rx="3" fill="#f6f0e0" stroke="#241d10" stroke-width="2.2"/>
+      <rect x="60" y="140" width="200" height="8" fill="#5c5033"/>
+      <text x="76" y="172" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">UNIT 01 &middot; GRID N08/E02</text>
+      <text x="76" y="196" font-family="Special Elite, monospace" font-size="16" fill="#241d10">Williamsburg Lodge</text>
+      <text x="76" y="216" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">Autograph Collection &middot; Marriott</text>
+      <text x="76" y="234" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">Built 1939 &middot; inside Colonial Williamsburg</text>
+      <text x="76" y="256" font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="700" fill="#4f6b58">&rarr; walking distance to Merchants Sq.</text>
+      <text x="76" y="290" font-family="Spectral, serif" font-style="italic" font-size="9.5" fill="#5c5033">Dinner nearby, flexible &mdash; no DDD lead</text>
+      <text x="76" y="304" font-family="Spectral, serif" font-style="italic" font-size="9.5" fill="#5c5033">locally, so lean casual (see below)</text>
+
+      <!-- connector 1 -> 2 -->
+      <line x1="260" y1="225" x2="338" y2="255" stroke="#4f6b58" stroke-width="2" stroke-dasharray="5,4"/>
+      <text x="270" y="215" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="700" fill="#4f6b58">WALKING DISTANCE</text>
+
+      <!-- UNIT 2: HISTORIC AREA + MERCHANTS SQUARE -->
+      <rect x="340" y="70" width="180" height="24" rx="3" fill="#4f6b58"/>
+      <text x="430" y="86" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#f6f0e0">SAT AM&ndash;MIDDAY</text>
+      <rect x="340" y="100" width="280" height="340" rx="3" fill="#f6f0e0" stroke="#241d10" stroke-width="2.2"/>
+      <rect x="340" y="100" width="280" height="8" fill="#4f6b58"/>
+      <text x="356" y="130" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">UNIT 02 &middot; GRID N10/E05</text>
+      <text x="356" y="154" font-family="Special Elite, monospace" font-size="17" fill="#241d10">Colonial Williamsburg</text>
+      <text x="356" y="174" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">Trades/sites &asymp;10am&ndash;5pm &middot; annual pass $75/adult</text>
+      <text x="356" y="192" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#a1782e">2026 = 250th anniversary &mdash; bigger crowds</text>
+      <line x1="356" y1="206" x2="604" y2="206" stroke="#c2b384" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="356" y="228" font-family="Special Elite, monospace" font-size="14" fill="#241d10">Merchants Square</text>
+      <text x="356" y="246" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">Adjacent, walkable &mdash; the day's shop district</text>
+      <line x1="356" y1="258" x2="604" y2="258" stroke="#c2b384" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="356" y="280" font-family="Special Elite, monospace" font-size="13" fill="#241d10">Precarious Beer Project</text>
+      <text x="356" y="298" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">110 S Henry St &middot; official Merchants Sq. merchant</text>
+      <text x="356" y="314" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">Sat 11am&ndash;11pm &middot; lunch: Electric Circus Taco +</text>
+      <text x="356" y="330" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">Ol' Dominion Burger (smashburgers)</text>
+
+      <!-- afternoon cluster label -->
+      <text x="356" y="465" font-family="IBM Plex Mono, monospace" font-size="11" font-weight="700" fill="#4f6b58">AFTERNOON &mdash; PICK ONE OR TWO (interchangeable)</text>
+      <line x1="420" y1="440" x2="390" y2="500" stroke="#4f6b58" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="480" y1="440" x2="480" y2="500" stroke="#4f6b58" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="540" y1="440" x2="570" y2="500" stroke="#4f6b58" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+      <circle cx="380" cy="545" r="42" fill="#f6f0e0" stroke="#4f6b58" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="380" y="538" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#241d10">Freedom</text>
+      <text x="380" y="550" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#241d10">Park</text>
+      <text x="380" y="564" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5c5033">James City Co.</text>
+
+      <circle cx="480" cy="545" r="42" fill="#f6f0e0" stroke="#4f6b58" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="480" y="538" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#241d10">Alewerks</text>
+      <text x="480" y="550" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#241d10">Brewing</text>
+      <text x="480" y="564" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5c5033">est. 2006</text>
+
+      <circle cx="580" cy="545" r="42" fill="#f6f0e0" stroke="#4f6b58" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="580" y="538" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#241d10">Williamsburg</text>
+      <text x="580" y="550" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#241d10">Winery</text>
+      <text x="580" y="564" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5c5033">menu detail thin</text>
+
+      <text x="356" y="605" font-family="Spectral, serif" font-style="italic" font-size="9.5" fill="#5c5033">(or Precarious again, if not used for lunch)</text>
+
+      <!-- UNIT 3: EVENING (glow) -->
+      <ellipse cx="835" cy="220" rx="200" ry="150" fill="#dcae56" opacity="0.10"/>
+      <rect x="700" y="80" width="230" height="24" rx="3" fill="#dcae56"/>
+      <text x="815" y="96" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#1b1420">SAT EVENING &mdash; THE EXCEPTION</text>
+      <rect x="700" y="110" width="280" height="240" rx="3" fill="#1b1420" stroke="#dcae56" stroke-width="2.4"/>
+      <text x="716" y="140" font-family="IBM Plex Mono, monospace" font-size="9" fill="#c9bba3">UNIT 03 &middot; GRID N14/E09</text>
+      <text x="716" y="164" font-family="Special Elite, monospace" font-size="16" fill="#dcae56">Amber Ox Public House</text>
+      <text x="716" y="182" font-family="Spectral, serif" font-size="12" font-weight="600" fill="#f1e7d6">+ The Study (same building)</text>
+      <text x="716" y="202" font-family="IBM Plex Mono, monospace" font-size="9" fill="#c9bba3">525 Prince George St, Suite 102</text>
+      <text x="716" y="220" font-family="IBM Plex Mono, monospace" font-size="9" fill="#c9bba3">Dinner Sat 2:30&ndash;10pm &middot; dining room til 9pm</text>
+      <text x="716" y="238" font-family="IBM Plex Mono, monospace" font-size="9" fill="#c9bba3">Southern farm-to-table, shareable plates</text>
+      <text x="716" y="260" font-family="IBM Plex Mono, monospace" font-size="9" fill="#c9bba3">The Study: candlelit, book-lined speakeasy</text>
+      <text x="716" y="278" font-family="IBM Plex Mono, monospace" font-size="9" fill="#c9bba3">21+, res. only, 2-hr seating, Thu&ndash;Sat 4&ndash;9pm</text>
+      <text x="716" y="296" font-family="IBM Plex Mono, monospace" font-size="9" fill="#c9bba3">(confirm summer hours the week of travel)</text>
+      <text x="716" y="322" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#dcae56">0 MIN transfer &mdash; same building</text>
+
+      <!-- Copper Fox backup -->
+      <line x1="980" y1="200" x2="1040" y2="230" stroke="#dcae56" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="1080" cy="260" r="42" fill="#f6f0e0" stroke="#dcae56" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="1080" y="252" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="700" fill="#241d10">Copper Fox</text>
+      <text x="1080" y="264" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="700" fill="#241d10">Distillery</text>
+      <text x="1080" y="277" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5c5033">backup &mdash; speakeasy +</text>
+      <text x="1080" y="288" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5c5033">fire-pit courtyard</text>
+
+      <!-- UNIT 4: JAMESTOWNE (Sunday) -->
+      <rect x="740" y="390" width="90" height="24" rx="3" fill="#a15a34"/>
+      <text x="785" y="406" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#f6f0e0">SUN AM</text>
+      <rect x="740" y="420" width="300" height="210" rx="3" fill="#f6f0e0" stroke="#241d10" stroke-width="2.2"/>
+      <rect x="740" y="420" width="300" height="8" fill="#a15a34"/>
+      <text x="756" y="452" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">UNIT 04 &middot; GRID S02/E14</text>
+      <text x="756" y="476" font-family="Special Elite, monospace" font-size="16" fill="#241d10">Historic Jamestowne</text>
+      <text x="756" y="494" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">Archaeology Walking Tour &mdash; James Fort</text>
+      <text x="756" y="510" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">11am or 2pm &middot; led by a Preservation Virginia</text>
+      <text x="756" y="524" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">archaeologist &middot; the ACTIVE excavation</text>
+      <text x="756" y="540" font-family="Spectral, serif" font-style="italic" font-size="9" fill="#5c5033">(distinct from Jamestown Settlement, the replica)</text>
+      <text x="756" y="558" font-family="IBM Plex Mono, monospace" font-size="9" fill="#5c5033">Gate 8:45am &middot; ticketing 9am &middot; Archaearium 9:30am</text>
+      <text x="756" y="580" font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="700" fill="#9c3626">&#9888; SEASONAL: daily tour runs Apr&ndash;Oct only</text>
+
+      <!-- mini excavation grid inset -->
+      <rect x="985" y="440" width="42" height="42" fill="#f6f0e0" stroke="#a15a34" stroke-width="1.5"/>
+      <line x1="985" y1="461" x2="1027" y2="461" stroke="#a15a34" stroke-width="1"/>
+      <line x1="1006" y1="440" x2="1006" y2="482" stroke="#a15a34" stroke-width="1"/>
+      <text x="1006" y="497" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5c5033">active dig</text>
+
+      <!-- York River SP backup -->
+      <line x1="1040" y1="520" x2="1070" y2="540" stroke="#a15a34" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="1105" cy="565" r="44" fill="#f6f0e0" stroke="#a15a34" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="1105" y="555" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="700" fill="#241d10">York River</text>
+      <text x="1105" y="566" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8" font-weight="700" fill="#241d10">State Park</text>
+      <text x="1105" y="579" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5c5033">alt &mdash; &asymp;11 mi from CW</text>
+      <text x="1105" y="590" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5c5033">trails, seasonal paddling</text>
+
+      <text x="756" y="662" font-family="Spectral, serif" font-style="italic" font-size="9.5" fill="#5c5033">Lunch, then the drive home &mdash; Sunday afternoon</text>
+    </svg>
+  </div>
+  <div class="plan-caption">
+    <b>Reading this log:</b> each rectangle is a real weekend stop, drawn like an excavation unit on a site plan &mdash; the numbering and grid references are illustrative, not real coordinates. Distances and connection lines are shown <span class="flagword">only where the source research explicitly stated them</span> (Lodge&ndash;Merchants Square walking distance; Amber Ox&ndash;The Study same building; York River State Park &asymp;11 miles from Colonial Williamsburg). No other inter-stop drive or walk times are shown, invented, or implied &mdash; this is a schematic, not a routing map.
+  </div>
+  <div class="plan-legend">
+    <span><span class="swatch" style="background:#5c5033"></span>Friday &mdash; travel &amp; lodging</span>
+    <span><span class="swatch" style="background:#4f6b58"></span>Saturday day &mdash; dig-site &amp; shops</span>
+    <span><span class="swatch" style="background:#dcae56"></span>Saturday evening &mdash; the exception</span>
+    <span><span class="swatch" style="background:#a15a34"></span>Sunday &mdash; archaeology &amp; departure</span>
+    <span><span class="swatch" style="background:#f6f0e0;border-style:dashed"></span>Backup / alternative, not core plan</span>
+  </div>
+</div>
+
+<!-- FRIDAY -->
+<div class="sec-label"><span class="sec-tag">Friday &mdash; Travel Down</span><div class="sec-rule"></div></div>
+<div class="field-log">
+  <div class="card-index">
+    <div class="card-cat"><div class="card-num">FN&ndash;01</div><div class="card-phase">Drive &amp;<br>Check-In</div></div>
+    <div class="card-body">
+      <div class="stop-top"><div class="stop-name">Alexandria &rarr; Williamsburg</div></div>
+      <div class="stop-meta">&asymp;2.5&ndash;3 hrs depending on traffic/route &middot; arrive, check in, dinner &mdash; no daytime activities added on purpose</div>
+      <div class="stop-desc"><b>Lodging: Williamsburg Lodge, Autograph Collection</b> (Marriott/Bonvoy) &mdash; verified via Marriott's own site + Colonial Williamsburg's own site. Built 1939, walking distance to Merchants Square.</div>
+    </div>
+  </div>
+  <div class="card-index">
+    <div class="card-cat"><div class="card-num">FN&ndash;02</div><div class="card-phase">Dinner</div></div>
+    <div class="card-body">
+      <div class="stop-top"><div class="stop-name">Flexible / Casual</div></div>
+      <div class="stop-meta">No DDD-featured option exists locally &mdash; see the Trip At A Glance flag above and Checked &amp; Ruled Out below</div>
+      <div class="stop-desc">Lean casual/brewery depending on arrival time. <b>Virginia Beer Co.</b> (rotating food trucks) is one option, or something near the Lodge.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SATURDAY -->
+<div class="sec-label"><span class="sec-tag">Saturday &mdash; Full Day In Williamsburg</span><div class="sec-rule"></div></div>
+<div class="field-log">
+
+  <div class="card-index day2">
+    <div class="card-cat"><div class="card-num">FN&ndash;03</div><div class="card-phase">Morning<br>&amp; Midday</div></div>
+    <div class="card-body">
+      <div class="stop-top"><div class="stop-name">Colonial Williamsburg Historic Area</div></div>
+      <div class="stop-meta">Open year-round &middot; trades/sites generally 10am&ndash;5pm &middot; annual pass $75/adult &middot; verified via official CW Foundation site</div>
+      <div class="stop-desc">2026 is the 250th anniversary of independence &mdash; expect bigger crowds and extra programming. <b>Merchants Square</b>, the adjacent shop district, is directly walkable and fits the household's "cute shop district" preference &mdash; verified, tied to official CW/Lodge sourcing.</div>
+    </div>
+  </div>
+
+  <div class="card-index day2">
+    <div class="card-cat"><div class="card-num">FN&ndash;04</div><div class="card-phase">Lunch</div></div>
+    <div class="card-body">
+      <div class="stop-top"><div class="stop-name">Precarious Beer Project</div></div>
+      <div class="stop-meta">110 S Henry St &middot; official Merchants Square merchant (confirmed via Merchants Square's own directory, not just "nearby") &middot; Sat hours 11am&ndash;11pm</div>
+      <div class="stop-desc">Doubles as lunch: on-site food from two vendor partners, <b>Electric Circus Taco</b> and <b>Ol' Dominion Burger</b> (smashburgers). Very casual, good household fit. Recommendation: visit earlier in the day as lunch rather than adding it as a separate afternoon stop.</div>
+      <div class="stop-alt"><b>If keeping Precarious purely for afternoon beers instead:</b> Berret's Taphouse Grill (199 S Boundary St, Merchants Square &mdash; outdoor, first-come-first-served, live music, cornhole; the more casual half of Berret's, which also runs a separate indoor seafood restaurant) or DoG Street Pub (401 W Duke of Gloucester St &mdash; gastropub, self-described "relaxed, unpretentious," entrees $7&ndash;26).</div>
+    </div>
+  </div>
+
+  <div class="card-index day2">
+    <div class="card-cat"><div class="card-num">FN&ndash;05</div><div class="card-phase">Afternoon</div></div>
+    <div class="card-body">
+      <div class="stop-top"><div class="stop-name">Pick One Or Two</div><span class="stop-or">Interchangeable</span></div>
+      <div class="stop-desc">All four verified independently &mdash; treat as a menu, not a schedule.</div>
+      <div class="pick-list">
+        <div class="pick-item"><b>Freedom Park</b> &mdash; James City County. 17th-c. homesite, 18th-c. graveyard, earliest known free Black settlement, reconstructed cabins. Verified via official James City County page + historical marker database.</div>
+        <div class="pick-item"><b>Alewerks Brewing</b> &mdash; established craft brewery, verified via venue's own site.</div>
+        <div class="pick-item"><b>Precarious Beer Project</b> (if not used for lunch) &mdash; verified via venue's own site.</div>
+        <div class="pick-item"><b>Williamsburg Winery</b> &mdash; hours verified via the winery's own site; full menu/pricing detail is aggregator-level (see Sourcing Confidence).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-index evening">
+    <div class="card-cat"><div class="card-num">FN&ndash;06</div><div class="card-phase">Evening<br>&mdash; Exception</div></div>
+    <div class="card-body">
+      <div class="stop-top"><div class="stop-name">Amber Ox Public House + The Study</div></div>
+      <div class="stop-meta">525 Prince George St, Suite 102 &middot; dinner Sat 2:30&ndash;10pm, dining room seating until 9pm &middot; verified via the venue's own site</div>
+      <div class="stop-desc"><b>Dinner:</b> Southern-inspired farm-to-table, shareable plates, housemade biscuits, smoked wings, pimento cheese, local seafood/produce &mdash; upscale-casual, "Public House" branding keeps it from tipping into fine dining. <b>Cocktails: The Study</b>, same building &mdash; candlelit, book-lined speakeasy, reservation-only, 21+, two-hour seating, open Thu&ndash;Sat 4&ndash;9pm (summer hours may vary &mdash; confirm the week of travel). <b>Key logistics win:</b> because dinner and cocktails are in the same building, there's no separate transit leg or timing risk between them &mdash; the standout sequencing find for the day.</div>
+      <div class="stop-alt"><b>Backup cocktail alternative:</b> Copper Fox Distillery speakeasy lounge + fire-pit courtyard, whisky flights &mdash; verified via official site, corroborated by Wikipedia and virginiaspirits.org.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CURATED CATEGORIES -->
+<div class="sec-label"><span class="sec-tag">Curated By Category</span><div class="sec-rule"></div></div>
+<div class="sec-note">Pulled out of the day-by-day flow for quick reference &mdash; parks/historic sites and casual dining leads, matching the household's usual habits.</div>
+<div class="cat-grid">
+
+  <div class="cat-card">
+    <div class="cat-bar">Parks, Monuments &amp; Historic Sites</div>
+    <div class="cat-body">
+      <div class="cat-item"><b>Historic Jamestowne</b> &mdash; active dig, James Fort<span class="cat-tag">Sunday anchor</span></div>
+      <div class="cat-item"><b>Colonial Williamsburg Historic Area</b><span class="cat-tag">Saturday anchor</span></div>
+      <div class="cat-item"><b>Freedom Park</b> &mdash; James City County<span class="cat-tag">afternoon pick</span></div>
+      <div class="cat-item"><b>York River State Park</b><span class="cat-tag">Sunday alt</span></div>
+      <div class="cat-note">Genuine overlap with Ashe's archaeology background: the Jamestowne walking tour is a real dig, not a reenactment.</div>
+    </div>
+  </div>
+
+  <div class="cat-card">
+    <div class="cat-bar">Casual Dining &amp; Drinks</div>
+    <div class="cat-body">
+      <div class="cat-item"><b>Precarious Beer Project</b><span class="cat-tag">lunch</span></div>
+      <div class="cat-item"><b>Berret's Taphouse Grill</b><span class="cat-tag">alt lunch</span></div>
+      <div class="cat-item"><b>DoG Street Pub</b><span class="cat-tag">alt lunch</span></div>
+      <div class="cat-item"><b>Virginia Beer Co.</b><span class="cat-tag">Friday dinner</span></div>
+      <div class="cat-leads"><b>Thinly sourced, not built into the plan:</b> Blue Talon Bistro (casualness characterization came from Merchants Square's directory listing, not the restaurant's own site), Second Street Bistro (exact Saturday closing time unconfirmed), Food For Thought, Aromas Caf&eacute; (hours unconfirmed on both). Worth a look, but confirm before relying on them.</div>
+    </div>
+  </div>
+
+  <div class="cat-card">
+    <div class="cat-bar">Evening &amp; Speakeasy</div>
+    <div class="cat-body">
+      <div class="cat-item"><b>The Study at Amber Ox</b> &mdash; reservation-only<span class="cat-tag">the pick</span></div>
+      <div class="cat-item"><b>Copper Fox Distillery</b> &mdash; whisky flights<span class="cat-tag">backup</span></div>
+      <div class="cat-item"><b>Alewerks Brewing</b><span class="cat-tag">afternoon pick</span></div>
+      <div class="cat-item"><b>Williamsburg Winery</b><span class="cat-tag">afternoon pick</span></div>
+      <div class="cat-note">The Study and Historic Jamestowne's archaeology tour have already been added to the household map.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUNDAY -->
+<div class="sec-label"><span class="sec-tag">Sunday &mdash; Morning, Then Afternoon Departure</span><div class="sec-rule"></div></div>
+<div class="field-log">
+
+  <div class="card-index sunday">
+    <div class="card-cat"><div class="card-num">FN&ndash;07</div><div class="card-phase">Morning<br>Anchor</div></div>
+    <div class="card-body">
+      <div class="stop-top"><div class="stop-name">Historic Jamestowne &mdash; Archaeology Walking Tour of James Fort</div></div>
+      <div class="stop-meta">11:00am or 2:00pm tour &middot; led by a Preservation Virginia archaeologist &middot; dual-sourced via Historic Jamestowne's own site + NPS's own event page</div>
+      <div class="stop-desc">Walks the <b>ACTIVE excavation</b> inside the real James Fort footprint &mdash; distinct from Jamestown Settlement, the museum/replica attraction. A strong, genuine match for Ashe's archaeology background: real dig work and current-season finds, not reenactment. Gate opens 8:45am, visitor center/ticketing 9am, Archaearium &amp; museum store 9:30am. Suggested shape: arrive &asymp;9am, browse the Archaearium/visitor center, take the 11am tour (&asymp;45min&ndash;1hr), leaving midday free for lunch and the drive home.</div>
+      <div class="inline-flag">&#9888; Seasonal &mdash; the daily walking tour runs April&ndash;October only. Re-check the schedule if this trip lands outside that window.</div>
+      <div class="stop-alt"><b>Alternative / backup</b> if timing doesn't work or a nature-forward morning is preferred: York River State Park (&asymp;11 miles from Colonial Williamsburg, trails, Taskinas Creek paddling in season) &mdash; verified via official Virginia DCR page.</div>
+    </div>
+  </div>
+
+  <div class="card-index sunday">
+    <div class="card-cat"><div class="card-num">FN&ndash;08</div><div class="card-phase">Midday &amp;<br>Departure</div></div>
+    <div class="card-body">
+      <div class="stop-top"><div class="stop-name">Lunch, Then Head Home</div></div>
+      <div class="stop-meta">Drive back to Alexandria in the afternoon</div>
+      <div class="stop-desc">No specific lunch spot locked in for Sunday &mdash; midday is left open by design, since it's already carrying the tour's timing risk.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- RULED OUT -->
+<div class="sec-label"><span class="sec-tag">Checked &amp; Ruled Out</span><div class="sec-rule"></div></div>
+<div class="sec-note">Two things the household usually checks for, tested honestly against this trip and reported as negative results rather than stretched into a recommendation.</div>
+<div class="ruled-grid">
+
+  <div class="ruled-card">
+    <div class="ruled-stamp">Negative Result</div>
+    <div class="ruled-title">Diners, Drive-Ins &amp; Dives</div>
+    <div class="ruled-body">No featured DDD spot exists in Williamsburg, Newport News, Hampton, or York County. Nearest is <b>Doumar's</b> in Norfolk (&asymp;55 min away, invented the waffle cone, DDD appearance confirmed by local news) &mdash; but Norfolk pulls away from the Alexandria direction, so it's flagged here as a "worth knowing about" fact, not built into this compact two-day plan.</div>
+  </div>
+
+  <div class="ruled-card">
+    <div class="ruled-stamp">Negative Result</div>
+    <div class="ruled-title">German / European Culture Angle</div>
+    <div class="ruled-body">Nothing substantial found for Tom's European Studies / German-Russian background. <b>Das Festhaus</b> at Busch Gardens is theme-park German kitsch, not heritage. <b>Historic Germanna</b> &mdash; the real thing &mdash; is 90+ minutes away, too far for this trip. Reporting honestly that none was found rather than manufacturing a connection.</div>
+  </div>
+
+</div>
+
+<!-- LODGING -->
+<div class="sec-label"><span class="sec-tag">Lodging &mdash; Marriott / Bonvoy Lens</span><div class="sec-rule"></div></div>
+<div class="lodge-single">
+  <div class="lodge-top"><div class="lodge-name">Williamsburg Lodge</div><span class="lodge-pick-flag">Verified Pick</span></div>
+  <div class="lodge-brand">Autograph Collection (Marriott) &middot; Inside Colonial Williamsburg</div>
+  <div class="lodge-desc">A historic 1939 Rockefeller-era lodge, still owned and operated by the Colonial Williamsburg Foundation's for-profit arm, now part of Marriott's Autograph Collection. Sits inside Colonial Williamsburg itself &mdash; extremely well-located, walking distance to Merchants Square &mdash; verified via Marriott's own site and Colonial Williamsburg's own site.</div>
+  <div class="lodge-honest">Honest note: since this trip is Williamsburg-only, the research didn't surface a second Marriott/MVC/Interval International property to compare it against the way the earlier Richmond+Williamsburg version did &mdash; the Lodge is the one strong, well-verified pick for this specific weekend.</div>
+</div>
+
+<!-- CORRECTIONS -->
+<div class="sec-label"><span class="sec-tag">Corrections Caught During Research</span><div class="sec-rule"></div></div>
+<div class="correction-panel">
+  <div class="correction-head">Worth remembering so they don't resurface wrong</div>
+  <div class="correction-item"><span class="mark">&times;</span><span><b>"The Jasper" and "Grandstaff &amp; Stein"</b> are Richmond bars, not Williamsburg &mdash; an earlier bad AI summary had conflated them into this trip; corrected here.</span></div>
+  <div class="correction-item"><span class="mark">&times;</span><span><b>Freedom Park</b> is in James City County, not York County as one source claimed.</span></div>
+  <div class="correction-item"><span class="mark">&times;</span><span><b>Precarious Beer Project's</b> address is 110 S Henry St, confirmed as an official Merchants Square merchant &mdash; not "Merchants Square generally" as one aggregator vaguely implied. It's literally inside the square, not just nearby.</span></div>
+</div>
+
+<!-- SOURCING CONFIDENCE -->
+<div class="sec-label"><span class="sec-tag">Sourcing Confidence</span><div class="sec-rule"></div></div>
+<div class="sec-note">Kept visible on purpose, not folded into a footnote &mdash; this is advisory travel planning, and confidence in each detail should travel with it.</div>
+<div class="qc-grid">
+  <div class="qc-col ok">
+    <span class="qc-flag ok">Well-Verified</span>
+    <div class="qc-body">Official venue sites, government/park sites, or direct local news reporting: Colonial Williamsburg hours/pricing; Williamsburg Lodge; Merchants Square directory and Precarious Beer Project's status as an official merchant within it; Amber Ox Public House dinner hours; The Study's hours/reservation policy; Freedom Park; Historic Jamestowne's archaeology tour (dual-sourced via the site itself and NPS); York River State Park; Berret's; DoG Street Pub; the <b>Old Chickahominy House closure</b>; Doumar's DDD status.</div>
+  </div>
+  <div class="qc-col thin">
+    <span class="qc-flag thin">Thinly Sourced</span>
+    <div class="qc-body">Aggregator-level, worth a confirming call before relying on it: Williamsburg Winery's exact menu/pricing detail beyond hours; Blue Talon Bistro's casualness characterization (from Merchants Square's directory listing, not the restaurant's own site); Second Street Bistro's exact Saturday closing time; Food For Thought's hours; Aromas Caf&eacute;'s hours.</div>
+  </div>
+  <div class="qc-col gap">
+    <span class="qc-flag gap">Could Not Confirm</span>
+    <div class="qc-body">The Study's note that "summer hours vary" from the standard Thu&ndash;Sat 4&ndash;9pm schedule was mentioned on Amber Ox's own site, but without specifics &mdash; since this could be a summer trip, confirm exact hours and reservation availability directly before finalizing timing. Current Amber Ox dinner pricing/full menu wasn't independently verified beyond the general description.</div>
+  </div>
+</div>
+
+<div class="footer">
+  Compiled Aug 2026 &middot; <b>advisory / exploratory travel planning, not a booked itinerary</b> &middot; reconfirm hours, pricing, reservations, and the Jamestowne tour season before travel &middot; The Study at Amber Ox and the Historic Jamestowne archaeology tour are already logged on the household map &middot; tashefamily.com reports
+</div>
+
+</div>
+</body>
+</html>

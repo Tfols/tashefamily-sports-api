@@ -480,6 +480,29 @@ body::before {
 .theme-roadtrip .report-file-desc { color: #b3ab86; }
 .theme-roadtrip .report-file-arrow { color: #b3ab86; }
 .theme-roadtrip .report-file-link:hover .report-file-arrow { color: #e8dab3; }
+
+/* ── Field journal / dig-site-to-speakeasy theme ────────── */
+.theme-digjournal .report-card,
+.theme-digjournal .report-card-multi {
+  background: rgba(20,15,10,0.94);
+  border-color: #4a3d28;
+}
+.theme-digjournal .report-card:hover {
+  border-color: #dcae56;
+}
+.theme-digjournal .report-card-bar {
+  background: linear-gradient(90deg, #4f6b58, #dcae56, #6e2436);
+}
+.theme-digjournal .report-name { color: #f1e7d6; }
+.theme-digjournal .report-desc { color: #b8a988; }
+.theme-digjournal .report-meta { color: #b8a988; }
+.theme-digjournal .report-files { border-top-color: #4a3d28; }
+.theme-digjournal .report-file-link { border-bottom-color: #4a3d28; }
+.theme-digjournal .report-file-link:hover { background: rgba(220,174,86,0.08); }
+.theme-digjournal .report-file-name { color: #f1e7d6; }
+.theme-digjournal .report-file-desc { color: #b8a988; }
+.theme-digjournal .report-file-arrow { color: #b8a988; }
+.theme-digjournal .report-file-link:hover .report-file-arrow { color: #dcae56; }
 </style>
 </head>
 <body>
@@ -650,6 +673,17 @@ const REPORTS = [
     icon: '🚗',
     theme: 'roadtrip',
     file: '/static/reports/richmond-williamsburg-couples-trip-factsheet.html',
+    type: 'HTML',
+  },
+  {
+    topic: 'Travel',
+    hideTopicHeader: true,
+    name: 'Williamsburg — Couple\'s Trip',
+    desc: 'A Williamsburg-only weekend for two — Friday travel, a full Saturday from the Colonial Williamsburg historic area to a same-building speakeasy nightcap, Sunday morning at the real Jamestowne archaeology dig. Old Chickahominy House flagged permanently closed as of Jan 2026.',
+    date: 'Aug 2026',
+    icon: '🏺',
+    theme: 'digjournal',
+    file: '/static/reports/williamsburg-couples-trip-factsheet.html',
     type: 'HTML',
   },
 ];
