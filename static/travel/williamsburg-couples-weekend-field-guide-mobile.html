@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Alexandria + Williamsburg — Trip Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2e8cf; --paper-3:#faf3e0; --paper-2:#e8dab3;
+    --ink:#2a2013; --ink-soft:#5c4d34;
+    --line:#c7b483; --line-dark:#9c8452;
+    --green:#1f4d3a; --green-2:#173a2c;
+    --rust:#a83c22; --gold:#d9a441; --navy:#1c3a5c;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  html,body{ background:var(--paper); color:var(--ink); margin:0; }
+  body{
+    font-family:'Libre Baskerville',serif;
+    padding-left: calc(16px + env(safe-area-inset-left));
+    padding-right: calc(16px + env(safe-area-inset-right));
+    touch-action: manipulation;
+  }
+  .gutter{ padding-left:16px; padding-right:16px; margin-left:-16px; margin-right:-16px; }
+  .full-bleed{ margin-left:calc(-16px - env(safe-area-inset-left)); margin-right:calc(-16px - env(safe-area-inset-right)); }
+  h1,h2,h3{ margin:0; }
+
+  /* ---- Masthead ---- */
+  .masthead{ background:var(--green); color:var(--paper-3); border-bottom:4px solid var(--ink);
+    padding:calc(18px + env(safe-area-inset-top)) 16px 18px; }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--gold); font-size:11px;
+    text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
+  .masthead h1{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:34px;
+    line-height:0.95; text-transform:uppercase; color:var(--paper-3); }
+  .masthead h1 .plus{ color:var(--gold); padding:0 4px; }
+  .intro{ font-family:'Libre Baskerville',serif; font-style:italic; color:#dce8df; font-size:15px;
+    line-height:1.5; margin-top:12px; max-height:calc(1.5em * 3); overflow:hidden; }
+  .route-grid{ display:grid; grid-template-columns:1fr 1fr; margin-top:16px; background:var(--green-2);
+    border:1px solid rgba(250,243,224,0.25); }
+  .rc-cell{ padding:10px 12px; border-right:1px solid rgba(250,243,224,0.25);
+    border-bottom:1px solid rgba(250,243,224,0.25); }
+  .rc-cell:nth-child(2n){ border-right:none; }
+  .rc-cell:nth-child(3),.rc-cell:nth-child(4){ border-bottom:none; }
+  .rc-label{ font-family:'IBM Plex Mono',monospace; font-size:9px; color:#9fc2ab; text-transform:uppercase;
+    letter-spacing:.05em; }
+  .rc-value{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:12px; color:var(--gold);
+    margin-top:3px; line-height:1.4; }
+
+  /* ---- Alert ---- */
+  .alert{ background:repeating-linear-gradient(45deg, var(--rust) 0 16px, #201a12 16px 32px); padding:4px; }
+  .alert-inner{ background:var(--paper-3); padding:14px 16px; }
+  .alert-head{ font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--rust); text-transform:uppercase;
+    font-size:13px; margin-bottom:8px; }
+  .alert-body{ font-family:'IBM Plex Mono',monospace; font-size:14px; line-height:1.6; color:var(--ink); }
+  .alert-body b{ color:var(--rust); }
+
+  /* ---- Key strip (details) ---- */
+  .key-details{ margin:20px 0; }
+  .key-details summary{ list-style:none; cursor:pointer; background:var(--paper-2); border:2px solid var(--ink);
+    padding:12px 14px; font-family:'IBM Plex Mono',monospace; font-weight:700; text-transform:uppercase;
+    font-size:12px; letter-spacing:.04em; min-height:44px; display:flex; align-items:center; gap:8px; }
+  .key-details summary::-webkit-details-marker{ display:none; }
+  .key-details summary::before{ content:"▸"; color:var(--rust); }
+  .key-details[open] summary::before{ content:"▾"; }
+  .key-grid{ display:grid; grid-template-columns:1fr 1fr; border:2px solid var(--ink); border-top:none;
+    background:var(--paper-2); }
+  .key-item{ padding:12px 14px; display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:.03em; min-height:44px; }
+  .key-pin{ width:13px; height:13px; border-radius:50%; flex:0 0 auto; }
+  .key-pin.anchor{ background:var(--gold); border:2.5px solid var(--ink); }
+  .key-pin.option{ background:var(--paper-3); border:2px dashed var(--rust); }
+  .key-chip{ font-weight:700; padding:2px 7px; border-radius:2px; }
+  .key-chip.verified{ background:var(--green); color:var(--paper-3); }
+  .key-chip.lead{ background:transparent; border:1.5px dashed var(--rust); color:var(--rust); }
+
+  /* ---- Section tag ---- */
+  .section-tag{ display:flex; align-items:center; gap:10px; margin:32px 0 12px; }
+  .section-tag span{ background:var(--ink); color:var(--paper-3); font-family:'IBM Plex Mono',monospace;
+    font-weight:700; text-transform:uppercase; font-size:11px; letter-spacing:.05em; padding:5px 10px; }
+  .section-tag::after{ content:""; flex:1; height:2px; background:var(--ink); }
+
+  /* ---- Sticky day header + plate ---- */
+  .day-block{ margin-top:44px; }
+  .day-sticky{ position:sticky; top:0; z-index:20; background:var(--ink); color:var(--paper-3); height:52px;
+    display:flex; align-items:center; gap:10px; padding:0 16px; }
+  .day-sticky .num{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:24px; color:var(--gold); }
+  .day-sticky .title{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:16px;
+    text-transform:uppercase; color:var(--paper-3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+  .day-sticky .loc{ font-family:'IBM Plex Mono',monospace; font-size:10px; color:#9fc2ab; text-align:right;
+    flex:0 0 auto; max-width:34%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  .day-plate{ background:var(--ink); color:var(--paper-3); padding:18px 16px; }
+  .day-num-big{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:44px; line-height:1;
+    color:var(--paper-3); }
+  .day-loc-line{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--gold); font-size:11px;
+    text-transform:uppercase; letter-spacing:.04em; margin-top:6px; }
+  .day-title-big{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:26px;
+    text-transform:uppercase; margin-top:4px; line-height:1.05; }
+
+  .day-shape{ font-family:'Libre Baskerville',serif; font-style:italic; color:var(--ink-soft); font-size:15px;
+    line-height:1.6; margin:16px 16px 20px; }
+
+  /* ---- Stop spine ---- */
+  .stop-spine{ position:relative; padding:0 16px; }
+  .stop-spine::before{ content:""; position:absolute; left:23px; top:6px; bottom:6px; width:0;
+    background-image:repeating-linear-gradient(var(--green) 0 9px, transparent 9px 15px); }
+  .stop-row{ display:grid; grid-template-columns:34px 1fr; gap:12px; margin-bottom:16px; position:relative; }
+  .pin-col{ display:flex; justify-content:center; padding-top:6px; }
+  .pin{ width:14px; height:14px; border-radius:50%; z-index:2; position:relative; }
+  .pin.anchor{ background:var(--gold); border:3px solid var(--ink); }
+  .stop-card{ background:var(--paper-3); border:2px solid var(--ink); border-left:6px solid var(--green);
+    border-radius:3px; padding:12px; }
+  .stop-card.flagged{ border-color:var(--rust); border-left-color:var(--rust); }
+  .eyebrow-when{ font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.05em; color:var(--ink-soft); margin-bottom:4px; }
+  .stop-name{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; text-transform:uppercase;
+    font-size:20px; line-height:1.1; }
+  .chip{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:11px; text-transform:uppercase;
+    letter-spacing:.04em; padding:3px 8px; border-radius:2px; display:inline-block; margin-top:8px; }
+  .chip.verified{ background:var(--green); color:var(--paper-3); }
+  .chip.lead{ background:transparent; border:1.5px dashed var(--rust); color:var(--rust); }
+  .chip.strongpick{ background:var(--gold); color:var(--ink); }
+  .meta-rows{ margin-top:10px; border-top:1px dotted var(--line-dark); }
+  .meta-row{ display:flex; flex-direction:column; gap:2px; padding:8px 2px; min-height:44px; justify-content:center;
+    border-bottom:1px dotted var(--line-dark); text-decoration:none; color:inherit; }
+  .meta-row:last-child{ border-bottom:none; }
+  .meta-label{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-soft); text-transform:uppercase;
+    letter-spacing:.04em; }
+  .meta-value{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink); line-height:1.4; }
+  a.meta-row .meta-value{ color:var(--navy); text-decoration:underline; }
+  .stop-desc{ font-size:16px; line-height:1.55; margin-top:10px; }
+  .flag-chip{ display:block; background:var(--rust); color:var(--paper-3); font-family:'IBM Plex Mono',monospace;
+    font-size:13px; font-weight:700; padding:10px 12px; border-radius:2px; margin-top:12px; line-height:1.5; }
+  .flag-chip::before{ content:"⚠ FLAG — "; }
+
+  /* ---- Options panel ---- */
+  .options-panel{ margin:0 16px 16px; background:var(--paper-2); border:2.5px dashed var(--line-dark);
+    border-radius:4px; padding:14px; }
+  .options-header{ font-family:'IBM Plex Mono',monospace; font-weight:700; text-transform:uppercase; font-size:12px;
+    letter-spacing:.04em; margin-bottom:10px; }
+  .option-row{ border-top:1px dotted var(--line-dark); padding:12px 0; display:flex; flex-direction:column; gap:6px; }
+  .option-row:first-child{ border-top:none; padding-top:2px; }
+  .option-name{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; text-transform:uppercase;
+    font-size:17px; }
+  .option-why{ font-size:15px; color:var(--ink-soft); line-height:1.55; }
+  .options-note{ font-size:15px; color:var(--ink-soft); line-height:1.6; font-style:italic; }
+
+  /* ---- Category rail ---- */
+  .cat-rail{ display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch; padding:0 16px; margin:14px -16px 6px; scrollbar-width:none; }
+  .cat-rail::-webkit-scrollbar{ display:none; }
+  .cat-card{ flex:0 0 78%; scroll-snap-align:start; border:2px solid var(--ink); background:var(--paper-3);
+    border-radius:3px; overflow:hidden; }
+  .cat-header{ font-family:'IBM Plex Mono',monospace; font-weight:700; text-transform:uppercase; font-size:12px;
+    letter-spacing:.03em; padding:8px 10px; color:var(--paper-3); }
+  .cat-header.green{ background:var(--green); }
+  .cat-header.rust{ background:var(--rust); }
+  .cat-body{ padding:11px; font-size:15px; line-height:1.5; }
+  .cat-body ul{ margin:0; padding-left:1.1em; }
+  .cat-body li{ margin-bottom:5px; }
+  .cat-note{ border-top:1px dotted var(--line-dark); margin-top:9px; padding-top:8px; font-size:13px;
+    color:var(--ink-soft); line-height:1.5; }
+  .cat-note b{ color:var(--rust); }
+  .rail-count{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-soft); text-transform:uppercase;
+    letter-spacing:.04em; padding:0 16px; margin-bottom:6px; }
+  .cat-crossref{ margin:14px 16px 0; background:var(--paper-2); border:1.5px dashed var(--line-dark);
+    border-radius:3px; padding:12px 14px; font-size:15px; color:var(--ink-soft); font-style:italic; line-height:1.55; }
+
+  /* ---- Lodging ---- */
+  .lodging-wrap{ padding:0 16px; }
+  .lodging-filter{ font-style:italic; color:var(--ink-soft); font-size:15px; margin:8px 0 14px; }
+  .lodging-card{ background:var(--paper-3); border:2px solid var(--ink); border-left:6px solid var(--navy);
+    border-radius:3px; padding:14px; margin-bottom:12px; }
+  .lodging-card.strong{ border-color:var(--gold); border-left-color:var(--gold); }
+  .lodging-name{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; text-transform:uppercase;
+    font-size:18px; line-height:1.15; }
+  .lodging-brand{ font-family:'IBM Plex Mono',monospace; color:var(--navy); font-size:12px; margin:8px 0;
+    line-height:1.5; }
+  .lodging-desc{ font-size:16px; line-height:1.55; margin-top:4px; }
+
+  .correction-details{ margin:0 16px 4px; }
+  .correction-details summary{ list-style:none; cursor:pointer; display:flex; align-items:center; gap:8px;
+    min-height:44px; font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--rust); font-size:13px;
+    text-transform:uppercase; padding:10px 2px; }
+  .correction-details summary::-webkit-details-marker{ display:none; }
+  .correction-details summary::before{ content:"▸"; }
+  .correction-details[open] summary::before{ content:"▾"; }
+
+  /* ---- Still loose ---- */
+  .loose-wrap{ padding:0 16px; }
+  .loose-col{ border:2.5px solid var(--ink); padding:16px; margin-bottom:12px; }
+  .loose-col.gold{ background:rgba(217,164,65,0.10); }
+  .loose-col.rust{ background:rgba(168,60,34,0.08); }
+  .loose-col.green{ background:rgba(31,77,58,0.07); }
+  .loose-chip{ display:inline-block; font-family:'IBM Plex Mono',monospace; font-weight:700; text-transform:uppercase;
+    font-size:12px; letter-spacing:.03em; background:var(--ink); color:var(--paper-3); padding:5px 9px;
+    margin-bottom:11px; }
+  .loose-body{ font-size:15px; line-height:1.6; }
+  .loose-body + .loose-body{ margin-top:10px; }
+
+  /* ---- Footer ---- */
+  .footer{ border-top:2px solid var(--line); margin-top:32px; padding:20px 16px calc(32px + env(safe-area-inset-bottom));
+    text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase;
+    color:var(--ink-soft); letter-spacing:.04em; }
+  .footer div + div{ margin-top:6px; }
+
+  /* Tap feedback */
+  .stop-card:active, .option-row:active, .cat-card:active, .lodging-card:active { background:var(--paper-2); }
+  .meta-row:active{ background:var(--paper-2); }
+</style>
+</head>
+<body>
+
+  <!-- MASTHEAD -->
+  <div class="masthead full-bleed">
+    <div class="eyebrow">Field Guide &middot; Couple&rsquo;s Weekend &middot; No dates fixed &middot; Compiled Aug 15, 2026</div>
+    <h1>ALEXANDRIA <span class="plus">+</span> WILLIAMSBURG</h1>
+    <p class="intro">A planning reference for a three-day weekend away — not booked. Reconfirm hours before travel, especially The Study&rsquo;s hours and the Jamestowne tour schedule (flagged below).</p>
+    <div class="route-grid">
+      <div class="rc-cell"><div class="rc-label">Order</div><div class="rc-value">Alexandria &rarr; Wburg &rarr; Alexandria</div></div>
+      <div class="rc-cell"><div class="rc-label">Drive, each way</div><div class="rc-value">~2h45m (unverified)</div></div>
+      <div class="rc-cell"><div class="rc-label">Extension</div><div class="rc-value">None</div></div>
+      <div class="rc-cell"><div class="rc-label">Status</div><div class="rc-value">Advisory, not booked</div></div>
+    </div>
+  </div>
+
+  <!-- ALERT -->
+  <div class="alert full-bleed">
+    <div class="alert-inner">
+      <div class="alert-head">&#9888; Old Chickahominy House — permanently closed</div>
+      <div class="alert-body"><b>Final service was January 17, 2026</b>, after 70 years — confirmed via primary local news (WYDaily) and reflected on the venue&rsquo;s own Yelp listing as CLOSED. Left out of this itinerary entirely; do not route to it.</div>
+    </div>
+  </div>
+
+  <!-- KEY STRIP -->
+  <details class="key-details" open>
+    <summary>How to read this</summary>
+    <div class="key-grid">
+      <div class="key-item"><span class="key-pin anchor"></span> Anchor stop</div>
+      <div class="key-item"><span class="key-pin option"></span> Interchangeable option</div>
+      <div class="key-item"><span class="chip verified" style="margin-top:0;">Verified</span> Official/corroborated</div>
+      <div class="key-item"><span class="chip lead" style="margin-top:0;">Lead</span> Weak source, call first</div>
+    </div>
+  </details>
+
+  <!-- DAY 1 -->
+  <div class="day-block">
+    <div class="day-sticky">
+      <span class="num">01</span>
+      <span class="title">Travel &amp; First Night</span>
+      <span class="loc">Williamsburg</span>
+    </div>
+    <div class="day-plate full-bleed">
+      <div class="day-num-big">01</div>
+      <div class="day-loc-line">Williamsburg &middot; Alexandria &rarr; Williamsburg, ~2h45m (unverified)</div>
+      <div class="day-title-big">Travel &amp; First Night</div>
+    </div>
+    <p class="day-shape">Friday is travel and dinner only, by design — no daytime activity before arrival. Dinner and cocktails sit in the same building, so tonight has zero transit between stops.</p>
+
+    <div class="stop-spine">
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Evening</div>
+          <div class="stop-name">Amber Ox Public House</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <a class="meta-row" href="https://maps.apple.com/?q=525%20Prince%20George%20St%2C%20Williamsburg%2C%20VA" target="_blank" rel="noopener">
+              <span class="meta-label">Address</span><span class="meta-value">525 Prince George St, Williamsburg</span>
+            </a>
+            <div class="meta-row">
+              <span class="meta-label">Hours</span>
+              <span class="meta-value">Mon 4&ndash;9p &middot; Tue closed &middot; Wed&ndash;Fri 11:30a&ndash;9p &middot; Sat&ndash;Sun 10a&ndash;9p (Yelp-sourced only)</span>
+            </div>
+          </div>
+          <p class="stop-desc">Southern scratch-kitchen, farm-to-table, pours its own Precarious beer. Matches the household&rsquo;s casual-over-upscale default and anchors the evening in one building.</p>
+          <div class="flag-chip">Hours above are Yelp-only, not an official hours page — worth a quick call before the trip.</div>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card flagged">
+          <div class="eyebrow-when">After dinner</div>
+          <div class="stop-name">The Study at Amber Ox</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-label">Access</span><span class="meta-value">Same building as Amber Ox &middot; unmarked frosted-glass door off the main bar</span></div>
+            <div class="meta-row"><span class="meta-label">Reservations</span><span class="meta-value">Required</span></div>
+          </div>
+          <p class="stop-desc">The household&rsquo;s deliberate &ldquo;fancy&rdquo; exception — a 1920s-library speakeasy, debuted Nov 2024. Menu: beef tartare, caviar and chips, blue crab dip. On the family map and independently corroborated by three fresh sources (venue site, Coastal Virginia Magazine, Mr. Williamsburg).</p>
+          <div class="flag-chip">Hours conflict, unresolved: family map says Thu&ndash;Sat 4&ndash;9pm; fresh research says Wed&ndash;Sun 4pm&ndash;close. Both cover Friday, so no trip conflict — but the sources disagree, so call to confirm before booking.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="options-panel">
+      <div class="options-header">Options around Friday evening</div>
+      <p class="options-note">None researched — Friday is intentionally fixed to one building. If a backup is needed, Merchants Square&rsquo;s other casual spots (see Saturday) are a short walk from the Lodge.</p>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-block">
+    <div class="day-sticky">
+      <span class="num">02</span>
+      <span class="title">Colonial Wburg &amp; Merchants Sq.</span>
+      <span class="loc">Williamsburg</span>
+    </div>
+    <div class="day-plate full-bleed">
+      <div class="day-num-big">02</div>
+      <div class="day-loc-line">Williamsburg &middot; Historic Area + Merchants Square, on foot</div>
+      <div class="day-title-big">Colonial Williamsburg &amp; Merchants Square</div>
+    </div>
+    <p class="day-shape">August is one of the hottest, most humid stretches of the year here — Colonial Williamsburg&rsquo;s own guidance is to front-load outdoor sites for morning/evening and use indoor exhibits as a midday heat break.</p>
+
+    <div class="stop-spine">
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Morning</div>
+          <div class="stop-name">Colonial Williamsburg Historic Area</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-label">Hours</span><span class="meta-value">Open 365 days/yr &middot; Trades &amp; Sites ~10a&ndash;5p</span></div>
+            <div class="meta-row"><span class="meta-label">Visitor Center</span><span class="meta-value">Opens 9:30a &middot; shuttle to Merchants Square</span></div>
+          </div>
+          <p class="stop-desc">The core historic-site anchor — parks, monuments, and historic sites are squarely the household&rsquo;s thing. In summer, front-load outdoor trades and save the Governor&rsquo;s Palace / Public Hospital (indoor) for midday heat.</p>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Midday</div>
+          <div class="stop-name">Precarious Beer Project</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <a class="meta-row" href="https://maps.apple.com/?q=110%20S%20Henry%20St%2C%20Williamsburg%2C%20VA" target="_blank" rel="noopener">
+              <span class="meta-label">Address</span><span class="meta-value">110 S Henry St, Merchants Square</span>
+            </a>
+            <div class="meta-row"><span class="meta-label">On-site</span><span class="meta-value">Taqueria + burger/chicken counter + arcade</span></div>
+          </div>
+          <p class="stop-desc">Sister brewery to Amber Ox. Casual, walk-in-friendly — matches the household&rsquo;s default dining mode, one block from the morning&rsquo;s historic sites.</p>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Afternoon</div>
+          <div class="stop-name">Merchants Square</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-label">What&rsquo;s there</span><span class="meta-value">40+ shops, restaurants, galleries, indie cinema</span></div>
+          </div>
+          <p class="stop-desc">The &ldquo;cute walkable shop district&rdquo; this household reliably enjoys — unstructured browsing time between the morning&rsquo;s history and the afternoon&rsquo;s Jamestowne tour.</p>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card flagged">
+          <div class="eyebrow-when">11a or 2p slot</div>
+          <div class="stop-name">Historic Jamestowne — Archaeology Tour</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-label">2026 season</span><span class="meta-value">Opened Apr 11 &middot; end date not confirmed</span></div>
+            <a class="meta-row" href="tel:7578561250">
+              <span class="meta-label">Call ahead</span><span class="meta-value">757-856-1250</span>
+            </a>
+          </div>
+          <p class="stop-desc">Ashe&rsquo;s archaeology-interest anchor for the trip — already approved on the household&rsquo;s family map.</p>
+          <div class="flag-chip">Branding/scheduling inconsistent site-to-site: older refs call this &ldquo;Archaeology Walking Tour of James Fort&rdquo;; current materials mostly say &ldquo;Archaeology Tour,&rdquo; possibly departing from the Pocahontas statue instead of the Tercentennial Monument. Days-run and 2026 season-end date are unconfirmed. Call ahead before finalizing.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="options-panel">
+      <div class="options-header">Lunch alternative</div>
+      <div class="option-row">
+        <div class="option-name">Gabriel Archer Tavern at Williamsburg Winery</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">Swap-in for Precarious if you&rsquo;d rather eat at the winery itself. Confirmed operating via the winery&rsquo;s official site.</div>
+      </div>
+    </div>
+
+    <div class="options-panel">
+      <div class="options-header">Late afternoon — pick one, energy-dependent</div>
+      <div class="option-row">
+        <div class="option-name">Alewerks Brewing Company</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">Original Brewery, 189B Ewell Rd, or the newer L.A.B. taproom, 5711-36 Richmond Rd. Taproom + hours Verified; a formal guided tour is Lead-level only — call 757-220-3670 if a tour is the point.</div>
+      </div>
+      <div class="option-row">
+        <div class="option-name">Williamsburg Winery</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">Tasting room daily 11:30a&ndash;7:30p. Four tour tiers, $40&ndash;$100. Reservations 24hr+ ahead, or walk in for a flight.</div>
+      </div>
+      <div class="option-row">
+        <div class="option-name">Freedom Park</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">Could move to Sunday morning instead — see Day 3. ADA-accessible paved loop; strong fit for Ashe&rsquo;s history interest if there&rsquo;s energy left.</div>
+      </div>
+    </div>
+
+    <div class="section-tag"><span>Williamsburg by category</span></div>
+    <div class="cat-rail">
+      <div class="cat-card">
+        <div class="cat-header green">Bookstores</div>
+        <div class="cat-body">
+          <div class="cat-note">Nothing specific surfaced this pass. Merchants Square lists 40+ merchants, none called out as a dedicated bookstore — worth a fresh look before the trip.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header green">Coffee shops</div>
+        <div class="cat-body">
+          <div class="cat-note">Not researched this pass. Merchants Square almost certainly has one — worth a quick check closer to travel dates.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header green">Breweries / Wineries</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Precarious Beer Project</b> — casual hall, sister to Amber Ox</li>
+            <li><b>Alewerks Brewing Co.</b> — original brewery + new L.A.B. taproom</li>
+            <li><b>Williamsburg Winery</b> — tasting room + 4 tour tiers</li>
+            <li><b>Gabriel Archer Tavern</b> — the winery&rsquo;s own restaurant</li>
+          </ul>
+          <div class="cat-note">Well-researched — all four confirmed via official sources this pass.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header rust">Food ideas</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Amber Ox Public House</b> — Friday dinner anchor</li>
+            <li><b>Precarious Beer Project</b> — Saturday lunch anchor</li>
+          </ul>
+          <div class="cat-note"><b>No Guy Fieri DDD-featured spot</b> in Williamsburg/Newport News/Hampton/York County (re-confirmed via a dedicated DDD tracker). Nearest: Doumar&rsquo;s (Norfolk), Captain Chuck-a-Mucks (Rescue, VA, ~50mi) — both too far. Old Chickahominy House is closed (see alert). Saturday dinner left open, see Still Loose.</div>
+        </div>
+      </div>
+    </div>
+    <div class="rail-count">1 / 4 &middot; swipe</div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-block">
+    <div class="day-sticky">
+      <span class="num">03</span>
+      <span class="title">One Last Morning</span>
+      <span class="loc">Wburg → Home</span>
+    </div>
+    <div class="day-plate full-bleed">
+      <div class="day-num-big">03</div>
+      <div class="day-loc-line">Historic Triangle &middot; morning/midday, then drive home ~2h45m (unverified)</div>
+      <div class="day-title-big">One Last Morning, Then Home</div>
+    </div>
+    <p class="day-shape">Everything today is genuinely optional — the household&rsquo;s own research tags both morning candidates as options, not anchors, so no stop spine is forced here. Pick one or both by energy and drive timing, then a casual lunch before departure.</p>
+
+    <div class="options-panel">
+      <div class="options-header">Morning / midday — pick one or both</div>
+      <div class="option-row">
+        <div class="option-name">Freedom Park</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">600 acres, ~2mi trail incl. 1mi ADA-accessible paved loop. Historical core: one of the nation&rsquo;s earliest Free Black Settlements (1803&ndash;1850), three reconstructed cabins (Jackson, Brown, Lightfoot families), 18th-c. cemetery, Battle of Spencer&rsquo;s Ordinary site. Strong, lesser-known fit for Ashe&rsquo;s interest. Hours daily 7a&ndash;sunset, Interpretive Center 10a&ndash;5p. Guided Free Black Settlement tours only run specific fall 2026 dates (Sep 27, Oct 10, Nov 19, Dec 12) — none in summer.</div>
+      </div>
+      <div class="option-row">
+        <div class="option-name">Yorktown Battlefield / Colonial NHP</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">~15&ndash;20 min from Williamsburg. A genuine but modest nod to Tom&rsquo;s German-history interest: Hessian troops fought at the 1781 Siege of Yorktown, Regiment von Bose defended Redoubt No. 9. No dedicated German-history exhibit on-site — a fact a ranger would surface, not a standalone destination.</div>
+      </div>
+    </div>
+
+    <div class="options-panel">
+      <div class="options-header">Backup if plans or weather shift</div>
+      <div class="option-row">
+        <div class="option-name">York River State Park</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">A different flavor than the historic-site cluster — Chesapeake Bay estuarine reserve, multi-use trails, boat ramp, fishing, seasonal kayak rentals. Active: Virginia DCR held a public master-planning meeting in May 2026 about new facilities there.</div>
+      </div>
+    </div>
+
+    <div class="cat-crossref">Williamsburg&rsquo;s by-category rail (bookstores, coffee, breweries/wineries, food) lives under Saturday — that&rsquo;s the day with browsing time. Sunday&rsquo;s stops above are historic-site and nature options, not shop/food picks.</div>
+  </div>
+
+  <!-- LODGING -->
+  <div class="section-tag"><span>Lodging</span></div>
+  <div class="lodging-wrap">
+    <p class="lodging-filter">Filtered for Marriott / Bonvoy / Marriott Vacation Club / Interval International, the household&rsquo;s standing lodging preference.</p>
+    <div class="lodging-card strong">
+      <div class="lodging-name">Williamsburg Lodge, Autograph Collection</div>
+      <span class="chip strongpick">Strong pick</span>
+      <div class="lodging-brand">Marriott Autograph Collection &middot; 310 S. England St, Williamsburg &middot; adjacent to the Historic Area &amp; Merchants Square</div>
+      <p class="lodging-desc">Joined Autograph Collection 2017; 323 rooms, built 1939 by John D. Rockefeller Jr. On-site spa, multiple pools, golf-club access. Confirmed via Marriott&rsquo;s own site plus two independent corroborators (Historic Hotels of America, Colonial Williamsburg&rsquo;s accommodations page) — the only candidate surfaced this pass, and it fits the household&rsquo;s loyalty preference directly.</p>
+    </div>
+  </div>
+
+  <!-- STILL LOOSE -->
+  <div class="section-tag"><span>Still loose</span></div>
+  <div class="loose-wrap">
+    <div class="loose-col gold">
+      <div class="loose-chip">Unconfirmed drive</div>
+      <p class="loose-body">Alexandria &rarr; Williamsburg drive time (~2h45m each way) is carried forward from an earlier pass and wasn&rsquo;t re-verified this session, either direction. Recheck before finalizing timing.</p>
+    </div>
+    <div class="loose-col rust">
+      <div class="loose-chip">Hours to reconfirm</div>
+      <p class="loose-body">The Study at Amber Ox: family map says Thu&ndash;Sat 4&ndash;9p; fresh research says Wed&ndash;Sun 4p&ndash;close. Both cover Friday, so no trip conflict — but call to confirm. Amber Ox&rsquo;s own hours are Yelp-sourced only.</p>
+      <p class="loose-body">Historic Jamestowne&rsquo;s tour has inconsistent day-of-week scheduling and an unconfirmed 2026 season-end date — call 757-856-1250. Alewerks&rsquo; formal tour program is Lead-level only — call 757-220-3670.</p>
+    </div>
+    <div class="loose-col green">
+      <div class="loose-chip">No fit found / final pass</div>
+      <p class="loose-body">No dedicated Williamsburg-area fit for Tom&rsquo;s European Studies / German&ndash;Russian studies interest. Yorktown&rsquo;s Hessian-troop connection is real but modest. Germanna (the actual German colonial VA settlement) is ~130mi away, not a fit here. No Russian-history tie-in found in the area.</p>
+      <p class="loose-body">Saturday dinner is intentionally left open — no specific pick researched this pass. Busch Gardens Williamsburg belonged to an earlier draft of this trip and wasn&rsquo;t restudied against the household&rsquo;s park/historic-site profile.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>Advisory / not booked &mdash; reconfirm hours before travel</div>
+    <div>Alexandria &rarr; Williamsburg</div>
+  </div>
+
+</body>
+</html>
