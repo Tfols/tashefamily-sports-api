@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel — Tashe</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-1:     #0d211f;
+  --bg-2:     #16332e;
+  --panel:    rgba(15,36,33,0.92);
+  --border:   #2f5a50;
+  --border-s: #3f7367;
+  --rule:     #2a4f46;
+  --text:     #e7ecdf;
+  --bright:   #f7f3e6;
+  --muted:    #8fac9f;
+  --head:     #d8c896;
+  --accent:   #c99a4c;
+  --teal:     #4fa895;
+  --grd:      linear-gradient(90deg, #4fa895, #c99a4c);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; }
+body {
+  background: linear-gradient(160deg, var(--bg-1), var(--bg-2)) fixed;
+  color: var(--text);
+  font-family: "IBM Plex Mono", monospace;
+  min-height: 100vh;
+}
+/* dotted flight-path atmosphere */
+body::before {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(rgba(201,154,76,0.16) 1px, transparent 1.4px),
+    radial-gradient(rgba(79,168,149,0.12) 1px, transparent 1.4px);
+  background-size: 46px 46px, 68px 68px;
+  background-position: 0 0, 23px 30px;
+  opacity: 0.55;
+}
+
+#app {
+  position: relative; z-index: 1;
+  max-width: 960px; margin: 0 auto;
+  padding: 28px 20px;
+}
+
+/* ── Page header ─────────────────────────────────────────── */
+#page-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--rule);
+}
+#back-link {
+  font-size: 10px; font-weight: 600;
+  color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  flex: 0 0 auto;
+  transition: color 0.15s, border-color 0.15s;
+}
+#back-link:hover { color: var(--accent); border-color: var(--accent); }
+#page-title {
+  font-family: "Fraunces", serif;
+  font-size: 24px; font-weight: 700;
+  color: var(--bright); letter-spacing: 0.01em;
+}
+#page-sub {
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 0.08em; margin-top: 4px;
+}
+
+/* ── Trip cards grid ─────────────────────────────────────── */
+.trip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+@media (max-width: 760px) { .trip-grid { grid-template-columns: 1fr; } }
+
+.trip-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.15s, transform 0.12s;
+}
+.trip-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.trip-card-multi {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+}
+
+.trip-card-bar { height: 3px; background: var(--grd); }
+.trip-card-body {
+  padding: 16px 16px 13px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.trip-icon { font-size: 26px; line-height: 1; margin-bottom: 4px; }
+.trip-name {
+  font-family: "Fraunces", serif;
+  font-size: 17px; font-weight: 600;
+  color: var(--bright); letter-spacing: 0.01em; line-height: 1.25;
+}
+.trip-dates {
+  font-size: 10px; color: var(--accent);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.trip-desc {
+  font-size: 12.5px; color: var(--muted);
+  line-height: 1.45;
+  display: -webkit-box; -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.trip-status {
+  display: inline-block;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal); border: 1px solid var(--border-s);
+  border-radius: 3px; padding: 2px 7px; margin-top: 2px;
+  width: fit-content;
+}
+
+/* Sub-links inside a multi-document trip card */
+.trip-files {
+  display: flex; flex-direction: column;
+  margin-top: 8px;
+  border-top: 1px dashed var(--rule);
+}
+.trip-file-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+  text-decoration: none;
+  transition: background 0.12s;
+  border-bottom: 1px dashed var(--rule);
+}
+.trip-file-link:last-child { border-bottom: none; }
+.trip-file-link:hover { background: rgba(79,168,149,0.08); }
+.trip-file-icon { font-size: 17px; flex: 0 0 auto; }
+.trip-file-info { flex: 1; min-width: 0; }
+.trip-file-name { font-size: 12.5px; font-weight: 600; color: var(--bright); line-height: 1.3; }
+.trip-file-desc {
+  font-size: 10.5px; color: var(--muted); line-height: 1.3; margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.trip-file-arrow {
+  font-size: 11px; color: var(--muted); flex: 0 0 auto;
+  transition: color 0.12s, transform 0.12s;
+}
+.trip-file-link:hover .trip-file-arrow { color: var(--accent); transform: translateX(2px); }
+
+/* ── Empty state ─────────────────────────────────────────── */
+#empty-state {
+  text-align: center; padding: 70px 20px;
+  border: 1px dashed var(--rule); border-radius: 10px;
+}
+#empty-state .glyph { font-size: 30px; margin-bottom: 12px; opacity: 0.7; }
+#empty-state .headline {
+  font-family: "Fraunces", serif;
+  font-size: 17px; color: var(--bright); margin-bottom: 6px;
+}
+#empty-state .sub { font-size: 12px; color: var(--muted); max-width: 46ch; margin: 0 auto; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="page-header">
+    <a href="/" id="back-link">&larr; Dashboard</a>
+    <div>
+      <div id="page-title">Travel</div>
+      <div id="page-sub">tashefamily.com &middot; trip plans & itineraries</div>
+    </div>
+  </div>
+
+  <div id="trip-sections"></div>
+
+</div>
+
+<script>
+/*
+  TRIPS array — each entry is one card. Populated by the household
+  travel-planner agent (itineraries handed off as Trip Field Guides
+  from report-builder). Files live in /static/travel/.
+
+  Single-document: { name, desc, dates, status, file, icon? }
+  Multi-document:  { name, desc, dates, status, icon?, files: [{label, desc, file, icon?}, ...] }
+*/
+const TRIPS = [
+  // { name: 'Iceland Ring Road', desc: 'Two-week loop — waterfalls, glacier lagoon, Reykjavik', dates: 'Jun 2027', status: 'Planning', icon: '🧊', file: '/static/travel/iceland-field-guide.html' },
+];
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderCard(t) {
+  const meta = `${t.dates ? `<div class="trip-dates">${escHtml(t.dates)}</div>` : ''}${t.status ? `<div class="trip-status">${escHtml(t.status)}</div>` : ''}`;
+  if (t.files) {
+    return `<div class="trip-card-multi">
+      <div class="trip-card-bar"></div>
+      <div class="trip-card-body">
+        <div class="trip-icon">${t.icon || '🧳'}</div>
+        <div class="trip-name">${escHtml(t.name)}</div>
+        ${t.desc ? `<div class="trip-desc">${escHtml(t.desc)}</div>` : ''}
+        ${meta}
+      </div>
+      <div class="trip-files">
+        ${t.files.map(f => `
+          <a href="${escHtml(f.file)}" target="_blank" class="trip-file-link">
+            <div class="trip-file-icon">${f.icon || '📄'}</div>
+            <div class="trip-file-info">
+              <div class="trip-file-name">${escHtml(f.label)}</div>
+              ${f.desc ? `<div class="trip-file-desc">${escHtml(f.desc)}</div>` : ''}
+            </div>
+            <div class="trip-file-arrow">→</div>
+          </a>
+        `).join('')}
+      </div>
+    </div>`;
+  }
+  return `<a href="${escHtml(t.file)}" target="_blank" class="trip-card">
+    <div class="trip-card-bar"></div>
+    <div class="trip-card-body">
+      <div class="trip-icon">${t.icon || '🧳'}</div>
+      <div class="trip-name">${escHtml(t.name)}</div>
+      ${t.desc ? `<div class="trip-desc">${escHtml(t.desc)}</div>` : ''}
+      ${meta}
+    </div>
+  </a>`;
+}
+
+function render() {
+  const el = document.getElementById('trip-sections');
+
+  if (!TRIPS.length) {
+    el.innerHTML = `<div id="empty-state">
+      <div class="glyph">🧳 ✈️</div>
+      <div class="headline">No trips plotted yet</div>
+      <div class="sub">Trip plans built by the household travel agent will show up here as field guides — itineraries, destination notes, and logistics, one card per trip.</div>
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = `<div class="trip-grid">${TRIPS.map(renderCard).join('')}</div>`;
+}
+
+render();
+</script>
+</body>
+</html>

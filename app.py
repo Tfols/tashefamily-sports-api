@@ -264,6 +264,11 @@ def reports_page():
     return send_from_directory('static', 'reports.html')
 
 
+@app.route('/travel')
+def travel_page():
+    return send_from_directory('static', 'travel.html')
+
+
 @app.route('/favicon.ico')
 @app.route('/favicon.png')
 def favicon():
