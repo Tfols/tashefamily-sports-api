@@ -503,6 +503,29 @@ body::before {
 .theme-digjournal .report-file-desc { color: #b8a988; }
 .theme-digjournal .report-file-arrow { color: #b8a988; }
 .theme-digjournal .report-file-link:hover .report-file-arrow { color: #dcae56; }
+
+/* ── Diner menu board / Regional Pizza theme ────────────── */
+.theme-pizza .report-card,
+.theme-pizza .report-card-multi {
+  background: rgba(26,14,10,0.94);
+  border-color: #7a3620;
+}
+.theme-pizza .report-card:hover {
+  border-color: #e2b039;
+}
+.theme-pizza .report-card-bar {
+  background: linear-gradient(90deg, #b23a28, #e2b039);
+}
+.theme-pizza .report-name { color: #f9ecd8; }
+.theme-pizza .report-desc { color: #d3b48f; }
+.theme-pizza .report-meta { color: #d3b48f; }
+.theme-pizza .report-files { border-top-color: #7a3620; }
+.theme-pizza .report-file-link { border-bottom-color: #7a3620; }
+.theme-pizza .report-file-link:hover { background: rgba(226,176,57,0.08); }
+.theme-pizza .report-file-name { color: #f9ecd8; }
+.theme-pizza .report-file-desc { color: #d3b48f; }
+.theme-pizza .report-file-arrow { color: #d3b48f; }
+.theme-pizza .report-file-link:hover .report-file-arrow { color: #e2b039; }
 </style>
 </head>
 <body>
@@ -662,6 +685,19 @@ const REPORTS = [
     files: [
       { label: 'Field Reference', desc: 'Collector\'s-shelf diagram, Bounty Board, era-by-era checklist tables', file: '/static/reports/funko-grogu-checklist-factsheet.html', icon: '🐸' },
       { label: 'Full Reference Guide', desc: 'Numbered sections, tiered sources, sourcing confidence', file: '/static/reports/funko-grogu-checklist-report.html', icon: '📖' },
+    ]
+  },
+  {
+    topic: 'Food & Drink',
+    hideTopicHeader: true,
+    name: 'American Regional Pizza Styles',
+    desc: '33 codified regional pizza traditions beyond the household favorites — small-town and obscure finds prioritized, the Erie question answered directly, three pilgrimage-worthy vaults, and confirmed dead-end searches kept visible',
+    date: 'Aug 2026',
+    icon: '🍕',
+    theme: 'pizza',
+    files: [
+      { label: 'Field Checklist', desc: 'Passport-style tried/want-to-try checklist, region route map', file: '/static/reports/regional-pizza-styles-factsheet.html', icon: '🍕' },
+      { label: 'Full Reference Guide', desc: 'Complete history, vault candidates, tiered sources per style', file: '/static/reports/regional-pizza-styles-report.html', icon: '📖' },
     ]
   },
 ];

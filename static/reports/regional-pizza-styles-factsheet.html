@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f2e6c8;color:#241a12;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Household Pizza Passport — Regional Styles Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Permanent+Marker&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2e6c8;
+  --paper-2:#e8d7a8;
+  --paper-3:#faf3e0;
+  --ink:#241a12;
+  --ink-soft:#5a4736;
+  --line:#cdbb8f;
+  --line-dark:#a4906a;
+  --crust:#c98a3f;
+  --crust-deep:#8a5a20;
+  --sauce:#b23a28;
+  --sauce-deep:#7a2418;
+  --basil:#3f6b3f;
+  --basil-deep:#274a27;
+  --cheese:#e2b039;
+  --cheese-deep:#a97a1c;
+  --pepperoni:#8a2418;
+  --flag:#9c2b1f;
+  --flag-tint:#f6e0dc;
+  --ok:#3f6b3f;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:light;background:var(--paper)!important;color:var(--ink)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:"IBM Plex Sans",sans-serif;font-size:13.5px;line-height:1.5;max-width:1180px;margin:0 auto;padding:0 0 60px;
+  background-image:radial-gradient(circle at 18px 18px, rgba(169,144,106,0.13) 1.4px, transparent 1.6px);
+  background-size:36px 36px;
+}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+#sheet{padding:24px 28px 0}
+
+h1,.display{font-family:"Alfa Slab One",cursive;font-weight:400}
+.stamp-font{font-family:"Permanent Marker",cursive;font-weight:400}
+
+/* ── MASTHEAD ── */
+.masthead{display:grid;grid-template-columns:1fr auto;border:3px solid var(--ink);margin-bottom:16px;overflow:hidden;background:var(--paper-3)}
+.masthead-main{padding:18px 24px;display:flex;flex-direction:column;justify-content:center}
+.masthead-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sauce-deep);margin-bottom:6px;font-weight:700}
+h1{font-size:2.15rem;line-height:1.05;color:var(--ink)}
+h1 span.hl{color:var(--sauce)}
+.masthead-sub{font-size:.85rem;color:var(--ink-soft);margin-top:9px;max-width:68ch}
+.passport-badge{background:var(--cheese);border-left:3px solid var(--ink);padding:12px 22px;display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:172px;text-align:center}
+.passport-badge .pb-num{font-family:"Alfa Slab One",cursive;font-size:1.85rem;color:var(--ink);line-height:1}
+.passport-badge .pb-range{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--sauce-deep);margin-top:4px;font-weight:700}
+.passport-badge .pb-label{font-family:"IBM Plex Mono",monospace;font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+
+/* ── KEY STATS ── */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
+.stat-cell{background:var(--paper-3);border:2px solid var(--ink);padding:10px 8px;text-align:center;position:relative;page-break-inside:avoid}
+.stat-cell::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:13px;height:13px;border-radius:50%;background:var(--cheese);border:2px solid var(--ink)}
+.stat-cell.c1::before{background:var(--sauce)}
+.stat-cell.c2::before{background:var(--basil)}
+.stat-cell.c3::before{background:var(--crust)}
+.stat-cell.c4::before{background:var(--flag)}
+.stat-cell.c5::before{background:var(--pepperoni)}
+.stat-num{font-family:"Alfa Slab One",cursive;font-size:1.3rem;color:var(--ink);line-height:1;margin-top:4px}
+.stat-label{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--ink-soft);margin-top:6px;line-height:1.35}
+
+/* ── SECTION LABEL ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin-bottom:10px;margin-top:26px;break-after:avoid}
+.sec-tag{font-family:"Alfa Slab One",cursive;font-size:1rem;color:var(--paper-3);background:var(--sauce-deep);padding:4px 14px;border:2px solid var(--ink);flex-shrink:0}
+.sec-rule{height:2px;background:var(--ink);flex:1}
+.sec-note{font-size:.74rem;color:var(--ink-soft);margin-bottom:10px;font-style:italic;max-width:90ch}
+
+/* ── ROUTE MAP DIAGRAM ── */
+.diagram-panel{border:3px solid var(--ink);background:var(--paper-3);margin-bottom:16px;overflow:hidden}
+.diagram-head{background:var(--ink);color:var(--paper);padding:8px 18px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between}
+.diagram-body{padding:12px 16px 4px;overflow-x:auto}
+.diagram-body svg{width:100%;height:auto;display:block;min-width:680px}
+.diagram-caption{font-size:.75rem;color:var(--ink-soft);padding:8px 18px 14px;line-height:1.55;border-top:1px dashed var(--line-dark);margin-top:4px}
+.diagram-caption b{color:var(--ink)}
+
+/* ── LEGEND STRIP ── */
+.legend-strip{display:flex;flex-wrap:wrap;gap:14px;align-items:center;border:2px dashed var(--line-dark);background:var(--paper-3);padding:10px 16px;margin-bottom:18px;font-size:.74rem;color:var(--ink-soft)}
+.legend-strip b{color:var(--ink)}
+.legend-item{display:flex;align-items:center;gap:6px}
+
+/* ── VAULT CARDS ── */
+.vault-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:6px}
+.vault-card{border:3px double var(--crust-deep);background:var(--paper-3);padding:14px 16px;position:relative;page-break-inside:avoid}
+.vault-card::before{content:"★ VAULT";position:absolute;top:-11px;left:12px;background:var(--cheese);border:2px solid var(--ink);font-family:"IBM Plex Mono",monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;color:var(--ink)}
+.vault-name{font-family:"Alfa Slab One",cursive;font-size:.98rem;color:var(--sauce-deep);margin:8px 0 4px;line-height:1.25}
+.vault-tag{font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--basil-deep);font-weight:700;letter-spacing:.03em;margin-bottom:6px}
+.vault-note{font-size:.76rem;color:var(--ink-soft);line-height:1.55}
+
+/* ── ERIE FILE ── */
+.erie-panel{border:3px solid var(--ink);background:var(--paper-3);margin-bottom:16px;overflow:hidden}
+.erie-head{background:var(--flag);color:#fdf0ee;padding:10px 18px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between}
+.erie-body{padding:16px 20px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.erie-col-title{font-family:"Alfa Slab One",cursive;font-size:.92rem;margin-bottom:6px}
+.erie-col.no .erie-col-title{color:var(--flag)}
+.erie-col.yes .erie-col-title{color:var(--basil-deep)}
+.erie-col p{font-size:.8rem;color:var(--ink-soft);line-height:1.6}
+.erie-stamp{display:inline-block;font-family:"Permanent Marker",cursive;font-size:1rem;color:var(--flag);border:3px solid var(--flag);border-radius:6px;padding:3px 10px;transform:rotate(-4deg);margin-bottom:8px}
+.erie-stamp.pos{color:var(--basil-deep);border-color:var(--basil-deep);transform:rotate(3deg)}
+
+/* ── DEAD ENDS ── */
+.deadend-panel{border:2px solid var(--ink);background:var(--paper-2);padding:14px 20px;margin-bottom:6px}
+.deadend-list{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 18px;margin-top:8px}
+.deadend-item{font-size:.78rem;color:var(--ink);display:flex;align-items:baseline;gap:6px}
+.deadend-item::before{content:"✕";color:var(--flag);font-weight:700;font-family:"IBM Plex Mono",monospace}
+
+/* ── HUB HEADER (region cluster) ── */
+.hub-head{display:flex;align-items:baseline;gap:12px;margin:26px 0 8px;padding:7px 0 7px 14px;border-left:9px solid var(--crust);border-bottom:2px solid var(--ink);break-after:avoid}
+.hub-head.hub-ne{border-left-color:var(--sauce)}
+.hub-head.hub-mw{border-left-color:var(--crust)}
+.hub-head.hub-ap{border-left-color:var(--cheese-deep)}
+.hub-head.hub-w{border-left-color:var(--basil)}
+.hub-head.hub-g{border-left-color:var(--pepperoni)}
+.hub-title{font-family:"Alfa Slab One",cursive;font-size:1.2rem;color:var(--ink)}
+.hub-sub{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--ink-soft)}
+.hub-count{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--ink-soft);margin-left:auto;white-space:nowrap}
+
+.cluster-label{font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--crust-deep);margin:14px 0 6px}
+
+/* ── CHECKLIST TABLE ── */
+.table-scroll{overflow-x:auto;margin-bottom:6px}
+table.check-table{width:100%;border-collapse:collapse;background:var(--paper-3);border:2px solid var(--ink);font-size:.78rem;margin-bottom:4px}
+table.check-table th{font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--paper-2);border-bottom:2px solid var(--ink);padding:7px 10px;text-align:left}
+table.check-table td{padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top;line-height:1.45}
+table.check-table tr:last-child td{border-bottom:none}
+table.check-table tr{break-inside:avoid}
+tr.correction-row{background:var(--flag-tint)}
+tr.correction-row td:first-child{border-left:4px solid var(--flag)}
+
+.flagnote{display:block;margin-top:4px;font-size:.72rem;font-style:italic;color:var(--flag)}
+.flagnote b{font-style:normal}
+
+/* ── STAMP BADGE ── */
+.stamp{display:inline-flex;align-items:center;justify-content:center;min-width:64px;padding:4px 8px;border-radius:5px;font-family:"Permanent Marker",cursive;font-size:.78rem;white-space:nowrap;text-align:center;line-height:1}
+.stamp.tried{color:var(--sauce-deep);border:2.5px solid var(--sauce-deep);transform:rotate(-3deg);background:rgba(178,58,40,0.06)}
+.stamp.want{color:var(--ink-soft);border:2px dashed var(--line-dark);font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;border-radius:20px}
+
+.conf{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.6rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:3px;white-space:nowrap}
+.conf-well{background:var(--basil);color:#fff}
+.conf-mod{background:var(--cheese-deep);color:#fff}
+.conf-thin{background:transparent;color:var(--flag);border:1.5px dashed var(--flag)}
+.conf-corr{background:var(--ink);color:var(--paper)}
+
+/* ── SOURCING CONFIDENCE ── */
+.qc-strip{border:3px solid var(--ink);background:var(--paper-3);margin:20px 0 16px}
+.qc-head{background:var(--cheese);padding:9px 18px;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border-bottom:3px solid var(--ink)}
+.qc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.qc-item{padding:13px 18px;border-right:1px dashed var(--line-dark);border-bottom:1px dashed var(--line-dark)}
+.qc-item:nth-child(2n){border-right:none}
+.qc-flag{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:9px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:5px;display:inline-block;padding:2px 7px;color:#fff}
+.qc-flag.ok{background:var(--basil)}
+.qc-flag.mod{background:var(--cheese-deep)}
+.qc-flag.thin{background:var(--flag)}
+.qc-flag.gone{background:var(--ink)}
+.qc-body{font-size:.76rem;line-height:1.5;color:var(--ink)}
+
+/* ── FOOTER ── */
+.footer{padding:16px 4px 20px;font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.04em;color:var(--ink-soft);text-align:center;line-height:1.9;border-top:1px solid var(--line-dark);margin-top:6px}
+
+@media(max-width:900px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .vault-grid{grid-template-columns:1fr}
+  .masthead{grid-template-columns:1fr}
+  .qc-grid{grid-template-columns:1fr}
+  .qc-item{border-right:none}
+  .erie-body{grid-template-columns:1fr}
+  .deadend-list{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div id="sheet">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-main">
+    <div class="masthead-eyebrow">Field Checklist &middot; American Regional Pizza Styles &middot; Compiled Aug 2026</div>
+    <h1>The Household <span class="hl">Pizza Passport</span></h1>
+    <div class="masthead-sub">Every codified American regional pizza style found in this research, organized geographically, with what's already been tried stamped in and what's still on the list left open &mdash; built especially to surface the small-town and obscure finds this household actually asked for. Companion to the full reference guide, which carries the complete history and sourcing for each entry.</div>
+  </div>
+  <div class="passport-badge">
+    <div class="pb-num">33</div>
+    <div class="pb-range">Styles Catalogued</div>
+    <div class="pb-label">+ 7 Confirmed Dead Ends</div>
+  </div>
+</div>
+
+<!-- KEY STATS -->
+<div class="stat-row">
+  <div class="stat-cell c1">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Already tried: NY style, Neapolitan, Chicago deep dish, Detroit (the favorite), New Haven apizza</div>
+  </div>
+  <div class="stat-cell c2">
+    <div class="stat-num">28</div>
+    <div class="stat-label">Still on the list &mdash; mostly small-town and obscure, exactly the kind sought out</div>
+  </div>
+  <div class="stat-cell c3">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Vault-candidate pilgrimages: Papa's Tomato Pies, Beau Jo's, Wooster Street New Haven</div>
+  </div>
+  <div class="stat-cell c4">
+    <div class="stat-num">7</div>
+    <div class="stat-label">Confirmed negative findings &mdash; actively searched, no distinct style exists</div>
+  </div>
+  <div class="stat-cell c5">
+    <div class="stat-num">1</div>
+    <div class="stat-label">Erie mystery: no "Erie style" pizza found &mdash; but pepperoni balls are real, see below</div>
+  </div>
+  <div class="stat-cell c1">
+    <div class="stat-num">1912</div>
+    <div class="stat-label">Oldest continuously family-run pizzeria in the US, still catchable: Papa's Tomato Pies</div>
+  </div>
+</div>
+
+<!-- SIGNATURE DIAGRAM: THE PIZZA BELT ROUTE MAP -->
+<div class="diagram-panel">
+  <div class="diagram-head"><span>The Pizza Belt Road Trip &mdash; Regional Hubs, West to East</span><span>Circle size &asymp; styles catalogued in that hub</span></div>
+  <div class="diagram-body">
+    <svg viewBox="0 0 980 260" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 60 190 Q 220 120 340 175 T 620 150 T 900 170" fill="none" stroke="#8a5a20" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round"/>
+
+      <!-- WEST -->
+      <circle cx="90" cy="182" r="34" fill="#faf3e0" stroke="#241a12" stroke-width="3"/>
+      <circle cx="90" cy="182" r="34" fill="none" stroke="#3f6b3f" stroke-width="6" stroke-dasharray="0 213.6"/>
+      <text x="90" y="178" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="17" fill="#241a12">3</text>
+      <text x="90" y="193" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5a4736">STYLES</text>
+      <text x="90" y="234" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="13" fill="#241a12">The West</text>
+      <text x="90" y="248" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4736">CA &middot; CO &middot; NM (thin)</text>
+
+      <!-- MIDWEST -->
+      <circle cx="340" cy="150" r="46" fill="#faf3e0" stroke="#241a12" stroke-width="3"/>
+      <path d="M 340 104 A 46 46 0 0 1 375.5 118.5" fill="none" stroke="#3f6b3f" stroke-width="6"/>
+      <text x="340" y="146" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="21" fill="#241a12">12</text>
+      <text x="340" y="163" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4736">STYLES</text>
+      <text x="340" y="215" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="14" fill="#241a12">Midwest</text>
+      <text x="340" y="229" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4736">Chi &middot; Det &middot; OH &middot; StL &middot; MKE &middot; QC</text>
+      <text x="340" y="241" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#3f6b3f" font-weight="700">2 tried</text>
+
+      <!-- APPALACHIA / MID-ATLANTIC -->
+      <circle cx="565" cy="130" r="34" fill="#faf3e0" stroke="#241a12" stroke-width="3"/>
+      <text x="565" y="126" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="17" fill="#241a12">3</text>
+      <text x="565" y="141" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#5a4736">STYLES</text>
+      <text x="565" y="182" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="13" fill="#241a12">Appalachia / Mid-Atl.</text>
+      <text x="565" y="196" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4736">Old Forge &middot; Altoona &middot; Baltimore</text>
+
+      <!-- NORTHEAST -->
+      <circle cx="790" cy="148" r="46" fill="#faf3e0" stroke="#241a12" stroke-width="3"/>
+      <path d="M 790 102 A 46 46 0 0 1 826 121" fill="none" stroke="#3f6b3f" stroke-width="6"/>
+      <text x="790" y="144" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="21" fill="#241a12">12</text>
+      <text x="790" y="161" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4736">STYLES</text>
+      <text x="790" y="213" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="14" fill="#241a12">Northeast</text>
+      <text x="790" y="227" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#5a4736">NY/NJ/LI &middot; New England &middot; Upstate</text>
+      <text x="790" y="239" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7" fill="#3f6b3f" font-weight="700">3 tried</text>
+
+      <!-- GULF / OTHER (spur) -->
+      <path d="M 900 170 Q 930 200 940 228" fill="none" stroke="#8a2418" stroke-width="3.5" stroke-dasharray="1 9" stroke-linecap="round"/>
+      <circle cx="945" cy="238" r="20" fill="#faf3e0" stroke="#8a2418" stroke-width="2.5" stroke-dasharray="3 3"/>
+      <text x="945" y="234" text-anchor="middle" font-family="Alfa Slab One, cursive" font-size="11" fill="#8a2418">3</text>
+      <text x="945" y="245" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="5.5" fill="#8a2418">thin</text>
+
+      <!-- Erie marker, off the main road, flagged -->
+      <circle cx="710" cy="70" r="4" fill="none" stroke="#9c2b1f" stroke-width="2"/>
+      <line x1="713" y1="73" x2="726" y2="88" stroke="#9c2b1f" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <text x="732" y="92" font-family="Permanent Marker, cursive" font-size="11" fill="#9c2b1f">Erie? &mdash; see below</text>
+    </svg>
+  </div>
+  <div class="diagram-caption">
+    <b>Reading this route:</b> five regional hubs, arranged loosely west &rarr; east, with circle size scaled to the exact number of styles catalogued in that hub below (counts match the region tables one-for-one). A solid green arc marks a hub with at least one style already tried. The dashed spur at far right is the thinly-documented Gulf Coast / island group &mdash; included for completeness, not because it's confidently codified. Erie sits off the main road on purpose: see The Erie File, immediately below.
+  </div>
+</div>
+
+<div class="legend-strip">
+  <div class="legend-item"><span class="stamp tried" style="min-width:0;padding:2px 8px">TRIED</span> already had it</div>
+  <div class="legend-item"><span class="stamp want" style="min-width:0;padding:2px 8px">WANT</span> still on the list</div>
+  <div class="legend-item"><span class="conf conf-well">Well</span> well-documented</div>
+  <div class="legend-item"><span class="conf conf-mod">Moderate</span> documented with hedging</div>
+  <div class="legend-item"><span class="conf conf-thin">Thin</span> thin / unconfirmed</div>
+  <div class="legend-item"><b>★ VAULT</b> = pilgrimage-worthy per the research brief</div>
+</div>
+
+<!-- VAULT CANDIDATES -->
+<div class="sec-label"><span class="sec-tag">Vault Candidates</span><div class="sec-rule"></div></div>
+<div class="sec-note">Three pilgrimage-worthy finds flagged explicitly in the brief &mdash; the places where visiting isn't just trying a style, it's standing where the style was actually invented.</div>
+<div class="vault-grid">
+  <div class="vault-card">
+    <div class="vault-name">Papa's Tomato Pies</div>
+    <div class="vault-tag">Trenton / Robbinsville, NJ &middot; est. 1912</div>
+    <div class="vault-note">Opened by 17-year-old Neapolitan immigrant Giuseppe "Joe" Papa &mdash; cited as the <b>oldest continuously operating family-owned pizza restaurant in the country</b>. The related De Lorenzo's lineage (1947) is a few miles away. Both have since relocated from Trenton proper to nearby Robbinsville.</div>
+  </div>
+  <div class="vault-card">
+    <div class="vault-name">Beau Jo's</div>
+    <div class="vault-tag">Idaho Springs, CO &middot; est. 1973</div>
+    <div class="vault-note">Chip Bair invented the Colorado "mountain pie" &mdash; thick, hand-braided crust, sold by the pound, honey on the side &mdash; right here. Now six Colorado locations, but Idaho Springs is the original.</div>
+  </div>
+  <div class="vault-card">
+    <div class="vault-name">Frank Pepe's &amp; Sally's Apizza</div>
+    <div class="vault-tag">Wooster Street, New Haven, CT &middot; 1925 / 1938</div>
+    <div class="vault-note">Already a household favorite in style &mdash; this is the upgrade: the two actual originating establishments, a few blocks apart on the same street, both still coal-fired 80&ndash;100 years later.</div>
+  </div>
+</div>
+
+<!-- ERIE FILE -->
+<div class="sec-label"><span class="sec-tag">The Erie File</span><div class="sec-rule"></div></div>
+<div class="erie-panel">
+  <div class="erie-head"><span>Case File: "Erie-Style" Pizza</span><span>Status: No Independent Match</span></div>
+  <div class="erie-body">
+    <div class="erie-col no">
+      <div class="erie-stamp">NOT FOUND</div>
+      <div class="erie-col-title">What we went looking for</div>
+      <p>No good, independent sourcing establishes "Erie style" as its own codified pizza tradition. Erie shares in the broader <b>Western New York / Rust Belt cup-and-char pepperoni tradition</b> centered on Buffalo &mdash; small-diameter pepperoni cups that curl and char, documented back to WWII-era shops like Bocce Club (1946) and tied to Buffalo's Battistoni Italian Specialty Meats (est. 1931). Erie (like Cleveland and Detroit) never fully switched to "lay-flat" pepperoni, and local shops like Lucky Man's Pizzeria are noted for it &mdash; but no dedicated historical writeup treats "Erie style" as its own named tradition the way Old Forge, Quad Cities, or Brier Hill are documented. This is a real gap, not a confident negative: a strong local source may simply not have surfaced.</p>
+    </div>
+    <div class="erie-col yes">
+      <div class="erie-stamp pos">REAL FIND</div>
+      <div class="erie-col-title">What Erie <em>is</em> uniquely documented for</div>
+      <p><b>Pepperoni balls</b> &mdash; a fried, dough-wrapped pepperoni snack, not a pizza. Originated in Erie's Little Italy, reportedly evolving from Depression-era fried fish-scrap balls; the Mohican Market and Bakery was advertising them for sale as early as <b>1947</b>. Different food entirely from a pizza style, but a genuine, well-documented Erie original worth seeking out on the same trip.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMED DEAD ENDS -->
+<div class="sec-label"><span class="sec-tag">Confirmed Dead Ends</span><div class="sec-rule"></div></div>
+<div class="sec-note">Actively searched, no distinct codified regional style found &mdash; useful to know before spending a search on these.</div>
+<div class="deadend-panel">
+  <div class="deadend-list">
+    <div class="deadend-item">Seattle, WA</div>
+    <div class="deadend-item">Rochester, NY</div>
+    <div class="deadend-item">Kansas City, MO</div>
+    <div class="deadend-item">Louisville, KY</div>
+    <div class="deadend-item">Cincinnati, OH <span style="color:var(--ink-soft);font-style:italic">(beyond generic Ohio Valley)</span></div>
+    <div class="deadend-item">New Castle, PA</div>
+    <div class="deadend-item">New Britain, CT <span style="color:var(--ink-soft);font-style:italic">(bar pizza specifically)</span></div>
+  </div>
+</div>
+
+<!-- ═══ HUB: NORTHEAST ═══ -->
+<div class="hub-head hub-ne">
+  <div><div class="hub-title">Northeast</div><div class="hub-sub">New York / Long Island / New Jersey &middot; New England &middot; Upstate NY</div></div>
+  <div class="hub-count">12 styles &middot; 3 tried</div>
+</div>
+
+<div class="cluster-label">New York / Long Island / New Jersey Cluster</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp tried">TRIED</span></td><td><strong>New York style</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">NYC</span></td><td>Thin, hand-tossed, foldable; coal/gas deck-oven char; light low-moisture mozz.</td><td>Lombardi's (1905 license), Totonno's, John's of Bleecker St., Grimaldi's</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp tried">TRIED</span></td><td><strong>Neapolitan / Neapolitan-American</strong></td><td>VPN-certified needs a 900&deg;F wood-fired dome oven + 4-ingredient dough; American immigrant shops diverged into NY style instead, lacking wood ovens.<span class="flagnote"><b>Note:</b> the modern "neo-Neapolitan" wood-fired wave is a distinct recent movement, not a lineage descendant.</span></td><td>&mdash;</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Grandma pizza</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Long Island</span></td><td>Thin, square, oiled sheet-pan bake, crisp bottom &mdash; originally a home-kitchen style.</td><td>Umberto's, New Hyde Park (1965)</td><td><span class="conf conf-well">Well</span><span class="flagnote">Naming legend (a regular customer, 1980s) plausible but not airtight.</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Sicilian (American) vs. sfincione</strong></td><td>Thick, square, focaccia-like, mozzarella-heavy &mdash; diverged sharply from breadcrumb/anchovy/caciocavallo sfincione when caciocavallo was hard to source in the US.</td><td>Divergence placed in Brooklyn, likely the Depression</td><td><span class="conf conf-well">Well</span><span class="flagnote">Exact origin point hedged &mdash; "culinary researchers believe."</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Trenton tomato pie</strong> ★ Vault<br><span style="font-size:.7rem;color:var(--ink-soft)">Trenton / Robbinsville, NJ</span></td><td>Cheese &amp; toppings go down first; tomato sauce ladled on top afterward.</td><td>Papa's Tomato Pies (1912), De Lorenzo's (1947)</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Buffalo style</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Buffalo, NY</span></td><td>Medium-thick pan crust; sweet, tomato-paste-forward sauce edge to edge; cup-and-char pepperoni piled to the rim.</td><td>Bocce Club Pizza (1946), La Nova, Santora's</td><td><span class="conf conf-well">Well</span><span class="flagnote">Style well documented; no single inventor confirmed.</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cluster-label">New England</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp tried">TRIED</span></td><td><strong>New Haven / Connecticut apizza</strong> ★ Vault<br><span style="font-size:.7rem;color:var(--ink-soft)">New Haven, CT &mdash; Wooster St.</span></td><td>Thin, irregular, coal-fired blistered crust; sparse or no mozz unless requested; the white clam pie.</td><td>Frank Pepe's (1925), Sally's Apizza (1938) &mdash; a few blocks apart</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Greek / "New England style"</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">New London, CT</span></td><td>Proofed &amp; baked in an oiled metal pan, oily fried crisp bottom; mozz-white cheddar blend. Not Greek in culinary origin.</td><td>Pizza House, New London (1955, Costas Kitsatis)</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>South Shore bar pizza</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">South of Boston, MA</span></td><td>~10in cracker-thin pan pizza, mozz-cheddar stretched to a charred lacy edge; linguiça toppings common.</td><td>The Lynwood, Randolph (c. 1949)</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Massachusetts beach pizza</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Salisbury Beach / Lawrence, MA</span></td><td>Square, thin, sweet tomato sauce, very light cheese dusting. Distinct from South Shore bar pizza.</td><td>Tripoli Bakery (1944&ndash;45), Cristy's (1946) &mdash; essentially the only two places</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Rhode Island pizza strips</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Providence &mdash; Federal Hill</span></td><td>Cheese-less/minimal, thickly-sauced focaccia baked in sheet pans, cut into strips, eaten room-temp.</td><td>Palmieri's Bakery (1898), LaSalle Bakery (1932)</td><td><span class="conf conf-well">Well</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cluster-label">Upstate New York</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Utica / Rome tomato pie</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Utica, NY</span></td><td>Rectangular, thick airy crust, hearty sauce, pecorino Romano or Parmesan dusted on top, little to no mozz, served room-temp.</td><td>O'Scugnizzo's Pizzeria (c. 1914), Roma Sausage &amp; Deli</td><td><span class="conf conf-well">Well</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sec-note">Rochester, NY was searched specifically for a distinct bar-pizza or local style &mdash; none found. See Confirmed Dead Ends above.</div>
+
+<!-- ═══ HUB: MIDWEST ═══ -->
+<div class="hub-head hub-mw">
+  <div><div class="hub-title">Midwest</div><div class="hub-sub">Chicago &middot; Detroit &middot; Ohio &middot; St. Louis &middot; Milwaukee &middot; Quad Cities</div></div>
+  <div class="hub-count">12 styles &middot; 2 tried</div>
+</div>
+
+<div class="cluster-label">Chicago's Four Pizza Traditions</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp tried">TRIED</span></td><td><strong>Deep dish</strong></td><td>Thick, high steel-pan walls; cheese, then toppings, then chunky sauce on top; fork and knife.</td><td>Pizzeria Uno/Due, Lou Malnati's, Gino's East</td><td><span class="conf conf-well">Well</span><span class="flagnote">Restaurant-of-origin solid; who actually invented it is genuinely disputed (Rudy Malnati Sr. vs. Ric Riccardo).</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Tavern-style / party-cut</strong></td><td>Thin, unleavened, cracker-crisp; cut into small squares to the edge &mdash; a cheap Prohibition-era bar snack.</td><td>Vito &amp; Nick's, Pat's Pizza (commonly cited)</td><td><span class="conf conf-thin">Thin</span><span class="flagnote">"Commonly cited" more than independently verified &mdash; treat as a lead.</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Stuffed pizza</strong></td><td>A second thin top crust under the sauce, over even more cheese than deep dish; inspired by pizza rustica.</td><td>Nancy's Pizzeria vs. Giordano's (1974) &mdash; disputed in court</td><td><span class="conf conf-well">Well</span><span class="flagnote">Category well documented; origin genuinely contested.</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Pizza pot pie</strong></td><td>Sauce, sausage, mushrooms, Wisconsin brick cheese layered in a ceramic bowl, dough on top, baked &amp; flipped upside-down to serve.</td><td>Rarely found outside Chicago</td><td><span class="conf conf-thin">Thin</span><span class="flagnote">Most obscure of the four; thinner independent sourcing.</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cluster-label">Detroit &mdash; the Red-Top / Blue-Top Question</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp tried">TRIED</span></td><td><strong>Detroit style</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">the household favorite &mdash; made at home</span></td><td>Rectangular pan, thick airy crust, caramelized cheese pushed to the rim; historically Wisconsin brick cheese. "Red-top" = sauce ladled on top in stripes after baking, a real named variant.</td><td>Buddy's Pizza (1946, Gus &amp; Anna Guerra), Loui's, Cloverleaf, Shield's</td><td><span class="conf conf-well">Well</span><span class="flagnote"><b>Myth to retire:</b> no documentation of "blue-top" as a competing sauce style &mdash; "blue top" just names the blue steel automotive pans, not a sauce placement.</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cluster-label">The Ohio Cluster</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Brier Hill-style</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Youngstown, OH</span></td><td>Breadlike thick dough, thick tomato sauce, green bell peppers, Romano cheese instead of mozz.</td><td>Avalon Downtown, Wedgewood Pizza, Sunrise Pizza</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Ohio Valley-style</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Steubenville, OH</span></td><td>Square crust baked with sauce, then cold uncooked toppings and grated mozz added AFTER baking.</td><td>Original DiCarlo's (1945, Primo DiCarlo) &mdash; Steubenville &amp; Wheeling, WV, still operating</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Cleveland-style</strong></td><td>Thin crust cut into small squares; notably sweet, sugared tomato sauce.</td><td>Mama Roberto's (trademark since 1999), Geraci's (1956, Michael Symon's favorite)</td><td><span class="conf conf-mod">Moderate</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Columbus-style</strong></td><td>Thin cracker-like crust, cornmeal-dusted; sweet sauce; provolone instead of mozz; square tavern cut.</td><td>Massey's Pizza, Rubino's</td><td><span class="conf conf-well">Well</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sec-note">Cincinnati and Louisville sometimes get lumped into a loose "Ohio Valley" cold-topping association, but neither has its own confirmed distinct style &mdash; Louisville pizza-makers themselves say so on the record. See Confirmed Dead Ends above.</div>
+
+<div class="cluster-label">St. Louis</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>St. Louis-style</strong></td><td>Very thin, cracker-like, unleavened crust; party-cut squares; Provel cheese (cheddar-Swiss-provolone blend that doesn't stretch).</td><td>Imo's (1964, Ed Imo)</td><td><span class="conf conf-well">Well</span><span class="flagnote">Provel/Imo's origin solid; the "linoleum-cutter" square-cut story is charming shop legend, not rigorously sourced.</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cluster-label">Milwaukee</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Milwaukee tavern-style</strong></td><td>Cracker-thin (~1.25mm) crust cut into tavern squares, sauce and toppings to the edge &mdash; deliberately blends Sicilian rectangle-cut with Neapolitan thinness.</td><td>Caradaro Club (1945, Caravella &amp; Todaro) &mdash; many later shops founded by its alumni</td><td><span class="conf conf-well">Well</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cluster-label">Quad Cities (Iowa / Illinois border)</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Quad City-style</strong></td><td>Dark, malt-flavored crust; sauce spiked with chili flakes/cayenne; toppings placed UNDER the cheese; cut into strips.</td><td>Harris Pizza (1960), Uncle Bill's, Fields of Pizza, Happy Joe's (1972)</td><td><span class="conf conf-well">Well</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══ HUB: APPALACHIA / MID-ATLANTIC ═══ -->
+<div class="hub-head hub-ap">
+  <div><div class="hub-title">Appalachia &amp; Mid-Atlantic</div><div class="hub-sub">Pennsylvania coal region &middot; Maryland</div></div>
+  <div class="hub-count">3 styles &middot; 0 tried</div>
+</div>
+
+<div class="cluster-label">Pennsylvania Coal-Region &amp; Small-Town Styles</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Old Forge-style</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Old Forge, PA &mdash; "Pizza Capital of the World"</span></td><td>Baked in rectangular pans, sold by the tray (whole/half), pieces are "cuts" not slices. Comes in "red" (sweet sauce) and "white" (double-crust, no sauce) varieties.</td><td>Arcaro &amp; Genell, Revello's, Salerno's (commonly cited &mdash; no single verified "best")</td><td><span class="conf conf-mod">Moderate</span><span class="flagnote">Living tradition well covered; the 1926 founding date is a commonly repeated figure, not firmly anchored to a primary document.</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Altoona-style</strong><br><span style="font-size:.7rem;color:var(--ink-soft)">Altoona, PA</span></td><td>Sicilian-thick crust, sweet sauce, a ring of green bell pepper, deli salami, and a slice of American cheese or Velveeta on top.</td><td>Originated at the Altoona Hotel (burned 2013); survives at 29th Street Pizza, Zach's Sports Bar</td><td><span class="conf conf-mod">Moderate</span><span class="flagnote">Founding decade genuinely disputed across sources: 1950s vs. 1960s&ndash;70s.</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="cluster-label">Mid-Atlantic</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Baltimore / Maryland-style</strong></td><td>Thin crispy crust; sweet tomato sauce; provolone (not mozz); square/rectangular cut; sometimes topped with Maryland blue crab.</td><td>Credited to Bob Beall, a tobacco farmer with no prior pizza experience</td><td><span class="conf conf-thin">Thin</span><span class="flagnote">No dated founding, no restaurant name tied to the claim &mdash; treat "Bob Beall invented it" as a lead, not established fact.</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══ HUB: WEST ═══ -->
+<div class="hub-head hub-w">
+  <div><div class="hub-title">The West</div><div class="hub-sub">California &middot; Colorado &middot; New Mexico</div></div>
+  <div class="hub-count">3 styles &middot; 0 tried</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Flagship / Try</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>California-style</strong></td><td>Thin crust with nontraditional, produce-forward/high-end toppings &mdash; a sharp break from red-sauce-and-mozz convention.</td><td>Ed LaDou (Prego SF &rarr; Spago LA, 1982), Alice Waters (Chez Panisse)</td><td><span class="conf conf-well">Well</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Colorado "mountain pie"</strong> ★ Vault<br><span style="font-size:.7rem;color:var(--ink-soft)">Idaho Springs, CO</span></td><td>Thick, hand-braided crust; heavy sauce and cheese; sold by the pound; served with honey.</td><td>Beau Jo's (1973, Chip Bair) &mdash; now 6 CO locations</td><td><span class="conf conf-well">Well</span><span class="flagnote">Straight from the restaurant's own account &mdash; reliable for founding facts, not independently third-party verified.</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>New Mexico green chile pizza</strong></td><td>Roasted green chile (sometimes blue corn crust, carne adovada) layered onto pizza &mdash; a topping tradition more than a single codified crust/sauce/cut style.</td><td>"Various interpretations across the state"</td><td><span class="conf conf-thin">Thin</span><span class="flagnote">Sourcing explicitly says it "resists tidy definition."</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="sec-note">Seattle was searched specifically &mdash; multiple local food-media pieces state outright it has no regional style of its own. See Confirmed Dead Ends above.</div>
+
+<!-- ═══ HUB: GULF / OTHER ═══ -->
+<div class="hub-head hub-g">
+  <div><div class="hub-title">Gulf Coast, Islands &amp; Other Thin Traditions</div><div class="hub-sub">Included for completeness &mdash; flagged, not confidently codified</div></div>
+  <div class="hub-count">3 entries &middot; 0 tried</div>
+</div>
+<div class="table-scroll">
+<table class="check-table">
+<thead><tr><th style="width:64px">Status</th><th>Style</th><th>Defining Trait</th><th>Notes</th><th>Confidence</th></tr></thead>
+<tbody>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>New Orleans / Gulf Coast</strong></td><td>Scattered Cajun-Italian fusion toppings at individual restaurants (e.g. Creole mustard aioli, gulf shrimp). A thinly-sourced Gulf Coast habit of dipping slices in Catalina/French dressing surfaced once.</td><td>Not a codified regional style</td><td><span class="conf conf-thin">Thin</span></td></tr>
+<tr><td><span class="stamp want">WANT</span></td><td><strong>Puerto Rican-style pizza</strong></td><td>General claims of a thin, not-overly-crispy crust; San Juan's pizza culture growing since the 1970s. No named founder or defining technique found.</td><td>Related dish: <b>pi&ntilde;&oacute;n</b> &mdash; a plantain-and-ground-beef layered pie, arguably a different dish wearing "pizza" as a loose label</td><td><span class="conf conf-thin">Thin</span></td></tr>
+<tr class="correction-row"><td><span class="conf conf-corr" style="min-width:64px;display:inline-block;text-align:center">CORRECTION</span></td><td><strong>Hawaiian pizza</strong></td><td>Invented in <b>Chatham, Ontario, Canada</b>, in 1962 by Sam Panopoulos, a Greek-Canadian restaurateur, named for the canned pineapple brand he used.</td><td>Well documented (multiple obituaries/profiles corroborate) &mdash; but Canadian, not American, and not a genuine Hawaii-based tradition. Included only to correct the record.</td><td><span class="conf conf-well">Well</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- SOURCING CONFIDENCE -->
+<div class="qc-strip">
+  <div class="qc-head">Sourcing Confidence &mdash; kept visible, not smoothed over</div>
+  <div class="qc-grid">
+    <div class="qc-item">
+      <span class="qc-flag ok">Well-Documented</span>
+      <div class="qc-body">The large majority of entries above: New York style, Neapolitan/VPN rules, Chicago deep dish (restaurant-of-origin), tavern-style &amp; stuffed as categories, Detroit style incl. red-top, New Haven apizza, St. Louis/Provel, Trenton tomato pie, Grandma pizza, Buffalo style, Quad City-style, Brier Hill, Ohio Valley/DiCarlo's, Columbus-style, Milwaukee tavern-style, Colorado mountain pie/Beau Jo's, California style, RI pizza strips, MA beach pizza, South Shore bar pizza, Greek/New England pizza, Utica tomato pie, and Hawaiian pizza's Canadian (not American) origin.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag mod">Moderate / Hedged</span>
+      <div class="qc-body">Sicilian-American vs. sfincione divergence, Cleveland-style, Old Forge (living tradition solid, 1926 date less anchored), Altoona-style (founding decade genuinely disputed).</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag thin">Thin / Unconfirmed</span>
+      <div class="qc-body">"Erie style" as an independent codified tradition (the most important gap given this household's specific interest &mdash; see The Erie File), Baltimore/Bob Beall origin story, New Mexico green chile pizza as a codified style, New Orleans/Gulf Coast pizza incl. the Catalina-dressing detail, Puerto Rican-style pizza generally, and the "blue-top" half of the Detroit question.</div>
+    </div>
+    <div class="qc-item">
+      <span class="qc-flag gone">Confirmed Negative</span>
+      <div class="qc-body">Actively searched, no distinct style found: Seattle, Rochester NY, Kansas City, Louisville, Cincinnati (beyond generic Ohio Valley), New Castle PA, and New Britain CT bar pizza specifically.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  33 styles catalogued across 5 regional hubs, plus 7 confirmed dead ends and the Erie question addressed head-on<br>
+  Full history, sourcing detail, and the tiered reference list live in the companion Full Reference Guide &middot; Compiled August 2026
+</div>
+
+</div>
+</body>
+</html>

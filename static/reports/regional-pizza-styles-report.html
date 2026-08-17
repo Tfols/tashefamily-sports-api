@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#faf3e2;color:#241a12;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American Regional Pizza Styles: A Full Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{color-scheme:light;background:#faf3e2!important;color:#241a12!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.75;background:#faf3e2;color:#241a12;max-width:820px;margin:0 auto;padding:56px 40px 96px}
+
+/* tokens: sauce #b23a28 · sauce-deep #7a2418 · cheese #c9932e · basil #3f6b3f · crust #8a5a20 · ink #241a12 · paper #faf3e2 */
+
+/* COVER */
+.cover{border-top:4px solid #241a12;border-bottom:1px solid #cdbb8f;padding:32px 0 28px;margin-bottom:48px}
+.cover-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#7a2418;margin-bottom:12px}
+.cover h1{font-size:2.05rem;font-weight:700;line-height:1.2;color:#241a12;margin-bottom:10px}
+.cover h1 em{font-style:italic;font-weight:500;color:#3f6b3f}
+.cover-subtitle{font-size:1rem;color:#5a4736;font-style:italic;margin-bottom:20px;max-width:60ch}
+.cover-meta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;color:#8a7357;line-height:2.2;border-top:1px solid #d8c9a0;padding-top:14px;margin-top:14px}
+
+/* TOC */
+.toc{background:#fff;border:1px solid #d8c9a0;padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7a2418;margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted #d8c9a0;font-size:.88rem}
+.toc-item:last-child{border-bottom:none}
+.toc-section{color:#241a12}
+.toc-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:#7a2418}
+.toc-item.hl .toc-section{font-weight:700;color:#7a2418}
+
+/* SECTION STRUCTURE */
+.section{margin-bottom:56px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:#7a2418;flex-shrink:0}
+.section-rule{height:1px;background:#d8c9a0;flex:1}
+h2{font-family:'Spectral',serif;font-size:1.44rem;font-weight:700;color:#241a12;margin-bottom:14px;line-height:1.25}
+h3{font-family:'Spectral',serif;font-size:1.06rem;font-style:italic;font-weight:600;color:#3f6b3f;margin:26px 0 9px}
+p{color:#241a12;margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+p strong{color:#241a12}
+em{font-style:italic}
+
+/* CALLOUT */
+.callout{border-left:4px solid #3f6b3f;background:#eef1ea;padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:#241a12;margin:0;font-size:.96rem;line-height:1.68;max-width:66ch}
+.callout cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.72rem;color:#5a6e53;margin-top:8px}
+
+/* DETAIL TABLE */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:190px 1fr;gap:0;border-bottom:1px solid #ecdfc0;padding:12px 0;font-size:.9rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:'Spectral',serif;font-weight:700;color:#3f6b3f;line-height:1.45;padding-right:16px}
+.detail-body{color:#241a12;line-height:1.68}
+.detail-body strong{color:#241a12}
+
+/* TABLE WRAPPER */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+.table-scroll table{margin:0}
+
+/* GENERIC TABLE */
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.87rem;background:#fff;border:1px solid #d8c9a0}
+.data-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#241a12;background:#f2e7cc;border-bottom:2px solid #cdbb8f;padding:9px 12px;text-align:left}
+.data-table td{padding:9px 12px;border-bottom:1px solid #ecdfc0;color:#241a12;vertical-align:top;line-height:1.5}
+.data-table tr:last-child td{border-bottom:none}
+
+/* VAULT CARDS (quieter echo of fact-sheet signature) */
+.vault-list{margin:18px 0}
+.vault-entry{border:1px solid #241a12;background:#fff;padding:18px 22px;margin-bottom:14px}
+.vault-entry:last-child{margin-bottom:0}
+.vault-entry-tag{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#c9932e;margin-bottom:6px}
+.vault-entry h3{margin:0 0 6px;color:#7a2418;font-style:normal;font-weight:700}
+.vault-entry p{font-size:.93rem;margin-bottom:0}
+
+/* ERIE DOSSIER */
+.doc-compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #241a12;margin:20px 0}
+.doc-half{padding:16px 20px}
+.doc-half.left{border-right:1px solid #d8c9a0}
+.doc-half-label{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#8a7357;margin-bottom:6px}
+.doc-half-title{font-family:'Spectral',serif;font-weight:700;font-size:.98rem;color:#241a12;margin-bottom:8px}
+.doc-half p{font-size:.83rem;margin-bottom:0;line-height:1.6}
+.doc-half.no .doc-half-title{color:#a4291f}
+.doc-half.yes .doc-half-title{color:#3f6b3f}
+
+/* CONFIDENCE / TIERS */
+.confidence{border:1.5px solid #241a12;background:#fff;margin:22px 0}
+.confidence-head{background:#241a12;color:#faf3e2;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.confidence-body{padding:16px 20px}
+.conf-item{border-left:4px solid #c9932e;padding:8px 14px;margin-bottom:12px;background:#faf3e2}
+.conf-item:last-child{margin-bottom:0}
+.conf-item.bad{border-left-color:#a4291f}
+.conf-item.good{border-left-color:#3f6b3f}
+.conf-item .lbl{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#c9932e;display:block;margin-bottom:4px}
+.conf-item.bad .lbl{color:#a4291f}
+.conf-item.good .lbl{color:#3f6b3f}
+.conf-item p{font-size:.86rem;margin:0;max-width:none}
+
+/* NEGATIVE FINDINGS BOX */
+.negbox{border:2px solid #a4291f;background:#fff;margin:22px 0}
+.negbox-head{background:#a4291f;color:#faf3e2;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.negbox-body{padding:18px 22px}
+.negbox-item{display:grid;grid-template-columns:150px 1fr;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dotted #ecdfc0}
+.negbox-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.negbox-place{font-family:"IBM Plex Mono",monospace;font-weight:700;color:#a4291f;font-size:.82rem}
+.negbox-item p{font-size:.88rem;margin:0}
+
+/* SOURCES SECTION */
+.sources-section{margin-top:56px;padding-top:28px;border-top:2px solid #241a12}
+.source-group{margin-bottom:28px}
+.source-group-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#7a2418;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #d8c9a0}
+.source-group-note{font-size:.78rem;color:#8a7357;font-style:italic;margin-bottom:12px}
+.source-item{font-size:.87rem;color:#241a12;line-height:1.65;padding:6px 0;border-bottom:1px dotted #ecdfc0}
+.source-item:last-child{border-bottom:none}
+.source-item em{font-style:italic}
+
+/* FOOTER */
+.footer{margin-top:56px;padding-top:20px;border-top:1px solid #d8c9a0;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:#8a7357;text-align:center;line-height:2.2}
+
+@media(max-width:640px){
+  body{padding:28px 18px 64px;font-size:16px}
+  .cover h1{font-size:1.55rem}
+  .detail-row{grid-template-columns:1fr;gap:4px}
+  .detail-label{padding-right:0}
+  .data-table{width:auto;min-width:560px}
+  .doc-compare{grid-template-columns:1fr}
+  .doc-half.left{border-right:none;border-bottom:1px solid #d8c9a0}
+  .negbox-item{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Full Reference Guide &middot; Household Food Research &middot; Compiled August 2026</div>
+  <h1>American Regional Pizza Styles<br><em>A Full Reference Guide</em></h1>
+  <div class="cover-subtitle">The complete catalogue: 33 codified regional and small-town pizza styles across five geographic clusters, the full history and sourcing behind each, three pilgrimage-worthy "vault" finds, a direct answer to the household's specific question about Erie, and seven confirmed dead ends worth knowing about before searching further &mdash; sourcing confidence kept visible throughout, not smoothed into a generic disclaimer.</div>
+  <div class="cover-meta">
+    Compiled: August 2026 &nbsp;&middot;&nbsp; Scope: codified American regional pizza traditions, organized geographically<br>
+    Household context: already tried New York style, Neapolitan, Chicago deep dish, Detroit style (the favorite, made at home), and New Haven/Connecticut apizza<br>
+    Companion document: Field Checklist (regional-pizza-styles-factsheet.html)
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><span class="toc-section">1. How to Read This Catalogue</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item hl"><span class="toc-section">2. The Erie Question &mdash; What We Actually Found</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item hl"><span class="toc-section">3. Vault Candidates &mdash; Three Pilgrimages Worth Planning</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item"><span class="toc-section">4. New York / Long Island / New Jersey Cluster</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item"><span class="toc-section">5. New England</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">6. Chicago's Four Pizza Traditions</span><span class="toc-num">&sect; 06</span></div>
+  <div class="toc-item"><span class="toc-section">7. Detroit Style &mdash; The Red-Top/Blue-Top Question</span><span class="toc-num">&sect; 07</span></div>
+  <div class="toc-item"><span class="toc-section">8. The Ohio Cluster</span><span class="toc-num">&sect; 08</span></div>
+  <div class="toc-item"><span class="toc-section">9. St. Louis</span><span class="toc-num">&sect; 09</span></div>
+  <div class="toc-item"><span class="toc-section">10. Milwaukee</span><span class="toc-num">&sect; 10</span></div>
+  <div class="toc-item"><span class="toc-section">11. Quad Cities</span><span class="toc-num">&sect; 11</span></div>
+  <div class="toc-item"><span class="toc-section">12. Pennsylvania Coal-Region &amp; Small-Town Styles</span><span class="toc-num">&sect; 12</span></div>
+  <div class="toc-item"><span class="toc-section">13. Mid-Atlantic</span><span class="toc-num">&sect; 13</span></div>
+  <div class="toc-item"><span class="toc-section">14. Upstate New York</span><span class="toc-num">&sect; 14</span></div>
+  <div class="toc-item"><span class="toc-section">15. The West</span><span class="toc-num">&sect; 15</span></div>
+  <div class="toc-item"><span class="toc-section">16. Gulf Coast, Islands &amp; Thinly-Documented Traditions</span><span class="toc-num">&sect; 16</span></div>
+  <div class="toc-item hl"><span class="toc-section">17. Confirmed Negative Findings</span><span class="toc-num">&sect; 17</span></div>
+  <div class="toc-item"><span class="toc-section">18. Sourcing Confidence Assessment</span><span class="toc-num">&sect; 18</span></div>
+  <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
+</div>
+
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
+  <h2>How to Read This Catalogue</h2>
+
+  <p>This guide catalogues 33 distinct American regional and local pizza styles, organized into five geographic clusters (Northeast, Midwest, Appalachia/Mid-Atlantic, West, and a smaller Gulf Coast/islands group), plus a dedicated treatment of the household's specific Erie question and a section on searches that came up empty. It is the companion to a shorter Field Checklist built for scanning; this document carries the full history, credited originators, and sourcing behind every entry.</p>
+
+  <p>Five styles in this catalogue are already familiar to this household: <strong>New York style, Neapolitan, Chicago deep dish, Detroit style</strong> (a particular favorite, made at home), and <strong>New Haven/Connecticut apizza</strong>. The other 28 are organized to surface exactly what was asked for &mdash; the small-town and obscure regional variants in the spirit of Erie and Old Forge, which make up the large majority of this catalogue.</p>
+
+  <p>Every entry carries a sourcing-confidence read, expressed consistently across this document:</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Well-documented</span><span class="detail-body">Multiple independent sources agree on the core facts &mdash; named originator, place, and date, or a clearly corroborated style description.</span></div>
+    <div class="detail-row"><span class="detail-label">Moderate / hedged</span><span class="detail-body">The style itself is real and covered, but some specific detail (an exact date, an originator's identity) is disputed or softly sourced even among the sources that cover it.</span></div>
+    <div class="detail-row"><span class="detail-label">Thin / unconfirmed</span><span class="detail-body">Real signal that something exists, but thin, single-source, or explicitly hedged in the original coverage &mdash; presented as a lead, not a settled fact.</span></div>
+    <div class="detail-row"><span class="detail-label">Confirmed negative</span><span class="detail-body">Actively searched; multiple sources agree no distinct codified style exists. Different from "not yet researched" &mdash; this is a real finding, covered in &sect; 17.</span></div>
+  </div>
+
+  <p>Several individual entries carry their own specific caveats &mdash; a disputed founding date, a contested "who invented it" claim, a charming-but-unverified shop legend. Those stay attached to their specific entry throughout this document rather than being smoothed into a single generic disclaimer at the end.</p>
+</div>
+
+
+<!-- SECTION 2: ERIE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
+  <h2>The Erie Question &mdash; What We Actually Found</h2>
+
+  <p>This household specifically asked about Erie-style pizza, alongside Old Forge, as an example of the small-town regional variant it wanted this catalogue to surface. The honest finding deserves to be stated plainly and up front rather than buried: <strong>no good, independent sourcing exists establishing "Erie style" as its own codified pizza tradition</strong>, distinct the way Old Forge, Quad Cities, or Brier Hill are documented.</p>
+
+  <div class="doc-compare">
+    <div class="doc-half left no">
+      <div class="doc-half-label">What we went looking for</div>
+      <div class="doc-half-title">"Erie-Style" Pizza</div>
+      <p>No dedicated historical writeup treats "Erie style" as its own named tradition. What Erie actually shares in is the broader <strong>Western New York / Rust Belt cup-and-char pepperoni tradition</strong> centered on Buffalo &mdash; small-diameter pepperoni cups that curl and char at the edges, documented in depth back to WWII-era Buffalo pizzerias like Bocce Club (1946) and tied to Buffalo meat producer Battistoni Italian Specialty Meats (est. 1931). Erie shares in this old-school cup-and-char pepperoni tradition &mdash; it never fully switched to "lay-flat" pepperoni, similar to Cleveland and Detroit &mdash; and local shops like Lucky Man's Pizzeria are noted for it. But that's participation in a regional tradition centered elsewhere, not a separately codified "Erie style."</p>
+    </div>
+    <div class="doc-half yes">
+      <div class="doc-half-label">What Erie IS uniquely documented for</div>
+      <div class="doc-half-title">Pepperoni Balls</div>
+      <p>A fried, dough-wrapped pepperoni snack &mdash; a different food entirely, not a pizza style. Originated in Erie's Little Italy, reportedly evolving from Depression-era fried fish-scrap balls. The Mohican Market and Bakery was advertising them for sale as early as <strong>1947</strong>. This is real, specific, and worth seeking out on its own terms &mdash; just not the thing the "Erie-style pizza" framing implies.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>This is flagged as a genuine research gap, not a confident negative the way Seattle or Rochester are (see &sect; 17). It's entirely possible a strong local source exists documenting "Erie style" as its own thing that simply didn't surface in this search. Worth a second, more targeted look if the household wants to pursue it further &mdash; but as it stands, the honest answer is: Erie's pizza tradition is Buffalo/WNY cup-and-char, and Erie's own genuine culinary original is a snack, not a pie.</p>
+  </div>
+</div>
+
+
+<!-- SECTION 3: VAULT -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
+  <h2>Vault Candidates &mdash; Three Pilgrimages Worth Planning</h2>
+
+  <p>Three finds in this catalogue rise above "try the style" into "visit the actual place where it was invented." All three are still-operating, verifiable, named establishments &mdash; not just a style credited to a city.</p>
+
+  <div class="vault-list">
+    <div class="vault-entry">
+      <div class="vault-entry-tag">Vault Candidate 1 &middot; Trenton / Robbinsville, NJ</div>
+      <h3>Papa's Tomato Pies (est. 1912)</h3>
+      <p>Giuseppe "Joe" Papa, a 17-year-old Neapolitan immigrant, opened Papa's Tomato Pies in 1912 in Trenton's Chambersburg neighborhood &mdash; cited as the <strong>oldest continuously operating family-owned pizza restaurant in the country</strong>. The related De Lorenzo's lineage opened its own shop in 1947. Both defining trait: cheese and toppings go down first, with tomato sauce ladled on top afterward, the reverse of the usual order. Both Papa's and De Lorenzo's have since relocated from Trenton proper to nearby Robbinsville, NJ &mdash; worth noting before planning a visit to "Trenton" itself. See &sect; 04 for the full Trenton tomato pie entry.</p>
+    </div>
+    <div class="vault-entry">
+      <div class="vault-entry-tag">Vault Candidate 2 &middot; Idaho Springs, CO</div>
+      <h3>Beau Jo's (est. 1973)</h3>
+      <p>Chip Bair invented the Colorado "mountain pie" &mdash; a thick, deliberately hand-braided crust that holds more toppings and turns pizza into a meal for four, sold by the pound, served with honey for crust-dipping &mdash; after buying Beau Jo's in Idaho Springs in 1973. The chain has since grown to six Colorado locations (Idaho Springs, Arvada, Evergreen, Longmont, Fort Collins, Steamboat Springs), but Idaho Springs is the original. This account comes straight from the restaurant's own history &mdash; generally reliable for founding facts, though not independently third-party verified. See &sect; 15.</p>
+    </div>
+    <div class="vault-entry">
+      <div class="vault-entry-tag">Vault Candidate 3 &middot; Wooster Street, New Haven, CT</div>
+      <h3>Frank Pepe Pizzeria Napoletana (1925) &amp; Sally's Apizza (1938)</h3>
+      <p>New Haven apizza is already a household favorite in style &mdash; this is the upgrade. Frank Pepe is credited with originating New Haven-style apizza in 1925; his nephew-by-training Salvatore Consiglio opened Sally's Apizza down the same street in 1938, still coal-fired more than 80 years later. The two originating establishments sit only a few blocks apart on Wooster Street. Frank Pepe himself is specifically credited with the white clam pie in the 1960s. See &sect; 05.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 4: NY/NJ CLUSTER -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
+  <h2>New York / Long Island / New Jersey Cluster</h2>
+
+  <h3>New York style &mdash; New York City &middot; Already Tried</h3>
+  <p>Thin, hand-tossed, foldable crust with a light layer of low-moisture mozzarella, sold by the slice from large pies, traditionally baked in coal or gas deck ovens. Traces to Gennaro Lombardi, who began selling tomato pies wrapped in paper at his Little Italy grocery around 1897 and received the first pizzeria license in the U.S. in 1905, using a coal-fired oven. Coal (burning up to 1000&deg;F, versus wood's 600&ndash;800&deg;F) produced the bigger, chewier, more heavily charred pies with more toppings &mdash; including pepperoni, an American invention &mdash; that became the NY template. <strong>Try:</strong> Lombardi's, Totonno's, John's of Bleecker Street, Grimaldi's &mdash; all NYC, all historically cited originators.</p>
+
+  <h3>Neapolitan / Neapolitan-American &mdash; Already Tried</h3>
+  <p>True Neapolitan (VPN-certified, per the Associazione Verace Pizza Napoletana) requires a wood-fired dome oven around 900&deg;F and a four-ingredient dough (00 flour, water, salt, fresh yeast); coal, electric, and gas-combo ovens are explicitly disallowed by the certifying body. Early American immigrant pizzerias could never have met this standard, since they used American flour, dairy, and coal-fired ovens instead of wood &mdash; precisely how "American Neapolitan" (i.e. New York style) diverged from true Neapolitan in the first place.</p>
+  <div class="callout"><p>The modern American "neo-Neapolitan"/"NEOpolitan" wave &mdash; wood-fired, blistered, VPN-adjacent pizzerias now common in many U.S. cities &mdash; is a distinct, more recent phenomenon self-consciously imitating Naples, not a lineage descendant of the early-1900s immigrant pizzerias.</p></div>
+
+  <h3>Grandma pizza &mdash; Long Island</h3>
+  <p>Thin, square, crisp-bottomed pizza baked in an oiled sheet pan &mdash; historically a home-kitchen style, hence the name. Credited to Umberto Corteo, who opened Umberto's in New Hyde Park in 1965; the name reportedly came from a regular customer, Anthony "Tippy" Nocella, in the 1980s, and the "Sicilian Grandma" variant was introduced around 1994. Well documented, though the naming legend is plausible rather than airtight. <strong>Try:</strong> Umberto's, multiple Long Island locations, credited as originator.</p>
+
+  <h3>Sicilian pizza (American) vs. sfincione</h3>
+  <p>American "Sicilian" pizza &mdash; thick, square, focaccia-like, heavy on mozzarella &mdash; descends from sfincione but diverged sharply. Authentic sfincione is topped with breadcrumbs, anchovies, tuma or caciocavallo cheese, onions, and a meatless tomato sauce, often applied in reverse order. The American version emerged because caciocavallo was hard to source in the U.S. while cow's-milk mozzarella was cheap and reliable; culinary historians place the adaptation in Brooklyn, likely during the Depression. Well documented as a lineage/divergence story, though the exact origin point is hedged ("culinary researchers believe") rather than pinned to a single named shop.</p>
+
+  <h3>Trenton tomato pie &mdash; Trenton / Robbinsville, NJ &middot; Vault Candidate</h3>
+  <p>Circular, thin-crust pie distinguished by order of assembly: cheese and toppings go down first, with tomato sauce ladled on top afterward. Traces to Giuseppe "Joe" Papa's Papa's Tomato Pies (1912) &mdash; see &sect; 03 &mdash; with the related De Lorenzo's lineage opening its own shop in 1947. Well documented, with a specific, verifiable founding date. Both establishments have since relocated from Trenton proper to nearby Robbinsville, NJ.</p>
+
+  <h3>Buffalo style &mdash; Buffalo, NY</h3>
+  <p>Medium-thick, pan-baked dough; sweet, tomato-paste-forward sauce edge to edge; heavy whole-milk mozzarella; signature cup-and-char pepperoni piled to the rim. No single credited inventor &mdash; the style evolved across multiple postwar pizzerias &mdash; though Santora's Pizzeria (Joseph Santora) is sometimes cited for popularizing the thick-pan approach using a repurposed GM factory steel dish. Well documented as a style; looser sourcing on "who invented it first." <strong>Try:</strong> Bocce Club Pizza (1946, flagship of the tradition), La Nova, Santora's (Depew, opened 1970).</p>
+</div>
+
+
+<!-- SECTION 5: NEW ENGLAND -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
+  <h2>New England</h2>
+
+  <h3>New Haven / Connecticut apizza &mdash; New Haven, Wooster Street &middot; Already Tried &middot; Vault Candidate</h3>
+  <p>Thin, irregularly-shaped, coal-fired crust, blistered and charred, often sparse or no mozzarella unless requested, famously topped with clams (the "white clam pie"). Frank Pepe is credited with originating New Haven-style apizza in 1925; his nephew-by-training Salvatore Consiglio opened Sally's Apizza down the same street in 1938, still coal-fired 80+ years later. The white clam pie specifically is credited to Frank Pepe himself in the 1960s. Well documented, with named founders and dates. See &sect; 03 for the pilgrimage case.</p>
+
+  <h3>Greek pizza / "New England style" &mdash; New London, CT</h3>
+  <p>Proofed and baked in an oiled metal pan rather than stretched to order, giving an oily, fried, crisp-bottomed crust; typically topped with a 50/50 mozzarella&ndash;white cheddar blend. Despite the name, not Greek in culinary origin &mdash; credited to Costas "Charlie" Kitsatis, a Greek immigrant, at Pizza House in New London in 1955, part of a broader wave in which Greek immigrant families took over pizzerias from retiring Italian owners across New England. Well documented, with a named originator, restaurant, and date.</p>
+
+  <h3>South Shore bar pizza &mdash; Massachusetts, south of Boston</h3>
+  <p>A Sicilian-Greek hybrid: small (~10-inch), thin, cracker-like crust baked in individual pans, mozzarella-cheddar blend stretched to the pan's edge for a charred, lacy border; strongly associated with Portuguese-heritage toppings like lingui&ccedil;a. The Lynwood in Randolph is cited as an early (circa 1949) pioneer, run by a family of Lithuanian immigrant descent. Well documented, and currently having a cultural moment &mdash; Boston Globe and Boston Magazine features from 2020&ndash;2024. <strong>Try:</strong> The Lynwood (Randolph, MA), cited as the pioneering location.</p>
+
+  <h3>Massachusetts "beach pizza" &mdash; Lawrence / Salisbury Beach, MA</h3>
+  <p>Distinct from South Shore bar pizza: square, thin-crust pizza with sweet tomato sauce and a very light dusting of cheese. Credited to Angelo Zappala at Tripoli Bakery in Lawrence in 1944, transplanted to Salisbury Beach in summer 1945; rival Cristy's opened at Salisbury Beach in March 1946, and the two have coexisted in a friendly rivalry ever since. Well documented, with named founders and specific dates. <strong>Try:</strong> Tripoli Bakery and Cristy's, both at Salisbury Beach &mdash; essentially the only two places that make the authentic style.</p>
+
+  <h3>Rhode Island pizza strips &mdash; Providence, Federal Hill</h3>
+  <p>Cheese-less (or minimal-cheese), thickly-sauced focaccia-style bread baked in sheet pans, cooled, cut into rectangular strips, and eaten at room temperature &mdash; a party/graduation food. Believed to have evolved from home-baked focaccia traditions Italian immigrants brought to Federal Hill beginning in the early 1900s. Well documented. <strong>Try:</strong> Palmieri's Bakery (Providence, since 1898/incorporated 1901) and LaSalle Bakery (a Providence institution since 1932).</p>
+</div>
+
+
+<!-- SECTION 6: CHICAGO -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 06</span><div class="section-rule"></div></div>
+  <h2>Chicago's Four Pizza Traditions</h2>
+
+  <h3>Deep dish &middot; Already Tried</h3>
+  <p>Thick, high-walled crust in a round steel pan, layered cheese-then-toppings-then-chunky-sauce-on-top, eaten with a fork and knife. Credited to Pizzeria Uno (opened 1943 by Ike Sewell and Ric Riccardo), though who actually invented the recipe is genuinely disputed among historians &mdash; Rudy Malnati Sr. (a Pizzeria Uno kitchen employee who later founded Lou Malnati's in 1971) claimed credit, as did Riccardo himself. The restaurant-of-origin is solid; the "who invented it" question remains openly unresolved even among food historians. <strong>Try:</strong> Pizzeria Uno/Due, Lou Malnati's, Gino's East &mdash; all well-established, though "true original" is contested among locals.</p>
+
+  <h3>Tavern-style / thin crust, party-cut</h3>
+  <p>Thin, unleavened, cracker-crisp dough cut into small squares ("tavern cut"/"party cut") rather than wedges, toppings to the edge. Emerged in Chicago taverns, likely in the 1930s&ndash;40s post-Prohibition, as a cheap bar snack meant to encourage drink sales &mdash; no single credited inventor. Well documented as a genre, thinner on any specific founding claim. <strong>Try:</strong> Vito &amp; Nick's and Pat's Pizza are commonly cited &mdash; more "commonly cited" than independently verified, so treat as a lead rather than a confirmed originator.</p>
+
+  <h3>Stuffed pizza</h3>
+  <p>Distinct from deep dish, and frequently confused with it. Adds a second, thin top crust under the sauce, on top of even more cheese than deep dish; inspired by the Italian Easter pie scarciedda/pizza rustica. Both Nancy's Pizzeria and Giordano's (founded 1974) claim originator status, and the two have disputed the claim in court. Well documented as its own category, with a genuinely contested origin.</p>
+
+  <h3>Pizza pot pie</h3>
+  <p>The most obscure of the four. Sauce, sausage, mushrooms, and Wisconsin brick cheese layered in a ceramic bowl, topped with Sicilian dough, baked, and served flipped upside-down onto a plate. Documented as one of Chicago's five recognized pizza sub-styles (alongside deep dish, stuffed, pan, and tavern) but rarely found outside the city. Thinner sourcing than the other three &mdash; mentioned consistently as a category, but with less independent historical depth behind it.</p>
+</div>
+
+
+<!-- SECTION 7: DETROIT -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 07</span><div class="section-rule"></div></div>
+  <h2>Detroit Style &mdash; The Red-Top/Blue-Top Question</h2>
+
+  <p>Rectangular pan pizza, thick but airy crust, crisp caramelized cheese edges (cheese pushed to the pan's rim), historically made with Wisconsin brick cheese. Origin is well documented: Buddy's Rendezvous Pizzeria, Detroit's east side, 1946, credited to Gus and Anna Guerra with help from employee Connie Piccinato, using repurposed blue-steel automotive parts trays. <strong>Already tried by this household &mdash; a particular favorite, made at home.</strong></p>
+
+  <div class="callout">
+    <p><strong>"Red top" is a real, named variant</strong> &mdash; sauce ladled on top in stripes after baking, rather than under the cheese. No documentation was found of "blue top" as a competing sauce-placement style. "Blue top" refers to the blue steel pans themselves &mdash; a manufacturing detail, not a sauce style. The red-top/blue-top framing as a paired binary appears to conflate pan color/type with sauce placement; flagged here explicitly so it doesn't get repeated as fact.</p>
+  </div>
+
+  <p><strong>Try:</strong> Buddy's Pizza (originator, multiple metro Detroit locations), Loui's Pizza, Cloverleaf, Shield's &mdash; early adopters and competitors in the same Detroit tradition.</p>
+</div>
+
+
+<!-- SECTION 8: OHIO -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 08</span><div class="section-rule"></div></div>
+  <h2>The Ohio Cluster</h2>
+  <p>Four distinct, separately-documented styles within Ohio &mdash; not one "Ohio style."</p>
+
+  <h3>Brier Hill-style &mdash; Brier Hill neighborhood, Youngstown</h3>
+  <p>Breadlike, thick dough; thick tomato sauce; green bell peppers; Romano cheese instead of mozzarella. Developed by Italian immigrants during the Depression as a use for surplus bread dough, originally baked in communal brick ovens; Romano was used because it didn't require refrigeration. Well documented, including coverage in Atlas Obscura's Gastro Obscura. <strong>Try:</strong> Avalon Downtown Pizzeria (Youngstown), Wedgewood Pizza (Austintown/Boardman, Food Network recognized), Sunrise Pizza (Warren, OH).</p>
+
+  <h3>Ohio Valley-style &mdash; Steubenville, OH, spreading into Wheeling, WV</h3>
+  <p>Square crust with tomato sauce baked in, then cold, uncooked toppings and grated mozzarella added <em>after</em> baking. Credited specifically to Primo DiCarlo, a WWII veteran who tasted pizza in Italy and tried to recreate it back home, opening the Original DiCarlo's Famous Pizza Shop in 1945 &mdash; the first licensed pizza restaurant in Ohio. By the late 1950s there were reportedly 24 DiCarlo's shops across the Ohio Valley. Well documented, with a named founder, date, and verifiable expansion. <strong>Try:</strong> DiCarlo's (Steubenville original, plus Wheeling, WV) &mdash; the actual originating chain, still operating.</p>
+
+  <h3>Cleveland-style</h3>
+  <p>Thin crust cut into small squares, with a notably sweet, sugared tomato sauce as its signature trait. Emerged from early-20th-century Italian immigrant communities. Mama Roberto's (Mentor, OH) holds the legal trademark on "Cleveland Style Pizza" since 1999; Geraci's (1956) was singled out by chef Michael Symon in a widely-cited 2011 social media post as his favorite. Moderately documented &mdash; the trademark and Symon endorsement are solid; the deeper origin story is more general and inferential.</p>
+
+  <h3>Columbus-style</h3>
+  <p>Thin, cracker-like crust with a cornmeal-dusted base; sweet tomato sauce; edge-to-edge toppings; provolone cheese instead of mozzarella; square tavern cut. Credited to Jimmy Massey and Romeo Sirij in the early 1950s; the provolone choice is attributed to Columbus having had only one Italian ingredient supplier in the early pizza era, and that supplier stocked provolone rather than mozzarella. Well documented, with a dedicated Wikipedia entry and coverage across multiple food-history pieces. <strong>Try:</strong> Massey's Pizza and Rubino's &mdash; historic Columbus pizzerias.</p>
+
+  <div class="callout">
+    <p>Cincinnati and Louisville are sometimes described as sharing a loosely-defined "Ohio Valley" cold-topping tradition with Steubenville, but neither has its own confirmed distinct style. Louisville pizza-makers themselves, quoted directly in a Louisville alt-weekly, say there is <strong>no</strong> distinct Louisville style despite periodic attempts to coin one. Kansas City likewise has no broadly recognized signature style. See &sect; 17 for the full confirmed-negative treatment of all three.</p>
+  </div>
+</div>
+
+
+<!-- SECTION 9: ST. LOUIS -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 09</span><div class="section-rule"></div></div>
+  <h2>St. Louis</h2>
+
+  <h3>St. Louis-style</h3>
+  <p>Very thin, cracker-like, unleavened crust (no yeast); cut into squares ("party cut"); topped with Provel, a processed blend of cheddar, Swiss, and provolone (plus liquid smoke per some sourcing) that doesn't stretch like mozzarella. Provel was developed around 1947 by Hoffman Dairy (Wisconsin) specifically for St. Louis's Costa Grocery, aiming for a cheese with sharper flavor that wouldn't string. Imo's, opened by Ed Imo in 1964, is the dominant purveyor and effectively synonymous with the style nationally. Well documented on Provel's origin and Imo's founding date.</p>
+  <div class="callout"><p>The square-cut choice is attributed, per shop legend, to Imo's prior work as a linoleum tile cutter. This reads as charming shop legend rather than rigorously sourced fact &mdash; flagged as such rather than repeated as settled history.</p></div>
+</div>
+
+
+<!-- SECTION 10: MILWAUKEE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 10</span><div class="section-rule"></div></div>
+  <h2>Milwaukee</h2>
+
+  <h3>Milwaukee tavern-style</h3>
+  <p>Cracker-thin (~1.25mm) crust cut into tavern squares, sauce and toppings to the edge. Traced to the Caradaro Club, opened in the Third Ward in 1945 by John Caravella and Joe Todaro, who deliberately combined Sicilian pizza's rectangular-slice tradition with Neapolitan thinness. Many later Milwaukee pizzerias (Balistreri's, Barbierie's, DiMarini's, Calderone Club, Lisa's) were founded by former Caradaro Club employees. Well documented, with a specific founding restaurant, date, and named founders. Conceptually similar to Chicago tavern-style, but an independently documented lineage &mdash; not a direct offshoot of it.</p>
+</div>
+
+
+<!-- SECTION 11: QUAD CITIES -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 11</span><div class="section-rule"></div></div>
+  <h2>Quad Cities (Iowa / Illinois Border)</h2>
+
+  <h3>Quad City-style</h3>
+  <p>Dark, malt-flavored crust (malt syrup gives color and a nutty flavor); tomato sauce spiked with red chili flakes or cayenne; toppings placed <em>under</em> the cheese; cut into elongated strips rather than wedges or squares. Credited to Tony Maniscalco Sr., who arrived in the Quad Cities in 1952 and developed the style using a base recipe from the Bacino family, popularized mid-1950s. Well documented, with a dedicated Wikipedia entry. <strong>Try:</strong> Harris Pizza (since 1960, named a top Iowa pizza place by one national outlet), plus Uncle Bill's, Fields of Pizza (Moline), and Happy Joe's (Bettendorf, 1972, also credited as originator of taco pizza).</p>
+</div>
+
+
+<!-- SECTION 12: PA COAL REGION -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 12</span><div class="section-rule"></div></div>
+  <h2>Pennsylvania Coal-Region and Small-Town Styles</h2>
+
+  <h3>Old Forge-style &mdash; Old Forge, PA, "the Pizza Capital of the World"</h3>
+  <p>Baked in rectangular metal pans and sold by the "tray" (whole or half) rather than the "pie," with pieces called "cuts" rather than slices. Light, crisp-bottomed, chewy-centered crust; comes in "red" (sweet sauce, mozzarella/American/cheddar blend) and "white" (double-crust, no sauce, cheese and fillings sandwiched between two dough layers) varieties. Reportedly dates to 1926, though this is a commonly repeated date rather than one anchored to a specific primary document. Well documented as a living, ongoing local tradition, with active "top 10 Old Forge pizzerias" industry press coverage, though less rigorously documented on precise founding year. <strong>Try:</strong> multiple Old Forge pizzerias are commonly cited &mdash; Arcaro &amp; Genell, Revello's, and Salerno's among the most frequently named &mdash; but treat any single "best" ranking as opinion.</p>
+
+  <h3>Altoona-style &mdash; Altoona, PA</h3>
+  <p>Sicilian-style thick crust; sweet tomato sauce; a ring of green bell pepper; deli-style salami; and, most distinctively, a slice of American cheese or Velveeta on top. Originated as a menu item at the Altoona Hotel, likely in the 1950s (some sources say 1960s&ndash;70s &mdash; the exact decade is genuinely disputed across sources). The hotel burned down in 2013; the style now survives at other local spots that adopted it, including 29th Street Pizza and Zach's Sports Bar. Moderately well documented &mdash; multiple independent food-media pieces, including a Wikipedia entry &mdash; but the founding decade is explicitly unsettled even among those sources, flagged here as a genuine disagreement rather than resolved.</p>
+</div>
+
+
+<!-- SECTION 13: MID-ATLANTIC -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 13</span><div class="section-rule"></div></div>
+  <h2>Mid-Atlantic</h2>
+
+  <h3>Baltimore / Maryland-style</h3>
+  <p>Thin, crispy crust; sweet tomato sauce with a noticeable sugar presence; provolone (not mozzarella) as the primary cheese; square/rectangular cut; sometimes topped with Maryland blue crab. Credited to Bob Beall, described as a tobacco farmer and former minor-league baseball player with no prior pizza experience, whose choice of rectangular pan was reportedly a practical accommodation (round pans were hard to find) rather than a stylistic choice.</p>
+  <div class="callout"><p>Thinner sourcing than most entries in this catalogue &mdash; attributed to Beall across a couple of pieces but without a strong primary-source anchor (no clearly dated founding, no restaurant name tied to the claim). Treat "Bob Beall invented it" as a lead rather than an established fact.</p></div>
+</div>
+
+
+<!-- SECTION 14: UPSTATE NY -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 14</span><div class="section-rule"></div></div>
+  <h2>Upstate New York</h2>
+
+  <h3>Utica / Rome tomato pie &mdash; Utica, NY</h3>
+  <p>Rectangular, thick, airy crust; hearty tomato sauce; pecorino Romano or Parmesan dusted on top; little to no mozzarella; served at room temperature. O'Scugnizzo's Pizzeria is credited with selling 5-cent tomato pies from a basement starting around 1914. Utica tomato pie sits alongside other Utica-originated Italian-American dishes like Utica greens and chicken riggies as part of a broader, well-documented regional food identity. Well documented. <strong>Try:</strong> Roma Sausage &amp; Deli, described as the place that "put Utica tomato pie on the map."</p>
+
+  <div class="callout"><p>Rochester, NY was searched specifically for a distinct Rochester bar-pizza or local style; none was found. Coverage there centers on standard New York-style pizza and Brooklyn-descended shops rather than any locally codified style. Confirmed negative finding &mdash; see &sect; 17.</p></div>
+</div>
+
+
+<!-- SECTION 15: THE WEST -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 15</span><div class="section-rule"></div></div>
+  <h2>The West</h2>
+
+  <h3>California-style</h3>
+  <p>Thin crust with nontraditional, often high-end or produce-forward toppings (goat cheese, artichoke hearts, chicken with peanut sauce, etc.), breaking sharply from red-sauce-and-mozzarella convention. Credited to a specific circle of early-1980s California chefs: Ed LaDou (working first at Prego in San Francisco, then poached by Wolfgang Puck for Spago in Los Angeles in 1982) and Alice Waters at Chez Panisse in Berkeley. LaDou later worked with California Pizza Kitchen. Well documented, with named individuals, restaurants, and a specific year (1982).</p>
+
+  <h3>Colorado-style "mountain pie" &mdash; Idaho Springs, CO &middot; Vault Candidate</h3>
+  <p>Thick, hand-braided crust (braiding is a defining visual trait); heavy sauce and cheese; sold by the pound; served with honey for crust-dipping. Invented by Chip Bair after he bought Beau Jo's in Idaho Springs in 1973 &mdash; see &sect; 03 &mdash; deliberately hand-rolling crusts to hold more toppings and turn pizza into a meal for four. Well documented, with a single named originator, restaurant, and date, straight from the restaurant's own account (primary/self-reported source, generally reliable for founding facts but not independently third-party verified).</p>
+
+  <h3>New Mexico green chile pizza</h3>
+  <p>A topping/ingredient tradition &mdash; roasted green chile, sometimes blue corn crust, carne adovada &mdash; layered onto pizza rather than a single codified crust/sauce/cut style. Sourcing describes it as resisting "tidy definition," with "various interpretations across the state." A real regional culinary tendency, but not (yet) a documented, named pizza style the way Old Forge or Quad Cities are. Thin sourcing &mdash; flagged rather than presented as settled.</p>
+
+  <div class="callout"><p>Seattle was actively searched and found to have no distinct codified style. Multiple local food-media pieces explicitly state Seattle "doesn't have its own regional style of pie a la New York or Chicago" and instead hosts a wide mix of imported styles (Neapolitan, Detroit, NY-inspired, Roman). Confirmed negative finding &mdash; see &sect; 17.</p></div>
+</div>
+
+
+<!-- SECTION 16: GULF COAST -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 16</span><div class="section-rule"></div></div>
+  <h2>Gulf Coast, Islands &amp; Other Thinly-Documented Traditions</h2>
+
+  <h3>New Orleans / Gulf Coast</h3>
+  <p>Scattered mentions of Cajun-Italian fusion toppings at individual restaurants (e.g. a "9th Ward" pizza with Creole mustard aioli and gulf shrimp toppings) and a charming but very thinly sourced regional habit of dipping pizza slices in Catalina/French dressing on the Mississippi Gulf Coast. None of this rises to a codified, named regional pizza style &mdash; it's individual-restaurant creativity plus one single-source local eating habit. Treat the Catalina-dressing detail as a lead (one mention, not corroborated elsewhere), not a confirmed regional fact.</p>
+
+  <h3>Puerto Rican-style pizza</h3>
+  <p>Thin sourcing. General claims of "a distinct flavor with a thin crust that is not overly crispy or flaky," and San Juan's pizza culture growing since the 1970s, but no named founder, restaurant, or specific defining technique comparable to the mainland styles above. One genuinely well-defined distinct dish sits alongside this: <strong>pi&ntilde;&oacute;n</strong> &mdash; a plantain-and-ground-beef layered pie, historically pan-cooked on the stovetop, more a savory plantain casserole than pizza in the crust-and-sauce sense &mdash; interesting, but arguably a different dish wearing "pizza" as a loose descriptor. Presented here as unconfirmed/thin.</p>
+
+  <h3>Hawaiian pizza &mdash; a correction, not a regional entry</h3>
+  <p>Hawaiian pizza did <strong>not</strong> originate in Hawaii and is not a documented Hawaiian regional tradition. It was invented in Chatham, Ontario, Canada, in 1962 by Sam Panopoulos, a Greek-Canadian restaurateur, and named after the brand of canned pineapple he used. This is well documented &mdash; multiple obituaries and profiles of Panopoulos corroborate it &mdash; but it firmly does not belong in a catalogue of American regional pizza traditions, since it's Canadian in origin. No evidence was found of a genuinely distinct Hawaii-based pizza tradition beyond the topping combination being served everywhere, including in Hawaii itself. Included here specifically to correct the record rather than to recommend a trip.</p>
+</div>
+
+
+<!-- SECTION 17: CONFIRMED NEGATIVES -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 17</span><div class="section-rule"></div></div>
+  <h2>Confirmed Negative Findings</h2>
+
+  <p>Seven places were actively searched for a distinct, codified regional pizza style and came up empty. This is genuinely useful information &mdash; it can save a future search from chasing something that doesn't exist &mdash; and is presented here as its own section rather than folded quietly into the sourcing notes.</p>
+
+  <div class="negbox">
+    <div class="negbox-head">Searched, No Distinct Style Found</div>
+    <div class="negbox-body">
+      <div class="negbox-item"><span class="negbox-place">Seattle, WA</span><p>Multiple local food-media pieces explicitly state Seattle has no regional style of its own, hosting instead a wide mix of imported styles (Neapolitan, Detroit, NY-inspired, Roman).</p></div>
+      <div class="negbox-item"><span class="negbox-place">Rochester, NY</span><p>Coverage centers on standard New York-style pizza and Brooklyn-descended shops rather than any locally codified style.</p></div>
+      <div class="negbox-item"><span class="negbox-place">Kansas City, MO</span><p>No broadly recognized signature style. Some argue for a cracker-thin, heavily-topped local variant, explicitly described as "less recognized" even in sympathetic local coverage.</p></div>
+      <div class="negbox-item"><span class="negbox-place">Louisville, KY</span><p>Louisville pizza-makers themselves, quoted directly in a Louisville alt-weekly, say there is no distinct Louisville style despite periodic attempts to coin one.</p></div>
+      <div class="negbox-item"><span class="negbox-place">Cincinnati, OH</span><p>Beyond a generic, loosely-defined "Ohio Valley" cold-topping association shared with Louisville and Steubenville, no distinct Cincinnati style was found.</p></div>
+      <div class="negbox-item"><span class="negbox-place">New Castle, PA</span><p>No distinct codified style found in this research.</p></div>
+      <div class="negbox-item"><span class="negbox-place">New Britain, CT</span><p>Bar pizza specifically was searched and not found to be a codified distinct style, despite New England's broader bar-pizza traditions elsewhere (see South Shore, &sect; 05).</p></div>
+    </div>
+  </div>
+
+  <p>Erie is deliberately <em>not</em> listed here, despite also coming up empty for a codified "Erie style" &mdash; that finding gets its own full treatment in &sect; 02, because it comes with a genuine positive finding (pepperoni balls) attached, and because it was the household's specific starting question rather than a background search.</p>
+</div>
+
+
+<!-- SECTION 18: SOURCING CONFIDENCE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 18</span><div class="section-rule"></div></div>
+  <h2>Sourcing Confidence Assessment</h2>
+
+  <p>Across all 33 catalogued styles, sourcing quality varies meaningfully, and that variation is preserved here deliberately rather than smoothed into uniform confidence.</p>
+
+  <div class="confidence">
+    <div class="confidence-head">Confidence Tiers Across This Catalogue</div>
+    <div class="confidence-body">
+      <div class="conf-item good">
+        <span class="lbl">Well-documented, high confidence</span>
+        <p>New York style, Neapolitan/VPN rules, Chicago deep dish (restaurant-of-origin solid, inventor genuinely disputed), Chicago tavern-style as a category, Chicago stuffed, Detroit style (including red-top specifically), New Haven apizza, St. Louis/Provel, Trenton tomato pie, Grandma pizza, Buffalo style, Quad City-style, Brier Hill, Ohio Valley/DiCarlo's, Columbus-style, Milwaukee tavern-style, Colorado mountain pie/Beau Jo's, California style, Rhode Island pizza strips, Massachusetts beach pizza, South Shore bar pizza, Greek/New England pizza, Utica tomato pie, and Hawaiian pizza's Canadian (not American) origin.</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">Moderately documented, some hedging</span>
+        <p>Sicilian-American vs. sfincione divergence (exact origin point hedged), Cleveland-style (trademark and Symon endorsement solid, deeper origin more general), Old Forge (living tradition well covered, 1926 date less anchored), Altoona-style (founding decade genuinely disputed across sources).</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Thin or unconfirmed &mdash; flagged explicitly</span>
+        <p>"Erie style" as an independent codified tradition (the most important gap given this household's specific interest &mdash; see &sect; 02), the Baltimore/Bob Beall origin story, New Mexico green chile pizza as a codified style, New Orleans/Gulf Coast pizza including the Catalina-dressing detail, Puerto Rican-style pizza generally, and the "blue-top" half of the Detroit red-top/blue-top question (appears to refer to pan color, not a real sauce-style counterpart).</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Confirmed negative findings</span>
+        <p>Actively searched, no distinct style found: Seattle, Rochester NY, Kansas City, Louisville, Cincinnati (beyond generic Ohio Valley association), New Castle PA, and New Britain CT bar pizza specifically. See &sect; 17.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout"><p>A note on this section's sourcing: the research handoff behind this guide provided a single flat list of roughly 51 sources rather than a per-claim numbered citation mapping. Rather than invent a false precision by assigning specific footnote numbers to specific sentences, the Sources and References section below organizes those same sources by type and reliability tier, and specific claims are attributed by publication name in the prose above wherever the original research named one directly.</p></div>
+</div>
+
+
+<!-- SOURCES AND REFERENCES -->
+<div class="sources-section">
+  <div class="section-eyebrow"><span class="section-tag">&sect;</span><div class="section-rule"></div></div>
+  <h2>Sources and References</h2>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 1 &mdash; Official Restaurant / Brand Primary Sources</div>
+    <div class="source-group-note">Direct accounts from the originating businesses themselves &mdash; reliable for founding facts and self-reported history, though not independently third-party verified.</div>
+    <div class="source-item">Buddy's Pizza, official site &mdash; Detroit style founding account.</div>
+    <div class="source-item">DiCarlo's, official site &mdash; Ohio Valley-style founding account.</div>
+    <div class="source-item">Beau Jo's, official site &mdash; Colorado mountain pie founding account.</div>
+    <div class="source-item">Imo's Pizza, official site &mdash; St. Louis-style / Provel history.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 2 &mdash; Encyclopedic / Reference</div>
+    <div class="source-group-note">Wikipedia entries, used for cross-checking dates, named founders, and style descriptions across the catalogue.</div>
+    <div class="source-item">Wikipedia: Quad City-style pizza; Detroit-style pizza; St. Louis-style pizza; Brier Hill-style pizza; Altoona-style pizza; Columbus-style pizza; Trenton tomato pie; De Lorenzo's Tomato Pies; Greek pizza; Tavern-style pizza; Ed LaDou.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 3 &mdash; Food Journalism &amp; Culinary History Publications</div>
+    <div class="source-group-note">The backbone of most of the narrative history in this guide.</div>
+    <div class="source-item">PMQ Pizza Magazine &middot; Chowhound &middot; Food Republic &middot; Tasting Table &middot; Atlas Obscura / Gastro Obscura &middot; Boston Magazine &middot; Boston Globe &middot; Saveur &middot; Cleveland Magazine &middot; Belt Magazine &middot; New Haven Pizza School &middot; Franco's Pizza.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 4 &mdash; Regional / Local Journalism &amp; Historical Societies</div>
+    <div class="source-group-note">The source of most of the confirmed-negative findings in &sect; 17, along with small-town detail elsewhere in the catalogue.</div>
+    <div class="source-item">LEO Weekly (Louisville) &middot; KCUR (Kansas City) &middot; Seattle Met &middot; New Mexico Magazine &middot; Weelunk (Wheeling, WV) &middot; Pittsburgh Orbit &middot; Visit NEPA &middot; Explore Mahoning &middot; Culinary Historians of Chicago &middot; Block Club Chicago.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 5 &mdash; Aggregator / Lifestyle Secondary Sources</div>
+    <div class="source-group-note">Included for transparency; treated as lower-confidence corroboration rather than primary evidence, consistent with the confidence flags attached to specific entries above.</div>
+    <div class="source-item">Mashed &middot; Homeslyce &middot; The Daily Meal &middot; Barking Doodle &middot; Empire Slice Pizza &middot; Bienvenidos &middot; Aida's Kitchen.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 6 &mdash; News Corroboration</div>
+    <div class="source-group-note">Used specifically to confirm the Hawaiian pizza correction in &sect; 16.</div>
+    <div class="source-item">CBC News &mdash; obituary/profile coverage of Sam Panopoulos, corroborating the 1962 Chatham, Ontario origin of Hawaiian pizza.</div>
+  </div>
+</div>
+
+<div class="footer">
+  American Regional Pizza Styles: A Full Reference Guide &nbsp;&middot;&nbsp; Compiled August 2026<br>
+  33 styles, 5 clusters, 3 vault candidates, 7 confirmed dead ends, and the Erie question answered directly in &sect; 02<br>
+  Companion document: Field Checklist (regional-pizza-styles-factsheet.html)
+</div>
+
+</body>
+</html>
