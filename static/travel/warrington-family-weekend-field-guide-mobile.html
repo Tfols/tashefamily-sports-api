@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Alexandria + Horsham — Family Trip Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2e8cf; --paper-3:#faf3e0; --paper-2:#e8dab3;
+    --ink:#2a2013; --ink-soft:#5c4d34;
+    --line:#c7b483; --line-dark:#9c8452;
+    --green:#1f4d3a; --green-2:#173a2c;
+    --rust:#a83c22; --gold:#d9a441; --navy:#1c3a5c;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  html,body{ background:var(--paper); color:var(--ink); margin:0; }
+  body{
+    font-family:'Libre Baskerville',serif;
+    padding-left: calc(16px + env(safe-area-inset-left));
+    padding-right: calc(16px + env(safe-area-inset-right));
+    touch-action: manipulation;
+  }
+  .gutter{ padding-left:16px; padding-right:16px; margin-left:-16px; margin-right:-16px; }
+  .full-bleed{ margin-left:calc(-16px - env(safe-area-inset-left)); margin-right:calc(-16px - env(safe-area-inset-right)); }
+  h1,h2,h3{ margin:0; }
+
+  /* ---- Masthead ---- */
+  .masthead{ background:var(--green); color:var(--paper-3); border-bottom:4px solid var(--ink);
+    padding:calc(18px + env(safe-area-inset-top)) 16px 18px; }
+  .eyebrow{ font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--gold); font-size:11px;
+    text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; }
+  .masthead h1{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:34px;
+    line-height:0.95; text-transform:uppercase; color:var(--paper-3); }
+  .masthead h1 .plus{ color:var(--gold); padding:0 4px; }
+  .intro{ font-family:'Libre Baskerville',serif; font-style:italic; color:#dce8df; font-size:15px;
+    line-height:1.5; margin-top:12px; max-height:calc(1.5em * 3); overflow:hidden; }
+  .route-grid{ display:grid; grid-template-columns:1fr 1fr; margin-top:16px; background:var(--green-2);
+    border:1px solid rgba(250,243,224,0.25); }
+  .rc-cell{ padding:10px 12px; border-right:1px solid rgba(250,243,224,0.25);
+    border-bottom:1px solid rgba(250,243,224,0.25); }
+  .rc-cell:nth-child(2n){ border-right:none; }
+  .rc-cell:nth-child(3),.rc-cell:nth-child(4){ border-bottom:none; }
+  .rc-label{ font-family:'IBM Plex Mono',monospace; font-size:9px; color:#9fc2ab; text-transform:uppercase;
+    letter-spacing:.05em; }
+  .rc-value{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:12px; color:var(--gold);
+    margin-top:3px; line-height:1.4; }
+
+  /* ---- Key strip (details) ---- */
+  .key-details{ margin:20px 0; }
+  .key-details summary{ list-style:none; cursor:pointer; background:var(--paper-2); border:2px solid var(--ink);
+    padding:12px 14px; font-family:'IBM Plex Mono',monospace; font-weight:700; text-transform:uppercase;
+    font-size:12px; letter-spacing:.04em; min-height:44px; display:flex; align-items:center; gap:8px; }
+  .key-details summary::-webkit-details-marker{ display:none; }
+  .key-details summary::before{ content:"▸"; color:var(--rust); }
+  .key-details[open] summary::before{ content:"▾"; }
+  .key-grid{ display:grid; grid-template-columns:1fr 1fr; border:2px solid var(--ink); border-top:none;
+    background:var(--paper-2); }
+  .key-item{ padding:12px 14px; display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:.03em; min-height:44px; }
+  .key-pin{ width:13px; height:13px; border-radius:50%; flex:0 0 auto; }
+  .key-pin.anchor{ background:var(--gold); border:2.5px solid var(--ink); }
+  .key-pin.option{ background:var(--paper-3); border:2px dashed var(--rust); }
+  .key-chip{ font-weight:700; padding:2px 7px; border-radius:2px; }
+  .key-chip.verified{ background:var(--green); color:var(--paper-3); }
+  .key-chip.lead{ background:transparent; border:1.5px dashed var(--rust); color:var(--rust); }
+
+  /* ---- Section tag ---- */
+  .section-tag{ display:flex; align-items:center; gap:10px; margin:32px 0 12px; }
+  .section-tag span{ background:var(--ink); color:var(--paper-3); font-family:'IBM Plex Mono',monospace;
+    font-weight:700; text-transform:uppercase; font-size:11px; letter-spacing:.05em; padding:5px 10px; }
+  .section-tag::after{ content:""; flex:1; height:2px; background:var(--ink); }
+
+  /* ---- Sticky day header + plate ---- */
+  .day-block{ margin-top:44px; }
+  .day-sticky{ position:sticky; top:0; z-index:20; background:var(--ink); color:var(--paper-3); height:52px;
+    display:flex; align-items:center; gap:10px; padding:0 16px; }
+  .day-sticky .num{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:24px; color:var(--gold); }
+  .day-sticky .title{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:16px;
+    text-transform:uppercase; color:var(--paper-3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+  .day-sticky .loc{ font-family:'IBM Plex Mono',monospace; font-size:10px; color:#9fc2ab; text-align:right;
+    flex:0 0 auto; max-width:34%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  .day-plate{ background:var(--ink); color:var(--paper-3); padding:18px 16px; }
+  .day-num-big{ font-family:'Big Shoulders Display',sans-serif; font-weight:900; font-size:44px; line-height:1;
+    color:var(--paper-3); }
+  .day-loc-line{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--gold); font-size:11px;
+    text-transform:uppercase; letter-spacing:.04em; margin-top:6px; }
+  .day-title-big{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; font-size:26px;
+    text-transform:uppercase; margin-top:4px; line-height:1.05; }
+
+  .day-shape{ font-family:'Libre Baskerville',serif; font-style:italic; color:var(--ink-soft); font-size:15px;
+    line-height:1.6; margin:16px 16px 20px; }
+
+  /* ---- Stop spine ---- */
+  .stop-spine{ position:relative; padding:0 16px; }
+  .stop-spine::before{ content:""; position:absolute; left:23px; top:6px; bottom:6px; width:0;
+    background-image:repeating-linear-gradient(var(--green) 0 9px, transparent 9px 15px); }
+  .stop-row{ display:grid; grid-template-columns:34px 1fr; gap:12px; margin-bottom:16px; position:relative; }
+  .pin-col{ display:flex; justify-content:center; padding-top:6px; }
+  .pin{ width:14px; height:14px; border-radius:50%; z-index:2; position:relative; }
+  .pin.anchor{ background:var(--gold); border:3px solid var(--ink); }
+  .stop-card{ background:var(--paper-3); border:2px solid var(--ink); border-left:6px solid var(--green);
+    border-radius:3px; padding:12px; }
+  .stop-card.flagged{ border-color:var(--rust); border-left-color:var(--rust); }
+  .eyebrow-when{ font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.05em; color:var(--ink-soft); margin-bottom:4px; }
+  .stop-name{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; text-transform:uppercase;
+    font-size:20px; line-height:1.1; }
+  .chip{ font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:11px; text-transform:uppercase;
+    letter-spacing:.04em; padding:3px 8px; border-radius:2px; display:inline-block; margin-top:8px; }
+  .chip.verified{ background:var(--green); color:var(--paper-3); }
+  .chip.lead{ background:transparent; border:1.5px dashed var(--rust); color:var(--rust); }
+  .chip.strongpick{ background:var(--gold); color:var(--ink); }
+  .meta-rows{ margin-top:10px; border-top:1px dotted var(--line-dark); }
+  .meta-row{ display:flex; flex-direction:column; gap:2px; padding:8px 2px; min-height:44px; justify-content:center;
+    border-bottom:1px dotted var(--line-dark); text-decoration:none; color:inherit; }
+  .meta-row:last-child{ border-bottom:none; }
+  .meta-label{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-soft); text-transform:uppercase;
+    letter-spacing:.04em; }
+  .meta-value{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink); line-height:1.4; }
+  a.meta-row .meta-value{ color:var(--navy); text-decoration:underline; }
+  .stop-desc{ font-size:16px; line-height:1.55; margin-top:10px; }
+  .flag-chip{ display:block; background:var(--rust); color:var(--paper-3); font-family:'IBM Plex Mono',monospace;
+    font-size:13px; font-weight:700; padding:10px 12px; border-radius:2px; margin-top:12px; line-height:1.5; }
+  .flag-chip::before{ content:"⚠ FLAG — "; }
+
+  /* ---- Options panel ---- */
+  .options-panel{ margin:0 16px 16px; background:var(--paper-2); border:2.5px dashed var(--line-dark);
+    border-radius:4px; padding:14px; }
+  .options-header{ font-family:'IBM Plex Mono',monospace; font-weight:700; text-transform:uppercase; font-size:12px;
+    letter-spacing:.04em; margin-bottom:10px; }
+  .option-row{ border-top:1px dotted var(--line-dark); padding:12px 0; display:flex; flex-direction:column; gap:6px; }
+  .option-row:first-child{ border-top:none; padding-top:2px; }
+  .option-name{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; text-transform:uppercase;
+    font-size:17px; }
+  .option-why{ font-size:15px; color:var(--ink-soft); line-height:1.55; }
+  .options-note{ font-size:15px; color:var(--ink-soft); line-height:1.6; font-style:italic; }
+
+  /* ---- Category rail ---- */
+  .cat-rail{ display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch; padding:0 16px; margin:14px -16px 6px; scrollbar-width:none; }
+  .cat-rail::-webkit-scrollbar{ display:none; }
+  .cat-card{ flex:0 0 78%; scroll-snap-align:start; border:2px solid var(--ink); background:var(--paper-3);
+    border-radius:3px; overflow:hidden; }
+  .cat-header{ font-family:'IBM Plex Mono',monospace; font-weight:700; text-transform:uppercase; font-size:12px;
+    letter-spacing:.03em; padding:8px 10px; color:var(--paper-3); }
+  .cat-header.green{ background:var(--green); }
+  .cat-header.rust{ background:var(--rust); }
+  .cat-body{ padding:11px; font-size:15px; line-height:1.5; }
+  .cat-body ul{ margin:0; padding-left:1.1em; }
+  .cat-body li{ margin-bottom:5px; }
+  .cat-note{ border-top:1px dotted var(--line-dark); margin-top:9px; padding-top:8px; font-size:13px;
+    color:var(--ink-soft); line-height:1.5; }
+  .cat-note b{ color:var(--rust); }
+  .rail-count{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-soft); text-transform:uppercase;
+    letter-spacing:.04em; padding:0 16px; margin-bottom:6px; }
+
+  /* ---- Lodging ---- */
+  .lodging-wrap{ padding:0 16px; }
+  .lodging-filter{ font-style:italic; color:var(--ink-soft); font-size:15px; margin:8px 0 14px; }
+  .lodging-card{ background:var(--paper-3); border:2px solid var(--ink); border-left:6px solid var(--navy);
+    border-radius:3px; padding:14px; margin-bottom:12px; }
+  .lodging-card.strong{ border-color:var(--gold); border-left-color:var(--gold); }
+  .lodging-name{ font-family:'Big Shoulders Display',sans-serif; font-weight:800; text-transform:uppercase;
+    font-size:18px; line-height:1.15; }
+  .lodging-brand{ font-family:'IBM Plex Mono',monospace; color:var(--navy); font-size:12px; margin:8px 0;
+    line-height:1.5; }
+  .lodging-desc{ font-size:16px; line-height:1.55; margin-top:4px; }
+
+  /* ---- Corrections (collapsed by default) ---- */
+  .correction-details{ margin:0 16px 10px; border:2px solid var(--rust); background:rgba(168,60,34,0.10);
+    border-radius:3px; padding:2px 12px; }
+  .correction-details summary{ list-style:none; cursor:pointer; display:flex; align-items:center; gap:8px;
+    min-height:44px; font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--rust); font-size:13px;
+    text-transform:uppercase; padding:10px 2px; }
+  .correction-details summary::-webkit-details-marker{ display:none; }
+  .correction-details summary::before{ content:"▸"; }
+  .correction-details[open] summary::before{ content:"▾"; }
+  .correction-body{ font-size:15px; line-height:1.6; color:var(--ink); padding-bottom:12px; }
+  .correction-body b{ color:var(--rust); }
+
+  /* ---- Still loose ---- */
+  .loose-wrap{ padding:0 16px; }
+  .loose-col{ border:2.5px solid var(--ink); padding:16px; margin-bottom:12px; }
+  .loose-col.gold{ background:rgba(217,164,65,0.10); }
+  .loose-col.rust{ background:rgba(168,60,34,0.08); }
+  .loose-col.green{ background:rgba(31,77,58,0.07); }
+  .loose-chip{ display:inline-block; font-family:'IBM Plex Mono',monospace; font-weight:700; text-transform:uppercase;
+    font-size:12px; letter-spacing:.03em; background:var(--ink); color:var(--paper-3); padding:5px 9px;
+    margin-bottom:11px; }
+  .loose-body{ font-size:15px; line-height:1.6; }
+  .loose-body + .loose-body{ margin-top:10px; }
+
+  /* ---- Footer ---- */
+  .footer{ border-top:2px solid var(--line); margin-top:32px; padding:20px 16px calc(32px + env(safe-area-inset-bottom));
+    text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase;
+    color:var(--ink-soft); letter-spacing:.04em; }
+  .footer div + div{ margin-top:6px; }
+
+  /* Tap feedback */
+  .stop-card:active, .option-row:active, .cat-card:active, .lodging-card:active { background:var(--paper-2); }
+  .meta-row:active{ background:var(--paper-2); }
+</style>
+</head>
+<body>
+
+  <!-- MASTHEAD -->
+  <div class="masthead full-bleed">
+    <div class="eyebrow">Field Guide &middot; Family Weekend &middot; Sept 4&ndash;6, 2026 &middot; Compiled Aug 17, 2026</div>
+    <h1>ALEXANDRIA <span class="plus">+</span> HORSHAM</h1>
+    <p class="intro">Visiting Tom&rsquo;s parents in Warrington, PA — Tom, Ashe, Finn (6), Aidan (14 mo). Advisory only, not booked. Built around Aidan&rsquo;s nap/7&nbsp;PM bedtime and Finn&rsquo;s attention span. Reconfirm hours before travel.</p>
+    <div class="route-grid">
+      <div class="rc-cell"><div class="rc-label">Order</div><div class="rc-value">Alexandria &rarr; Horsham &rarr; Alexandria</div></div>
+      <div class="rc-cell"><div class="rc-label">Drive, Friday</div><div class="rc-value">3&ndash;3.5 hrs (corrected)</div></div>
+      <div class="rc-cell"><div class="rc-label">Extension</div><div class="rc-value">None</div></div>
+      <div class="rc-cell"><div class="rc-label">Status</div><div class="rc-value">Advisory, not booked</div></div>
+    </div>
+  </div>
+
+  <!-- KEY STRIP -->
+  <details class="key-details" open>
+    <summary>How to read this</summary>
+    <div class="key-grid">
+      <div class="key-item"><span class="key-pin anchor"></span> Anchor stop</div>
+      <div class="key-item"><span class="key-pin option"></span> Interchangeable option</div>
+      <div class="key-item"><span class="chip verified" style="margin-top:0;">Verified</span> Official/corroborated</div>
+      <div class="key-item"><span class="chip lead" style="margin-top:0;">Lead</span> Weak source, call first</div>
+    </div>
+  </details>
+
+  <!-- DAY 1 -->
+  <div class="day-block">
+    <div class="day-sticky">
+      <span class="num">01</span>
+      <span class="title">Travel, Farm &amp; Family</span>
+      <span class="loc">Horsham</span>
+    </div>
+    <div class="day-plate full-bleed">
+      <div class="day-num-big">01</div>
+      <div class="day-loc-line">Warrington/Horsham &middot; Alexandria &rarr; Horsham, ~3&ndash;3.5 hrs (corrected, Lead)</div>
+      <div class="day-title-big">Travel, Farm Stop &amp; Family Visit</div>
+    </div>
+    <p class="day-shape">A light travel day: the whole morning is the drive, so the corrected 3&ndash;3.5-hour range — not the 2&ndash;2.5 hours originally assumed — is the day&rsquo;s real constraint. Leave Alexandria by 9&ndash;10 AM to land mid-afternoon with room before the evening family visit and Aidan&rsquo;s 7&nbsp;PM bedtime.</p>
+
+    <div class="stop-spine">
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Morning</div>
+          <div class="stop-name">Depart Alexandria</div>
+          <span class="chip lead">Lead</span>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-label">Route</span><span class="meta-value">I-95 &middot; DC Beltway &rarr; Baltimore &rarr; Wilmington corridor</span></div>
+            <div class="meta-row"><span class="meta-label">Distance</span><span class="meta-value">~150&ndash;165 mi</span></div>
+          </div>
+          <p class="stop-desc">The corrected estimate is 3&ndash;3.5 hours, not the 2&ndash;2.5 hours originally assumed — this single number reshapes the whole day. Leaving by 9&ndash;10 AM at the latest lands mid-afternoon with room before the evening family visit and Aidan&rsquo;s 7&nbsp;PM bedtime.</p>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card flagged">
+          <div class="eyebrow-when">Afternoon</div>
+          <div class="stop-name">Merrymead Farm</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <a class="meta-row" href="https://maps.apple.com/?q=2222%20S%20Valley%20Forge%20Rd%2C%20Lansdale%2C%20PA" target="_blank" rel="noopener">
+              <span class="meta-label">Address</span><span class="meta-value">2222 S Valley Forge Rd, Lansdale, PA</span>
+            </a>
+            <div class="meta-row"><span class="meta-label">Drive</span><span class="meta-value">~15 min from hotel</span></div>
+          </div>
+          <p class="stop-desc">Working dairy farm with a petting zoo, homemade ice cream made on-site, and a farm store/bakery — squarely the household&rsquo;s farm-stand-plus-ice-cream pattern, and a known Finn favorite.</p>
+          <div class="flag-chip">Early-September hours aren&rsquo;t confirmed yet — verify closer to the date before building the afternoon around it.</div>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Late afternoon</div>
+          <div class="stop-name">Family Visit — Tom&rsquo;s Parents&rsquo; House</div>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-label">Location</span><span class="meta-value">Warrington, PA</span></div>
+          </div>
+          <p class="stop-desc">First stop with Tom&rsquo;s parents this trip — casual, no set agenda.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="options-panel">
+      <div class="options-header">Friday evening — pick, reorder, or drop</div>
+      <div class="option-row">
+        <div class="option-name">Broom&rsquo;s Bloom Dairy</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">1700 S Fountain Green Rd, Bel Air, MD &middot; ~4 mi off I-95 Exit 80 &middot; Tue&ndash;Sat 11a&ndash;9p, Sun 12&ndash;9p, closed Mon. A working 9th-generation dairy farm directly on-route, not a detour — homemade ice cream, artisan cheese. Purely optional; worth it only if the morning is running ahead of schedule.</div>
+      </div>
+      <div class="option-row">
+        <div class="option-name">Steve&rsquo;s Prince of Steaks</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">404 Easton Rd, Warrington. Hand-sliced cheesesteaks, well-reviewed. Closest of the two dinner options to the parents&rsquo; house.</div>
+      </div>
+      <div class="option-row">
+        <div class="option-name">Daddypops Diner</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">232 N York Rd, Hatboro. DDD-featured diner. Sits two minutes from Saturday&rsquo;s Sportscard Playground stop — worth folding into Saturday&rsquo;s dinner instead if Friday runs long.</div>
+      </div>
+    </div>
+
+    <div class="section-tag"><span>Warrington/Horsham by category</span></div>
+    <div class="cat-rail">
+      <div class="cat-card">
+        <div class="cat-header green">Farm &amp; ice cream</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Broom&rsquo;s Bloom Dairy</b> — on-route pit stop, Bel Air, MD</li>
+            <li><b>Merrymead Farm</b> — day&rsquo;s kid-activity anchor, Lansdale, PA</li>
+          </ul>
+          <div class="cat-note">Both are already Friday&rsquo;s actual stops — listed here for a quick side-by-side, not because more farm research exists for this leg.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header green">Kid play spaces</div>
+        <div class="cat-body">
+          <div class="cat-note">No dedicated playground scoped for Horsham/Warrington itself — Saturday and Sunday carry the trip&rsquo;s playground stops (Kids Castle, Peace Valley Park, Graeme Park).</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header green">Comics, cards &amp; records</div>
+        <div class="cat-body">
+          <div class="cat-note">The household&rsquo;s four established shop stops (Siren Records, Cyborg One, Sportscard Playground, Hope&rsquo;s Cookies) all fall on Saturday and Sunday&rsquo;s route — none is near Horsham/Warrington itself.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header rust">Casual dinner</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Steve&rsquo;s Prince of Steaks</b> — Warrington</li>
+            <li><b>Daddypops Diner</b> — Hatboro</li>
+          </ul>
+          <div class="cat-note">Either covers Friday dinner — see the options panel above for the full fork.</div>
+        </div>
+      </div>
+    </div>
+    <div class="rail-count">1 / 4 &middot; swipe</div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-block">
+    <div class="day-sticky">
+      <span class="num">02</span>
+      <span class="title">Playgrounds &amp; Shop Loop</span>
+      <span class="loc">Doylestown</span>
+    </div>
+    <div class="day-plate full-bleed">
+      <div class="day-num-big">02</div>
+      <div class="day-loc-line">Doylestown/Hatboro &middot; day trip from Horsham, ~18&ndash;20 min each way</div>
+      <div class="day-title-big">Playgrounds, Family &amp; the Shop Loop</div>
+    </div>
+    <p class="day-shape">The trip&rsquo;s one full day, built around a hard 7&nbsp;PM bedtime on both ends: playground and nature time in the morning, the family visit timed around Aidan&rsquo;s nap, then the Doylestown shop stops on the way back toward Horsham.</p>
+
+    <div class="stop-spine">
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card flagged">
+          <div class="eyebrow-when">Morning</div>
+          <div class="stop-name">Kids Castle</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <a class="meta-row" href="https://maps.apple.com/?q=425%20Wells%20Rd%2C%20Doylestown%2C%20PA" target="_blank" rel="noopener">
+              <span class="meta-label">Address</span><span class="meta-value">425 Wells Rd, Doylestown, PA</span>
+            </a>
+            <div class="meta-row"><span class="meta-label">Drive</span><span class="meta-value">~18&ndash;20 min from Horsham</span></div>
+          </div>
+          <p class="stop-desc">An 8-story community-built wooden castle playground, raised in 1996&ndash;97 through a volunteer effort and designed/named by local kids through an art contest — widely cited as one of the more distinctive playgrounds in the country.</p>
+          <div class="flag-chip">Low ceilings and narrow passages make it hard for adults or toddlers to navigate — best framed as a Finn-plus-one-adult stop while the other parent handles Aidan, or timed around his nap.</div>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Midday</div>
+          <div class="stop-name">Peace Valley Park / Nature Center</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <a class="meta-row" href="https://maps.apple.com/?q=170%20Chapman%20Rd%2C%20Doylestown%2C%20PA" target="_blank" rel="noopener">
+              <span class="meta-label">Address</span><span class="meta-value">170 Chapman Rd, Doylestown, PA</span>
+            </a>
+            <div class="meta-row"><span class="meta-label">Drive</span><span class="meta-value">similar distance to Kids Castle</span></div>
+          </div>
+          <p class="stop-desc">15+ miles of trails around Lake Galena, a nature center, a playground/sandpit, and creek wading (water shoes recommended) — a natural pairing with Kids Castle in the same area.</p>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Afternoon</div>
+          <div class="stop-name">Family Visit — Warrington</div>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-label">When</span><span class="meta-value">late morning or after Aidan&rsquo;s nap</span></div>
+          </div>
+          <p class="stop-desc">Sam, Cris, and their three kids (Dezmin, Izabella, Alexzandra) are likely joining; Tom&rsquo;s brother from Lancaster may also come, since he&rsquo;d be traveling to Warrington rather than the family going to him.</p>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Late afternoon</div>
+          <div class="stop-name">Siren Records + Cyborg One</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <a class="meta-row" href="https://maps.apple.com/?q=25%20E%20State%20St%2C%20Doylestown%2C%20PA" target="_blank" rel="noopener">
+              <span class="meta-label">Siren Records</span><span class="meta-value">25 E State St, Doylestown, PA</span>
+            </a>
+            <a class="meta-row" href="https://maps.apple.com/?q=44%20E%20State%20St%2C%20Doylestown%2C%20PA" target="_blank" rel="noopener">
+              <span class="meta-label">Cyborg One</span><span class="meta-value">44 E State St (entrance rear, Oakland Ave)</span>
+            </a>
+          </div>
+          <p class="stop-desc">Two doors down and easy to combine: Siren Records (vinyl since 1988, listening stations, small live-music venue) and Cyborg One (comics/pop-culture since 1992 — comics, toys, board games, TCGs, vintage buy/sell). Both established household favorites already on the family map, not new discoveries.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="options-panel">
+      <div class="options-header">Doylestown playground alternatives</div>
+      <div class="option-row">
+        <div class="option-name">Parkside Place Park</div>
+        <span class="chip lead" style="margin-top:0;">Lead</span>
+        <div class="option-why">1 Parkside Place, North Wales, PA &middot; ~15 min. Castle-themed playground, closer than Doylestown. Sourcing is thin (single aggregator) — worth a quick second check before relying on it as the primary stop.</div>
+      </div>
+      <div class="option-row">
+        <div class="option-name">Bucks County Children&rsquo;s Museum</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">500 Union Square, New Hope, PA &middot; $9/person, advance tickets recommended. Genuine kids museum, ages 1&ndash;8. A real stretch on distance (~25 min, beyond the household&rsquo;s usual 15&ndash;20 min tolerance) — keep as rain/weather contingency, not a default.</div>
+      </div>
+    </div>
+
+    <div class="section-tag"><span>Doylestown/Hatboro by category</span></div>
+    <div class="cat-rail">
+      <div class="cat-card">
+        <div class="cat-header green">Playgrounds &amp; nature</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Kids Castle</b> — 8-story wooden castle, Doylestown</li>
+            <li><b>Peace Valley Park</b> — trails, nature center, creek wading</li>
+            <li><b>Parkside Place Park</b> — castle-themed, North Wales</li>
+          </ul>
+          <div class="cat-note">Kids Castle&rsquo;s low ceilings make it a Finn-and-one-adult stop (see flag above). Parkside Place is thin-sourced (single aggregator) — a closer alternative worth double-checking, not a confirmed swap.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header green">Rainy-day backup</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Bucks County Children&rsquo;s Museum</b> — New Hope, ages 1&ndash;8, $9/person</li>
+          </ul>
+          <div class="cat-note">Kept as contingency only — a real stretch on distance (~25 min) beyond the household&rsquo;s usual 15&ndash;20 min tolerance for family stops.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header green">Records, comics &amp; cards</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Siren Records</b> — vinyl since 1988, Doylestown</li>
+            <li><b>Cyborg One</b> — comics/pop-culture since 1992, Doylestown</li>
+            <li><b>Sportscard Playground</b> — cards/hobby boxes since 1996, Hatboro</li>
+          </ul>
+          <div class="cat-note">All three are established household favorites, already on the family map (return-favorite / always-visit) — a maintenance stop, not new exploration. Hatboro is Montgomery County, not Bucks, despite bordering it.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header rust">Food ideas</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Daddypops Diner</b> — DDD-featured, Hatboro, pairs with Sportscard Playground above</li>
+          </ul>
+          <div class="cat-note"><b>Leads, unconfirmed:</b> Pineville Tavern (near Doylestown) — a real DDD-claimed spot, but only secondary-sourced (a local radio writeup, not a primary Food Network confirmation).</div>
+        </div>
+      </div>
+    </div>
+    <div class="rail-count">1 / 4 &middot; swipe</div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-block">
+    <div class="day-sticky">
+      <span class="num">03</span>
+      <span class="title">Closing Visit &amp; Home</span>
+      <span class="loc">Horsham</span>
+    </div>
+    <div class="day-plate full-bleed">
+      <div class="day-num-big">03</div>
+      <div class="day-loc-line">Horsham &middot; zero real drive, then home</div>
+      <div class="day-title-big">Closing Visit &amp; the Drive Home</div>
+    </div>
+    <p class="day-shape">A short morning before a ~noon departure — Graeme Park&rsquo;s free grounds sit inside Horsham itself, so there&rsquo;s no real drive to plan around, just a closing visit at the parents&rsquo; house and the Hope&rsquo;s Cookies stop on the way out.</p>
+
+    <div class="stop-spine">
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Morning</div>
+          <div class="stop-name">Graeme Park</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <a class="meta-row" href="https://maps.apple.com/?q=859%20County%20Line%20Rd%2C%20Horsham%20Township%2C%20PA" target="_blank" rel="noopener">
+              <span class="meta-label">Address</span><span class="meta-value">859 County Line Rd, Horsham Township, PA</span>
+            </a>
+            <div class="meta-row"><span class="meta-label">Drive</span><span class="meta-value">zero real drive time</span></div>
+          </div>
+          <p class="stop-desc">Free grounds, trails, and picnic areas right in Horsham — the township&rsquo;s only National Historic Landmark (the Keith House, an 18th-century Georgian mansion, the only surviving residence of a colonial Pennsylvania governor). Fits the tight before-noon window well.</p>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Late morning</div>
+          <div class="stop-name">Family Visit — Closing Visit</div>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-label">When</span><span class="meta-value">before noon, Warrington</span></div>
+          </div>
+          <p class="stop-desc">Last stop with the parents before departure.</p>
+        </div>
+      </div>
+
+      <div class="stop-row">
+        <div class="pin-col"><div class="pin anchor"></div></div>
+        <div class="stop-card">
+          <div class="eyebrow-when">Departure</div>
+          <div class="stop-name">Hope&rsquo;s Cookies</div>
+          <span class="chip verified">Verified</span>
+          <div class="meta-rows">
+            <a class="meta-row" href="https://maps.apple.com/?q=1125%20W%20Lancaster%20Ave%2C%20Bryn%20Mawr%2C%20PA" target="_blank" rel="noopener">
+              <span class="meta-label">Address</span><span class="meta-value">1125 W Lancaster Ave, Bryn Mawr, PA</span>
+            </a>
+          </div>
+          <p class="stop-desc">An established household tradition when leaving Tom&rsquo;s parents, not a new find — a cookie shop near Bryn Mawr College, where Ashe went to school. It sits on the Philadelphia Main Line, a deliberate detour off the direct Warrington-to-Alexandria route, not something to second-guess.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="options-panel">
+      <div class="options-header">If departure slides past noon</div>
+      <div class="option-row">
+        <div class="option-name">Keith House Tour (Graeme Park)</div>
+        <span class="chip verified" style="margin-top:0;">Verified</span>
+        <div class="option-why">$6&ndash;8 &middot; Fri&ndash;Sun, Sun 12&ndash;4pm &middot; &ldquo;Living History Sundays&rdquo; reenactors. Only fits if departure moves past noon — the free grounds alone cover the morning-visit case without it.</div>
+      </div>
+    </div>
+
+    <div class="section-tag"><span>Horsham by category</span></div>
+    <div class="cat-rail">
+      <div class="cat-card">
+        <div class="cat-header green">Historic &amp; outdoor</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Graeme Park</b> — free grounds, Horsham Township</li>
+          </ul>
+          <div class="cat-note">Already Sunday&rsquo;s anchor, above — listed here for quick reference. No other Horsham-area outdoor spot was researched for this leg.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header green">Departure-route sweets</div>
+        <div class="cat-body">
+          <ul>
+            <li><b>Hope&rsquo;s Cookies</b> — Bryn Mawr, on the Main Line</li>
+          </ul>
+          <div class="cat-note">Already Sunday&rsquo;s closing anchor, above — an established tradition tied to Ashe&rsquo;s alma mater, not a new pick.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header green">Playgrounds &amp; parks</div>
+        <div class="cat-body">
+          <div class="cat-note">No additional playground scoped for Sunday&rsquo;s short window — see Saturday&rsquo;s Doylestown grid (Kids Castle, Peace Valley Park, Parkside Place) if there&rsquo;s appetite for one more before departure.</div>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-header rust">Food ideas</div>
+        <div class="cat-body">
+          <div class="cat-note">No lunch stop researched for Sunday — likely a drive-through or on-the-road meal given the ~noon departure and the Hope&rsquo;s Cookies detour. Flag if a real lunch stop should get a proper pass before the trip.</div>
+        </div>
+      </div>
+    </div>
+    <div class="rail-count">1 / 4 &middot; swipe</div>
+  </div>
+
+  <!-- LODGING -->
+  <div class="section-tag"><span>Lodging</span></div>
+  <div class="lodging-wrap">
+    <p class="lodging-filter">No alternates evaluated this pass — the property was already booked before this guide was built.</p>
+    <div class="lodging-card strong">
+      <div class="lodging-name">TownePlace Suites Philadelphia Horsham</div>
+      <span class="chip strongpick">Strong pick</span>
+      <div class="lodging-brand">Marriott &middot; extended-stay suites &middot; Horsham, PA</div>
+      <p class="lodging-desc">The trip&rsquo;s fixed base for all three nights. No street address or alternates were supplied or evaluated this pass — the property was already selected before this guide was built.</p>
+    </div>
+  </div>
+
+  <details class="correction-details">
+    <summary>&#9888; Correction — Friday&rsquo;s drive time</summary>
+    <div class="correction-body">Alexandria to Horsham is <b>3&ndash;3.5 hours</b>, not the 2&ndash;2.5 hours originally assumed — I-95 through the DC Beltway, Baltimore, and Wilmington, roughly 150&ndash;165 miles. This is a Lead-level, synthesized estimate, not pulled from one authoritative source. It reshapes Friday: leave Alexandria by 9&ndash;10 AM at the latest to land mid-afternoon with room before the evening family visit and Aidan&rsquo;s 7&nbsp;PM bedtime.</div>
+  </details>
+  <details class="correction-details">
+    <summary>&#9888; Correction — same-named shops are in England</summary>
+    <div class="correction-body">Two comic/game shops that looked local at first search — <b>BattleQuest Games</b> (Horsham) and <b>Stormforge Hobbies and Games</b> (Warrington) — turned out to be same-named businesses in Horsham, West Sussex and Warrington, Cheshire, England, not Pennsylvania. Worth remembering for future PA-area searches, since both town names repeat exactly.</div>
+  </details>
+
+  <!-- STILL LOOSE -->
+  <div class="section-tag"><span>Still loose</span></div>
+  <div class="loose-wrap">
+    <div class="loose-col gold">
+      <div class="loose-chip">Unconfirmed drive</div>
+      <p class="loose-body">Friday&rsquo;s 3&ndash;3.5 hour range is a Lead — synthesized from route and mileage, not one live-traffic source. Sunday&rsquo;s return drive wasn&rsquo;t separately estimated this pass; assume a similar range and check traffic morning-of both days before locking departure times.</p>
+    </div>
+    <div class="loose-col rust">
+      <div class="loose-chip">Hours &amp; sourcing to verify</div>
+      <p class="loose-body">Merrymead Farm&rsquo;s early-September hours aren&rsquo;t confirmed — its site and reviews back the stop itself, not its September calendar. Parkside Place Park (North Wales) is sourced from a single aggregator — worth a second check if it&rsquo;s meant to replace Kids Castle/Peace Valley rather than sit as backup. Pineville Tavern&rsquo;s Diners, Drive-Ins and Dives claim is only secondary-sourced (a local radio writeup, not Food Network itself).</p>
+    </div>
+    <div class="loose-col green">
+      <div class="loose-chip">Final pass before travel</div>
+      <p class="loose-body">Whether Tom&rsquo;s brother from Lancaster joins Saturday at the parents&rsquo; house isn&rsquo;t locked — confirm with Sam and Cris closer to the date. If Sunday&rsquo;s departure slides past noon, double-check Graeme Park&rsquo;s Keith House tour window (Sun 12&ndash;4pm, Living History Sundays) is still running.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>Advisory / not booked &mdash; reconfirm hours before travel</div>
+    <div>Alexandria &rarr; Warrington/Horsham</div>
+  </div>
+
+</body>
+</html>
