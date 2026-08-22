@@ -526,6 +526,29 @@ body::before {
 .theme-pizza .report-file-desc { color: #d3b48f; }
 .theme-pizza .report-file-arrow { color: #d3b48f; }
 .theme-pizza .report-file-link:hover .report-file-arrow { color: #e2b039; }
+
+/* ── Museum vitrine / LEGO Habitat theme ────────────────── */
+.theme-habitat .report-card,
+.theme-habitat .report-card-multi {
+  background: rgba(10,9,7,0.94);
+  border-color: #6b4a2e;
+}
+.theme-habitat .report-card:hover {
+  border-color: #e2a03f;
+}
+.theme-habitat .report-card-bar {
+  background: linear-gradient(90deg, #d97148, #e2a03f, #8a9a6e);
+}
+.theme-habitat .report-name { color: #f5ece0; }
+.theme-habitat .report-desc { color: #c2ab8e; }
+.theme-habitat .report-meta { color: #c2ab8e; }
+.theme-habitat .report-files { border-top-color: #6b4a2e; }
+.theme-habitat .report-file-link { border-bottom-color: #6b4a2e; }
+.theme-habitat .report-file-link:hover { background: rgba(226,160,63,0.08); }
+.theme-habitat .report-file-name { color: #f5ece0; }
+.theme-habitat .report-file-desc { color: #c2ab8e; }
+.theme-habitat .report-file-arrow { color: #c2ab8e; }
+.theme-habitat .report-file-link:hover .report-file-arrow { color: #e2a03f; }
 </style>
 </head>
 <body>
@@ -698,6 +721,19 @@ const REPORTS = [
     files: [
       { label: 'Field Checklist', desc: 'Passport-style tried/want-to-try checklist, region route map', file: '/static/reports/regional-pizza-styles-factsheet.html', icon: '🍕' },
       { label: 'Full Reference Guide', desc: 'Complete history, vault candidates, tiered sources per style', file: '/static/reports/regional-pizza-styles-report.html', icon: '📖' },
+    ]
+  },
+  {
+    topic: 'Hobby',
+    hideTopicHeader: true,
+    name: 'LEGO Minifigure Habitats',
+    desc: 'The 8×8 AFOL diorama micro-format — origin, the five design principles, advanced stacking technique, 2026 challenge culture, and LEGO Group\'s own (limited) crossover',
+    date: 'Aug 2026',
+    icon: '🏠',
+    theme: 'habitat',
+    files: [
+      { label: 'Field Reference', desc: 'Interlock-mechanism diagram, five principles, origin timeline, sourcing tiers', file: '/static/reports/lego-minifigure-habitats-factsheet.html', icon: '🧱' },
+      { label: 'Full Reference Guide', desc: 'Numbered sections, tiered sources, captioned reference photos', file: '/static/reports/lego-minifigure-habitats-report.html', icon: '📖' },
     ]
   },
 ];

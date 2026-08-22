@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f5efe1;color:#221c14;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGO Minifigure Habitats: A Full Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{color-scheme:light;background:#f5efe1!important;color:#221c14!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Newsreader',Georgia,serif;font-size:17px;line-height:1.75;background:#f5efe1;color:#221c14;max-width:820px;margin:0 auto;padding:56px 40px 96px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+
+/* tokens: amber #a8741f · terracotta #9c4b2a · sage #4f6b45 · slate #3f5f74 · ink #221c14 · paper #f5efe1 */
+
+/* COVER */
+.cover{border-top:4px solid #221c14;border-bottom:1px solid #d9cbac;padding:32px 0 28px;margin-bottom:48px}
+.cover-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#9c4b2a;margin-bottom:12px}
+.cover h1{font-size:2.1rem;font-weight:700;line-height:1.2;color:#221c14;margin-bottom:10px}
+.cover h1 em{font-style:italic;font-weight:500;color:#4f6b45}
+.cover-subtitle{font-size:1rem;color:#5a5040;font-style:italic;margin-bottom:20px;max-width:64ch}
+.cover-meta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;color:#8a7a5c;line-height:2.2;border-top:1px solid #d9cbac;padding-top:14px;margin-top:14px}
+
+/* TOC */
+.toc{background:#fbf8f0;border:1px solid #d9cbac;padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#9c4b2a;margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted #d9cbac;font-size:.88rem}
+.toc-item:last-child{border-bottom:none}
+.toc-section{color:#221c14}
+.toc-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:#9c4b2a}
+
+/* SECTION STRUCTURE */
+.section{margin-bottom:56px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:#9c4b2a;flex-shrink:0}
+.section-rule{height:1px;background:#d9cbac;flex:1}
+h2{font-family:'Newsreader',serif;font-size:1.5rem;font-weight:700;color:#221c14;margin-bottom:14px;line-height:1.25}
+h3{font-family:'Newsreader',serif;font-size:1.08rem;font-style:italic;font-weight:600;color:#4f6b45;margin:26px 0 9px}
+p{color:#221c14;margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+p strong{color:#221c14}
+em{font-style:italic}
+
+/* CALLOUT */
+.callout{border-left:4px solid #4f6b45;background:#eef1ea;padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:#221c14;margin:0;font-size:.96rem;line-height:1.68;max-width:66ch}
+.callout cite{display:block;font-family:"IBM Plex Mono",monospace;font-style:normal;font-size:.72rem;color:#5a6e53;margin-top:8px}
+
+/* DETAIL LIST / TABLE ROWS */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:170px 1fr;gap:0;border-bottom:1px solid #ece3cf;padding:12px 0;font-size:.9rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:'Newsreader',serif;font-weight:700;color:#4f6b45;line-height:1.45;padding-right:16px}
+.detail-body{color:#221c14;line-height:1.68}
+.detail-body strong{color:#221c14}
+
+/* SPEC PANEL (standard format numbers) */
+.spec-panel{border:1px solid #221c14;background:#fbf8f0;margin:20px 0;display:grid;grid-template-columns:repeat(2,1fr)}
+.spec-item{padding:14px 20px;border-right:1px dashed #d9cbac;border-bottom:1px dashed #d9cbac}
+.spec-item:nth-child(2n){border-right:none}
+.spec-k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8a7a5c;margin-bottom:4px}
+.spec-v{font-size:.92rem;color:#221c14;line-height:1.5}
+
+/* PRINCIPLE LIST */
+.principle-list{margin:18px 0}
+.principle-item{border:1px solid #221c14;background:#fbf8f0;padding:16px 20px;margin-bottom:12px}
+.principle-item:last-child{margin-bottom:0}
+.principle-tag{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#a8741f;margin-bottom:6px}
+.principle-item h3{margin:0 0 6px;color:#9c4b2a;font-style:normal;font-weight:700}
+.principle-item p{font-size:.93rem;margin-bottom:0}
+
+/* LADDER TABLE */
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.87rem;background:#fbf8f0;border:1px solid #d9cbac}
+.data-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#221c14;background:#ece3cf;border-bottom:2px solid #b3a37c;padding:9px 12px;text-align:left}
+.data-table td{padding:9px 12px;border-bottom:1px solid #ece3cf;color:#221c14;vertical-align:top;line-height:1.5}
+.data-table tr:last-child td{border-bottom:none}
+
+/* VAULT / CARD LIST (challenges, LEGO connection) */
+.vault-list{margin:18px 0}
+.vault-entry{border:1px solid #221c14;background:#fbf8f0;padding:18px 22px;margin-bottom:14px}
+.vault-entry:last-child{margin-bottom:0}
+.vault-entry-tag{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#a8741f;margin-bottom:6px;display:flex;justify-content:space-between;gap:10px}
+.vault-entry h3{margin:0 0 6px;color:#9c4b2a;font-style:normal;font-weight:700}
+.vault-entry p{font-size:.93rem;margin-bottom:0}
+.vault-entry .vquote{font-style:italic;font-size:.88rem;color:#4f6b45;margin-top:10px;border-top:1px dashed #d9cbac;padding-top:10px}
+
+/* CONFIDENCE FLAG INLINE */
+.flag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:2px}
+.flag-v{background:#e3ecdf;color:#4f6b45;border:1px solid #4f6b45}
+.flag-m{background:#f3e6cf;color:#a8741f;border:1px solid #a8741f}
+.flag-u{background:#f2ded3;color:#9c4b2a;border:1px solid #9c4b2a}
+
+/* CONFIDENCE / TIERS BLOCK */
+.confidence{border:1.5px solid #221c14;background:#fbf8f0;margin:22px 0}
+.confidence-head{background:#221c14;color:#f5efe1;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.confidence-body{padding:16px 20px}
+.conf-item{border-left:4px solid #a8741f;padding:8px 14px;margin-bottom:12px;background:#f5efe1}
+.conf-item:last-child{margin-bottom:0}
+.conf-item.bad{border-left-color:#9c4b2a}
+.conf-item.good{border-left-color:#4f6b45}
+.conf-item .lbl{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#a8741f;display:block;margin-bottom:4px}
+.conf-item.bad .lbl{color:#9c4b2a}
+.conf-item.good .lbl{color:#4f6b45}
+.conf-item p{font-size:.86rem;margin:0;max-width:none}
+
+/* BUILDER CREDIT LIST */
+.credit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 20px;margin:18px 0;font-size:.86rem}
+.credit-grid div{padding:5px 0;border-bottom:1px dotted #ece3cf}
+.credit-grid b{color:#221c14}
+
+/* PHOTO REFERENCES (external, rights-unresolved — captioned, not presented as cleared assets) */
+.figure-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.figure{border:1px solid #221c14;background:#fbf8f0;padding:12px;margin:20px 0}
+.figure-row .figure{margin:0}
+.figure img{width:100%;height:200px;object-fit:cover;display:block;border:1px solid #d9cbac;background:#ece3cf}
+.figure-cap{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:#5a5040;margin-top:9px;line-height:1.65}
+.figure-cap b{color:#221c14}
+.figure-cap a{color:#9c4b2a;word-break:break-all}
+.figure-rights{font-size:.62rem;color:#9c4b2a;margin-top:5px;font-style:italic;line-height:1.5}
+
+/* SOURCES SECTION */
+.sources-section{margin-top:56px;padding-top:28px;border-top:2px solid #221c14}
+.source-group{margin-bottom:28px}
+.source-group-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#9c4b2a;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #d9cbac}
+.source-group-note{font-size:.78rem;color:#8a7a5c;font-style:italic;margin-bottom:12px}
+.source-item{font-size:.87rem;color:#221c14;line-height:1.65;padding:6px 0;border-bottom:1px dotted #ece3cf}
+.source-item:last-child{border-bottom:none}
+.source-item em{font-style:italic}
+
+/* FOOTER */
+.footer{margin-top:56px;padding-top:20px;border-top:1px solid #d9cbac;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:#8a7a5c;text-align:center;line-height:2.2}
+
+@media(max-width:640px){
+  body{padding:28px 18px 64px;font-size:16px}
+  .cover h1{font-size:1.6rem}
+  .detail-row{grid-template-columns:1fr;gap:4px}
+  .detail-label{padding-right:0}
+  .spec-panel{grid-template-columns:1fr}
+  .spec-item{border-right:none}
+  .credit-grid{grid-template-columns:1fr}
+  .data-table{width:auto;min-width:520px;display:block;overflow-x:auto}
+  .figure-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Full Reference Guide &middot; Hobby &amp; Fan-Culture Research &middot; Compiled August 2026</div>
+  <h1>LEGO Minifigure Habitats<br><em>A Full Reference Guide</em></h1>
+  <div class="cover-subtitle">The 8&times;8 diorama micro-format that lives almost entirely inside Instagram AFOL culture: where it actually came from, the format's one hard rule and its interlock mechanism, the five design principles that function as its shared rulebook, the advanced technique for seamless stacks, the challenge culture running right now, and the two real (but unequally weighted) points of contact with The LEGO Group itself.</div>
+  <div class="cover-meta">
+    Compiled: August 2026 &nbsp;&middot;&nbsp; Scope: the minifigure-habitat diorama genre &mdash; a fan format, not an official LEGO Group product line<br>
+    Sourcing: AFOL blogs (BrickNerd, The Rambling Brick, The Brothers Brick), Instagram (BrickFamBuilds), and LEGO Party! developer press materials<br>
+    Companion document: Field Reference (lego-minifigure-habitats-factsheet.html)
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><span class="toc-section">1. What the Genre Is</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item"><span class="toc-section">2. Origin</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item"><span class="toc-section">3. The Standard Format</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item"><span class="toc-section">4. The Five Design Principles</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item"><span class="toc-section">5. Advanced Technique &mdash; Integrated Habitat Stacks</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">6. Challenge Culture (2026)</span><span class="toc-num">&sect; 06</span></div>
+  <div class="toc-item"><span class="toc-section">7. LEGO Group's Relationship to the Trend</span><span class="toc-num">&sect; 07</span></div>
+  <div class="toc-item"><span class="toc-section">8. Named Builders Worth Following</span><span class="toc-num">&sect; 08</span></div>
+  <div class="toc-item"><span class="toc-section">9. Sourcing Confidence Assessment</span><span class="toc-num">&sect; 09</span></div>
+  <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
+</div>
+
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
+  <h2>What the Genre Is</h2>
+
+  <p>"Minifigure habitats" (usually just "habitats") are a fan-driven diorama micro-format: a tiny scene, typically built around a single minifigure, inside a tightly constrained footprint &mdash; most commonly an 8&times;8 stud plate. It is not an official LEGO Group product line; it emerged and continues to live almost entirely within Instagram-based Adult Fan of LEGO (AFOL) challenge culture.</p>
+
+  <p>Josh Parkinson, writing on BrickNerd, frames the format memorably in "Skillful Habitats: The Five Keys To Building Small": habitats are &ldquo;the haiku of LEGO building: easy to dismiss, but you can fit worlds inside its small structure.&rdquo;</p>
+
+  <h3>Terminology</h3>
+  <p>The wider hobby uses a rough size hierarchy to talk about scenes like this &mdash; useful to have straight before going further:</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Vignette</span><span class="detail-body">The smallest scene format in the hierarchy.</span></div>
+    <div class="detail-row"><span class="detail-label">Bignette</span><span class="detail-body">Larger than a vignette, smaller than a diorama.</span></div>
+    <div class="detail-row"><span class="detail-label">Diorama</span><span class="detail-body">The largest scene format in the hierarchy.</span></div>
+    <div class="detail-row"><span class="detail-label">Habitat</span><span class="detail-body">Functions less as a size category and more as a description of a themed, enclosed environment built for a minifigure &mdash; overlapping with vignette/bignette sizing in practice, but named for what it depicts, not how big it is.</span></div>
+    <div class="detail-row"><span class="detail-label">MOC</span><span class="detail-body">"My Own Creation" &mdash; the umbrella AFOL term for any original, non-instruction build, of which habitats are one specific sub-genre.</span></div>
+    <div class="detail-row"><span class="detail-label">MILS</span><span class="detail-body">Modular Integrated Landscaping System &mdash; 32&times;32 baseplates with Technic-pin, profile-matched edges for collaborative convention-floor terrain layouts. Worth distinguishing from habitats despite the shared "standardized module that connects to others" idea: MILS is a different, larger-scale genre.</span></div>
+  </div>
+</div>
+
+
+<!-- SECTION 2: ORIGIN -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
+  <h2>Origin</h2>
+
+  <p>The habitat format's origin is better documented than commonly assumed, though the chain of custody from template to trend rests mainly on search-engine snippets rather than a firsthand read of the source blogs &mdash; several returned 403 errors during this research pass. Treat the sequence below as moderately, not fully, corroborated, with the exception of the two points marked <span class="flag flag-v">Verified</span>.</p>
+
+  <div class="vault-list">
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>2016</span><span class="flag flag-m">Moderate</span></div>
+      <h3>The Template &mdash; Handoko Setyawan</h3>
+      <p>LEGO builder <strong>Handoko Setyawan</strong> (Flickr handle "Pangeran Panda," Sydney-based) posts an 8&times;8 minifigure habitat <em>template</em> to Flickr in 2016, in an album titled "Minifig Habitat &ndash; Template." The Flickr album title itself was directly confirmed; the broader chain around it converged across independent searches but rests on snippets. The album's photos are marked All Rights Reserved and none is individually distinguished as "the" template shot &mdash; not reproduced in this guide for that reason; see the image note at the end of &sect; 09.</p>
+    </div>
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>2019&ndash;early 2020</span><span class="flag flag-m">Moderate</span></div>
+      <h3>The Rambling Brick Picks It Up</h3>
+      <p>The blog <strong>The Rambling Brick</strong> (founded Jan 30, 2016) runs habitat-building competitions on Setyawan's template: a "Disney Minifigure Habitat Challenge" in May 2019 (33 entries, 22 builders), a Series 19 Collectible Minifigures habitat competition in Sept&ndash;Oct 2019 (30+ entries, &asymp;20 builders), and a "Hero Habitats" competition in early 2020 &mdash; described by Rambling Brick as the last of its habitat-specific challenges before the format moved into Jen/BrickFamBuilds' orbit.</p>
+    </div>
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>October 2020</span><span class="flag flag-v">Verified</span></div>
+      <h3>Jen (BrickFamBuilds) Builds the Instagram Culture</h3>
+      <p>Jen of BrickFamBuilds (@brickfambuilds) built the format into the recurring Instagram challenge culture that dominates today, starting with a Halloween-themed challenge in October 2020. In her own words:</p>
+      <p class="vquote">&ldquo;I was first inspired to host a habitat challenge back in October 2020 because Halloween was approaching and I wanted to combine my love of all things spooky and my recent obsession with habitat building.&rdquo;</p>
+    </div>
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>2021</span><span class="flag flag-v">Verified</span></div>
+      <h3>Scale of Participation</h3>
+      <p>By 2021, participation in Jen's various challenges had reached <strong>2,605 habitats from 330 builders</strong> &mdash; the clearest evidence that the format had moved from a niche template into a genuine recurring community practice.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 3: STANDARD FORMAT -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
+  <h2>The Standard Format</h2>
+
+  <p>An 8&times;8 stud plate base, walls roughly 8 bricks high with tiles capping the top, and an interlocking mechanism using alternating single-stud overhangs (one side overhangs left, the next overhangs right) so habitats stack and connect edge-to-edge with others built to the same spec. The back is left unfinished, since it's normally hidden in a stack.</p>
+
+  <div class="spec-panel">
+    <div class="spec-item"><div class="spec-k">Base footprint</div><div class="spec-v">8&times;8 studs &mdash; the format's one genuinely fixed rule</div></div>
+    <div class="spec-item"><div class="spec-k">Wall height</div><div class="spec-v">&asymp;8 bricks, tile-capped</div></div>
+    <div class="spec-item"><div class="spec-k">Interlock</div><div class="spec-v">Alternating single-stud overhang, edge to edge</div></div>
+    <div class="spec-item"><div class="spec-k">Back face</div><div class="spec-v">Left unfinished &mdash; normally hidden once stacked</div></div>
+  </div>
+
+  <div class="callout">
+    <p>Two additional, more granular claims turned up in this research but could not be independently verified against source text this pass: that the 8-brick wall height splits into two distinct 4-brick sections, and that "messy backs" function as a specific, named in-joke around the final photo posted to Instagram. Both are presented here with that hedge rather than folded into the confirmed spec above &mdash; see &sect; 09.</p>
+  </div>
+
+  <div class="figure">
+    <img src="https://images.squarespace-cdn.com/content/v1/51967abae4b0fe8d0161031f/ca05c77c-fe46-4cd7-9721-62f44fb3b206/habitat-stack-example.jpeg" alt="A stack of interlocking minifigure habitat modules, photographed by BrickBuiltJosh, illustrating the alternating-overhang connection described above." loading="lazy">
+    <div class="figure-cap"><b>BrickBuiltJosh</b> (Josh Parkinson) &mdash; the original 2022 Disney Habitat Challenge stack, used by BrickNerd itself to illustrate this exact interlocking mechanism. <a href="https://images.squarespace-cdn.com/content/v1/51967abae4b0fe8d0161031f/ca05c77c-fe46-4cd7-9721-62f44fb3b206/habitat-stack-example.jpeg" target="_blank" rel="noopener">Source image (BrickNerd)</a></div>
+    <div class="figure-rights">Image usage rights not independently cleared for this guide &mdash; shown at reduced size for private household reference only, with builder credit and source link. See &sect; 09 for the full note.</div>
+  </div>
+</div>
+
+
+<!-- SECTION 4: FIVE PRINCIPLES -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
+  <h2>The Five Design Principles</h2>
+
+  <p>From BrickNerd's "Skillful Habitats: The Five Keys To Building Small" by Josh Parkinson (BrickBuiltJosh) &mdash; the closest thing this genre has to a shared rulebook, and directly, firsthand sourced. <span class="flag flag-v">Verified</span></p>
+
+  <div class="principle-list">
+    <div class="principle-item">
+      <div class="principle-tag">Principle 1</div>
+      <h3>Color</h3>
+      <p>Restrict to 2&ndash;3 dominant colors, with grey/black/white as permitted neutrals; shade variation within the palette (not new hues) creates depth. &ldquo;The more you can hone your color palette, the easier it will be to create a striking creation.&rdquo;</p>
+    </div>
+    <div class="principle-item">
+      <div class="principle-tag">Principle 2</div>
+      <h3>Focus</h3>
+      <p>Clean, uncluttered composition &mdash; &ldquo;Keep it simple, AFOL.&rdquo; The minifigure or central subject stays undistracted by competing detail.</p>
+    </div>
+    <div class="principle-item">
+      <div class="principle-tag">Principle 3</div>
+      <h3>Texture</h3>
+      <p>At 8&times;8 scale, &ldquo;every single stud counts.&rdquo; Builders lean on plates, minifig accessories, printed/stickered tiles, and SNOT (studs-not-on-top) techniques for fine detail without eating disproportionate visual space.</p>
+    </div>
+    <div class="principle-item">
+      <div class="principle-tag">Principle 4</div>
+      <h3>Composition ("Clump and Contrast")</h3>
+      <p>Group detail into distinct clumps rather than scattering it evenly; use color/light/texture contrast to direct the eye.</p>
+    </div>
+    <div class="principle-item">
+      <div class="principle-tag">Principle 5</div>
+      <h3>Story</h3>
+      <p>Favor a captured narrative moment (mid-action, turned away, interacting with another figure) over a static pose, sometimes reinforced with built-in lighting for cinematic effect.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 5: ADVANCED TECHNIQUE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
+  <h2>Advanced Technique &mdash; Integrated Habitat Stacks</h2>
+
+  <p>BrickNerd's "Integrated Habitats: The Art of the Seamless Stack" (Josh Parkinson) describes a progression beyond the standard single-stud-overhang interlock, where builders blur the boundary between adjacent habitats entirely &mdash; &ldquo;integrating and even extending the habitats as they stack together&rdquo; to the point where &ldquo;it can be hard to tell if it's even a stack of habitats anymore.&rdquo; <span class="flag flag-v">Verified</span></p>
+
+  <table class="data-table">
+    <tr><th>Level</th><th>Name</th><th>What Changes</th></tr>
+    <tr><td>1</td><td>Framing / Consistency</td><td>Shared color and window styling across a stack.</td></tr>
+    <tr><td>2</td><td>Integrated New Look</td><td>Unified thematic architecture ties the modules together.</td></tr>
+    <tr><td>3</td><td>Blurred Edges</td><td>Extensions, irregular shapes, and landscape elements bridge habitats.</td></tr>
+    <tr><td>4</td><td>Radical Reorientation</td><td>Interiors built alongside exteriors; standard stacking orientation rotated.</td></tr>
+    <tr><td>5</td><td>360&deg; Designs</td><td>Interior and exterior displayed simultaneously.</td></tr>
+  </table>
+
+  <p>Named techniques and parts recurring across this progression: turntable bases, Technic pins for secure connections, clip-based connectors with central risers, wedge-shaped bridging pieces, anti-studs for paneled detail, and overhanging plates/tiles to disguise the square base outline.</p>
+
+  <div class="figure-row">
+    <div class="figure">
+      <img src="https://images.squarespace-cdn.com/content/v1/51967abae4b0fe8d0161031f/c6c5f539-a233-4228-93bb-daaf0cfe88e3/habitat-connector-diagram.jpg" alt="BrickNerd's own technical diagram of the clip-based habitat connector system with central risers." loading="lazy">
+      <div class="figure-cap"><b>BrickNerd</b> &mdash; connector diagram from "Integrated Habitats: The Art of the Seamless Stack," showing the clip-based connector / central-riser system named above. <a href="https://images.squarespace-cdn.com/content/v1/51967abae4b0fe8d0161031f/c6c5f539-a233-4228-93bb-daaf0cfe88e3/habitat-connector-diagram.jpg" target="_blank" rel="noopener">Source image (BrickNerd)</a></div>
+      <div class="figure-rights">Rights not cleared &mdash; private reference only. See &sect; 09.</div>
+    </div>
+    <div class="figure">
+      <img src="https://images.squarespace-cdn.com/content/v1/51967abae4b0fe8d0161031f/e34ac6d4-194d-45b1-9d76-4f0f03895fb3/gothgirlbricks.jpg" alt="A large haunted-house habitat stack by GothGirlBricks (2024), with interior cross-sections visible alongside the exterior." loading="lazy">
+      <div class="figure-cap"><b>GothGirlBricks</b> &mdash; large haunted-house stack (2024) with interior cross-sections shown alongside the exterior, an example of Level 4&ndash;5 on the ladder above. <a href="https://images.squarespace-cdn.com/content/v1/51967abae4b0fe8d0161031f/e34ac6d4-194d-45b1-9d76-4f0f03895fb3/gothgirlbricks.jpg" target="_blank" rel="noopener">Source image (BrickNerd)</a></div>
+      <div class="figure-rights">Rights not cleared &mdash; private reference only. See &sect; 09.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>A follow-up article, "Next-Level Habitats: Creative Ways to Break Out of the Corner" (also Josh Parkinson), exists on BrickNerd and reportedly covers further variations &mdash; curving/angling backs, outward-facing scenes, wall omission, non-minifigure subjects, resizing up/down, and underwater/underground/space settings. Its existence and author are confirmed; its specific content could not be independently accessed this research pass and should be treated as an unconfirmed lead, not a settled part of this guide.</p>
+  </div>
+</div>
+
+
+<!-- SECTION 6: CHALLENGE CULTURE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 06</span><div class="section-rule"></div></div>
+  <h2>Challenge Culture (2026)</h2>
+
+  <p>The genre lives almost entirely inside recurring Instagram challenges rather than any official venue. Three are active as of this writing, all moderately (not firsthand) sourced. <span class="flag flag-m">Moderate</span></p>
+
+  <div class="vault-list">
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>Disney Habitat Challenge</span><span class="flag flag-m">Moderate</span></div>
+      <h3>The Largest Annual Habitat Challenge</h3>
+      <p>Co-hosted by Jen (BrickFamBuilds) and TrickyBricks (Flynn De Marco and Richard Board) &mdash; recognized LEGO fan media with a regular YouTube show.</p>
+    </div>
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>Pride Habitat Challenge</span><span class="flag flag-m">Moderate</span></div>
+      <h3>An Active, Distinct Annual Challenge</h3>
+      <p>Hosted by Simon &amp; Dan (@twogayafols). The Brothers Brick covered the 2026 edition (#pridehabitats2026) in a July 1, 2026 feature.</p>
+    </div>
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>2-Week Hobby Habitat Challenge</span><span class="flag flag-m">Moderate</span></div>
+      <h3>TrickyBricks' Recurring Challenge</h3>
+      <p>A separate, TrickyBricks-run recurring challenge on its own cadence, distinct from the Disney and Pride challenges above.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 7: LEGO GROUP CONNECTION -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 07</span><div class="section-rule"></div></div>
+  <h2>LEGO Group's Relationship to the Trend</h2>
+
+  <p>No official, ratified LEGO Group habitat product line or set exists. But two notable connections are worth documenting, at unequal weight.</p>
+
+  <div class="vault-list">
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>LEGO Party! (video game)</span><span class="flag flag-v">Verified</span></div>
+      <h3>The Clearest Official Crossover</h3>
+      <p><strong>LEGO Party!</strong> (launched Sept 30, 2025, PS5/PS4/Xbox/Switch/PC) was built by SMG Studio in direct collaboration with The LEGO Group, using only "legal build" LEGO-brick constructions throughout. Its achievement icons are explicitly styled after the minifigure habitat format (8&times;8 stud isometric dioramas), mostly designed by Lewis Meeny (@built_bricks). This is the clearest documented case of the habitat format crossing into an official LEGO Group-collaborated product.</p>
+      <p class="vquote">&ldquo;The habitat format is something I always loved seeing at various LEGO shows as it's a format that distills down the builds to the core creative use of parts.&rdquo; &mdash; Ashley Ringrose, SMG Studio founder</p>
+    </div>
+    <div class="vault-entry">
+      <div class="vault-entry-tag"><span>LEGO CMF Series 27 tie-in article</span><span class="flag flag-v">Verified</span></div>
+      <h3>BrickNerd's Own Creative Choice, Not an Official Statement</h3>
+      <p>Dave Schefcik's BrickNerd piece, featuring builder ABrickDreamer (Davide Sacramati), happened to take habitat form. LEGO Group supplied product to BrickNerd for this coverage, but the habitat framing was the AFOL media outlet's own creative choice &mdash; not an official LEGO Group statement on the genre itself. Worth documenting, but it shouldn't be read as carrying the same weight as the LEGO Party! collaboration above.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 8: BUILDERS -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 08</span><div class="section-rule"></div></div>
+  <h2>Named Builders Worth Following</h2>
+
+  <p>Format originator and LEGO Party! credits are called out specifically below; the rest is the wider builder community named across the coverage this guide draws on.</p>
+
+  <div class="detail-list" style="margin-bottom:8px">
+    <div class="detail-row"><span class="detail-label">Format originator</span><span class="detail-body"><strong>Handoko Setyawan</strong> ("Pangeran Panda")</span></div>
+    <div class="detail-row"><span class="detail-label">LEGO Party! icons</span><span class="detail-body"><strong>Lewis Meeny</strong> (@built_bricks)</span></div>
+    <div class="detail-row"><span class="detail-label">Instagram-era founder</span><span class="detail-body"><strong>Jen</strong> (BrickFamBuilds)</span></div>
+  </div>
+
+  <div class="credit-grid">
+    <div><b>TrickyBricks</b> &mdash; Flynn De Marco &amp; Richard Board</div>
+    <div><b>Dana Knudson</b> &mdash; troublesbricking</div>
+    <div><b>Caz Mockett</b></div>
+    <div><b>lego_nano_1</b></div>
+    <div><b>Thomas</b> &mdash; minimalbricks</div>
+    <div><b>Matticus Bricks</b></div>
+    <div><b>Yabs Lee</b> &mdash; brickapal00za</div>
+    <div><b>Catrin Johnson</b> &mdash; simplelovelyuseful</div>
+    <div><b>Anabelle</b> &mdash; brickswhynot</div>
+    <div><b>Lisa Fasciglione</b></div>
+    <div><b>Taylor</b> &mdash; bricksandchaos</div>
+    <div><b>The Plastic Wanderer</b> &mdash; Ethan</div>
+    <div><b>Larry Builds</b></div>
+    <div><b>Boudewijn Danser</b></div>
+    <div><b>Kristel Whitaker</b></div>
+    <div><b>Jon</b> &mdash; brickcityplanner</div>
+    <div><b>GothGirlBricks</b></div>
+    <div><b>legonano</b> &mdash; Tamami</div>
+    <div><b>ABrickDreamer</b> &mdash; Davide Sacramati</div>
+  </div>
+</div>
+
+
+<!-- SECTION 9: SOURCING CONFIDENCE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 09</span><div class="section-rule"></div></div>
+  <h2>Sourcing Confidence Assessment</h2>
+
+  <p>This guide is community/practitioner-sourced &mdash; AFOL blogs, Instagram, and one developer's press materials &mdash; not peer-reviewed. Confidence varies meaningfully across it, and that variation is preserved deliberately rather than smoothed into a single disclaimer.</p>
+
+  <div class="confidence">
+    <div class="confidence-head">Confidence Tiers Across This Guide</div>
+    <div class="confidence-body">
+      <div class="conf-item good">
+        <span class="lbl">Well-verified &mdash; directly fetched</span>
+        <p>The five design principles (&sect; 04), standard-format basics (&sect; 03, excluding the two hedged details), the integrated-stacks technique and its five levels (&sect; 05), Jen's origin quote (&sect; 02), and the LEGO Party! connection including the Ringrose quote (&sect; 07).</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">Moderately corroborated &mdash; via search snippets, not firsthand-fetched</span>
+        <p>The Setyawan/Rambling Brick origin chain (&sect; 02) &mdash; converged across independent searches, but the source blog pages themselves returned 403 errors this pass. The Disney, Pride, and Hobby Habitat Challenge operational details (&sect; 06).</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Explicitly unconfirmed</span>
+        <p>"Next-Level Habitats" specific content (&sect; 05) &mdash; existence and authorship confirmed, content not independently accessed. The claim that the 8-brick wall height splits into two distinct 4-brick sections, and "messy backs" as a specifically named Instagram convention (both &sect; 03) &mdash; neither could be verified against source text and neither is presented elsewhere in this guide as settled fact.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>A note on the photographs in this guide:</strong> the three images placed above (&sect; 03, &sect; 05) were sourced via BrickNerd's Squarespace-hosted CDN and carry no visible license information in what was fetched; Handoko Setyawan's original 2016 Flickr template album is separately marked All Rights Reserved and was not reproduced here at all, for that reason. None of these images should be treated as cleared for reuse. They're shown at reduced size, individually credited to the builder, and linked back to the source asset, for private household reference on Tom's own reports page &mdash; not for republication elsewhere.</p>
+  </div>
+</div>
+
+
+<!-- SOURCES AND REFERENCES -->
+<div class="sources-section">
+  <div class="section-eyebrow"><span class="section-tag">&sect;</span><div class="section-rule"></div></div>
+  <h2>Sources and References</h2>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 1 &mdash; Directly Fetched / Firsthand-Read Sources</div>
+    <div class="source-group-note">The backbone of this guide's well-verified claims.</div>
+    <div class="source-item">BrickNerd &mdash; Josh Parkinson (BrickBuiltJosh), "Skillful Habitats: The Five Keys To Building Small" &mdash; source for &sect; 04 in full.</div>
+    <div class="source-item">BrickNerd &mdash; Josh Parkinson, "Integrated Habitats: The Art of the Seamless Stack" &mdash; source for &sect; 05, including the connector diagram and GothGirlBricks photo reproduced there.</div>
+    <div class="source-item">BrickFamBuilds (Instagram, @brickfambuilds) &mdash; Jen's own account of the October 2020 origin of her habitat challenges, quoted in &sect; 02.</div>
+    <div class="source-item">LEGO Party! developer press materials (SMG Studio) &mdash; including the Ashley Ringrose quote in &sect; 07.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 2 &mdash; Moderately Corroborated (Search-Snippet Convergence)</div>
+    <div class="source-group-note">Content that converged across independent searches but could not be fetched and read firsthand this pass &mdash; several attempts returned 403 errors.</div>
+    <div class="source-item">The Rambling Brick (founded Jan 30, 2016) &mdash; source for the 2019&ndash;2020 habitat-competition chain in &sect; 02.</div>
+    <div class="source-item">The Brothers Brick &mdash; July 1, 2026 feature on the 2026 Pride Habitat Challenge (#pridehabitats2026), source for part of &sect; 06.</div>
+    <div class="source-item">Flickr &mdash; Handoko Setyawan ("Pangeran Panda"), "Minifig Habitat &ndash; Template" album (2016); album title directly confirmed, surrounding context via snippets. All Rights Reserved &mdash; not reproduced in this guide.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 3 &mdash; Confirmed to Exist, Content Not Independently Verified</div>
+    <div class="source-group-note">Flagged explicitly rather than folded into the guide as settled fact.</div>
+    <div class="source-item">BrickNerd &mdash; Josh Parkinson, "Next-Level Habitats: Creative Ways to Break Out of the Corner." Existence and authorship confirmed; specific content not accessed this pass (see &sect; 05, &sect; 09).</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Additional Coverage</div>
+    <div class="source-group-note">Referenced for the LEGO Group / BrickNerd tie-in discussed in &sect; 07, and for the standard-format photo in &sect; 03.</div>
+    <div class="source-item">BrickNerd &mdash; Dave Schefcik, LEGO Collectible Minifigures Series 27 coverage, featuring builder ABrickDreamer (Davide Sacramati).</div>
+    <div class="source-item">BrickNerd &mdash; "Skillful Habitats," photo credit BrickBuiltJosh (2022 Disney Habitat Challenge stack), reproduced in &sect; 03.</div>
+  </div>
+</div>
+
+<div class="footer">
+  LEGO Minifigure Habitats: A Full Reference Guide &nbsp;&middot;&nbsp; Compiled August 2026<br>
+  A fan-driven format, not an official LEGO Group product line &mdash; sourcing confidence kept visible throughout, not smoothed into a generic disclaimer<br>
+  Photographs credited individually; usage rights not cleared &mdash; private household reference only, see &sect; 09<br>
+  Companion document: Field Reference (lego-minifigure-habitats-factsheet.html)
+</div>
+
+</body>
+</html>
