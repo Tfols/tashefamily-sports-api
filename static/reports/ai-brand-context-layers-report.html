@@ -78,7 +78,6 @@ h1.title .sub{
 
 /* ── layout ─────────────────────────────────────────────── */
 .layout{ display:grid; grid-template-columns: 226px 1fr; gap: 36px; align-items:start; }
-@media (max-width: 880px){ .layout{ grid-template-columns: 1fr; } #toc{ position:static; } }
 
 #toc{
   position: sticky; top: 20px;
@@ -98,6 +97,11 @@ h1.title .sub{
 #toc li a:hover{ color: var(--ink); background: rgba(0,152,201,0.08); }
 #toc li.sub a{ padding-left:16px; font-size:11.5px; color: var(--muted); }
 #toc li.top a{ font-weight:600; color: var(--ink); }
+
+/* Must come after the base #toc rule above — equal-specificity CSS cascades on
+   source order, not media-query position, so declaring this earlier silently
+   loses to the unconditional sticky rule and pins the TOC over content on mobile. */
+@media (max-width: 880px){ .layout{ grid-template-columns: 1fr; } #toc{ position:static; } }
 
 /* ── content ───────────────────────────────────────────── */
 main{ min-width:0; }
