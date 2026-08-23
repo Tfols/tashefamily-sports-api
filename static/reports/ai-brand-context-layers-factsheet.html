@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Reference — Context Layers for Firms: Keeping AI-Generated UI/UX On-Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3efe4;
+    --paper-2:#eae3d1;
+    --ink:#161209;
+    --ink-soft:#4a4030;
+    --rule:rgba(22,18,9,0.22);
+    --rule-soft:rgba(22,18,9,0.12);
+    --cyan:#0098c9;
+    --cyan-deep:#005f7d;
+    --magenta:#d1006b;
+    --magenta-deep:#8f0049;
+    --yellow:#e8b400;
+    --yellow-ink:#5c4600;
+    --white:#fbfaf5;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-font-smoothing:antialiased;}
+  html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact;}
+  body{
+    margin:0;
+    background:#0d0b07;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:28px 12px 60px;
+  }
+  @page{ size:8.5in 11in; margin:0.25in; }
+
+  .sheet{
+    width:100%;
+    max-width:1220px;
+    background:var(--paper);
+    position:relative;
+    border:1.5px solid var(--ink);
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+  }
+  .crop{position:absolute; width:18px; height:18px; pointer-events:none;}
+  .crop::before,.crop::after{content:"";position:absolute;background:var(--ink);}
+  .crop::before{width:100%;height:1.5px;top:50%;}
+  .crop::after{height:100%;width:1.5px;left:50%;}
+  .crop.tl{top:-9px;left:-9px;}
+  .crop.tr{top:-9px;right:-9px;}
+  .crop.bl{bottom:-9px;left:-9px;}
+  .crop.br{bottom:-9px;right:-9px;}
+
+  .frame{ padding:32px clamp(18px,4vw,50px) 22px; }
+
+  /* ── HEADER ─────────────────────────────────────────────── */
+  header{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:16px; margin-bottom:20px; flex-wrap:wrap; gap:14px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--cyan-deep); margin:0 0 8px; font-weight:600;
+  }
+  h1{
+    font-family:'Fraunces', serif; font-weight:600; font-optical-sizing:auto;
+    font-size:clamp(26px,3.6vw,42px); line-height:1.05; margin:0; letter-spacing:-0.01em;
+  }
+  h1 em{ font-style:italic; font-weight:400; color:var(--magenta-deep); }
+  .dwg-meta{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-align:right;
+    color:var(--ink-soft); line-height:1.7; white-space:nowrap;
+  }
+  .dwg-meta b{color:var(--ink);}
+
+  .dek{
+    font-size:14.5px; color:#3d3626; max-width:820px; margin:0 0 24px; line-height:1.55;
+  }
+
+  /* ── KEY FIGURES STRIP ──────────────────────────────────── */
+  .figures{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:28px; }
+  @media (max-width:900px){ .figures{grid-template-columns:repeat(2,1fr);} }
+  .fig{
+    background:var(--white); border:1.5px solid var(--ink); padding:12px 12px 11px;
+    display:flex; flex-direction:column; gap:5px; position:relative;
+  }
+  .fig.t1{ border-left:5px solid var(--cyan); }
+  .fig.t2{ border-left:5px solid var(--magenta); border-style:dashed; border-left-style:solid; }
+  .fig.t3{ border-left:5px solid var(--yellow); border-style:dotted; border-left-style:solid; }
+  .fig .fnum{ font-family:'Fraunces',serif; font-weight:600; font-size:25px; line-height:1; color:var(--ink); }
+  .fig .flab{ font-family:'IBM Plex Mono',monospace; font-size:9.8px; color:var(--ink-soft); line-height:1.35; }
+  .fig .ftier{
+    position:absolute; top:8px; right:8px; font-family:'IBM Plex Mono',monospace;
+    font-size:8px; font-weight:700; letter-spacing:.05em; padding:2px 5px; border-radius:2px;
+  }
+  .fig.t1 .ftier{ background:var(--cyan); color:var(--white); }
+  .fig.t2 .ftier{ background:var(--magenta); color:var(--white); }
+  .fig.t3 .ftier{ background:var(--yellow); color:var(--yellow-ink); }
+
+  /* ── SIGNATURE DIAGRAM: THE CONTEXT STACK ──────────────── */
+  .pipeline{
+    border:1.5px solid var(--ink); background:var(--white); padding:18px 20px 20px;
+    margin-bottom:28px;
+  }
+  .pipe-title{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:14px; padding-bottom:8px; border-bottom:1px dashed var(--rule);
+  }
+  .pipe-title b{ color:var(--ink); }
+  .pipe-row{ display:flex; align-items:stretch; gap:8px; flex-wrap:nowrap; }
+  @media (max-width:960px){ .pipe-row{ flex-wrap:wrap; } }
+  .node{
+    border:1.5px solid var(--ink); background:var(--paper); padding:9px 11px;
+    display:flex; flex-direction:column; gap:3px; justify-content:center; flex:1; min-width:0;
+  }
+  .node .nlab{ font-family:'IBM Plex Mono',monospace; font-size:8.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--cyan-deep); }
+  .node .ntitle{ font-family:'Fraunces',serif; font-weight:600; font-size:13.5px; line-height:1.15; color:var(--ink); }
+  .node .nsub{ font-size:9.8px; color:var(--ink-soft); line-height:1.3; }
+  .node.build{ background:var(--ink); border-color:var(--ink); flex:0 0 92px; align-items:center; text-align:center; }
+  .node.build .ntitle{ color:var(--white); font-size:11px; }
+  .node.build .nsub{ color:#cfc6ac; }
+  .arrow{ display:flex; align-items:center; justify-content:center; flex:0 0 20px; font-size:16px; color:var(--ink-soft); font-weight:700; }
+
+  .pipe-connector{
+    text-align:center; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.04em;
+    color:var(--magenta-deep); margin:10px 0; font-weight:600;
+  }
+  .pipe-connector::before,.pipe-connector::after{ content:"—"; color:var(--rule); margin:0 8px; }
+
+  .ai-row{ gap:10px; }
+  .ai-node{
+    border:1.5px dashed var(--magenta-deep); background:#fbeef4; padding:9px 11px;
+    flex:1; display:flex; flex-direction:column; gap:3px; min-width:0;
+  }
+  .ai-node .nlab{ font-family:'IBM Plex Mono',monospace; font-size:8.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--magenta-deep); }
+  .ai-node .ntitle{ font-family:'Fraunces',serif; font-weight:600; font-size:13px; color:var(--ink); }
+  .ai-node .nsub{ font-size:9.6px; color:var(--ink-soft); line-height:1.3; }
+
+  .output-row{ margin-top:10px; align-items:stretch; }
+  .out-node{
+    flex:1; border:2px solid var(--ink); background:var(--yellow); padding:10px 14px;
+    display:flex; align-items:center; justify-content:center; gap:10px; text-align:center;
+  }
+  .out-node .ntitle{ font-family:'Fraunces',serif; font-weight:700; font-size:15px; color:var(--ink); }
+  .loop-note{
+    flex:0 0 260px; border:1.5px solid var(--ink); background:var(--paper-2); padding:9px 12px;
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--ink-soft); line-height:1.4; display:flex; align-items:center;
+  }
+  .loop-note b{ color:var(--magenta-deep); }
+  @media (max-width:960px){ .output-row{flex-wrap:wrap;} .loop-note{flex:1 1 100%;} }
+
+  /* ── PANELS ─────────────────────────────────────────────── */
+  .panels{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:820px){ .panels{grid-template-columns:1fr;} }
+  .panel{ border:1.5px solid var(--ink); background:var(--white); display:flex; flex-direction:column; }
+  .panel-head{
+    background:var(--ink); color:var(--paper); padding:9px 14px;
+    display:flex; align-items:baseline; gap:9px;
+  }
+  .panel-head .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; background:var(--cyan);
+    color:var(--white); padding:2px 6px; font-weight:700; letter-spacing:.03em;
+  }
+  .panel-head h2{ font-family:'Fraunces',serif; font-size:16px; margin:0; font-weight:600; }
+  .panel-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:11px; }
+
+  .lede{ font-size:12.5px; color:#3d3626; line-height:1.5; border-left:2px solid var(--cyan); padding-left:9px; }
+
+  .block-label{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:5px;
+  }
+  ul.spec{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:5px; }
+  ul.spec li{ font-size:12.4px; line-height:1.42; padding-left:14px; position:relative; color:#221d10; }
+  ul.spec li::before{ content:"—"; position:absolute; left:0; color:var(--ink-soft); }
+  ul.spec li .mini-tier{ font-family:'IBM Plex Mono',monospace; font-size:8.5px; font-weight:700; padding:1px 4px; margin-left:5px; border-radius:2px; white-space:nowrap; }
+  .mt1{ background:var(--cyan); color:var(--white); }
+  .mt2{ background:var(--magenta); color:var(--white); }
+  .mt3{ background:var(--yellow); color:var(--yellow-ink); }
+
+  .gap-note{
+    border:1px dotted var(--yellow-ink); background:#fbf4dc; padding:9px 11px;
+    font-size:11.8px; color:#4a3a06; line-height:1.42;
+  }
+  .gap-note b{ display:block; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; margin-bottom:3px; color:var(--yellow-ink); }
+
+  .slop-specimen{
+    border:2px solid var(--magenta-deep); background:repeating-linear-gradient(135deg, #fbeef4 0 8px, #f6dbe7 8px 16px);
+    padding:10px 12px; display:flex; flex-direction:column; gap:6px;
+  }
+  .slop-specimen .slabel{
+    font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:10px; letter-spacing:.06em; color:var(--magenta-deep);
+  }
+  .slop-mock{
+    background:var(--white); border:1px solid var(--rule); padding:8px 10px; display:flex; flex-direction:column; gap:5px; align-items:center; text-align:center;
+  }
+  .slop-mock .sm-head{ font-family:sans-serif; font-weight:400; font-size:12px; color:#444; }
+  .slop-mock .sm-grad{ width:100%; height:9px; background:linear-gradient(90deg,#6d5bd0,#c084e0); border-radius:2px; }
+  .slop-mock .sm-cards{ display:flex; gap:5px; width:100%; }
+  .slop-mock .sm-cards div{ flex:1; height:16px; border:1px solid #ddd; border-radius:5px; background:#fafafa; }
+
+  .checklist{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px; }
+  .checklist li{ display:flex; gap:8px; align-items:flex-start; font-size:12.4px; line-height:1.4; color:#221d10; }
+  .checklist .cknum{
+    flex:0 0 auto; width:18px; height:18px; border:1.5px solid var(--ink); display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:700; margin-top:1px;
+  }
+
+  .gov-models{ display:flex; gap:6px; }
+  .gov-models div{ flex:1; border:1px solid var(--ink); padding:6px 7px; text-align:center; }
+  .gov-models .gm-name{ font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:700; }
+
+  /* ── SOURCING TIER LEGEND ──────────────────────────────── */
+  .tier-legend{
+    margin-top:22px; border:1.5px solid var(--ink); background:var(--ink); color:var(--paper);
+    padding:14px 18px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+  }
+  @media (max-width:760px){ .tier-legend{grid-template-columns:1fr;} }
+  .tl-item{ display:flex; gap:9px; align-items:flex-start; }
+  .tl-swatch{ flex:0 0 14px; height:14px; margin-top:2px; border:1.5px solid var(--paper); }
+  .tl-item.t1 .tl-swatch{ background:var(--cyan); }
+  .tl-item.t2 .tl-swatch{ background:var(--magenta); border-style:dashed; }
+  .tl-item.t3 .tl-swatch{ background:var(--yellow); border-style:dotted; }
+  .tl-item h4{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; margin:0 0 3px; letter-spacing:.03em; }
+  .tl-item p{ margin:0; font-size:10.8px; color:#d9d0b8; line-height:1.4; }
+
+  /* ── TITLE BLOCK ────────────────────────────────────────── */
+  .titleblock{
+    margin-top:22px; border-top:1.5px solid var(--ink); padding-top:12px;
+    display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; flex-wrap:wrap;
+  }
+  .tb-notes{ font-size:10.6px; color:var(--ink-soft); line-height:1.6; max-width:680px; }
+  .tb-notes b{color:var(--ink);}
+  .tb-grid{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; border:1px solid var(--ink);
+    display:grid; grid-template-columns:repeat(2,auto);
+  }
+  .tb-grid div{ padding:5px 10px; border-right:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+  .tb-grid div:nth-child(2n){border-right:none;}
+  .tb-grid .k{color:var(--ink-soft);}
+  .tb-grid .v{color:var(--ink); font-weight:600;}
+
+  @media (prefers-reduced-motion:no-preference){
+    .fade{ animation: fadeUp .55s ease both; }
+    .fade:nth-child(1){animation-delay:.02s;}
+    .fade:nth-child(2){animation-delay:.07s;}
+    .fade:nth-child(3){animation-delay:.12s;}
+    @keyframes fadeUp{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  }
+
+  @media print{
+    body{ background:var(--paper); padding:0; }
+    .sheet{ box-shadow:none; max-width:none; border:none; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <span class="crop tl"></span><span class="crop tr"></span><span class="crop bl"></span><span class="crop br"></span>
+  <div class="frame">
+
+    <header>
+      <div>
+        <p class="eyebrow">Field Reference — Design Governance in the AI Era</p>
+        <h1>Context Layers for Firms <em>/</em> Keeping AI-Generated UI/UX On-Brand</h1>
+      </div>
+      <div class="dwg-meta">
+        SPEC NO. <b>DTX-01</b><br>
+        SHEET <b>1 OF 1</b> · SCALE <b>NTS</b><br>
+        REV <b>2026-08</b>
+      </div>
+    </header>
+
+    <p class="dek">The traditional design-token pyramid (Primitive → Semantic → Component) is the pre-AI foundation. AI tools don't replace it — they attach a new layer on top that has to be governed on its own terms, or the pyramid's own discipline erodes underneath it. Condensed from vendor, practitioner, and academic sourcing tiered by confidence below; full citations in the companion report.</p>
+
+    <!-- KEY FIGURES -->
+    <div class="figures fade">
+      <div class="fig t1"><span class="ftier">T1</span><span class="fnum">2025.10</span><span class="flab">W3C Design Tokens Format ships Oct 28, 2025 — 24+ orgs incl. Adobe, Google, Meta, Figma, Salesforce</span></div>
+      <div class="fig t1"><span class="ftier">T1</span><span class="fnum">78% / 32%</span><span class="flab">Say AI speeds design work vs. say they can actually rely on its output — Figma 2025 survey, 2,500 respondents</span></div>
+      <div class="fig t2"><span class="ftier">T2</span><span class="fnum">~200 ln</span><span class="flab">Practitioner-consensus ceiling for an AI instruction file before "context rot" sets in</span></div>
+      <div class="fig t3"><span class="ftier">T3</span><span class="fnum">84%</span><span class="flab">Claimed token-adoption rate, up from 56% — single aggregator source, unverified primary survey</span></div>
+      <div class="fig t3"><span class="ftier">T3</span><span class="fnum">−91%</span><span class="flab">Claimed conversion-rate drop for "AI slop" sites — single vendor blog, could not independently verify</span></div>
+    </div>
+
+    <!-- SIGNATURE DIAGRAM -->
+    <div class="pipeline fade">
+      <div class="pipe-title"><b>The Context Stack</b> — where AI-specific layers attach to the pre-AI token pyramid, and how the loop closes</div>
+
+      <div class="pipe-row foundation">
+        <div class="node"><span class="nlab">Foundation</span><span class="ntitle">Primitive</span><span class="nsub">blue-500, space-4</span></div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="nlab">Foundation</span><span class="ntitle">Semantic</span><span class="nsub">action-color, surface-bg</span></div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="nlab">Foundation</span><span class="ntitle">Component</span><span class="nsub">button-bg-primary</span></div>
+        <div class="arrow">→</div>
+        <div class="node build"><span class="ntitle">Style Dictionary</span><span class="nsub">build step</span></div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="nlab">Output</span><span class="ntitle">Platform Tokens</span><span class="nsub">CSS · Swift · Kotlin · Compose</span></div>
+      </div>
+
+      <div class="pipe-connector">AI context layer reads this file — never regenerates it</div>
+
+      <div class="pipe-row ai-row">
+        <div class="ai-node"><span class="nlab">Attaches here</span><span class="ntitle">Instruction File</span><span class="nsub">CLAUDE.md / .cursorrules — principle-based, ~200-line ceiling</span></div>
+        <div class="ai-node"><span class="nlab">Attaches here</span><span class="ntitle">Skill / Agent Context</span><span class="nsub">Progressive disclosure, loaded only when relevant</span></div>
+        <div class="ai-node"><span class="nlab">Attaches here</span><span class="ntitle">Injection Layer</span><span class="nsub">MCP servers, APIs, manifests, RAG pipelines</span></div>
+      </div>
+
+      <div class="pipe-row output-row">
+        <div class="out-node"><span class="ntitle">→ AI-Generated UI/UX</span></div>
+        <div class="loop-note"><span><b>Evaluation &amp; audit loop</b> closes back to the token-of-truth file: token compliance checks, screenshot-diff, human sync — catching drift before it compounds.</span></div>
+      </div>
+    </div>
+
+    <!-- PANELS -->
+    <div class="panels">
+
+      <!-- AI SLOP SPECIMEN -->
+      <section class="panel fade">
+        <div class="panel-head"><span class="tag">✕</span><h2>The "AI Slop" Specimen</h2></div>
+        <div class="panel-body">
+          <p class="lede">Anthropic's own diagnosis: models trained on internet-scale data gravitate toward the statistically most common visual pattern — "distributional convergence" — producing an identifiable aesthetic monoculture. <span class="mini-tier mt1">T1</span></p>
+          <div class="slop-specimen">
+            <span class="slabel">SPECIMEN — DEFAULTS TO NAME AND AVOID</span>
+            <div class="slop-mock">
+              <span class="sm-head">Centered Headline · Subtitle · Two Buttons</span>
+              <div class="sm-grad"></div>
+              <div class="sm-cards"><div></div><div></div><div></div></div>
+            </div>
+          </div>
+          <ul class="spec">
+            <li>Inter, Roboto, Arial, system-ui defaults</li>
+            <li>Indigo-to-purple gradients on white</li>
+            <li>Three rounded cards in a row</li>
+            <li>Generic centered hero: headline + subtitle + two buttons</li>
+          </ul>
+          <div class="gap-note"><b>UNCONFIRMED FIGURE</b>Vendor blog claims AI-slop marketing sites convert 91% worse than higher-quality inventory — not independently verifiable against a primary source. <span class="mini-tier mt3">T3</span></div>
+        </div>
+      </section>
+
+      <!-- AI CONTEXT TOOLKIT -->
+      <section class="panel fade">
+        <div class="panel-head"><span class="tag">◈</span><h2>The AI Context Toolkit</h2></div>
+        <div class="panel-body">
+          <p class="lede">The named, currently-real mechanisms for constraining AI tools to a firm's brand — from strongest to thinnest sourcing.</p>
+          <ul class="spec">
+            <li><b>Anthropic frontend-design Skill</b> — principle-based dimensions, not prescriptive hex codes <span class="mini-tier mt1">T1</span></li>
+            <li><b>Figma AI agent + tokens</b> — matches colors/fonts, not brand "feel" <span class="mini-tier mt1">T1</span></li>
+            <li><b>v0 "Design Systems 2.0"</b> — distills repo/Figma/Storybook into a persistent skill <span class="mini-tier mt1">T1</span></li>
+            <li><b>CLAUDE.md / .cursorrules</b> — concise, testable, reloaded fresh each session <span class="mini-tier mt2">T2</span></li>
+            <li><b>RAG over brand guidelines</b> — concept documented, no named production case study <span class="mini-tier mt3">gap</span></li>
+            <li><b>Fine-tuned UI-layout models</b> — mature for brand voice/text, absent at the layout level <span class="mini-tier mt3">gap</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- GOVERNANCE & DRIFT -->
+      <section class="panel fade">
+        <div class="panel-head"><span class="tag">§</span><h2>Governance &amp; Drift</h2></div>
+        <div class="panel-body">
+          <p class="lede">Governance predates AI and still structures the problem. Curtis's three models <span class="mini-tier mt2">T2</span> — pick one deliberately:</p>
+          <div class="gov-models">
+            <div><div class="gm-name">Standalone</div></div>
+            <div><div class="gm-name">Centralized</div></div>
+            <div><div class="gm-name">Federated</div></div>
+          </div>
+          <p class="block-label" style="margin-top:2px;">Named drift failure modes <span class="mini-tier mt2">T2</span></p>
+          <ul class="spec">
+            <li>Fabricating plausible-but-wrong token names</li>
+            <li>Spacing drift within a single session</li>
+            <li>"Forgetting" decisions between sessions</li>
+            <li>Using component props after they've been renamed</li>
+          </ul>
+          <div class="gap-note"><b>DATED SOURCE, STILL STRUCTURALLY SOUND</b>Brad Frost's 10-step governance workflow predates AI entirely (2019) — prototype → review → document → semver release remains a valid skeleton.</div>
+        </div>
+      </section>
+
+      <!-- SIX-PIECE CHECKLIST -->
+      <section class="panel fade">
+        <div class="panel-head"><span class="tag">✓</span><h2>The Six-Piece Context Layer</h2></div>
+        <div class="panel-body">
+          <p class="lede">What a firm's (or power user's) design context layer should contain, at minimum:</p>
+          <ol class="checklist">
+            <li><span class="cknum">1</span>Frozen, versioned token-of-truth file (W3C-compliant), AI reads but never regenerates</li>
+            <li><span class="cknum">2</span>Concise, principle-based AI instruction file — dimensions to think about, defaults to avoid, not exhaustive values</li>
+            <li><span class="cknum">3</span>Component-assembly constraint — AI restricted to real components, never inventing new ones</li>
+            <li><span class="cknum">4</span>Evaluation/audit loop — linting, screenshot-diff, a short recurring human sync</li>
+            <li><span class="cknum">5</span>A governance model chosen deliberately, not defaulted to</li>
+            <li><span class="cknum">6</span>Explicit ownership + semantic-versioning discipline</li>
+          </ol>
+        </div>
+      </section>
+    </div>
+
+    <!-- SOURCING TIER LEGEND -->
+    <div class="tier-legend fade">
+      <div class="tl-item t1"><span class="tl-swatch"></span><div><h4>TIER 1 — Well-Supported</h4><p>Vendor-primary or independently verified: W3C standard, Anthropic's own Skill docs, Figma's own survey.</p></div></div>
+      <div class="tl-item t2"><span class="tl-swatch"></span><div><h4>TIER 2 — Commercially-Interested, Consistent</h4><p>Drift/DesignOps analysis from vendors and agencies with a stake, but internally consistent with T1 material.</p></div></div>
+      <div class="tl-item t3"><span class="tl-swatch"></span><div><h4>TIER 3 — Thinly-Sourced / Unconfirmed</h4><p>Single-source aggregator figures, or genuine gaps in current practice (no case study found).</p></div></div>
+    </div>
+
+    <!-- TITLE BLOCK -->
+    <div class="titleblock">
+      <div class="tb-notes">
+        <b>Notes.</b> Sourcing spans late-2025 through mid-2026, appropriate for a fast-moving topic, with one clearly dated exception (Frost's 2019 governance piece, flagged above). Full citations, category-tiered references, and worked reasoning are in the companion full report.
+      </div>
+      <div class="tb-grid">
+        <div class="k">DOCUMENT</div><div class="v">Field Reference</div>
+        <div class="k">COMPANION</div><div class="v">Full Reference Guide</div>
+        <div class="k">STATUS</div><div class="v">For internal use</div>
+        <div class="k">SCALE</div><div class="v">Not to scale</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

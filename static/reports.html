@@ -549,6 +549,29 @@ body::before {
 .theme-habitat .report-file-desc { color: #c2ab8e; }
 .theme-habitat .report-file-arrow { color: #c2ab8e; }
 .theme-habitat .report-file-link:hover .report-file-arrow { color: #e2a03f; }
+
+/* ── Spec-sheet / print-registration / Design Tokens theme ── */
+.theme-designtokens .report-card,
+.theme-designtokens .report-card-multi {
+  background: rgba(14,12,7,0.95);
+  border-color: #5c4a23;
+}
+.theme-designtokens .report-card:hover {
+  border-color: #0098c9;
+}
+.theme-designtokens .report-card-bar {
+  background: linear-gradient(90deg, #0098c9, #d1006b, #e8b400);
+}
+.theme-designtokens .report-name { color: #f3efe4; }
+.theme-designtokens .report-desc { color: #c2b696; }
+.theme-designtokens .report-meta { color: #c2b696; }
+.theme-designtokens .report-files { border-top-color: #5c4a23; }
+.theme-designtokens .report-file-link { border-bottom-color: #5c4a23; }
+.theme-designtokens .report-file-link:hover { background: rgba(0,152,201,0.08); }
+.theme-designtokens .report-file-name { color: #f3efe4; }
+.theme-designtokens .report-file-desc { color: #c2b696; }
+.theme-designtokens .report-file-arrow { color: #c2b696; }
+.theme-designtokens .report-file-link:hover .report-file-arrow { color: #0098c9; }
 </style>
 </head>
 <body>
@@ -734,6 +757,19 @@ const REPORTS = [
     files: [
       { label: 'Field Reference', desc: 'Interlock-mechanism diagram, five principles, origin timeline, sourcing tiers', file: '/static/reports/lego-minifigure-habitats-factsheet.html', icon: '🧱' },
       { label: 'Full Reference Guide', desc: 'Numbered sections, tiered sources, captioned reference photos', file: '/static/reports/lego-minifigure-habitats-report.html', icon: '📖' },
+    ]
+  },
+  {
+    topic: 'Business & Design',
+    hideTopicHeader: true,
+    name: 'Context Layers for Firms — Keeping AI-Generated UI/UX On-Brand',
+    desc: 'Design-token architecture meets AI-specific context layers — instruction files, Anthropic\'s frontend-design Skill, governance models, named failure modes, and a practical six-piece context layer, with sourcing tiers kept visible throughout',
+    date: 'Aug 2026',
+    icon: '🎛️',
+    theme: 'designtokens',
+    files: [
+      { label: 'Field Reference', desc: 'Context-stack pipeline diagram, key figures, AI-slop specimen, sourcing tiers', file: '/static/reports/ai-brand-context-layers-factsheet.html', icon: '🎛️' },
+      { label: 'Full Reference Guide', desc: 'Numbered sections, tiered sources, wiki cross-references', file: '/static/reports/ai-brand-context-layers-report.html', icon: '📖' },
     ]
   },
 ];

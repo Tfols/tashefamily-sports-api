@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Context Layers for Firms: Keeping AI-Generated UI/UX On-Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper: #f6f3ea;
+  --paper-2: #efe9d9;
+  --panel: #fbfaf5;
+  --ink: #171208;
+  --ink-soft: #574d38;
+  --border: #d8cfb4;
+  --border-soft: #e5ddc6;
+  --cyan: #0098c9;
+  --cyan-deep: #005f7d;
+  --magenta: #d1006b;
+  --magenta-deep: #8f0049;
+  --yellow: #e8b400;
+  --yellow-ink: #5c4600;
+  --muted: #7a6f57;
+}
+*,*::before,*::after{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", sans-serif;
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.65;
+}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact;}
+
+#shell{ max-width: 1180px; margin:0 auto; padding: 28px 20px 90px; }
+
+/* ── header ─────────────────────────────────────────────── */
+#page-header{
+  display:flex; align-items:center; gap:16px;
+  margin-bottom: 26px; padding-bottom:16px;
+  border-bottom: 1px solid var(--border);
+}
+#back-link{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+  color: var(--muted); letter-spacing:.1em; text-transform:uppercase;
+  text-decoration:none; padding:6px 12px; border:1px solid var(--border); border-radius:4px;
+  flex:0 0 auto; transition: color .15s, border-color .15s;
+}
+#back-link:hover{ color: var(--cyan-deep); border-color: var(--cyan-deep); }
+#page-sub{ font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; }
+
+/* ── hero ───────────────────────────────────────────────── */
+.hero{ margin-bottom: 34px; }
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  color: var(--cyan-deep); margin-bottom:14px; display:flex; align-items:center; gap:10px; font-weight:600;
+}
+.eyebrow::before{ content:""; width:22px; height:1px; background: var(--cyan-deep); }
+h1.title{
+  font-family:"Fraunces",serif; font-weight:600;
+  font-size: clamp(30px, 5vw, 50px); line-height:1.06; letter-spacing:-0.01em;
+  color: var(--ink); margin-bottom:6px;
+}
+h1.title .sub{
+  display:block; font-weight:400; font-style:italic; font-size:0.5em; color: var(--ink-soft); margin-top:8px;
+}
+.dek{
+  max-width: 780px; color: var(--ink-soft); font-size: 14px; line-height:1.7; margin-top:18px;
+}
+.meta-row{
+  display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:20px;
+  font-family:"IBM Plex Mono",monospace; font-size:10.5px; color: var(--muted); letter-spacing:.04em;
+}
+.meta-row b{ color: var(--ink-soft); }
+
+/* ── layout ─────────────────────────────────────────────── */
+.layout{ display:grid; grid-template-columns: 226px 1fr; gap: 36px; align-items:start; }
+@media (max-width: 880px){ .layout{ grid-template-columns: 1fr; } #toc{ position:static; } }
+
+#toc{
+  position: sticky; top: 20px;
+  border:1px solid var(--border); background: var(--panel);
+  border-radius:6px; padding: 16px 16px 18px;
+}
+#toc .toc-label{
+  font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--muted); margin-bottom:10px;
+}
+#toc ol{ list-style:none; display:flex; flex-direction:column; gap:2px; }
+#toc li a{
+  display:block; padding:5px 6px; border-radius:4px;
+  font-size:12px; color: var(--ink-soft); text-decoration:none; line-height:1.4;
+  transition: color .12s, background .12s;
+}
+#toc li a:hover{ color: var(--ink); background: rgba(0,152,201,0.08); }
+#toc li.sub a{ padding-left:16px; font-size:11.5px; color: var(--muted); }
+#toc li.top a{ font-weight:600; color: var(--ink); }
+
+/* ── content ───────────────────────────────────────────── */
+main{ min-width:0; }
+section.block{ margin-bottom: 40px; scroll-margin-top: 20px; }
+
+h2.h1{
+  font-family:"Fraunces",serif; font-weight:600; font-size: 26px; color: var(--ink);
+  display:flex; align-items:baseline; gap:12px; margin-bottom:16px;
+  padding-bottom:10px; border-bottom: 1px solid var(--border);
+}
+h2.h1 .num{
+  font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600; color: var(--cyan-deep);
+  flex:0 0 auto;
+}
+h3.h2{
+  font-family:"Fraunces",serif; font-weight:600; font-size:19px; color: var(--ink);
+  margin: 26px 0 10px; display:flex; align-items:baseline; gap:10px;
+}
+h3.h2 .num{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; color: var(--muted); }
+h4.h3{
+  font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  color: var(--magenta-deep); margin: 18px 0 8px;
+}
+
+p{ margin-bottom: 13px; color: var(--ink); }
+p:last-child{ margin-bottom:0; }
+
+ul.pts{ list-style:none; display:flex; flex-direction:column; gap:9px; margin: 10px 0 16px; }
+ul.pts li{
+  position:relative; padding-left:18px; font-size:14px; line-height:1.6; color: var(--ink);
+}
+ul.pts li::before{ content:"›"; position:absolute; left:0; top:0; color: var(--cyan-deep); font-weight:700; }
+
+/* tier chip, shared visual language with the fact sheet */
+.tier-chip{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; font-weight:700; padding:1px 6px; border-radius:2px; white-space:nowrap; display:inline-block; }
+.t1{ background: var(--cyan); color:#fff; }
+.t2{ background: var(--magenta); color:#fff; }
+.t3{ background: var(--yellow); color: var(--yellow-ink); }
+
+/* finding callout */
+.finding{
+  margin: 16px 0; border:1px solid var(--border); border-left:3px solid var(--cyan);
+  background: var(--panel); border-radius: 0 8px 8px 0; padding: 14px 18px;
+}
+.finding .flabel{
+  font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:10.5px; letter-spacing:.12em;
+  color: var(--cyan-deep); display:block; margin-bottom:6px;
+}
+.finding p{ font-size:13.5px; color: var(--ink); }
+
+/* risk / gap callout */
+.risk{
+  margin:16px 0; border:1px solid #c99a2a; border-left:3px solid var(--yellow);
+  background: #fbf4dc; border-radius:0 8px 8px 0; padding:14px 18px;
+}
+.risk .flabel{
+  font-family:"IBM Plex Mono",monospace; font-weight:700; font-size:10.5px; letter-spacing:.12em;
+  color: var(--yellow-ink); display:block; margin-bottom:6px;
+}
+.risk p{ font-size:13.5px; color:#4a3a06; }
+
+.cite{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; color: var(--muted); margin-top:4px; display:block; }
+
+/* synthesis principles */
+.principles{ display:flex; flex-direction:column; gap:12px; margin-top:12px; }
+.principle{
+  border:1px solid var(--border); background: var(--panel); border-radius:8px; padding:14px 16px;
+  display:grid; grid-template-columns: auto 1fr; gap:14px; align-items:start;
+}
+.principle .pnum{
+  font-family:"Fraunces",serif; font-weight:600; font-size:20px; color: var(--cyan-deep);
+}
+.principle h4{ font-family:"Fraunces",serif; font-size:15px; color: var(--ink); margin-bottom:5px; font-weight:600; }
+.principle p{ font-size:13px; color: var(--ink-soft); margin:0; }
+
+/* checklist reused from fact sheet, quieter here */
+.checklist{ list-style:none; margin:10px 0 16px; display:flex; flex-direction:column; gap:9px; }
+.checklist li{ display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5; color: var(--ink); }
+.checklist .cknum{
+  flex:0 0 auto; width:20px; height:20px; border:1.5px solid var(--ink); border-radius:3px; display:flex; align-items:center; justify-content:center;
+  font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:700; margin-top:1px;
+}
+
+/* gap callout in-line */
+.gapnote{ font-size:12.5px; color:var(--yellow-ink); font-style:italic; }
+
+/* wiki callout box */
+.wikibox{
+  margin:16px 0; border:1px solid var(--border); background: var(--panel); border-radius:8px; padding:14px 18px;
+}
+.wikibox .wlabel{ font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; display:block; }
+.wikibox ul{ list-style:none; display:flex; flex-direction:column; gap:6px; }
+.wikibox ul li{ font-size:13px; color:var(--ink-soft); padding-left:14px; position:relative; }
+.wikibox ul li::before{ content:"·"; position:absolute; left:0; color:var(--cyan-deep); }
+.wikibox code{ font-family:"IBM Plex Mono",monospace; font-size:12px; background:var(--paper-2); padding:1px 4px; border-radius:2px; color:var(--ink); }
+
+/* epistemic tiers */
+.tier{ margin-bottom:14px; padding-left:14px; border-left:2px solid var(--border); }
+.tier b{ color: var(--ink); }
+
+/* references */
+.ref-group{ margin-bottom:22px; }
+.ref-group-title{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+  color: var(--magenta-deep); margin-bottom:10px; padding-bottom:6px; border-bottom:1px dashed var(--border);
+}
+.ref-list{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+.ref-list li{
+  font-size:12.5px; line-height:1.55; color: var(--ink-soft); padding-left:14px; position:relative;
+}
+.ref-list li::before{ content:"·"; position:absolute; left:0; color: var(--cyan-deep); }
+.ref-list li b, .ref-list li strong{ color: var(--ink); }
+.ref-note{ font-size:11.5px; color: var(--muted); font-style:italic; margin-top:4px; }
+
+/* footer titleblock */
+.titleblock{
+  margin-top: 40px; padding-top:18px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+}
+.tb-notes{ font-size:11px; color: var(--muted); max-width:640px; line-height:1.6; }
+.tb-grid{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; border:1px solid var(--border);
+  display:grid; grid-template-columns:repeat(2,auto); border-radius:6px; overflow:hidden;
+}
+.tb-grid div{ padding:6px 12px; border-right:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft); }
+.tb-grid div:nth-child(2n){ border-right:none; }
+.tb-grid .k{ color: var(--muted); }
+.tb-grid .v{ color: var(--cyan-deep); font-weight:600; }
+
+@media (prefers-reduced-motion:no-preference){
+  .fade{ animation: fadeUp .55s ease both; }
+  section.block:nth-of-type(1){ animation-delay:.02s; }
+  @keyframes fadeUp{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+}
+
+@page{ size:8.5in 11in; margin:0.5in; }
+@media print{
+  #toc{ display:none; }
+  .layout{ grid-template-columns: 1fr; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+<body>
+<div id="shell">
+
+  <div id="page-header">
+    <a href="/reports" id="back-link">&larr; Reports</a>
+    <div id="page-sub">tashefamily.com · design governance research</div>
+  </div>
+
+  <div class="hero fade">
+    <div class="eyebrow">Research Synthesis · Design Systems &amp; AI Governance</div>
+    <h1 class="title">Context Layers for Firms
+      <span class="sub">Keeping AI-Generated UI/UX On-Brand</span>
+    </h1>
+    <p class="dek">A tiered synthesis of design-token architecture, AI-specific context-layer patterns, governance models, and named failure modes shaping how firms keep AI-assisted design and code on-brand in 2026 — leaning heavily on vendor and practitioner sourcing given the subject, with sourcing-confidence tiers carried through deliberately rather than flattened.</p>
+    <div class="meta-row">
+      <span><b>Prepared</b> August 2026</span>
+      <span><b>Companion</b> Field Reference (DTX-01)</span>
+      <span><b>Scope</b> Design tokens · AI context layers · Governance · Failure modes · Recommendations</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <nav id="toc">
+      <div class="toc-label">Contents</div>
+      <ol>
+        <li class="top"><a href="#intro">Introduction</a></li>
+        <li class="top"><a href="#s1">§1 Traditional Foundations</a></li>
+        <li class="top"><a href="#s2">§2 AI-Specific Context Layers</a></li>
+        <li class="sub"><a href="#s2-1">2.1 Instruction Files</a></li>
+        <li class="sub"><a href="#s2-2">2.2 Anthropic's Frontend Skill</a></li>
+        <li class="sub"><a href="#s2-3">2.3 Figma's AI Agent</a></li>
+        <li class="sub"><a href="#s2-4">2.4 v0's Design Systems 2.0</a></li>
+        <li class="sub"><a href="#s2-5">2.5 RAG &amp; Fine-Tuning Gaps</a></li>
+        <li class="top"><a href="#s3">§3 Governance &amp; Process</a></li>
+        <li class="sub"><a href="#s3-1">3.1 Standalone/Centralized/Federated</a></li>
+        <li class="sub"><a href="#s3-2">3.2 Frost's Workflow</a></li>
+        <li class="sub"><a href="#s3-3">3.3 DesignOps 2.0</a></li>
+        <li class="sub"><a href="#s3-4">3.4 The Figma Reliability Gap</a></li>
+        <li class="sub"><a href="#s3-5">3.5 Drift &amp; Cross-Functional Sync</a></li>
+        <li class="top"><a href="#s4">§4 Failure Modes</a></li>
+        <li class="top"><a href="#s5">§5 Recommendations</a></li>
+        <li class="top"><a href="#s6">§6 Source Quality Notes</a></li>
+        <li class="top"><a href="#s7">§7 Sources &amp; References</a></li>
+      </ol>
+    </nav>
+
+    <main>
+
+      <section class="block fade" id="intro">
+        <h2 class="h1"><span class="num">§0</span>Introduction</h2>
+        <p>Design tokens gave firms a machine-readable source of truth for brand decisions years before generative AI entered the design workflow. What's changed since roughly 2025 is not the existence of that foundation but what now sits on top of it: instruction files, packaged skills, and injection layers that let AI tools generate UI/UX work while (in principle) staying constrained to a firm's actual brand system rather than inventing a plausible-looking one. This report treats those as two distinct architectural layers — the pre-AI token/component foundation, and the AI-specific context layer built on it — because conflating them obscures where governance actually needs to happen.</p>
+        <p>A methodological note up front, consistent with how this report treats sourcing throughout: this subject leans more heavily on vendor and practitioner blog content than most topics this pipeline covers, because it is young and fast-moving. Rather than smoothing that over, every substantive claim below carries an explicit confidence tier — <span class="tier-chip t1">T1</span> well-supported / vendor-primary or independently verified, <span class="tier-chip t2">T2</span> reasonably well-supported but commercially interested, or <span class="tier-chip t3">T3</span> thinly sourced or unconfirmed. Where a claim traces to a single aggregator or vendor blog rather than a verifiable primary source, that is stated plainly rather than presented as settled fact.</p>
+
+        <div class="wikibox">
+          <span class="wlabel">Per Tom's Second Brain — what's already captured</span>
+          <p style="margin-bottom:8px; font-size:13px; color:var(--ink-soft);">A relevance check of the wiki found strong existing coverage on the AI-infrastructure side of this topic but a real gap on the design-systems/brand-governance side:</p>
+          <ul>
+            <li><code>wiki/agent-harness-architecture.md</code> — covers the general "context layers" framing (thin-harness/fat-skills, the four-layer memory stack, CLAUDE.md hierarchy and bloat risk) but isn't design-specific.</li>
+            <li><code>wiki/hq-team-harness.md</code> — the wiki's closest analogue to "how firms structure shared context layers," about company knowledge generally rather than UI/UX, and sourced from a single vendor-affiliated (unverified) writeup.</li>
+            <li><code>wiki/ai-agent-skills.md</code> — the most directly relevant page: names Anthropic's frontend-design skill explicitly as the fix for "AI-slop aesthetic," and frames a discipline-skills-vs-capability-skills distinction.</li>
+            <li><code>wiki/claude-code-workflows.md</code> — one undeveloped paragraph on handing Claude a design-system file at session start.</li>
+            <li><code>wiki/enterprise-ai-productivity.md</code> — notes "no shared design system" as a symptom of AI-accelerated codebase entropy.</li>
+          </ul>
+          <p style="margin-top:8px; font-size:13px; color:var(--ink-soft);">No dedicated wiki page exists on design tokens, brand style-guide structure, design-review governance, or human/AI component drift — this report fills that gap. Worth noting directly: Tom's own global CLAUDE.md <code>frontend_aesthetics</code> block (fonts, color, motion rules) mirrors Anthropic's own official guidance almost exactly (see §2.2) — a validation point, not a coincidence.</p>
+        </div>
+      </section>
+
+      <section class="block fade" id="s1">
+        <h2 class="h1"><span class="num">§1</span>Traditional Design-System Foundations (the Pre-AI Baseline)</h2>
+        <p>Design tokens are the atomic layer: color, type, spacing, and other visual decisions stored as structured data (JSON/YAML) rather than hardcoded values, so a single change propagates everywhere. The 2026 convention has converged on a three-tier structure — <b>Primitive</b> (e.g., <code>blue-500</code>) → <b>Semantic</b> (e.g., <code>action-color</code>) → <b>Component</b> (e.g., <code>button-bg-primary</code>) — which keeps a value change from breaking unrelated surfaces. Tokens are transformed into platform-specific outputs (CSS variables, Swift enums, Kotlin values, Compose tokens) via a build step, most commonly Style Dictionary.</p>
+        <div class="finding">
+          <span class="flabel">⬡ KEY FINDING <span class="tier-chip t1" style="margin-left:6px;">T1</span></span>
+          <p>The space just got a formal standard: the W3C Design Tokens Community Group shipped the first stable Design Tokens Format Module (2025.10) on October 28, 2025, backed by 24+ organizations including Adobe, Google, Meta, Microsoft, Amazon, Figma, Sketch, Salesforce, Shopify, Disney, the New York Times, and General Motors — a vendor-neutral JSON interchange format, verified directly against the W3C's own announcement.</p>
+          <span class="cite">W3C Design Tokens Community Group, Design Tokens Format Module 2025.10</span>
+        </div>
+        <p>Design token adoption reportedly reached 84% of teams surveyed in 2026, up from 56% a year earlier <span class="tier-chip t3">T3</span> — this figure traces to an aggregator/vendor blog, not a named primary survey; treat as directional, not a hard fact.</p>
+        <p>Component libraries and brand guideline documents remain the human-facing layer above tokens — Storybook-style component catalogs, and traditionally static PDF brand books. Practitioner sources note static brand-guideline PDFs are increasingly considered outdated in 2026, favoring "living" digital systems synced with the token/component layer <span class="tier-chip t3">T3</span> — this comes from a marketing-adjacent vendor blog and should be read as an industry-trend claim, not a verified statistic.</p>
+      </section>
+
+      <section class="block fade" id="s2">
+        <h2 class="h1"><span class="num">§2</span>AI-Specific Context Layers</h2>
+
+        <h3 class="h2" id="s2-1"><span class="num">2.1</span>Project-Level Instruction Files</h3>
+        <p>Anthropic's own guidance for CLAUDE.md is to keep it concise — under roughly 200 lines — since every line consumes context budget every turn, and beyond a couple hundred lines teams risk "context rot," where important rules get diluted and adherence quietly drops. Practitioner guidance recommends leading with concrete, testable specifics and keeping critical invariants in the reloaded-fresh file rather than relying on early conversation turns compaction may summarize away. <span class="tier-chip t2">T2</span> — community/practitioner-blog sourcing, not official Anthropic docs; treat numeric thresholds as practitioner consensus, not a hard rule.</p>
+        <p>Cursor's equivalent (<code>.cursorrules</code>, or the newer <code>.cursor/rules/*.mdc</code> directory) works the same way: version-controlled rule files injecting a team's tokens, spacing scale, typography, and component patterns into every AI request — described by one source as "the single biggest quality lever in Cursor." <span class="tier-chip t3">T3</span> — community/aggregator sourcing only; no primary Cursor documentation located for this specific claim.</p>
+
+        <h3 class="h2" id="s2-2"><span class="num">2.2</span>Anthropic's Frontend-Design Skill</h3>
+        <p>This is the strongest primary/vendor source in this research. Published as an official Anthropic blog post dated November 12, 2025, it directly names the problem this report addresses: AI models default toward "AI slop" — Inter fonts, purple gradients, minimal animation — because of "distributional convergence" during training (the model gravitates to the statistically most common pattern in its training data). <span class="tier-chip t1">T1</span></p>
+        <p>Anthropic's fix is architectural, not just prompt-level: a Skill (metadata + markdown instructions, loaded dynamically only when relevant, avoiding permanent context bloat) that gives Claude principle-based direction rather than prescriptive rules — what dimensions to think about (typography, color/theme, motion, backgrounds) rather than exact hex codes or fonts. The companion official Anthropic cookbook notebook (<code>prompting_for_frontend_aesthetics.ipynb</code>) lays out three concrete techniques:</p>
+        <ul class="pts">
+          <li>Guide specific design dimensions individually rather than asking for "better design" broadly.</li>
+          <li>Reference design inspiration without being overly prescriptive about implementation.</li>
+          <li>Explicitly name defaults to avoid (Inter, Roboto, Arial, system fonts; purple gradients on white; predictable component patterns).</li>
+        </ul>
+        <div class="finding">
+          <span class="flabel">⬡ VALIDATION SIGNAL <span class="tier-chip t1" style="margin-left:6px;">T1</span></span>
+          <p>Tom's own global CLAUDE.md <code>frontend_aesthetics</code> block closely mirrors this official pattern — same structure, same specific anti-patterns named (Inter, purple gradients on white, generic card grids). Direct alignment with vendor best practice, not coincidence.</p>
+        </div>
+
+        <h3 class="h2" id="s2-3"><span class="num">2.3</span>Figma's AI Agent and the Tokens-as-Guardrail Model</h3>
+        <p>Figma has built an AI design agent into its canvas generating layouts, editing designs, applying components/variables via natural language, working against a team's existing tokens and component library. <span class="tier-chip t1">T1</span></p>
+        <p>Vendor and practitioner sources converge on a specific limit: "the AI doesn't understand your brand beyond the tokens in your design system — it can match colors and fonts but not the feel of your brand." <span class="tier-chip t2">T2</span> A well-structured token system becomes the thing keeping AI output on-brand specifically because it's the one artifact both humans and AI tools can be constrained against.</p>
+
+        <h3 class="h2" id="s2-4"><span class="num">2.4</span>v0 by Vercel's "Design Systems 2.0" Pipeline</h3>
+        <p>The most concrete named example of a design-token-to-AI-prompt pipeline in production, and official Vercel/v0 documentation — one of the stronger vendor-primary sources here. <span class="tier-chip t1">T1</span> Teams point v0 at a design system's sources (GitHub repo, Figma frames/nodes, Storybook docs, style-guide links); v0 distills those into a saved "skill" — persistent instructions applied across future generations in that project scope, rather than re-reading raw sources each time. v0 also supports account/project-level "Context settings," including a plain-language brand "vibe" description plus links to style documentation.</p>
+
+        <h3 class="h2" id="s2-5"><span class="num">2.5</span>RAG Over Brand Guidelines and Fine-Tuned Style Models — Genuine Gaps</h3>
+        <div class="risk">
+          <span class="flabel">⚠ GAP IN CURRENT PRACTICE, NOT JUST IN RESEARCH <span class="tier-chip t3" style="margin-left:6px;">T3</span></span>
+          <p>RAG over brand guidelines is a well-documented general pattern, but no named, credible case study of a firm doing this specifically for UI/UX brand consistency at production scale was found — sourcing here is generic RAG-explainer content, not a design-specific implementation account.</p>
+        </div>
+        <p>Fine-tuned/custom style models exist mainly on the visual-asset side rather than UI/UX layout: Adobe Firefly offers custom models at enterprise tier; Stable Diffusion with brand-trained LoRAs is used for illustration-heavy brands (typically 10–200 curated images). Brand-voice fine-tuning (text/copy) is more mature (e.g., Writer.com; true fine-tuning runs ~$500–$5,000). No credible source was found for a fine-tuned model specifically at the UI/component-layout level — this appears to be a genuinely underdeveloped area, not a sourcing gap.</p>
+      </section>
+
+      <section class="block fade" id="s3">
+        <h2 class="h1"><span class="num">§3</span>Governance and Process Practices</h2>
+        <p>Design system governance predates AI and still structures the AI-era problem.</p>
+
+        <h3 class="h2" id="s3-1"><span class="num">3.1</span>Standalone, Centralized, Federated</h3>
+        <p>Nathan Curtis's widely-cited framework names three recurring governance models — Standalone, Centralized, Federated — described by practitioners as "the single highest-leverage governance decision a team makes." <span class="tier-chip t2">T2</span></p>
+
+        <h3 class="h2" id="s3-2"><span class="num">3.2</span>Frost's Ten-Step Workflow</h3>
+        <p>Brad Frost (Atomic Design author, established independent practitioner) published a concrete governance workflow: default to existing components → flag unmet needs → categorize one-off vs. core → prototype → review → build/test → final approval → document → release via semver → adopt/QA. <span class="tier-chip t2">T2</span></p>
+        <div class="risk">
+          <span class="flabel">⚠ DATED SOURCE, STILL STRUCTURALLY SOUND</span>
+          <p>Frost's article is from November 2019 — it pre-dates AI-generated design entirely. It's carried in this report because the workflow itself is still structurally relevant, not because it was written with this problem in mind.</p>
+        </div>
+
+        <h3 class="h2" id="s3-3"><span class="num">3.3</span>DesignOps 2.0 — A Governance Layer for AI Pipelines</h3>
+        <p>The 2026-specific addition is a governance layer aimed explicitly at AI pipelines. One substantive source (UX Design Lab, April 2026) proposes a four-layer model: <span class="tier-chip t2">T2</span></p>
+        <ul class="pts">
+          <li><b>Source layer</b> — versioned, immutable, machine-readable tokens/components/code-mappings/accessibility metadata.</li>
+          <li><b>Injection layer</b> — governed context-delivery (MCP servers, APIs, manifests, RAG pipelines) controlling what the model retrieves and from where.</li>
+          <li><b>Evaluation layer</b> — automated checks beyond visual comparison (token compliance, component validity, keyboard behavior, ARIA coverage).</li>
+          <li><b>Dynamic audit layer</b> — operational record of what was generated, what failed, and how human corrections feed back into schema refinement.</li>
+        </ul>
+
+        <h3 class="h2" id="s3-4"><span class="num">3.4</span>The Empirical Case: Figma's 2025 Reliability Gap</h3>
+        <div class="finding">
+          <span class="flabel">⬡ KEY FINDING <span class="tier-chip t1" style="margin-left:6px;">T1</span></span>
+          <p>The DesignOps 2.0 source cites Figma's own January 2025 survey of 2,500 designers/developers across seven countries, independently verified directly against Figma's blog: 78% said AI significantly speeds up workflow, but only 32% said they could rely on AI output, and only 58% said it improves work quality — with a gap between developers (82% satisfaction, 68% quality improvement) and designers (69% satisfaction, 54% quality improvement).</p>
+          <span class="cite">Figma, "AI in design" survey, January 2025 · 2,500 respondents, 7 countries</span>
+        </div>
+        <p>This efficiency/reliability gap is the empirical case for the governance layer existing at all: teams adopting AI for design speed without a corresponding evaluation/audit layer trade velocity for quality risk without visibility into the trade-off.</p>
+
+        <h3 class="h2" id="s3-5"><span class="num">3.5</span>Design System Drift and Cross-Functional Sync</h3>
+        <p>Vendor case studies on "design system drift" consistently name the same failure pattern: AI tools generating UI without real access to actual components/tokens, therefore approximating — fabricating plausible-but-wrong token names, drifting on spacing within a session, "forgetting" decisions between sessions, continuing to use component props after they've been renamed. Recommended fixes converge: freeze tokens in a single reference file the AI reads but never regenerates, restrict the AI to assembling existing components rather than inventing new ones, validate output via linting plus screenshot-diff comparison loops.</p>
+        <div class="risk">
+          <span class="flabel">⚠ SOURCING CAVEAT</span>
+          <p>The two most detailed sources on this failure mode (Superdesign, Figr.design) are vendors selling AI design tools that solve exactly this problem <span class="tier-chip t2" style="margin-left:4px;">T2</span> — diagnosis is well-reasoned and consistent with independently-sourced Anthropic/Figma material, but specific fix recommendations should be read as informed-but-commercially-interested.</p>
+        </div>
+        <p>Cross-functional sync as lightweight governance: one vendor source recommends short (~20-minute) weekly reviews comparing live shipped screens, Figma files, and coded components to catch misalignment early, alongside automated audits for detached component instances, frequent token overrides, and duplicate components. <span class="tier-chip t2">T2</span></p>
+        <p>An agency source (Boldare, commercial interest in design-system services, but claim consistent with independently-sourced material) names the underlying liability directly: "a component library without a governance model is a time-limited asset" — "AI tools don't create design debt. They accelerate whatever system — or absence of system — already exists." <span class="tier-chip t2">T2</span></p>
+      </section>
+
+      <section class="block fade" id="s4">
+        <h2 class="h1"><span class="num">§4</span>Known Failure Modes / Anti-Patterns</h2>
+        <p>The dominant, well-documented anti-pattern is "AI slop" design — generic, homogeneous output with an identifiable fingerprint: Inter typeface, indigo-to-purple gradients, three rounded cards in a row, hero sections indistinguishable from thousands of other AI-generated products. Anthropic's own explanation is the most authoritative available: "distributional convergence" — models trained on internet-scale data gravitate toward the statistically most common visual pattern, an aesthetic monoculture. <span class="tier-chip t1">T1</span></p>
+        <div class="risk">
+          <span class="flabel">⚠ UNCONFIRMED FIGURE <span class="tier-chip t3" style="margin-left:6px;">T3</span></span>
+          <p>Documented business consequences beyond aesthetics: one source (Venngage, a design-tool vendor blog) claims AI-slop marketing sites see conversion rates 91% lower than higher-quality inventory. This could not be independently verified against a primary source — present as an unconfirmed claim, not settled fact.</p>
+        </div>
+        <p>Design system drift is the second major failure mode — gradual divergence between what a design system specifies and what actually ships, whether from AI approximation or ordinary human pressure (hard-coded values under deadline, detached component instances, unclear change ownership). Sources are consistent this is a pre-existing problem AI accelerates, not a new problem AI invents. <span class="tier-chip t2">T2</span></p>
+        <p>The efficiency/reliability gap from Figma's 2025 survey (78% speed vs. 32% reliability, §3.4) is itself named as a failure mode in the DesignOps 2.0 framing: teams adopting AI for design speed without a corresponding evaluation/audit layer trade velocity for quality risk without visibility into the trade-off. <span class="tier-chip t2">T2</span></p>
+      </section>
+
+      <section class="block fade" id="s5">
+        <h2 class="h1"><span class="num">§5</span>Concrete Recommendations — a Practical "Design Context Layer"</h2>
+        <p>A firm's (or power user's) design context layer should contain, at minimum:</p>
+        <ol class="checklist">
+          <li><span class="cknum">1</span>A frozen, versioned token-of-truth file (JSON/YAML, ideally W3C Design Tokens Format-compliant) covering primitive → semantic → component hierarchy — every source treats this as non-negotiable, the one artifact AI tools should be constrained against rather than asked to regenerate.</li>
+          <li><span class="cknum">2</span>A concise, principle-based AI instruction file (CLAUDE.md, .cursorrules, or equivalent) naming design dimensions to think about rather than exhaustively prescribing values, explicitly calling out defaults to avoid (Inter, purple gradients, generic card grids), staying short enough to avoid context rot — practitioner consensus points to roughly 200 lines as a ceiling, critical invariants prioritized over exhaustive detail.</li>
+          <li><span class="cknum">3</span>A component-assembly constraint, not a component-generation license — AI tools restricted to using real, existing components/props rather than inventing plausible-looking new ones, since fabrication (not lack of creativity) is the recurring named failure mode.</li>
+          <li><span class="cknum">4</span>An evaluation/audit loop, even lightweight — automated linting for token compliance, screenshot-diff comparison against prior states, a short recurring human sync (weekly or per-release) comparing what shipped against what the system specifies.</li>
+          <li><span class="cknum">5</span>A governance decision made deliberately, not by default — pick a model (standalone/centralized/federated per Curtis) and a change-approval workflow (Frost's prototype→review→document→version-release pattern remains structurally sound despite predating AI).</li>
+          <li><span class="cknum">6</span>Explicit ownership and versioning discipline — semantic versioning for the token/component release cycle, a named owner for approving pattern changes and deprecations, since "unclear ownership" is repeatedly named as the root cause of drift regardless of whether AI or humans introduced it.</li>
+        </ol>
+        <div class="finding">
+          <span class="flabel">⬡ FOR AN INDIVIDUAL POWER USER</span>
+          <p>For an individual power-user context (closer to Tom's actual CLAUDE.md setup than an enterprise DesignOps pipeline), the evidence suggests the highest-leverage version of this is exactly what's already in place: a concise, principle-based frontend-aesthetics block naming dimensions and anti-patterns rather than prescribing exact values — matching Anthropic's own official recommendation almost exactly, a meaningful validation signal rather than coincidence.</p>
+        </div>
+      </section>
+
+      <section class="block fade" id="s6">
+        <h2 class="h1"><span class="num">§6</span>Source Quality and Epistemic Notes</h2>
+        <p>In keeping with treating sourcing rigor as part of the deliverable, this section states plainly what kind of evidence underlies each part of this report. This subject leans more heavily on vendor and practitioner blog content than most topics this pipeline covers, so this framing carries more weight here than usual.</p>
+        <div class="tier">
+          <p><b><span class="tier-chip t1">T1</span> Well-supported, high-confidence</b> (vendor-primary, independently verified): the W3C Design Tokens standard; Anthropic's frontend-design Skill and stated rationale (official blog + official cookbook); Figma's 2025 AI survey statistics (verified directly against Figma's own blog); general design-token three-tier architecture and toolchain convergence; v0's official Design Systems 2.0 documentation.</p>
+        </div>
+        <div class="tier">
+          <p><b><span class="tier-chip t2">T2</span> Reasonably well-supported but commercially interested</b>: design-system-drift failure-mode analysis (Superdesign, Figr.design) and DesignOps-as-infrastructure framing (Boldare, UX Design Lab) — internally consistent with independently-sourced material, but from vendors/agencies with a stake in the diagnosis; Curtis's governance-model framework and Frost's workflow, carried as practitioner consensus rather than primary data.</p>
+        </div>
+        <div class="tier">
+          <p><b><span class="tier-chip t3">T3</span> Thinly sourced or unconfirmed</b>: the 84%-token-adoption and 91%-lower-conversion figures (single aggregator/vendor sources, not verified primary surveys); no credible case study found for RAG over brand guidelines in production, nor for fine-tuned UI-layout models — flagged as genuine gaps in current practice, not just gaps in research.</p>
+        </div>
+        <p>Most sourcing is late-2025 through mid-2026, appropriate for a fast-moving topic, with one clearly dated exception: Brad Frost's 2019 governance piece, flagged in §3.2 as pre-AI but structurally still useful.</p>
+      </section>
+
+      <section class="block fade" id="s7">
+        <h2 class="h1"><span class="num">§7</span>Sources and References</h2>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Standards <span class="tier-chip t1" style="margin-left:8px;">T1</span></div>
+          <ul class="ref-list">
+            <li>W3C Design Tokens Community Group. "Design Tokens Format Module," 2025.10 (First Public Working Draft / stable release, October 28, 2025). Backed by Adobe, Google, Meta, Microsoft, Amazon, Figma, Sketch, Salesforce, Shopify, Disney, the New York Times, and General Motors, among 24+ organizations.</li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Official Vendor Documentation <span class="tier-chip t1" style="margin-left:8px;">T1</span></div>
+          <ul class="ref-list">
+            <li>Anthropic. "Claude's frontend-design Skill." Official Anthropic blog, November 12, 2025.</li>
+            <li>Anthropic. "Prompting for Frontend Aesthetics." Anthropic Cookbook, <span class="ref-note">prompting_for_frontend_aesthetics.ipynb</span>.</li>
+            <li>Figma. "AI in design" survey findings. Figma blog, January 2025 (2,500 designers/developers, 7 countries).</li>
+            <li>Vercel / v0. "Design Systems 2.0" documentation — skill distillation from repo/Figma/Storybook sources; project-level Context settings and brand "vibe" description.</li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Commercially-Interested but Consistent (Vendor/Agency) <span class="tier-chip t2" style="margin-left:8px;">T2</span></div>
+          <ul class="ref-list">
+            <li>Superdesign. Design-system-drift failure-mode analysis (AI design tool vendor).</li>
+            <li>Figr.design. Design-system-drift failure-mode analysis and recommended fixes (AI design tool vendor).</li>
+            <li>UX Design Lab. "DesignOps 2.0" four-layer governance model, April 2026.</li>
+            <li>Boldare. "A component library without a governance model is a time-limited asset" (design-system agency).</li>
+            <li>Unnamed vendor source. Cross-functional sync cadence recommendation (~20-minute weekly reviews) and automated-audit checklist (detached instances, token overrides, duplicate components).</li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Practitioner / Community Guidance <span class="tier-chip t2" style="margin-left:8px;">T2</span></div>
+          <ul class="ref-list">
+            <li>Nathan Curtis. Design system governance framework — Standalone / Centralized / Federated models. <span class="ref-note">Widely cited practitioner framework, not a single dated publication.</span></li>
+            <li>Brad Frost. Component governance workflow (10-step: default→flag→categorize→prototype→review→build/test→approve→document→release→adopt). November 2019 — <span class="ref-note">pre-dates AI-generated design; carried for structural relevance, flagged as dated.</span></li>
+            <li>Practitioner/community guidance on CLAUDE.md conciseness (~200-line ceiling) and "context rot."</li>
+          </ul>
+        </div>
+
+        <div class="ref-group">
+          <div class="ref-group-title">Thinly Sourced / Unconfirmed <span class="tier-chip t3" style="margin-left:8px;">T3</span></div>
+          <ul class="ref-list">
+            <li>Aggregator/vendor blog. 84% design-token adoption claim (up from 56% year-prior). <span class="ref-note">Single source, not a named primary survey.</span></li>
+            <li>Venngage (design-tool vendor blog). Claim that AI-slop marketing sites convert 91% lower than higher-quality inventory. <span class="ref-note">Could not independently verify against a primary source.</span></li>
+            <li>Community/aggregator source. Claim that .cursorrules is "the single biggest quality lever in Cursor." <span class="ref-note">No primary Cursor documentation located.</span></li>
+            <li>Marketing-adjacent vendor blog. Claim that static brand-guideline PDFs are "increasingly outdated" in favor of living digital systems. <span class="ref-note">Industry-trend claim, not a verified statistic.</span></li>
+            <li>Generic RAG-explainer sourcing (not design-specific). No named production case study found for RAG over brand guidelines applied to UI/UX consistency — flagged as a gap in current practice.</li>
+            <li>No credible source found for fine-tuned models at the UI/component-layout level (as distinct from visual-asset or brand-voice fine-tuning) — flagged as a gap in current practice.</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="titleblock">
+        <div class="tb-notes">
+          <b>Notes.</b> Sourcing-confidence tiers are carried through deliberately rather than flattened, given how heavily this subject leans on vendor and practitioner content. Where a figure or claim rests on a single aggregator/vendor source, that is stated in-line, not just in §7.
+        </div>
+        <div class="tb-grid">
+          <div class="k">DOCUMENT</div><div class="v">Full Reference Guide</div>
+          <div class="k">COMPANION</div><div class="v">Field Reference (DTX-01)</div>
+          <div class="k">STATUS</div><div class="v">For internal use</div>
+          <div class="k">REV</div><div class="v">2026-08</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>
