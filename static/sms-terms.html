@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMS Terms &amp; Conditions — Tashe Family Household Digest</title>
+<title>SMS Terms &amp; Conditions — Tom Folsom's Household Automation</title>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -64,6 +64,16 @@ strong{color:var(--bright);}
   white-space:nowrap;
 }
 .kv .v{font-size:14px;color:var(--text);}
+.script{
+  background:rgba(56,189,248,0.05);border:1px solid var(--border);border-radius:6px;
+  padding:16px 18px;margin:16px 0;
+}
+.script-label{
+  font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--accent);
+  letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:10px;
+}
+.script p{font-style:italic;color:var(--bright);margin-bottom:10px;}
+.script p:last-child{margin-bottom:0;}
 footer{
   margin-top:40px;padding-top:16px;border-top:1px solid var(--rule);
   font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);
@@ -78,29 +88,37 @@ footer{
     <a href="/" id="back-link">&larr; Dashboard</a>
     <div>
       <h1>SMS Terms &amp; Conditions</h1>
-      <div class="sub">tashefamily.com · household digest messaging</div>
+      <div class="sub">tashefamily.com · Tom Folsom's Household Automation</div>
     </div>
   </div>
 
   <div class="callout">
-    <p><strong>At a glance.</strong> A private household automation sends a daily schedule-and-weather text to two adult members of one family. Roughly one message per day. Message and data rates may apply. Reply <strong>STOP</strong> to cancel, <strong>HELP</strong> for help.</p>
+    <p><strong>At a glance.</strong> An automated application sends a daily schedule-and-weather text to two adult recipients who consented in advance. Roughly one message per day. Message and data rates may apply. Reply <strong>STOP</strong> to cancel, <strong>HELP</strong> for help.</p>
   </div>
 
   <div class="kv">
-    <div class="k">Program</div><div class="v">Tashe Family Household Digest</div>
-    <div class="k">Operator</div><div class="v">Tom Folsom (private individual)</div>
-    <div class="k">Recipients</div><div class="v">Two adult members of one household</div>
+    <div class="k">Program</div><div class="v">Tom Folsom's Household Automation</div>
+    <div class="k">Operator</div><div class="v">Tom Folsom (sole proprietor)</div>
+    <div class="k">Recipients</div><div class="v">Two adults, enrolled by the operator with prior express consent</div>
     <div class="k">Frequency</div><div class="v">About one message per day, plus occasional household notifications</div>
     <div class="k">Cost</div><div class="v">Free from the operator; carrier message and data rates may apply</div>
     <div class="k">Opt out</div><div class="v">Reply STOP</div>
   </div>
 
   <h2><span class="n">1</span>Program description</h2>
-  <p>The Tashe Family Household Digest is a private, non-commercial messaging program operated by Tom Folsom for members of his own household. Messages contain that day's household calendar events, outstanding household to-do items, and the local weather forecast, along with occasional household notifications such as a reminder or an alert relevant to the family.</p>
-  <p>This program sends no marketing, promotional, or advertising content of any kind.</p>
+  <p>Tom Folsom's Household Automation is a private, non-commercial scheduling and notification application built and operated by Tom Folsom. It runs on a fixed daily schedule with no human involvement in composing or sending any message: the application queries the Google Calendar API, the TickTick task API, and the National Weather Service API, assembles the results into a formatted summary, and delivers that summary by SMS to its registered recipients. It also sends automated alerts when conditions it monitors are met, such as a severe weather notice or an approaching deadline.</p>
+  <p>All messages are transactional system notifications. This application sends no marketing, promotional, or advertising content of any kind.</p>
 
   <h2><span class="n">2</span>Who receives messages, and how they consented</h2>
-  <p>Messages go only to two adult members of a single household, both of whom gave express prior consent to receive them and whose numbers were entered directly by the operator. There is no public signup: no web form, no keyword opt-in, and no way for anyone outside the household to join. Numbers are never purchased, rented, or obtained from any list or third party.</p>
+  <p>Messages go only to two adults, both of whom gave express prior consent and whose numbers were entered directly into the application's private configuration by the operator. There is no public signup: no web form, no keyword opt-in, and no way for anyone else to join. Numbers are never purchased, rented, or obtained from any list or third party.</p>
+  <p>Consent is obtained <strong>verbally and in person</strong> by the operator, who reads the following disclosure aloud and records the recipient's affirmative response along with the date:</p>
+  <div class="script">
+    <span class="script-label">Verbal opt-in script</span>
+    <p>"I've built an automated system that sends a daily text with our calendar, our to-do list, and the weather forecast. It's operated by me, Tom Folsom, and the messages come from my number ending in [last four digits].</p>
+    <p>It sends about one message per day, plus occasional alerts. Message and data rates from your carrier may apply. You can stop the messages at any time by replying STOP, or by telling me and I'll remove your number.</p>
+    <p>Do I have your permission to add your mobile number to receive these text messages?"</p>
+  </div>
+  <p>Consent is recorded only after an unambiguous yes. A recipient who declines is not added, and no message is sent to any number that has not gone through this process.</p>
 
   <h2><span class="n">3</span>Message frequency</h2>
   <p>Recipients should expect approximately <strong>one message per day</strong>, generally in the morning. Additional messages may occasionally be sent when a household matter warrants it. Frequency may vary.</p>
