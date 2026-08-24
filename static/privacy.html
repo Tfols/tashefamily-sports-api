@@ -52,6 +52,12 @@ strong{color:var(--bright);}
   border-radius:0 6px 6px 0;padding:14px 18px;margin:18px 0;
 }
 .callout p:last-child{margin-bottom:0;}
+.keystatement{
+  background:rgba(56,189,248,0.07);border:1px solid var(--accent);
+  border-radius:6px;padding:16px 18px;margin:18px 0;
+}
+.keystatement p{color:var(--bright);margin-bottom:10px;}
+.keystatement p:last-child{margin-bottom:0;}
 footer{
   margin-top:40px;padding-top:16px;border-top:1px solid var(--rule);
   font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);
@@ -71,56 +77,78 @@ footer{
   </div>
 
   <div class="callout">
-    <p><strong>Summary.</strong> Tom Folsom's Household Automation is a private, non-commercial scheduling and notification application, built and operated by one person. It sends an automated daily schedule-and-weather summary by text message to two adult recipients. No one else can sign up, no data is sold or shared for marketing, and nothing is collected from visitors to this website.</p>
+    <p><strong>Summary.</strong> Tom Folsom's Household Automation is a private, non-commercial scheduling and notification application, built and operated by one person. It sends an automated daily schedule-and-weather summary by text message to two adult recipients who consented in advance. No one else can sign up, nothing is collected from visitors to this website, and no information is ever shared for marketing purposes.</p>
+  </div>
+
+  <div class="keystatement">
+    <p><strong>No mobile information is shared with third parties or affiliates for marketing or promotional purposes.</strong></p>
+    <p><strong>Text messaging originator opt-in data and consent are never shared with any third party or affiliate for any purpose.</strong> This information is excluded from every category of disclosure described anywhere in this policy.</p>
   </div>
 
   <h2><span class="n">1</span>Who operates this application</h2>
   <p>Tom Folsom's Household Automation is built and operated by Tom Folsom as a personal, non-commercial project. It is not a product, and it is not offered to the public. There is no signup form, no customer account system, and no way for a member of the public to subscribe.</p>
   <p>Messages are generated and sent entirely by software on a fixed schedule. No person composes or sends any individual message.</p>
 
-  <h2><span class="n">2</span>What information is involved</h2>
-  <p>The service handles a deliberately small amount of information:</p>
+  <h2><span class="n">2</span>What information is collected</h2>
+  <p>The application handles a deliberately small amount of information:</p>
   <ul>
-    <li><strong>Mobile phone numbers</strong> of the two adult household members who receive the digest. These are entered directly into the system's private configuration by the operator. They are not collected through any web form and are not obtained from any third party.</li>
-    <li><strong>Message content</strong>, which consists of that day's household calendar events, outstanding household to-do items, and the local weather forecast.</li>
+    <li><strong>Mobile phone numbers</strong> of the two adult recipients. These are entered directly into the application's private configuration by the operator. They are not collected through any web form and are not obtained from any third party, list, or data broker.</li>
+    <li><strong>Consent records</strong> noting that each recipient gave express prior consent, and the date it was given.</li>
+    <li><strong>Message content</strong>, consisting of that day's household calendar events, outstanding household to-do items, and the local weather forecast.</li>
   </ul>
   <p>No information whatsoever is collected from visitors to this website. There are no analytics, no advertising trackers, and no cookies set by these pages.</p>
 
-  <h2><span class="n">3</span>Where the information comes from</h2>
+  <h2><span class="n">3</span>Where message content comes from</h2>
   <p>Digest content is assembled from services the household already uses and has authorized:</p>
   <ul>
     <li><strong>Google Calendar</strong> — read-only access to the household's own shared calendar.</li>
     <li><strong>TickTick</strong> — read-only access to the household's own task lists.</li>
     <li><strong>National Weather Service</strong> — a public government weather forecast for the household's area. No personal information is sent when retrieving it.</li>
   </ul>
+  <p>No mobile phone number, consent record, or other recipient information is ever transmitted to any of these services.</p>
 
-  <h2><span class="n">4</span>How the information is used</h2>
-  <p>Phone numbers are used for exactly one purpose: delivering the household digest and any household notification the operator sends to his own family. They are never used for marketing, never used to build a profile, and never used for any purpose beyond delivering these messages.</p>
+  <h2><span class="n">4</span>How information is used</h2>
+  <p>Mobile phone numbers are used for exactly one purpose: delivering the automated messages described in this policy to the recipients who consented to receive them.</p>
+  <p>Phone numbers are never used for marketing, never used to build a profile, never used for advertising or analytics, and never used for any purpose beyond delivering these messages.</p>
 
-  <h2><span class="n">5</span>Who it is shared with</h2>
-  <p>Phone numbers and message content are <strong>not sold, rented, traded, or shared</strong> with any third party for that party's own purposes.</p>
-  <p>The one necessary disclosure is to <strong>Twilio</strong>, the messaging provider that actually transmits the text messages, and to the mobile carriers that deliver them. Twilio processes this information solely to send the messages and handles it under its own privacy policy at <a href="https://www.twilio.com/legal/privacy">twilio.com/legal/privacy</a>.</p>
+  <h2><span class="n">5</span>SMS messaging program disclosures</h2>
+  <p>The following disclosures apply to the SMS messaging program covered by this policy:</p>
+  <ul>
+    <li><strong>Message frequency:</strong> Recipients receive approximately one message per day, plus occasional automated alerts. Message frequency may vary.</li>
+    <li><strong>Cost:</strong> <strong>Message and data rates may apply.</strong> The operator charges nothing for these messages; any charges are between the recipient and their mobile carrier.</li>
+    <li><strong>Opt out:</strong> Reply <strong>STOP</strong> to any message to cancel. Opt-out is honored immediately and permanently unless the recipient later asks to be re-added.</li>
+    <li><strong>Help:</strong> Reply <strong>HELP</strong> to any message, or email the address in Section 11.</li>
+    <li><strong>Content:</strong> All messages are transactional system notifications. No marketing, promotional, or advertising content is sent.</li>
+  </ul>
+  <p>Full program terms are published at <a href="/sms-terms">/sms-terms</a>, including the verbatim script used to obtain consent.</p>
+
+  <h2><span class="n">6</span>Sharing and disclosure</h2>
+  <div class="keystatement">
+    <p><strong>Mobile information and messaging consent are not shared with third parties or affiliates for marketing or promotional purposes.</strong> No mobile phone number, opt-in record, or consent record is sold, rented, traded, leased, or otherwise provided to any third party or affiliate for that party's own use.</p>
+  </div>
+  <p>The only disclosure that occurs is an operational one strictly necessary to deliver the messages: mobile phone numbers are transmitted to <strong>Twilio</strong>, the licensed messaging provider that carries the messages, and onward to the recipient's mobile carrier for delivery.</p>
+  <p>Twilio acts solely as a service provider carrying out the delivery instruction. It does not receive this information for its own marketing or promotional use, and it handles the information under its own privacy policy at <a href="https://www.twilio.com/legal/privacy">twilio.com/legal/privacy</a>. This is the same operational disclosure that occurs whenever any text message is sent, and it is not a sharing of information for marketing purposes.</p>
   <p>Information may also be disclosed if required by law.</p>
 
-  <h2><span class="n">6</span>How long it is kept</h2>
-  <p>The service keeps no separate database of recipients or message history. Phone numbers exist only in the operator's private system configuration and remain there until removed. Message delivery records are retained by Twilio according to Twilio's own retention practices.</p>
+  <h2><span class="n">7</span>How long information is kept</h2>
+  <p>The application keeps no separate database of recipients or message history. Mobile phone numbers exist only in the operator's private application configuration and remain there until removed. Message delivery records are retained by Twilio according to Twilio's own retention practices.</p>
 
-  <h2><span class="n">7</span>Security</h2>
+  <h2><span class="n">8</span>Security</h2>
   <p>Access credentials are stored as private environment variables on the operator's own machine and are not committed to any public code repository. Messages are transmitted to Twilio over an encrypted HTTPS connection.</p>
-  <p>Plainly stated: standard SMS is not an encrypted medium, and no system is perfectly secure. Accordingly, the digest is limited to routine household scheduling information and deliberately excludes financial details, account credentials, medical information, and similarly sensitive material.</p>
+  <p>Plainly stated: standard SMS is not an encrypted medium, and no system is perfectly secure. Accordingly, message content is limited to routine household scheduling information and deliberately excludes financial details, account credentials, medical information, and similarly sensitive material.</p>
 
-  <h2><span class="n">8</span>Your choices</h2>
-  <p>Any recipient can stop all messages at any time by replying <strong>STOP</strong> to any message from this service. Opt-out is honored immediately and permanently unless that person later asks to be re-added. Replying <strong>HELP</strong> returns contact information.</p>
-  <p>A recipient may also ask the operator directly to remove their number or to confirm what information is held about them.</p>
+  <h2><span class="n">9</span>Your choices</h2>
+  <p>Any recipient can stop all messages at any time by replying <strong>STOP</strong> to any message. Opt-out is honored immediately and permanently unless that person later asks to be re-added. Replying <strong>HELP</strong> returns contact information.</p>
+  <p>A recipient may also ask the operator directly to remove their number, or to confirm what information is held about them.</p>
 
-  <h2><span class="n">9</span>Children</h2>
-  <p>The digest is sent only to adult members of the household. It is not directed to children, and no information about children is knowingly collected through it.</p>
-
-  <h2><span class="n">10</span>Changes</h2>
-  <p>If this policy changes, the revised version will be posted on this page with an updated effective date.</p>
+  <h2><span class="n">10</span>Children</h2>
+  <p>Messages are sent only to adults. This application is not directed to children, and no information about children is knowingly collected through it.</p>
 
   <h2><span class="n">11</span>Contact</h2>
   <p>Questions about this policy can be sent to <a href="mailto:tom.folsom@gmail.com">tom.folsom@gmail.com</a>.</p>
+
+  <h2><span class="n">12</span>Changes</h2>
+  <p>If this policy changes, the revised version will be posted on this page with an updated effective date. This page is the single, authoritative privacy policy for Tom Folsom's Household Automation.</p>
 
   <footer>
     <span>Effective 24 August 2026</span>
