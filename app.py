@@ -269,6 +269,16 @@ def travel_page():
     return send_from_directory('static', 'travel.html')
 
 
+@app.route('/privacy')
+def privacy_page():
+    return send_from_directory('static', 'privacy.html')
+
+
+@app.route('/sms-terms')
+def sms_terms_page():
+    return send_from_directory('static', 'sms-terms.html')
+
+
 @app.route('/favicon.ico')
 @app.route('/favicon.png')
 def favicon():

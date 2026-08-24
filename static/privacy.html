@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Tashe Family Household Digest</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-1:#060a14; --bg-2:#111b32;
+  --panel:rgba(15,24,42,0.92);
+  --border:#2e446f; --rule:#304975;
+  --text:#d9e7ff; --bright:#f3f8ff; --muted:#90a9ca;
+  --accent:#38bdf8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:linear-gradient(135deg,var(--bg-1),var(--bg-2)) fixed;
+  color:var(--text); font-family:"Space Grotesk",sans-serif;
+  min-height:100vh; font-size:15px; line-height:1.7;
+}
+#app{max-width:760px;margin:0 auto;padding:28px 20px 80px;}
+#page-header{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--rule);
+}
+#back-link{
+  font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:600;
+  color:var(--muted);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+  padding:6px 12px;border:1px solid var(--border);border-radius:4px;flex:0 0 auto;
+  transition:color .15s,border-color .15s;
+}
+#back-link:hover{color:var(--accent);border-color:var(--accent);}
+h1{font-size:24px;font-weight:700;color:var(--bright);letter-spacing:.02em;}
+.sub{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);letter-spacing:.08em;margin-top:4px;}
+h2{
+  font-size:15px;font-weight:700;color:var(--bright);
+  margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--rule);
+  display:flex;align-items:baseline;gap:10px;
+}
+h2 .n{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent);font-weight:600;}
+p{margin-bottom:12px;}
+ul{margin:10px 0 14px;padding-left:0;list-style:none;}
+li{position:relative;padding-left:18px;margin-bottom:7px;}
+li::before{content:"›";position:absolute;left:0;color:var(--accent);font-weight:700;}
+a{color:var(--accent);}
+strong{color:var(--bright);}
+.callout{
+  background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--accent);
+  border-radius:0 6px 6px 0;padding:14px 18px;margin:18px 0;
+}
+.callout p:last-child{margin-bottom:0;}
+footer{
+  margin-top:40px;padding-top:16px;border-top:1px solid var(--rule);
+  font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="page-header">
+    <a href="/" id="back-link">&larr; Dashboard</a>
+    <div>
+      <h1>Privacy Policy</h1>
+      <div class="sub">tashefamily.com · household digest messaging</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Summary.</strong> This is a private, non-commercial household automation run by one person for his own family. It sends a daily schedule-and-weather summary by text message to two adult members of that household. No one else can sign up, no data is sold or shared for marketing, and nothing is collected from visitors to this website.</p>
+  </div>
+
+  <h2><span class="n">1</span>Who operates this service</h2>
+  <p>The Tashe Family Household Digest is operated by Tom Folsom as a personal, non-commercial project. It is not a product, and it is not offered to the public. There is no signup form, no customer account system, and no way for a member of the public to subscribe.</p>
+
+  <h2><span class="n">2</span>What information is involved</h2>
+  <p>The service handles a deliberately small amount of information:</p>
+  <ul>
+    <li><strong>Mobile phone numbers</strong> of the two adult household members who receive the digest. These are entered directly into the system's private configuration by the operator. They are not collected through any web form and are not obtained from any third party.</li>
+    <li><strong>Message content</strong>, which consists of that day's household calendar events, outstanding household to-do items, and the local weather forecast.</li>
+  </ul>
+  <p>No information whatsoever is collected from visitors to this website. There are no analytics, no advertising trackers, and no cookies set by these pages.</p>
+
+  <h2><span class="n">3</span>Where the information comes from</h2>
+  <p>Digest content is assembled from services the household already uses and has authorized:</p>
+  <ul>
+    <li><strong>Google Calendar</strong> — read-only access to the household's own shared calendar.</li>
+    <li><strong>TickTick</strong> — read-only access to the household's own task lists.</li>
+    <li><strong>National Weather Service</strong> — a public government weather forecast for the household's area. No personal information is sent when retrieving it.</li>
+  </ul>
+
+  <h2><span class="n">4</span>How the information is used</h2>
+  <p>Phone numbers are used for exactly one purpose: delivering the household digest and any household notification the operator sends to his own family. They are never used for marketing, never used to build a profile, and never used for any purpose beyond delivering these messages.</p>
+
+  <h2><span class="n">5</span>Who it is shared with</h2>
+  <p>Phone numbers and message content are <strong>not sold, rented, traded, or shared</strong> with any third party for that party's own purposes.</p>
+  <p>The one necessary disclosure is to <strong>Twilio</strong>, the messaging provider that actually transmits the text messages, and to the mobile carriers that deliver them. Twilio processes this information solely to send the messages and handles it under its own privacy policy at <a href="https://www.twilio.com/legal/privacy">twilio.com/legal/privacy</a>.</p>
+  <p>Information may also be disclosed if required by law.</p>
+
+  <h2><span class="n">6</span>How long it is kept</h2>
+  <p>The service keeps no separate database of recipients or message history. Phone numbers exist only in the operator's private system configuration and remain there until removed. Message delivery records are retained by Twilio according to Twilio's own retention practices.</p>
+
+  <h2><span class="n">7</span>Security</h2>
+  <p>Access credentials are stored as private environment variables on the operator's own machine and are not committed to any public code repository. Messages are transmitted to Twilio over an encrypted HTTPS connection.</p>
+  <p>Plainly stated: standard SMS is not an encrypted medium, and no system is perfectly secure. Accordingly, the digest is limited to routine household scheduling information and deliberately excludes financial details, account credentials, medical information, and similarly sensitive material.</p>
+
+  <h2><span class="n">8</span>Your choices</h2>
+  <p>Any recipient can stop all messages at any time by replying <strong>STOP</strong> to any message from this service. Opt-out is honored immediately and permanently unless that person later asks to be re-added. Replying <strong>HELP</strong> returns contact information.</p>
+  <p>A recipient may also ask the operator directly to remove their number or to confirm what information is held about them.</p>
+
+  <h2><span class="n">9</span>Children</h2>
+  <p>The digest is sent only to adult members of the household. It is not directed to children, and no information about children is knowingly collected through it.</p>
+
+  <h2><span class="n">10</span>Changes</h2>
+  <p>If this policy changes, the revised version will be posted on this page with an updated effective date.</p>
+
+  <h2><span class="n">11</span>Contact</h2>
+  <p>Questions about this policy can be sent to <a href="mailto:tom.folsom@gmail.com">tom.folsom@gmail.com</a>.</p>
+
+  <footer>
+    <span>Effective 24 August 2026</span>
+    <span><a href="/sms-terms">SMS Terms &amp; Conditions &rarr;</a></span>
+  </footer>
+
+</div>
+</body>
+</html>
