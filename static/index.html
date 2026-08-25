@@ -27,6 +27,21 @@
   --blue-grd: linear-gradient(90deg, #38bdf8, #5d8bff);
 }
 
+#site-footer {
+  position: relative; z-index: 1;
+  max-width: 1600px; margin: 0 auto;
+  padding: 18px 20px 28px;
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; letter-spacing: .06em;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+}
+#site-footer a { color: var(--muted); text-decoration: none; transition: color .15s; }
+#site-footer a:hover { color: var(--accent); }
+#site-footer .sep { opacity: .5; }
+
 /* ── Reset + base ───────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
@@ -653,6 +668,14 @@ body::before {
   </div><!-- /body -->
 
 </div><!-- /app -->
+
+<footer id="site-footer">
+  <span>Tom Folsom's Household Automation</span>
+  <span class="sep">·</span>
+  <a href="/privacy">Privacy Policy</a>
+  <span class="sep">·</span>
+  <a href="/sms-terms">SMS Terms &amp; Conditions</a>
+</footer>
 
 <script>
 // ── State ──────────────────────────────────────────────────────
