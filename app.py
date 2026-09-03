@@ -11,7 +11,10 @@ from html.parser import HTMLParser
 from flask import Flask, jsonify, send_from_directory, request, Response
 from icalendar import Calendar as iCal
 
+from bp_log import bp_log
+
 app = Flask(__name__)
+app.register_blueprint(bp_log)
 
 TEAMS = {
     'phillies':      {'sport': 'baseball',    'league': 'mlb',                       'id': '22'},
