@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#070b16;color:#eef3fb;color-scheme:dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LitRPG Print Watch — Cycle 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b16;
+  --bg2:#0d1526;
+  --panel:#101b32;
+  --panel-2:#16223c;
+  --line:#20385c;
+  --text:#eef3fb;
+  --text-dim:#9fb0c9;
+  --text-faint:#6b7c96;
+
+  --cyan:#0e93ab; --cyan-bright:#22d3ee;
+  --violet:#6b46c1; --violet-bright:#a78bfa;
+  --gold:#8a5f09; --gold-bright:#eab308;
+  --green:#15803d; --green-bright:#34d399;
+  --red:#b91c1c; --red-bright:#f87171;
+  --grey:#5b6272; --grey-bright:#94a3b8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:dark;background:var(--bg)!important;color:var(--text)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:'Spectral',Georgia,serif;font-size:14px;line-height:1.55;max-width:1180px;margin:0 auto;padding:0 0 50px}
+
+@page{ size:8.5in 11in; margin:0.25in; }
+
+.scan-strip{
+  height:9px;
+  background:linear-gradient(90deg,var(--cyan-bright),var(--violet-bright) 50%,var(--gold-bright));
+  background-size:18px 100%;
+  position:relative;
+}
+.scan-strip::after{
+  content:"";position:absolute;inset:0;
+  background-image:repeating-linear-gradient(90deg,rgba(7,11,22,0.6) 0 2px,transparent 2px 16px);
+}
+
+#sheet{padding:22px 28px 0}
+
+/* ── MASTHEAD ── */
+.masthead{display:grid;grid-template-columns:1fr auto;gap:0;border:3px solid var(--line);margin-bottom:16px;background:var(--panel);overflow:hidden}
+.masthead-main{padding:18px 24px;position:relative}
+.masthead-main::before,.masthead-main::after{content:"";position:absolute;width:13px;height:13px;border-color:var(--cyan-bright);border-style:solid;opacity:.85}
+.masthead-main::before{top:8px;left:8px;border-width:2px 0 0 2px}
+.masthead-main::after{bottom:8px;left:8px;border-width:0 0 2px 2px}
+.masthead-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan-bright);margin-bottom:8px;font-weight:600}
+h1{font-family:'VT323',monospace;font-weight:400;font-size:3rem;line-height:.95;color:#f4f8ff;letter-spacing:.01em}
+h1 .hl{color:var(--gold-bright)}
+.masthead-sub{font-size:.88rem;color:var(--text-dim);margin-top:9px;max-width:62ch;line-height:1.6}
+
+.cadence-card{background:var(--panel-2);border-left:2px solid var(--line);padding:16px 22px;min-width:250px;display:flex;flex-direction:column;justify-content:center;gap:9px}
+.cc-title{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet-bright)}
+.cc-row{display:flex;justify-content:space-between;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--text)}
+.cc-row span:first-child{color:var(--text-faint)}
+.cc-row b{color:var(--gold-bright)}
+
+/* ── KEY STATS ── */
+.stat-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:16px}
+.stat-cell{background:var(--panel);border:2px solid var(--line);padding:11px 8px 9px;text-align:center;position:relative}
+.stat-cell::before{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:11px;height:11px;background:var(--cyan-bright);border:2px solid var(--bg);border-radius:1px}
+.stat-cell.c-v::before{background:var(--violet-bright)}
+.stat-cell.c-g::before{background:var(--gold-bright)}
+.stat-cell.c-r::before{background:var(--green-bright)}
+.stat-cell.c-x::before{background:var(--grey-bright)}
+.stat-num{font-family:'VT323',monospace;font-size:1.95rem;line-height:1;color:var(--cyan-bright)}
+.stat-cell.c-v .stat-num{color:var(--violet-bright)}
+.stat-cell.c-g .stat-num{color:var(--gold-bright)}
+.stat-cell.c-r .stat-num{color:var(--green-bright)}
+.stat-cell.c-x .stat-num{color:var(--grey-bright)}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:.59rem;color:var(--text-dim);margin-top:5px;line-height:1.35}
+
+/* ── SECTION LABEL ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin:24px 0 9px}
+.sec-label:first-of-type{margin-top:4px}
+.sec-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--bg);background:var(--text);padding:4px 11px;flex-shrink:0}
+.sec-rule{height:2px;background:var(--line);flex:1}
+.sec-note{font-size:.79rem;color:var(--text-dim);margin:-1px 0 12px;font-style:italic;max-width:86ch}
+
+/* ── MAJOR PATCH (Wandering Inn) ── */
+.patch-major{border:3px solid var(--gold-bright);background:linear-gradient(180deg,var(--panel),var(--bg2));margin-bottom:6px;overflow:hidden}
+.patch-major-head{background:var(--gold-bright);color:#1a1200;padding:9px 20px;font-family:'IBM Plex Mono',monospace;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:11px;display:flex;justify-content:space-between;align-items:center}
+.patch-major-head .pm-tag{background:#1a1200;color:var(--gold-bright);padding:3px 10px;font-size:9.5px;letter-spacing:.1em}
+.patch-major-body{padding:20px 24px 6px}
+.patch-major-title{font-family:'VT323',monospace;font-size:2.5rem;color:#fff;line-height:1}
+.patch-major-sub{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--text-dim);margin-top:5px;letter-spacing:.04em;text-transform:uppercase}
+.patch-major-desc{font-size:.85rem;color:var(--text);line-height:1.65;margin-top:14px;max-width:96ch}
+.patch-major-desc b{color:var(--gold-bright)}
+.patch-major-desc + .patch-major-desc{margin-top:10px}
+.gate-flag{border:1.5px solid var(--red-bright);background:rgba(185,28,28,.12);padding:11px 15px;margin-top:14px;font-size:.79rem;line-height:1.55;color:var(--text)}
+.gate-flag b{color:var(--red-bright)}
+.roadmap-wrap{margin-top:18px;border-top:1px dashed var(--line);padding-top:14px}
+.roadmap-wrap svg{width:100%;height:auto;display:block}
+.roadmap-caption{font-size:.75rem;color:var(--text-dim);line-height:1.55;margin-top:6px}
+.patch-major-sources{margin-top:14px;padding:12px 0 4px;border-top:1px dashed var(--line);font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--text-faint);display:flex;flex-wrap:wrap;gap:6px 16px}
+.patch-major-sources a{color:var(--cyan-bright);text-decoration:none}
+.patch-major-sources a:hover{text-decoration:underline}
+
+/* ── CHANGELOG ROWS ── */
+.log-list{display:flex;flex-direction:column;gap:9px;margin-bottom:8px}
+.log-row{display:grid;grid-template-columns:118px 1fr 195px;gap:16px;border:2px solid var(--line);background:var(--panel);padding:13px 17px;page-break-inside:avoid}
+.log-row.pending{border-style:dashed;border-color:var(--gold-bright);background:var(--panel-2)}
+.log-row.unconfirmed{border-style:dashed;border-color:var(--grey-bright);background:repeating-linear-gradient(135deg,var(--panel),var(--panel) 8px,var(--panel-2) 8px,var(--panel-2) 16px)}
+.log-tag-col{display:flex;align-items:flex-start}
+.ptag{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;padding:4px 8px;color:#0a0e1a;align-self:flex-start}
+.ptag.new-series{background:var(--green-bright)}
+.ptag.sequel{background:var(--cyan-bright)}
+.ptag.adjacent{background:var(--violet-bright)}
+.ptag.pending{background:transparent;border:1.5px dashed var(--gold-bright);color:var(--gold-bright)}
+.ptag.unconfirmed{background:transparent;border:1.5px dashed var(--grey-bright);color:var(--grey-bright)}
+.log-title{font-weight:700;font-size:.94rem;color:#fff;line-height:1.32}
+.log-series{font-weight:400;color:var(--text-dim);font-size:.78rem}
+.log-author{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--text-dim);margin-top:3px}
+.log-blurb{font-size:.78rem;color:var(--text);line-height:1.5;margin-top:6px}
+.log-meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-dim);display:flex;flex-direction:column;gap:4px;text-align:right;justify-content:flex-start}
+.log-meta b{color:#fff}
+.log-meta a{color:var(--cyan-bright);text-decoration:none}
+.log-meta a:hover{text-decoration:underline}
+
+.gap-note{border:1.5px dashed var(--grey-bright);background:var(--panel-2);padding:13px 17px;font-size:.77rem;color:var(--text-dim);line-height:1.6;margin-bottom:8px;page-break-inside:avoid}
+.gap-note b{color:#fff}
+
+/* ── STATUS EFFECTS ── */
+.status-strip{border:3px solid var(--line);background:var(--panel);margin-bottom:16px}
+.status-head{background:var(--line);padding:8px 18px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-bright)}
+.status-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.status-item{padding:13px 19px;border-right:1px dashed var(--line);border-bottom:1px dashed var(--line)}
+.status-item:nth-child(2n){border-right:none}
+.status-flag{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;display:inline-block;padding:3px 8px;color:#0a0e1a}
+.status-flag.fix{background:var(--cyan-bright)}
+.status-flag.thin{background:var(--gold-bright)}
+.status-flag.scope{background:var(--green-bright)}
+.status-body{font-size:.76rem;line-height:1.55;color:var(--text)}
+.status-body b{color:#fff}
+
+/* ── FOOTER ── */
+.footer{padding:16px 28px 20px;font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.03em;color:var(--text-faint);text-align:center;line-height:1.9}
+.footer a{color:var(--cyan-bright);text-decoration:none}
+
+@media(max-width:920px){
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+  .masthead{grid-template-columns:1fr}
+  .log-row{grid-template-columns:1fr}
+  .log-meta{text-align:left}
+  .status-grid{grid-template-columns:1fr}
+  .status-item{border-right:none}
+}
+</style>
+</head>
+<body>
+
+<div class="scan-strip"></div>
+
+<div id="sheet">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-main">
+    <div class="masthead-eyebrow">System Update Log &middot; Physical Release Tracker</div>
+    <h1>LitRPG Print <span class="hl">Watch</span></h1>
+    <div class="masthead-sub">New physical (paperback/hardcover) LitRPG releases only &mdash; ebook- and audio-only titles are out of scope. Cycle 01 covers roughly Aug 4&ndash;25, 2026, and establishes the baseline for this recurring weekly check.</div>
+  </div>
+  <div class="cadence-card">
+    <div class="cc-title">Tracker Status</div>
+    <div class="cc-row"><span>Cycle</span><b>01 &middot; Baseline</b></div>
+    <div class="cc-row"><span>Window</span><b>Aug 4&ndash;25, 2026</b></div>
+    <div class="cc-row"><span>Compiled</span><b>Aug 29, 2026</b></div>
+    <div class="cc-row"><span>Next scan</span><b>~7 days</b></div>
+  </div>
+</div>
+
+<!-- KEY STATS -->
+<div class="stat-row">
+  <div class="stat-cell c-g">
+    <div class="stat-num">1</div>
+    <div class="stat-label">Landmark event this cycle &mdash; a genre-defining web serial's print debut</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Other confirmed new physical titles, verified via publisher/retailer pages</div>
+  </div>
+  <div class="stat-cell c-v">
+    <div class="stat-num">1</div>
+    <div class="stat-label">Partially confirmed &mdash; print SKU exists, date/price not independently verified</div>
+  </div>
+  <div class="stat-cell c-x">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Flagged as open items for next cycle &mdash; not presented as findings</div>
+  </div>
+  <div class="stat-cell c-r">
+    <div class="stat-num">~10 yrs</div>
+    <div class="stat-label">The Wandering Inn ran free/ebook-only before this print debut (since July 2016)</div>
+  </div>
+  <div class="stat-cell c-g">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Print installments planned in the rollout, through Nov 2026</div>
+  </div>
+</div>
+
+<!-- MAJOR PATCH: WANDERING INN -->
+<div class="patch-major">
+  <div class="patch-major-head"><span>&#9889; Major Patch &mdash; Genre Landmark</span><span class="pm-tag">First-Ever Print Edition</span></div>
+  <div class="patch-major-body">
+    <div class="patch-major-title">The Wandering Inn</div>
+    <div class="patch-major-sub">Book One, Part One &middot; pirateaba &middot; HarperCollins &middot; Paperback &middot; Released August 11, 2026</div>
+    <div class="patch-major-desc">One of the longest-running and most acclaimed LitRPG web serials &mdash; running online continuously since <b>July 2016</b> &mdash; has entered physical print for the first time. It was previously available only as ebook, audiobook, or free web serial. HarperCollins is releasing it in <b>four parts on a monthly cadence</b>: Book One Pt. 1 (Aug 11), Pt. 2 (Sept 22), Book Two Pt. 1 (Oct 20), Pt. 2 (Nov 10) &mdash; all 2026.</div>
+    <div class="patch-major-desc">Per the author's own announcement, this is a <b>rewritten and re-edited edition</b> prepared specifically for the print deal &mdash; not a straight reprint of the web text.</div>
+    <div class="gate-flag"><b>Notable change for existing free-serial readers:</b> as part of the traditional-publishing tradeoff, Volumes 1&ndash;2 are now gated behind the print/ebook release rather than freely available on the web serial site.</div>
+
+    <div class="roadmap-wrap">
+      <svg viewBox="0 0 880 190" xmlns="http://www.w3.org/2000/svg">
+        <line x1="60" y1="110" x2="820" y2="110" stroke="#a78bfa" stroke-width="3"/>
+        <line x1="210" y1="80" x2="210" y2="140" stroke="#eab308" stroke-width="2" stroke-dasharray="5,4"/>
+        <text x="210" y="68" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700" fill="#eab308">TODAY &middot; AUG 29</text>
+
+        <circle cx="60" cy="110" r="9" fill="#34d399" stroke="#070b16" stroke-width="2"/>
+        <text x="60" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#f4f8ff">AUG 11, 2026</text>
+        <text x="60" y="49" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#9fb0c9">BOOK ONE &middot; PART ONE</text>
+        <text x="60" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#34d399">RELEASED</text>
+        <text x="60" y="155" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="#6b7c96">this report's headline</text>
+
+        <circle cx="411" cy="110" r="9" fill="#22d3ee" stroke="#070b16" stroke-width="2"/>
+        <text x="411" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#f4f8ff">SEP 22, 2026</text>
+        <text x="411" y="49" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#9fb0c9">BOOK ONE &middot; PART TWO</text>
+        <text x="411" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#22d3ee">UPCOMING</text>
+
+        <circle cx="645" cy="110" r="9" fill="#22d3ee" stroke="#070b16" stroke-width="2"/>
+        <text x="645" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#f4f8ff">OCT 20, 2026</text>
+        <text x="645" y="49" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#9fb0c9">BOOK TWO &middot; PART ONE</text>
+        <text x="645" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#22d3ee">UPCOMING</text>
+
+        <circle cx="820" cy="110" r="9" fill="#22d3ee" stroke="#070b16" stroke-width="2"/>
+        <text x="820" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="700" fill="#f4f8ff">NOV 10, 2026</text>
+        <text x="820" y="49" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#9fb0c9">BOOK TWO &middot; PART TWO</text>
+        <text x="820" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700" fill="#22d3ee">UPCOMING</text>
+      </svg>
+      <div class="roadmap-caption">Four-part monthly rollout as announced by HarperCollins/pirateaba. Only Part One has released as of this cycle; the remaining three are tracked for future cycles, not assumed.</div>
+    </div>
+
+    <div class="patch-major-sources">
+      <span>Verified via:</span>
+      <a href="https://wanderinginn.com/2026/03/28/harpercollins-announcement/" target="_blank" rel="noopener">wanderinginn.com (author announcement)</a>
+      <a href="https://screenrant.com/longest-lit-rpg-series-wandering-inn-paperback-release-august-2026/" target="_blank" rel="noopener">ScreenRant</a>
+      <a href="https://www.walmart.com/ip/The-Wander-Inn-Paperback-9798210969033/2460488550" target="_blank" rel="noopener">Walmart listing</a>
+      <a href="https://www.mcnallyrobinson.com/9780063516380/pirateaba/the-wandering-inn" target="_blank" rel="noopener">McNally Robinson listing</a>
+    </div>
+  </div>
+</div>
+
+<!-- CHANGELOG: CONFIRMED -->
+<div class="sec-label" style="margin-top:22px"><span class="sec-tag">Changelog &mdash; Confirmed New Releases</span><div class="sec-rule"></div></div>
+<div class="sec-note">Physical availability verified directly against publisher/retailer product pages &mdash; not inferred from release announcements &mdash; since ebook and print availability commonly diverge in this genre.</div>
+
+<div class="log-list">
+
+  <div class="log-row">
+    <div class="log-tag-col"><span class="ptag new-series">New Series</span></div>
+    <div class="log-main">
+      <div class="log-title">Goblin Teeth <span class="log-series">&mdash; A Monster Party LitRPG, Bk. 1</span></div>
+      <div class="log-author">Jim Quill &middot; Podium Publishing</div>
+      <div class="log-blurb">Originated as a Royal Road serial with 800,000+ views before this print release.</div>
+    </div>
+    <div class="log-meta">
+      <div><b>Paperback</b></div>
+      <div>Released ~Aug 4, 2026</div>
+      <div><a href="https://www.target.com/p/goblin-teeth-by-jim-quill-paperback/-/A-1012303962" target="_blank" rel="noopener">Target &#8599;</a></div>
+      <div><a href="https://www.walmart.com/ip/Goblin-Teeth-Goblin-Teeth-A-Monster-Party-Litrpg-Book-1-Paperback-9798347024872/20258456705" target="_blank" rel="noopener">Walmart &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="log-row">
+    <div class="log-tag-col"><span class="ptag adjacent">Genre-Adjacent</span></div>
+    <div class="log-main">
+      <div class="log-title">Rules of Engagement <span class="log-series">&mdash; Ransom's Renegades, Bk. 2</span></div>
+      <div class="log-author">Rick Partlow &middot; Aethon Books</div>
+      <div class="log-blurb">Military-SF/LitRPG-adjacent rather than a close match to dungeon-crawler taste &mdash; flagged explicitly, not a core match.</div>
+    </div>
+    <div class="log-meta">
+      <div><b>Paperback</b> &middot; $14</div>
+      <div>Released Aug 18, 2026</div>
+      <div><a href="https://aethonbooks.com/book/rules-of-engagement/" target="_blank" rel="noopener">aethonbooks.com &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="log-row">
+    <div class="log-tag-col"><span class="ptag sequel">Sequel</span></div>
+    <div class="log-main">
+      <div class="log-title">Fall of the Guild <span class="log-series">&mdash; The Eternal Assassin, Bk. 2</span></div>
+      <div class="log-author">W.D. Swanson &middot; Aethon Books</div>
+      <div class="log-blurb">Progression-fantasy/LitRPG isekai with multi-classing and tactical combat &mdash; a plausible taste match for a Dungeon Crawler Carl / He Who Fights with Monsters reader.</div>
+    </div>
+    <div class="log-meta">
+      <div><b>Paperback</b> &middot; $15 &middot; 437pp</div>
+      <div>Released Aug 19, 2026</div>
+      <div><a href="https://aethonbooks.com/book/fall-of-the-guild/" target="_blank" rel="noopener">aethonbooks.com &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="log-row">
+    <div class="log-tag-col"><span class="ptag new-series">New Series</span></div>
+    <div class="log-main">
+      <div class="log-title">Orphan <span class="log-series">&mdash; The Numbered Empire, Bk. 1</span></div>
+      <div class="log-author">Guy Enigma &middot; Aethon Books</div>
+      <div class="log-blurb">Brand-new series launch &mdash; System/aptitude-stat LitRPG. ISBN 9798193743798.</div>
+    </div>
+    <div class="log-meta">
+      <div><b>Paperback</b> &middot; $20 &middot; 807pp</div>
+      <div>Released Aug 25, 2026</div>
+      <div><a href="https://aethonbooks.com/book/orphan/" target="_blank" rel="noopener">aethonbooks.com &#8599;</a></div>
+    </div>
+  </div>
+
+  <div class="log-row">
+    <div class="log-tag-col"><span class="ptag adjacent">Genre-Adjacent</span></div>
+    <div class="log-main">
+      <div class="log-title">Smoke and Fire <span class="log-series">&mdash; Raptors</span></div>
+      <div class="log-author">CJ Valin &amp; Jaime Castle &middot; Aethon Books</div>
+      <div class="log-blurb">Superhero-progression series rather than dungeon/RPG-system LitRPG in the strict sense &mdash; flagged as genre-adjacent.</div>
+    </div>
+    <div class="log-meta">
+      <div><b>Paperback</b> &middot; $12</div>
+      <div>Released Aug 18, 2026</div>
+      <div><a href="https://aethonbooks.com/book/smoke-and-fire/" target="_blank" rel="noopener">aethonbooks.com &#8599;</a></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PATCH PENDING -->
+<div class="sec-label"><span class="sec-tag">Patch Pending &mdash; Partially Confirmed</span><div class="sec-rule"></div></div>
+<div class="sec-note">A genuine print SKU exists, but exact date/price could not be independently verified this cycle.</div>
+
+<div class="log-list">
+  <div class="log-row pending">
+    <div class="log-tag-col"><span class="ptag pending">Pending</span></div>
+    <div class="log-main">
+      <div class="log-title">Apex Guardian <span class="log-series">&mdash; Paladin of the Forsaken Lands, Bk. 1</span></div>
+      <div class="log-author">Jollybane &middot; Aethon Books</div>
+      <div class="log-blurb">A distinct paperback ASIN/ISBN exists on Amazon separate from the Kindle edition, and Aethon's own August 2026 release announcement places this series' Book 1 on Aug 18, 2026 &mdash; but the Amazon page's price/ship-date details couldn't be pulled directly, and no dedicated Aethon book-detail page could be located. Existence of a print edition is confirmed; exact date/price is not.</div>
+    </div>
+    <div class="log-meta">
+      <div><b>Paperback (SKU confirmed)</b></div>
+      <div>Date/price: unverified</div>
+      <div>ISBN 9798192371176</div>
+      <div><a href="https://www.amazon.com/Apex-Guardian-Adventure-Paladin-Forsaken/dp/B0HF1V6BB6" target="_blank" rel="noopener">Amazon &#8599;</a></div>
+      <div><a href="https://aethonbooks.com/2026/07/15/august-2026/" target="_blank" rel="noopener">Aethon Aug. slate &#8599;</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- RUMOR MILL -->
+<div class="sec-label"><span class="sec-tag">Rumor Mill &mdash; Could Not Confirm</span><div class="sec-rule"></div></div>
+<div class="sec-note">Open items carried to next cycle for a follow-up check &mdash; presented as leads, not findings.</div>
+
+<div class="log-list">
+  <div class="log-row unconfirmed">
+    <div class="log-tag-col"><span class="ptag unconfirmed">Unconfirmed</span></div>
+    <div class="log-main">
+      <div class="log-title">The Legend of Randidly Ghosthound 15</div>
+      <div class="log-author">Noret Flood &middot; Aethon Books</div>
+      <div class="log-blurb">Claimed Aug 26, 2026 release, but no page loaded this cycle showed price or physical format &mdash; only Kindle listings were found in checks.</div>
+    </div>
+    <div class="log-meta"><div>Print status: unconfirmed</div></div>
+  </div>
+
+  <div class="log-row unconfirmed">
+    <div class="log-tag-col"><span class="ptag unconfirmed">One to Watch</span></div>
+    <div class="log-main">
+      <div class="log-title">The Apocalypse is a Side Quest: Book Five</div>
+      <div class="log-author">Liam Lawless &middot; Shadow Alley Press</div>
+      <div class="log-blurb">Publisher's site lists it "coming soon" for Sept 1, 2026; the series is normally sold in paperback, but no product page with a print SKU for this specific volume could be confirmed. Close taste match to Tom's reading (post-apocalyptic progression fantasy) if a print run materializes &mdash; worth a callout for next cycle.</div>
+    </div>
+    <div class="log-meta"><div>Print status: unconfirmed</div></div>
+  </div>
+
+  <div class="gap-note">
+    <b>Coverage gap, not a null result:</b> no verifiable new physical LitRPG releases were found this cycle from Mountaindale Press, Wraithmarked Creative, Royal Road author-direct, Tapas Media, or Portal Books. Tooling issues meant some publisher listing pages returned stale cached data this run &mdash; treat this as an unchecked/inconclusive gap for a follow-up, not confirmation that nothing happened at those publishers.
+  </div>
+</div>
+
+<!-- STATUS EFFECTS -->
+<div class="sec-label"><span class="sec-tag">Patch Verification Notes</span><div class="sec-rule"></div></div>
+
+<div class="status-strip">
+  <div class="status-head">Active Effects &mdash; Sourcing &amp; Scope</div>
+  <div class="status-grid">
+    <div class="status-item">
+      <span class="status-flag scope">Scope Lock &middot; Physical Only</span>
+      <div class="status-body">This tracker covers <b>paperback/hardcover releases only</b>. Ebook- and audio-only titles, however notable, are explicitly out of scope for this recurring task.</div>
+    </div>
+    <div class="status-item">
+      <span class="status-flag fix">Method &middot; Retailer-Verified</span>
+      <div class="status-body">Every confirmed item above was checked against a live <b>publisher or retailer product page</b> (Aethon, Target, Walmart, Amazon, McNally Robinson), not inferred from a release announcement alone &mdash; announcements and actual print availability commonly diverge in this genre.</div>
+    </div>
+    <div class="status-item">
+      <span class="status-flag thin">Thin &middot; Publisher Coverage</span>
+      <div class="status-body">Mountaindale Press, Wraithmarked Creative, Royal Road author-direct storefronts, Tapas Media, and Portal Books were not conclusively checked this cycle due to stale/cached listing pages &mdash; a gap to close next run, not a finding that these publishers had no releases.</div>
+    </div>
+    <div class="status-item">
+      <span class="status-flag thin">Baseline &middot; First Run</span>
+      <div class="status-body">This is Cycle 01 of a new recurring weekly task. There is no prior cycle to diff against yet &mdash; every item above is being reported as "new" relative to a zero baseline, not relative to last week's list.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="scan-strip"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Sources: wanderinginn.com &middot; ScreenRant &middot; Walmart &middot; McNally Robinson &middot; Target &middot; Aethon Books &middot; Amazon<br>
+  Companion to the existing <a href="https://dashboard.tashefamily.com/static/reports/litrpg-reading-list-factsheet.html" target="_blank" rel="noopener">LitRPG Bookshelf reading list</a>. See also the full Cycle 01 report for methodology detail and tiered references.<br>
+  Cycle 01 &middot; Compiled Aug 29, 2026.
+</div>
+
+</body>
+</html>

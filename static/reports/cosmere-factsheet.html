@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#0c0a16;color:#f2ecdf;color-scheme:dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cosmere — Field Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0c0a16;
+  --void-2:#16112a;
+  --void-3:#1e1836;
+  --void-4:#241d40;
+  --line:#3a3158;
+  --line-bright:#59497f;
+  --text:#f2ecdf;
+  --text-dim:#b7abcf;
+  --text-faint:#7d7196;
+
+  --copper:#a35f22;
+  --copper-bright:#e0913f;
+  --copper-soft:rgba(224,145,63,.14);
+
+  --storm:#2f7d8f;
+  --storm-bright:#6fd6e8;
+  --storm-soft:rgba(111,214,232,.12);
+
+  --fan:#665c85;
+  --fan-bright:#a79ac9;
+  --fan-soft:rgba(167,154,201,.12);
+
+  --garnet:#7d2230;
+  --garnet-bright:#e2495a;
+  --garnet-soft:rgba(226,73,90,.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:dark;background:var(--void)!important;color:var(--text)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{
+  font-family:'Crimson Pro',Georgia,serif;font-size:14.5px;line-height:1.55;
+  max-width:1180px;margin:0 auto;padding:0 0 60px;
+  background:
+    radial-gradient(ellipse 900px 500px at 18% -8%, rgba(111,214,232,.06), transparent 60%),
+    radial-gradient(ellipse 700px 600px at 100% 30%, rgba(224,145,63,.05), transparent 55%),
+    var(--void);
+  position:relative;
+}
+@page{ size:8.5in 11in; margin:0.25in; }
+h1,h2,h3{font-family:'Cinzel',serif;font-weight:700;letter-spacing:.02em}
+a{color:var(--storm-bright)}
+#sheet{padding:26px 30px 0;position:relative;z-index:1}
+
+/* shatter-crack top strip */
+.crack-strip{height:9px;position:relative;background:linear-gradient(90deg,var(--copper-bright),var(--storm-bright) 45%,var(--fan-bright) 75%,var(--garnet-bright));}
+.crack-strip::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(115deg, rgba(12,10,22,.55) 0 3px, transparent 3px 22px);}
+
+/* ── crosslink ── */
+.crosslink{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;color:var(--text-faint);text-align:right;padding:10px 30px 0}
+.crosslink a{color:var(--storm-bright);text-decoration:none;border-bottom:1px dotted var(--storm-bright)}
+
+/* ── MASTHEAD ── */
+.masthead{display:grid;grid-template-columns:1fr auto;gap:0;border:2px solid var(--line-bright);margin:14px 0 16px;background:var(--void-2);overflow:hidden;position:relative}
+.masthead-main{padding:22px 28px;position:relative}
+.masthead-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--storm-bright);margin-bottom:10px;font-weight:600}
+h1.title{font-size:2.9rem;line-height:1;color:#fbf7ec;text-shadow:0 0 24px rgba(224,145,63,.18)}
+h1.title .frag{color:var(--copper-bright)}
+.masthead-sub{font-family:'Crimson Pro',serif;font-size:1.05rem;font-style:italic;color:var(--text-dim);margin-top:10px;max-width:56ch}
+.meta-rail{background:var(--void-3);border-left:2px solid var(--line);min-width:230px;display:flex;flex-direction:column}
+.meta-row{padding:9px 18px;border-bottom:1px solid var(--line);flex:1;display:flex;flex-direction:column;justify-content:center}
+.meta-row:last-child{border-bottom:none}
+.meta-label{font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-faint)}
+.meta-val{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--copper-bright);margin-top:3px;font-weight:600}
+
+/* ── TIER LEGEND ── */
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;border:1.5px solid var(--line);background:var(--void-2);padding:13px 20px;margin-bottom:18px;align-items:center}
+.legend-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint);margin-right:6px}
+.tier{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px 4px 7px;font-weight:700;white-space:nowrap}
+.tier::before{content:"";width:9px;height:9px;flex-shrink:0}
+.tier.confirmed{border:1.5px solid var(--copper-bright);color:var(--copper-bright);background:var(--copper-soft)}
+.tier.confirmed::before{background:var(--copper-bright)}
+.tier.wob{border:1.5px dashed var(--storm-bright);color:var(--storm-bright);background:var(--storm-soft)}
+.tier.wob::before{border:1.5px dashed var(--storm-bright);background:transparent}
+.tier.fan{border:1.5px dotted var(--fan-bright);color:var(--fan-bright);background:var(--fan-soft)}
+.tier.fan::before{border:1.5px dotted var(--fan-bright);background:transparent;border-radius:50%}
+.tier.unconf{border:1.5px dotted var(--text-faint);color:var(--text-faint);background:rgba(125,113,150,.1)}
+.tier.unconf::before{content:"?";width:auto;color:var(--text-faint);font-weight:800}
+.legend-note{font-family:'Crimson Pro',serif;font-style:italic;font-size:.82rem;color:var(--text-faint);width:100%;margin-top:2px}
+
+/* ── SECTION LABEL ── */
+.sec-label{display:flex;align-items:center;gap:10px;margin:26px 0 10px}
+.sec-label:first-of-type{margin-top:6px}
+.sec-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--void);background:var(--copper-bright);padding:4px 12px;flex-shrink:0}
+.sec-rule{height:1.5px;background:var(--line);flex:1;position:relative}
+.sec-rule::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;background:var(--storm-bright);transform:rotate(45deg)}
+.sec-note{font-size:.8rem;color:var(--text-dim);font-style:italic;margin:-2px 0 12px;max-width:90ch}
+
+/* ── KEY STATS ── */
+.stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:6px}
+.stat-cell{background:var(--void-2);border:1.5px solid var(--line);border-top:3px solid var(--copper-bright);padding:13px 10px 10px;text-align:center;position:relative}
+.stat-cell.wob{border-top-color:var(--storm-bright)}
+.stat-num{font-family:'Cinzel',serif;font-weight:700;font-size:1.85rem;line-height:1;color:var(--text)}
+.stat-cell.wob .stat-num{color:var(--storm-bright)}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.04em;color:var(--text-dim);margin-top:6px;line-height:1.35;text-transform:uppercase}
+.stat-foot{font-family:'IBM Plex Mono',monospace;font-size:.52rem;color:var(--text-faint);margin-top:5px;font-style:normal}
+
+/* ── READING ORDERS ── */
+.ro-callout{border:1.5px solid var(--line);background:var(--void-2);padding:14px 18px;margin-bottom:14px;font-size:.88rem;line-height:1.6}
+.ro-callout b{color:var(--copper-bright)}
+.ro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:6px}
+.ro-panel{border:1.5px solid var(--line);background:var(--void-2);display:flex;flex-direction:column;page-break-inside:avoid}
+.ro-head{padding:10px 14px;border-bottom:1.5px solid var(--line);background:var(--void-3)}
+.ro-head h3{font-size:.98rem;color:var(--text)}
+.ro-head .tier{margin-top:7px}
+.ro-body{padding:12px 14px;font-size:.8rem;line-height:1.6;flex:1}
+.ro-seq{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.ro-step{display:flex;gap:7px;align-items:baseline}
+.ro-step .n{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-faint);flex-shrink:0;width:14px}
+.ro-caveat{font-style:italic;color:var(--text-faint);font-size:.74rem;margin-top:8px;border-top:1px dashed var(--line);padding-top:7px}
+
+/* ── CONNECTIVE TISSUE ── */
+.tissue{border:1.5px solid var(--storm-bright);background:linear-gradient(180deg,var(--void-2),var(--void-3));padding:18px 22px;margin-bottom:6px}
+.tissue p{font-size:.94rem;line-height:1.7}
+.tissue .tier{margin-top:10px}
+
+/* ── STORY STATUS ── */
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin-bottom:6px}
+.status-row{display:flex;flex-direction:column;gap:4px}
+.status-top{display:flex;justify-content:space-between;align-items:baseline;font-family:'IBM Plex Mono',monospace;font-size:.72rem}
+.status-top .name{color:var(--text);font-weight:700;letter-spacing:.03em}
+.status-top .frac{color:var(--copper-bright)}
+.bar-track{height:12px;background:var(--void-3);border:1px solid var(--line);position:relative;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--copper),var(--copper-bright))}
+.bar-fill.empty{background:repeating-linear-gradient(45deg,var(--void-4) 0 6px,var(--void-3) 6px 12px);width:2%}
+.status-note{font-size:.72rem;color:var(--text-faint);font-style:italic}
+
+/* ── SPOILER FLAG ── */
+.spoiler-flag{border:1.5px dashed var(--garnet-bright);background:var(--garnet-soft);padding:11px 16px;margin:14px 0 6px;font-size:.8rem;line-height:1.55;display:flex;gap:10px;align-items:flex-start}
+.spoiler-flag .sf-icon{font-family:'Cinzel',serif;font-weight:800;color:var(--garnet-bright);font-size:1rem;flex-shrink:0}
+.spoiler-flag b{color:var(--garnet-bright)}
+
+/* ── SHATTER MOSAIC ── */
+.mosaic-wrap{border:1.5px solid var(--line);background:radial-gradient(ellipse at 50% 40%, rgba(111,214,232,.05), var(--void-2) 70%);padding:22px 20px 18px;margin-bottom:6px;position:relative}
+.mosaic-cap{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-faint);margin-top:12px;font-style:italic}
+.shatter-field{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;align-items:stretch;max-width:980px;margin:0 auto}
+.shard{width:112px;min-height:100px;padding:10px 9px 8px;display:flex;flex-direction:column;justify-content:center;background:var(--void-3);text-align:center;position:relative}
+.shard.confirmed{border:2px solid var(--copper-bright);box-shadow:0 0 10px rgba(224,145,63,.15) inset}
+.shard.fan{border:2px dotted var(--fan-bright)}
+.shard .s-name{font-family:'Cinzel',serif;font-weight:600;font-size:.82rem;color:var(--text);line-height:1.15}
+.shard .s-sub{font-family:'IBM Plex Mono',monospace;font-size:.55rem;color:var(--text-faint);margin-top:5px;line-height:1.3}
+.shard .s-tag{font-family:'IBM Plex Mono',monospace;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;color:var(--copper-bright)}
+.shard.fan .s-tag{color:var(--fan-bright)}
+.shard .s-spoil{position:absolute;top:-8px;right:-8px;width:20px;height:20px;background:var(--garnet-bright);color:var(--void);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-weight:800;font-size:.7rem}
+.shape-a{clip-path:polygon(6% 0%,100% 8%,94% 100%,0% 92%)}
+.shape-b{clip-path:polygon(0% 14%,88% 0%,100% 86%,12% 100%)}
+.shape-c{clip-path:polygon(10% 0%,100% 0%,90% 100%,0% 88%)}
+.shape-d{clip-path:polygon(0% 0%,92% 6%,100% 100%,8% 94%)}
+
+/* ── COLLECTOR ── */
+.collector-flag{border:2px solid var(--copper-bright);background:var(--copper-soft);padding:14px 18px;margin-bottom:14px;font-size:.86rem;line-height:1.6}
+.collector-flag b{color:var(--copper-bright)}
+.pattern-note{border-left:3px solid var(--storm-bright);background:var(--storm-soft);padding:10px 15px;margin:12px 0;font-size:.8rem;line-height:1.6;font-style:italic}
+table.cat{width:100%;border-collapse:collapse;margin-bottom:8px;font-size:.8rem}
+table.cat th{font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;text-align:left;color:var(--text-faint);border-bottom:1.5px solid var(--line);padding:6px 10px}
+table.cat td{padding:7px 10px;border-bottom:1px solid var(--line)}
+table.cat td.soldout{color:var(--garnet-bright);font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:700}
+table.cat td.avail{color:var(--copper-bright);font-family:'IBM Plex Mono',monospace;font-size:.68rem}
+table.cat td.price{font-family:'IBM Plex Mono',monospace;color:var(--text)}
+
+/* ── FOOTER ── */
+.foot{margin-top:28px;padding-top:14px;border-top:1.5px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text-faint);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.foot a{color:var(--storm-bright)}
+
+@media print{
+  .crosslink{display:none}
+}
+</style>
+</head>
+<body>
+<div class="crack-strip"></div>
+<div class="crosslink">Companion document → <a href="cosmere-report.html">The Cosmere — Ars Arcanum: A Reader's Reference Guide</a></div>
+<div id="sheet">
+
+  <div class="masthead">
+    <div class="masthead-main">
+      <div class="masthead-eyebrow">Household Reference · Sept 2026</div>
+      <h1 class="title">THE <span class="frag">COSMERE</span></h1>
+      <div class="masthead-sub">Field Reference — book list, reading orders, the connective tissue, and the collector's bottom line. Written for a reader already inside the published books.</div>
+    </div>
+    <div class="meta-rail">
+      <div class="meta-row"><div class="meta-label">Series w/ published entries</div><div class="meta-val">6</div></div>
+      <div class="meta-row"><div class="meta-label">Latest release</div><div class="meta-val">Wind and Truth, Dec 2024</div></div>
+      <div class="meta-row"><div class="meta-label">Next release</div><div class="meta-val">Isles of the Emberdark (Tor), Feb 2026</div></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="legend-title">Confidence key</span>
+    <span class="tier confirmed">Text-confirmed</span>
+    <span class="tier wob">Word of Brandon</span>
+    <span class="tier fan">Fan-derived</span>
+    <span class="tier unconf">Could not confirm</span>
+    <span class="legend-note">Every claim below carries one of these. Cosmere writing online routinely blurs published text with fan inference — this page doesn't.</span>
+  </div>
+
+  <div class="sec-label"><span class="sec-tag">01 · At a glance</span><span class="sec-rule"></span></div>
+  <div class="stat-row">
+    <div class="stat-cell"><div class="stat-num">5 / 10</div><div class="stat-label">Stormlight published<br>(Arc 1 complete)</div></div>
+    <div class="stat-cell"><div class="stat-num">7 / ~13</div><div class="stat-label">Mistborn published<br>(Era 1 + Era 2)</div></div>
+    <div class="stat-cell"><div class="stat-num">1 / 3</div><div class="stat-label">Elantris published</div></div>
+    <div class="stat-cell wob"><div class="stat-num">0</div><div class="stat-label">Dragonsteel (series)<br>published — see §4</div></div>
+    <div class="stat-cell wob"><div class="stat-num">~30–40</div><div class="stat-label">Total Cosmere novels<br>planned, order-of-magnitude</div></div>
+  </div>
+  <div class="stat-foot" style="margin-bottom:18px">23 distinct titles/collections counted from the published catalog below (Sept 2026) — a tally, not an official Sanderson figure.</div>
+
+  <div class="sec-label"><span class="sec-tag">02 · Reading orders — genuinely competing</span><span class="sec-rule"></span></div>
+  <div class="ro-callout">
+    <b>Sanderson's own answer: it doesn't matter which series you start with.</b> Five valid entry points per his FAQ — <i>Mistborn: The Final Empire</i>, <i>The Emperor's Soul</i>, <i>The Way of Kings</i>, <i>Elantris</i>, <i>Warbreaker</i>. His one hard rule: never skip ahead within a series. He specifically flags <i>The Alloy of Law</i> as a weak entry point despite opening Mistborn Era 2 — it spoils Era 1.
+    <span class="tier confirmed" style="margin-top:8px">Text-confirmed — brandonsanderson.com FAQ</span>
+  </div>
+  <div class="ro-grid">
+    <div class="ro-panel">
+      <div class="ro-head"><h3>Official Chronological</h3><span class="tier confirmed">Text-confirmed</span></div>
+      <div class="ro-body">
+        In-world sequence, per Sanderson's own FAQ.
+        <div class="ro-seq">
+          <div class="ro-step"><span class="n">1</span>Elantris</div>
+          <div class="ro-step"><span class="n">2</span>The Emperor's Soul</div>
+          <div class="ro-step"><span class="n">3</span>Mistborn Era 1</div>
+          <div class="ro-step"><span class="n">4</span>Warbreaker</div>
+          <div class="ro-step"><span class="n">5</span>Shadows for Silence</div>
+          <div class="ro-step"><span class="n">6</span>Stormlight Archive</div>
+          <div class="ro-step"><span class="n">7</span>Mistborn Era 2</div>
+          <div class="ro-step"><span class="n">8</span>Sixth of the Dusk</div>
+        </div>
+        <div class="ro-caveat">Demands more Cosmere literacy up front. Sanderson himself flags several placements as unconfirmed (RAFO).</div>
+      </div>
+    </div>
+    <div class="ro-panel">
+      <div class="ro-head"><h3>Publication Order</h3><span class="tier confirmed">Text-confirmed (dates)</span></div>
+      <div class="ro-body">
+        As released, by year — the spoiler-safest path.
+        <div class="ro-seq">
+          <div class="ro-step"><span class="n">·</span>Elantris (2005)</div>
+          <div class="ro-step"><span class="n">·</span>Mistborn Era 1 (2006–08)</div>
+          <div class="ro-step"><span class="n">·</span>Warbreaker (2009)</div>
+          <div class="ro-step"><span class="n">·</span>Stormlight begins (2010)</div>
+          <div class="ro-step"><span class="n">·</span>Mistborn Era 2 begins (2011)</div>
+          <div class="ro-step"><span class="n">·</span>...interleaved to present</div>
+        </div>
+        <div class="ro-caveat">A straight sort of publish dates, not an endorsed "order" — included here as the neutral baseline.</div>
+      </div>
+    </div>
+    <div class="ro-panel">
+      <div class="ro-head"><h3>Fan "Connections-First"</h3><span class="tier fan">Fan-derived</span></div>
+      <div class="ro-body">
+        Optimizes for catching cameos and Realmatic tie-ins early, at the cost of harder books sooner. Not endorsed by Sanderson.
+        <div class="ro-seq">
+          <div class="ro-step"><span class="n">1</span>Mistborn Era 1</div>
+          <div class="ro-step"><span class="n">2</span>Warbreaker</div>
+          <div class="ro-step"><span class="n">3</span>Stormlight Archive</div>
+          <div class="ro-step"><span class="n">4</span>Mistborn Era 2</div>
+          <div class="ro-step"><span class="n">5</span>Secret Projects</div>
+        </div>
+        <div class="ro-caveat">Fan orders also disagree with each other — notably where Warbreaker sits relative to Words of Radiance, and where the Secret Projects land.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label"><span class="sec-tag">03 · What actually connects everything</span><span class="sec-rule"></span></div>
+  <div class="tissue">
+    <p>All of Sanderson's adult epic fantasy shares one cosmology: a shattered god's power split into <b>sixteen Shards</b>, each invested in a different world. Every named magic system draws on the same substrate — <b>Investiture</b> — moving through three overlapping Realms (Physical, Cognitive, Spiritual). Rare points where a Shard's Investiture pools heavily, called <b>perpendicularities</b>, let people cross between worlds. <b>Hoid</b>, under one alias or another, has cameoed in every published Cosmere book to date. That's the whole shared skeleton — the full Shard-by-Shard detail, including one late-series reveal, is in the companion report.</p>
+    <span class="tier confirmed">Core structure text-confirmed — full roster and one Shard's current status rest on thinner ground, see full report §5</span>
+  </div>
+
+  <div class="sec-label"><span class="sec-tag">04 · Where the story stands</span><span class="sec-rule"></span></div>
+  <div class="status-grid">
+    <div class="status-row">
+      <div class="status-top"><span class="name">STORMLIGHT ARCHIVE</span><span class="frac">5 / 10 · Arc 1 complete</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:50%"></div></div>
+      <div class="status-note">Wind and Truth (Dec 2024) closes Arc 1. Sanderson plans a multi-year break before Arc 2 (books 6–10); no firm date.</div>
+    </div>
+    <div class="status-row">
+      <div class="status-top"><span class="name">MISTBORN</span><span class="frac">7 / ~13</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:54%"></div></div>
+      <div class="status-note">Era 3 "Ghostbloods" book 1 mostly done — Dec 2028 stated as firm. Era 4 unconfirmed.</div>
+    </div>
+    <div class="status-row">
+      <div class="status-top"><span class="name">ELANTRIS</span><span class="frac">1 / 3</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:33%"></div></div>
+      <div class="status-note">Two sequels planned, unwritten. No date.</div>
+    </div>
+    <div class="status-row">
+      <div class="status-top"><span class="name">DRAGONSTEEL (the series)</span><span class="frac">0 / unknown</span></div>
+      <div class="bar-track"><div class="bar-fill empty"></div></div>
+      <div class="status-note">Meant to anchor the endgame and Hoid's backstory. Entirely unpublished — see full report §4 and §9.</div>
+    </div>
+  </div>
+  <div class="collector-flag" style="margin-top:10px">Concretely next: <b>Isles of the Emberdark</b> Tor trade (Feb 2026) → Hoid's Storybook Collection crowdfund (Mar 2026) → <b>The Fires of December</b>, first of Hoid's Travails (Dec 2026) → Ghostbloods Era 3 (Dec 2028, then 2029, 2030) → Stormlight Arc 2, undated.</div>
+
+  <div class="sec-label"><span class="sec-tag">05 · The Shattering, at a glance</span><span class="sec-rule"></span></div>
+  <div class="sec-note">All sixteen original Shards of Adonalsium. Solid copper = confirmed on the page. Dotted violet = named only via Word of Brandon or <i>Wind and Truth</i>, with Vessel and world still unconfirmed in text. The garnet mark flags a Shard whose <i>current</i> status turns on a late-book reveal — detail deliberately withheld here; see the full report.</div>
+  <div class="mosaic-wrap">
+    <div class="shatter-field">
+      <div class="shard confirmed shape-a" style="transform:rotate(-3deg)"><div class="s-name">Ruin</div><div class="s-sub">Scadrial — merged, now Harmony</div><div class="s-tag">Confirmed</div></div>
+      <div class="shard confirmed shape-b" style="transform:rotate(2deg)"><div class="s-name">Preservation</div><div class="s-sub">Scadrial — merged, now Harmony</div><div class="s-tag">Confirmed</div></div>
+      <div class="shard confirmed shape-c" style="transform:rotate(-2deg)"><div class="s-name">Honor</div><div class="s-sub">Roshar</div><div class="s-tag">Confirmed</div></div>
+      <div class="shard confirmed shape-d" style="transform:rotate(3deg)"><div class="s-name">Cultivation</div><div class="s-sub">Roshar</div><div class="s-tag">Confirmed</div></div>
+      <div class="shard confirmed shape-a" style="transform:rotate(-4deg)">
+        <div class="s-spoil">!</div>
+        <div class="s-name">Odium</div><div class="s-sub">Roshar — current status: see full report</div><div class="s-tag">Confirmed</div>
+      </div>
+      <div class="shard confirmed shape-b" style="transform:rotate(2deg)"><div class="s-name">Endowment</div><div class="s-sub">Nalthis</div><div class="s-tag">Confirmed</div></div>
+      <div class="shard confirmed shape-c" style="transform:rotate(-3deg)"><div class="s-name">Devotion</div><div class="s-sub">Sel — splintered, residue: the Dor</div><div class="s-tag">Confirmed</div></div>
+      <div class="shard confirmed shape-d" style="transform:rotate(4deg)"><div class="s-name">Dominion</div><div class="s-sub">Sel — splintered, residue: the Dor</div><div class="s-tag">Confirmed</div></div>
+      <div class="shard confirmed shape-a" style="transform:rotate(-2deg)"><div class="s-name">Autonomy</div><div class="s-sub">Taldain + others · Vessel: Bavadin</div><div class="s-tag">Confirmed</div></div>
+      <div class="shard fan shape-b" style="transform:rotate(3deg)"><div class="s-name">Ambition</div><div class="s-tag">Fan-derived</div></div>
+      <div class="shard fan shape-c" style="transform:rotate(-4deg)"><div class="s-name">Invention</div><div class="s-tag">Fan-derived</div></div>
+      <div class="shard fan shape-d" style="transform:rotate(2deg)"><div class="s-name">Mercy</div><div class="s-tag">Fan-derived</div></div>
+      <div class="shard fan shape-a" style="transform:rotate(-3deg)"><div class="s-name">Valor</div><div class="s-tag">Fan-derived</div></div>
+      <div class="shard fan shape-b" style="transform:rotate(4deg)"><div class="s-name">Reason</div><div class="s-tag">Fan-derived</div></div>
+      <div class="shard fan shape-c" style="transform:rotate(-2deg)"><div class="s-name">Virtuosity</div><div class="s-tag">Fan-derived</div></div>
+      <div class="shard fan shape-d" style="transform:rotate(3deg)"><div class="s-name">Whimsy</div><div class="s-tag">Fan-derived</div></div>
+    </div>
+    <div class="mosaic-cap">16 Shards of Adonalsium · 9 confirmed on the page, 7 named only via Word of Brandon / <i>Wind and Truth</i></div>
+  </div>
+
+  <div class="sec-label"><span class="sec-tag">06 · The collector's bottom line</span><span class="sec-rule"></span></div>
+  <div class="collector-flag">
+    <b>Dragonsteel-direct (dragonsteelbooks.com) behaves like Subterranean does for Bujold in your author tracker</b> — direct-sale leatherbounds, capped 2/customer, signed copies do not restock once sold out. For some editions, direct is the only route at all.
+  </div>
+  <table class="cat">
+    <tr><th>Edition</th><th>Price (at research)</th><th>Signed status</th></tr>
+    <tr><td>Mistborn Era 1 &amp; Era 2 (leatherbound)</td><td class="price">$125 ea.</td><td class="soldout">Final Empire, Alloy of Law, Bands of Mourning, Lost Metal — signed SOLD OUT</td></tr>
+    <tr><td>Warbreaker (leatherbound)</td><td class="price">$125</td><td class="soldout">Signed SOLD OUT</td></tr>
+    <tr><td>Elantris (leatherbound)</td><td class="price">$125</td><td class="avail">Unsigned available</td></tr>
+    <tr><td>The Way of Kings / Words of Radiance (leatherbound)</td><td class="price">$250 ea.</td><td class="avail">Unsigned available</td></tr>
+  </table>
+  <div class="pattern-note">Direct-first pattern: unique Dragonsteel editions and signed stock appear months before the Tor trade edition (e.g. Isles of the Emberdark: direct Jul 2025 → Tor trade Feb 2026). Treat every Dragonsteel-only item as time-sensitive.</div>
+  <div class="stat-foot">B&amp;N carries the standard Tor catalog broadly (incl. a Stormlight 1–5 mass-market box) and runs signed tip-in campaigns on major releases. <span class="tier unconf" style="margin-top:4px">Could not confirm any official B&amp;N-exclusive Sanderson edition (sprayed edges, exclusive covers) — only fan-made Etsy/eBay listings surfaced.</span></div>
+
+  <div class="foot">
+    <span>Researched Sept 2026 · sources include brandonsanderson.com, dragonsteelbooks.com, State of the Sanderson 2025, and Coppermind (fan-maintained, cited as such)</span>
+    <span>Full sourcing and Shard-by-Shard detail → <a href="cosmere-report.html">the companion reference guide</a></span>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f2efe4;color:#1c1a2e;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LitRPG Physical Release Tracker — Baseline Report, Cycle 01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body{color-scheme:light;background:#f2efe4!important;color:#1c1a2e!important}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.75;background:#f2efe4;color:#1c1a2e;max-width:820px;margin:0 auto;padding:56px 40px 96px}
+
+/* tokens: ink #1c1a2e · ink-soft #55536b · paper #f2efe4 · line #d9d2ba · indigo #423a8f · indigo-deep #2b2560 · gold #8a6a1f · green #3f6b46 · red #a4291f */
+
+/* COVER */
+.cover{border-top:4px solid #1c1a2e;border-bottom:1px solid #d9d2ba;padding:32px 0 28px;margin-bottom:48px}
+.cover-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#423a8f;margin-bottom:12px}
+.cover h1{font-size:2rem;font-weight:700;line-height:1.22;color:#1c1a2e;margin-bottom:10px}
+.cover h1 em{font-style:italic;font-weight:500;color:#8a6a1f}
+.cover-subtitle{font-size:1rem;color:#55536b;font-style:italic;margin-bottom:20px;max-width:64ch}
+.cover-meta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;color:#7a7690;line-height:2.2;border-top:1px solid #e2dbc0;padding-top:14px;margin-top:14px}
+
+/* TOC */
+.toc{background:#fff;border:1px solid #d9d2ba;padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#423a8f;margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted #e2dbc0;font-size:.88rem}
+.toc-item:last-child{border-bottom:none}
+.toc-section{color:#1c1a2e}
+.toc-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:#423a8f}
+.toc-item.hl .toc-section{font-weight:700;color:#8a6a1f}
+
+/* SECTION STRUCTURE */
+.section{margin-bottom:52px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:#423a8f;flex-shrink:0}
+.section-rule{height:1px;background:#e2dbc0;flex:1}
+h2{font-family:'Spectral',serif;font-size:1.42rem;font-weight:700;color:#1c1a2e;margin-bottom:14px;line-height:1.25}
+h3{font-family:'Spectral',serif;font-size:1.04rem;font-style:italic;font-weight:600;color:#8a6a1f;margin:26px 0 9px}
+p{color:#1c1a2e;margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+p strong{color:#1c1a2e}
+em{font-style:italic}
+
+/* CALLOUT */
+.callout{border-left:4px solid #423a8f;background:#eceafb;padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:#1c1a2e;margin:0;font-size:.96rem;line-height:1.68;max-width:66ch}
+
+/* DETAIL LIST */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:180px 1fr;gap:0;border-bottom:1px solid #ecdfc0;padding:12px 0;font-size:.9rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:'Spectral',serif;font-weight:700;color:#423a8f;line-height:1.45;padding-right:16px}
+.detail-body{color:#1c1a2e;line-height:1.68}
+
+/* DATA TABLE */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+.table-scroll table{margin:0}
+.data-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.85rem;background:#fff;border:1px solid #d9d2ba}
+.data-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#1c1a2e;background:#e9e3cf;border-bottom:2px solid #d3c9a3;padding:9px 11px;text-align:left}
+.data-table td{padding:9px 11px;border-bottom:1px solid #ecdfc0;color:#1c1a2e;vertical-align:top;line-height:1.5}
+.data-table tr:last-child td{border-bottom:none}
+.data-table .flag-adj{color:#8a6a1f;font-style:italic}
+
+/* HEADLINE DOSSIER CARD */
+.dossier{border:1.5px solid #1c1a2e;background:#fff;margin:20px 0}
+.dossier-head{background:#1c1a2e;color:#f2efe4;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 18px}
+.dossier-body{padding:18px 22px}
+.dossier-row{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:8px 0;border-bottom:1px dotted #ecdfc0;font-size:.87rem}
+.dossier-row:last-child{border-bottom:none}
+.dossier-label{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.04em;color:#423a8f;padding-top:2px}
+.dossier-value{color:#1c1a2e;line-height:1.6}
+
+/* ROADMAP TABLE (quieter echo of fact-sheet timeline) */
+.roadmap-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.85rem}
+.roadmap-table th{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#1c1a2e;background:#e9e3cf;padding:8px 12px;text-align:left;border-bottom:2px solid #d3c9a3}
+.roadmap-table td{padding:9px 12px;border-bottom:1px solid #ecdfc0}
+.roadmap-table td.status-released{color:#3f6b46;font-weight:700}
+.roadmap-table td.status-upcoming{color:#423a8f}
+
+/* CONFIDENCE TIERS */
+.confidence{border:1.5px solid #1c1a2e;background:#fff;margin:22px 0}
+.confidence-head{background:#1c1a2e;color:#f2efe4;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.confidence-body{padding:16px 20px}
+.conf-item{border-left:4px solid #8a6a1f;padding:8px 14px;margin-bottom:12px;background:#f2efe4}
+.conf-item:last-child{margin-bottom:0}
+.conf-item.bad{border-left-color:#a4291f}
+.conf-item.good{border-left-color:#3f6b46}
+.conf-item .lbl{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:#8a6a1f;display:block;margin-bottom:4px}
+.conf-item.bad .lbl{color:#a4291f}
+.conf-item.good .lbl{color:#3f6b46}
+.conf-item p{font-size:.86rem;margin:0;max-width:none}
+
+/* GAP / NEGATIVE BOX */
+.gapbox{border:2px solid #a4291f;background:#fff;margin:22px 0}
+.gapbox-head{background:#a4291f;color:#f2efe4;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 16px}
+.gapbox-body{padding:18px 22px}
+.gapbox-item{display:grid;grid-template-columns:160px 1fr;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dotted #ecdfc0}
+.gapbox-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.gapbox-place{font-family:"IBM Plex Mono",monospace;font-weight:700;color:#a4291f;font-size:.8rem}
+.gapbox-item p{font-size:.88rem;margin:0}
+
+/* SOURCES SECTION */
+.sources-section{margin-top:52px;padding-top:28px;border-top:2px solid #1c1a2e}
+.source-group{margin-bottom:26px}
+.source-group-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#423a8f;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #e2dbc0}
+.source-group-note{font-size:.78rem;color:#7a7690;font-style:italic;margin-bottom:12px}
+.source-item{font-size:.87rem;color:#1c1a2e;line-height:1.65;padding:6px 0;border-bottom:1px dotted #ecdfc0}
+.source-item:last-child{border-bottom:none}
+.source-item a{color:#423a8f}
+
+/* FOOTER */
+.footer{margin-top:52px;padding-top:20px;border-top:1px solid #e2dbc0;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:#7a7690;text-align:center;line-height:2.2}
+.footer a{color:#423a8f}
+
+@media(max-width:640px){
+  body{padding:28px 18px 64px;font-size:16px}
+  .cover h1{font-size:1.5rem}
+  .detail-row{grid-template-columns:1fr;gap:4px}
+  .data-table{width:auto;min-width:560px}
+  .dossier-row{grid-template-columns:1fr;gap:4px}
+  .gapbox-item{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Full Baseline Report &middot; Household LitRPG Tracking &middot; Compiled Aug 29, 2026</div>
+  <h1>LitRPG Physical Release Tracker<br><em>Baseline Report, Cycle 01</em></h1>
+  <div class="cover-subtitle">The first run of a new recurring weekly task tracking newly available <strong>physical (paperback/hardcover) only</strong> LitRPG releases &mdash; headlined by The Wandering Inn's first-ever print edition, plus five other confirmed titles, one partially confirmed, and three open items carried to next cycle. Sourcing confidence is kept visible throughout, not smoothed into a generic disclaimer.</div>
+  <div class="cover-meta">
+    Compiled: August 29, 2026 &nbsp;&middot;&nbsp; Window covered: roughly Aug 4&ndash;25, 2026<br>
+    Scope: paperback/hardcover print releases only &mdash; ebook and audio-only releases are explicitly out of scope for this task<br>
+    Household context: builds on the existing <a href="https://dashboard.tashefamily.com/static/reports/litrpg-reading-list-factsheet.html">LitRPG Bookshelf reading list</a> (Dungeon Crawler Carl, He Who Fights with Monsters)<br>
+    Companion document: Print Watch fact sheet (litrpg-print-watch-factsheet.html)
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><span class="toc-section">1. Scope, Method &amp; How to Read This Report</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item hl"><span class="toc-section">2. The Headline &mdash; The Wandering Inn's Print Debut</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item"><span class="toc-section">3. Confirmed New Physical Releases (Aug 4&ndash;25, 2026)</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item"><span class="toc-section">4. Partially Confirmed &mdash; Apex Guardian</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item hl"><span class="toc-section">5. Flagged &mdash; Could Not Confirm This Cycle</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">6. Publisher Coverage Notes</span><span class="toc-num">&sect; 06</span></div>
+  <div class="toc-item"><span class="toc-section">7. Relationship to the Existing Reading List</span><span class="toc-num">&sect; 07</span></div>
+  <div class="toc-item"><span class="toc-section">8. Tracking Methodology Going Forward</span><span class="toc-num">&sect; 08</span></div>
+  <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
+</div>
+
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
+  <h2>Scope, Method &amp; How to Read This Report</h2>
+
+  <p>This report is the first run (<strong>Cycle 01</strong>) of a new recurring weekly task tracking newly available <strong>physical print</strong> LitRPG releases &mdash; paperback and hardcover only. Ebook-only and audio-only releases are explicitly out of scope for this tracking effort, regardless of how notable they are, because Tom's stated interest here is specifically physical availability.</p>
+
+  <p>This cycle's window covers roughly <strong>August 4&ndash;25, 2026</strong>. It is headlined by a genuinely landmark event for the genre &mdash; the first-ever print edition of <em>The Wandering Inn</em> &mdash; alongside five other confirmed new physical titles, one partially confirmed release, and three items that could not be confirmed this cycle and are carried forward as open leads rather than presented as findings.</p>
+
+  <p>A methodological point worth stating plainly, since it shapes every entry below: <strong>physical availability was verified directly against publisher and retailer product pages</strong> (Aethon Books' own book pages, Target, Walmart, Amazon, McNally Robinson) rather than inferred from release announcements alone. This distinction matters specifically in LitRPG, a genre where a title can be announced, "available," or even actively selling in ebook/Kindle Unlimited form for months or years before &mdash; or entirely without ever &mdash; a print edition materializing. An announcement is a lead; a live product page with a paperback or hardcover SKU is a confirmation.</p>
+
+  <p>Four confidence categories are used consistently throughout this report:</p>
+
+  <div class="detail-list">
+    <div class="detail-row"><span class="detail-label">Confirmed</span><span class="detail-body">Verified directly against a live publisher or retailer product page showing a physical (paperback/hardcover) SKU, with a release date.</span></div>
+    <div class="detail-row"><span class="detail-label">Partially confirmed</span><span class="detail-body">A genuine print SKU exists and was located, but a specific detail &mdash; typically exact release date or price &mdash; could not be independently verified this cycle.</span></div>
+    <div class="detail-row"><span class="detail-label">Flagged / could not confirm</span><span class="detail-body">A release is claimed somewhere, but no product page confirming physical format, date, or price could be located this cycle. Carried forward as an open item, not reported as a finding.</span></div>
+    <div class="detail-row"><span class="detail-label">Coverage gap</span><span class="detail-body">A publisher or channel that was checked but returned inconclusive results (e.g. stale cached listing pages) &mdash; different from "confirmed no releases," and flagged as such rather than silently treated as a null result.</span></div>
+  </div>
+
+  <p>As the first run of this task, there is no prior cycle to diff against. Every title below is reported as "new to this tracker" relative to a zero baseline, not relative to a previous week's list &mdash; that comparison becomes possible starting with Cycle 02.</p>
+</div>
+
+
+<!-- SECTION 2: HEADLINE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
+  <h2>The Headline &mdash; The Wandering Inn's Print Debut</h2>
+
+  <p><em>The Wandering Inn</em>, written by pirateaba, is widely regarded as one of the longest-running and most acclaimed LitRPG web serials in existence &mdash; it has been publishing continuously online since <strong>July 2016</strong>. Until this cycle, it existed only as a free web serial, an ebook, and an audiobook. That changed on <strong>August 11, 2026</strong>, with the release of <em>Book One, Part One</em> in paperback through HarperCollins &mdash; the series' first-ever physical print edition.</p>
+
+  <div class="dossier">
+    <div class="dossier-head">Release Dossier</div>
+    <div class="dossier-body">
+      <div class="dossier-row"><span class="dossier-label">Title</span><span class="dossier-value">The Wandering Inn, Book One, Part One</span></div>
+      <div class="dossier-row"><span class="dossier-label">Author</span><span class="dossier-value">pirateaba</span></div>
+      <div class="dossier-row"><span class="dossier-label">Publisher</span><span class="dossier-value">HarperCollins</span></div>
+      <div class="dossier-row"><span class="dossier-label">Format</span><span class="dossier-value">Paperback</span></div>
+      <div class="dossier-row"><span class="dossier-label">Release date</span><span class="dossier-value">August 11, 2026</span></div>
+      <div class="dossier-row"><span class="dossier-label">Web serial since</span><span class="dossier-value">July 2016 &mdash; roughly a decade of free/ebook-only availability preceding this print debut</span></div>
+      <div class="dossier-row"><span class="dossier-label">Edition note</span><span class="dossier-value">Per the author's own announcement, this is a rewritten and re-edited edition prepared specifically for the print deal &mdash; not a straight reprint of the existing web text.</span></div>
+    </div>
+  </div>
+
+  <h3>The four-part rollout</h3>
+  <p>HarperCollins is publishing the print edition in four installments on a monthly cadence running from August through November 2026:</p>
+
+  <table class="roadmap-table">
+    <thead><tr><th>Installment</th><th>Release Date</th><th>Status as of Aug 29, 2026</th></tr></thead>
+    <tbody>
+      <tr><td>Book One, Part One</td><td>Aug 11, 2026</td><td class="status-released">Released</td></tr>
+      <tr><td>Book One, Part Two</td><td>Sept 22, 2026</td><td class="status-upcoming">Upcoming</td></tr>
+      <tr><td>Book Two, Part One</td><td>Oct 20, 2026</td><td class="status-upcoming">Upcoming</td></tr>
+      <tr><td>Book Two, Part Two</td><td>Nov 10, 2026</td><td class="status-upcoming">Upcoming</td></tr>
+    </tbody>
+  </table>
+
+  <p>Only Part One has actually released as of this report's compile date; the remaining three installments are tracked commitments for future cycles of this task, not releases to report yet.</p>
+
+  <h3>A notable change for existing free-serial readers</h3>
+  <div class="callout">
+    <p>As part of the traditional-publishing tradeoff behind this deal, Volumes 1&ndash;2 of the web serial are now gated behind the print/ebook release rather than being freely available on the web serial site, as they had been for roughly a decade. This is a real, material change in access for readers who have been following the free version &mdash; worth surfacing plainly rather than only celebrating the print milestone.</p>
+  </div>
+
+  <p>The author's own announcement post is dated March 28, 2026 (per the post's own URL), several months ahead of the August release &mdash; consistent with a deal of this scale requiring lead time to announce, produce, and distribute before the first installment reaches shelves.</p>
+
+  <p>This finding is confirmed via four independent sources: the author's own site (wanderinginn.com), a ScreenRant article covering the release specifically, and two live retailer paperback listings &mdash; Walmart and McNally Robinson &mdash; both showing an active paperback SKU distinct from any ebook listing.</p>
+</div>
+
+
+<!-- SECTION 3: CONFIRMED -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
+  <h2>Confirmed New Physical Releases (Aug 4&ndash;25, 2026)</h2>
+
+  <p>Five additional titles were confirmed this cycle, each verified against a live publisher or retailer product page. Two are flagged explicitly as genre-adjacent rather than close matches to Tom's dungeon-crawler/RPG-progression taste; the other three are closer fits or notable in their own right.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead><tr><th>Title</th><th>Author</th><th>Publisher</th><th>Format / Price</th><th>Release Date</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Goblin Teeth</strong><br>Monster Party LitRPG, Bk. 1</td>
+        <td>Jim Quill</td>
+        <td>Podium Publishing</td>
+        <td>Paperback</td>
+        <td>~Aug 4, 2026</td>
+        <td>Originated as a Royal Road serial with 800,000+ views before this print release.</td>
+      </tr>
+      <tr>
+        <td><strong>Rules of Engagement</strong><br>Ransom's Renegades, Bk. 2</td>
+        <td>Rick Partlow</td>
+        <td>Aethon Books</td>
+        <td>Paperback, $14</td>
+        <td>Aug 18, 2026</td>
+        <td class="flag-adj">Military-SF/LitRPG-adjacent &mdash; flagged as genre-adjacent, not a close taste match.</td>
+      </tr>
+      <tr>
+        <td><strong>Fall of the Guild</strong><br>The Eternal Assassin, Bk. 2</td>
+        <td>W.D. Swanson</td>
+        <td>Aethon Books</td>
+        <td>Paperback, $15, 437pp</td>
+        <td>Aug 19, 2026</td>
+        <td>Progression-fantasy/LitRPG isekai, multi-classing and tactical combat &mdash; a plausible taste match.</td>
+      </tr>
+      <tr>
+        <td><strong>Orphan</strong><br>The Numbered Empire, Bk. 1</td>
+        <td>Guy Enigma</td>
+        <td>Aethon Books</td>
+        <td>Paperback, $20, 807pp</td>
+        <td>Aug 25, 2026</td>
+        <td>Brand-new series launch, System/aptitude-stat LitRPG. ISBN 9798193743798.</td>
+      </tr>
+      <tr>
+        <td><strong>Smoke and Fire</strong><br>Raptors</td>
+        <td>CJ Valin &amp; Jaime Castle</td>
+        <td>Aethon Books</td>
+        <td>Paperback, $12</td>
+        <td>Aug 18, 2026</td>
+        <td class="flag-adj">Superhero-progression series &mdash; flagged as genre-adjacent, not strict dungeon/RPG-system LitRPG.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Sources, per title: Goblin Teeth via Target and Walmart paperback listings; Rules of Engagement, Fall of the Guild, Orphan, and Smoke and Fire each via their own dedicated Aethon Books product page (aethonbooks.com/book/...).</p>
+</div>
+
+
+<!-- SECTION 4: PARTIALLY CONFIRMED -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
+  <h2>Partially Confirmed &mdash; Apex Guardian</h2>
+
+  <p><strong>Apex Guardian</strong> (Paladin of the Forsaken Lands, Book 1), by Jollybane, published by Aethon Books, sits in the partially-confirmed tier for Cycle 01. This is stated as a deliberate, specific caveat rather than folded into the confirmed list, because two different things are true at once here:</p>
+
+  <div class="dossier">
+    <div class="dossier-head">What Is Confirmed vs. What Is Not</div>
+    <div class="dossier-body">
+      <div class="dossier-row"><span class="dossier-label">Confirmed</span><span class="dossier-value">A genuine paperback product listing exists on Amazon &mdash; ISBN 9798192371176, ASIN B0HF1V6BB6 &mdash; distinct from the separate Kindle edition. Aethon's own August 2026 release-slate announcement places this series' Book 1 on August 18, 2026.</span></div>
+      <div class="dossier-row"><span class="dossier-label">Not confirmed</span><span class="dossier-value">The Amazon page's price and ship-date details could not be pulled directly this cycle, and no dedicated Aethon book-detail page (of the kind that exists for the five titles in &sect; 03) could be located for this title.</span></div>
+    </div>
+  </div>
+
+  <p>Net assessment: <strong>existence of a print edition is confirmed; the exact release date and price are not.</strong> This is exactly the kind of gap this report is built to surface honestly rather than paper over with a plausible-sounding guess &mdash; a specific date or price is not stated here because neither was independently verified.</p>
+</div>
+
+
+<!-- SECTION 5: FLAGGED -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
+  <h2>Flagged &mdash; Could Not Confirm This Cycle</h2>
+
+  <p>Three items came up during this cycle's research that could not be confirmed to the standard used elsewhere in this report. They are presented here explicitly as open items for a future check, not as findings.</p>
+
+  <div class="gapbox">
+    <div class="gapbox-head">Unconfirmed Leads &amp; Coverage Gaps</div>
+    <div class="gapbox-body">
+      <div class="gapbox-item">
+        <span class="gapbox-place">Randidly Ghosthound 15</span>
+        <p><em>The Legend of Randidly Ghosthound 15</em> (Noret Flood, Aethon Books) is claimed to have released Aug 26, 2026, but no page loaded this cycle showed price or physical format &mdash; only Kindle listings were found in checks. Worth a direct follow-up next cycle.</p>
+      </div>
+      <div class="gapbox-item">
+        <span class="gapbox-place">Apocalypse Side Quest 5</span>
+        <p><em>The Apocalypse is a Side Quest: Book Five</em> (Liam Lawless, Shadow Alley Press) is listed "coming soon" for Sept 1, 2026 on the publisher's own site. The series is normally sold in paperback, but no product page with a confirmed print SKU for this specific volume was located. Flagged as <strong>one to watch</strong>: this is a close taste match to Tom's reading (post-apocalyptic progression fantasy) if a print run does materialize, and its claimed date falls just after this cycle's window, making it a natural check for Cycle 02.</p>
+      </div>
+      <div class="gapbox-item">
+        <span class="gapbox-place">Publisher coverage gap</span>
+        <p>No verifiable new physical LitRPG releases were found this cycle from Mountaindale Press, Wraithmarked Creative, Royal Road author-direct storefronts, Tapas Media, or Portal Books. This reflects tooling issues &mdash; some publisher listing pages returned stale cached data during this run &mdash; and should be read as an <strong>unchecked, inconclusive gap</strong>, not as confirmation that nothing happened at those publishers this cycle. See &sect; 06.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SECTION 6: PUBLISHER COVERAGE -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 06</span><div class="section-rule"></div></div>
+  <h2>Publisher Coverage Notes</h2>
+
+  <p>This cycle's confirmed releases lean heavily on Aethon Books (four of the six titles addressed in &sect;&sect; 02&ndash;04) plus one Podium Publishing title and the HarperCollins headline. That concentration is partly a reflection of Aethon's dominant position in commercial LitRPG publishing, and partly an artifact of which publisher listing pages loaded reliably this cycle.</p>
+
+  <p>Five other channels worth watching in this genre &mdash; Mountaindale Press, Wraithmarked Creative, Royal Road author-direct storefronts, Tapas Media, and Portal Books &mdash; returned inconclusive results this run due to stale cached listing data. This is recorded here as a specific, named gap in this cycle's coverage rather than smoothed into the confirmed-releases list or silently dropped. A goal for Cycle 02 is closing this gap with fresh checks against each of these five channels.</p>
+</div>
+
+
+<!-- SECTION 7: RELATIONSHIP TO READING LIST -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 07</span><div class="section-rule"></div></div>
+  <h2>Relationship to the Existing Reading List</h2>
+
+  <p>This tracker is a companion to the household's existing <a href="https://dashboard.tashefamily.com/static/reports/litrpg-reading-list-factsheet.html">LitRPG Bookshelf reading list</a>, which is built around Tom's two current reads &mdash; <em>Dungeon Crawler Carl</em> and <em>He Who Fights with Monsters</em> &mdash; and already flagged The Wandering Inn's then-upcoming print debut as a "breaking" item. This report is where that item graduates from a forward-looking flag into a confirmed release, with the full four-part rollout now tracked concretely.</p>
+
+  <p>Where a newly confirmed title in this cycle plausibly matches that existing taste profile (dungeon-crawler mechanics, RPG-system progression, found-family tone), that judgment is noted inline in &sect; 03 &mdash; <em>Fall of the Guild</em> specifically is called out as a plausible match, while <em>Rules of Engagement</em> and <em>Smoke and Fire</em> are explicitly flagged as genre-adjacent rather than close fits. This tracker does not re-litigate or expand the reading list's own recommendation tiers; it exists specifically to surface new physical availability on a rolling basis.</p>
+</div>
+
+
+<!-- SECTION 8: METHODOLOGY GOING FORWARD -->
+<div class="section">
+  <div class="section-eyebrow"><span class="section-tag">&sect; 08</span><div class="section-rule"></div></div>
+  <h2>Tracking Methodology Going Forward</h2>
+
+  <p>This report establishes the baseline for a recurring weekly task. The intended cadence and standards going forward:</p>
+
+  <div class="confidence">
+    <div class="confidence-head">Standing Rules for Future Cycles</div>
+    <div class="confidence-body">
+      <div class="conf-item good">
+        <span class="lbl">Scope stays locked to physical print</span>
+        <p>Paperback and hardcover releases only. Ebook- and audio-only titles remain out of scope regardless of how notable they are, unless the household explicitly changes this instruction.</p>
+      </div>
+      <div class="conf-item good">
+        <span class="lbl">Verification standard stays retailer/publisher-first</span>
+        <p>A title is "confirmed" only once a live publisher or retailer product page shows a physical SKU. A release announcement alone is a lead, not a confirmation, given how commonly ebook and print availability diverge in this genre.</p>
+      </div>
+      <div class="conf-item">
+        <span class="lbl">Diff against the prior cycle starting Cycle 02</span>
+        <p>Future reports should explicitly note which confirmed titles are newly appearing versus already known from a previous cycle (e.g. Wandering Inn Book One Pt. 2 becoming "confirmed released" rather than "upcoming" once Sept 22, 2026 arrives), rather than re-presenting the full history each time.</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Coverage gaps get named, not absorbed</span>
+        <p>When a publisher or channel returns inconclusive data (as happened this cycle with five publishers, &sect; 06), that should continue to be reported explicitly as a gap to close, rather than treated as an implicit "no releases" finding.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>No sources/citations apparatus beyond what follows is needed for future weekly runs to stay lightweight, but the same tiered sourcing discipline used here &mdash; distinguishing a publisher's own product page from a retailer listing from an editorial/news writeup &mdash; should carry forward each cycle.</p>
+</div>
+
+
+<!-- SOURCES -->
+<div class="sources-section">
+  <div class="section-eyebrow"><span class="section-tag">&sect;</span><div class="section-rule"></div></div>
+  <h2>Sources and References</h2>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 1 &mdash; Author / Publisher Primary Sources</div>
+    <div class="source-group-note">Direct statements from the author or the publishing house itself &mdash; the highest-confidence tier for release facts.</div>
+    <div class="source-item">pirateaba, wanderinginn.com &mdash; HarperCollins print-deal announcement (wanderinginn.com/2026/03/28/harpercollins-announcement/).</div>
+    <div class="source-item">Aethon Books &mdash; individual book pages for Rules of Engagement, Fall of the Guild, Orphan, and Smoke and Fire (aethonbooks.com/book/...).</div>
+    <div class="source-item">Aethon Books &mdash; August 2026 release-slate announcement (aethonbooks.com/2026/07/15/august-2026/), used for the Apex Guardian date claim in &sect; 04.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 2 &mdash; Retailer Product Listings</div>
+    <div class="source-group-note">Used to independently verify physical (paperback/hardcover) SKUs, distinct from ebook listings, for each confirmed title.</div>
+    <div class="source-item">Walmart &mdash; The Wandering Inn paperback listing.</div>
+    <div class="source-item">McNally Robinson &mdash; The Wandering Inn paperback listing.</div>
+    <div class="source-item">Target &mdash; Goblin Teeth paperback listing.</div>
+    <div class="source-item">Walmart &mdash; Goblin Teeth paperback listing.</div>
+    <div class="source-item">Amazon &mdash; Apex Guardian paperback listing (ASIN B0HF1V6BB6, distinct from the Kindle edition).</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Tier 3 &mdash; Editorial / Journalism Coverage</div>
+    <div class="source-group-note">Used for narrative and contextual confirmation of the headline release.</div>
+    <div class="source-item">ScreenRant &mdash; coverage of The Wandering Inn's August 2026 paperback release.</div>
+  </div>
+
+  <div class="source-group">
+    <div class="source-group-title">Companion Documents</div>
+    <div class="source-group-note">Not independent sources, but directly referenced in this report.</div>
+    <div class="source-item">LitRPG Print Watch, Cycle 01 fact sheet (litrpg-print-watch-factsheet.html) &mdash; the scannable companion to this report.</div>
+    <div class="source-item">LitRPG Bookshelf reading list (litrpg-reading-list-factsheet.html) &mdash; the household's existing reading-list document, referenced in &sect; 07.</div>
+  </div>
+</div>
+
+<div class="footer">
+  LitRPG Physical Release Tracker: Baseline Report, Cycle 01 &nbsp;&middot;&nbsp; Compiled August 29, 2026<br>
+  1 landmark headline, 5 confirmed titles, 1 partially confirmed, 3 flagged open items, 1 named publisher coverage gap<br>
+  Companion document: Print Watch fact sheet (litrpg-print-watch-factsheet.html)
+</div>
+
+</body>
+</html>

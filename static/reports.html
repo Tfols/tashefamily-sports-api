@@ -435,6 +435,29 @@ body::before {
 .theme-grogu .report-file-link:hover .report-file-arrow { color: #2f9e6f; }
 
 /* ── System window / LitRPG theme ───────────────────────── */
+.theme-cosmere .report-card,
+.theme-cosmere .report-card-multi {
+  background: rgba(10,9,14,0.96);
+  border-color: #3a2f26;
+  box-shadow: 0 0 12px rgba(183,110,46,0.06);
+}
+.theme-cosmere .report-card:hover {
+  border-color: #b76e2e;
+}
+.theme-cosmere .report-card-bar {
+  background: linear-gradient(90deg, #b76e2e, #7fd4e0, #6b5b8a);
+}
+.theme-cosmere .report-name { color: #f2ece2; }
+.theme-cosmere .report-desc { color: #a2968a; }
+.theme-cosmere .report-meta { color: #a2968a; }
+.theme-cosmere .report-files { border-top-color: #3a2f26; }
+.theme-cosmere .report-file-link { border-bottom-color: #3a2f26; }
+.theme-cosmere .report-file-link:hover { background: rgba(127,212,224,0.07); }
+.theme-cosmere .report-file-name { color: #f2ece2; }
+.theme-cosmere .report-file-desc { color: #a2968a; }
+.theme-cosmere .report-file-arrow { color: #a2968a; }
+.theme-cosmere .report-file-link:hover .report-file-arrow { color: #b76e2e; }
+
 .theme-litrpg .report-card,
 .theme-litrpg .report-card-multi {
   background: rgba(7,11,22,0.95);
@@ -597,6 +620,19 @@ body::before {
 */
 const REPORTS = [
   {
+    topic: 'Books',
+    hideTopicHeader: true,
+    name: "Brandon Sanderson's Cosmere",
+    desc: 'The full book list, the competing reading orders, how the worlds actually connect — and a confidence system separating what the books say from what fans infer',
+    date: 'Sep 2026',
+    icon: '🌌',
+    theme: 'cosmere',
+    files: [
+      { label: 'Field Reference', desc: 'Shattered-mosaic Shard chart, book list by series, collector bottom line', file: '/static/reports/cosmere-factsheet.html', icon: '🌌' },
+      { label: 'Ars Arcanum — Full Reference Guide', desc: 'Realmatics, Investiture, worldhopping, Hoid, published-vs-planned, leatherbounds', file: '/static/reports/cosmere-report.html', icon: '📖' },
+    ]
+  },
+  {
     topic: 'Garden',
     hideTopicHeader: true,
     name: 'Potager — Kitchen Garden Design',
@@ -654,6 +690,19 @@ const REPORTS = [
     theme: 'litrpg',
     file: '/static/reports/litrpg-reading-list-factsheet.html',
     type: 'HTML',
+  },
+  {
+    topic: 'Books',
+    hideTopicHeader: true,
+    name: 'LitRPG Print Watch — Cycle 01',
+    desc: 'Baseline for the weekly physical-release tracker: which publishers actually print, the Aethon Vault hardcover pipeline, and why a publisher ISBN is not proof of a purchasable print edition',
+    date: 'Aug 2026',
+    icon: '📦',
+    theme: 'litrpg',
+    files: [
+      { label: 'Cycle Summary', desc: 'At-a-glance new print releases and what changed this cycle', file: '/static/reports/litrpg-print-watch-factsheet.html', icon: '📦' },
+      { label: 'Baseline Report', desc: 'Publisher tiers, sourcing method, verification standard, open questions', file: '/static/reports/litrpg-print-watch-report.html', icon: '📖' },
+    ]
   },
   {
     topic: 'Sports History',

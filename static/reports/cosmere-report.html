@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#efe9da;color:#1c1730;color-scheme:light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cosmere — Ars Arcanum: A Reader's Reference Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --parchment:#efe9da;
+  --parchment-2:#e6ddc7;
+  --parchment-3:#f7f3e8;
+  --ink:#1c1730;
+  --ink-soft:#4a4460;
+  --line:#cabf9e;
+  --line-dark:#a89a72;
+  --copper:#9c5a25;
+  --copper-deep:#6e3d15;
+  --copper-soft:rgba(156,90,37,.13);
+  --garnet:#7d2230;
+  --garnet-soft:rgba(125,34,48,.1);
+  --storm:#2f7d8f;
+  --storm-soft:rgba(47,125,143,.1);
+  --fan:#6b6084;
+  --fan-soft:rgba(107,96,132,.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{color-scheme:light;background:var(--parchment)!important;color:var(--ink)!important}
+html,body,*{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+body{font-family:'Crimson Pro',Georgia,serif;font-size:17px;line-height:1.75;background:var(--parchment);color:var(--ink);max-width:820px;margin:0 auto;padding:56px 40px 100px}
+@page{ size:8.5in 11in; margin:0.25in; }
+h1,h2,h3{font-family:'Cinzel',serif;letter-spacing:.01em}
+a{color:var(--storm)}
+em{font-style:italic}
+strong{color:var(--ink)}
+
+/* ── COVER ── */
+.cover{border-top:4px solid var(--ink);border-bottom:1px solid var(--line-dark);padding:34px 0 28px;margin-bottom:14px}
+.cover-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper-deep);margin-bottom:14px}
+.cover h1{font-size:2.15rem;font-weight:700;line-height:1.2;color:var(--ink);margin-bottom:10px}
+.cover h1 em{font-style:normal;font-family:'Crimson Pro',serif;font-weight:500;color:var(--copper-deep)}
+.cover-subtitle{font-family:'Crimson Pro',serif;font-size:1.05rem;color:var(--ink-soft);font-style:italic;margin-bottom:20px;max-width:60ch}
+.cover-meta{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:var(--ink-soft);line-height:2.2;border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+.cover-meta a{color:var(--storm)}
+
+/* ── TIER SYSTEM ── */
+.tier{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px 3px 7px;font-weight:700;white-space:nowrap;border-radius:1px}
+.tier::before{content:"";width:8px;height:8px;flex-shrink:0}
+.tier.confirmed{border:1.5px solid var(--copper);color:var(--copper-deep);background:var(--copper-soft)}
+.tier.confirmed::before{background:var(--copper)}
+.tier.wob{border:1.5px dashed var(--storm);color:var(--storm);background:var(--storm-soft)}
+.tier.wob::before{border:1.5px dashed var(--storm);background:transparent}
+.tier.fan{border:1.5px dotted var(--fan);color:var(--fan);background:var(--fan-soft)}
+.tier.fan::before{border:1.5px dotted var(--fan);background:transparent;border-radius:50%}
+.tier.unconf{border:1.5px dotted var(--ink-soft);color:var(--ink-soft);background:rgba(74,68,96,.06)}
+.tier.unconf::before{content:"?";width:auto;font-weight:800}
+
+.legend-block{background:var(--parchment-3);border:1px solid var(--line);padding:18px 22px;margin-bottom:40px}
+.legend-block .lb-title{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-deep);margin-bottom:10px}
+.legend-row{display:flex;gap:10px;align-items:baseline;margin-bottom:7px;font-size:.86rem}
+.legend-row:last-child{margin-bottom:0}
+.legend-row span.desc{color:var(--ink-soft)}
+
+/* ── TOC ── */
+.toc{background:var(--parchment-3);border:1px solid var(--line);padding:24px 28px;margin-bottom:48px}
+.toc-title{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-deep);margin-bottom:14px}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px dotted var(--line);font-size:.88rem}
+.toc-item:last-child{border-bottom:none}
+.toc-item a{color:var(--ink);text-decoration:none}
+.toc-num{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--copper-deep)}
+
+/* ── SECTIONS ── */
+.section{margin-bottom:54px}
+.section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.section-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;color:var(--copper-deep);flex-shrink:0}
+.section-rule{height:1px;background:var(--line);flex:1}
+h2{font-size:1.42rem;font-weight:700;color:var(--ink);margin-bottom:14px;line-height:1.3}
+h3{font-family:'Crimson Pro',serif;font-size:1.08rem;font-style:italic;font-weight:600;color:var(--copper-deep);margin:26px 0 10px}
+p{color:var(--ink);margin-bottom:14px;max-width:72ch}
+p:last-child{margin-bottom:0}
+ul,ol{margin:0 0 14px 22px;max-width:70ch}
+li{margin-bottom:6px}
+
+/* ── CALLOUT ── */
+.callout{border-left:4px solid var(--copper);background:var(--parchment-3);padding:16px 22px;margin:22px 0}
+.callout p{font-style:italic;color:var(--ink);margin:0 0 8px;font-size:.96rem;line-height:1.68;max-width:66ch}
+.callout p:last-child{margin-bottom:0}
+
+/* ── SPOILER BOX ── */
+.spoiler-box{border:2px dashed var(--garnet);background:var(--garnet-soft);padding:18px 24px;margin:20px 0}
+.spoiler-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.spoiler-head .sh-icon{font-family:'Cinzel',serif;font-weight:800;color:var(--garnet);font-size:1.1rem}
+.spoiler-head .sh-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--garnet);font-weight:700}
+.spoiler-box p{color:var(--ink)}
+
+/* ── DETAIL LIST ── */
+.detail-list{margin:16px 0}
+.detail-row{display:grid;grid-template-columns:210px 1fr;gap:0;border-bottom:1px solid var(--line);padding:12px 0;font-size:.9rem;align-items:start}
+.detail-row:last-child{border-bottom:none}
+.detail-label{font-family:'Cinzel',serif;font-size:.82rem;font-weight:600;color:var(--copper-deep);line-height:1.5;padding-right:16px}
+.detail-body{color:var(--ink);line-height:1.68}
+
+/* ── TABLES ── */
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.86rem}
+table th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;text-align:left;color:var(--copper-deep);border-bottom:1.5px solid var(--line-dark);padding:8px 12px}
+table td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table td.mono{font-family:'IBM Plex Mono',monospace;font-size:.78rem}
+
+/* ── SHARD CARDS ── */
+.shard-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.shard-card{border:1px solid var(--line);background:var(--parchment-3);padding:12px 15px}
+.shard-card.confirmed{border-left:3px solid var(--copper)}
+.shard-card.fan{border-left:3px solid var(--fan);border-style:dashed}
+.shard-card .sc-name{font-family:'Cinzel',serif;font-weight:700;font-size:.95rem;color:var(--ink)}
+.shard-card .sc-meta{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--ink-soft);margin-top:3px}
+.shard-card .sc-note{font-size:.82rem;color:var(--ink-soft);margin-top:6px;line-height:1.5}
+.shard-card .tier{margin-top:8px}
+
+/* ── IMAGE REF ── */
+.imgref{border:1px solid var(--line);background:var(--parchment-3);padding:16px 20px;margin:18px 0}
+.imgref-title{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--copper-deep);margin-bottom:10px}
+.imgref-item{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px dotted var(--line);font-size:.83rem;align-items:baseline}
+.imgref-item:last-child{border-bottom:none}
+.imgref-item .il-label{color:var(--ink-soft);flex-shrink:0}
+.imgref-item a{color:var(--storm);text-decoration:none;border-bottom:1px dotted var(--storm)}
+
+/* ── SOURCES ── */
+.src-cat{margin-bottom:26px}
+.src-cat h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper-deep);margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.src-item{font-size:.86rem;margin-bottom:8px;padding-left:2px;line-height:1.6}
+.src-item a{color:var(--storm)}
+
+/* crosslink + footer */
+.crosslink{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-soft);text-align:right;margin-bottom:18px}
+.crosslink a{color:var(--storm);text-decoration:none;border-bottom:1px dotted var(--storm)}
+.report-foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--ink-soft)}
+@media print{.crosslink{display:none}}
+</style>
+</head>
+<body>
+
+<div class="crosslink">Scannable companion → <a href="cosmere-factsheet.html">The Cosmere — Field Reference</a></div>
+
+<div class="cover">
+  <div class="cover-tag">Household Reference · Researched September 2026</div>
+  <h1>The Cosmere <em>— Ars Arcanum</em></h1>
+  <div class="cover-subtitle">A reader's reference guide to Brandon Sanderson's shared universe: the connective cosmology, the Shard roster with its confidence tiers, the published-vs-planned accounting, and the collector's edition landscape. Written for someone who has already read the books.</div>
+  <div class="cover-meta">
+    Built from research-and-source findings, Sept 2026 · Confidence-tiered throughout — see legend below · No new facts added beyond the source research
+  </div>
+</div>
+
+<div class="legend-block">
+  <div class="lb-title">How to read this document</div>
+  <div class="legend-row"><span class="tier confirmed">Text-confirmed</span><span class="desc">— stated directly in a published Sanderson book, or on his own site/FAQ.</span></div>
+  <div class="legend-row"><span class="tier wob">Word of Brandon</span><span class="desc">— Sanderson has said it (interview, signing, State of the Sanderson), but it is not yet in the published text.</span></div>
+  <div class="legend-row"><span class="tier fan">Fan-derived</span><span class="desc">— synthesized by the fan community (Coppermind, 17th Shard, etc.) from WoB and text clues; not an official statement.</span></div>
+  <div class="legend-row"><span class="tier unconf">Could not confirm</span><span class="desc">— the research pass looked and came up empty. Treated as an open question, not a fact.</span></div>
+  <div class="legend-row"><span style="border:2px dashed #7d2230;color:#7d2230;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;font-weight:700">⚠ Spoiler</span><span class="desc">— turns on a late-book revelation (specifically, <em>Rhythm of War</em>). Boxed separately; skip if you want to hand this section to someone not caught up.</span></div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-item"><a href="#s1"><span class="toc-section">1 · The published catalog</span></a><span class="toc-num">01</span></div>
+  <div class="toc-item"><a href="#s2"><span class="toc-section">2 · Reading orders — the competing schools</span></a><span class="toc-num">02</span></div>
+  <div class="toc-item"><a href="#s3"><span class="toc-section">3 · Adonalsium and the Shattering</span></a><span class="toc-num">03</span></div>
+  <div class="toc-item"><a href="#s4"><span class="toc-section">4 · The Shard roster</span></a><span class="toc-num">04</span></div>
+  <div class="toc-item"><a href="#s5"><span class="toc-section">5 · Realmatic Theory and Investiture</span></a><span class="toc-num">05</span></div>
+  <div class="toc-item"><a href="#s6"><span class="toc-section">6 · Worldhopping and perpendicularities</span></a><span class="toc-num">06</span></div>
+  <div class="toc-item"><a href="#s7"><span class="toc-section">7 · Hoid across the books</span></a><span class="toc-num">07</span></div>
+  <div class="toc-item"><a href="#s8"><span class="toc-section">8 · Where the story stands</span></a><span class="toc-num">08</span></div>
+  <div class="toc-item"><a href="#s9"><span class="toc-section">9 · Entry points</span></a><span class="toc-num">09</span></div>
+  <div class="toc-item"><a href="#s10"><span class="toc-section">10 · For the collector</span></a><span class="toc-num">10</span></div>
+  <div class="toc-item"><a href="#s11"><span class="toc-section">11 · Sources &amp; references</span></a><span class="toc-num">11</span></div>
+</div>
+
+<!-- ============ 1 ============ -->
+<div class="section" id="s1">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 01</span><span class="section-rule"></span></div>
+  <h2>The Published Catalog</h2>
+  <p>Every Cosmere book in print or announced, by series, as of September 2026. <span class="tier confirmed">Text-confirmed</span></p>
+
+  <h3>Elantris (Sel)</h3>
+  <ul>
+    <li><em>Elantris</em> (2005) — standalone today; two sequels planned, unwritten.</li>
+    <li><em>The Emperor's Soul</em> — novella (2012, Tachyon). Also collected in <em>Arcanum Unbounded</em>; easy to find standalone.</li>
+  </ul>
+
+  <h3>Mistborn Era 1 (Scadrial)</h3>
+  <ul>
+    <li><em>The Final Empire</em> (2006) · <em>The Well of Ascension</em> (2007) · <em>The Hero of Ages</em> (2008)</li>
+  </ul>
+
+  <h3>Mistborn Era 2 — Wax and Wayne</h3>
+  <ul>
+    <li><em>The Alloy of Law</em> (2011) · <em>Shadows of Self</em> (2015) · <em>The Bands of Mourning</em> (2016) · <em>The Lost Metal</em> (2022)</li>
+  </ul>
+
+  <h3>Warbreaker (Nalthis)</h3>
+  <ul><li>Standalone (2009).</li></ul>
+
+  <h3>The Stormlight Archive (Roshar) — Arc 1 of 2, complete</h3>
+  <ul>
+    <li><em>The Way of Kings</em> (2010) · <em>Words of Radiance</em> (2014) · <em>Oathbringer</em> (2017) · <em>Rhythm of War</em> (2020) · <em>Wind and Truth</em> (Dec 6, 2024 — closes Arc 1)</li>
+  </ul>
+
+  <h3>Secret Projects (2022 Kickstarter — highest-funded Kickstarter of all time)</h3>
+  <ul>
+    <li><em>Tress of the Emerald Sea</em> (2023) · <em>Yumi and the Nightmare Painter</em> (2023) · <em>The Sunlit Man</em> (2023)</li>
+    <li><em>The Frugal Wizard's Handbook for Surviving Medieval England</em> was part of the same Kickstarter batch but is <strong>not</strong> Cosmere — easy to assume otherwise.</li>
+  </ul>
+
+  <h3>White Sand (Taldain)</h3>
+  <p>Graphic novel trilogy, Dynamite (2016 / 2018 / 2019), omnibus 2022 with new prologue. The original prose novel was <strong>never published</strong> — only a partial prose excerpt exists, inside <em>Arcanum Unbounded</em>. The full story is graphic-novel-only.</p>
+
+  <h3>Isles of the Emberdark</h3>
+  <p>Expands the 2014 novella <em>Sixth of the Dusk</em>. Dragonsteel-direct hardcover released July 1, 2025; Tor trade hardcover follows February 3, 2026.</p>
+
+  <h3>Arcanum Unbounded: The Cosmere Collection (2016)</h3>
+  <p>Contents: "The Hope of Elantris"; "The Eleventh Metal"; "The Emperor's Soul"; "Allomancer Jak and the Pits of Eltania, Episodes 28–30"; "White Sand" (prose excerpt); "Shadows for Silence in the Forests of Hell" (Threnody); "Sixth of the Dusk" (First of the Sun); "Mistborn: Secret History"; "Edgedancer" (Stormlight, Lift).</p>
+
+  <div class="callout">
+    <p><strong>Print-availability flags</strong> — <em>Mistborn: Secret History</em>'s primary print home is <em>Arcanum Unbounded</em> (later standalone reprints exist per bookseller listings). <em>Sixth of the Dusk</em> has <strong>no standalone print edition at all</strong> — print-only inside <em>Arcanum Unbounded</em>, though a standalone ebook exists; now superseded in scope by <em>Isles of the Emberdark</em>. "The Hope of Elantris," "The Eleventh Metal," and "Allomancer Jak" are print-only inside <em>Arcanum Unbounded</em> — some began as free online serials.</p>
+  </div>
+
+  <h3>Announced, not yet published (as of Sept 2026)</h3>
+  <ul>
+    <li><strong>The Fires of December</strong> — "Secret Project Six," first of <strong>Hoid's Travails</strong> (first-person Hoid, lesser-known worlds). Crowdfund edition earlier; commercial Tor edition targeted Dec 2026. <span class="tier confirmed">Confirmed</span></li>
+    <li><strong>Ghostbloods</strong> (Mistborn Era 3) — book 1 "mostly done." Sanderson: "2028 is a pretty firm release date... don't expect it to move." Projected Dec 2028 / 2029 / 2030 for the trilogy. <span class="tier confirmed">Confirmed</span></li>
+    <li><strong>Stormlight Book 6</strong> (Arc 2 opener) — no firm date. Sanderson says only that he feels "the call to return," likely "in the next few years," complicated by TV commitments. <span class="tier unconf">A circulating "2031" figure is fan extrapolation, not his words</span></li>
+    <li>Hoid's Storybook Collection crowdfund — March 2026. <span class="tier confirmed">Confirmed</span></li>
+  </ul>
+  <p style="font-size:.85rem;color:var(--ink-soft);font-style:italic">Note: <em>Blightfall</em> (Riftwake) is not Cosmere and not written by Sanderson — excluded here by standing rule.</p>
+</div>
+
+<!-- ============ 2 ============ -->
+<div class="section" id="s2">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 02</span><span class="section-rule"></span></div>
+  <h2>Reading Orders — The Competing Schools</h2>
+  <p>There is no consensus reading order, and none of what follows is ranked against the others — presenting one as "best" would misrepresent the research. <span class="tier confirmed">Text-confirmed</span></p>
+
+  <div class="callout">
+    <p><strong>Sanderson's own guidance</strong> (faq.brandonsanderson.com): "it really doesn't matter which Cosmere series you start with." Five valid entry points: <em>Mistborn: The Final Empire</em>, <em>The Emperor's Soul</em>, <em>The Way of Kings</em>, <em>Elantris</em>, <em>Warbreaker</em>. His one hard rule: don't skip ahead within a series. He flags <em>The Alloy of Law</em> as spoiling Mistborn Era 1, so it's a weak entry point despite opening Era 2.</p>
+  </div>
+
+  <h3>Sanderson's official chronological order</h3>
+  <p><em>Elantris</em> → <em>The Emperor's Soul</em> → Mistborn Era 1 → <em>Warbreaker</em> → <em>Shadows for Silence</em> → Stormlight → Mistborn Era 2 → <em>Sixth of the Dusk</em> → future Mistborn — with his own caveat that several placements are unconfirmed ("RAFO"). <span class="tier confirmed">Text-confirmed, with acknowledged gaps</span></p>
+
+  <h3>Fan-constructed orders</h3>
+  <p>Publication order and various "connections-first" hybrids disagree with each other on details — notably where <em>Warbreaker</em> sits relative to <em>Words of Radiance</em>, and where the Secret Projects land. What each optimizes for:</p>
+  <ul>
+    <li><strong>Publication order</strong> — spoiler-safest, reads as released.</li>
+    <li><strong>Chronological</strong> — in-world sequence, but demands more Cosmere literacy up front.</li>
+    <li><strong>Connections-first</strong> — catches cameos and Realmatic tie-ins early, at the cost of reading harder books sooner. The recurring version of this pattern: Mistborn Era 1 → <em>Warbreaker</em> → Stormlight → Mistborn Era 2 → Secret Projects.</li>
+  </ul>
+  <p><span class="tier fan">Fan-derived — none of these three is endorsed by Sanderson</span></p>
+</div>
+
+<!-- ============ 3 ============ -->
+<div class="section" id="s3">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 03</span><span class="section-rule"></span></div>
+  <h2>Adonalsium and the Shattering</h2>
+  <p>Adonalsium was the power of creation. In the Shattering, a group of sixteen individuals killed it; each took a portion and became a <strong>Shard</strong>. Every Shard carries an Intent that colors both its Vessel's personality and the magic system it produces on whatever world it settles. <span class="tier confirmed">Text-confirmed</span></p>
+  <p>This is the single fact that makes the Cosmere one universe rather than several unrelated fantasy worlds: every magic system in every series is a local expression of the same shattered power, filtered through whichever Shard's Investiture dominates that world.</p>
+</div>
+
+<!-- ============ 4 ============ -->
+<div class="section" id="s4">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 04</span><span class="section-rule"></span></div>
+  <h2>The Shard Roster</h2>
+  <p>All sixteen original Shards. The count of sixteen holds once Ruin and Preservation are counted together as Harmony, and Odium/Retribution as one renamed Shard.</p>
+
+  <h3>Text-confirmed in published books</h3>
+  <div class="shard-grid">
+    <div class="shard-card confirmed"><div class="sc-name">Ruin</div><div class="sc-meta">Scadrial</div><div class="sc-note">Merged with Preservation into Harmony (Vessel: Sazed) at the end of Mistborn Era 1.</div><span class="tier confirmed">Confirmed</span></div>
+    <div class="shard-card confirmed"><div class="sc-name">Preservation</div><div class="sc-meta">Scadrial</div><div class="sc-note">Merged with Ruin into Harmony (Vessel: Sazed).</div><span class="tier confirmed">Confirmed</span></div>
+    <div class="shard-card confirmed"><div class="sc-name">Honor</div><div class="sc-meta">Roshar</div><div class="sc-note">One of two Shards seated on Roshar.</div><span class="tier confirmed">Confirmed</span></div>
+    <div class="shard-card confirmed"><div class="sc-name">Cultivation</div><div class="sc-meta">Roshar</div><div class="sc-note">The other Shard seated on Roshar.</div><span class="tier confirmed">Confirmed</span></div>
+    <div class="shard-card confirmed"><div class="sc-name">Endowment</div><div class="sc-meta">Nalthis</div><div class="sc-note">Powers Awakening in <em>Warbreaker</em>.</div><span class="tier confirmed">Confirmed</span></div>
+    <div class="shard-card confirmed"><div class="sc-name">Devotion</div><div class="sc-meta">Sel</div><div class="sc-note">Killed/splintered; residue forms the Dor.</div><span class="tier confirmed">Confirmed</span></div>
+    <div class="shard-card confirmed"><div class="sc-name">Dominion</div><div class="sc-meta">Sel</div><div class="sc-note">Killed/splintered; residue forms the Dor, alongside Devotion's.</div><span class="tier confirmed">Confirmed</span></div>
+    <div class="shard-card confirmed"><div class="sc-name">Autonomy</div><div class="sc-meta">Taldain + others · Vessel: Bavadin</div><div class="sc-note">Tied to multiple worlds via multiple avatars.</div><span class="tier confirmed">Confirmed</span></div>
+    <div class="shard-card confirmed"><div class="sc-name">Odium</div><div class="sc-meta">Roshar</div><div class="sc-note">See the spoiler-flagged note below — its current holder and name have changed.</div><span class="tier confirmed">Confirmed (current status is a late-book reveal)</span></div>
+  </div>
+
+  <div class="spoiler-box">
+    <div class="spoiler-head"><span class="sh-icon">⚠</span><span class="sh-label">Spoiler — Rhythm of War (2020)</span></div>
+    <p>In <em>Rhythm of War</em>, Taravangian kills Rayse — the original Vessel of Odium — and ascends to hold the Shard himself. He later renames it <strong>Retribution</strong>. This single event reframes the political endgame of the back half of Stormlight Arc 1 and is the one piece of "settled Cosmere lore" in this report that genuinely turns on a late-book revelation.</p>
+  </div>
+
+  <h3>Weaker ground — named via Word of Brandon / <em>Wind and Truth</em> only</h3>
+  <p>Ambition, Invention, Mercy, Valor, Reason, Virtuosity, and Whimsy are named only in <em>Wind and Truth</em> or via Word of Brandon; several of their Vessels and planets remain unconfirmed in text.</p>
+  <div class="shard-grid">
+    <div class="shard-card fan"><div class="sc-name">Ambition</div><span class="tier fan">Fan-derived / WoB</span></div>
+    <div class="shard-card fan"><div class="sc-name">Invention</div><span class="tier fan">Fan-derived / WoB</span></div>
+    <div class="shard-card fan"><div class="sc-name">Mercy</div><span class="tier fan">Fan-derived / WoB</span></div>
+    <div class="shard-card fan"><div class="sc-name">Valor</div><span class="tier fan">Fan-derived / WoB</span></div>
+    <div class="shard-card fan"><div class="sc-name">Reason</div><span class="tier fan">Fan-derived / WoB</span></div>
+    <div class="shard-card fan"><div class="sc-name">Virtuosity</div><span class="tier fan">Fan-derived / WoB</span></div>
+    <div class="shard-card fan"><div class="sc-name">Whimsy</div><span class="tier fan">Fan-derived / WoB</span></div>
+  </div>
+  <p style="font-size:.85rem;color:var(--ink-soft);font-style:italic">A methodological note from the research pass: the clearest secondary source found (ScreenRant) was internally inconsistent — it listed thirteen rows while claiming sixteen — and had to be cross-checked against Coppermind to reconcile. Coppermind itself is the community-run 17th Shard wiki: fan-maintained, not official, cited here as such rather than folded in with brandonsanderson.com or Tor material.</p>
+</div>
+
+<!-- ============ 5 ============ -->
+<div class="section" id="s5">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 05</span><span class="section-rule"></span></div>
+  <h2>Realmatic Theory and Investiture</h2>
+  <p>Everything in the Cosmere exists in three Realms simultaneously: <strong>Physical</strong> (matter), <strong>Cognitive</strong> (perception and mind — how a thing is viewed, including by itself), and <strong>Spiritual</strong> (essence and connections). <span class="tier confirmed">Text-confirmed</span></p>
+  <p><strong>Investiture</strong> is the shared substrate: power tied to a specific Shard, which cannot be created or destroyed and flows from higher to lower concentration. It underlies every magic system — Allomancy, Surgebinding, Awakening — collectively the Invested Arts. Initiation into a magic system generally requires a "crack" in a person's spiritweb for Investiture to bond into. <span class="tier confirmed">Text-confirmed</span></p>
+</div>
+
+<!-- ============ 6 ============ -->
+<div class="section" id="s6">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 06</span><span class="section-rule"></span></div>
+  <h2>Worldhopping and Perpendicularities</h2>
+  <p>Where a Shard's Investiture pools heavily, it can form a <strong>perpendicularity</strong> — a point where the three Realms align enough that someone can slide between them, and from there, between planets. <span class="tier confirmed">Text-confirmed, core concept</span></p>
+  <p><span class="tier fan">No single canonical explainer of the precise mechanics exists</span> — this account is synthesized from Coppermind's Realm pages, not drawn from one authoritative passage.</p>
+</div>
+
+<!-- ============ 7 ============ -->
+<div class="section" id="s7">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 07</span><span class="section-rule"></span></div>
+  <h2>Hoid Across the Books</h2>
+  <p>Hoid appears in some form in <strong>every published Cosmere book</strong> — confirmed by Sanderson himself. <span class="tier confirmed">Confirmed</span></p>
+  <ul>
+    <li>Aliases across the catalog: <strong>Wit</strong> (Stormlight Archive), a wandering storyteller (<em>Warbreaker</em>), Cephandrius / Dust / Wanderer (Stormlight epigraph letters), Hoid (Mistborn).</li>
+    <li>Said to originate on Yolen; can manipulate Fortune, sensing where he needs to be without knowing why.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Where the line actually sits.</strong> Confirmed: the cameos themselves — he is identifiable on the page across the catalog. <em>Not</em> confirmed: his full backstory and origin. Sanderson has explicitly reserved that for the unwritten <strong>Dragonsteel</strong> series. Claims that "Hoid was present at the Shattering," or that he predates the Shards, are fan synthesis pulled from convention Q&amp;As and Words of Brandon — <strong>not stated in any published novel.</strong> This is the single most-blurred fact in casual Cosmere discussion online, which is exactly why it gets called out here rather than folded into the confirmed list above.</p>
+  </div>
+  <p><span class="tier confirmed">Cameos: Confirmed</span> &nbsp; <span class="tier fan">Origin / Shattering presence: Fan-derived, not in text</span></p>
+  <p style="font-size:.9rem;color:var(--ink-soft)"><em>The Fires of December</em> (Hoid's Travails) is written first-person as Hoid and may resolve some of this once published — it hasn't yet, as of this report.</p>
+</div>
+
+<!-- ============ 8 ============ -->
+<div class="section" id="s8">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 08</span><span class="section-rule"></span></div>
+  <h2>Where the Story Stands</h2>
+
+  <div class="detail-list">
+    <div class="detail-row"><div class="detail-label">Stormlight</div><div class="detail-body">Ten books, two five-book arcs — <span class="tier confirmed">confirmed directly by Sanderson</span>. Arc 1 is complete with <em>Wind and Truth</em>, which he describes as "a distinct ending for this sequence." Arc 2 (books 6–10) shifts focus toward Jasnah, Lift, and Renarin. He plans a multi-year break and is doing Mistborn Era 3 first.</div></div>
+    <div class="detail-row"><div class="detail-label">Mistborn</div><div class="detail-body">A planned four-era structure running from Era 1's renaissance-level technology toward a <span class="tier wob">Word-of-Brandon space-opera finale with Allomancy-powered spaceships</span> — this describes his pitch to his editor, not yet on the page. Era 3 (Ghostbloods) book 1 is mostly done; Dec 2028 is stated as firm.</div></div>
+    <div class="detail-row"><div class="detail-label">The endgame</div><div class="detail-body">Sanderson has spoken of roughly <span class="tier wob">30–40 total Cosmere novels (often cited as ~35)</span>. The exact figure could not be pinned to one quotable statement — treat it as order-of-magnitude, not a count. <strong>Dragonsteel</strong> is intended to tell the Shattering/Hoid backstory and serve as connective tissue for a multi-series convergence.</div></div>
+    <div class="detail-row"><div class="detail-label">Published vs. plan</div><div class="detail-body">5 of 10 Stormlight. 7 of ~13 Mistborn (3 + 4, with Era 3's three still to come and an unconfirmed Era 4 beyond that). Elantris: 1 of 3. <strong>Dragonsteel — the series meant to anchor the endgame — is entirely unpublished.</strong> That's worth sitting with: the thing that's supposed to explain how everything connects doesn't exist on the page yet.</div></div>
+    <div class="detail-row"><div class="detail-label">Next, concretely</div><div class="detail-body"><em>Isles of the Emberdark</em> Tor trade (Feb 2026) → Hoid's Storybook Collection crowdfund (Mar 2026) → <em>The Fires of December</em> (Dec 2026) → Ghostbloods (Dec 2028, 2029, 2030) → Stormlight Arc 2, undated.</div></div>
+  </div>
+</div>
+
+<!-- ============ 9 ============ -->
+<div class="section" id="s9">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 09</span><span class="section-rule"></span></div>
+  <h2>Entry Points</h2>
+  <ul>
+    <li><strong>New to fantasy:</strong> <em>Elantris</em> (or <em>Steelheart</em>, non-Cosmere) — Sanderson's own suggestion. <span class="tier confirmed">Confirmed</span></li>
+    <li><strong>Experienced fantasy reader:</strong> <em>Mistborn: The Final Empire</em> or <em>The Way of Kings</em> — his top two picks. Mistborn is the lighter commitment (~650pp vs. Stormlight's far larger scope). <span class="tier confirmed">Confirmed</span></li>
+    <li><strong>Wants the connected-universe payoff fastest:</strong> no official answer exists. The recurring fan pattern is Mistborn Era 1 → <em>Warbreaker</em> → Stormlight → Mistborn Era 2 → Secret Projects, on the logic that later books assume cumulative Cosmere literacy. <span class="tier fan">Fan-constructed</span></li>
+  </ul>
+</div>
+
+<!-- ============ 10 ============ -->
+<div class="section" id="s10">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 10</span><span class="section-rule"></span></div>
+  <h2>For the Collector</h2>
+
+  <h3>The direct-first pattern — the actionable finding</h3>
+  <p>Secret Projects went to backers and Dragonsteel-direct first (<em>Tress</em>: backers Jan 1 2023, general Jan 10), with Tor's commercial trade edition arriving roughly three months later (<em>Tress</em>: Apr 4 2023). The same pattern held for <em>Isles of the Emberdark</em> (direct Jul 2025 → Tor Feb 2026), and is likely for <em>The Fires of December</em> (crowdfund Mar 2026 → commercial Dec 2026 — the "likely" is an inference from the established pattern, not a confirmed date match). <strong>Unique cover art, formats, and first-print variants live on the Dragonsteel side, and for some editions direct is the only route at all.</strong></p>
+  <div class="callout">
+    <p><strong>This is the same shape as the Subterranean Press / Bujold situation already in your author tracker</strong> — a publisher-direct channel that carries exclusive editions and first dibs on signed stock, running ahead of and separate from the mainline trade release. Treat Dragonsteel-direct the same way: check it specifically, don't assume the Tor edition is the only or the first option.</p>
+  </div>
+
+  <h3>What the leatherbound editions physically are</h3>
+  <p>The <em>Warbreaker</em> 10th Anniversary leatherbound is the template: bonded leather, Smyth-sewn (not glued) binding, gilded page edges, two-color foiling, a four-page art gallery, new commissioned interior illustrations, and endpapers by original cover artist Dan dos Santos. Announced for Q4 2026: an illustrated <em>Skyward</em> leatherbound with 30+ new interiors by Jake Parker. The <em>Lost Metal</em> leatherbound carries new endpages and art by Bryan Mark Taylor and Victor Adame Minguez. <span class="tier confirmed">Confirmed, dragonsteelbooks.com + Dan dos Santos's own account of the Warbreaker edition</span></p>
+
+  <h3>Catalog and stock status (at time of research)</h3>
+  <table>
+    <tr><th>Edition</th><th>Price</th><th>Signed status</th></tr>
+    <tr><td>Mistborn Era 1 &amp; Era 2 (leatherbound, per volume)</td><td class="mono">$125</td><td>Final Empire, Alloy of Law, Bands of Mourning, Lost Metal — signed sold out</td></tr>
+    <tr><td>Warbreaker (leatherbound)</td><td class="mono">$125</td><td>Signed sold out</td></tr>
+    <tr><td>Elantris (leatherbound)</td><td class="mono">$125</td><td>Unsigned available</td></tr>
+    <tr><td>The Way of Kings (leatherbound)</td><td class="mono">$250</td><td>Unsigned available</td></tr>
+    <tr><td>Words of Radiance (leatherbound)</td><td class="mono">$250</td><td>Unsigned available</td></tr>
+  </table>
+  <p style="font-size:.85rem;color:var(--ink-soft);font-style:italic">Dragonsteel-direct is capped at 2 copies per customer; signed copies do not restock once sold out. Dragonsteel now also produces Wheel of Time leatherbounds — <em>The Eye of the World</em> has already sold out.</p>
+
+  <h3>Barnes &amp; Noble</h3>
+  <p>Standard Tor hardcovers, trades, and mass-markets of the mainline catalog are broadly stocked, including a Stormlight 1–5 mass-market boxed set. B&amp;N regularly runs signed pre-order tip-in campaigns with Tor on major releases. <span class="tier confirmed">Confirmed</span></p>
+  <p><span class="tier unconf">Could not confirm any official B&amp;N-exclusive Sanderson edition program</span> (sprayed edges, exclusive covers) — the search surfaced only Etsy/eBay fan-made "special editions," which are not official. Worth a direct check with B&amp;N near a release date; do not treat as established until then.</p>
+
+  <div class="imgref">
+    <div class="imgref-title">Reference images identified by research (not embedded — no direct image files were provided, only source page links)</div>
+    <div class="imgref-item"><span class="il-label">Official cover art</span><a href="https://www.brandonsanderson.com/pages/the-stormlight-archive-series" target="_blank" rel="noopener">brandonsanderson.com — Stormlight + Mistborn book pages</a></div>
+    <div class="imgref-item"><span class="il-label">Leatherbound photography (official)</span><a href="https://www.dragonsteelbooks.com/collections/leatherbound-books" target="_blank" rel="noopener">dragonsteelbooks.com — leatherbound collection</a></div>
+    <div class="imgref-item"><span class="il-label">Binding/endpaper detail (official)</span><a href="https://www.dandossantos.com/the-making-of-warbreaker-the-10th-anniversary-edition" target="_blank" rel="noopener">Dan dos Santos — "The Making of Warbreaker: The 10th Anniversary Edition"</a></div>
+    <div class="imgref-item"><span class="il-label">Shard/system infographic — <strong>fan-made</strong></span><a href="https://www.17thshard.com/gallery" target="_blank" rel="noopener">17thshard.com/gallery — not an official Dragonsteel/Tor asset</a></div>
+  </div>
+</div>
+
+<!-- ============ 11 ============ -->
+<div class="section" id="s11">
+  <div class="section-eyebrow"><span class="section-tag">SECTION 11</span><span class="section-rule"></span></div>
+  <h2>Sources &amp; References</h2>
+
+  <div class="src-cat">
+    <h4>Primary — Sanderson / Tor / Dragonsteel official</h4>
+    <div class="src-item">State of the Sanderson 2025 — <a href="https://www.brandonsanderson.com/blogs/blog/state-of-the-sanderson-2025" target="_blank" rel="noopener">brandonsanderson.com</a>. Source for the Stormlight ten-book/two-arc plan and the Mistborn Era 3 timeline, in his own words.</div>
+    <div class="src-item">"What Order Should I Read Them In?" — <a href="https://faq.brandonsanderson.com/knowledge-base/what-order-should-i-read-them-in/" target="_blank" rel="noopener">faq.brandonsanderson.com</a></div>
+    <div class="src-item">"Can you put the Cosmere books in chronological order?" — <a href="https://faq.brandonsanderson.com/knowledge-base/can-you-put-the-cosmere-books-in-chronologcal-order/" target="_blank" rel="noopener">faq.brandonsanderson.com</a></div>
+    <div class="src-item">"Where do I start?" — <a href="https://www.brandonsanderson.com/pages/where-do-i-start" target="_blank" rel="noopener">brandonsanderson.com</a></div>
+    <div class="src-item">"How Many Books Will Be In The Stormlight Archive?" — <a href="https://faq.brandonsanderson.com/knowledge-base/how-many-books-will-be-in-the-stormlight-archive/" target="_blank" rel="noopener">faq.brandonsanderson.com</a></div>
+    <div class="src-item">Dragonsteel leatherbound catalog (live) — <a href="https://www.dragonsteelbooks.com/collections/leatherbound-books" target="_blank" rel="noopener">dragonsteelbooks.com</a>. Prices and stock status read live from the store at research time.</div>
+    <div class="src-item">Dragonsteel Nexus 2025 launch-party announcements — <a href="https://www.dragonsteelbooks.com/blogs/the-cognitive-realm/dsnx-2025-launch-party-announcements" target="_blank" rel="noopener">dragonsteelbooks.com</a></div>
+    <div class="src-item">Isles of the Emberdark, Tor edition — <a href="https://torpublishinggroup.com/isles-of-the-emberdark/?isbn=9781250415394&format=hardback" target="_blank" rel="noopener">torpublishinggroup.com</a></div>
+  </div>
+
+  <div class="src-cat">
+    <h4>Author-adjacent, professionally produced</h4>
+    <div class="src-item">Dan dos Santos, "The Making of Warbreaker: The 10th Anniversary Edition" — <a href="https://www.dandossantos.com/the-making-of-warbreaker-the-10th-anniversary-edition" target="_blank" rel="noopener">dandossantos.com</a>. The cover artist's own account of the leatherbound's binding and endpaper work.</div>
+  </div>
+
+  <div class="src-cat">
+    <h4>Fan-maintained — cited as such, not treated as official</h4>
+    <div class="src-item">Coppermind (17th Shard community wiki) — <a href="https://coppermind.net/wiki/Cosmere" target="_blank" rel="noopener">Cosmere</a> · <a href="https://coppermind.net/wiki/Shard" target="_blank" rel="noopener">Shard</a> · <a href="https://coppermind.net/wiki/Realmatic_Theory" target="_blank" rel="noopener">Realmatic Theory</a> · <a href="https://coppermind.net/wiki/Investiture" target="_blank" rel="noopener">Investiture</a> · <a href="https://coppermind.net/wiki/Hoid" target="_blank" rel="noopener">Hoid</a>. Used throughout for structure and cross-reference; fan-run, not official.</div>
+    <div class="src-item">17th Shard gallery — fan-made Shard/system infographic, labeled as such wherever referenced.</div>
+  </div>
+
+  <div class="src-cat">
+    <h4>Secondary / encyclopedic</h4>
+    <div class="src-item">Rhythm of War Reread, ch. 113 — <a href="https://reactormag.com/rhythm-of-war-reread-chapter-one-hundred-thirteen/" target="_blank" rel="noopener">Reactor / Tor.com</a>. Used to confirm the Taravangian/Odium sequence.</div>
+    <div class="src-item">Brandon Sanderson bibliography — <a href="https://en.wikipedia.org/wiki/Brandon_Sanderson_bibliography" target="_blank" rel="noopener">Wikipedia</a></div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Sourcing assessment, carried over from the research pass.</strong> Solid: publication years and series structure; Sanderson's reading-order guidance; the Taravangian/Odium events; the Stormlight ten-book/two-arc plan and Mistborn Era 3 timeline; the Kickstarter-first release pattern; the Dragonsteel leatherbound catalog and stock status. Thin / aggregator-derived: the total planned Cosmere novel count (30–40 / ~35); the minor Shards' Vessels and planets; the "2031" Stormlight 6 estimate. Could not confirm: an official B&amp;N-exclusive Sanderson edition program; precise worldhopping mechanics beyond the perpendicularity concept.</p>
+  </div>
+</div>
+
+<div class="report-foot">
+  Built by report-builder from research-and-source findings dated Sept 19, 2026. No fact, figure, or claim in this document originates outside that research file. Companion scannable version: <a href="cosmere-factsheet.html">cosmere-factsheet.html</a>.
+</div>
+
+</body>
+</html>
