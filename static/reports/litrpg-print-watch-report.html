@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LitRPG Physical Release Tracker — Baseline Report, Cycle 01</title>
+<title>LitRPG Print Watch — Running Log</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -37,6 +37,7 @@ body{font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.75;backgr
 .section-rule{height:1px;background:#e2dbc0;flex:1}
 h2{font-family:'Spectral',serif;font-size:1.42rem;font-weight:700;color:#1c1a2e;margin-bottom:14px;line-height:1.25}
 h3{font-family:'Spectral',serif;font-size:1.04rem;font-style:italic;font-weight:600;color:#8a6a1f;margin:26px 0 9px}
+.run-entry-body h3:first-child{margin-top:0}
 p{color:#1c1a2e;margin-bottom:14px;max-width:72ch}
 p:last-child{margin-bottom:0}
 p strong{color:#1c1a2e}
@@ -45,6 +46,7 @@ em{font-style:italic}
 /* CALLOUT */
 .callout{border-left:4px solid #423a8f;background:#eceafb;padding:16px 22px;margin:22px 0}
 .callout p{font-style:italic;color:#1c1a2e;margin:0;font-size:.96rem;line-height:1.68;max-width:66ch}
+.callout.urgent{border-left-color:#a4291f;background:#f7e9e6}
 
 /* DETAIL LIST */
 .detail-list{margin:16px 0}
@@ -61,6 +63,7 @@ em{font-style:italic}
 .data-table td{padding:9px 11px;border-bottom:1px solid #ecdfc0;color:#1c1a2e;vertical-align:top;line-height:1.5}
 .data-table tr:last-child td{border-bottom:none}
 .data-table .flag-adj{color:#8a6a1f;font-style:italic}
+.data-table .flag-bad{color:#a4291f;font-style:italic}
 
 /* HEADLINE DOSSIER CARD */
 .dossier{border:1.5px solid #1c1a2e;background:#fff;margin:20px 0}
@@ -100,6 +103,50 @@ em{font-style:italic}
 .gapbox-place{font-family:"IBM Plex Mono",monospace;font-weight:700;color:#a4291f;font-size:.8rem}
 .gapbox-item p{font-size:.88rem;margin:0}
 
+/* LATEST RUN */
+.latest-run{border:2px solid #423a8f;background:#eceafb;margin:20px 0}
+.latest-run-head{background:#423a8f;color:#f2efe4;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.latest-run-body{padding:20px 24px}
+.latest-run-body p{margin-bottom:10px}
+.latest-run-list{margin:12px 0 0;list-style:none}
+.latest-run-list li{padding:7px 0 7px 20px;position:relative;font-size:.93rem;border-bottom:1px dotted #ccc6e8}
+.latest-run-list li:last-child{border-bottom:none}
+.latest-run-list li::before{content:"\2192";position:absolute;left:0;color:#423a8f;font-weight:700}
+
+/* RUN LOG ENTRIES */
+.run-log-note{font-size:.85rem;color:#7a7690;font-style:italic;margin-bottom:20px}
+.run-entry{border:1px solid #d9d2ba;background:#fff;margin:0 0 26px}
+.run-entry:last-child{margin-bottom:0}
+.run-entry-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;background:#e9e3cf;padding:12px 20px;border-bottom:1px solid #d3c9a3}
+.run-entry-date{font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:.85rem;color:#1c1a2e;letter-spacing:.03em}
+.run-entry-tag{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.05em;color:#423a8f;text-transform:uppercase}
+.run-entry-body{padding:22px 24px}
+.quiet-note{border-left:4px solid #7a7690;background:#f2efe4;padding:14px 18px;font-style:italic;color:#55536b;font-size:.9rem}
+
+/* OPEN FOLLOW-UPS */
+.followup-group-label{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#7a7690;margin:24px 0 4px;padding-top:14px;border-top:1px dashed #d9d2ba}
+.followup-group-label:first-child{border-top:none;margin-top:0;padding-top:0}
+.followup-item{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid #ecdfc0}
+.followup-item:last-child{border-bottom:none}
+.followup-title{font-family:'Spectral',serif;font-weight:700;color:#1c1a2e;margin-bottom:4px;font-size:.95rem}
+.followup-body p{font-size:.87rem;margin:0;max-width:none;color:#1c1a2e}
+.age-tag{font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;white-space:nowrap;height:fit-content}
+.age-tag.stuck{background:#a4291f;color:#fff}
+.age-tag.aging{background:#8a6a1f;color:#fff}
+.age-tag.new{background:#3f6b46;color:#fff}
+
+/* SOURCE REACHABILITY */
+.reach-panel{margin:18px 0}
+.reach-item{display:grid;grid-template-columns:12px 1fr auto;gap:13px;align-items:start;padding:12px 0;border-bottom:1px solid #ecdfc0}
+.reach-item:last-child{border-bottom:none}
+.reach-dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.reach-dot.down{background:#a4291f}
+.reach-dot.partial{background:#8a6a1f}
+.reach-dot.up{background:#3f6b46}
+.reach-name{font-family:'Spectral',serif;font-weight:700;font-size:.9rem;color:#1c1a2e}
+.reach-note{font-size:.83rem;color:#55536b;margin-top:3px;line-height:1.55}
+.reach-since{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:#7a7690;white-space:nowrap;text-align:right;padding-top:2px}
+
 /* SOURCES SECTION */
 .sources-section{margin-top:52px;padding-top:28px;border-top:2px solid #1c1a2e}
 .source-group{margin-bottom:26px}
@@ -120,6 +167,9 @@ em{font-style:italic}
   .data-table{width:auto;min-width:560px}
   .dossier-row{grid-template-columns:1fr;gap:4px}
   .gapbox-item{grid-template-columns:1fr}
+  .followup-item{grid-template-columns:1fr}
+  .reach-item{grid-template-columns:12px 1fr}
+  .reach-since{grid-column:2;text-align:left}
 }
 </style>
 </head>
@@ -127,12 +177,12 @@ em{font-style:italic}
 
 <!-- COVER -->
 <div class="cover">
-  <div class="cover-tag">Full Baseline Report &middot; Household LitRPG Tracking &middot; Compiled Aug 29, 2026</div>
-  <h1>LitRPG Physical Release Tracker<br><em>Baseline Report, Cycle 01</em></h1>
-  <div class="cover-subtitle">The first run of a new recurring weekly task tracking newly available <strong>physical (paperback/hardcover) only</strong> LitRPG releases &mdash; headlined by The Wandering Inn's first-ever print edition, plus five other confirmed titles, one partially confirmed, and three open items carried to next cycle. Sourcing confidence is kept visible throughout, not smoothed into a generic disclaimer.</div>
+  <div class="cover-tag">Household LitRPG Tracking &middot; Living Document &middot; Updated Sept 19, 2026</div>
+  <h1>LitRPG Print Watch<br><em>Running Log</em></h1>
+  <div class="cover-subtitle">The durable, accumulating record of the weekly <code>print-release-check</code> task's research into newly available <strong>physical (paperback/hardcover) only</strong> LitRPG and author-watch releases. Every run gets an entry here, including quiet weeks &mdash; this page is the record, not a one-off snapshot.</div>
   <div class="cover-meta">
-    Compiled: August 29, 2026 &nbsp;&middot;&nbsp; Window covered: roughly Aug 4&ndash;25, 2026<br>
-    Scope: paperback/hardcover print releases only &mdash; ebook and audio-only releases are explicitly out of scope for this task<br>
+    Started: August 29, 2026 &nbsp;&middot;&nbsp; Runs logged: 4 &nbsp;&middot;&nbsp; Latest run: September 19, 2026 &nbsp;&middot;&nbsp; Cadence: weekly, Saturdays<br>
+    Scope: paperback/hardcover print releases only &mdash; ebook and audio-only releases are explicitly out of scope<br>
     Household context: builds on the existing <a href="https://dashboard.tashefamily.com/static/reports/litrpg-reading-list-factsheet.html">LitRPG Bookshelf reading list</a> (Dungeon Crawler Carl, He Who Fights with Monsters)<br>
     Companion document: Print Watch fact sheet (litrpg-print-watch-factsheet.html)
   </div>
@@ -141,14 +191,13 @@ em{font-style:italic}
 <!-- TOC -->
 <div class="toc">
   <div class="toc-title">Contents</div>
-  <div class="toc-item"><span class="toc-section">1. Scope, Method &amp; How to Read This Report</span><span class="toc-num">&sect; 01</span></div>
-  <div class="toc-item hl"><span class="toc-section">2. The Headline &mdash; The Wandering Inn's Print Debut</span><span class="toc-num">&sect; 02</span></div>
-  <div class="toc-item"><span class="toc-section">3. Confirmed New Physical Releases (Aug 4&ndash;25, 2026)</span><span class="toc-num">&sect; 03</span></div>
-  <div class="toc-item"><span class="toc-section">4. Partially Confirmed &mdash; Apex Guardian</span><span class="toc-num">&sect; 04</span></div>
-  <div class="toc-item hl"><span class="toc-section">5. Flagged &mdash; Could Not Confirm This Cycle</span><span class="toc-num">&sect; 05</span></div>
-  <div class="toc-item"><span class="toc-section">6. Publisher Coverage Notes</span><span class="toc-num">&sect; 06</span></div>
-  <div class="toc-item"><span class="toc-section">7. Relationship to the Existing Reading List</span><span class="toc-num">&sect; 07</span></div>
-  <div class="toc-item"><span class="toc-section">8. Tracking Methodology Going Forward</span><span class="toc-num">&sect; 08</span></div>
+  <div class="toc-item"><span class="toc-section">1. How This Log Works</span><span class="toc-num">&sect; 01</span></div>
+  <div class="toc-item hl"><span class="toc-section">2. Latest Run &mdash; September 19, 2026</span><span class="toc-num">&sect; 02</span></div>
+  <div class="toc-item"><span class="toc-section">3. Run Log (newest first)</span><span class="toc-num">&sect; 03</span></div>
+  <div class="toc-item hl"><span class="toc-section">4. Open Follow-ups</span><span class="toc-num">&sect; 04</span></div>
+  <div class="toc-item"><span class="toc-section">5. Source Reachability</span><span class="toc-num">&sect; 05</span></div>
+  <div class="toc-item"><span class="toc-section">6. Relationship to the Existing Reading List</span><span class="toc-num">&sect; 06</span></div>
+  <div class="toc-item"><span class="toc-section">7. Standing Rules for This Log</span><span class="toc-num">&sect; 07</span></div>
   <div class="toc-item"><span class="toc-section">Sources and References</span><span class="toc-num">&mdash;</span></div>
 </div>
 
@@ -156,209 +205,480 @@ em{font-style:italic}
 <!-- SECTION 1 -->
 <div class="section">
   <div class="section-eyebrow"><span class="section-tag">&sect; 01</span><div class="section-rule"></div></div>
-  <h2>Scope, Method &amp; How to Read This Report</h2>
+  <h2>How This Log Works</h2>
 
-  <p>This report is the first run (<strong>Cycle 01</strong>) of a new recurring weekly task tracking newly available <strong>physical print</strong> LitRPG releases &mdash; paperback and hardcover only. Ebook-only and audio-only releases are explicitly out of scope for this tracking effort, regardless of how notable they are, because Tom's stated interest here is specifically physical availability.</p>
+  <p>This page tracks newly available <strong>physical print</strong> LitRPG releases &mdash; paperback and hardcover only &mdash; plus a small set of non-LitRPG authors Tom follows the same way (Weber, Fforde, Bujold, Pierce, Sanderson, Tchaikovsky). Ebook-only and audio-only releases are explicitly out of scope regardless of how notable they are, because Tom's stated interest here is specifically physical availability.</p>
 
-  <p>This cycle's window covers roughly <strong>August 4&ndash;25, 2026</strong>. It is headlined by a genuinely landmark event for the genre &mdash; the first-ever print edition of <em>The Wandering Inn</em> &mdash; alongside five other confirmed new physical titles, one partially confirmed release, and three items that could not be confirmed this cycle and are carried forward as open leads rather than presented as findings.</p>
+  <p>The weekly <code>print-release-check</code> task runs every Saturday. Earlier, a report was only published when a run turned up something "genuinely meaty" &mdash; three runs (Sept 5, 12, 19) did real research whose findings only ever landed in a scheduled-session transcript. That was the wrong tradeoff: it made this page look abandoned even though the task kept working. As of this restructuring, <strong>every run gets an entry below, including a run that finds nothing</strong> &mdash; a quiet week is a legitimate, expected outcome, not a gap in the log.</p>
 
-  <p>A methodological point worth stating plainly, since it shapes every entry below: <strong>physical availability was verified directly against publisher and retailer product pages</strong> (Aethon Books' own book pages, Target, Walmart, Amazon, McNally Robinson) rather than inferred from release announcements alone. This distinction matters specifically in LitRPG, a genre where a title can be announced, "available," or even actively selling in ebook/Kindle Unlimited form for months or years before &mdash; or entirely without ever &mdash; a print edition materializing. An announcement is a lead; a live product page with a paperback or hardcover SKU is a confirmation.</p>
+  <p>A methodological point that shapes every entry: <strong>physical availability is verified directly against publisher and retailer product pages</strong> (Aethon's own book pages, Barnes &amp; Noble, Amazon, Walmart, Target, publisher sites) rather than inferred from release announcements alone. This distinction matters specifically in LitRPG, a genre where a title can be announced or actively selling in ebook/Kindle Unlimited form for months or years before &mdash; or entirely without ever &mdash; a print edition materializing. An announcement is a lead; a live product page with a paperback or hardcover SKU is a confirmation.</p>
 
-  <p>Four confidence categories are used consistently throughout this report:</p>
+  <p>Four confidence categories are used consistently throughout this log:</p>
 
   <div class="detail-list">
     <div class="detail-row"><span class="detail-label">Confirmed</span><span class="detail-body">Verified directly against a live publisher or retailer product page showing a physical (paperback/hardcover) SKU, with a release date.</span></div>
-    <div class="detail-row"><span class="detail-label">Partially confirmed</span><span class="detail-body">A genuine print SKU exists and was located, but a specific detail &mdash; typically exact release date or price &mdash; could not be independently verified this cycle.</span></div>
-    <div class="detail-row"><span class="detail-label">Flagged / could not confirm</span><span class="detail-body">A release is claimed somewhere, but no product page confirming physical format, date, or price could be located this cycle. Carried forward as an open item, not reported as a finding.</span></div>
-    <div class="detail-row"><span class="detail-label">Coverage gap</span><span class="detail-body">A publisher or channel that was checked but returned inconclusive results (e.g. stale cached listing pages) &mdash; different from "confirmed no releases," and flagged as such rather than silently treated as a null result.</span></div>
+    <div class="detail-row"><span class="detail-label">Partially confirmed</span><span class="detail-body">A genuine print SKU exists and was located, but a specific detail &mdash; typically exact release date or price &mdash; could not be independently verified that run.</span></div>
+    <div class="detail-row"><span class="detail-label">Flagged / could not confirm</span><span class="detail-body">A release is claimed somewhere, but no product page confirming physical format, date, or price could be located. Carried forward in &sect; 04 as an open item, not reported as a finding.</span></div>
+    <div class="detail-row"><span class="detail-label">Coverage gap</span><span class="detail-body">A publisher or channel that was checked but returned inconclusive results (e.g. a stale cached listing page, a 403/500 error) &mdash; different from "confirmed no releases," and tracked explicitly in &sect; 05 rather than silently treated as a null result.</span></div>
   </div>
 
-  <p>As the first run of this task, there is no prior cycle to diff against. Every title below is reported as "new to this tracker" relative to a zero baseline, not relative to a previous week's list &mdash; that comparison becomes possible starting with Cycle 02.</p>
+  <p>Every run diffs against everything reported in a prior run, so a title is only ever surfaced once. Where a title's status changes between runs (a date appears, a listing is corrected), that is noted as an update rather than re-presented as new.</p>
 </div>
 
 
-<!-- SECTION 2: HEADLINE -->
+<!-- SECTION 2: LATEST RUN -->
 <div class="section">
   <div class="section-eyebrow"><span class="section-tag">&sect; 02</span><div class="section-rule"></div></div>
-  <h2>The Headline &mdash; The Wandering Inn's Print Debut</h2>
+  <h2>Latest Run &mdash; September 19, 2026</h2>
 
-  <p><em>The Wandering Inn</em>, written by pirateaba, is widely regarded as one of the longest-running and most acclaimed LitRPG web serials in existence &mdash; it has been publishing continuously online since <strong>July 2016</strong>. Until this cycle, it existed only as a free web serial, an ebook, and an audiobook. That changed on <strong>August 11, 2026</strong>, with the release of <em>Book One, Part One</em> in paperback through HarperCollins &mdash; the series' first-ever physical print edition.</p>
-
-  <div class="dossier">
-    <div class="dossier-head">Release Dossier</div>
-    <div class="dossier-body">
-      <div class="dossier-row"><span class="dossier-label">Title</span><span class="dossier-value">The Wandering Inn, Book One, Part One</span></div>
-      <div class="dossier-row"><span class="dossier-label">Author</span><span class="dossier-value">pirateaba</span></div>
-      <div class="dossier-row"><span class="dossier-label">Publisher</span><span class="dossier-value">HarperCollins</span></div>
-      <div class="dossier-row"><span class="dossier-label">Format</span><span class="dossier-value">Paperback</span></div>
-      <div class="dossier-row"><span class="dossier-label">Release date</span><span class="dossier-value">August 11, 2026</span></div>
-      <div class="dossier-row"><span class="dossier-label">Web serial since</span><span class="dossier-value">July 2016 &mdash; roughly a decade of free/ebook-only availability preceding this print debut</span></div>
-      <div class="dossier-row"><span class="dossier-label">Edition note</span><span class="dossier-value">Per the author's own announcement, this is a rewritten and re-edited edition prepared specifically for the print deal &mdash; not a straight reprint of the existing web text.</span></div>
+  <div class="latest-run">
+    <div class="latest-run-head"><span>Run 4 &middot; September 19, 2026</span><span>3 findings &middot; several sources unreachable</span></div>
+    <div class="latest-run-body">
+      <p><strong>Headline:</strong> <em>He Who Fights With Monsters, Book 3: Hero</em> finally has a date &mdash; the Vault deluxe hardcover releases <strong>October 13, 2026</strong>, $32 at B&amp;N. This is the title Tom is actively waiting on.</p>
+      <ul class="latest-run-list">
+        <li><strong>Penric's Demon</strong> signed second printing open for preorder direct from Subterranean Press &mdash; $60, ~1,000 unnumbered copies. B&amp;N will not carry it, and Subterranean itself is closing (2027/2028), so this is a closing-window event, not a routine release.</li>
+        <li><strong>Aethon: Vault's Fall 2026 wave</strong> &mdash; 11 first-in-series hardcovers now tracked, Sept 2026 through Apr 2027. Four of the dates are disputed between B&amp;N and Aethon's own schedule &mdash; see &sect; 04.</li>
+        <li>A meaningful chunk of this run's sources were unreachable &mdash; B&amp;N category pages, Amazon, Kickstarter, and Reddit all failed, and jasperfforde.com has now failed SSL three runs running. See &sect; 05.</li>
+      </ul>
+      <p>Full detail in the top entry of &sect; 03 below.</p>
     </div>
   </div>
-
-  <h3>The four-part rollout</h3>
-  <p>HarperCollins is publishing the print edition in four installments on a monthly cadence running from August through November 2026:</p>
-
-  <table class="roadmap-table">
-    <thead><tr><th>Installment</th><th>Release Date</th><th>Status as of Aug 29, 2026</th></tr></thead>
-    <tbody>
-      <tr><td>Book One, Part One</td><td>Aug 11, 2026</td><td class="status-released">Released</td></tr>
-      <tr><td>Book One, Part Two</td><td>Sept 22, 2026</td><td class="status-upcoming">Upcoming</td></tr>
-      <tr><td>Book Two, Part One</td><td>Oct 20, 2026</td><td class="status-upcoming">Upcoming</td></tr>
-      <tr><td>Book Two, Part Two</td><td>Nov 10, 2026</td><td class="status-upcoming">Upcoming</td></tr>
-    </tbody>
-  </table>
-
-  <p>Only Part One has actually released as of this report's compile date; the remaining three installments are tracked commitments for future cycles of this task, not releases to report yet.</p>
-
-  <h3>A notable change for existing free-serial readers</h3>
-  <div class="callout">
-    <p>As part of the traditional-publishing tradeoff behind this deal, Volumes 1&ndash;2 of the web serial are now gated behind the print/ebook release rather than being freely available on the web serial site, as they had been for roughly a decade. This is a real, material change in access for readers who have been following the free version &mdash; worth surfacing plainly rather than only celebrating the print milestone.</p>
-  </div>
-
-  <p>The author's own announcement post is dated March 28, 2026 (per the post's own URL), several months ahead of the August release &mdash; consistent with a deal of this scale requiring lead time to announce, produce, and distribute before the first installment reaches shelves.</p>
-
-  <p>This finding is confirmed via four independent sources: the author's own site (wanderinginn.com), a ScreenRant article covering the release specifically, and two live retailer paperback listings &mdash; Walmart and McNally Robinson &mdash; both showing an active paperback SKU distinct from any ebook listing.</p>
 </div>
 
 
-<!-- SECTION 3: CONFIRMED -->
+<!-- SECTION 3: RUN LOG -->
 <div class="section">
   <div class="section-eyebrow"><span class="section-tag">&sect; 03</span><div class="section-rule"></div></div>
-  <h2>Confirmed New Physical Releases (Aug 4&ndash;25, 2026)</h2>
+  <h2>Run Log</h2>
+  <p class="run-log-note">Newest first. Each entry is what that Saturday's run actually found &mdash; nothing here is re-verified or updated retroactively; corrections to an earlier entry's findings appear in the run that made the correction, with a pointer back.</p>
 
-  <p>Five additional titles were confirmed this cycle, each verified against a live publisher or retailer product page. Two are flagged explicitly as genre-adjacent rather than close matches to Tom's dungeon-crawler/RPG-progression taste; the other three are closer fits or notable in their own right.</p>
+<!--
+=====================================================================
+APPEND POINT — the next run's entry goes HERE, immediately below this
+comment, so the run log stays newest-first. Do not delete this comment;
+it is the permanent marker for future runs.
 
-  <div class="table-scroll">
-  <table class="data-table">
-    <thead><tr><th>Title</th><th>Author</th><th>Publisher</th><th>Format / Price</th><th>Release Date</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Goblin Teeth</strong><br>Monster Party LitRPG, Bk. 1</td>
-        <td>Jim Quill</td>
-        <td>Podium Publishing</td>
-        <td>Paperback</td>
-        <td>~Aug 4, 2026</td>
-        <td>Originated as a Royal Road serial with 800,000+ views before this print release.</td>
-      </tr>
-      <tr>
-        <td><strong>Rules of Engagement</strong><br>Ransom's Renegades, Bk. 2</td>
-        <td>Rick Partlow</td>
-        <td>Aethon Books</td>
-        <td>Paperback, $14</td>
-        <td>Aug 18, 2026</td>
-        <td class="flag-adj">Military-SF/LitRPG-adjacent &mdash; flagged as genre-adjacent, not a close taste match.</td>
-      </tr>
-      <tr>
-        <td><strong>Fall of the Guild</strong><br>The Eternal Assassin, Bk. 2</td>
-        <td>W.D. Swanson</td>
-        <td>Aethon Books</td>
-        <td>Paperback, $15, 437pp</td>
-        <td>Aug 19, 2026</td>
-        <td>Progression-fantasy/LitRPG isekai, multi-classing and tactical combat &mdash; a plausible taste match.</td>
-      </tr>
-      <tr>
-        <td><strong>Orphan</strong><br>The Numbered Empire, Bk. 1</td>
-        <td>Guy Enigma</td>
-        <td>Aethon Books</td>
-        <td>Paperback, $20, 807pp</td>
-        <td>Aug 25, 2026</td>
-        <td>Brand-new series launch, System/aptitude-stat LitRPG. ISBN 9798193743798.</td>
-      </tr>
-      <tr>
-        <td><strong>Smoke and Fire</strong><br>Raptors</td>
-        <td>CJ Valin &amp; Jaime Castle</td>
-        <td>Aethon Books</td>
-        <td>Paperback, $12</td>
-        <td>Aug 18, 2026</td>
-        <td class="flag-adj">Superhero-progression series &mdash; flagged as genre-adjacent, not strict dungeon/RPG-system LitRPG.</td>
-      </tr>
-    </tbody>
-  </table>
+Also update, every run:
+  1. The "Latest Run" block in §2 — replace its contents with this
+     run's headline + findings list.
+  2. The cover-meta line at the top of the page ("Runs logged: N ·
+     Latest run: DATE").
+  3. §4 Open Follow-ups — age up any items still open (bump the run
+     count / age-tag color per the thresholds used below: green "new"
+     for this run only, gold "aging" for 2-3 runs open, red "stuck" for
+     4+ runs open); remove items that resolved (note the resolution
+     in this run's entry instead, with a one-line pointer); add any
+     newly-opened items.
+  4. §5 Source Reachability — update status/notes for any source whose
+     reachability changed this run.
+
+ENTRY FORMAT — one <div class="run-entry"> per run:
+
+  <div class="run-entry">
+    <div class="run-entry-head">
+      <span class="run-entry-date">YYYY-MM-DD — Run N</span>
+      <span class="run-entry-tag">short tag, e.g. "2 confirmed" or "quiet week"</span>
+    </div>
+    <div class="run-entry-body">
+
+      <!-- normal case: use whatever mix of components fits what was
+           found — a .dossier for a single headline item, a .data-table
+           for a list of titles, a .callout for a notable caveat. -->
+      <h3>Subheading for this run's item</h3>
+      <p>...</p>
+
+      <!-- OR, if genuinely nothing new was found, use this instead of
+           inventing a finding: -->
+      <div class="quiet-note">No new physical releases confirmed this
+        run. Checked: [sources actually checked]. [Optional one-line
+        reason, e.g. "no wave-announcement posts since the last one."]</div>
+
+    </div>
   </div>
 
-  <p>Sources, per title: Goblin Teeth via Target and Walmart paperback listings; Rules of Engagement, Fall of the Guild, Orphan, and Smoke and Fire each via their own dedicated Aethon Books product page (aethonbooks.com/book/...).</p>
+Never invent a finding to avoid logging a quiet week — a quiet-note
+entry is a correct, expected outcome for this task, not a gap in it.
+=====================================================================
+-->
+
+  <div class="run-entry">
+    <div class="run-entry-head"><span class="run-entry-date">2026-09-19 — Run 4</span><span class="run-entry-tag">1 headline &middot; 1 closing-window &middot; 11-title wave</span></div>
+    <div class="run-entry-body">
+
+      <h3>He Who Fights With Monsters, Book 3: Hero — dated at last</h3>
+      <div class="dossier">
+        <div class="dossier-head">Release Dossier</div>
+        <div class="dossier-body">
+          <div class="dossier-row"><span class="dossier-label">Series</span><span class="dossier-value">He Who Fights With Monsters (Travis Deverell / Shirtaloon) &mdash; Tom has read Books 1&ndash;2</span></div>
+          <div class="dossier-row"><span class="dossier-label">Imprint</span><span class="dossier-value">Aethon: Vault (Simon &amp; Schuster distribution)</span></div>
+          <div class="dossier-row"><span class="dossier-label">Format</span><span class="dossier-value">Deluxe hardcover, 656pp, bonus short story, ISBN 9781638494003</span></div>
+          <div class="dossier-row"><span class="dossier-label">Price</span><span class="dossier-value">$32 at Barnes &amp; Noble (list $35)</span></div>
+          <div class="dossier-row"><span class="dossier-label">Release date</span><span class="dossier-value">October 13, 2026 &mdash; B&amp;N pre-order page verified live this run</span></div>
+          <div class="dossier-row"><span class="dossier-label">Why it matters</span><span class="dossier-value">This date newly appeared on the Vault schedule; Tom's own reading-status notes still said "no date" going into this run. Second-highest-priority watch item after DCC Book 9.</span></div>
+        </div>
+      </div>
+
+      <h3>Penric's Demon — signed second printing, closing window</h3>
+      <div class="callout urgent">
+        <p><strong>Subterranean Press is closing</strong> (announced June 2026: fulfilling the 2026&ndash;2027 schedule, then shutting down late 2027/early 2028). <em>Penric's Demon</em> &mdash; the first Penric &amp; Desdemona novella, whose original $45 limited and $25 trade editions are both out of print &mdash; is getting a signed second printing: ~1,000 unnumbered hardcovers, <strong>$60</strong>, jacket art by Lauren Saint-Onge, currently at the printer with preorders open direct from Subterranean. <strong>Barnes &amp; Noble will not carry this edition</strong> &mdash; it is sold direct (and through select indie stores) only. Not new content, but the last-chance channel for it.</p>
+      </div>
+
+      <h3>Aethon: Vault — Fall 2026 first-in-series hardcover wave</h3>
+      <p>Eleven first-in-series hardcovers newly tracked this run, all via B&amp;N pre-order pages. Dates marked <strong>*</strong> conflict between B&amp;N's listing and Aethon's own Vault schedule page &mdash; treat as unresolved until rechecked (tracked in &sect; 04).</p>
+
+      <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th>Title</th><th>Author</th><th>Price</th><th>Release Date</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Battle Mage Farmer 1:</strong> Domestication</td><td>Seth Ring</td><td>$35</td><td>Sept 22, 2026</td><td>B&amp;N pre-order verified.</td></tr>
+          <tr><td><strong>Backyard Starship 1:</strong> Destiny is Calling</td><td>J.N. Chaney &amp; Terry Maggert</td><td>$30</td><td>Sept 22, 2026</td><td class="flag-adj">Sci-fi, not core LitRPG.</td></tr>
+          <tr><td><strong>Mage Errant 1:</strong> Into the Labyrinth</td><td>John Bierce</td><td>$30</td><td>Sept 29, 2026</td><td>B&amp;N pre-order verified. Plausible taste match (magic-school progression).</td></tr>
+          <tr><td><strong>Azarinth Healer 1</strong></td><td>Rhaegar</td><td>$30</td><td>Oct 27, 2026</td><td>Already on Tom's candidate list. B&amp;N pre-order.</td></tr>
+          <tr><td><strong>Shadow Slave 1:</strong> Child of Shadows</td><td>GuiltyThree</td><td>$30</td><td>Nov 10, 2026 *</td><td class="flag-bad">B&amp;N says Nov 10; Aethon's Feb post said Oct 6.</td></tr>
+          <tr><td><strong>New Life as a Max Level Archmage 1</strong></td><td>ArcaneCadence</td><td>$35</td><td>Nov 10, 2026</td><td>B&amp;N pre-order.</td></tr>
+          <tr><td><strong>Roverpowered 1:</strong> Ruff Start</td><td>Drew Hayes</td><td>$30</td><td>Nov 10, 2026</td><td>B&amp;N pre-order.</td></tr>
+          <tr><td><strong>Path to Transcendence 1:</strong> Will of Mana</td><td>Ryan Arelius</td><td>$35</td><td>Nov 17 (B&amp;N) vs. Nov 3 (Aethon) *</td><td class="flag-bad">Dates disagree.</td></tr>
+          <tr><td><strong>Unorthodox Farming 1</strong></td><td>Benjamin Kerei</td><td>$30</td><td>Dec 15 (B&amp;N) vs. Nov 3 (Aethon) *</td><td class="flag-bad">Dates disagree.</td></tr>
+          <tr><td><strong>Ascend Online 1</strong></td><td>Luke Chmilenko</td><td>$30</td><td>Dec 1 (B&amp;N) vs. Nov 17 (Aethon) *</td><td class="flag-bad">Dates disagree.</td></tr>
+          <tr><td><strong>Defiance of the Fall 1</strong></td><td>J.F. Brink</td><td>$35</td><td>Apr 20, 2027</td><td>Already on Tom's candidate list (editing caveats noted there). B&amp;N pre-order.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p>Also reconfirmed this run, no change in substance: Jasper Fforde's <em>Dark Reading Matter</em> B&amp;N listing (hardcover $30 / paperback $20, Oct 6, 2026, same as the Sept 5 finding) &mdash; but <code>jasperfforde.com</code>'s own page still fails SSL verification, the third run running (see &sect; 05). David Weber's <em>A Call to Deception</em> B&amp;N page is unchanged from the Sept 12 run &mdash; still reads "in stock" despite the Feb 2, 2027 date (see &sect; 04). Baen's Monthly Bundle pages loaded fine this run (no 403); no new Weber title in the Oct/Nov/Dec bundles.</p>
+
+      <p>Source reachability this run was notably weak: B&amp;N category/new-release pages, Amazon product/category pages, Kickstarter, and Reddit were all unreachable to direct fetch, and Aethon's own aggregate <code>/new-releases/</code> page remained stale (cached 2023 content). See &sect; 05 for the full picture across runs.</p>
+    </div>
+  </div>
+
+  <div class="run-entry">
+    <div class="run-entry-head"><span class="run-entry-date">2026-09-12 — Run 3</span><span class="run-entry-tag">1 confirmed &middot; 2 flagged</span></div>
+    <div class="run-entry-body">
+
+      <h3>The Soul Anchors (UnderVerse, Book 11)</h3>
+      <div class="detail-list">
+        <div class="detail-row"><span class="detail-label">Author / Publisher</span><span class="detail-body">Jez Cajiao &mdash; The Legion Publishers</span></div>
+        <div class="detail-row"><span class="detail-label">Format</span><span class="detail-body">Paperback, 389pp, ISBN 978-1-915617-38-5</span></div>
+        <div class="detail-row"><span class="detail-label">Release date</span><span class="detail-body">June 4, 2026 &mdash; confirmed via Amazon; no B&amp;N listing found, consistent with Legion's confirmed sell-through-Amazon-per-author model</span></div>
+      </div>
+
+      <p><strong>Flagged &mdash; not treated as confirmed findings:</strong> a Barnes &amp; Noble product page for David Weber's <em>A Call to Deception</em> now exists, but its own listing language reads "in stock" despite the book's Feb 2, 2027 date &mdash; likely a mislabeled preorder, worth a manual check before treating as purchasable (carried to &sect; 04). Separately, Risingshadow (a fan-run tracker, not a publisher source) lists a placeholder "Safehold Book 11, TBA ~2026" entry with no title or details confirmed &mdash; an unconfirmed lead only (also carried to &sect; 04).</p>
+    </div>
+  </div>
+
+  <div class="run-entry">
+    <div class="run-entry-head"><span class="run-entry-date">2026-09-05 — Run 2</span><span class="run-entry-tag">3 confirmed &middot; 1 gap resolved</span></div>
+    <div class="run-entry-body">
+
+      <h3>Dungeon Crawler Carl: Deluxe Edition (Book 1)</h3>
+      <div class="detail-list">
+        <div class="detail-row"><span class="detail-label">Publisher</span><span class="detail-body">Ace / Penguin Random House</span></div>
+        <div class="detail-row"><span class="detail-label">Format</span><span class="detail-body">Deluxe hardcover, $65, art by Victo Ngai, solvable-maze case design, 464pp</span></div>
+        <div class="detail-row"><span class="detail-label">Release date</span><span class="detail-body">November 17, 2026 &mdash; B&amp;N preorder confirmed live</span></div>
+        <div class="detail-row"><span class="detail-label">Note</span><span class="detail-body">A collector's edition of a book Tom's already read, not new content &mdash; his call whether it's worth double-dipping.</span></div>
+      </div>
+
+      <h3>Jasper Fforde — Dark Reading Matter, US edition confirmed</h3>
+      <p>Barnes &amp; Noble has a live preorder page for the US hardcover &mdash; $30, releasing <strong>October 6, 2026</strong>, the same date as the UK edition. Corroborated by PRH/Soho's own listing, which also marks it a bestseller. <code>jasperfforde.com</code>'s dedicated page could not be loaded this run (SSL cert error) &mdash; B&amp;N and PRH/Soho served as the confirming sources instead.</p>
+
+      <h3>David Weber — A Call to Deception, confirmed direct</h3>
+      <p>Now confirmed directly on <code>davidweber.net</code>'s own book page (previously only an aggregator claim): hardcover $28, ebook $9.99, 384pp, <strong>February 2, 2027</strong>. Corroborated by Amazon and a Simon &amp; Schuster listing.</p>
+
+      <h3>Legion Publishers — print status resolved</h3>
+      <p>Confirmed this run: Legion does publish physical paperbacks, but distributed per-author through Amazon rather than a scrapeable in-house storefront &mdash; the publisher's own site (<code>/shop</code>, per-author shop pages) remains unusable for automated fetch (404 / JS-rendered, no static product data). Future checks should search "[author] Legion Publishers paperback amazon" rather than trying the publisher's own site.</p>
+    </div>
+  </div>
+
+  <div class="run-entry">
+    <div class="run-entry-head"><span class="run-entry-date">2026-08-29 — Run 1 (Baseline)</span><span class="run-entry-tag">1 headline &middot; 5 confirmed &middot; 1 partial &middot; 3 flagged at the time</span></div>
+    <div class="run-entry-body">
+
+      <h3>The Headline — The Wandering Inn's Print Debut</h3>
+      <p><em>The Wandering Inn</em>, written by pirateaba, is widely regarded as one of the longest-running and most acclaimed LitRPG web serials in existence &mdash; it has been publishing continuously online since <strong>July 2016</strong>. Until this run, it existed only as a free web serial, an ebook, and an audiobook. That changed on <strong>August 11, 2026</strong>, with the release of <em>Book One, Part One</em> in paperback through HarperCollins &mdash; the series' first-ever physical print edition.</p>
+
+      <div class="dossier">
+        <div class="dossier-head">Release Dossier</div>
+        <div class="dossier-body">
+          <div class="dossier-row"><span class="dossier-label">Title</span><span class="dossier-value">The Wandering Inn, Book One, Part One</span></div>
+          <div class="dossier-row"><span class="dossier-label">Author</span><span class="dossier-value">pirateaba</span></div>
+          <div class="dossier-row"><span class="dossier-label">Publisher</span><span class="dossier-value">HarperCollins</span></div>
+          <div class="dossier-row"><span class="dossier-label">Format</span><span class="dossier-value">Paperback</span></div>
+          <div class="dossier-row"><span class="dossier-label">Release date</span><span class="dossier-value">August 11, 2026</span></div>
+          <div class="dossier-row"><span class="dossier-label">Web serial since</span><span class="dossier-value">July 2016 &mdash; roughly a decade of free/ebook-only availability preceding this print debut</span></div>
+          <div class="dossier-row"><span class="dossier-label">Edition note</span><span class="dossier-value">Per the author's own announcement, this is a rewritten and re-edited edition prepared specifically for the print deal &mdash; not a straight reprint of the existing web text.</span></div>
+        </div>
+      </div>
+
+      <h3>The four-part rollout</h3>
+      <p>HarperCollins is publishing the print edition in four installments on a monthly cadence running from August through November 2026:</p>
+
+      <table class="roadmap-table">
+        <thead><tr><th>Installment</th><th>Release Date</th><th>Status as of Aug 29, 2026</th></tr></thead>
+        <tbody>
+          <tr><td>Book One, Part One</td><td>Aug 11, 2026</td><td class="status-released">Released</td></tr>
+          <tr><td>Book One, Part Two</td><td>Sept 22, 2026</td><td class="status-upcoming">Upcoming</td></tr>
+          <tr><td>Book Two, Part One</td><td>Oct 20, 2026</td><td class="status-upcoming">Upcoming</td></tr>
+          <tr><td>Book Two, Part Two</td><td>Nov 10, 2026</td><td class="status-upcoming">Upcoming</td></tr>
+        </tbody>
+      </table>
+
+      <h3>A notable change for existing free-serial readers</h3>
+      <div class="callout">
+        <p>As part of the traditional-publishing tradeoff behind this deal, Volumes 1&ndash;2 of the web serial are now gated behind the print/ebook release rather than being freely available on the web serial site, as they had been for roughly a decade. A real, material change in access for readers who have been following the free version.</p>
+      </div>
+
+      <p>Confirmed via four independent sources: the author's own site (wanderinginn.com), a ScreenRant article covering the release specifically, and two live retailer paperback listings &mdash; Walmart and McNally Robinson.</p>
+
+      <h3>Confirmed New Physical Releases (Aug 4&ndash;25, 2026)</h3>
+      <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th>Title</th><th>Author</th><th>Publisher</th><th>Format / Price</th><th>Release Date</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Goblin Teeth</strong><br>Monster Party LitRPG, Bk. 1</td>
+            <td>Jim Quill</td>
+            <td>Podium Publishing</td>
+            <td>Paperback</td>
+            <td>~Aug 4, 2026</td>
+            <td>Originated as a Royal Road serial with 800,000+ views before this print release.</td>
+          </tr>
+          <tr>
+            <td><strong>Rules of Engagement</strong><br>Ransom's Renegades, Bk. 2</td>
+            <td>Rick Partlow</td>
+            <td>Aethon Books</td>
+            <td>Paperback, $14</td>
+            <td>Aug 18, 2026</td>
+            <td class="flag-adj">Military-SF/LitRPG-adjacent &mdash; flagged as genre-adjacent, not a close taste match.</td>
+          </tr>
+          <tr>
+            <td><strong>Fall of the Guild</strong><br>The Eternal Assassin, Bk. 2</td>
+            <td>W.D. Swanson</td>
+            <td>Aethon Books</td>
+            <td>Paperback, $15, 437pp</td>
+            <td>Aug 19, 2026</td>
+            <td>Progression-fantasy/LitRPG isekai, multi-classing and tactical combat &mdash; a plausible taste match.</td>
+          </tr>
+          <tr>
+            <td><strong>Orphan</strong><br>The Numbered Empire, Bk. 1</td>
+            <td>Guy Enigma</td>
+            <td>Aethon Books</td>
+            <td>Paperback, $20, 807pp</td>
+            <td>Aug 25, 2026</td>
+            <td>Brand-new series launch, System/aptitude-stat LitRPG. ISBN 9798193743798.</td>
+          </tr>
+          <tr>
+            <td><strong>Smoke and Fire</strong><br>Raptors</td>
+            <td>CJ Valin &amp; Jaime Castle</td>
+            <td>Aethon Books</td>
+            <td>Paperback, $12</td>
+            <td>Aug 18, 2026</td>
+            <td class="flag-adj">Superhero-progression series &mdash; flagged as genre-adjacent, not strict dungeon/RPG-system LitRPG.</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Sources, per title: Goblin Teeth via Target and Walmart paperback listings; Rules of Engagement, Fall of the Guild, Orphan, and Smoke and Fire each via their own dedicated Aethon Books product page.</p>
+
+      <h3>Partially Confirmed — Apex Guardian</h3>
+      <p><strong>Apex Guardian</strong> (Paladin of the Forsaken Lands, Book 1), by Jollybane, Aethon Books: a genuine paperback listing exists on Amazon (ISBN 9798192371176, ASIN B0HF1V6BB6), distinct from the Kindle edition, and Aethon's own August release-slate announcement places Book 1 on August 18, 2026 &mdash; but the Amazon page's price and ship-date details could not be pulled this run, and no dedicated Aethon book-detail page could be located. Net assessment: <strong>existence of a print edition is confirmed; exact release date and price are not</strong> &mdash; stated as a specific gap rather than a plausible-sounding guess.</p>
+
+      <h3>Flagged at the time — could not confirm this run</h3>
+      <p>Preserved here as the original finding; current status of these items lives in &sect; 04, not repeated in full each run.</p>
+      <div class="gapbox">
+        <div class="gapbox-head">Unconfirmed Leads &amp; Coverage Gaps, as of Aug 29</div>
+        <div class="gapbox-body">
+          <div class="gapbox-item">
+            <span class="gapbox-place">Randidly Ghosthound 15</span>
+            <p><em>The Legend of Randidly Ghosthound 15</em> (Noret Flood, Aethon Books) is claimed to have released Aug 26, 2026, but no page loaded this run showed price or physical format &mdash; only Kindle listings were found.</p>
+          </div>
+          <div class="gapbox-item">
+            <span class="gapbox-place">Apocalypse Side Quest 5</span>
+            <p><em>The Apocalypse is a Side Quest: Book Five</em> (Liam Lawless, Shadow Alley Press) listed "coming soon" for Sept 1, 2026 on the publisher's own site; no confirmed print SKU. Close taste match if a print run materializes.</p>
+          </div>
+          <div class="gapbox-item">
+            <span class="gapbox-place">Publisher coverage gap</span>
+            <p>No verifiable new physical LitRPG releases found this run from Mountaindale Press, Wraithmarked Creative, Royal Road author-direct storefronts, Tapas Media, or Portal Books &mdash; reflecting stale cached listing pages, not confirmation that nothing happened at those publishers.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Publisher coverage notes</h3>
+      <p>This run's confirmed releases leaned heavily on Aethon Books (four of six titles) plus one Podium Publishing title and the HarperCollins headline &mdash; partly Aethon's dominant position in commercial LitRPG, partly which publisher listing pages loaded reliably this run. Five other channels &mdash; Mountaindale Press, Wraithmarked Creative, Royal Road author-direct storefronts, Tapas Media, and Portal Books &mdash; returned inconclusive results due to stale cached data, named here as a specific gap rather than folded into the confirmed list.</p>
+    </div>
+  </div>
+
 </div>
 
 
-<!-- SECTION 4: PARTIALLY CONFIRMED -->
+<!-- SECTION 4: OPEN FOLLOW-UPS -->
 <div class="section">
   <div class="section-eyebrow"><span class="section-tag">&sect; 04</span><div class="section-rule"></div></div>
-  <h2>Partially Confirmed &mdash; Apex Guardian</h2>
+  <h2>Open Follow-ups</h2>
+  <p>Unresolved leads, carried across runs rather than re-reported in full each week. Age is the signal that something is stuck &mdash; an item open four runs running deserves a different kind of attention than one raised yesterday.</p>
 
-  <p><strong>Apex Guardian</strong> (Paladin of the Forsaken Lands, Book 1), by Jollybane, published by Aethon Books, sits in the partially-confirmed tier for Cycle 01. This is stated as a deliberate, specific caveat rather than folded into the confirmed list, because two different things are true at once here:</p>
+  <div class="followups">
+    <div class="followup-group-label">Stuck — open 4 runs (since 2026-08-29)</div>
 
-  <div class="dossier">
-    <div class="dossier-head">What Is Confirmed vs. What Is Not</div>
-    <div class="dossier-body">
-      <div class="dossier-row"><span class="dossier-label">Confirmed</span><span class="dossier-value">A genuine paperback product listing exists on Amazon &mdash; ISBN 9798192371176, ASIN B0HF1V6BB6 &mdash; distinct from the separate Kindle edition. Aethon's own August 2026 release-slate announcement places this series' Book 1 on August 18, 2026.</span></div>
-      <div class="dossier-row"><span class="dossier-label">Not confirmed</span><span class="dossier-value">The Amazon page's price and ship-date details could not be pulled directly this cycle, and no dedicated Aethon book-detail page (of the kind that exists for the five titles in &sect; 03) could be located for this title.</span></div>
+    <div class="followup-item">
+      <div><div class="followup-title">The Legend of Randidly Ghosthound 15</div><div class="followup-body"><p>Aethon's own page lists a $18 paperback (ISBN 9798193756965) with a "Buy the Book" button, but it routes through a proxy to an Amazon listing that is Kindle-only (this run: Amazon pages 500'd outright). No B&amp;N listing found. Publisher-listed &ne; retail-confirmed, four runs straight. Low priority to keep hammering on, but still open.</p></div></div>
+      <span class="age-tag stuck">4 runs</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Mountaindale Press release-schedule page</div><div class="followup-body"><p>The dedicated schedule page has never shown usable title/date content across four runs. The homepage itself has improved (now shows plausible current titles like <em>Ruin</em> and <em>The Great Depths</em>, "available now" / "coming soon" with no dates) &mdash; a partial improvement, not a resolution.</p></div></div>
+      <span class="age-tag stuck">4 runs</span>
+    </div>
+
+    <div class="followup-group-label">Aging — open 2&ndash;3 runs</div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Discount Dan — Mythic-Grade Hardback Edition (Kickstarter)</div><div class="followup-body"><p>Shadow Alley Press campaign, ~1,855 backers / $229,637 as of a mid-August snippet; est. ship Feb 2027. Still backer-exclusive &mdash; no BackerKit, Amazon, or publisher-store retail listing found. Re-check as the ship date approaches, since that's typically when retail preorders open.</p></div></div>
+      <span class="age-tag aging">3 runs</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Lord of EXP Farming, Book 3</div><div class="followup-body"><p>Timeless Wind. Book 1 has a clear physical Amazon and B&amp;N listing; Book 3 does not &mdash; only Kindle/eBook found both times checked. A Risingshadow claim of an Aug 10 print release via Amazon is unverified. Print status for Book 3 is NOT confirmed.</p></div></div>
+      <span class="age-tag aging">2 runs</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">David Weber — A Call to Deception, "in stock" mislabel</div><div class="followup-body"><p>B&amp;N's product page reads "in stock / available now" for the $28 hardcover with no pre-order language, despite the Feb 2, 2027 release date. Unchanged across two runs &mdash; still worth a manual look to rule out an actual early-availability quirk.</p></div></div>
+      <span class="age-tag aging">2 runs</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Safehold Book 11 (David Weber)</div><div class="followup-body"><p>Risingshadow &mdash; a fan-run tracker, not a publisher source &mdash; lists a placeholder "TBA ~2026" entry with no title or details confirmed. Raised 2026-09-12; not yet rechecked against davidweber.net or Baen.</p></div></div>
+      <span class="age-tag aging">1 run, not rechecked</span>
+    </div>
+
+    <div class="followup-group-label">New this run (2026-09-19)</div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Aethon Vault Fall 2026 wave — disputed dates</div><div class="followup-body"><p>B&amp;N and Aethon's own Vault schedule page disagree on four titles: Shadow Slave 1, Path to Transcendence 1, Unorthodox Farming 1, Ascend Online 1 (see the table in the Sept 19 run entry, &sect; 03). Also unconfirmed at B&amp;N: <em>Life Reset (New Era Online 1)</em> claimed Nov 17, and <em>Raised in Fire (Demon Days, Vampire Nights 2)</em> claimed Oct 6 &mdash; no B&amp;N hardcover page found for either.</p></div></div>
+      <span class="age-tag new">New</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Bobiverse 6, The Infinite Extent — print edition</div><div class="followup-body"><p>Released Sept 10, 2026 as an Audible Original audiobook first. No confirmed print date. Tom owns and collects Bobiverse in print (books 1&ndash;5) &mdash; watch for a print listing to appear.</p></div></div>
+      <span class="age-tag new">New</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Warformed: Stormweaver 1 &amp; 2 (Kickstarter, Wraithmarked)</div><div class="followup-body"><p>Paperbacks + signed hardcovers; ~1,855 backers / $229,637 per a mid-August snippet (Kickstarter itself 403'd this run). End/delivery dates unknown. Wraithmarked sells direct, so a retail listing may never appear even once fulfilled.</p></div></div>
+      <span class="age-tag new">New</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">A Thousand Li hardcover reissues — B&amp;N links unverified</div><div class="followup-body"><p>Ace/PRH reissues, on Tom's candidate list. <em>The First Step</em> (Mar 10, 2026) has a B&amp;N page but shows "out of stock online"; <em>The First Stop</em> (Jul 14, 2026) and <em>The First War</em> (Nov 10, 2026) have no B&amp;N page found. Reissues, not new print, so low urgency &mdash; but worth a direct B&amp;N search rather than relying on stale index results.</p></div></div>
+      <span class="age-tag new">New</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Shadow Alley / Portal upcoming titles — format unstated</div><div class="followup-body"><p>Shadow Alley: War Girls (Juniper Wars 5) Sept 22; Unintended Cultivator 10 Nov 17; Apocalypse Continuum 2 Jan 12, 2027. Portal: First Necromancer 4 Sept 22; Azarinth Healer 7 "late 2026" (Risingshadow says 2027). Print format not confirmed for any of these.</p></div></div>
+      <span class="age-tag new">New</span>
+    </div>
+
+    <div class="followup-item">
+      <div><div class="followup-title">Heretical Fishing, Book 7</div><div class="followup-body"><p>Tom's only outstanding trigger for this series (currently reading). No listing anywhere found this run. Book 6's B&amp;N page also not found, for reference.</p></div></div>
+      <span class="age-tag new">New</span>
     </div>
   </div>
-
-  <p>Net assessment: <strong>existence of a print edition is confirmed; the exact release date and price are not.</strong> This is exactly the kind of gap this report is built to surface honestly rather than paper over with a plausible-sounding guess &mdash; a specific date or price is not stated here because neither was independently verified.</p>
 </div>
 
 
-<!-- SECTION 5: FLAGGED -->
+<!-- SECTION 5: SOURCE REACHABILITY -->
 <div class="section">
   <div class="section-eyebrow"><span class="section-tag">&sect; 05</span><div class="section-rule"></div></div>
-  <h2>Flagged &mdash; Could Not Confirm This Cycle</h2>
+  <h2>Source Reachability</h2>
+  <p>A source that silently fails reopens a blind spot invisibly &mdash; this panel exists so a broken source stays visible instead of just quietly producing fewer findings. Status reflects the most recent run each source was checked.</p>
 
-  <p>Three items came up during this cycle's research that could not be confirmed to the standard used elsewhere in this report. They are presented here explicitly as open items for a future check, not as findings.</p>
-
-  <div class="gapbox">
-    <div class="gapbox-head">Unconfirmed Leads &amp; Coverage Gaps</div>
-    <div class="gapbox-body">
-      <div class="gapbox-item">
-        <span class="gapbox-place">Randidly Ghosthound 15</span>
-        <p><em>The Legend of Randidly Ghosthound 15</em> (Noret Flood, Aethon Books) is claimed to have released Aug 26, 2026, but no page loaded this cycle showed price or physical format &mdash; only Kindle listings were found in checks. Worth a direct follow-up next cycle.</p>
+  <div class="reach-panel">
+    <div class="reach-item">
+      <span class="reach-dot down"></span>
+      <div>
+        <div class="reach-name">B&amp;N category / new-release listing pages</div>
+        <div class="reach-note">404 on site search, except a direct ISBN-search URL that worked once. Individual product/ISBN pages remain reliable &mdash; the category sort specifically is what's broken. Forces a search-and-verify-individual-pages workaround for the Tier 3 sweep.</div>
       </div>
-      <div class="gapbox-item">
-        <span class="gapbox-place">Apocalypse Side Quest 5</span>
-        <p><em>The Apocalypse is a Side Quest: Book Five</em> (Liam Lawless, Shadow Alley Press) is listed "coming soon" for Sept 1, 2026 on the publisher's own site. The series is normally sold in paperback, but no product page with a confirmed print SKU for this specific volume was located. Flagged as <strong>one to watch</strong>: this is a close taste match to Tom's reading (post-apocalyptic progression fantasy) if a print run does materialize, and its claimed date falls just after this cycle's window, making it a natural check for Cycle 02.</p>
+      <span class="reach-since">Down since 09-05 &middot; still down 09-19</span>
+    </div>
+    <div class="reach-item">
+      <span class="reach-dot down"></span>
+      <div>
+        <div class="reach-name">Amazon product / category pages</div>
+        <div class="reach-note">500/503 errors on category and several product pages (e.g. Ghosthound 15 this run). Individual product pages sometimes still resolve.</div>
       </div>
-      <div class="gapbox-item">
-        <span class="gapbox-place">Publisher coverage gap</span>
-        <p>No verifiable new physical LitRPG releases were found this cycle from Mountaindale Press, Wraithmarked Creative, Royal Road author-direct storefronts, Tapas Media, or Portal Books. This reflects tooling issues &mdash; some publisher listing pages returned stale cached data during this run &mdash; and should be read as an <strong>unchecked, inconclusive gap</strong>, not as confirmation that nothing happened at those publishers this cycle. See &sect; 06.</p>
+      <span class="reach-since">Down since 09-05 &middot; still down 09-19</span>
+    </div>
+    <div class="reach-item">
+      <span class="reach-dot down"></span>
+      <div>
+        <div class="reach-name">Kickstarter</div>
+        <div class="reach-note">403 on every attempt across three runs (Discount Dan, Warformed: Stormweaver). Forced to rely on search snippets for backer/funding figures instead of the campaign page itself.</div>
       </div>
+      <span class="reach-since">Down since 09-05 &middot; still down 09-19</span>
+    </div>
+    <div class="reach-item">
+      <span class="reach-dot down"></span>
+      <div>
+        <div class="reach-name">Reddit (r/litrpg)</div>
+        <div class="reach-note">Unreachable by direct fetch and by search (no recent thread content surfaced). Not tested 09-12.</div>
+      </div>
+      <span class="reach-since">Down since 09-05 &middot; still down 09-19</span>
+    </div>
+    <div class="reach-item">
+      <span class="reach-dot partial"></span>
+      <div>
+        <div class="reach-name">Aethon aggregate /new-releases/ listing page</div>
+        <div class="reach-note">Stale (cached 2023 content) across every run checked. Workaround in place and working: direct per-book detail pages and the dedicated Aethon Vault schedule page (aethonbooks.com/aethonvault/) both fetch reliably.</div>
+      </div>
+      <span class="reach-since">Stale since 08-29 &middot; still stale 09-19</span>
+    </div>
+    <div class="reach-item">
+      <span class="reach-dot partial"></span>
+      <div>
+        <div class="reach-name">Mountaindale Press release-schedule page</div>
+        <div class="reach-note">Dedicated schedule page (mountaindalepress.store/pages/new-releases-and-coming-soon) still just a heading + newsletter signup, no titles/dates. Homepage itself has improved and now shows plausible current titles.</div>
+      </div>
+      <span class="reach-since">Broken since 08-29 &middot; partial improvement 09-12/09-19</span>
+    </div>
+    <div class="reach-item">
+      <span class="reach-dot down"></span>
+      <div>
+        <div class="reach-name">jasperfforde.com</div>
+        <div class="reach-note">Persistent SSL certificate failure. B&amp;N and PRH/Soho product listings used as substitute confirming sources for Fforde news.</div>
+      </div>
+      <span class="reach-since">Failing 3 runs running (09-05, 09-12, 09-19)</span>
+    </div>
+    <div class="reach-item">
+      <span class="reach-dot up"></span>
+      <div>
+        <div class="reach-name">Baen Monthly Bundle pages</div>
+        <div class="reach-note">Reported blocked (403) in earlier research; fetched cleanly on the 09-19 run with no block encountered.</div>
+      </div>
+      <span class="reach-since">Reachable as of 09-19</span>
     </div>
   </div>
 </div>
 
 
-<!-- SECTION 6: PUBLISHER COVERAGE -->
+<!-- SECTION 6: RELATIONSHIP TO READING LIST -->
 <div class="section">
   <div class="section-eyebrow"><span class="section-tag">&sect; 06</span><div class="section-rule"></div></div>
-  <h2>Publisher Coverage Notes</h2>
-
-  <p>This cycle's confirmed releases lean heavily on Aethon Books (four of the six titles addressed in &sect;&sect; 02&ndash;04) plus one Podium Publishing title and the HarperCollins headline. That concentration is partly a reflection of Aethon's dominant position in commercial LitRPG publishing, and partly an artifact of which publisher listing pages loaded reliably this cycle.</p>
-
-  <p>Five other channels worth watching in this genre &mdash; Mountaindale Press, Wraithmarked Creative, Royal Road author-direct storefronts, Tapas Media, and Portal Books &mdash; returned inconclusive results this run due to stale cached listing data. This is recorded here as a specific, named gap in this cycle's coverage rather than smoothed into the confirmed-releases list or silently dropped. A goal for Cycle 02 is closing this gap with fresh checks against each of these five channels.</p>
-</div>
-
-
-<!-- SECTION 7: RELATIONSHIP TO READING LIST -->
-<div class="section">
-  <div class="section-eyebrow"><span class="section-tag">&sect; 07</span><div class="section-rule"></div></div>
   <h2>Relationship to the Existing Reading List</h2>
 
-  <p>This tracker is a companion to the household's existing <a href="https://dashboard.tashefamily.com/static/reports/litrpg-reading-list-factsheet.html">LitRPG Bookshelf reading list</a>, which is built around Tom's two current reads &mdash; <em>Dungeon Crawler Carl</em> and <em>He Who Fights with Monsters</em> &mdash; and already flagged The Wandering Inn's then-upcoming print debut as a "breaking" item. This report is where that item graduates from a forward-looking flag into a confirmed release, with the full four-part rollout now tracked concretely.</p>
+  <p>This log is a companion to the household's existing <a href="https://dashboard.tashefamily.com/static/reports/litrpg-reading-list-factsheet.html">LitRPG Bookshelf reading list</a>, which is built around Tom's current and completed reads &mdash; <em>Dungeon Crawler Carl</em>, <em>He Who Fights with Monsters</em>, and <em>Heretical Fishing</em> &mdash; and originally flagged The Wandering Inn's then-upcoming print debut as a "breaking" item. This log is where that item graduated from a forward-looking flag into a confirmed release, and where subsequent developments &mdash; HWFWM Book 3 getting a date, the Vault hardcover wave &mdash; get tracked concretely as they land.</p>
 
-  <p>Where a newly confirmed title in this cycle plausibly matches that existing taste profile (dungeon-crawler mechanics, RPG-system progression, found-family tone), that judgment is noted inline in &sect; 03 &mdash; <em>Fall of the Guild</em> specifically is called out as a plausible match, while <em>Rules of Engagement</em> and <em>Smoke and Fire</em> are explicitly flagged as genre-adjacent rather than close fits. This tracker does not re-litigate or expand the reading list's own recommendation tiers; it exists specifically to surface new physical availability on a rolling basis.</p>
+  <p>Where a newly confirmed title plausibly matches Tom's existing taste profile (dungeon-crawler mechanics, RPG-system progression, found-family tone), that judgment is noted inline where it's reported. This log does not re-litigate or expand the reading list's own recommendation tiers; it exists specifically to surface new physical availability on a rolling basis.</p>
 </div>
 
 
-<!-- SECTION 8: METHODOLOGY GOING FORWARD -->
+<!-- SECTION 7: STANDING RULES -->
 <div class="section">
-  <div class="section-eyebrow"><span class="section-tag">&sect; 08</span><div class="section-rule"></div></div>
-  <h2>Tracking Methodology Going Forward</h2>
-
-  <p>This report establishes the baseline for a recurring weekly task. The intended cadence and standards going forward:</p>
+  <div class="section-eyebrow"><span class="section-tag">&sect; 07</span><div class="section-rule"></div></div>
+  <h2>Standing Rules for This Log</h2>
 
   <div class="confidence">
-    <div class="confidence-head">Standing Rules for Future Cycles</div>
+    <div class="confidence-head">Rules Every Run Follows</div>
     <div class="confidence-body">
       <div class="conf-item good">
         <span class="lbl">Scope stays locked to physical print</span>
@@ -366,20 +686,22 @@ em{font-style:italic}
       </div>
       <div class="conf-item good">
         <span class="lbl">Verification standard stays retailer/publisher-first</span>
-        <p>A title is "confirmed" only once a live publisher or retailer product page shows a physical SKU. A release announcement alone is a lead, not a confirmation, given how commonly ebook and print availability diverge in this genre.</p>
+        <p>A title is "confirmed" only once a live publisher or retailer product page shows a physical SKU. A release announcement alone is a lead, not a confirmation.</p>
       </div>
       <div class="conf-item">
-        <span class="lbl">Diff against the prior cycle starting Cycle 02</span>
-        <p>Future reports should explicitly note which confirmed titles are newly appearing versus already known from a previous cycle (e.g. Wandering Inn Book One Pt. 2 becoming "confirmed released" rather than "upcoming" once Sept 22, 2026 arrives), rather than re-presenting the full history each time.</p>
+        <span class="lbl">Every run gets an entry, including quiet ones</span>
+        <p>A run that finds nothing new still gets logged with a quiet-note entry (&sect; 03's append-point comment has the exact format). This page stopped being trustworthy when it silently skipped runs &mdash; that does not happen again.</p>
       </div>
       <div class="conf-item bad">
-        <span class="lbl">Coverage gaps get named, not absorbed</span>
-        <p>When a publisher or channel returns inconclusive data (as happened this cycle with five publishers, &sect; 06), that should continue to be reported explicitly as a gap to close, rather than treated as an implicit "no releases" finding.</p>
+        <span class="lbl">Coverage gaps and unreachable sources get named, not absorbed</span>
+        <p>When a publisher, retailer, or platform returns inconclusive data or fails outright, that is reported explicitly in &sect; 05 rather than treated as an implicit "no releases" finding.</p>
+      </div>
+      <div class="conf-item bad">
+        <span class="lbl">Open items get aged, not re-litigated</span>
+        <p>&sect; 04 tracks unresolved leads with an explicit run-count. An item stuck for several runs is a signal worth surfacing on its own, not just quietly re-checked forever.</p>
       </div>
     </div>
   </div>
-
-  <p>No sources/citations apparatus beyond what follows is needed for future weekly runs to stay lightweight, but the same tiered sourcing discipline used here &mdash; distinguishing a publisher's own product page from a retailer listing from an editorial/news writeup &mdash; should carry forward each cycle.</p>
 </div>
 
 
@@ -391,38 +713,49 @@ em{font-style:italic}
   <div class="source-group">
     <div class="source-group-title">Tier 1 &mdash; Author / Publisher Primary Sources</div>
     <div class="source-group-note">Direct statements from the author or the publishing house itself &mdash; the highest-confidence tier for release facts.</div>
-    <div class="source-item">pirateaba, wanderinginn.com &mdash; HarperCollins print-deal announcement (wanderinginn.com/2026/03/28/harpercollins-announcement/).</div>
-    <div class="source-item">Aethon Books &mdash; individual book pages for Rules of Engagement, Fall of the Guild, Orphan, and Smoke and Fire (aethonbooks.com/book/...).</div>
-    <div class="source-item">Aethon Books &mdash; August 2026 release-slate announcement (aethonbooks.com/2026/07/15/august-2026/), used for the Apex Guardian date claim in &sect; 04.</div>
+    <div class="source-item">pirateaba, wanderinginn.com &mdash; HarperCollins print-deal announcement.</div>
+    <div class="source-item">Aethon Books &mdash; individual book pages for Rules of Engagement, Fall of the Guild, Orphan, and Smoke and Fire.</div>
+    <div class="source-item">Aethon Books &mdash; August 2026 release-slate announcement (Apex Guardian date claim).</div>
+    <div class="source-item">Aethon: Vault master schedule page (aethonbooks.com/aethonvault/) &mdash; used for the Fall 2026 wave.</div>
+    <div class="source-item">davidweber.net &mdash; official book page for A Call to Deception.</div>
+    <div class="source-item">Subterranean Press &mdash; product page for Penric's Demon (signed second printing).</div>
+    <div class="source-item">Lois McMaster Bujold's Goodreads author blog &mdash; Sept 14, 2026 announcement of the Penric's Demon reprint.</div>
   </div>
 
   <div class="source-group">
     <div class="source-group-title">Tier 2 &mdash; Retailer Product Listings</div>
-    <div class="source-group-note">Used to independently verify physical (paperback/hardcover) SKUs, distinct from ebook listings, for each confirmed title.</div>
-    <div class="source-item">Walmart &mdash; The Wandering Inn paperback listing.</div>
-    <div class="source-item">McNally Robinson &mdash; The Wandering Inn paperback listing.</div>
-    <div class="source-item">Target &mdash; Goblin Teeth paperback listing.</div>
-    <div class="source-item">Walmart &mdash; Goblin Teeth paperback listing.</div>
-    <div class="source-item">Amazon &mdash; Apex Guardian paperback listing (ASIN B0HF1V6BB6, distinct from the Kindle edition).</div>
+    <div class="source-group-note">Used to independently verify physical (paperback/hardcover) SKUs, distinct from ebook listings.</div>
+    <div class="source-item">Walmart &amp; McNally Robinson &mdash; The Wandering Inn paperback listings.</div>
+    <div class="source-item">Target &amp; Walmart &mdash; Goblin Teeth paperback listings.</div>
+    <div class="source-item">Amazon &mdash; Apex Guardian (ASIN B0HF1V6BB6) and The Soul Anchors (ISBN 978-1-915617-38-5) listings.</div>
+    <div class="source-item">Barnes &amp; Noble &mdash; product pages for Dungeon Crawler Carl Deluxe Edition (ean 9798217192199), Dark Reading Matter, A Call to Deception, He Who Fights With Monsters Book 3 (ean 9781638494003), and each Aethon: Vault Fall 2026 wave title individually.</div>
+    <div class="source-item">PRH / Soho Press listing &mdash; Dark Reading Matter US edition corroboration.</div>
+    <div class="source-item">Simon &amp; Schuster listing &mdash; A Call to Deception corroboration.</div>
   </div>
 
   <div class="source-group">
     <div class="source-group-title">Tier 3 &mdash; Editorial / Journalism Coverage</div>
-    <div class="source-group-note">Used for narrative and contextual confirmation of the headline release.</div>
+    <div class="source-group-note">Used for narrative and contextual confirmation of headline releases.</div>
     <div class="source-item">ScreenRant &mdash; coverage of The Wandering Inn's August 2026 paperback release.</div>
   </div>
 
   <div class="source-group">
+    <div class="source-group-title">Tier 4 &mdash; Unverified / Fan-run Trackers</div>
+    <div class="source-group-note">Explicitly lower confidence &mdash; used only to flag a lead for follow-up, never as confirmation on their own.</div>
+    <div class="source-item">Risingshadow &mdash; Safehold Book 11 placeholder listing; Lord of EXP Farming Book 3 print claim. Both unconfirmed, tracked in &sect; 04.</div>
+  </div>
+
+  <div class="source-group">
     <div class="source-group-title">Companion Documents</div>
-    <div class="source-group-note">Not independent sources, but directly referenced in this report.</div>
-    <div class="source-item">LitRPG Print Watch, Cycle 01 fact sheet (litrpg-print-watch-factsheet.html) &mdash; the scannable companion to this report.</div>
-    <div class="source-item">LitRPG Bookshelf reading list (litrpg-reading-list-factsheet.html) &mdash; the household's existing reading-list document, referenced in &sect; 07.</div>
+    <div class="source-group-note">Not independent sources, but directly referenced in this log.</div>
+    <div class="source-item">LitRPG Print Watch fact sheet (litrpg-print-watch-factsheet.html) &mdash; the scannable companion to this log.</div>
+    <div class="source-item">LitRPG Bookshelf reading list (litrpg-reading-list-factsheet.html) &mdash; the household's existing reading-list document, referenced in &sect; 06.</div>
   </div>
 </div>
 
 <div class="footer">
-  LitRPG Physical Release Tracker: Baseline Report, Cycle 01 &nbsp;&middot;&nbsp; Compiled August 29, 2026<br>
-  1 landmark headline, 5 confirmed titles, 1 partially confirmed, 3 flagged open items, 1 named publisher coverage gap<br>
+  LitRPG Print Watch &mdash; Running Log &nbsp;&middot;&nbsp; Started August 29, 2026 &nbsp;&middot;&nbsp; 4 runs logged &nbsp;&middot;&nbsp; Latest run: September 19, 2026<br>
+  Updated weekly by the <code>print-release-check</code> task &mdash; see &sect; 03 for the append point and entry format<br>
   Companion document: Print Watch fact sheet (litrpg-print-watch-factsheet.html)
 </div>
 
