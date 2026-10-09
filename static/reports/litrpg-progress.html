@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LitRPG Series Progress</title>
+<meta name="description" content="Where each LitRPG series stands: which volumes are in print, which are bought, which are read, and what comes next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,600&family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   LitRPG series progress
+   Anchor: library circulation desk. Kraft card stock, typewriter
+   data, rubber-stamp ink. Deliberately NOT the navy HUD look of
+   the Print Watch / Reading List pages.
+
+   Layout = a segmented strip per series (one cell per volume,
+   square check = bought, round check = read) plus a computed
+   "Next" slip. Data lives in litrpg-progress-data.js.
+
+   Class names are deliberately long and prefixed (cl-, rw-, nx-,
+   tl-). The mockup used a bare `.q` for the "?" marker and that
+   collided with an unrelated `.q` panel rule, which flung the "?"
+   cells out of their rows. No short generic names here.
+   All colour via custom properties.
+   =========================================================== */
+:root{
+  --paper:#efe5cb;
+  --paper-2:#f8f2e0;
+  --kraft:#d9c392;
+  --kraft-2:#c3a76a;
+  --ink:#2a2118;
+  --ink-soft:#5f5343;
+  --mute:#76694f;       /* low-emphasis text that still reads */
+  --faint:#a39679;      /* borders only */
+  --print:#d9a21b;      /* in print: mustard */
+  --bought:#8b2a2a;     /* bought: oxblood */
+  --read:#1f5a43;       /* read: pine */
+  --stamp:#2d4b8e;      /* announced / stamp ink: date-due blue */
+  --gilt:#e3c47a;
+  --cw:42px;            /* width of one volume cell */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);
+  font-family:'Fraunces',Georgia,serif;font-size:16px;line-height:1.5;
+  background-color:var(--paper);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .27 0 0 0 0 .15 0 0 0 .10 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(180deg,transparent 0 31px,rgba(139,42,42,.07) 31px 32px),
+    radial-gradient(1200px 600px at 85% -10%,rgba(255,255,255,.45),transparent 60%);
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+b,strong{font-weight:700}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- masthead ---------- */
+.mast{padding:46px 28px 26px;position:relative}
+.mast-eyebrow{font:700 12px 'Courier Prime',monospace;letter-spacing:.26em;text-transform:uppercase;color:var(--bought)}
+.mast h1{
+  margin:10px 0 0;font-weight:900;font-size:clamp(3rem,8.2vw,6.4rem);line-height:.9;letter-spacing:-.025em;
+  font-variation-settings:'opsz' 144;
+}
+.mast h1 em{font-style:italic;font-weight:300;color:var(--bought)}
+.mast-lede{max-width:62ch;margin:22px 0 0;font-size:1.06rem;color:var(--ink-soft)}
+.mast-lede b{color:var(--ink)}
+.stamp-due{
+  position:absolute;right:28px;top:44px;transform:rotate(6deg);
+  border:3px double var(--stamp);color:var(--stamp);padding:8px 16px;text-align:center;
+  font:400 22px 'Special Elite',monospace;letter-spacing:.12em;text-transform:uppercase;line-height:1.25;
+  opacity:.92;
+}
+.stamp-due small{display:block;font-size:11px;letter-spacing:.2em}
+.stamp-due[hidden]{display:none}
+
+/* ---------- sticky key ---------- */
+.key{
+  position:sticky;top:0;z-index:50;
+  background:var(--ink);color:var(--paper-2);
+  border-bottom:4px solid var(--print);
+  box-shadow:0 6px 0 rgba(42,33,24,.12);
+}
+.key-in{max-width:1240px;margin:0 auto;padding:9px 28px 10px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.key-title{font:400 15px 'Special Elite',monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--print)}
+.key-items{display:flex;flex-wrap:wrap;gap:6px 18px;flex:1}
+.ki{display:flex;align-items:center;gap:7px;font:400 12px/1.2 'Courier Prime',monospace}
+.ki b{display:block;font:700 13px/1.15 'Courier Prime',monospace;color:#fff;letter-spacing:.02em}
+.ki-d{color:#d8cdb2;font-size:11.5px}
+
+.sw{display:inline-grid;place-items:center;width:26px;height:26px;flex:none;position:relative;color:#fff;font:700 14px 'Courier Prime',monospace}
+.sw-digital{border:1.5px solid #b9ac8e;color:#b9ac8e}
+.sw-announced{border:2px solid #8fb0ee;background:repeating-linear-gradient(135deg,#8fb0ee 0 3px,transparent 3px 7px)}
+.sw-print{border:2px solid var(--paper-2);background:var(--print)}
+.sw-bought{border:2px solid var(--paper-2);background:var(--bought);border-radius:2px}
+.sw-read{border:2px solid var(--paper-2);background:var(--read);border-radius:50%}
+.sw-reading{border:2px solid var(--paper-2);border-radius:50%;background:linear-gradient(90deg,var(--read) 50%,transparent 50%)}
+.sw-unknown{border:2px dashed var(--paper-2);color:var(--paper-2)}
+.sw-open{border:2px dashed #b9ac8e;color:#b9ac8e}
+.sw-side{border:2px solid var(--paper-2);background:var(--paper-2)}
+.sw-side::after{content:"";position:absolute;top:-2px;right:-2px;width:10px;height:10px;background:linear-gradient(225deg,var(--ink) 50%,var(--faint) 50%)}
+.ck{width:12px;height:12px;display:block}
+
+/* ---------- groups ---------- */
+main{padding-bottom:60px}
+.group-h{
+  margin:36px 0 10px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+}
+.group-h h2{margin:0;font-weight:900;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1;letter-spacing:-.02em;font-variation-settings:'opsz' 144}
+.group-h-note{font:400 13px 'Special Elite',monospace;color:var(--bought);letter-spacing:.08em}
+.group-h::after{content:"";flex:1;min-width:40px;border-top:2px dashed var(--faint);align-self:center}
+.group-box-secondary{background:rgba(195,167,106,.28);border:2px dashed var(--kraft-2);padding:0 12px 10px}
+.data-error{
+  margin:18px 0 0;padding:12px 18px;border:3px solid var(--bought);background:#f6dcd6;color:var(--ink);
+  font:400 13px/1.5 'Courier Prime',monospace;
+}
+.data-error b{color:var(--bought)}
+.data-error ul{margin:6px 0 0;padding-left:20px}
+
+/* ---------- column heads + rows (shared grid) ---------- */
+.rw-cols,.rw{
+  display:grid;grid-template-columns:190px minmax(0,1fr) 124px 184px;gap:6px 18px;align-items:center;
+  padding-left:10px;padding-right:10px;
+}
+.rw-cols{
+  background:var(--ink);color:var(--paper-2);padding-top:7px;padding-bottom:7px;
+  font:700 11px 'Courier Prime',monospace;letter-spacing:.16em;text-transform:uppercase;
+}
+.rw{padding-top:12px;padding-bottom:12px;border-bottom:1.5px solid rgba(42,33,24,.28)}
+.rise{animation:rise .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 35ms)}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}}
+
+.sname{font-weight:700;font-size:1.12rem;line-height:1.15;letter-spacing:-.01em;margin:0}
+.sauth{font:400 12px 'Courier Prime',monospace;color:var(--ink-soft);margin:2px 0 0}
+.scap{font:italic 400 12.5px/1.3 'Fraunces',serif;color:var(--stamp);margin:4px 0 0}
+
+/* ---------- the strip: one cell per volume ---------- */
+.cl-strip{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 4px;align-content:center}
+.cl{
+  position:relative;width:var(--cw);height:80px;flex:none;
+  border:2px solid var(--ink);background:var(--paper-2);display:flex;flex-direction:column;
+}
+.cl-span{width:calc(var(--cw) * 2 + 4px)}
+.cl-hd{height:23px;flex:none;display:flex;align-items:center;justify-content:center;border-bottom:2px solid var(--ink);font:700 13px 'Courier Prime',monospace}
+.cl-lo{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:2px}
+.cl-span .cl-lo{flex-direction:row;gap:12px}
+
+.st-print .cl-hd,.st-bought .cl-hd,.st-reading .cl-hd,.st-read .cl-hd{background:var(--print)}
+
+.st-digital{border:1.5px solid var(--faint);background:transparent;color:var(--mute)}
+.st-digital .cl-hd{border-bottom:1px solid var(--faint)}
+.cl-e{font:italic 400 15px 'Fraunces',serif;color:var(--mute)}
+
+.st-announced{border-color:var(--stamp)}
+.st-announced .cl-hd{border-bottom-color:var(--stamp);color:var(--stamp);background:repeating-linear-gradient(135deg,rgba(45,75,142,.38) 0 3px,transparent 3px 7px)}
+.cl-dt{display:flex;flex-direction:column;align-items:center;color:var(--stamp);font-family:'Courier Prime',monospace;line-height:1.05}
+.cl-dt b{font-size:11px;letter-spacing:.04em}
+.cl-dt b.cl-dt-day{font-size:16px;line-height:1}
+.cl-dt i{font-style:normal;font-size:10px}
+
+/* unconfirmed and open-ended: dashed, never solid */
+.st-unknown,.cl-tail{border:2px dashed var(--faint);background:transparent;color:var(--ink-soft)}
+.st-unknown .cl-hd,.cl-tail .cl-hd{border-bottom:2px dashed var(--faint);color:var(--ink-soft)}
+.cl-mark{font:700 22px 'Courier Prime',monospace;color:var(--ink-soft)}
+.cl-tail{opacity:.85}
+
+/* side story: dog-eared corner (cell is position:relative, so this stays inside it) */
+.cl-side::after{
+  content:"";position:absolute;top:-2px;right:-2px;width:12px;height:12px;
+  background:linear-gradient(225deg,var(--paper) 50%,var(--ink) 50%);
+}
+
+/* the two check slots */
+.bx{
+  width:18px;height:18px;border:2px solid var(--ink-soft);background:var(--paper-2);
+  display:grid;place-items:center;color:#fff;
+}
+.bx-buy{border-radius:2px}
+.bx-read{border-radius:50%}
+.bx-buy.bx-on{background:var(--bought);border-color:var(--bought)}
+.bx-read.bx-on{background:var(--read);border-color:var(--read)}
+.bx-read.bx-half{background:linear-gradient(90deg,var(--read) 50%,var(--paper-2) 50%);border-color:var(--read)}
+.bx .ck{width:10px;height:10px}
+
+/* ---------- tally ---------- */
+.tl{font:400 12.5px/1.45 'Courier Prime',monospace;color:var(--ink-soft)}
+.tl b{color:var(--ink);font-size:14px}
+.tl small{display:block;font-size:11px;color:var(--mute)}
+
+/* ---------- Next slip (computed) ---------- */
+.nx{
+  padding:7px 10px 8px;background:rgba(255,255,255,.4);
+  border:1.5px solid rgba(42,33,24,.35);border-left:5px solid var(--ink);
+}
+.nx-act{border-left-color:var(--read)}
+.nx-wait{border-left-color:var(--stamp)}
+.nx-done{border-left-color:var(--faint)}
+.nx-lab{display:none;font:700 10.5px 'Courier Prime',monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--bought)}
+.nx-h{display:block;font-weight:700;font-size:1.02rem;line-height:1.15;letter-spacing:-.01em}
+.nx-wait .nx-h{color:var(--stamp)}
+.nx-l{display:block;margin-top:3px;font:400 12px/1.3 'Courier Prime',monospace;color:var(--ink-soft)}
+
+footer{margin-top:50px;padding:20px 0 40px;border-top:3px double var(--ink);font:400 12px/1.6 'Courier Prime',monospace;color:var(--ink-soft)}
+
+@media (max-width:1100px){
+  .stamp-due{position:static;display:inline-block;margin-top:16px;transform:rotate(3deg)}
+  .stamp-due[hidden]{display:none}
+}
+@media (max-width:980px){
+  .rw-cols{display:none}
+  .rw{grid-template-columns:1fr 1fr}
+  .rw > .rw-name,.rw > .cl-strip{grid-column:1/-1}
+  .nx-lab{display:block}
+}
+@media (max-width:600px){
+  .wrap,.key-in{padding-left:16px;padding-right:16px}
+  .mast{padding-left:16px;padding-right:16px}
+  .rw{grid-template-columns:1fr}
+  .key{position:static}
+}
+@page{margin:.3in}
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .key{position:static;box-shadow:none}
+  .rise{animation:none}
+  .rw{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false"><symbol id="ck" viewBox="0 0 12 12"><path d="M2 6.4 4.9 9.2 10 3" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></symbol></svg>
+<noscript><p style="padding:20px;font-family:monospace">This page draws itself from litrpg-progress-data.js with JavaScript. Enable JS to view it.</p></noscript>
+
+<header class="mast wrap">
+  <div class="mast-eyebrow">LitRPG shelf &middot; circulation record</div>
+  <h1>Series progress,<br><em>volume by volume.</em></h1>
+  <p class="mast-lede">Every series in the rotation, one card per volume: how long the series runs, which volumes are <b>in print</b>, which are <b>bought</b> and which are <b>read</b>. The <b>Next</b> slip is worked out from the cards. Where a fact is not confirmed the page shows a dashed <b>?</b> instead of a guess.</p>
+  <div class="stamp-due" id="asOfStamp" hidden></div>
+</header>
+
+<div class="key" role="region" aria-label="Key to the volume cards">
+  <div class="key-in">
+    <div class="key-title">Key</div>
+    <div class="key-items">
+      <div class="ki"><span class="sw sw-digital" aria-hidden="true">e</span><div><b>Not in print</b><span class="ki-d">digital only</span></div></div>
+      <div class="ki"><span class="sw sw-announced" aria-hidden="true"></span><div><b>Print announced</b><span class="ki-d">date on the card</span></div></div>
+      <div class="ki"><span class="sw sw-print" aria-hidden="true"></span><div><b>In print</b><span class="ki-d">mustard header</span></div></div>
+      <div class="ki"><span class="sw sw-bought" aria-hidden="true"><svg class="ck"><use href="#ck"/></svg></span><div><b>Bought</b><span class="ki-d">square check, top</span></div></div>
+      <div class="ki"><span class="sw sw-read" aria-hidden="true"><svg class="ck"><use href="#ck"/></svg></span><div><b>Read</b><span class="ki-d">round check, bottom</span></div></div>
+      <div class="ki"><span class="sw sw-reading" aria-hidden="true"></span><div><b>Reading now</b><span class="ki-d">half circle</span></div></div>
+      <div class="ki"><span class="sw sw-unknown" aria-hidden="true">?</span><div><b>Unconfirmed</b><span class="ki-d">not counted</span></div></div>
+      <div class="ki"><span class="sw sw-open" aria-hidden="true">+</span><div><b>Open-ended</b><span class="ki-d">nothing announced past here</span></div></div>
+      <div class="ki"><span class="sw sw-side" aria-hidden="true"></span><div><b>Side story</b><span class="ki-d">dog-eared corner</span></div></div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap" id="app"></main>
+
+<footer class="wrap">
+  <div id="footAsOf">Updated by hand whenever a book is bought or finished.</div>
+</footer>
+
+<script src="litrpg-progress-data.js"></script>
+<script>
+/* =====================================================================
+   Renderer. Reads window.LITRPG_PROGRESS (litrpg-progress-data.js).
+   Everything shown (counts, group headings, the Next slip) is computed
+   here from the per-volume states. Nothing below invents a number:
+   unconfirmed volumes are excluded from every count, and open-ended
+   series never get a total.
+   ===================================================================== */
+(function(){
+'use strict';
+
+var D = window.LITRPG_PROGRESS;
+var app = document.getElementById('app');
+
+var STATE = {
+  digital:   'not in print (digital only)',
+  announced: 'print announced',
+  print:     'in print, not bought',
+  bought:    'bought, not read',
+  reading:   'bought, reading now',
+  read:      'bought and read',
+  unknown:   'unconfirmed, not counted'
+};
+var PRINTED = {print:1, bought:1, reading:1, read:1};
+var OWNED   = {bought:1, reading:1, read:1};
+var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function lab(n){return String(n).replace(/(\d)-(\d)/,'$1–$2');}
+function units(v){return v.span>1 ? v.span : 1;}
+function plural(n,w){return n+' '+w+(n===1?'':'s');}
+function seriesCount(n){return n+' series';}   /* "series" is its own plural */
+function stateOf(v){return STATE[v.state] ? v.state : 'unknown';}
+
+function parseDate(iso){
+  var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||'');
+  if(!m) return null;
+  var mo=+m[2]; if(mo<1||mo>12) return null;
+  return {key:iso, mon:MON[mo-1].toUpperCase(), day:String(+m[3]), yr:'’'+m[1].slice(2),
+          full:MON[mo-1]+' '+(+m[3])+', '+m[1]};
+}
+
+/* ---------- validation: a typo in the data shows up loudly, not silently ---------- */
+function validate(){
+  var e=[];
+  if(!parseDate(D.asOf)) e.push('asOf must look like 2026-10-09.');
+  ['started','unstarted'].forEach(function(g){
+    if(!Array.isArray(D[g])){ e.push('"'+g+'" must be a list.'); return; }
+    D[g].forEach(function(s,i){
+      var w=g+' #'+(i+1)+(s&&s.name?' ('+s.name+')':'');
+      if(!s||!s.name){ e.push(w+': missing name.'); }
+      if(!s||!Array.isArray(s.volumes)||!s.volumes.length){ e.push(w+': needs a non-empty volumes list.'); return; }
+      s.volumes.forEach(function(v){
+        var vw=w+', vol '+(v&&v.n!=null?v.n:'?');
+        if(!v||v.n==null||v.n===''){ e.push(w+': a volume has no n.'); return; }
+        if(!STATE[v.state]) e.push(vw+': state "'+v.state+'" is not one of digital, announced, print, bought, reading, read, unknown.');
+        if(v.date!=null){
+          if(v.state!=='announced') e.push(vw+': date only goes with state "announced".');
+          else if(!parseDate(v.date)) e.push(vw+': date must look like 2027-01-31.');
+        }
+        if(v.span!=null && !(v.span>=1 && v.span%1===0)) e.push(vw+': span must be a whole number.');
+      });
+    });
+  });
+  return e;
+}
+
+/* ---------- counts, all derived from the volume states ---------- */
+function tally(s){
+  var t={exist:0,unreleased:0,unconf:0,printN:0,printU:0,boughtN:0,readN:0,readingN:0,
+         annN:0,digitalU:0,unreadN:0,toBuyN:0};
+  s.volumes.forEach(function(v){
+    var st=stateOf(v), u=units(v);
+    if(st==='unknown'){ t.unconf++; return; }
+    if(v.unreleased) t.unreleased+=u; else t.exist+=u;
+    if(PRINTED[st]){ t.printN++; t.printU+=u; }
+    if(OWNED[st])   t.boughtN++;
+    if(st==='read')    t.readN++;
+    if(st==='reading') t.readingN++;
+    if(st==='announced') t.annN++;
+    if(st==='digital') t.digitalU+=u;
+    if(st==='bought')  t.unreadN++;
+    if(st==='print')   t.toBuyN++;
+  });
+  return t;
+}
+
+/* ---------- the Next slip: computed, never typed ---------- */
+function nextStep(s){
+  var vols=s.volumes.filter(function(v){return stateOf(v)!=='unknown';});
+  var by=function(st){return vols.filter(function(v){return v.state===st;});};
+  var reading=by('reading')[0];
+  var unread=by('bought');
+  var toBuy=by('print');
+  var ann=by('announced').slice().sort(function(a,b){
+    var da=parseDate(a.date), db=parseDate(b.date);
+    if(da&&db) return da.key<db.key?-1:da.key>db.key?1:0;
+    if(da) return -1; if(db) return 1; return 0;
+  });
+  var up=ann[0]||null;
+  var t=tally(s);
+  var head,kind,lines=[];
+  var upText=up?('vol '+lab(up.n)+(parseDate(up.date)?', '+parseDate(up.date).full:', no date yet')):'';
+
+  if(reading){
+    head='Finish vol '+lab(reading.n); kind='act';
+    if(unread.length) lines.push(unread.length+' more bought, unread');
+  } else if(unread.length){
+    head='Read vol '+lab(unread[0].n); kind='act';
+    if(unread.length>1) lines.push((unread.length-1)+' more bought, unread');
+  } else {
+    var finished=!up&&!toBuy.length&&!t.digitalU&&!s.openEnded&&!t.unconf;
+    head=finished?'Finished':(toBuy.length?'Owned books all read':'Caught up');
+    kind=finished?'done':'wait';
+  }
+  if(toBuy.length) lines.push(toBuy.length+' in print, not yet bought');
+  if(up) lines.push((kind==='act'?'Next out: ':'Waiting on ')+upText);
+  if(kind!=='act' && t.digitalU) lines.push(plural(t.digitalU,'volume')+' digital only');
+  var unk=s.volumes.filter(function(v){return stateOf(v)==='unknown';});
+  if(unk.length) lines.push('Vol '+unk.map(function(v){return lab(v.n);}).join(', ')+' unconfirmed, not counted');
+  if(s.openEnded && vols.length) lines.push('Nothing announced past vol '+lab(vols[vols.length-1].n));
+  return {head:head,kind:kind,lines:lines};
+}
+
+/* ---------- cells ---------- */
+function describe(v){
+  var st=stateOf(v);
+  var d='Vol '+lab(v.n)+(v.title?' ('+v.title+')':'')+(v.side?', side story':'')+': '+STATE[st];
+  if(st==='announced'){ var pd=parseDate(v.date); d+=pd?', '+pd.full:', no date yet'; }
+  if(v.unreleased) d+=', not yet released in any format';
+  if(v.note) d+='. '+v.note;
+  return d;
+}
+function slot(kind,on,half){
+  var cls='bx bx-'+kind+(on?' bx-on':'')+(half?' bx-half':'');
+  return '<span class="'+cls+'">'+(on?'<svg class="ck"><use href="#ck"/></svg>':'')+'</span>';
+}
+function cellHtml(v){
+  var st=stateOf(v);
+  var cls=['cl','st-'+st];
+  if(v.side) cls.push('cl-side');
+  if(v.span>1) cls.push('cl-span');
+  var lo;
+  if(st==='digital') lo='<span class="cl-e">e</span>';
+  else if(st==='unknown') lo='<span class="cl-mark">?</span>';
+  else if(st==='announced'){
+    var d=parseDate(v.date);
+    lo=d ? '<span class="cl-dt"><b>'+d.mon+'</b><b class="cl-dt-day">'+d.day+'</b><i>'+d.yr+'</i></span>'
+         : '<span class="cl-dt"><b>NO</b><b>DATE</b></span>';
+  } else {
+    lo=slot('buy',!!OWNED[st],false)+slot('read',st==='read',st==='reading');
+  }
+  var desc=describe(v);
+  return '<li class="'+cls.join(' ')+'" title="'+esc(desc)+'"><span class="sr">'+esc(desc)+'</span>'
+       + '<span class="cl-hd" aria-hidden="true">'+esc(lab(v.n))+'</span>'
+       + '<span class="cl-lo" aria-hidden="true">'+lo+'</span></li>';
+}
+function tailHtml(){
+  return '<li class="cl cl-tail" title="Open-ended: nothing announced past the last volume shown"><span class="sr">Open-ended: nothing announced past the last volume shown.</span>'
+       + '<span class="cl-hd" aria-hidden="true">+</span><span class="cl-lo" aria-hidden="true"><span class="cl-mark">&hellip;</span></span></li>';
+}
+
+/* ---------- row ---------- */
+function rowHtml(s,i){
+  var t=tally(s), n=nextStep(s);
+  var cells=s.volumes.map(cellHtml).join('')+(s.openEnded?tailHtml():'');
+  var total=t.unreleased ? '<b>'+t.exist+'</b> released' : '<b>'+t.exist+(s.openEnded?'+':'')+'</b> volumes';
+  var extra=[];
+  if(s.complete) extra.push('complete');
+  if(t.unreleased) extra.push('+'+t.unreleased+' to come');
+  var l1=total+(extra.length?' &middot; '+extra.join(' &middot; '):'');
+  var l2='in print <b>'+t.printN+'</b>'+(t.annN?' &middot; +'+t.annN+' announced':'');
+  var cover=(t.printU!==t.printN)?'<small>(covers '+plural(t.printU,'volume')+')</small>':'';
+  var l3='bought <b>'+t.boughtN+'</b> &middot; read <b>'+t.readN+'</b>'+(t.readingN?' &middot; reading <b>'+t.readingN+'</b>':'');
+  var nlines=n.lines.map(function(l){return '<span class="nx-l">'+esc(l)+'</span>';}).join('');
+  return '<article class="rw rise" style="--i:'+i+'">'
+    + '<div class="rw-name"><h3 class="sname">'+esc(s.name)+'</h3><p class="sauth">'+esc(s.author||'')+'</p>'
+    +   (s.note?'<p class="scap">'+esc(s.note)+'</p>':'')+'</div>'
+    + '<ol class="cl-strip" aria-label="Volumes of '+esc(s.name)+'">'+cells+'</ol>'
+    + '<div class="tl"><div>'+l1+'</div><div>'+l2+'</div>'+cover+'<div>'+l3+'</div></div>'
+    + '<div class="nx nx-'+n.kind+'"><span class="nx-lab">Next</span><b class="nx-h">'+esc(n.head)+'</b>'+nlines+'</div>'
+    + '</article>';
+}
+
+/* ---------- groups ---------- */
+function groupHtml(id,title,note,list,offset,secondary){
+  var rows=list.map(function(s,k){return rowHtml(s,offset+k);}).join('');
+  var cols='<div class="rw-cols" aria-hidden="true"><span>Series</span><span>Volumes</span><span>Tally</span><span>Next</span></div>';
+  return '<section aria-labelledby="'+id+'">'
+    + '<div class="group-h"><h2 id="'+id+'">'+title+'</h2><span class="group-h-note">'+seriesCount(list.length)+' &middot; '+note+'</span></div>'
+    + '<div'+(secondary?' class="group-box-secondary"':'')+'>'+cols+rows+'</div>'
+    + '</section>';
+}
+
+/* ---------- go ---------- */
+function render(){
+  if(!D){
+    app.innerHTML='<p class="data-error"><b>Data problem.</b> litrpg-progress-data.js did not load, so there is nothing to draw. It must sit in the same folder as this page.</p>';
+    return;
+  }
+  var errs=validate();
+  var html='';
+  if(errs.length){
+    html+='<div class="data-error"><b>Data problem.</b> Fix these in litrpg-progress-data.js:<ul>'+errs.map(function(m){return '<li>'+esc(m)+'</li>';}).join('')+'</ul></div>';
+  }
+  var started=Array.isArray(D.started)?D.started:[];
+  var unstarted=Array.isArray(D.unstarted)?D.unstarted:[];
+  html+=groupHtml('hStarted','Started','at least one volume read',started,0,false);
+  html+=groupHtml('hUnstarted','Owned, not yet started','bought, nothing read yet',unstarted,started.length,true);
+  app.innerHTML=html;
+
+  var d=parseDate(D.asOf);
+  if(d){
+    var st=document.getElementById('asOfStamp');
+    st.innerHTML='<small>Data as of</small>'+(d.day.length<2?'0':'')+d.day+' '+d.mon+' '+d.full.slice(-4);
+    st.hidden=false;
+    document.getElementById('footAsOf').textContent='Updated by hand whenever a book is bought or finished. Data as of '+d.full+'.';
+  }
+}
+render();
+})();
+</script>
+</body>
+</html>
