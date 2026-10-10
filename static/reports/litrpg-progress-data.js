@@ -290,8 +290,8 @@ window.LITRPG_PROGRESS = {
         { n: '1', state: 'bought' },
         { n: '2', state: 'print' },
         { n: '3', state: 'print' },
-        { n: '4', state: 'print' },
-        { n: '5', state: 'print' },
+        { n: '4', state: 'bought' },
+        { n: '5', state: 'bought' },
         { n: '6', state: 'announced', date: '2027-06-22', unreleased: true }
       ]
     },
@@ -306,6 +306,16 @@ window.LITRPG_PROGRESS = {
         { n: '3', state: 'announced', date: '2027-02-16' },
         { n: '4', state: 'announced', date: '2027-05-18' },
         { n: '5', state: 'announced', date: '2027-08-24' }
+      ]
+    },
+
+    {
+      name: 'The Sigilist',
+      author: 'Django Wexler · Orbit',
+      note: 'Orbit. Series length not yet known.',
+      openEnded: true,
+      volumes: [
+        { n: '1', state: 'bought', note: 'The Only Way Out Is Up — Orbit trade paperback, released Sep 29, 2026' }
       ]
     }
 
