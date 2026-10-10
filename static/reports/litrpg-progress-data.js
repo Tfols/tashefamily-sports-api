@@ -73,7 +73,7 @@
 
 window.LITRPG_PROGRESS = {
 
-  asOf: '2026-10-09',
+  asOf: '2026-10-10',
 
   /* ------------------------------------------------------------------
      STARTED
@@ -138,7 +138,7 @@ window.LITRPG_PROGRESS = {
       openEnded: true,
       volumes: [
         { n: '1', state: 'read' },
-        { n: '2', state: 'reading' },
+        { n: '2', state: 'read' },
         { n: '3', state: 'announced', date: '2026-10-20' },
         { n: '4', state: 'announced', date: '2026-11-10' }
       ]
@@ -226,6 +226,21 @@ window.LITRPG_PROGRESS = {
         { n: '8', state: 'digital' },
         { n: '9', state: 'digital' }
       ]
+    },
+
+    {
+      name: 'Mage Errant',
+      author: 'John Bierce',
+      note: 'The Vault hardcover Book 1 combines original volumes 1 and 2. The original run is 7 volumes.',
+      complete: true,
+      volumes: [
+        { n: '1-2', state: 'read', span: 2, note: 'Vault hardcover Book 1 = original volumes 1 and 2' },
+        { n: '3',   state: 'digital' },
+        { n: '4',   state: 'digital' },
+        { n: '5',   state: 'digital' },
+        { n: '6',   state: 'digital' },
+        { n: '7',   state: 'digital' }
+      ]
     }
 
   ],
@@ -278,21 +293,6 @@ window.LITRPG_PROGRESS = {
         { n: '4', state: 'print' },
         { n: '5', state: 'print' },
         { n: '6', state: 'announced', date: '2027-06-22', unreleased: true }
-      ]
-    },
-
-    {
-      name: 'Mage Errant',
-      author: 'John Bierce',
-      note: 'The Vault hardcover Book 1 combines original volumes 1 and 2. The original run is 7 volumes.',
-      complete: true,
-      volumes: [
-        { n: '1-2', state: 'bought', span: 2, note: 'Vault hardcover Book 1 = original volumes 1 and 2' },
-        { n: '3',   state: 'digital' },
-        { n: '4',   state: 'digital' },
-        { n: '5',   state: 'digital' },
-        { n: '6',   state: 'digital' },
-        { n: '7',   state: 'digital' }
       ]
     },
 
