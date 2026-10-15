@@ -73,7 +73,7 @@
 
 window.LITRPG_PROGRESS = {
 
-  asOf: '2026-10-10',
+  asOf: '2026-10-15',
 
   /* ------------------------------------------------------------------
      STARTED
@@ -126,7 +126,7 @@ window.LITRPG_PROGRESS = {
         { n: '2', state: 'read' },
         { n: '3', state: 'read' },
         { n: '4', state: 'read' },
-        { n: '5', state: 'bought' },
+        { n: '5', state: 'read' },
         { n: '6', state: 'unknown', note: 'Listings exist, but this volume is not confirmed as out. Not counted.' }
       ]
     },
