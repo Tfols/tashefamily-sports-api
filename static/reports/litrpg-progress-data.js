@@ -73,7 +73,7 @@
 
 window.LITRPG_PROGRESS = {
 
-  asOf: '2026-10-17',
+  asOf: '2026-10-18',
 
   /* ------------------------------------------------------------------
      STARTED
@@ -248,8 +248,8 @@ window.LITRPG_PROGRESS = {
       author: 'Dakota Krout',
       complete: true,
       volumes: [
-        { n: '1', state: 'reading' },
-        { n: '2', state: 'bought' },
+        { n: '1', state: 'read' },
+        { n: '2', state: 'reading' },
         { n: '3', state: 'bought' },
         { n: '4', state: 'bought' },
         { n: '5', state: 'bought' }
