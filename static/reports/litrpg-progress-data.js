@@ -73,7 +73,7 @@
 
 window.LITRPG_PROGRESS = {
 
-  asOf: '2026-10-15',
+  asOf: '2026-10-17',
 
   /* ------------------------------------------------------------------
      STARTED
@@ -241,6 +241,19 @@ window.LITRPG_PROGRESS = {
         { n: '6',   state: 'digital' },
         { n: '7',   state: 'digital' }
       ]
+    },
+
+    {
+      name: 'The Divine Dungeon',
+      author: 'Dakota Krout',
+      complete: true,
+      volumes: [
+        { n: '1', state: 'reading' },
+        { n: '2', state: 'bought' },
+        { n: '3', state: 'bought' },
+        { n: '4', state: 'bought' },
+        { n: '5', state: 'bought' }
+      ]
     }
 
   ],
@@ -267,19 +280,6 @@ window.LITRPG_PROGRESS = {
         { n: '10', state: 'print' },
         { n: '11', state: 'print' },
         { n: '12', state: 'print' }
-      ]
-    },
-
-    {
-      name: 'The Divine Dungeon',
-      author: 'Dakota Krout',
-      complete: true,
-      volumes: [
-        { n: '1', state: 'bought' },
-        { n: '2', state: 'bought' },
-        { n: '3', state: 'bought' },
-        { n: '4', state: 'bought' },
-        { n: '5', state: 'bought' }
       ]
     },
 
