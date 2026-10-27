@@ -6,6 +6,7 @@ icalendar
 python-dateutil
 recurring-ical-events
 feedparser
+PyJWT[crypto]
 twilio
 google-api-python-client
 google-auth

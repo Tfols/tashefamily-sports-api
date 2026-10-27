@@ -1,9 +1,11 @@
 import calendar as cal_module
 import os
+import posixpath
 import time
 from datetime import datetime, date, timedelta
 
 import feedparser
+import jwt
 import pytz
 import recurring_ical_events
 import requests
@@ -15,6 +17,48 @@ from bp_log import bp_log
 
 app = Flask(__name__)
 app.register_blueprint(bp_log)
+
+
+# ── Cloudflare Access gate ────────────────────────────────────────
+# Every path not listed below needs a valid Cloudflare Access token. This blocks
+# anyone who skips Cloudflare (the raw *.up.railway.app address, or Railway's edge
+# with a forged Host header). Keep PUBLIC_* in step with the Bypass apps in Zero
+# Trust: a path Cloudflare bypasses but this gate protects will 403 for everyone.
+# /privacy and /sms-terms are linked from the Twilio carrier registration, and
+# /sms/bp is Twilio's webhook (it has its own signature check), so they stay public.
+# Off until both CF_ACCESS_TEAM and CF_ACCESS_AUD are set on Railway.
+CF_ACCESS_TEAM = os.environ.get('CF_ACCESS_TEAM', '').strip().removeprefix('https://').rstrip('/')
+CF_ACCESS_AUD = os.environ.get('CF_ACCESS_AUD', '').strip()
+PUBLIC_PATHS = {'/reports', '/privacy', '/sms-terms', '/sms/bp', '/health', '/favicon.ico', '/favicon.png'}
+PUBLIC_PREFIXES = ('/static/reports/',)
+
+_cf_team_domain = CF_ACCESS_TEAM if '.' in CF_ACCESS_TEAM else f'{CF_ACCESS_TEAM}.cloudflareaccess.com'
+_cf_jwks = None
+if CF_ACCESS_TEAM and CF_ACCESS_AUD:
+    _cf_jwks = jwt.PyJWKClient(f'https://{_cf_team_domain}/cdn-cgi/access/certs',
+                               lifespan=3600, timeout=8, headers={'User-Agent': 'Mozilla/5.0'})
+else:
+    app.logger.warning('Cloudflare Access gate is OFF: set CF_ACCESS_TEAM and CF_ACCESS_AUD to enable it')
+
+
+@app.before_request
+def require_cloudflare_access():
+    if _cf_jwks is None:
+        return None
+    # Normalize so /static/reports/../index.html can't pass as a public report.
+    path = posixpath.normpath(request.path)
+    if path in PUBLIC_PATHS or path.startswith(PUBLIC_PREFIXES):
+        return None
+    token = request.headers.get('Cf-Access-Jwt-Assertion', '')
+    if not token:
+        return Response('Cloudflare Access sign-in required', status=403)
+    try:
+        key = _cf_jwks.get_signing_key_from_jwt(token)
+        jwt.decode(token, key.key, algorithms=['RS256'],
+                   audience=CF_ACCESS_AUD, issuer=f'https://{_cf_team_domain}')
+    except jwt.PyJWTError:
+        return Response('Cloudflare Access sign-in required', status=403)
+    return None
 
 TEAMS = {
     'phillies':      {'sport': 'baseball',    'league': 'mlb',                       'id': '22'},
@@ -247,7 +291,8 @@ def health():
 @app.route('/debug-env')
 def debug_env():
     """Shows which expected env vars are present (not their values)."""
-    keys = ['OPENWEATHERMAP_API_KEY', 'GOOGLE_ICAL_URL', 'PORT']
+    keys = ['OPENWEATHERMAP_API_KEY', 'GOOGLE_ICAL_URL', 'PORT',
+            'CF_ACCESS_TEAM', 'CF_ACCESS_AUD', 'ICAL_ENABLED']
     return jsonify({k: bool(os.environ.get(k)) for k in keys})
 
 
