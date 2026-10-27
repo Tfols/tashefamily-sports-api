@@ -417,6 +417,13 @@ _ical_cache = {}
 
 @app.route('/ical')
 def get_calendar():
+    # OFF by default (2026-10-27). This route has no login, and it served 60 days of
+    # the family calendar (kids' schedules, appointments, locations) to anyone who
+    # opened /ical on the dashboard domain or the raw Railway URL. Keep it off until
+    # the dashboard sits behind real sign-in (Cloudflare Access), with the raw
+    # *.up.railway.app address closed too. Then set ICAL_ENABLED=1 on Railway.
+    if os.environ.get('ICAL_ENABLED') != '1':
+        return jsonify([])
     ical_url = os.environ.get('GOOGLE_ICAL_URL', '')
     if not ical_url:
         return jsonify([])
