@@ -73,7 +73,7 @@
 
 window.LITRPG_PROGRESS = {
 
-  asOf: '2026-10-28',
+  asOf: '2026-11-02',
 
   /* ------------------------------------------------------------------
      STARTED
@@ -139,7 +139,7 @@ window.LITRPG_PROGRESS = {
       volumes: [
         { n: '1', state: 'read' },
         { n: '2', state: 'read' },
-        { n: '3', state: 'reading' },
+        { n: '3', state: 'read' },
         { n: '4', state: 'announced', date: '2026-11-10' }
       ]
     },
