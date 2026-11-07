@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex, nofollow">
+<title>Williamsburg Family Trip Field Guide (iPhone) - Nov 13-15, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#f2e8cf; --paper-3:#faf3e0; --paper-2:#e8dab3;
+  --ink:#2a2013; --ink-soft:#5c4d34; --line:#c7b483; --line-dark:#9c8452;
+  --green:#1f4d3a; --green-2:#173a2c; --rust:#a83c22; --gold:#d9a441; --navy:#1c3a5c; --mint:#9fc2ab;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 'Libre Baskerville',Georgia,serif;touch-action:manipulation;
+  background-image:radial-gradient(rgba(92,77,52,.07) 1px,transparent 1px);background-size:5px 5px;overflow-x:hidden}
+.g{padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right))}
+h1,h2,h3,h4,p{margin:0}
+a{color:inherit}
+/* masthead */
+.mast{background:var(--green);border-bottom:4px solid var(--ink);color:var(--paper-3);padding-top:calc(18px + env(safe-area-inset-top));padding-bottom:14px}
+.eyebrow{font:700 11px/1.4 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.mast h1{font:900 34px/.95 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin:8px 0 10px}
+.mast h1 b{color:var(--gold)}
+.intro{font-style:italic;font-size:15px;line-height:1.45;color:#e9e2cc}
+.route{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(250,243,224,.3);margin-top:14px;border:1px solid rgba(250,243,224,.3)}
+.route div{background:var(--green-2);padding:8px 10px}
+.route .k{font:600 9px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--mint)}
+.route .v{font:700 12px/1.3 'IBM Plex Mono',monospace;color:var(--gold)}
+/* alert */
+.alert{padding:4px;background:repeating-linear-gradient(45deg,var(--rust) 0 16px,#201a12 16px 32px)}
+.alert .in{background:var(--paper-3);padding:12px 16px}
+.alert .hd{font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);margin-bottom:4px}
+.alert .bd{font-size:15px;line-height:1.45}
+/* key */
+details>summary{list-style:none;cursor:pointer}
+details>summary::-webkit-details-marker{display:none}
+.key{margin:16px 16px 0;background:var(--paper-2);border:2px solid var(--ink)}
+.key summary{min-height:44px;display:flex;align-items:center;padding:0 12px;font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase}
+.keyg{display:grid;grid-template-columns:1fr 1fr;gap:10px 8px;padding:4px 12px 14px;font:600 11px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+.keyg span{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.chev:after{content:"+";margin-left:auto;font-size:18px}
+details[open]>summary .chev:after{content:"\2212"}
+/* pins chips */
+.pin{display:inline-block;width:14px;height:14px;border-radius:50%;flex:none}
+.pin.a{background:var(--gold);border:3px solid var(--ink)}
+.pin.o{background:var(--paper-3);border:2px dashed var(--rust)}
+.chip{display:inline-block;font:700 11px/1.2 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:2px}
+.chip.v{background:var(--green);color:var(--paper-3)}
+.chip.l{border:1.5px dashed var(--rust);color:var(--rust)}
+.chip.map{border:1.5px solid var(--navy);color:var(--navy);background:rgba(28,58,92,.08)}
+.chip.pit{border:1.5px solid var(--ink);background:var(--gold);color:var(--ink)}
+.chip.sol{background:var(--ink);color:var(--paper-3)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+/* section tag */
+.tag{display:flex;align-items:center;gap:10px;margin:32px 0 14px}
+.tag span{background:var(--ink);color:var(--paper-3);font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;padding:4px 9px}
+.tag:after{content:"";flex:1;height:2px;background:var(--ink)}
+/* timed */
+.timed{border:3px solid var(--ink);background:var(--paper-3)}
+.headline{background:var(--gold);border-bottom:3px solid var(--ink);padding:14px 14px 16px}
+.headline .when{font:700 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+.headline .big{font:900 44px/.9 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin:4px 0 6px}
+.headline h2{font:800 20px/1.1 'Big Shoulders Display',sans-serif;text-transform:uppercase}
+.headline p{font-size:15px;line-height:1.45;margin-top:8px}
+.dayhd{background:var(--ink);color:var(--paper-3);font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px}
+.dayhd.sat{background:var(--green)}
+.trow{padding:10px 14px;border-top:1px dotted var(--line-dark)}
+.trow .t{font:700 13px 'IBM Plex Mono',monospace}
+.trow .w{font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-left:6px}
+.trow .x{font-size:15px;line-height:1.45;margin-top:2px}
+.trow .chip{margin-top:6px}
+.timed .foot{padding:12px 14px;border-top:2px solid var(--ink);background:var(--paper-2);font-size:15px;font-style:italic;line-height:1.45}
+/* theme */
+.theme{margin-top:44px}
+.sticky{position:sticky;top:0;z-index:20;background:var(--ink);color:var(--paper-3);min-height:52pt;display:flex;align-items:center;gap:10px;
+  padding-top:env(safe-area-inset-top);padding-left:calc(16px + env(safe-area-inset-left));padding-right:calc(16px + env(safe-area-inset-right))}
+.sticky .n{font:900 24px 'Big Shoulders Display',sans-serif;color:var(--gold)}
+.sticky .t{font:800 16px 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.sticky .loc{font:600 10px 'IBM Plex Mono',monospace;color:var(--mint);text-align:right;text-transform:uppercase;max-width:38%;line-height:1.2}
+.fullplate{background:var(--ink);color:var(--paper-3);padding-top:14px;padding-bottom:16px}
+.fullplate .n{font:900 44px/1 'Big Shoulders Display',sans-serif;color:var(--gold)}
+.fullplate .leg{font:700 11px/1.35 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mint);margin-top:2px}
+.fullplate h2{font:800 26px/1.05 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin-top:6px}
+.shape{font-style:italic;font-size:15px;line-height:1.5;color:var(--ink-soft);margin:14px 0 16px}
+/* spine */
+.spine{position:relative;display:grid;gap:16px;scroll-margin-top:56pt}
+.spine:before{content:"";position:absolute;left:16px;top:8px;bottom:8px;width:2px;background:repeating-linear-gradient(var(--green) 0 9px,transparent 9px 15px)}
+.stop{display:grid;grid-template-columns:34px 1fr;gap:0 12px;position:relative}
+.pc{padding-top:14px;display:flex;justify-content:center;position:relative;z-index:2}
+.pc .pin{background-clip:padding-box}
+.card{background:var(--paper-3);border:2px solid var(--ink);border-left:6px solid var(--green);border-radius:3px;padding:12px;min-width:0}
+.card.fl{border-color:var(--rust)}
+.card:active{background:var(--paper-2);border-left-width:5px}
+.eye{font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.card h3{font:800 20px/1.1 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.02em;margin-top:2px}
+.mrs{margin:8px 0 6px;font:500 12px/1.4 'IBM Plex Mono',monospace}
+.mr{display:flex;gap:8px;padding:5px 0;border-top:1px dotted var(--line-dark);align-items:baseline}
+.mr:first-child{border-top:0}
+.mr .lb{flex:0 0 76px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;font-size:11px}
+.mr .vl{flex:1;min-width:0;overflow-wrap:anywhere}
+a.mr{min-height:44px;align-items:center;text-decoration:none}
+a.mr .vl{text-decoration:underline;text-decoration-color:var(--line-dark)}
+.card p{margin-top:6px}
+.card ul{margin:8px 0 0;padding-left:20px}.card li{margin:5px 0}
+.fchip{display:block;margin-top:10px;background:var(--rust);color:var(--paper-3);font:600 12px/1.45 'IBM Plex Mono',monospace;padding:7px 9px;border-radius:2px}
+.src{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);text-decoration:underline}
+/* options */
+.opts{background:var(--paper-2);border:2.5px dashed var(--line-dark);padding:12px;min-width:0}
+.opts .hd{font:700 11px/1.4 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.orow{padding:12px 0;border-top:1px dotted var(--line-dark)}
+.orow h4{font:800 17px/1.15 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.orow .why{font-size:15px;line-height:1.5;color:var(--ink-soft);display:block;margin-top:2px}
+.orow .why b{color:var(--ink)}
+.fl2{display:block;margin-top:6px;color:var(--rust);font:700 12px/1.45 'IBM Plex Mono',monospace}
+details.thin{margin-top:8px;border-top:1px dotted var(--line-dark)}
+details.thin summary{min-height:44px;display:flex;align-items:center;font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--rust)}
+details.thin p{font-size:15px;line-height:1.5;font-style:italic;color:var(--ink-soft);padding-bottom:8px}
+/* lodging etc */
+.lodge{background:var(--paper-3);border:2px solid var(--ink);border-left:6px solid var(--navy);padding:12px}
+.lodge h3{font:800 18px/1.1 'Big Shoulders Display',sans-serif;text-transform:uppercase}
+.br{font:600 12px/1.4 'IBM Plex Mono',monospace;color:var(--navy);margin:4px 0 6px}
+details.corr{margin-top:14px;border:2px solid var(--rust);background:rgba(168,60,34,.10)}
+details.corr summary{min-height:44px;display:flex;align-items:center;padding:0 12px;font:700 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--rust)}
+details.corr p{padding:0 12px 12px;font-size:15px;line-height:1.5}
+.calls{border:2.5px solid var(--ink);background:var(--paper-3)}
+.crow{padding:12px;border-top:1px dotted var(--line-dark)}
+.crow:first-child{border-top:0}
+.crow .nm{font:800 17px/1.15 'Big Shoulders Display',sans-serif;text-transform:uppercase}
+.crow .q{font-size:15px;line-height:1.45;color:var(--ink-soft);margin-top:2px}
+.crow a.tel{display:flex;align-items:center;min-height:44px;font:700 15px 'IBM Plex Mono',monospace;text-decoration:underline}
+.crow .tel.none{text-decoration:none;color:var(--ink-soft)}
+.ext{border:2.5px dashed var(--line-dark);background:var(--paper-2);padding:12px}
+.ext .c{display:inline-block;background:var(--ink-soft);color:var(--paper-3);font:700 11px 'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;padding:4px 7px}
+.ext h3{font:800 22px/1.05 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin:8px 0 4px}
+.ext p{font-size:16px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.tile{background:var(--paper-3);border:1px solid var(--line-dark);padding:8px;font-size:15px;line-height:1.3}
+.tile b{font:800 16px/1.1 'Big Shoulders Display',sans-serif;text-transform:uppercase;display:block}
+.loose{border:2.5px solid var(--ink)}
+.loose>div{padding:12px 14px;font-size:16px}
+.loose>div+div{border-top:1px dashed var(--line-dark)}
+.loose .gd{background:rgba(217,164,65,.10)}.loose .r{background:rgba(168,60,34,.08)}.loose .n{background:rgba(31,77,58,.07)}
+.loose ul{margin:8px 0 0;padding-left:20px}.loose li{margin:6px 0}
+footer{margin-top:32px;border-top:2px solid var(--line);padding-top:14px;padding-bottom:calc(32px + env(safe-area-inset-bottom));text-align:center;font:600 11px/1.6 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<header class="mast g">
+  <div class="eyebrow">Field Guide · Family trip · Nov 13–15, 2026 · Compiled Nov 7</div>
+  <h1>Williamsburg <b>+</b> Historic Triangle</h1>
+  <p class="intro">A planning reference, not a booked itinerary. Organized by theme, with dated and timed items first. Reconfirm hours before routing to anything.</p>
+  <div class="route">
+    <div><div class="k">Organized by</div><div class="v">Theme, not day</div></div>
+    <div><div class="k">Base</div><div class="v">Manor Club Sequel · 20 min to town</div></div>
+    <div><div class="k">Drive home</div><div class="v">About 3 hrs to Alexandria</div></div>
+    <div><div class="k">Status</div><div class="v">Advisory. Nothing booked.</div></div>
+  </div>
+</header>
+
+<div class="alert"><div class="in">
+  <div class="hd">&#9888; Not available in November</div>
+  <div class="bd"><b>Historic Jamestowne's Archaeology Walking Tour of James Fort runs April through October only.</b> It is left out as a tour. The Historic Jamestowne site itself is still open (block 03).</div>
+</div></div>
+
+<details class="key" open>
+  <summary><span>How to read this</span><span class="chev"></span></summary>
+  <div class="keyg">
+    <span><i class="pin a"></i> Anchor</span>
+    <span><i class="pin o"></i> Option</span>
+    <span><span class="chip v">Verified</span></span>
+    <span><span class="chip l">Lead</span> call first</span>
+    <span><span class="chip map">On your map</span></span>
+    <span><span class="chip pit">Pit stop</span></span>
+  </div>
+</details>
+
+<main>
+<!-- TIMED -->
+<div class="g"><div class="tag"><span>Dated and timed</span></div>
+<div class="timed">
+  <div class="headline">
+    <div class="when">Sat Nov 14 · 10 AM – 5 PM</div>
+    <div class="big">Free day</div>
+    <h2>Colonial Williamsburg free admission, 100th anniversary</h2>
+    <p>$0 tickets for ages 13+, 6–12 and 0–5, valid Nov 14 only. <b>Free tickets have to be added to a cart in advance.</b> Service fees and a 10% admission tax on the first $10 still apply at checkout. Sources conflict on a 9 vs. 10 AM start; treat 10 AM as likely.</p>
+    <div class="chips"><span class="chip v">Verified</span><a class="src" href="https://www.colonialwilliamsburg.org/visit/special-offers/" target="_blank" rel="noopener">Source</a></div>
+  </div>
+
+  <div class="dayhd">Friday, Nov 13</div>
+  <div class="trow"><span class="t">4:00 PM</span><span class="w">Check-in</span><div class="x">Marriott's Manor Club - Sequel, 101 St. Andrews Dr.</div><span class="chip v">Verified</span></div>
+
+  <div class="dayhd sat">Saturday, Nov 14 · the packed day</div>
+  <div class="trow"><span class="t">8 AM – noon</span><span class="w">Farmers market</span><div class="x">Williamsburg Farmers Market, 345 W Duke of Gloucester St. 2026 season unconfirmed.</div><span class="chip l">Lead</span></div>
+  <div class="trow"><span class="t">9 AM – 3 PM</span><span class="w">Maritime Festival</span><div class="x">Yorktown Maritime Festival, free. Single secondhand source; confirm at 757-890-5900.</div><span class="chip l">Lead</span></div>
+  <div class="trow"><span class="t">10 AM – 5 PM</span><span class="w">CW free day</span><div class="x"><b>Colonial Williamsburg, $0 tickets, add to cart in advance.</b> Arrive at 10 AM.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><span class="t">1:00 PM ET</span><span class="w">Football</span><div class="x">William &amp; Mary vs. Bucknell, Zable Stadium.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><span class="t">Time unknown</span><span class="w">CW 100th event</span><div class="x">Anniversary Celebration program. No program or times found.</div><span class="chip l">Lead</span></div>
+
+  <div class="dayhd">Sunday, Nov 15</div>
+  <div class="trow"><span class="t">10:00 AM</span><span class="w">Checkout</span><div class="x">Everything else on Sunday happens after this. Drive home is about 3 hours.</div><span class="chip v">Verified</span></div>
+
+  <div class="dayhd">Standing hours, all three days</div>
+  <div class="trow"><span class="t">9 AM – 5 PM</span><span class="w">Daily</span><div class="x">Jamestown Settlement, Yorktown museum, Yorktown Battlefield; Historic Jamestowne gate 8:45–4:30. Ticket sales close at 4:30 PM.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><span class="t">11 AM – 8 PM</span><span class="w">Daily</span><div class="x">Pierce's Pitt Bar-B-Que, so open Sunday.</div><span class="chip v">Verified</span></div>
+  <div class="foot">Saturday packs the most dated events and will likely be the most crowded day. That is an expectation, not a sourced fact. Friday afternoon and Sunday are the quieter windows for paid CW entry. Considered and skipped: Busch Gardens' Christmas Town.</div>
+</div></div>
+
+<!-- 01 -->
+<section class="theme" id="t01">
+  <div class="sticky"><span class="n">01</span><span class="t">At the resort</span><span class="loc">Ford's Colony</span></div>
+  <div class="fullplate g"><div class="n">01</div><div class="leg">Manor Club Sequel · campus-level</div><h2>At the resort</h2></div>
+  <div class="g">
+  <p class="shape">Home base for Aidan's naps and downtime. Every amenity here comes from the original Manor Club's page, so Sequel access is unconfirmed.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin a"></i></div>
+      <div class="card"><div class="eye">Home base</div><h3>Indoor heated pool, playground and toddler fun room</h3>
+        <div class="chips"><span class="chip v">Verified</span></div>
+        <div class="mrs"><div class="mr"><span class="lb">Pool</span><span class="vl">No lifeguards; children 12 and under need an adult</span></div><div class="mr"><span class="lb">Hours</span><span class="vl">— (see below)</span></div></div>
+        <p>The anchor for Aidan and for downtime. Finn falls under the adult-with-child rule at the pool.</p>
+        <span class="fchip">Verified for the original Manor Club; Sequel access unverified</span>
+        <a class="src" href="https://tpd2.packages.marriottvacationclubs.com/vacation-resorts/phfvi-marriotts-manor-club/amenities/" target="_blank" rel="noopener">Source</a></div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">Resort extras — pick, reorder, or drop</div>
+        <div class="orow"><h4>Outdoor pools and whirlpool</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Described as "heated in winter, cooled in summer"; one listing says two pools; November status unverified. Whirlpool is on the official page; tubs and sauna appear only in third-party listings. Pool hours of roughly 7 AM–11 PM are guest and reseller claims.</span></div>
+        <div class="orow"><h4>Game room, theatre, sports court</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Pool table, table tennis, horseshoes, "Showtime" movie theatre. Court: tennis, basketball, badminton, volleyball, shuffleboard. No mini golf.</span></div>
+        <div class="orow"><h4>Bistro 1699 / Marketplace Express</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Bistro has limited winter hours. Marketplace Express sells Starbucks and snacks. Splash Grille &amp; Pool Bar is seasonal, so closed.</span></div>
+        <div class="orow"><h4>Fitness and golf</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Life Fitness equipment; one listing says 24 hours. Two 18-hole courses, range and putting green at Ford's Colony Country Club, about a 5-minute walk; tee times via concierge.</span></div>
+        <details class="thin"><summary><span>Not found</span><span class="chev"></span></summary><p>A November activity calendar; parking cost (sources conflict between free and about $20–22 a day). No shuttle; Williamsburg is about a 20-minute drive. Pets not allowed (service animals only).</p></details>
+      </div></div>
+  </div></div>
+</section>
+
+<!-- 02 -->
+<section class="theme" id="t02">
+  <div class="sticky"><span class="n">02</span><span class="t">Colonial Williamsburg</span><span class="loc">Historic Area</span></div>
+  <div class="fullplate g"><div class="n">02</div><div class="leg">Historic Area · about 2 hours on foot</div><h2>Colonial Williamsburg</h2></div>
+  <div class="g">
+  <p class="shape">Saturday removes the cost question but brings crowds and harder parking. Size the visit at about two hours.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin a"></i></div>
+      <div class="card"><div class="eye">About 2 hrs · Sat is free</div><h3>CW Historic Area</h3>
+        <div class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span></div>
+        <div class="mrs"><div class="mr"><span class="lb">Verified</span><span class="vl">Sat Nov 14 free day, 10 AM–5 PM</span></div><div class="mr"><span class="lb">Lead</span><span class="vl">Hours, programs, regular prices</span></div></div>
+        <ul>
+          <li>A ticket is needed to enter buildings and see programs. Aidan (under 2) is free either way. Finn is 6, so he is $0 on the Sat Nov 14 free day.</li>
+          <li>Fri and Sun, 2025 prices (2026 not found): adult $35, youth 6–12 $10, under 6 free; online takes a further 10% off. On Fri or Sun Finn is a youth ticket (ages 6–12): $10 at 2025 prices, unverified for 2026.</li>
+          <li>Suggested shape: walk Duke of Gloucester Street, watch costumed interpreters, pick one or two open buildings, ideally a trade shop where Finn can watch things being made. Skip long sit-down tours with Aidan.</li>
+          <li>A grand union flag at an entrance signals an open site. Pick up the weekly program guide at the Visitor Center.</li>
+        </ul>
+        <span class="fchip">Not found: Nov 13–15 program schedule, multi-day pass (only a $75 annual pass appears), parking and shuttle. Could not confirm the Governor's Palace, Capitol or trade shops are open in November.</span>
+        <span class="fchip">Strollers: one unverified blog claim says many buildings do not allow strollers inside. Bring a carrier or a stroller you can leave outside.</span>
+        <a class="src" href="https://colonialwilliamsburg.org/visit/2025-pricing-updates" target="_blank" rel="noopener">Source</a></div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">Around the Historic Area</div>
+        <div class="orow"><h4>CW 100th Anniversary Celebration</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Saturday Nov 14. No program or times found.</span></div>
+        <div class="orow"><h4>Art Museums</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Free general admission per the CW pricing information; November hours not confirmed. A fallback for Finn.</span></div>
+        <div class="orow"><h4>Williamsburg Farmers Market</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Sat 8 AM–noon, 345 W Duke of Gloucester St. 2026 season unconfirmed.</span></div>
+        <div class="orow"><h4>Merchants Square</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Open-air shops and restaurants. Full list in block 07.</span></div>
+        <details class="thin"><summary><span>Outside the trip</span><span class="chev"></span></summary><p>Grand Illumination, Yule Log and Community Tree Lighting are all in December.</p></details>
+      </div></div>
+  </div></div>
+</section>
+
+<!-- 03 -->
+<section class="theme" id="t03">
+  <div class="sticky"><span class="n">03</span><span class="t">History beyond town</span><span class="loc">Jamestown · Yorktown</span></div>
+  <div class="fullplate g"><div class="n">03</div><div class="leg">Jamestown · Yorktown · Centerville Rd</div><h2>Colonial history beyond town</h2></div>
+  <div class="g">
+  <p class="shape">One good stop is the right size. Museums and battlefield run 9–5 daily; ticket sales close at 4:30 PM.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin a"></i></div>
+      <div class="card"><div class="eye">Anchor</div><h3>Jamestown Settlement</h3>
+        <div class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span></div>
+        <div class="mrs"><div class="mr"><span class="lb">Hours</span><span class="vl">9–5 daily; tickets by 4:30 PM</span></div><div class="mr"><span class="lb">Parking</span><span class="vl">Free</span></div><div class="mr"><span class="lb">Price</span><span class="vl">— (figures found expired June 30, 2026)</span></div></div>
+        <p>The default history stop. Hours are verified; prices are the Lead. Outdoor living-history areas have reduced winter hours, so the indoor galleries carry the visit.</p>
+        <a class="src" href="https://www.jyfmuseums.org/visit/plan-your-visit/faqs" target="_blank" rel="noopener">Source</a></div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">Other history stops — swap or add</div>
+        <div class="orow"><h4>American Revolution Museum at Yorktown</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Same hours and ticket rules as Jamestown Settlement (prices Lead). Mostly indoor.</span></div>
+        <div class="orow"><h4>Yorktown Battlefield (NPS)</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Open daily 9–5; page dated 2026.</span><a class="src" href="https://www.nps.gov/colo/planyourvisit/hours.htm" target="_blank" rel="noopener">Source</a></div>
+        <div class="orow"><h4>Historic Jamestowne (NPS)</h4><div class="chips"><span class="chip l">Lead</span><span class="chip map">On your map</span></div><span class="why">Visitor center 9–5, gate 8:45–4:30; page dated 2025. Good fit for Ashe's archaeology degree.</span><span class="fl2">The James Fort walking tour is April–October only. Not offered in November; the site itself is open.</span><a class="src" href="https://www.nps.gov/jame/planyourvisit/hours.htm" target="_blank" rel="noopener">Source</a></div>
+        <div class="orow"><h4>Freedom Park</h4><div class="chips"><span class="chip l">Lead</span><span class="chip map">On your map</span></div>
+          <a class="mr" href="https://maps.apple.com/?q=5537%20Centerville%20Rd%2C%20Williamsburg%2C%20VA%2023188"><span class="lb">Address</span><span class="vl">5537 Centerville Rd, Williamsburg 23188</span></a>
+          <span class="why">A 600-acre James City County park with reconstructed cabins from one of the nation's earliest free Black settlements (1803–1850), an 18th-century cemetery, and trails. Very close to the Ford's Colony resort. Good for Ashe (archaeology/history) and as a stretch for the kids.</span><span class="fl2">Hours not verified.</span></div>
+        <div class="orow"><h4>Yorktown Riverwalk Landing and Beach</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Shops, a beach, restaurants. Flat walking, easy with a stroller.</span></div>
+        <div class="orow"><h4>Yorktown Maritime Festival</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why"><b>Sat Nov 14, 9 AM–3 PM, free.</b> Single secondhand source; confirm at <a href="tel:7578905900">757-890-5900</a>.</span><a class="src" href="https://www.yorkcounty.gov/DocumentCenter/View/68295/2026-Yorktown-Events-at-a-Glance" target="_blank" rel="noopener">Source</a></div>
+      </div></div>
+  </div></div>
+</section>
+
+<!-- 04 -->
+<section class="theme" id="t04">
+  <div class="sticky"><span class="n">04</span><span class="t">College sports</span><span class="loc">Zable Stadium</span></div>
+  <div class="fullplate g"><div class="n">04</div><div class="leg">Zable Stadium · Saturday</div><h2>College sports</h2></div>
+  <div class="g">
+  <p class="shape">Research is thin here: one entry. Kickoff overlaps the Colonial Williamsburg free day.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="card"><div class="eye">Sat · 1 PM</div><h3>William &amp; Mary vs. Bucknell</h3>
+        <div class="chips"><span class="chip v">Verified</span></div>
+        <div class="mrs"><div class="mr"><span class="lb">Kickoff</span><span class="vl">Sat Nov 14, 1:00 PM ET</span></div><div class="mr"><span class="lb">Where</span><span class="vl">Zable Stadium</span></div><div class="mr"><span class="lb">Tickets</span><span class="vl">—</span></div></div>
+        <p>An option for Saturday afternoon. Kickoff time is verified; ticketing was not researched.</p>
+        <a class="src" href="https://tribeathletics.com/news/2026/3/26/football-announces-home-game-times.aspx" target="_blank" rel="noopener">Source</a></div></div>
+  </div></div>
+</section>
+
+<!-- 05 -->
+<section class="theme" id="t05">
+  <div class="sticky"><span class="n">05</span><span class="t">Breweries and drinks</span><span class="loc">Williamsburg</span></div>
+  <div class="fullplate g"><div class="n">05</div><div class="leg">Williamsburg · Jamestown · Merchants Square</div><h2>Breweries and drinks</h2></div>
+  <div class="g">
+  <p class="shape">Hours are not 2026-dated and sources conflict in places, so call first. Kid policies are mostly unconfirmed.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin a"></i></div>
+      <div class="card fl"><div class="eye">Beer stop anchor</div><h3>Precarious Beer Project</h3>
+        <div class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span><span class="chip map">On your map</span></div>
+        <div class="mrs">
+          <a class="mr" href="https://maps.apple.com/?q=110%20S%20Henry%20St%2C%20Williamsburg%2C%20VA"><span class="lb">Address</span><span class="vl">110 S Henry St (Merchants Square)</span></a>
+          <div class="mr"><span class="lb">Hours</span><span class="vl">Sun–Mon 11–9, Fri–Sat 11–11</span></div>
+          <a class="mr" href="tel:7578085104"><span class="lb">Phone</span><span class="vl">757-808-5104</span></a></div>
+        <p>Arcade games and food. Hours verified on the official site; the kid policy is the Lead (none found). Toast lists Sunday as closed, which conflicts.</p>
+        <span class="fchip">Address discrepancy: your map pin says 521 Prince George St; the research says the taproom is at 110 S Henry St. Shown here is the research address. Research places Amber Ox Public House at 521 Prince George St, so the pin may be misplaced. Confirm before driving.</span>
+        <a class="src" href="https://precariousbeer.com/home" target="_blank" rel="noopener">Source</a></div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">More breweries — swap, add, or skip</div>
+        <div class="orow"><h4>Billsburg Brewery</h4><div class="chips"><span class="chip l">Lead</span><span class="chip map">On your map</span></div>
+          <a class="mr" href="https://maps.apple.com/?q=2054%20Jamestown%20Rd%2C%20Williamsburg%2C%20VA"><span class="lb">Address</span><span class="vl">2054 Jamestown Rd</span></a>
+          <span class="why">Next to Jamestown. Waterfront, food truck. Sources conflict on hours. One guide calls it family friendly.</span></div>
+        <div class="orow"><h4>Virginia Beer Co.</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">401 Second St. Beer garden, fire pits, food trucks and non-alcoholic options. Listed Fri–Sat 12–9:30, Sun 12–9.</span></div>
+        <div class="orow"><h4>Alewerks</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Ewell Rd; also at the outlets. Pretzels and a large outdoor area. Hours found were from 2018.</span></div>
+        <div class="orow"><h4>Frothy Moon Brewhouse</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Patio and house-made root beer.</span></div>
+        <div class="orow"><h4>Strangeways Brewing</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Large brick patio. Hours not found.</span></div>
+        <div class="orow"><h4>Amber Ox Public House</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">521 Prince George St. Brewpub with Southern food. No hours found.</span></div>
+      </div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="card"><div class="eye">Adults only</div><h3>The Study at Amber Ox</h3>
+        <div class="chips"><span class="chip l">Lead</span><span class="chip map">On your map</span></div>
+        <div class="mrs">
+          <a class="mr" href="https://maps.apple.com/?q=525%20Prince%20George%20St%2C%20Williamsburg%2C%20VA"><span class="lb">Address</span><span class="vl">525 Prince George St</span></a>
+          <div class="mr"><span class="lb">Hours</span><span class="vl">Thu–Sat 4–9 PM, 2-hour seatings</span></div>
+          <div class="mr"><span class="lb">Rules</span><span class="vl">Reservation-only, 21+</span></div></div>
+        <p>A candlelit, book-lined speakeasy. It matches the family's cocktail bar and speakeasy exception. Adults only, so it could work as a date-night option if Ohana watches the kids. Only Friday and Saturday of the trip fall in its window.</p>
+        <span class="fchip">Hours need confirming. Reservations required.</span></div></div>
+  </div></div>
+</section>
+
+<!-- 06 -->
+<section class="theme" id="t06">
+  <div class="sticky"><span class="n">06</span><span class="t">Kid-friendly</span><span class="loc">Resort · Newport News</span></div>
+  <div class="fullplate g"><div class="n">06</div><div class="leg">Resort · Williamsburg · Newport News</div><h2>Kid-friendly</h2></div>
+  <div class="g">
+  <p class="shape">Finn (6) loves art; Aidan (14 months) needs naps and a stroller or carrier. No anchors were designated for this theme; several items are cross-listed.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">For the kids — pick, reorder, or drop</div>
+        <div class="orow"><h4>Resort playground and toddler room</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Block 01. Verified for the Manor Club; Sequel access unverified.</span></div>
+        <div class="orow"><h4>Freedom Park</h4><div class="chips"><span class="chip l">Lead</span><span class="chip map">On your map</span></div><span class="why">Block 03. Trails and reconstructed cabins close to the resort. Hours not verified.</span></div>
+        <div class="orow"><h4>Paint on Pottery</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Block 07. Pottery-painting studio with walk-ins, for Finn's love of art.</span></div>
+        <div class="orow"><h4>CW trade shops and Art Museums</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Block 02. Watching things being made suits Finn; Art Museums are a free fallback.</span></div>
+        <div class="orow"><h4>Great Wolf Lodge indoor water park</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Day pass; prices — (not found).</span><a class="src" href="https://www.greatwolf.com/williamsburg/waterpark-attractions/indoor-water-park/day-passes" target="_blank" rel="noopener">Source</a></div>
+        <div class="orow"><h4>Virginia Living Museum</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Newport News. 9–5 daily. Adult $21.95–23.95; child price —.</span><a class="src" href="https://thevlm.org/visit/" target="_blank" rel="noopener">Source</a></div>
+        <div class="orow"><h4>The Mariners' Museum and Park</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Newport News. $1 per person, 3 and under free; 9–5 daily.</span><a class="src" href="https://www.marinersmuseum.org/museum/" target="_blank" rel="noopener">Source</a></div>
+        <details class="thin"><summary><span>Closed</span><span class="chev"></span></summary><p>Water Country USA is closed for the season (secondary source).</p></details>
+      </div></div>
+  </div></div>
+</section>
+
+<!-- 07 -->
+<section class="theme" id="t07">
+  <div class="sticky"><span class="n">07</span><span class="t">Shopping</span><span class="loc">Williamsburg</span></div>
+  <div class="fullplate g"><div class="n">07</div><div class="leg">Matched to the family's preference lists</div><h2>Shopping</h2></div>
+  <div class="g">
+  <p class="shape">Hours are mostly unverified for November; confirm Fri–Sun by phone. Best fits: a tabletop game store for Tom and a cute shop strip for everyone.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin a"></i></div>
+      <div class="card"><div class="eye">Anchor</div><h3>Tap 'N Roll</h3>
+        <div class="chips"><span class="chip l">Lead</span></div>
+        <div class="mrs">
+          <a class="mr" href="https://maps.apple.com/?q=410%20Lightfoot%20Rd%20Ste%20G%2C%20Williamsburg%2C%20VA%2023188"><span class="lb">Address</span><span class="vl">410 Lightfoot Rd Ste G</span></a>
+          <div class="mr"><span class="lb">Hours</span><span class="vl">Fri–Sat 12–11, Sun 12–8 (2025 page; a 2022 article differs)</span></div></div>
+        <p>Best-fit find for board game and comic shops and Tom's tabletop games: Magic, Pokemon and Yu-Gi-Oh singles, board games, D&amp;D and RPG books, some LEGO.</p>
+        <a class="src" href="https://williamsburgfamilies.com/tap-n-roll-weekly-events-at-the-game-store" target="_blank" rel="noopener">Source</a></div></div>
+    <div class="stop"><div class="pc"><i class="pin a"></i></div>
+      <div class="card"><div class="eye">Anchor</div><h3>Merchants Square shops</h3>
+        <div class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span></div>
+        <div class="mrs"><div class="mr"><span class="lb">Hours</span><span class="vl">Blink Mon–Sat 10–6, Sun 12–5 (directory possibly stale)</span></div></div>
+        <p>The "cute shop strip": Blink, The Carousel (children's clothes), Wythe Candy, The Peanut Shop, Spice &amp; Tea Exchange, Danforth Pewter. Directory verified; hours are the Lead.</p>
+        <a class="src" href="https://merchantssquare.org/directory/" target="_blank" rel="noopener">Source</a></div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">More stores — pick, reorder, or drop</div>
+        <div class="orow"><h4>Bricks &amp; MiniFigs</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">5711 Richmond Rd, Space 028A (outlets area). Buys, sells and trades LEGO, for Tom's collecting. No hours found; verify it is still open.</span></div>
+        <div class="orow"><h4>Mermaid Books</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">421-A Prince George St. Used and rare, in a basement.</span><span class="fl2">A Dec 2020 report said it was closing for good; whether it reopened is not confirmed.</span></div>
+        <div class="orow"><h4>Turn the Page Bookshop</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">5707 Richmond Rd Ste 40. Mostly used books. One directory listing, no hours.</span></div>
+        <div class="orow"><h4>Colonial Williamsburg Bookstore</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Merchants Square. Hours vary.</span></div>
+        <div class="orow"><h4>Yorktown Bookshop</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">From a 2021 roundup; verify.</span></div>
+        <div class="orow"><h4>The Christmas Shop</h4><div class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span></div><span class="why">Hours verified: Fri 10–9, Sat 9–9, Sun 10–9.</span><span class="fl2">Address conflicts: 134 N Henry St or 405 W Duke of Gloucester St.</span></div>
+        <div class="orow"><h4>Paint on Pottery</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">1430 High St Ste 504. Pottery-painting studio with walk-ins; Tue–Sun 11–5 from an undated listing. Finn's pick.</span></div>
+        <div class="orow"><h4>Premium Outlets</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">5715 Richmond Rd. Snippet hours Fri–Sat 10–9, Sun 11–7. Brands found include Nike, J.Crew, Levi's, vineyard vines, Brooks Brothers; tenant list unverified.</span></div>
+        <details class="thin"><summary><span>Thin research</span><span class="chev"></span></summary><p>The clothing list on file covers only Tom's socks (Boardroom Socks, Zkano, Kentwool); none of those stores were found at the outlets, and a New Era cap store was not confirmed. No Williamsburg record store, baseball-card shop or art-supply store was found. Comic Cubicle looks closed. Jersey's Cards &amp; Comics (Yorktown) and Atomic Comics Emporium II (Newport News) were listed with Sunday hours only.</p></details>
+      </div></div>
+  </div></div>
+</section>
+
+<!-- 08 -->
+<section class="theme" id="t08">
+  <div class="sticky"><span class="n">08</span><span class="t">Dining</span><span class="loc">Williamsburg</span></div>
+  <div class="fullplate g"><div class="n">08</div><div class="leg">Casual · quality-first</div><h2>Dining</h2></div>
+  <div class="g">
+  <p class="shape">Nora is pescatarian; Tom, Ashe, Finn and Aidan eat no seafood. All five skip mushrooms. Seafood is fine at meals with Nora. Hours unverified unless noted.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin a"></i></div>
+      <div class="card"><div class="eye">Anchor</div><h3>Pierce's Pitt Bar-B-Que</h3>
+        <div class="chips"><span class="chip v">Verified</span></div>
+        <div class="mrs">
+          <a class="mr" href="https://maps.apple.com/?q=447%20E%20Rochambeau%20Dr%2C%20Williamsburg%2C%20VA"><span class="lb">Address</span><span class="vl">447 E Rochambeau Dr</span></a>
+          <div class="mr"><span class="lb">Hours</span><span class="vl">Daily 11–8, open Sunday</span></div></div>
+        <p>Local specialty (BBQ, Brunswick stew), casual and quality-first. Reviews mention a kids' menu and non-seafood options; neither is verified on the official site.</p>
+        <a class="src" href="https://pierces.com" target="_blank" rel="noopener">Source</a></div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">Meals — pick, reorder, or drop</div>
+        <div class="orow"><h4>Chowning's Tavern (CW)</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">American tavern, casual. Kids' option of burger, hot dog or chicken tenders. Inside dining 11:30–7:30 per a 2022 announcement; first come, first served.</span></div>
+        <div class="orow"><h4>King's Arms and Shields Tavern</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Prime rib, pork chops, family-style meals. Kid-friendliness and hours not confirmed.</span><a class="mr" href="tel:8004478679"><span class="lb">Phone</span><span class="vl">(800) 447-8679</span></a></div>
+        <div class="orow"><h4>Christiana Campbell's</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Seafood-focused, dinner only, listed Tue–Sat so likely closed Sunday. A fit for Nora, a poor fit for the seafood-averse majority.</span></div>
+        <div class="orow"><h4>Precarious, Virginia Beer Co., Amber Ox</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Brewpubs with strong beer lists. See block 05.</span></div>
+        <div class="orow"><h4>DoG Street Pub</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">401 W Duke of Gloucester St. British-style pub with a patio. No hours found.</span></div>
+        <div class="orow"><h4>Yorktown Pub</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">540 Water St. One blog: Sunday 11 AM to midnight.</span></div>
+        <div class="orow"><h4>Water Street Grille</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Yorktown. Seafood-heavy with brick-oven pizza, workable with Nora at the table. Sunday 11–8 per OpenTable.</span></div>
+        <div class="orow"><h4>CW "kid-approved" list</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Gold Course Grill, Museum Cafe, Traditions (breakfast). From a 2025 marketing page, no hours.</span></div>
+      </div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">Sweets and coffee</div>
+        <div class="orow"><h4>Meadows Original Frozen Custard</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">1222 Richmond Rd. A 2023 guide lists Fri–Sat 12–10; may be closed or limited in November.</span></div>
+        <div class="orow"><h4>Little York Confectionery</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Yorktown. Ice cream and chocolates.</span></div>
+        <div class="orow"><h4>Aromas Café</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">431 Prince George St. Directory hours: Fri–Sat 7–8, Sun 8–5.</span></div>
+        <div class="orow"><h4>Eleva Coffee Lounge</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Directory hours: daily 8–7.</span></div>
+        <details class="thin"><summary><span>Skip and gaps</span><span class="chev"></span></summary><p>Skip Mellow Mushroom (a chain, and mushroom-themed). Das Festhaus is inside Busch Gardens. No Irish pub, German restaurant outside the park, Guy Fieri DDD feature, Thai, Chinese or Mexican place was confirmed. Pizza came back thin: FTH Pizza (wood-fired, Toano, no hours, sometimes sells out of dough) and Old Town Pizza and Pasta are unverified leads. Unverified local-guide names: Two Drummers Smokehouse, Old City BBQ, Craft 31 (burgers), Murdoch's (Ford's Colony, open to the public).</p></details>
+      </div></div>
+  </div></div>
+</section>
+
+<!-- 09 -->
+<section class="theme" id="t09">
+  <div class="sticky"><span class="n">09</span><span class="t">Pit stops on the drive</span><span class="loc">I-95 S · I-64 E</span></div>
+  <div class="fullplate g"><div class="n">09</div><div class="leg">Alexandria to Williamsburg · separate category</div><h2>Pit stops on the drive</h2></div>
+  <div class="g">
+  <p class="shape">Optional, about one good stop each way because Aidan dislikes long car rides. Most have no confirmed Friday-evening or Sunday-midday hours, so these carry a confidence chip only, no role.</p>
+  <div class="spine">
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">Outbound, Friday — pick one at most</div>
+        <div class="orow"><h4>Mid-Atlantic Railroad Park, Ashland</h4><div class="chips"><span class="chip pit">Pit stop</span><span class="chip l">Lead</span></div><span class="why">About 1h15–1h30 from Alexandria. Free, open-daily walking tour of nine exhibits including a restored 1926 C&amp;O caboose and a train mural; more than 40 trains pass daily. Restrooms and playground not stated; the Ashland-Hanover Visitor Center (112 N Railroad Ave, listed 9–5 daily) is a plausible restroom stop.</span><a class="src" href="https://www.ashlandvirginia.com/railroad" target="_blank" rel="noopener">Source</a></div>
+        <div class="orow"><h4>Tales &amp; Tails Book Cafe, Fredericksburg</h4><div class="chips"><span class="chip pit">Pit stop</span><span class="chip l">Lead</span></div><span class="why">1010 Charles St, about 50 minutes out. New books, a children's reading room, local coffee and pastries. Hours not listed. Works either direction.</span><a class="src" href="https://fxbg.com/attraction/tales-and-tails/" target="_blank" rel="noopener">Source</a></div>
+        <div class="orow"><h4>Mason-Dixon Cafe, Fredericksburg</h4><div class="chips"><span class="chip pit">Pit stop</span><span class="chip l">Lead</span></div><span class="why">2100 Princess Anne St. Family-run diner with all-day breakfast. Aggregator-only; hours and kid-friendliness unverified.</span></div>
+      </div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">Return, Sunday — pick one at most</div>
+        <div class="orow"><h4>One Eyed Jacques</h4><div class="chips"><span class="chip pit">Pit stop</span><span class="chip v">Verified</span><span class="chip map">On your map</span></div>
+          <a class="mr" href="https://maps.apple.com/?q=3104%20W%20Cary%20St%2C%20Richmond%2C%20VA"><span class="lb">Address</span><span class="vl">3104 W Cary St, Carytown, Richmond</span></a>
+          <span class="why">A 10–20 minute detour. A board game and comics shop (not a restaurant) that is a household return-favorite. Sunday hours and kid policy were not researched; call before relying on it. Pairs with The Answer Brewpub.</span></div>
+        <div class="orow"><h4>The Answer Brewpub</h4><div class="chips"><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="chip map">On your map</span></div>
+          <a class="mr" href="https://maps.apple.com/?q=6008%20W%20Broad%20St%2C%20Richmond%2C%20VA"><span class="lb">Address</span><span class="vl">6008 W Broad St, Richmond</span></a>
+          <a class="mr" href="tel:8042821248"><span class="lb">Phone</span><span class="vl">(804) 282-1248</span></a>
+          <span class="why">A 10–20 minute detour. A Richmond return-favorite. 56 taps. No hours or kid policy found.</span><a class="src" href="https://www.visitrichmondva.com/listing/answer-brewpub/4175/" target="_blank" rel="noopener">Source</a></div>
+        <div class="orow"><h4>Children's Museum of Richmond</h4><div class="chips"><span class="chip pit">Pit stop</span><span class="chip l">Lead</span></div>
+          <a class="mr" href="tel:8044747000"><span class="lb">Phone</span><span class="vl">804-474-7000</span></a>
+          <span class="why">Hours page says Tue–Sun 9:30–5, so open Sunday. Confirm which location; renovations have caused closures.</span><a class="src" href="https://www.childrensmuseumofrichmond.org/full-menu/hours/" target="_blank" rel="noopener">Source</a></div>
+        <div class="orow"><h4>Carl's frozen custard, Fredericksburg</h4><div class="chips"><span class="chip pit">Pit stop</span><span class="chip l">Lead</span></div><span class="why">Patch says it runs until the Sunday before Thanksgiving (Nov 22 by calculation), so it should be open. No 2026 announcement. More than one location, so it may not pass the "independent" test.</span></div>
+        <details class="thin"><summary><span>Not found</span><span class="chev"></span></summary><p>Sunday hours and kid policy for One Eyed Jacques and The Answer Brewpub; any verified Guy Fieri DDD stop in Richmond; open farm stands (assume small seasonal ones are closed). Ashland Coffee &amp; Tea has conflicting listings and may be closed or renamed, so do not rely on it. Fredericksburg diner details rest on a single low-reliability source.</p></details>
+      </div></div>
+    <div class="stop"><div class="pc"><i class="pin o"></i></div>
+      <div class="opts"><div class="hd">Sunday after checkout — one local stop, about 1–2 hours</div>
+        <div class="orow"><h4>History one last time</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Jamestown Settlement or Yorktown Battlefield, both open 9–5.</span></div>
+        <div class="orow"><h4>Merchants Square</h4><div class="chips"><span class="chip l">Lead</span></div><span class="why">Aromas Café opens at 8; Blink opens at 12.</span></div>
+        <div class="orow"><h4>Lunch or a beer</h4><div class="chips"><span class="chip v">Verified</span></div><span class="why">Pierce's from 11. Precarious (Sun from 11, with the Toast conflict) and Virginia Beer Co. (from 12).</span></div>
+        <details class="thin"><summary><span>Sunday constraint</span><span class="chev"></span></summary><p>Before noon, opening hours are confirmed only for the museums, Aromas Café and Pierce's, so brunch timing stays flexible. Aidan's naps and the drive home are the constraint. Resort pools and playground are an early-morning use before the 10 AM checkout.</p></details>
+      </div></div>
+  </div></div>
+</section>
+
+<!-- LODGING -->
+<div class="g">
+<div class="tag"><span>Lodging</span></div>
+<p class="shape" style="margin-top:0">Marriott Vacation Club points plus Bonvoy, consistent with this stay. No account details or confirmation number are included.</p>
+<div class="lodge">
+  <h3>Marriott's Manor Club - Sequel</h3>
+  <div class="chips"><span class="chip v">Verified</span></div>
+  <div class="mrs">
+    <a class="mr" href="https://maps.apple.com/?q=101%20St.%20Andrews%20Dr%2C%20Williamsburg%2C%20VA%2023188"><span class="lb">Address</span><span class="vl">101 St. Andrews Dr, Williamsburg, VA 23188</span></a>
+    <a class="mr" href="tel:7572581120"><span class="lb">Phone</span><span class="vl">757-258-1120</span></a>
+    <div class="mr"><span class="lb">Check-in</span><span class="vl">Fri Nov 13, 4:00 PM</span></div>
+    <div class="mr"><span class="lb">Checkout</span><span class="vl">Sun Nov 15, 10:00 AM</span></div>
+  </div>
+  <p>Same Ford's Colony campus as the original Manor Club. The phone number comes from a VisitWilliamsburg listing for the Manor Club, so confirm it also reaches Sequel.</p>
+</div>
+<details class="corr"><summary><span>Correction — amenities are campus-level</span><span class="chev"></span></summary>
+  <p>The amenities in block 01 come from the <b>original Manor Club</b> page (read on a staging subdomain because the main site returned 403). Marriott lists Sequel as a separate resort, and no Sequel-specific amenities page was found. Treat each amenity as campus-level, <b>with Sequel access unverified</b>, until the call below.</p></details>
+
+<div class="tag"><span>Call before you go</span></div>
+<div class="calls">
+  <div class="crow"><div class="nm">Resort · Manor Club Sequel</div><div class="q">Which pools and tubs Sequel guests can use, which outdoor ones are open in November, pool hours, parking cost, and whether an activity calendar exists.</div><a class="tel" href="tel:7572581120">757-258-1120</a></div>
+  <div class="crow"><div class="nm">Yorktown</div><div class="q">Confirm the Maritime Festival on Sat Nov 14.</div><a class="tel" href="tel:7578905900">757-890-5900</a></div>
+  <div class="crow"><div class="nm">Precarious Beer Project</div><div class="q">Sunday hours (sources conflict) and kid policy. Confirm the address.</div><a class="tel" href="tel:7578085104">757-808-5104</a></div>
+  <div class="crow"><div class="nm">King's Arms and Shields Tavern</div><div class="q">Hours and kid-friendliness.</div><a class="tel" href="tel:8004478679">(800) 447-8679</a></div>
+  <div class="crow"><div class="nm">The Answer Brewpub · Richmond</div><div class="q">Sunday hours and kid policy.</div><a class="tel" href="tel:8042821248">(804) 282-1248</a></div>
+  <div class="crow"><div class="nm">Children's Museum of Richmond</div><div class="q">Which location is open; renovation closures.</div><a class="tel" href="tel:8044747000">804-474-7000</a></div>
+  <div class="crow"><div class="nm">No number on file</div><div class="q">Freedom Park, Tap 'N Roll, Bricks &amp; MiniFigs, Mermaid Books, The Study at Amber Ox, One Eyed Jacques. Hours or open/closed status to confirm.</div><span class="tel none" style="display:flex;min-height:44px;align-items:center;font:700 15px 'IBM Plex Mono',monospace">—</span></div>
+  <div class="crow"><div class="nm">Check in a normal browser</div><div class="q">The CW tickets page (the site blocked the research tools) and Busch Gardens' 2026 schedule.</div></div>
+</div>
+
+<div class="tag"><span>Further afield</span></div>
+<div class="ext">
+  <span class="c">Side trip · not part of the core plan</span>
+  <h3>Hampton and Newport News breweries</h3>
+  <p>About 30–40 minutes from Williamsburg, all saved on your map as want-to-go. Hours and kid policies were not researched, so confirm before making the drive. They pair with the Newport News museums in block 06.</p>
+  <div class="tiles">
+    <div class="tile"><b>Bull Island</b>on your map</div>
+    <div class="tile"><b>The Vanguard Brewpub &amp; Distillery</b>on your map</div>
+    <div class="tile"><b>Capstan Bar</b>on your map</div>
+    <div class="tile"><b>Tradition</b>on your map</div>
+    <div class="tile"><b>St. George</b>on your map</div>
+  </div>
+</div>
+
+<div class="tag"><span>Still loose</span></div>
+<div class="loose">
+  <div class="gd"><span class="chip sol">Unconfirmed</span>
+    <ul>
+      <li>Which resort amenities Sequel guests can use; pool hours; November status of outdoor pools.</li>
+      <li>CW hours (9 vs. 10 AM), open buildings, programs, the 100th event schedule, and the stroller rule.</li>
+      <li>Whether Mermaid Books and Bricks &amp; MiniFigs are still open; Freedom Park hours.</li>
+      <li>Precarious on Sunday; most brewery, shop and restaurant hours for November 2026.</li>
+    </ul></div>
+  <div class="r"><span class="chip sol">Prices to check</span>
+    <ul>
+      <li>CW regular-day 2026 prices (2025 shown); any multi-day pass.</li>
+      <li>Jamestown Settlement and Yorktown museum (found figures expired June 30, 2026).</li>
+      <li>Great Wolf Lodge day pass; Virginia Living Museum child price.</li>
+      <li>Resort parking; W&amp;M game tickets.</li>
+    </ul></div>
+  <div class="n"><span class="chip sol">Open questions</span>
+    <ul>
+      <li>What time do you leave Alexandria on Friday?</li>
+    </ul></div>
+</div>
+</div>
+</main>
+
+<footer class="g">
+  Advisory / not booked — reconfirm hours before travel<br>
+  Family copy<br>
+  Williamsburg · Nov 13–15, 2026
+</footer>
+</body>
+</html>
