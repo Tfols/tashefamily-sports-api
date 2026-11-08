@@ -46,6 +46,7 @@ h1,h2,h3,h4,p{margin:0}
 /* key strip */
 .key{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;background:var(--paper-2);border:2px solid var(--ink);padding:7px 12px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;break-inside:avoid}
 .key span{display:inline-flex;align-items:center;gap:6px}
+.key .chk{flex-basis:100%;border-top:1px dashed var(--line-dark);padding-top:6px;color:var(--ink-soft)}
 /* pins and chips */
 .pin{display:inline-block;width:16px;height:16px;border-radius:50%;flex:none}
 .pin.a{background:var(--gold);border:3px solid var(--ink)}
@@ -174,7 +175,7 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
   <div class="l">
     <div class="eyebrow">Field Guide · Family trip · Fri Nov 13 – Sun Nov 15, 2026 · Compiled Nov 7, 2026</div>
     <h1>Williamsburg <b>+</b> Historic Triangle</h1>
-    <p class="intro">A planning reference, not a booked itinerary. Organized by theme, with every dated or timed item pulled up front. Hours and prices are mostly unconfirmed for November 2026, so reconfirm before routing to anything. Party: Tom, Ashe, Ohana (Nora), Finn (6) and Aidan (14 months).</p>
+    <p class="intro">A planning reference, not a booked itinerary. Organized by theme, with every dated or timed item pulled up front. Hours and prices were checked against the trip dates on Nov 7. Anything still marked Lead needs a call before you route to it. Colonial Williamsburg is closed to the public on Sunday. Party: Tom, Ashe, Ohana (Nora), Finn (6) and Aidan (14 months).</p>
   </div>
   <div class="route">
     <div><div class="k">Organized by</div><div class="v">Theme (9 blocks), not day</div></div>
@@ -185,6 +186,10 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
 </header>
 
 <!-- 2 ALERT -->
+<div class="alert"><div class="in">
+  <div class="hd">&#9888; Closed Sunday, Nov 15</div>
+  <div class="bd"><b>Colonial Williamsburg is closed to the public on Sunday, Nov 15</b> (100th-anniversary gathering for employees, volunteers and retirees). The Historic Area, Art Museums, Campbell Archaeology Center and the CW taverns, King's Arms included, are all closed. Sunday is planned around non-CW stops: Jamestown, Yorktown, and pit stops on the drive home. CW days on this trip are Friday (paid) and Saturday (free day). Merchants Square shops are probably unaffected, but that is not confirmed. CW line: (888) 965-7254.</div>
+</div></div>
 <div class="alert"><div class="in">
   <div class="hd">&#9888; Not available in November</div>
   <div class="bd"><b>Historic Jamestowne's Archaeology Walking Tour of James Fort runs April through October only.</b> It is left out of this plan as a tour. The Historic Jamestowne site itself is still open (see block 03).</div>
@@ -198,6 +203,7 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
   <span><span class="chip l">Lead</span> call first</span>
   <span><span class="chip map">On your map</span> saved pin</span>
   <span><span class="chip pit">Pit stop</span> on the drive</span>
+  <span class="chk">Checked against trip dates Nov 7, 2026 — 17 confirmed, 8 changed, 25 still unverified (3 new items added)</span>
 </div>
 
 <!-- TIMED ITEMS (user-requested addition; not a stat row) -->
@@ -206,26 +212,35 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
   <div class="headline">
     <div class="d"><small>Sat Nov 14 · 10 AM – 5 PM</small>Free day</div>
     <h2>Colonial Williamsburg free admission, 100th anniversary</h2>
-    <p>Official special-offers page lists $0 tickets for ages 13+, 6–12 and 0–5, valid Nov 14 only. <b>Free tickets have to be added to a cart in advance.</b> Service fees and a 10% admission tax on the first $10 still apply at checkout. Hours sources conflict between 9 and 10 AM starts; treat 10 AM as likely and confirm. <span class="chip v">Verified</span><a class="src" href="https://www.colonialwilliamsburg.org/visit/special-offers/">src</a></p>
+    <p>Official special-offers page lists $0 tickets for ages 13+, 6–12 and 0–5, valid Nov 14 only. <b>Free tickets have to be added to a cart in advance.</b> Service fees and a 10% admission tax on the first $10 still apply at checkout. The CW ticket page gives 10 AM–5 PM. Which individual buildings are open on the free day is not stated. <span class="chip v">Verified</span><a class="src" href="https://www.colonialwilliamsburg.org/visit/special-offers/">src</a></p>
   </div>
 
   <div class="dayhd">Friday, Nov 13</div>
   <div class="trow"><div class="t">4:00 PM</div><div class="w">Check-in</div><div class="x">Marriott's Manor Club - Sequel, 101 St. Andrews Dr.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><div class="t">9 AM – 5 PM</div><div class="w">Tea festival</div><div class="x">Yorktown Tea Festival at the Yorktown museum: tastings and workshops. No prices found. Low fit for the kids; a short stop at most.</div><span class="chip l">Lead</span></div>
+  <div class="trow"><div class="t">5:30 – 10 PM</div><div class="w">Lantern festival</div><div class="x"><b>Winter Lantern Festival, Jamestown Settlement</b>, outdoors; last entry 9 PM. Separate ticket at winterlanternfestival.com. Details in block 06.</div><span class="chip l">Lead</span></div>
 
   <div class="dayhd sat">Saturday, Nov 14 · the packed day</div>
-  <div class="trow"><div class="t">8 AM – noon</div><div class="w">Farmers market</div><div class="x">Williamsburg Farmers Market, 345 W Duke of Gloucester St. 2026 season unconfirmed.</div><span class="chip l">Lead</span></div>
-  <div class="trow"><div class="t">9 AM – 3 PM</div><div class="w">Maritime Festival</div><div class="x">Yorktown Maritime Festival, free. Single secondhand source; confirm at 757-890-5900.</div><span class="chip l">Lead</span></div>
+  <div class="trow"><div class="t">8 AM – noon</div><div class="w">Farmers market</div><div class="x">Williamsburg Farmers Market. 2026 season runs Feb 7–Dec 19. Street address on file (345 W Duke of Gloucester St) unconfirmed.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><div class="t">9 AM – 3 PM</div><div class="w">Maritime Festival</div><div class="x">Yorktown Maritime Festival, Riverwalk Landing (331 Water St), free. Details at 757-890-5900.</div><span class="chip v">Verified</span></div>
   <div class="trow"><div class="t">10 AM – 5 PM</div><div class="w">CW free day</div><div class="x"><b>Colonial Williamsburg, $0 tickets, add to cart in advance.</b> Arrive at 10 AM.</div><span class="chip v">Verified</span></div>
   <div class="trow"><div class="t">1:00 PM ET</div><div class="w">Football</div><div class="x">William &amp; Mary vs. Bucknell, Zable Stadium.</div><span class="chip v">Verified</span></div>
-  <div class="trow"><div class="t">Time unknown</div><div class="w">CW 100th event</div><div class="x">Anniversary Celebration program. No program or times found.</div><span class="chip l">Lead</span></div>
+  <div class="trow"><div class="t">Time TBA</div><div class="w">Procession</div><div class="x">CW grand procession: Fifes and Drums, interpreters, community members and special guests. Route runs Capitol Circle to the Courthouse. No start time published.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><div class="t">Time TBA</div><div class="w">Art Museums</div><div class="x">Guided centennial tour at the Art Museums. No time published.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><div class="t">Time TBA</div><div class="w">Fireworks</div><div class="x">Fireworks display with reserved seating. No time published.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><div class="t">5:00 – 8:30 PM</div><div class="w">Evening toast</div><div class="x">"A Toast to the Next 100": ticketed adult evening reception (hors d'oeuvres, cocktails), Market Square North. No price listed; place and time come from one secondary source. Adult-oriented, not a kid event.</div><span class="chip l">Lead</span></div>
+  <div class="trow"><div class="t">On arrival</div><div class="w">Program</div><div class="x"><b>Times are not published. Grab the program on arrival</b> or check the CW events calendar.</div></div>
+  <div class="trow"><div class="t">5:30 – 10 PM</div><div class="w">Lantern festival</div><div class="x"><b>Winter Lantern Festival, Jamestown Settlement</b>, outdoors; last entry 9 PM. Separate ticket at winterlanternfestival.com. Details in block 06.</div><span class="chip l">Lead</span></div>
 
   <div class="dayhd">Sunday, Nov 15</div>
   <div class="trow"><div class="t">10:00 AM</div><div class="w">Checkout</div><div class="x">Everything else on Sunday happens after this. Drive home is about 3 hours.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><div class="t">All day</div><div class="w">CW closed</div><div class="x"><b>Historic Area, Art Museums, Campbell Archaeology Center and the CW taverns are closed to the public.</b> Plan Sunday around Jamestown, Yorktown or the pit stops home.</div><span class="chips"><span class="chip flag">Closed</span><span class="chip v">Verified</span></span></div>
 
   <div class="dayhd">Standing hours, all three days</div>
-  <div class="trow"><div class="t">9 AM – 5 PM</div><div class="w">Daily</div><div class="x">Jamestown Settlement, Yorktown museum, Yorktown Battlefield; Historic Jamestowne gate 8:45–4:30. Ticket sales close at 4:30 PM.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><div class="t">9 AM – 5 PM</div><div class="w">Daily</div><div class="x">Yorktown Battlefield (NPS); Historic Jamestowne visitor center 9–5, gate 8:45–4:30.</div><span class="chip v">Verified</span></div>
+  <div class="trow"><div class="t">9 AM – 5 PM</div><div class="w">Daily</div><div class="x">Jamestown Settlement and the Yorktown museum, per search summaries (their site blocked the research tools). Ticket sales close at 4:30 PM.</div><span class="chip l">Lead</span></div>
   <div class="trow"><div class="t">11 AM – 8 PM</div><div class="w">Daily</div><div class="x">Pierce's Pitt Bar-B-Que, so open Sunday.</div><span class="chip v">Verified</span></div>
-  <div class="foot">Saturday packs the most dated events (CW free day, farmers market, Yorktown festival, 1 PM football) and will likely be the most crowded day. That is an expectation, not a sourced fact. Friday afternoon and Sunday are the quieter windows for paid CW entry. Considered and skipped: Busch Gardens' Christmas Town.</div>
+  <div class="foot">Saturday packs the most dated events (CW free day, farmers market, Yorktown festival, 1 PM football) and will likely be the most crowded day. That is an expectation, not a sourced fact. Friday afternoon is the paid-entry CW window; Sunday is closed. CW's official anniversary page blocked the research tools, so the Saturday program comes from a tourism-site reproduction and search summaries (medium-high confidence). Considered and skipped: Busch Gardens' Christmas Town.</div>
 </div>
 
 <!-- 01 RESORT -->
@@ -252,26 +267,26 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
 <!-- 02 CW -->
 <section class="theme">
   <div class="plate"><div class="n">02</div><div class="r"><div class="leg">Historic Area · about 2 hours on foot</div><h2>Colonial Williamsburg</h2></div></div>
-  <p class="shape">Saturday removes the cost question but brings crowds and harder parking. Size the visit at about two hours: the street, a trade shop, and out before Aidan runs out of patience.</p>
+  <p class="shape">Saturday removes the cost question but brings crowds and harder parking. Size the visit at about two hours: the street, a trade shop, and out before Aidan runs out of patience. Sunday is closed to the public, so the CW visit is Friday (paid) or Saturday (free).</p>
   <div class="spine">
     <div class="stop"><div class="pc"><i class="pin a"></i><span class="when">~2 hrs<br>Sat free</span></div>
       <div class="card"><div class="r1"><h3>CW Historic Area</h3><span class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span></span></div>
-        <div class="meta"><b>Verified:</b> Sat Nov 14 free day, 10 AM–5 PM · <b>Lead:</b> hours, programs, regular prices<a class="src" href="https://colonialwilliamsburg.org/visit/2025-pricing-updates">src</a></div>
+        <div class="meta"><b>Verified:</b> Sat Nov 14 free day, 10 AM–5 PM; 2026 prices · <b>Closed:</b> Sun Nov 15 · <b>Lead:</b> regular hours, open buildings<a class="src" href="https://orgcms.colonialwilliamsburg.com/visit/tickets-passes">src</a></div>
         <ul>
-          <li>A ticket is needed to enter buildings and see programs. Aidan (under 2) is free either way. Finn is 6, so he is $0 on the Sat Nov 14 free day.</li>
-          <li>Fri and Sun, 2025 prices (2026 table not found): adult $35, youth 6–12 $10, under 6 free; buying online takes a further 10% off. On Fri or Sun Finn is a youth ticket (ages 6–12): $10 at 2025 prices, unverified for 2026.</li>
+          <li>A ticket is needed to enter buildings and see programs. <b>Finn (6):</b> youth ticket $10 on Fri, $0 on the Sat Nov 14 free day, and Sun is closed. <b>Aidan (14 months):</b> covered by the free day's 0–5 band on Sat; the 2026 price page lists no under-6 price, and "free" for under 6 comes from 2025 and was not re-verified.</li>
+          <li>2026 regular prices (Friday is the only regular-priced CW day on this trip): single day adult 13+ $37.50, youth 6–12 $10; 3-day ticket $55 adult / $28 youth; annual pass $75 / $35. Credit cards carry a 3% fee.</li>
           <li>Suggested shape: walk Duke of Gloucester Street, watch the costumed interpreters, pick one or two open buildings, ideally a trade shop where Finn can watch things being made. Skip long sit-down tours with Aidan.</li>
           <li>Not every building is open at once; a grand union flag at an entrance signals an open site. Pick up the weekly program guide at the Visitor Center.</li>
         </ul>
-        <span class="fchip">Not found: Nov 13–15 program schedule, multi-day pass (only a $75 annual pass appears), parking and shuttle. Could not confirm the Governor's Palace, Capitol or trade shops are open in November.</span>
+        <span class="fchip">Not found: regular-day hours, which buildings (Governor's Palace, Capitol, trade shops) are open, parking and shuttle. CW's pages blocked the research tools for these.</span>
         <span class="fchip">Strollers: one unverified blog claim says many buildings do not allow strollers inside. Bring a carrier or a stroller you can leave outside.</span></div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Pick any</span></div>
       <div class="opts"><div class="hd">Around the Historic Area</div>
-        <div class="orow"><h4>CW 100th Anniversary Celebration</h4><span class="chip l">Lead</span><span class="why">Saturday Nov 14. No program or times found. Take it as a reason Saturday is busy, not as something to plan around.</span></div>
-        <div class="orow"><h4>Art Museums</h4><span class="chip l">Lead</span><span class="why">Free general admission per the CW pricing information; November hours not confirmed. A fallback for Finn if the ticketed buildings are crowded or closed.</span></div>
-        <div class="orow"><h4>Williamsburg Farmers Market</h4><span class="chip l">Lead</span><span class="why">Sat 8 AM–noon, 345 W Duke of Gloucester St. 2026 season unconfirmed. Small seasonal markets may be closed in November.</span></div>
-        <div class="orow"><h4>Merchants Square</h4><span class="chip l">Lead</span><span class="why">Open-air shops and restaurants next to the Historic Area. Full list in block 07.</span></div>
-        <div class="thin">Grand Illumination, Yule Log and Community Tree Lighting are all in December, outside this trip.</div>
+        <div class="orow"><h4>CW 100th Anniversary Celebration</h4><span class="chip v">Verified</span><span class="why">Saturday Nov 14, Centennial Day: Historic Area free 10–5 with advance $0 tickets (small service fees apply). Grand procession (Capitol Circle to the Courthouse), Art Museums centennial tour and reserved-seating fireworks, all with times not published. "A Toast to the Next 100" is a ticketed adult evening reception (Lead; see the timed panel). Grab the program on arrival.</span></div>
+        <div class="orow"><h4>Art Museums</h4><span class="chip l">Lead</span><span class="why">Open Sat 10–5 with the centennial tour (time TBA) and the exhibition "Colonial Williamsburg: The First 100 Years." Hours come from a search summary. Admission price not re-verified for 2026. <span class="fl">Closed Sunday, Nov 15. Not a Sunday fallback.</span></span></div>
+        <div class="orow"><h4>Williamsburg Farmers Market</h4><span class="chip v">Verified</span><span class="why">Sat 8 AM–noon. The 2026 season runs Feb 7–Dec 19, so it is running. Street address on file (345 W Duke of Gloucester St) unconfirmed.</span></div>
+        <div class="orow"><h4>Merchants Square</h4><span class="chip l">Lead</span><span class="why">Open-air shops and restaurants next to the Historic Area. Full list in block 07. Probably unaffected by the Nov 15 CW closure, but not confirmed.</span></div>
+        <div class="thin">Grand Illumination, Yule Log and Community Tree Lighting are all in December, outside this trip. The Liberty Ice Pavilion opens Nov 20, also after the trip.</div>
       </div></div>
   </div>
 </section>
@@ -279,20 +294,22 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
 <!-- 03 HISTORY -->
 <section class="theme">
   <div class="plate"><div class="n">03</div><div class="r"><div class="leg">Jamestown · Yorktown · Centerville Rd</div><h2>Colonial history beyond town</h2></div></div>
-  <p class="shape">One good stop is the right size. The museums and battlefield run 9–5 daily with ticket sales closing at 4:30 PM, so none of them depends on the weekend schedule.</p>
+  <p class="shape">One good stop is the right size. The museums and battlefield run 9–5 daily with ticket sales closing at 4:30 PM, so none of them depends on the weekend schedule, and all of them stay open Sunday while CW is closed.</p>
   <div class="spine">
     <div class="stop"><div class="pc"><i class="pin a"></i><span class="when">Anchor</span></div>
-      <div class="card"><div class="r1"><h3>Jamestown Settlement</h3><span class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span></span></div>
-        <div class="meta">Open 9–5 daily · buy tickets by 4:30 PM · free parking · prices <b>—</b> (figures found expired June 30, 2026)<a class="src" href="https://www.jyfmuseums.org/visit/plan-your-visit/faqs">src</a></div>
-        <p>The default history stop. Hours are verified; prices are the Lead. Outdoor living-history areas have reduced winter hours, so the indoor galleries carry the visit.</p></div></div>
+      <div class="card"><div class="r1"><h3>Jamestown Settlement</h3><span class="chips"><span class="chip l">Lead</span></span></div>
+        <div class="meta">Open 9–5 daily (search summary; the site blocked the research tools) · buy tickets by 4:30 PM · free parking · price <b>—</b> (last official figures, $20 adult and $10 ages 6–12, expired June 30, 2026; a combo ticket was seen at $34 / $17, secondary source)<a class="src" href="https://www.jyfmuseums.org/visit/plan-your-visit/faqs">src</a></div>
+        <p>The default history stop. Hours and prices are both Lead until checked in a browser. Outdoor living-history areas have reduced winter hours, so the indoor galleries carry the visit.</p></div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Pick any</span></div>
       <div class="opts"><div class="hd">Other history stops — swap for the anchor or add one</div>
-        <div class="orow"><h4>American Revolution Museum at Yorktown</h4><span class="chip v">Verified</span><span class="why">Same hours and ticket rules as Jamestown Settlement (prices Lead). Mostly indoor, which suits a cold day.</span></div>
+        <div class="orow"><h4>American Revolution Museum at Yorktown</h4><span class="chip l">Lead</span><span class="why">Same hours and ticket rules as Jamestown Settlement (hours and prices both Lead; the site blocked the research tools). Mostly indoor, which suits a cold day.</span></div>
+        <div class="orow"><h4>Give Me Liberty exhibition, Yorktown museum</h4><span class="chip l">Lead</span><span class="why">"Virginia &amp; the Forging of a Nation," Jul 1, 2026 – Jan 31, 2027, included with museum admission. Found via a search summary; confirm on arrival.<a class="src" href="https://www.jyfmuseums.org/events/special-exhibits/give-me-liberty">src</a></span></div>
         <div class="orow"><h4>Yorktown Battlefield (NPS)</h4><span class="chip v">Verified</span><span class="why">Open daily 9–5; page dated 2026.<a class="src" href="https://www.nps.gov/colo/planyourvisit/hours.htm">src</a></span></div>
-        <div class="orow"><h4>Historic Jamestowne (NPS)</h4><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">Visitor center 9–5, gate 8:45–4:30; page dated 2025. Good fit for Ashe's archaeology degree.<a class="src" href="https://www.nps.gov/jame/planyourvisit/hours.htm">src</a><span class="fl">The James Fort walking tour is April–October only. Not offered in November; the site itself is open.</span></span></div>
-        <div class="orow"><h4>Freedom Park</h4><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">5537 Centerville Rd, Williamsburg 23188. A 600-acre James City County park with reconstructed cabins from one of the nation's earliest free Black settlements (1803–1850), an 18th-century cemetery, and trails. Very close to the Ford's Colony resort. Good for Ashe (archaeology/history) and as a stretch for the kids. <span class="fl">Hours not verified.</span></span></div>
+        <div class="orow"><h4>Historic Jamestowne (NPS)</h4><span class="chip v">Verified</span><span class="chip map">On your map</span><span class="why">Visitor center 9–5, gate 8:45–4:30 (NPS). The Glasshouse close time is inconsistent and the theater and exhibits may be "currently closed," so call ahead. Good fit for Ashe's archaeology degree.<a class="src" href="https://www.nps.gov/jame/planyourvisit/hours.htm">src</a><span class="fl">The James Fort walking tour is April–October only. Not offered in November; the site itself is open.</span></span></div>
+        <div class="orow"><h4>Freedom Park</h4><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">5537 Centerville Rd, Williamsburg 23188. A 600-acre James City County park with an 18th-century cemetery, the site of a 17th-century domicile, and trails. Very close to the Ford's Colony resort. Good for Ashe (archaeology/history) and as a stretch for the kids. <span class="fl">Hours unverified: 7 AM–sunset, Interpretive Center 10–5, per a search summary (county page blocked). Call 757-259-4022.</span></span></div>
         <div class="orow"><h4>Yorktown Riverwalk Landing and Beach</h4><span class="chip l">Lead</span><span class="why">Shops, a beach, restaurants. Flat walking, easy with a stroller.</span></div>
-        <div class="orow"><h4>Yorktown Maritime Festival</h4><span class="chip l">Lead</span><span class="why"><b>Sat Nov 14, 9 AM–3 PM, free.</b> Single secondhand source; confirm at 757-890-5900.<a class="src" href="https://www.yorkcounty.gov/DocumentCenter/View/68295/2026-Yorktown-Events-at-a-Glance">src</a></span></div>
+        <div class="orow"><h4>Yorktown Maritime Festival</h4><span class="chip v">Verified</span><span class="why"><b>Sat Nov 14, 9 AM–3 PM, free</b>, Riverwalk Landing (331 Water St). Details at 757-890-5900.<a class="src" href="https://yorkcounty.gov/CivicSend/ViewMessage/message/279856">src</a></span></div>
+        <div class="orow"><h4>Yorktown Tea Festival</h4><span class="chip l">Lead</span><span class="why"><b>Fri Nov 13, 9–5</b>, at the Yorktown museum: tastings and workshops. No prices found. Low fit for the kids; a short stop at most, and Friday is also the travel day.<a class="src" href="https://www.williamsburgfamilies.com/yorktown-tea-festival-wednesday-november-6-friday-november-8-2024/">src</a></span></div>
       </div></div>
   </div>
 </section>
@@ -304,7 +321,7 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
   <div class="spine">
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Sat<br>1 PM</span></div>
       <div class="card"><div class="r1"><h3>William &amp; Mary vs. Bucknell</h3><span class="chips"><span class="chip v">Verified</span></span></div>
-        <div class="meta">Sat Nov 14, 1:00 PM ET · Zable Stadium · tickets and price <b>—</b><a class="src" href="https://tribeathletics.com/news/2026/3/26/football-announces-home-game-times.aspx">src</a></div>
+        <div class="meta">Sat Nov 14, 1:00 PM ET · Zable Stadium · tickets and price <b>—</b> (resale listings about $42–47, unconfirmed)<a class="src" href="https://tribeathletics.com/news/2026/3/26/football-announces-home-game-times.aspx">src</a></div>
         <p>An option for Saturday afternoon if the family wants something other than the Historic Area. Kickoff time is verified; ticketing was not researched.</p></div></div>
   </div>
 </section>
@@ -312,27 +329,26 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
 <!-- 05 BREWERIES -->
 <section class="theme">
   <div class="plate"><div class="n">05</div><div class="r"><div class="leg">Williamsburg · Jamestown · Merchants Square</div><h2>Breweries and drinks</h2></div></div>
-  <p class="shape">Hours here are not 2026-dated and sources conflict in places, so call first. Kid policies are mostly unconfirmed; several have outdoor space or food trucks.</p>
+  <p class="shape">Hours for Precarious, Billsburg, Alewerks and Frothy Moon were checked against official sites on Nov 7; Virginia Beer Co. and Amber Ox are still Lead. No brewery states an official kid policy; several have outdoor space or food trucks.</p>
   <div class="spine">
     <div class="stop"><div class="pc"><i class="pin a"></i><span class="when">Beer stop<br>anchor</span></div>
       <div class="card fl"><div class="r1"><h3>Precarious Beer Project</h3><span class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span><span class="chip map">On your map</span></span></div>
-        <div class="meta">110 S Henry St (Merchants Square) · Sun–Mon 11–9, Fri–Sat 11–11 · 757-808-5104<a class="src" href="https://precariousbeer.com/home">src</a></div>
-        <p>Arcade games and food. Hours are verified on the official site; the kid policy is the Lead (none found). Toast lists Sunday as closed, which conflicts with the official site.</p>
+        <div class="meta">110 S Henry St (Merchants Square) · Sun–Mon 11–9, Tue–Thu 11–10, Fri–Sat 11–11 · 757-808-5104<a class="src" href="https://precariousbeer.com/home">src</a></div>
+        <p>Arcade games and food. Hours are verified on the official site; the kid policy is the Lead (none found). Toast lists Sunday as closed, which conflicts with the official site and is unresolved; call.</p>
         <span class="fchip">Address discrepancy: your map pin says 521 Prince George St; the research says the taproom is at 110 S Henry St. This guide shows the research address. Research places Amber Ox Public House at 521 Prince George St, so the pin may be misplaced. Confirm before driving.</span></div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Pick any</span></div>
       <div class="opts"><div class="hd">More breweries — swap, add, or skip</div>
-        <div class="orow"><h4>Billsburg Brewery</h4><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">2054 Jamestown Rd, next to Jamestown. Waterfront, food truck. Sources conflict on hours. One guide calls it family friendly. Pairs with a Jamestown Settlement visit.</span></div>
-        <div class="orow"><h4>Virginia Beer Co.</h4><span class="chip l">Lead</span><span class="why">401 Second St. Beer garden, fire pits, food trucks and non-alcoholic options. Listed Fri–Sat 12–9:30, Sun 12–9.</span></div>
-        <div class="orow"><h4>Alewerks</h4><span class="chip l">Lead</span><span class="why">Ewell Rd; also at the outlets. Pretzels and a large outdoor area. Hours found were from 2018, so treat as unknown.</span></div>
-        <div class="orow"><h4>Frothy Moon Brewhouse</h4><span class="chip l">Lead</span><span class="why">Patio and house-made root beer, which gives the kids something of their own.</span></div>
-        <div class="orow"><h4>Strangeways Brewing</h4><span class="chip l">Lead</span><span class="why">Large brick patio. Hours not found.</span></div>
-        <div class="orow"><h4>Amber Ox Public House</h4><span class="chip l">Lead</span><span class="why">521 Prince George St. Brewpub with Southern food. No hours found.</span></div>
+        <div class="orow"><h4>Billsburg Brewery</h4><span class="chip v">Verified</span><span class="chip map">On your map</span><span class="why">2054 Jamestown Rd, next to Jamestown. Sun–Thu 11–10, Fri–Sat 11–11. 757-926-0981. Waterfront, dog-friendly, food truck on site. One guide calls it family friendly; no official kid policy. Pairs with a Jamestown Settlement visit.</span></div>
+        <div class="orow"><h4>Virginia Beer Co.</h4><span class="chip l">Lead</span><span class="why">401 Second St. Beer garden, fire pits, food trucks and non-alcoholic options. Fri–Sat 12–9:30, Mon–Thu 3–9, Sun 12–9 (one source says 12–7). Hours conflict, so call.</span></div>
+        <div class="orow"><h4>Alewerks</h4><span class="chip v">Verified</span><span class="why">Taproom at 189B Ewell Rd: Mon–Thu 3–9, Fri–Sat 12–10, Sun 12–7. L.A.B. at 5711-36 Richmond Rd (outlets): Sun–Wed 12–6, Thu–Sat 12–8. Families can get games and non-alcoholic drinks; pretzels and a large outdoor area. 757-220-3670.</span></div>
+        <div class="orow"><h4>Frothy Moon Brewhouse</h4><span class="chip v">Verified</span><span class="why">1826 Jamestown Rd. Sun–Tue 8–8, Wed–Thu 8–9, Fri–Sat 8–10. Patio and house-made root beer, an all-ages option that gives the kids something of their own.</span></div>
+        <div class="orow"><h4>Amber Ox Public House</h4><span class="chip l">Lead</span><span class="why">521 Prince George St. Brewpub with Southern food. Reservation suggested: (757) 790-2299. Hours not found.</span></div>
       </div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Adults<br>only</span></div>
       <div class="card"><div class="r1"><h3>The Study at Amber Ox</h3><span class="chips"><span class="chip l">Lead</span><span class="chip map">On your map</span></span></div>
         <div class="meta">525 Prince George St · reservation-only · 21+ · Thu–Sat 4–9 PM, 2-hour seatings</div>
         <p>A candlelit, book-lined speakeasy. It matches the family's cocktail bar and speakeasy exception. Adults only, so it could work as a date-night option if Ohana watches the kids. Of the trip days, only Friday and Saturday fall in its Thu–Sat window.</p>
-        <span class="fchip">Hours need confirming. Reservations required.</span></div></div>
+        <span class="fchip">Hours need confirming. Reservations required. Address conflict: sources give 521 or 525 Prince George St.</span></div></div>
   </div>
 </section>
 
@@ -344,12 +360,13 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Pick any</span></div>
       <div class="opts"><div class="hd">For the kids — pick, reorder, or drop</div>
         <div class="orow"><h4>Resort playground and toddler room</h4><span class="chip v">Verified</span><span class="why">Block 01. Verified for the Manor Club; Sequel access unverified. The easiest option with a nap schedule.</span></div>
-        <div class="orow"><h4>Freedom Park</h4><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">Block 03. Trails and reconstructed cabins close to the resort, a kid stretch with history attached. Hours not verified.</span></div>
+        <div class="orow"><h4>Winter Lantern Festival, Jamestown Settlement</h4><span class="chip l">Lead</span><span class="why"><b>Fri Nov 13 and Sat Nov 14, 5:30–10 PM</b> (last entry 9; one listing says 9:30). Runs Thu–Sun through Dec 10. Tickets $26.99 ages 13+, $18.99 ages 4–12, free ages 3 and under, so Finn is the $18.99 tier and Aidan is free; senior, military and family-of-4+ bundles exist. Tickets at winterlanternfestival.com, separate from museum admission (secondary source). Outdoors and cold at night. <span class="fl">Stroller rules not verified.</span><a class="src" href="https://www.whro.org/arts-culture/2026-10-30/goodbye-to-the-250th-star-spangled-holiday-light-show-at-jamestown-settlement">src</a></span></div>
+        <div class="orow"><h4>Freedom Park</h4><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">Block 03. Trails, a cemetery and a 17th-century domicile site close to the resort, a kid stretch with history attached. Hours not verified (7 AM–sunset per a search summary).</span></div>
         <div class="orow"><h4>Paint on Pottery</h4><span class="chip l">Lead</span><span class="why">Block 07. A pottery-painting studio with walk-ins, aimed at Finn's love of art.</span></div>
-        <div class="orow"><h4>CW trade shops and Art Museums</h4><span class="chip l">Lead</span><span class="why">Block 02. Watching things being made suits Finn; the Art Museums are a free fallback.</span></div>
-        <div class="orow"><h4>Great Wolf Lodge indoor water park</h4><span class="chip l">Lead</span><span class="why">Day pass; prices <b>—</b> (not found).<a class="src" href="https://www.greatwolf.com/williamsburg/waterpark-attractions/indoor-water-park/day-passes">src</a></span></div>
-        <div class="orow"><h4>Virginia Living Museum</h4><span class="chip l">Lead</span><span class="why">Newport News. 9–5 daily. Adult $21.95–23.95; child price <b>—</b>.<a class="src" href="https://thevlm.org/visit/">src</a></span></div>
-        <div class="orow"><h4>The Mariners' Museum and Park</h4><span class="chip l">Lead</span><span class="why">Newport News. $1 per person, 3 and under free; 9–5 daily.<a class="src" href="https://www.marinersmuseum.org/museum/">src</a></span></div>
+        <div class="orow"><h4>CW trade shops and Art Museums</h4><span class="chip l">Lead</span><span class="why">Block 02. Watching things being made suits Finn. Friday (paid) and Saturday (free) only; CW and the Art Museums are closed Sunday.</span></div>
+        <div class="orow"><h4>Great Wolf Lodge indoor water park</h4><span class="chip l">Lead</span><span class="why">Day pass from $40, open to close; half-day pass from 4 PM; ages 2 and under free. Passes can sell out, so check availability: 800-551-9653.<a class="src" href="https://www.greatwolf.com/williamsburg/waterpark-attractions/indoor-water-park/day-passes">src</a></span></div>
+        <div class="orow"><h4>Virginia Living Museum</h4><span class="chip l">Lead</span><span class="why">Newport News. 9–5 daily. Adult $21.95–23.95; child price <b>—</b>. The official site blocked the research tools, so confirm hours and price.<a class="src" href="https://thevlm.org/visit/">src</a></span></div>
+        <div class="orow"><h4>The Mariners' Museum and Park</h4><span class="chip v">Verified</span><span class="why">Newport News. $1 per person, 3 and under free; 9–5 daily. Park and trail 6 AM–6 PM.<a class="src" href="https://www.marinersmuseum.org/museum/">src</a></span></div>
         <div class="thin"><b>Closed:</b> Water Country USA is closed for the season (secondary source).</div>
       </div></div>
   </div>
@@ -361,23 +378,23 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
   <p class="shape">Hours are mostly unverified for November; confirm Fri–Sun by phone. The best fits are a tabletop game store for Tom and a cute shop strip for everyone.</p>
   <div class="spine">
     <div class="stop"><div class="pc"><i class="pin a"></i><span class="when">Anchor</span></div>
-      <div class="card"><div class="r1"><h3>Tap 'N Roll</h3><span class="chips"><span class="chip l">Lead</span></span></div>
-        <div class="meta">410 Lightfoot Rd Ste G · Fri–Sat 12–11, Sun 12–8 (2025 page; a 2022 article differs)<a class="src" href="https://williamsburgfamilies.com/tap-n-roll-weekly-events-at-the-game-store">src</a></div>
+      <div class="card"><div class="r1"><h3>Tap 'N Roll</h3><span class="chips"><span class="chip v">Verified</span></span></div>
+        <div class="meta">410 Lightfoot Rd Ste G · Mon–Thu 12–10, Fri–Sat 12–11, Sun 12–8 · 757-808-5128<a class="src" href="https://williamsburgfamilies.com/tap-n-roll-weekly-events-at-the-game-store">src</a></div>
         <p>Best-fit find for board game and comic shops and Tom's tabletop games: Magic, Pokemon and Yu-Gi-Oh singles, board games, D&amp;D and RPG books, some LEGO.</p></div></div>
     <div class="stop"><div class="pc"><i class="pin a"></i><span class="when">Anchor</span></div>
       <div class="card"><div class="r1"><h3>Merchants Square shops</h3><span class="chips"><span class="chip v">Verified</span><span class="chip l">Lead</span></span></div>
-        <div class="meta">Directory verified, hours Lead · Blink Mon–Sat 10–6, Sun 12–5 (directory possibly stale)<a class="src" href="https://merchantssquare.org/directory/">src</a></div>
+        <div class="meta">Directory verified, hours Lead · Blink Mon–Sat 10–6, Sun noon–5; no hours listed for the other shops · unknown whether the Nov 15 CW closure affects the Square<a class="src" href="https://merchantssquare.org/directory/">src</a></div>
         <p>The "cute shop strip": Blink, The Carousel (children's clothes), Wythe Candy, The Peanut Shop, Spice &amp; Tea Exchange, Danforth Pewter. Walkable and flat.</p></div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Pick any</span></div>
       <div class="opts"><div class="hd">More stores — pick, reorder, or drop</div>
-        <div class="orow"><h4>Bricks &amp; MiniFigs</h4><span class="chip l">Lead</span><span class="why">5711 Richmond Rd, Space 028A (outlets area). Buys, sells and trades LEGO, for Tom's collecting. No hours found; verify it is still open.</span></div>
-        <div class="orow"><h4>Mermaid Books</h4><span class="chip l">Lead</span><span class="why">421-A Prince George St. Used and rare, in a basement. <span class="fl">A Dec 2020 report said it was closing for good; whether it reopened is not confirmed.</span></span></div>
+        <div class="orow"><h4>Bricks &amp; MiniFigs</h4><span class="chip l">Lead</span><span class="why">5711 Richmond Rd, Space 028A (outlets area). Buys, sells and trades LEGO, for Tom's collecting. No hours found and one "closed" snapshot, so call first: 757-808-6450. The outlets around it are open Mon–Thu 10–8, Fri–Sat 10–9, Sun 11–7.</span></div>
+        <div class="orow"><h4>The Fallen Acorn Bookshop</h4><span class="chip l">Lead</span><span class="why">421 Prince George St, in the former Mermaid Books space. New books; opened Sept 2024. The entrance is a brick staircase under Kilwins. Hours as of Nov 2024: Mon closed, Tue–Fri 11–7, Sat 9:30–7, Sun 12–5. <span class="fl">Hours come from an old article; confirm.</span></span></div>
         <div class="orow"><h4>Turn the Page Bookshop</h4><span class="chip l">Lead</span><span class="why">5707 Richmond Rd Ste 40. Mostly used books. One directory listing, no hours.</span></div>
         <div class="orow"><h4>Colonial Williamsburg Bookstore</h4><span class="chip l">Lead</span><span class="why">Merchants Square. Independent bookstore; hours vary.</span></div>
-        <div class="orow"><h4>Yorktown Bookshop</h4><span class="chip l">Lead</span><span class="why">From a 2021 roundup; verify. Pairs with a Yorktown visit.</span></div>
-        <div class="orow"><h4>The Christmas Shop</h4><span class="chip v">Verified</span><span class="chip l">Lead</span><span class="why">Hours verified: Fri 10–9, Sat 9–9, Sun 10–9. <span class="fl">Address conflicts: 134 N Henry St or 405 W Duke of Gloucester St.</span></span></div>
-        <div class="orow"><h4>Paint on Pottery</h4><span class="chip l">Lead</span><span class="why">1430 High St Ste 504. Pottery-painting studio with walk-ins; Tue–Sun 11–5 from an undated listing. Finn's pick.</span></div>
-        <div class="orow"><h4>Premium Outlets</h4><span class="chip l">Lead</span><span class="why">5715 Richmond Rd. Snippet hours Fri–Sat 10–9, Sun 11–7. Brands found include Nike, J.Crew, Levi's, vineyard vines, Brooks Brothers; tenant list unverified.</span></div>
+        <div class="orow"><h4>Yorktown Bookshop</h4><span class="chip l">Lead</span><span class="why">328 Water St. From a 2021 roundup; a "closed" snapshot was found, so verify. Pairs with a Yorktown visit.</span></div>
+        <div class="orow"><h4>The Christmas Shop</h4><span class="chip v">Verified</span><span class="chip l">Lead</span><span class="why">405 W Duke of Gloucester St. Hours verified: Sun–Fri 10–9, Sat 9–9. <span class="fl">Address unresolved: probably 405 W Duke of Gloucester St (MapQuest says 415); an earlier source gave 134 N Henry St. Confirm before driving.</span></span></div>
+        <div class="orow"><h4>Paint on Pottery</h4><span class="chip l">Lead</span><span class="why">1430 High St Ste 504. Pottery-painting studio, walk-ins welcome; Tue–Sun 11–5, closed Mon, from an undated listing, so call first: (757) 565-3500. Finn's pick.</span></div>
+        <div class="orow"><h4>Premium Outlets</h4><span class="chip l">Lead</span><span class="why">5715 Richmond Rd. Center hours Mon–Thu 10–8, Fri–Sat 10–9, Sun 11–7 (unverified). Brands found include Nike, J.Crew, Levi's, vineyard vines, Brooks Brothers; tenant list unverified.</span></div>
         <div class="thin"><b>Thin:</b> The clothing list on file covers only Tom's socks (Boardroom Socks, Zkano, Kentwool); none of those stores were found at the outlets, and a New Era cap store was not confirmed. No Williamsburg record store, baseball-card shop or art-supply store was found. Comic Cubicle looks closed. Jersey's Cards &amp; Comics (Yorktown) and Atomic Comics Emporium II (Newport News) were listed with Sunday hours only.</div>
       </div></div>
   </div>
@@ -386,28 +403,28 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
 <!-- 08 DINING -->
 <section class="theme">
   <div class="plate"><div class="n">08</div><div class="r"><div class="leg">Casual · quality-first · matched to dining lists</div><h2>Dining</h2></div></div>
-  <p class="shape">Nora is pescatarian; Tom, Ashe, Finn and Aidan eat no seafood. All five skip mushrooms. Seafood is fine at meals with Nora. Hours are unverified unless noted.</p>
+  <p class="shape">Nora is pescatarian; Tom, Ashe, Finn and Aidan eat no seafood. All five skip mushrooms. Seafood is fine at meals with Nora. Hours are unverified unless noted. All CW taverns are closed Sunday, Nov 15.</p>
   <div class="spine">
     <div class="stop"><div class="pc"><i class="pin a"></i><span class="when">Anchor</span></div>
       <div class="card"><div class="r1"><h3>Pierce's Pitt Bar-B-Que</h3><span class="chips"><span class="chip v">Verified</span></span></div>
-        <div class="meta">447 E Rochambeau Dr · daily 11–8, open Sunday<a class="src" href="https://pierces.com">src</a></div>
+        <div class="meta">447 E Rochambeau Dr · daily 11–8, open Sunday · (757) 565-2955<a class="src" href="https://pierces.com">src</a></div>
         <p>Local specialty (BBQ, Brunswick stew) at a casual, quality-first level. Reviews mention a kids' menu and non-seafood options; neither is verified on the official site.</p></div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Pick any</span></div>
       <div class="opts"><div class="hd">Meals — pick, reorder, or drop</div>
-        <div class="orow"><h4>Chowning's Tavern (CW)</h4><span class="chip l">Lead</span><span class="why">American tavern, casual. Kids' option of burger, hot dog or chicken tenders. Inside dining 11:30–7:30 per a 2022 announcement; first come, first served.</span></div>
-        <div class="orow"><h4>King's Arms and Shields Tavern</h4><span class="chip l">Lead</span><span class="why">Prime rib, pork chops, family-style meals. Kid-friendliness and hours not confirmed. Call (800) 447-8679.</span></div>
-        <div class="orow"><h4>Christiana Campbell's</h4><span class="chip l">Lead</span><span class="why">Seafood-focused, dinner only, listed Tue–Sat so likely closed Sunday. A fit for Nora, a poor fit for the seafood-averse majority.</span></div>
+        <div class="orow"><h4>Chowning's Tavern (CW)</h4><span class="chip l">Lead</span><span class="why">American tavern, casual. Kids' option of burger, hot dog or chicken tenders. Inside dining 11:30–7:30 per a 2022 announcement; first come, first served. <span class="fl">Likely closed: search summaries say "closed for renovation." Don't rely on it. Closed Sun Nov 15 regardless.</span></span></div>
+        <div class="orow"><h4>King's Arms and Shields Tavern</h4><span class="chip l">Lead</span><span class="why">Prime rib, pork chops, family-style meals. Children's menu. Lunch 11–2, lite fare 2–4, dinner 4:30–8. Call 855-240-3278. <span class="fl">Closed Tue–Wed and Sun Nov 15, so Friday and Saturday are the days.</span></span></div>
+        <div class="orow"><h4>Christiana Campbell's</h4><span class="chip l">Lead</span><span class="why">Seafood-focused, dinner only. Closed Sun Nov 15, like all CW taverns. A fit for Nora, a poor fit for the seafood-averse majority.</span></div>
         <div class="orow"><h4>Precarious, Virginia Beer Co., Amber Ox</h4><span class="chip l">Lead</span><span class="why">Brewpubs with strong beer lists. See block 05.</span></div>
-        <div class="orow"><h4>DoG Street Pub</h4><span class="chip l">Lead</span><span class="why">401 W Duke of Gloucester St. British-style pub with a patio. No hours found.</span></div>
-        <div class="orow"><h4>Yorktown Pub</h4><span class="chip l">Lead</span><span class="why">540 Water St. Tavern/pub; one blog says Sunday 11 AM to midnight.</span></div>
-        <div class="orow"><h4>Water Street Grille</h4><span class="chip l">Lead</span><span class="why">Yorktown. Seafood-heavy with brick-oven pizza, so workable with Nora at the table. Sunday 11–8 per OpenTable.</span></div>
+        <div class="orow"><h4>DoG Street Pub</h4><span class="chip l">Lead</span><span class="why">401 W Duke of Gloucester St. British-style pub with a patio. (757) 293-6478. Sunday hours conflict (11–midnight vs 11:30–8), so call.</span></div>
+        <div class="orow"><h4>Yorktown Pub</h4><span class="chip l">Lead</span><span class="why">540 Water St. Tavern/pub; one blog says Sunday 11 AM to midnight, while another listing says daily 11–9. Hours conflict, so call.</span></div>
+        <div class="orow"><h4>Water Street Grille</h4><span class="chip v">Verified</span><span class="why">Yorktown. Seafood-heavy with brick-oven pizza, so workable with Nora at the table. Sun–Thu 11–8, Fri–Sat 11–9, weekend brunch 11–2. (757) 369-5644. Confirmed by secondary sources only.</span></div>
         <div class="orow"><h4>CW "kid-approved" list</h4><span class="chip l">Lead</span><span class="why">Gold Course Grill, Museum Cafe, and Traditions (breakfast). From a 2025 marketing page, no hours.</span></div>
       </div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Sweets,<br>coffee</span></div>
       <div class="opts"><div class="hd">Sweets and coffee</div>
         <div class="orow"><h4>Meadows Original Frozen Custard</h4><span class="chip l">Lead</span><span class="why">1222 Richmond Rd. A 2023 guide lists Fri–Sat 12–10; may be closed or limited in November.</span></div>
-        <div class="orow"><h4>Little York Confectionery</h4><span class="chip l">Lead</span><span class="why">Yorktown. Ice cream and chocolates.</span></div>
-        <div class="orow"><h4>Aromas Café</h4><span class="chip v">Verified</span><span class="why">431 Prince George St. Directory hours: Fri–Sat 7–8, Sun 8–5.</span></div>
+        <div class="orow"><h4>Little York Confectionery</h4><span class="chip l">Lead</span><span class="why">Yorktown. Ice cream and chocolates. Fri–Sun per a 2023 article, so unreliable for November.</span></div>
+        <div class="orow"><h4>Aromas Café</h4><span class="chip v">Verified</span><span class="why">431 Prince George St. Mon–Thu 7–5, Fri–Sat 7–8, Sun 8–5. (757) 221-6676.</span></div>
         <div class="orow"><h4>Eleva Coffee Lounge</h4><span class="chip v">Verified</span><span class="why">Directory hours: daily 8–7.</span></div>
         <div class="thin"><b>Skip:</b> Mellow Mushroom (a chain, and mushroom-themed). Das Festhaus is inside Busch Gardens. <b>Gaps:</b> no Irish pub, German restaurant outside the park, Guy Fieri DDD feature, Thai, Chinese or Mexican place was confirmed. Pizza came back thin: FTH Pizza (wood-fired, Toano, no hours, sometimes sells out of dough) and Old Town Pizza and Pasta are unverified leads. Unverified local-guide names: Two Drummers Smokehouse, Old City BBQ, Craft 31 (burgers), Murdoch's (Ford's Colony, open to the public).</div>
       </div></div>
@@ -421,24 +438,24 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
   <div class="spine">
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Going<br>down</span></div>
       <div class="opts"><div class="hd">Outbound, Friday — pick one at most</div>
-        <div class="orow"><h4>Mid-Atlantic Railroad Park, Ashland</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="why">About 1h15–1h30 from Alexandria. Free, open-daily walking tour of nine exhibits including a restored 1926 C&amp;O caboose and a train mural; more than 40 trains pass daily. Restrooms and playground not stated; the Ashland-Hanover Visitor Center (112 N Railroad Ave, listed 9–5 daily) is a plausible restroom stop.<a class="src" href="https://www.ashlandvirginia.com/railroad">src</a></span></div>
-        <div class="orow"><h4>Tales &amp; Tails Book Cafe, Fredericksburg</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="why">1010 Charles St, about 50 minutes out. New books, a children's reading room, local coffee and pastries. Hours not listed. Works either direction.<a class="src" href="https://fxbg.com/attraction/tales-and-tails/">src</a></span></div>
+        <div class="orow"><h4>Mid-Atlantic Railroad Park, Ashland</h4><span class="chip pit">Pit stop</span><span class="chip v">Verified</span><span class="why">About 1h15–1h30 from Alexandria. Free and open daily (construction ongoing; 804-496-1434). Walking tour of nine exhibits including a restored 1926 C&amp;O caboose and a train mural; more than 40 trains pass daily. Restrooms and playground not stated; the Ashland-Hanover Visitor Center (112 N Railroad Ave, listed 9–5 daily) is a plausible restroom stop.<a class="src" href="https://www.ashlandvirginia.com/railroad">src</a></span></div>
+        <div class="orow"><h4>Tales &amp; Tails Book Cafe, Fredericksburg</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="why">1010 Charles St, about 50 minutes out. New books, a children's reading room, local coffee and pastries. Open every day except Tuesday per a June 2025 article, so call: 540-870-7605. Works either direction.<a class="src" href="https://fxbg.com/attraction/tales-and-tails/">src</a></span></div>
         <div class="orow"><h4>Mason-Dixon Cafe, Fredericksburg</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="why">2100 Princess Anne St. Family-run diner with all-day breakfast. Aggregator-only; hours and kid-friendliness unverified.</span></div>
       </div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Going<br>home</span></div>
       <div class="opts"><div class="hd">Return, Sunday — pick one at most</div>
-        <div class="orow"><h4>One Eyed Jacques</h4><span class="chip pit">Pit stop</span><span class="chip v">Verified</span><span class="chip map">On your map</span><span class="why">3104 W Cary St, Carytown, Richmond; a 10–20 minute detour. A board game and comics shop (not a restaurant) that is a household return-favorite. Sunday hours and kid policy were not researched; call before relying on it. Pairs with The Answer Brewpub.</span></div>
-        <div class="orow"><h4>The Answer Brewpub</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">6008 W Broad St, Richmond; a 10–20 minute detour. A Richmond return-favorite. 56 taps. No hours or kid policy found; call (804) 282-1248.<a class="src" href="https://www.visitrichmondva.com/listing/answer-brewpub/4175/">src</a></span></div>
-        <div class="orow"><h4>Children's Museum of Richmond</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="why">Hours page says Tue–Sun 9:30–5, so open Sunday. Confirm which location (804-474-7000); renovations have caused closures.<a class="src" href="https://www.childrensmuseumofrichmond.org/full-menu/hours/">src</a></span></div>
-        <div class="orow"><h4>Carl's frozen custard, Fredericksburg</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="why">Patch says it runs until the Sunday before Thanksgiving (Nov 22 by calculation), so it should be open. No 2026 announcement. It has more than one location, so it may not pass the "independent" test.</span></div>
+        <div class="orow"><h4>One Eyed Jacques</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">3104 W Cary St, Carytown, Richmond; a 10–20 minute detour. A board game and comics shop (not a restaurant) that is a household return-favorite. No Sunday hours found and kid policy not researched; call before relying on it. Pairs with The Answer Brewpub.</span></div>
+        <div class="orow"><h4>The Answer Brewpub</h4><span class="chip pit">Pit stop</span><span class="chip l">Lead</span><span class="chip map">On your map</span><span class="why">6008 W Broad St, Richmond; a 10–20 minute detour. A Richmond return-favorite. 56 taps. Sun 12–10 per user-submitted listings only; no kid policy found; call (804) 282-1248.<a class="src" href="https://www.visitrichmondva.com/listing/answer-brewpub/4175/">src</a></span></div>
+        <div class="orow"><h4>Children's Museum of Richmond</h4><span class="chip pit">Pit stop</span><span class="chip v">Verified</span><span class="why">Tue–Sun 9:30–5, so open Sunday. Downtown at 2626 W Broad St, 804-474-7000.<a class="src" href="https://www.childrensmuseumofrichmond.org/full-menu/hours/">src</a></span></div>
+        <div class="orow"><h4>Carl's frozen custard, Fredericksburg</h4><span class="chip pit">Pit stop</span><span class="chip v">Verified</span><span class="why">Closes for the season on the Sunday before Thanksgiving (Nov 22), so it is open Sun Nov 15 (secondary sources). It has more than one location, so it may not pass the "independent" test.</span></div>
         <div class="thin"><b>Not found:</b> Sunday hours and kid policy for One Eyed Jacques and The Answer Brewpub; any verified Guy Fieri DDD stop in Richmond; open farm stands (assume small seasonal ones are closed). Ashland Coffee &amp; Tea has conflicting listings and may be closed or renamed, so do not rely on it. Fredericksburg diner details rest on a single low-reliability source.</div>
       </div></div>
     <div class="stop"><div class="pc"><i class="pin o"></i><span class="when">Sunday,<br>after 10</span></div>
-      <div class="opts"><div class="hd">Sunday after checkout — one local stop, about 1–2 hours</div>
-        <div class="orow"><h4>History one last time</h4><span class="chip v">Verified</span><span class="why">Jamestown Settlement or Yorktown Battlefield, both open 9–5.</span></div>
-        <div class="orow"><h4>Merchants Square</h4><span class="chip l">Lead</span><span class="why">Aromas Café opens at 8; Blink opens at 12.</span></div>
-        <div class="orow"><h4>Lunch or a beer</h4><span class="chip v">Verified</span><span class="why">Pierce's from 11. Precarious (Sun from 11, with the Toast conflict) and Virginia Beer Co. (from 12).</span></div>
-        <div class="thin">Before noon, opening hours are confirmed only for the museums, Aromas Café and Pierce's, so brunch timing stays flexible. Aidan's naps and the drive home are the constraint. The resort pools and playground are an early-morning use before the 10 AM checkout.</div>
+      <div class="opts"><div class="hd">Sunday after checkout (CW is closed) — one non-CW stop, about 1–2 hours</div>
+        <div class="orow"><h4>History one last time</h4><span class="chip v">Verified</span><span class="why">Yorktown Battlefield or Historic Jamestowne (visitor center), both confirmed open 9–5. Jamestown Settlement and the Yorktown museum, with the Give Me Liberty exhibition, are also 9–5 per search summaries (Lead).</span></div>
+        <div class="orow"><h4>Merchants Square</h4><span class="chip l">Lead</span><span class="why">Aromas Café opens at 8 and Blink at noon (both confirmed). Whether the CW closure affects the Square is unconfirmed, so call before relying on it.</span></div>
+        <div class="orow"><h4>Lunch or a beer</h4><span class="chip v">Verified</span><span class="why">Pierce's from 11. Precarious (Sun from 11, with the Toast conflict) and Virginia Beer Co. (from 12; one source says it closes at 7, so call).</span></div>
+        <div class="thin">Before noon, opening hours are confirmed only for Yorktown Battlefield, Historic Jamestowne, Aromas Café and Pierce's, so brunch timing stays flexible. Aidan's naps and the drive home are the constraint. The resort pools and playground are an early-morning use before the 10 AM checkout.</div>
       </div></div>
   </div>
 </section>
@@ -457,12 +474,18 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
 <div class="tag"><span>Call before you go</span></div>
 <div class="calls">
   <div class="crow"><div class="nm">Resort · Manor Club Sequel<span class="q">Which pools and tubs Sequel guests can use, which outdoor ones are open in November, pool hours, parking cost, and whether an activity calendar exists.</span></div><div class="ph">757-258-1120</div></div>
-  <div class="crow"><div class="nm">Yorktown<span class="q">Confirm the Maritime Festival on Sat Nov 14.</span></div><div class="ph">757-890-5900</div></div>
+  <div class="crow"><div class="nm">Colonial Williamsburg<span class="q">Sat Nov 14 start times (procession, Art Museums tour, fireworks), which buildings are open, and the Sunday Nov 15 closure.</span></div><div class="ph">(888) 965-7254</div></div>
+  <div class="crow"><div class="nm">Yorktown<span class="q">The Maritime Festival on Sat Nov 14 is confirmed; call for details.</span></div><div class="ph">757-890-5900</div></div>
   <div class="crow"><div class="nm">Precarious Beer Project<span class="q">Sunday hours (sources conflict) and kid policy. Confirm the address.</span></div><div class="ph">757-808-5104</div></div>
-  <div class="crow"><div class="nm">King's Arms and Shields Tavern<span class="q">Hours and kid-friendliness.</span></div><div class="ph">(800) 447-8679</div></div>
+  <div class="crow"><div class="nm">King's Arms and Shields Tavern<span class="q">Closed Tue–Wed and Sun Nov 15. Confirm Friday or Saturday seating.</span></div><div class="ph">855-240-3278</div></div>
   <div class="crow"><div class="nm">The Answer Brewpub · Richmond<span class="q">Sunday hours and kid policy.</span></div><div class="ph">(804) 282-1248</div></div>
   <div class="crow"><div class="nm">Children's Museum of Richmond<span class="q">Which location is open; renovation closures.</span></div><div class="ph">804-474-7000</div></div>
-  <div class="crow"><div class="nm">Freedom Park · Tap 'N Roll · Bricks &amp; MiniFigs · Mermaid Books · The Study at Amber Ox · One Eyed Jacques<span class="q">Hours or open/closed status to confirm. No phone number was in the handoff.</span></div><div class="ph">—</div></div>
+  <div class="crow"><div class="nm">Bricks &amp; MiniFigs<span class="q">Call first: no hours found and one "closed" snapshot.</span></div><div class="ph">757-808-6450</div></div>
+  <div class="crow"><div class="nm">Freedom Park<span class="q">Hours (7 AM–sunset, Interpretive Center 10–5, per a search summary).</span></div><div class="ph">757-259-4022</div></div>
+  <div class="crow"><div class="nm">Amber Ox Public House<span class="q">Hours; reservation suggested.</span></div><div class="ph">(757) 790-2299</div></div>
+  <div class="crow"><div class="nm">DoG Street Pub<span class="q">Sunday hours conflict.</span></div><div class="ph">(757) 293-6478</div></div>
+  <div class="crow"><div class="nm">Great Wolf Lodge<span class="q">Day pass availability; passes can sell out.</span></div><div class="ph">800-551-9653</div></div>
+  <div class="crow"><div class="nm">The Fallen Acorn · The Study at Amber Ox · One Eyed Jacques · Chowning's · Turn the Page · Yorktown Bookshop<span class="q">Hours or open/closed status to confirm. No phone number on file.</span></div><div class="ph">—</div></div>
   <div class="crow"><div class="nm">Check in a normal browser<span class="q">The CW tickets page (the site blocked the research tools) and Busch Gardens' 2026 schedule.</span></div><div class="ph">online</div></div>
 </div>
 
@@ -486,16 +509,16 @@ footer{margin-top:28px;border-top:2px solid var(--line);padding-top:6px;display:
   <div class="g"><span class="chip sol">Unconfirmed</span>
     <ul>
       <li>Which resort amenities Sequel guests can use; pool hours; November status of outdoor pools.</li>
-      <li>CW hours (9 vs. 10 AM), open buildings, programs and the 100th event schedule; the stroller rule.</li>
-      <li>Whether Mermaid Books and Bricks &amp; MiniFigs are still open; Freedom Park hours.</li>
-      <li>Precarious on Sunday; most brewery, shop and restaurant hours for November 2026.</li>
+      <li>CW regular hours, which buildings are open, and the stroller rule; start times for the Sat procession, Art Museums tour and fireworks; the Toast reception's price; whether the Nov 15 closure touches Merchants Square.</li>
+      <li>Whether Bricks &amp; MiniFigs is open; Chowning's (likely closed); Fallen Acorn hours (2024 article); Freedom Park hours; Historic Jamestowne theater and exhibit status; Winter Lantern stroller rules.</li>
+      <li>Precarious on Sunday (sources conflict); Virginia Beer Co., DoG Street Pub and Yorktown Pub hours; kid policies at every brewery.</li>
     </ul></div>
   <div class="r"><span class="chip sol">Prices to check</span>
     <ul>
-      <li>CW regular-day 2026 prices (2025 shown here); any multi-day pass.</li>
-      <li>Jamestown Settlement and Yorktown museum (found figures expired June 30, 2026).</li>
-      <li>Great Wolf Lodge day pass; Virginia Living Museum child price.</li>
-      <li>Resort parking; W&amp;M game tickets.</li>
+      <li>CW under-6 price (free comes from 2025, not re-verified).</li>
+      <li>Jamestown Settlement and Yorktown museum (last official figures expired June 30, 2026; a $34 / $17 combo was seen, secondary source).</li>
+      <li>Virginia Living Museum child price; the Toast reception's price.</li>
+      <li>Resort parking; W&amp;M game tickets (resale about $42–47, unconfirmed).</li>
     </ul></div>
   <div class="n"><span class="chip sol">Open questions</span>
     <ul>
