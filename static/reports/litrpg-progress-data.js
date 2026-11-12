@@ -73,7 +73,7 @@
 
 window.LITRPG_PROGRESS = {
 
-  asOf: '2026-11-04',
+  asOf: '2026-11-12',
 
   /* ------------------------------------------------------------------
      STARTED
@@ -140,7 +140,7 @@ window.LITRPG_PROGRESS = {
         { n: '1', state: 'read' },
         { n: '2', state: 'read' },
         { n: '3', state: 'read' },
-        { n: '4', state: 'bought', title: 'Immortal Games', note: 'Bought early. Official release Nov 10, 2026.' }
+        { n: '4', state: 'read', title: 'Immortal Games', note: 'Released Nov 10, 2026.' }
       ]
     },
 
