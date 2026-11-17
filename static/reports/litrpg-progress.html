@@ -17,7 +17,8 @@
 
    Layout = a segmented strip per series (one cell per volume,
    square check = bought, round check = read) plus a computed
-   "Next" slip. Data lives in litrpg-progress-data.js.
+   "Next" slip. Data lives in litrpg-progress-data.js (loaded with a
+   cache-busting ?t=timestamp query so it is never stale).
 
    Class names are deliberately long and prefixed (cl-, rw-, nx-,
    tl-). The mockup used a bare `.q` for the "?" marker and that
@@ -275,7 +276,10 @@ footer{margin-top:50px;padding:20px 0 40px;border-top:3px double var(--ink);font
   <div id="footAsOf">Updated by hand whenever a book is bought or finished.</div>
 </footer>
 
-<script src="litrpg-progress-data.js"></script>
+<!-- Data file is loaded with a cache-busting ?t=timestamp (document.write, so it
+     still loads synchronously before the renderer below). The server caches the
+     .js for 4 hours; the query string forces a fresh copy on every page load. -->
+<script>document.write('<script src="litrpg-progress-data.js?t=' + Date.now() + '"><\/script>');</script>
 <script>
 /* =====================================================================
    Renderer. Reads window.LITRPG_PROGRESS (litrpg-progress-data.js).
