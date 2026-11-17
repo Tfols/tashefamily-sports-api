@@ -73,7 +73,7 @@
 
 window.LITRPG_PROGRESS = {
 
-  asOf: '2026-11-12',
+  asOf: '2026-11-17',
 
   /* ------------------------------------------------------------------
      STARTED
@@ -83,7 +83,7 @@ window.LITRPG_PROGRESS = {
     {
       name: 'Dungeon Crawler Carl',
       author: 'Matt Dinniman',
-      note: 'Book 9 is being split into two published books, 9 and 10. No dates yet.',
+      note: 'Book 9 is being split into two published books, 9 and 10. No dates yet. Owns the Book 1 Deluxe Edition (Nov 2026).',
       volumes: [
         { n: '1',  state: 'read' },
         { n: '2',  state: 'read' },
@@ -104,7 +104,7 @@ window.LITRPG_PROGRESS = {
       volumes: [
         { n: '1',  state: 'read' },
         { n: '2',  state: 'read' },
-        { n: '3',  state: 'announced', date: '2026-11-17', note: 'Moved from Oct 13, 2026' },
+        { n: '3',  state: 'bought', title: 'Hero', note: 'Released Nov 17, 2026.' },
         { n: '4',  state: 'announced', date: '2027-02-09' },
         { n: '5',  state: 'announced', date: '2027-04-06' },
         { n: '6',  state: 'digital' },
@@ -316,6 +316,26 @@ window.LITRPG_PROGRESS = {
       openEnded: true,
       volumes: [
         { n: '1', state: 'bought', note: 'The Only Way Out Is Up — Orbit trade paperback, released Sep 29, 2026' }
+      ]
+    },
+
+    {
+      name: 'Shadow Slave',
+      author: 'GuiltyThree · Aethon Vault',
+      openEnded: true,
+      volumes: [
+        { n: '1', state: 'bought',    title: 'Child of Shadows', note: 'Released Nov 10, 2026.' },
+        { n: '2', state: 'announced', date: '2027-02-16' },
+        { n: '3', state: 'announced', date: '2027-04-13' }
+      ]
+    },
+
+    {
+      name: 'New Life as a Max Level Archmage',
+      author: 'ArcaneCadence · Aethon Vault',
+      openEnded: true,
+      volumes: [
+        { n: '1', state: 'bought', note: 'Released Nov 10, 2026.' }
       ]
     }
 
