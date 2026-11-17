@@ -203,6 +203,17 @@ main{padding-bottom:60px}
 .nx-wait .nx-h{color:var(--stamp)}
 .nx-l{display:block;margin-top:3px;font:400 12px/1.3 'Courier Prime',monospace;color:var(--ink-soft)}
 
+/* ---------- to-buy list (bottom section) ---------- */
+.tb-list{list-style:none;margin:0;padding:0}
+.tb-item{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 18px;align-items:baseline;
+  padding:10px;border-bottom:1.5px solid rgba(42,33,24,.28);
+}
+.tb-name{font-weight:700;font-size:1.02rem;line-height:1.2;letter-spacing:-.01em;margin:0}
+.tb-name i{font-weight:400;color:var(--ink-soft)}
+.tb-date{font:700 12.5px 'Courier Prime',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--stamp);text-align:right;white-space:nowrap}
+.tb-date-now{color:var(--read)}
+
 footer{margin-top:50px;padding:20px 0 40px;border-top:3px double var(--ink);font:400 12px/1.6 'Courier Prime',monospace;color:var(--ink-soft)}
 
 @media (max-width:1100px){
@@ -226,7 +237,7 @@ footer{margin-top:50px;padding:20px 0 40px;border-top:3px double var(--ink);font
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .key{position:static;box-shadow:none}
   .rise{animation:none}
-  .rw{break-inside:avoid}
+  .rw,.tb-item{break-inside:avoid}
 }
 </style>
 </head>
@@ -329,6 +340,15 @@ function validate(){
       });
     });
   });
+  if(D.toBuy!=null){
+    if(!Array.isArray(D.toBuy)){ e.push('"toBuy" must be a list.'); }
+    else D.toBuy.forEach(function(b,i){
+      var w='toBuy #'+(i+1)+(b&&(b.series||b.title)?' ('+(b.series||b.title)+')':'');
+      if(!b||(!b.series&&!b.title)){ e.push(w+': needs a series or a title.'); return; }
+      if(b.series&&(b.n==null||b.n==='')) e.push(w+': a series entry needs n (book number).');
+      if(b.date!=null&&!parseDate(b.date)) e.push(w+': date must look like 2027-01-31, or be left out for "out now".');
+    });
+  }
   return e;
 }
 
@@ -459,6 +479,29 @@ function groupHtml(id,title,note,list,offset,secondary){
     + '</section>';
 }
 
+/* ---------- to buy: out-now first, then by release date ---------- */
+function toBuyHtml(list){
+  var items=list.filter(function(b){return b&&(b.series||b.title);}).map(function(b,k){return {b:b,k:k};});
+  if(!items.length) return '';
+  items.sort(function(x,y){
+    var dx=parseDate(x.b.date), dy=parseDate(y.b.date);
+    if(!dx&&!dy) return x.k-y.k;
+    if(!dx) return -1; if(!dy) return 1;
+    return dx.key<dy.key?-1:dx.key>dy.key?1:x.k-y.k;
+  });
+  var rows=items.map(function(it){
+    var b=it.b, d=parseDate(b.date);
+    var name=b.series ? esc(b.series)+' '+esc(lab(b.n))+(b.title?', <i>'+esc(b.title)+'</i>':'')
+                      : '<i>'+esc(b.title)+'</i>';
+    return '<li class="tb-item"><h3 class="tb-name">'+name+'</h3>'
+         + (d ? '<span class="tb-date">'+d.full+'</span>' : '<span class="tb-date tb-date-now">Out now</span>')
+         + '</li>';
+  }).join('');
+  return '<section aria-labelledby="hToBuy">'
+    + '<div class="group-h"><h2 id="hToBuy">To buy</h2><span class="group-h-note">'+plural(items.length,'book')+' &middot; release order</span></div>'
+    + '<ul class="tb-list">'+rows+'</ul></section>';
+}
+
 /* ---------- go ---------- */
 function render(){
   if(!D){
@@ -474,6 +517,7 @@ function render(){
   var unstarted=Array.isArray(D.unstarted)?D.unstarted:[];
   html+=groupHtml('hStarted','Started','at least one volume read',started,0,false);
   html+=groupHtml('hUnstarted','Owned, not yet started','bought, nothing read yet',unstarted,started.length,true);
+  if(Array.isArray(D.toBuy)) html+=toBuyHtml(D.toBuy);
   app.innerHTML=html;
 
   var d=parseDate(D.asOf);

@@ -18,6 +18,23 @@
      unstarted   [ series ]    owned, nothing read yet (shown as the
                                secondary group). To promote a series,
                                move its block from `unstarted` to `started`.
+     toBuy       [ entry ]     optional. Purchase list shown as the last
+                               section, headed "To buy". PUBLIC PAGE: an
+                               entry holds only the fields below. No prices,
+                               store links, ISBNs, stock notes, publishers,
+                               commentary or local paths. The page shows
+                               out-now entries first, then dated ones by
+                               release date. If the list is missing or empty,
+                               the section is not drawn.
+
+   TO-BUY ENTRY FIELDS  (one book per line)
+     series      optional  series name, exactly as shown above
+     n           required with series  book number, as text: '2'
+     title       optional  book title, shown in italics after the number.
+                           For a standalone book leave series and n out and
+                           give only title.
+     date        optional  'YYYY-MM-DD' release date. Leave it out for a
+                           book that is out now (shown as "Out now").
 
    SERIES FIELDS
      name        required  series title
@@ -64,6 +81,12 @@
                                          if it had it)
      A new volume appears in a series:   add one line to that series'
                                          volumes list.
+     Add a book to buy:                  add one line to `toBuy`.
+     Bought it (or it was a mistake):    delete its line from `toBuy`. Then
+                                         mark it 'bought' in its series
+                                         block (or add the volume there).
+     A to-buy book's date changes:       edit its date:, or remove date: once
+                                         it is out so it shows "Out now".
      Then change asOf at the top to today's date.
 
    Mind the commas: every line in a list ends with a comma. If the page
@@ -339,5 +362,23 @@ window.LITRPG_PROGRESS = {
       ]
     }
 
+  ],
+
+  /* ------------------------------------------------------------------
+     TO BUY
+     ------------------------------------------------------------------ */
+  toBuy: [
+    { series: 'Beware of Chicken', n: '2' },
+    { series: 'Beware of Chicken', n: '3' },
+    { series: 'He Who Fights With Monsters', n: '4', title: 'Home', date: '2027-02-09' },
+    { series: 'Shadow Slave', n: '2', title: 'Demon of Change', date: '2027-02-16' },
+    { title: 'Overworld', date: '2027-03-23' },
+    { series: 'He Who Fights With Monsters', n: '5', date: '2027-04-06' },
+    { series: 'Shadow Slave', n: '3', title: 'Prince of Nothing', date: '2027-04-13' },
+    { series: 'Rune Seeker', n: '2', title: "Legacy of Ur'Thul", date: '2027-05-04' },
+    { series: 'Awaken Online', n: '2', title: 'Precipice', date: '2027-05-04' },
+    { series: "Jake's Magical Market", n: '2', title: 'A Trek Through Time', date: '2027-05-11' },
+    { series: 'Backyard Starship', n: '2', title: 'Red Bounty', date: '2027-06-01' },
+    { series: 'Rise of Mankind', n: '2', title: 'Age of Bronze', date: '2027-07-06' }
   ]
 };
