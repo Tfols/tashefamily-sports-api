@@ -107,7 +107,7 @@
 
 window.LITRPG_PROGRESS = {
 
-  asOf: '2026-11-17',
+  asOf: '2026-11-18',
 
   /* ------------------------------------------------------------------
      STARTED
@@ -288,6 +288,17 @@ window.LITRPG_PROGRESS = {
         { n: '4', state: 'read' },
         { n: '5', state: 'read' }
       ]
+    },
+
+    {
+      name: 'The Sigilist',
+      author: 'Django Wexler · Orbit',
+      note: 'Orbit. Planned as a trilogy.',
+      openEnded: true,
+      volumes: [
+        { n: '1', state: 'read', note: 'The Only Way Out Is Up — Orbit trade paperback, released Sep 29, 2026' },
+        { n: '2', state: 'announced', title: 'There Are No Rules', date: '2027-07-13', unreleased: true }
+      ]
     }
 
   ],
@@ -344,16 +355,6 @@ window.LITRPG_PROGRESS = {
     },
 
     {
-      name: 'The Sigilist',
-      author: 'Django Wexler · Orbit',
-      note: 'Orbit. Series length not yet known.',
-      openEnded: true,
-      volumes: [
-        { n: '1', state: 'bought', note: 'The Only Way Out Is Up — Orbit trade paperback, released Sep 29, 2026' }
-      ]
-    },
-
-    {
       name: 'Shadow Slave',
       author: 'GuiltyThree · Aethon Vault',
       openEnded: true,
@@ -390,7 +391,8 @@ window.LITRPG_PROGRESS = {
     { series: 'Awaken Online', n: '2', title: 'Precipice', date: '2027-05-04' },
     { series: "Jake's Magical Market", n: '2', title: 'A Trek Through Time', date: '2027-05-11' },
     { series: 'Backyard Starship', n: '2', title: 'Red Bounty', date: '2027-06-01' },
-    { series: 'Rise of Mankind', n: '2', title: 'Age of Bronze', date: '2027-07-06' }
+    { series: 'Rise of Mankind', n: '2', title: 'Age of Bronze', date: '2027-07-06' },
+    { series: 'The Sigilist', n: '2', title: 'There Are No Rules', date: '2027-07-13' }
   ],
 
   /* ------------------------------------------------------------------
