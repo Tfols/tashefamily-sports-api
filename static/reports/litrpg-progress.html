@@ -344,15 +344,16 @@ function validate(){
       });
     });
   });
-  if(D.toBuy!=null){
-    if(!Array.isArray(D.toBuy)){ e.push('"toBuy" must be a list.'); }
-    else D.toBuy.forEach(function(b,i){
-      var w='toBuy #'+(i+1)+(b&&(b.series||b.title)?' ('+(b.series||b.title)+')':'');
+  ['toBuy','radar'].forEach(function(key){
+    if(D[key]==null) return;
+    if(!Array.isArray(D[key])){ e.push('"'+key+'" must be a list.'); return; }
+    D[key].forEach(function(b,i){
+      var w=key+' #'+(i+1)+(b&&(b.series||b.title)?' ('+(b.series||b.title)+')':'');
       if(!b||(!b.series&&!b.title)){ e.push(w+': needs a series or a title.'); return; }
       if(b.series&&(b.n==null||b.n==='')) e.push(w+': a series entry needs n (book number).');
       if(b.date!=null&&!parseDate(b.date)) e.push(w+': date must look like 2027-01-31, or be left out for "out now".');
     });
-  }
+  });
   return e;
 }
 
@@ -484,7 +485,7 @@ function groupHtml(id,title,note,list,offset,secondary){
 }
 
 /* ---------- to buy: out-now first, then by release date ---------- */
-function toBuyHtml(list){
+function bookListHtml(list,id,heading,noteTail){
   var items=list.filter(function(b){return b&&(b.series||b.title);}).map(function(b,k){return {b:b,k:k};});
   if(!items.length) return '';
   items.sort(function(x,y){
@@ -501,8 +502,8 @@ function toBuyHtml(list){
          + (d ? '<span class="tb-date">'+d.full+'</span>' : '<span class="tb-date tb-date-now">Out now</span>')
          + '</li>';
   }).join('');
-  return '<section aria-labelledby="hToBuy">'
-    + '<div class="group-h"><h2 id="hToBuy">To buy</h2><span class="group-h-note">'+plural(items.length,'book')+' &middot; release order</span></div>'
+  return '<section aria-labelledby="'+id+'">'
+    + '<div class="group-h"><h2 id="'+id+'">'+heading+'</h2><span class="group-h-note">'+plural(items.length,'book')+' &middot; '+noteTail+'</span></div>'
     + '<ul class="tb-list">'+rows+'</ul></section>';
 }
 
@@ -521,7 +522,8 @@ function render(){
   var unstarted=Array.isArray(D.unstarted)?D.unstarted:[];
   html+=groupHtml('hStarted','Started','at least one volume read',started,0,false);
   html+=groupHtml('hUnstarted','Owned, not yet started','bought, nothing read yet',unstarted,started.length,true);
-  if(Array.isArray(D.toBuy)) html+=toBuyHtml(D.toBuy);
+  if(Array.isArray(D.toBuy)) html+=bookListHtml(D.toBuy,'hToBuy','To buy','release order');
+  if(Array.isArray(D.radar)) html+=bookListHtml(D.radar,'hRadar','On the radar','not yet decided');
   app.innerHTML=html;
 
   var d=parseDate(D.asOf);

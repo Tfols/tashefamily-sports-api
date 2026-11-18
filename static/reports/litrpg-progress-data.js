@@ -26,8 +26,16 @@
                                out-now entries first, then dated ones by
                                release date. If the list is missing or empty,
                                the section is not drawn.
+     radar       [ entry ]     optional. Books identified but not yet decided
+                               on (not excluded, not bought, not on `toBuy`).
+                               Shown below "To buy", headed "On the radar".
+                               Same public-page rules and entry fields as
+                               `toBuy`, same sort order. When Tom decides,
+                               move the entry to `toBuy` (to buy it) or
+                               delete it (not interested). If the list is
+                               missing or empty, the section is not drawn.
 
-   TO-BUY ENTRY FIELDS  (one book per line)
+   TO-BUY / RADAR ENTRY FIELDS  (one book per line; both lists use these)
      series      optional  series name, exactly as shown above
      n           required with series  book number, as text: '2'
      title       optional  book title, shown in italics after the number.
@@ -87,6 +95,9 @@
                                          block (or add the volume there).
      A to-buy book's date changes:       edit its date:, or remove date: once
                                          it is out so it shows "Out now".
+     Add a radar book:                   add one line to `radar`.
+     Tom decides on a radar book:        move its line from `radar` to
+                                         `toBuy`, or delete it from `radar`.
      Then change asOf at the top to today's date.
 
    Mind the commas: every line in a list ends with a comma. If the page
@@ -380,5 +391,28 @@ window.LITRPG_PROGRESS = {
     { series: "Jake's Magical Market", n: '2', title: 'A Trek Through Time', date: '2027-05-11' },
     { series: 'Backyard Starship', n: '2', title: 'Red Bounty', date: '2027-06-01' },
     { series: 'Rise of Mankind', n: '2', title: 'Age of Bronze', date: '2027-07-06' }
+  ],
+
+  /* ------------------------------------------------------------------
+     ON THE RADAR
+     ------------------------------------------------------------------ */
+  radar: [
+    { series: 'The Dark Profit Saga', n: '1', title: 'Orconomics' },
+    { series: 'Completionist Chronicles', n: '1', title: 'Ritualist' },
+    { series: 'Threadbare', n: '1' },
+    { series: 'A Thousand Li', n: '1', title: 'The First War' },
+    { series: 'Azarinth Healer', n: '1' },
+    { series: 'Fall of Radiance', n: '1', title: "Ranger's Oath" },
+    { series: 'Mother of Learning', n: '1' },
+    { series: 'Arcane Ascension', n: '1', title: 'Sufficiently Advanced Magic' },
+    { series: 'The Primal Hunter', n: '1' },
+    { series: 'New Era Online', n: '1', title: 'Life Reset' },
+    { series: 'Ascend Online', n: '1', date: '2026-12-01' },
+    { series: 'Unorthodox Farming', n: '1', title: 'Oh, Great! I Was Reincarnated as a Farmer', date: '2026-12-15' },
+    { series: 'Bobiverse', n: '6', title: 'The Infinite Extent', date: '2027-01-05' },
+    { series: 'Chance Encounter', n: '1', title: "World's Only Hero", date: '2027-02-02' },
+    { series: 'Battleborne', n: '1', date: '2027-02-09' },
+    { series: 'Zenith of Sorcery', n: '1', date: '2027-03-09' },
+    { series: 'Defiance of the Fall', n: '1', date: '2027-04-20' }
   ]
 };
